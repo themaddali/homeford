@@ -1,4 +1,8 @@
-jQuery(document).ready(function(e) {
+ require(['../data/service'],function(service){
+    console.log(service.color);
+    console.log(service.size);
+    
+    jQuery(document).ready(function(e) {
 	var t = {
 		lines : 17,
 		length : 6,
@@ -140,4 +144,6 @@ jQuery(document).ready(function(e) {
 			}
 		}
 	})
-}); 
+});
+    
+});
