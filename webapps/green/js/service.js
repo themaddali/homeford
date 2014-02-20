@@ -53,7 +53,7 @@ define(['../js/bloodhound'
 				};
 
 				this.init = function() {
-					getUnivData();
+					//getUnivData();
 					this.resume();
 				};
 			}
