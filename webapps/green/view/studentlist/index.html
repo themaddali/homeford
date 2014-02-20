@@ -7,7 +7,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="../../css/style.css">
 		<script type="text/javascript" data-main="../../js/main" src="../../js/require-jquery.js"></script>
-		
 
 		<meta name="description" content=""/>
 
@@ -45,29 +44,15 @@
 		</header>
 		<div id="wrapper" class="hidden">
 			<div id="carousel">
-				<div class="empty"></div>
-				<div style="background: transparent url('../../img/colorsbook1.png') no-repeat 0 0;">
-					<span class="gradient-work-img"></span>
-					<span class="heading">Colors</span>
-					<br />
-					<span class="subtitle">Solids</span>
-					<a href="../course/maths"style="background: transparent url('../../img/colorsbook1bw.png') no-repeat 0 0;"></a>
+				<div id="carousel">
+					<div class="empty"></div>
+					<div class="studentboard" id="student-template">
+						<img src="../../img/student1.jpg" class="student-headshot">
+						<span class="student-name">Name</span>
+						<span class="student-info"></span>
+					</div>
 				</div>
-				<div style="background: transparent url('../../img/mathsbook1.png') no-repeat 0 0;">
-					<span class="gradient-work-img"></span>
-					<span class="heading">Maths</span>
-					<br />
-					<span class="subtitle">Basics</span>
-					<a href="../course/maths"style="background: transparent url('../../img/mathsbook1bw.png') no-repeat 0 0;"></a>
-				</div>
-				<div style="background: transparent url('../../img/numbersbook.png') no-repeat 0 0;">
-					<span class="gradient-work-img"></span>
-					<span class="heading">Numbers</span>
-					<br />
-					<span class="subtitle">1-100</span>
-					<a href="../course/maths"style="background: transparent url('../../img/numbersbookbw.png') no-repeat 0 0;"></a>
-				</div>
-				<div class="empty"></div>
+
 			</div>
 		</div>
 
@@ -79,16 +64,7 @@
 						<br />
 						<span class="subtitle">Solids</span> <img src="../../img/colorsbook1.png" alt="Slide" /> </a>
 					</li>
-					<li>
-						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Maths</span>
-						<br />
-						<span class="subtitle">Basics</span> <img src="../../img/mathsbook1.png" alt="Slide" /> </a>
-					</li>
-					<li>
-						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Numbers</span>
-						<br />
-						<span class="subtitle">1-100</span> <img src="../../img/numbersbook.png" alt="Slide" /> </a>
-					</li>
+
 				</ul>
 			</div>
 		</div>
@@ -113,6 +89,6 @@
 			};
 			/* ]]> */
 		</script>
-		<script type='text/javascript' src='class.js'></script>
+		<script type='text/javascript' src='studentlist.js'></script>
 	</body>
 </html>

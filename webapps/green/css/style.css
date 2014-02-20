@@ -1054,6 +1054,70 @@ html.no-touch #subnav ul li {
 
 html.touch #subnav {
   display: none; }
+
+
+/*==================Student Profiles=============*/
+ 
+#carousel .studentboard {
+  background-color: white;
+  text-align: center }
+#carousel img {
+  width:370px;
+  height:183px;	
+  background-color: rgba(0, 128, 0, 0.65);
+  text-align: center }
+#carousel .student-name {
+   display: inline-block;
+    width: 340px;
+    left: 0;
+    background-color: #fbb913;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    position: absolute;
+    /*top: 70px;*/
+    text-align: center;
+    z-index: 10;
+    color: white;
+    font-size: 1.9em;
+    font-weight: 400;
+    line-height: 1.2em; 
+  }
+#carousel .student-info {
+display: inline-block;
+    width: 340px;
+    left: 0;
+    background-color: white;
+    padding-top: 100px;
+    /*top: 70px;*/
+    text-align: left;
+    margin-left:10px;
+    z-index: 10;
+    color: white;
+    font-size: 1.9em;
+    font-weight: 400;
+    line-height: 1.2em;
+  }
+  
+  #carousel .student-info li{
+   color: #493E3E;
+   margin-left: 10px; 
+   list-style: none;
+   font-size: 0.9em;
+   border-left: 4px solid #fbb913;
+   padding:5px;
+   margin-bottom: 5px;
+   
+  }
+  /*#carousel .student-info li:first-letter
+	{ 
+	color:#fbb913;
+	}*/
+  
+
+
+ 
   
 /* =================== Quiz Styles     ======================= */
 #carousel .quizboard {

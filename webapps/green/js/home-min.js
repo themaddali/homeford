@@ -72,7 +72,7 @@ if (jQuery.cookie('user')) {
 	jQuery('#login-modal-link').addClass('loggedin-user');
 	jQuery('#login-modal-link').attr('href','');
 	var currentlocation = window.location.href;
-	window.location.assign(currentlocation+'view/class')
+	window.location.assign(currentlocation+'view/studentlist')
 }
 
 jQuery('.loggedin-user').on('click', function(e) {
@@ -138,7 +138,7 @@ jQuery('.login-input-button').on('click', function(e) {
 		});
 		var currentusr = jQuery.cookie('user');
 		var currentlocation = window.location.href;
-	    window.location.assign(currentlocation+'view/class');
+	    window.location.assign(currentlocation+'view/studentlist');
 	}
 	else
 	{
@@ -155,7 +155,7 @@ jQuery('#slogan-input').keypress(function(e) {
                 jQuery(this).blur();
                 jQuery('#slogan-input').focus().click();
                 jQuery.cookie('user', 'readonly');
-                window.location.assign('view/class');
+                window.location.assign('view/studentlist');
             }
         }
     });

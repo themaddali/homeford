@@ -1,6 +1,4 @@
 require(['../js/service'], function(service) {
-	var UnivObject = service.getUnivObject();
-	console.log(UnivObject);
 
 	jQuery(document).ready(function(e) {
 		var t = {
@@ -27,7 +25,7 @@ require(['../js/service'], function(service) {
 
 		if (!jQuery.cookie('user')) {
 			var currentlocation = window.location.href;
-			window.location.assign(currentlocation.split('view/class')[0]);
+			window.location.assign(currentlocation.split('view/studentlist')[0]);
 		} else {
 			jQuery('#loggedin-user').text(jQuery.cookie('user'));
 		}
@@ -35,10 +33,41 @@ require(['../js/service'], function(service) {
 		jQuery('#loggedin-user').on('click', function(e) {
 			e.preventDefault();
 			var currentlocation = window.location.href;
-			window.location.assign(currentlocation.split('view/class')[0] + 'view/admin')
+			window.location.assign(currentlocation.split('view/studentlist')[0] + 'view/admin')
 		});
 
-		Modernizr.load({
+		setTimeout(function() {
+			service.getUnivObject({
+				success : function(UnivData) {
+					console.log(UnivData);
+					//Create the student panels on the fly (DB should send this info per user/univ)
+					var template = jQuery('#student-template').remove().attr('id', '');
+					var COUNT = UnivData[0].students.length;
+					for (var i = 0; i < COUNT; i++) {
+						var newboard = template.clone();
+						jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
+						jQuery('.student-headshot', newboard).attr('src',UnivData[0].students[i].image);
+						for (var j=0; j< UnivData[0].students[i].courses.length; j++)
+						{
+							jQuery('.student-info', newboard).append("<li>"+UnivData[0].students[i].courses[j].name+"</li>");
+						}
+						jQuery('#carousel').append(newboard);
+						if (i === COUNT-1) {
+							jQuery('#carousel').append('<div class="empty"></div>');
+							loadPage() ;
+						}
+						if (COUNT ===1)
+						{
+							//No Need of selection
+							window.location.assign('/green/view/class');
+						}
+					}
+				}
+			});
+		}, 2000);
+		
+	  function loadPage() {
+	  	Modernizr.load({
 			test : Modernizr.touch,
 			yep : {
 				loadSwipejs : work_script_params.swipejsurl
@@ -144,6 +173,9 @@ require(['../js/service'], function(service) {
 				}
 			}
 		})
+	  }
+
+		
 	});
 
-}); 
+});
