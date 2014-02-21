@@ -1,6 +1,9 @@
 require(['../js/service'], function(service) {
 
 	jQuery(document).ready(function(e) {
+		var TOTALQUESTIONS = 10;
+		var COMPLETED = 0;
+		
 		var t = {
 			lines : 17,
 			length : 6,
@@ -25,39 +28,48 @@ require(['../js/service'], function(service) {
 
 		if (!jQuery.cookie('user')) {
 			var currentlocation = window.location.href;
-			window.location.assign(currentlocation.split('view/studentlist')[0]);
+			window.location.assign(currentlocation.split('view/class')[0]);
 		} else {
 			jQuery('#loggedin-user').text(jQuery.cookie('user'));
 		}
 
-		jQuery('#loggedin-user').on('click', function(e) {
-			e.preventDefault();
-			var currentlocation = window.location.href;
-			window.location.assign(currentlocation.split('view/studentlist')[0] + 'view/admin')
-		});
+		//Create the quiz panels on the fly (DB should send this info per user/teacher/quiz)
+		//Testing with 10 Questions - completed ones
+		function setCards(completed) {
+			var quizboardtemplate = jQuery('#quizboard-template').remove().attr('id', '');
+			QUESTIONS = TOTALQUESTIONS-completed;
+			for (var i = 1; i <= QUESTIONS; i++) {
+				var newboard = quizboardtemplate.clone();
+				jQuery('.qtnnumber', newboard).text('#' + (i +parseInt(completed)));
+				jQuery('#carousel').append(newboard);
+				if (i === QUESTIONS) {
+					jQuery('#carousel').append('<div class="empty"></div>');
+				}
+			}
+		}
 
 		setTimeout(function() {
-			service.getUnivObject({
-				success : function(UnivData) {
-					console.log(UnivData);
+			service.getStudentObject({
+				success : function(StudentData) {
+					console.log(StudentData);
 					//Create the student panels on the fly (DB should send this info per user/univ)
-					var template = jQuery('#student-template').remove().attr('id', '');
-					var COUNT = UnivData[0].students.length;
+					var template = jQuery('#quiz-option-template').remove().attr('id', '');
+					var COUNT = StudentData[0].activecourses.length;
 					for (var i = 0; i < COUNT; i++) {
 						var newboard = template.clone();
-						jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
-						jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
-						for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
-							jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
+						if (i == 0) {
+							jQuery('#quiz-option-active').text(StudentData[0].activecourses[i].name);
+							COMPLETED = (StudentData[0].activecourses[i].progress)/10;
+							progress(COMPLETED, jQuery('#progressBar'));
+							setCards(COMPLETED);
+
+						} else {
+							jQuery('.quiz-option', newboard).text(StudentData[0].activecourses[i].name);
+							jQuery('#quiz-options').append(newboard);
 						}
-						jQuery('#carousel').append(newboard);
 						if (i === COUNT - 1) {
-							jQuery('#carousel').append('<div class="empty"></div>');
+							jQuery('#quiz-options').append('<li class="back"><a href="../../view/class">Back to Class</a></li>');
 							loadPage();
-						}
-						if (COUNT === 1) {
-							//No Need of selection
-							window.location.assign('/green/view/class');
 						}
 					}
 				}
@@ -109,7 +121,12 @@ require(['../js/service'], function(service) {
 							function t(e) {
 								e.find("a").stop().fadeTo(500, 0);
 								e.addClass("selected");
-								e.unbind("click")
+								e.unbind("click");
+								generateQuiz();
+								var totalobjects = (jQuery('.quizboard').length)+COMPLETED;
+								var currentobject = ((jQuery('.selected > .qtnnumber').text()).split("#")[1]);
+								progress(Math.round((100 / totalobjects) * currentobject), jQuery('#progressBar'));
+
 							}
 
 
@@ -162,7 +179,7 @@ require(['../js/service'], function(service) {
 										t(n.eq(1));
 										e("#carousel div.selected").next().click(function(t) {
 											t.preventDefault();
-											e("#carousel").trigger("next", 1)
+											e("#carousel").trigger("next", 1);
 										})
 									}
 								})
@@ -171,6 +188,59 @@ require(['../js/service'], function(service) {
 					}
 				}
 			})
+		};
+
+		jQuery('.answer-option').on('click', function() {
+			if (jQuery(this).attr('data-id') === 'correct') {
+				jQuery(this).addClass('correct');
+				setTimeout(function() {
+					//jQuery('.qtn').parent(".quizboard").addClass('correct');
+					e("#carousel").trigger("next", 1);
+					generateQuiz();
+				}, 1000);
+			} else {
+				jQuery(this).addClass('incorrect');
+			}
+		});
+
+		function generateQuiz() {
+			//jQuery('.quizboard .correct').removeClass('correct');
+			jQuery('.answer-option').removeClass('correct');
+			jQuery('.answer-option').removeClass('incorrect');
+			jQuery('.answer-option').attr('data-id', '');
+			var operands = ['+', '-', '*'];
+			var activeoperand = operands[Math.floor((Math.random() * 2) + 1)];
+			var number1 = Math.floor((Math.random() * 100) + 1);
+			var number2 = Math.floor((Math.random() * 100) + 1);
+			var answer;
+			if (activeoperand == '+') {
+				answer = number1 + number2;
+			}
+			if (activeoperand == '-') {
+				answer = number1 - number2;
+			}
+			if (activeoperand == '*') {
+				answer = number1 * number2;
+			}
+			jQuery('.qtn').text('Value of ' + number1 + ' ' + activeoperand + ' ' + number2 + ' = ?');
+			var optionlocation = Math.floor((Math.random() * 4) + 1);
+			for (var i = 1; i < 5; i++) {
+				if (i === optionlocation) {
+					jQuery(".option" + i).val(answer).attr('data-id', 'correct');
+				} else {
+					var randomize = Math.floor((Math.random() * 30) + 1);
+					randomize = answer + randomize;
+					jQuery(".option" + i).val(randomize);
+				}
+			}
+		}
+
+		function progress(percent, element) {
+			percent = parseInt(percent);
+			var progressBarWidth = percent * jQuery(element).width() / 100;
+			element.find('div').animate({
+				width : progressBarWidth
+			}, 500).html(percent + "%&nbsp; ");
 		}
 
 	});
