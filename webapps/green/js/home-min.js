@@ -154,7 +154,7 @@ jQuery('#slogan-input').keypress(function(e) {
             if (jQuery('#slogan-input').val() === 'Maths' || jQuery('#slogan-input').val() === 'Colors' || jQuery('#slogan-input').val() === 'Numbers') {
                 jQuery(this).blur();
                 jQuery('#slogan-input').focus().click();
-                jQuery.cookie('user', 'readonly');
+                jQuery.cookie('user', 'home');
                 window.location.assign('view/studentlist');
             }
         }

@@ -351,6 +351,9 @@ body.error404 {
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
 	border-radius: 3px;
+	background-image: url("../img/next-up.png");
+	background-repeat:no-repeat;
+    background-position:95% center;outline:1; 
 	border: 2px solid rgb(245, 239, 239);
 	text-align: left;
 	background-color: white;

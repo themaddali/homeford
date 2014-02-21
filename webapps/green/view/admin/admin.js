@@ -288,8 +288,11 @@ jQuery(document).ready(function(e) {
 	new Chart(document.getElementById("ranking-chart-phone").getContext("2d")).Bar(rankingdata1);
 	new Chart(document.getElementById("progress-chart-phone").getContext("2d")).Doughnut(studentdata1);
 	
-	if (!jQuery.cookie('user')) {
+	if (!jQuery.cookie('user') || jQuery.cookie('user') === 'home' ) {
 		var currentlocation = window.location.href;
+		jQuery.removeCookie('user', {
+			path : '/green'
+		});
 		window.location.assign(currentlocation.split('view/admin')[0]);
 	}
 
