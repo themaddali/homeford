@@ -67,14 +67,14 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								console.log(StudentData);
 								//Create the student panels on the fly (DB should send this info per user/univ)
 								var template = jQuery('#quiz-option-template').remove().attr('id', '');
-								var COUNT = StudentData[0].activecourses.length;
+								var COUNT = StudentData[0].activeassignments.length;
 								for (var i = 0; i < COUNT; i++) {
-									jQuery('#quiz-option-active').text(StudentData[0].activecourses[i].name);
+									jQuery('#quiz-option-active').text(StudentData[0].activeassignments[i].name);
 									//COMPLETED = (StudentData[0].activecourses[i].progress) / 10;
 									//progress(COMPLETED, jQuery('#progressBar'));
 									//setCards(COMPLETED);
 									var newboard = template.clone();
-									jQuery('.quiz-option', newboard).text(StudentData[0].activecourses[i].name);
+									jQuery('.quiz-option', newboard).text(StudentData[0].activeassignments[i].name);
 									jQuery('#quiz-options').append(newboard);
 
 									if (i === COUNT - 1) {

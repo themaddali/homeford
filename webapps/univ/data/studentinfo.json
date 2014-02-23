@@ -19,7 +19,7 @@
         		"totalcourcesdone": "26",
         		"incentive": "Disney Land",
         		"incentiveimage": "../../img/disney.jpg",
-        		"activecourses": [
+        		"activeassignments": [
             			{	
             			"instructor": "T2-001",
             			"name":"Maths 001",
@@ -28,27 +28,27 @@
             			"averagescore": "80",
             			"timespent": "34mins",
             			"enrolledon": "2012-04-08T12:48:34 +07:00",
-            			"assignmentmodel": "pull"
+            			"assignmentmodel": "quiz"
             			},
             		    {	
             			"instructor": "T2-001",
-            			"name":"Numbers 015",
+            			"name":"Do 5 Kumon Tests",
             			"progress":"10",
             			"score": "0",
             			"averagescore": "90",
             			"timespent": "41mins",
             			"enrolledon": "2014-02-08T12:48:34 +07:00",
-            			"assignmentmodel": "push"
+            			"assignmentmodel": "task"
             			},
             			{	
             			"instructor": "T2-008",
-            			"name":"Colors 015",
+            			"name":"Go to Gym",
             			"progress":"70",
             			"score": "60",
             			"averagescore": "90",
             			"timespent": "24mins",
             			"enrolledon": "2014-02-08T12:48:34 +07:00",
-            			"assignmentmodel": "push"
+            			"assignmentmodel": "task"
             			},
             			{	
             			"instructor": "T2-008",
@@ -58,9 +58,9 @@
             			"averagescore": "90",
             			"timespent": "24mins",
             			"enrolledon": "2014-02-08T12:48:34 +07:00",
-            			"assignmentmodel": "push"
+            			"assignmentmodel": "quiz"
             			}],
-           		"previouscourses": [
+           		"previousassignments": [
             			{	
             			"instructor": "T2-001",
             			"name":"Maths 001",

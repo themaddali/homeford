@@ -59,12 +59,16 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								console.log(StudentData);
 								//Create the student panels on the fly (DB should send this info per user/univ)
 								var template = jQuery('#classboard-template').remove().attr('id', '');
-								var COUNT = StudentData[0].activecourses.length;
+								var COUNT = StudentData[0].activeassignments.length;
 								for (var i = 0; i < COUNT; i++) {
 									var newboard = template.clone();
-									jQuery('.class-name', newboard).text(StudentData[0].activecourses[i].name);
-									jQuery('.class-progress', newboard).text(StudentData[0].activecourses[i].progress + '% Done');
-									jQuery('.class-select', newboard).attr('name', StudentData[0].activecourses[i].name);
+									jQuery('.class-name', newboard).text(StudentData[0].activeassignments[i].name);
+									if (StudentData[0].activeassignments[i].assignmentmodel === 'task' )
+									{
+										jQuery('.class-binder', newboard).attr('src','../../img/taskbook.jpg');
+									}
+									jQuery('.class-progress', newboard).text(StudentData[0].activeassignments[i].progress + '% Done');
+									jQuery('.class-select', newboard).attr('name', StudentData[0].activeassignments[i].name);
 									jQuery('#carousel').append(newboard);
 									if (i === COUNT - 1) {
 										jQuery('#carousel').append('<div class="empty"></div>');
