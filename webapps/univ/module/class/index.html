@@ -32,28 +32,13 @@
 		</header>
 		<div id="wrapper" class="hidden">
 			<div id="carousel">
-				<div id="classboard-template" class="classboard" style="background: transparent url('../../img/binder.png') no-repeat 0 0;">
-					<span class="gradient-work-img"></span>
-					<span class="heading">Class Name</span>
-					<br />
-					<span class="subtitle">Progress</span>
-					<a href="../quiz"style="background: transparent url('../../img/binderbw.png') no-repeat 0 0;"></a>
-				</div>
-				<!-- <div style="background: transparent url('../../img/mathsbook1.png') no-repeat 0 0;">
-				<span class="gradient-work-img"></span>
-				<span class="heading">Maths</span>
-				<br />
-				<span class="subtitle">Basics</span>
-				<a href="../course/maths"style="background: transparent url('../../img/mathsbook1bw.png') no-repeat 0 0;"></a>
-				</div>
-				<div style="background: transparent url('../../img/numbersbook.png') no-repeat 0 0;">
-				<span class="gradient-work-img"></span>
-				<span class="heading">Numbers</span>
-				<br />
-				<span class="subtitle">1-100</span>
-				<a href="../course/maths"style="background: transparent url('../../img/numbersbookbw.png') no-repeat 0 0;"></a>
-				</div> -->
 				<div class="empty"></div>
+				<div id="classboard-template" class="classboard">
+					<img src="../../img/classbook.jpg" class="class-binder">
+					<span class="class-name">Class Name</span>
+					<span class="class-progress">Progress</span>
+					<a class="class-select" style="background: transparent no-repeat 0 0;"></a>
+				</div>
 			</div>
 		</div>
 
@@ -81,13 +66,13 @@
 
 		<a href="#" id="prev"></a>
 		<a href="#" id="next"></a>
-		
+
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="./../../js/lib/require.js"></script>
 		<script type="text/javascript">
-			require(['./../../js/lib/jquery','./../../js/common'], function(common) {
+			require(['./../../js/lib/jquery', './../../js/common'], function(common) {
 				require(['../../../../js/app/ClassView']);
 			});
 		</script>

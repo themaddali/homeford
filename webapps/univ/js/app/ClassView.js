@@ -1,21 +1,21 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib/plugins-min','../../js/lib/jquery.cookie','../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr,spin,plugins,cookie,carousel,service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, service) {"use strict";
 
 	var ClassView = ( function() {
 
 			var work_script_params = {
 				"workBg" : "..\/..\/img\/classbg.png",
-				"carouselurl" : "..\/..\/js\/jquery.carousel.min.js",
-				"swipejsurl" : "..\/..\/js\/swipe.min.js"
+				"carouselurl" : "..\/..\/js\/lib\/jquery.carousel.min.js",
+				"swipejsurl" : "..\/..\/js\/lib\/swipe.min.js"
 			};
 
 			/**
 			 * Constructor
 			 */
 			function ClassView() {
+				$(document).ready(function(e) {
 
-				jQuery(document).ready(function(e) {
 					var t = {
 						lines : 17,
 						length : 6,
@@ -42,13 +42,15 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 						var currentlocation = window.location.href;
 						window.location.assign('/univ');
 					} else {
-						jQuery('#loggedin-user').text(jQuery.cookie('user'));
+						if (jQuery.cookie('subuser')) {
+							jQuery('#loggedin-user').text(jQuery.cookie('user') + '>' + jQuery.cookie('subuser') );
+						}
 					}
 
 					jQuery('#loggedin-user').on('click', function(e) {
 						e.preventDefault();
 						var currentlocation = window.location.href;
-						window.location.assign(currentlocation.split('module/class')[0] + 'module/admin')
+						window.location.assign('/univ/module/admin');
 					});
 
 					setTimeout(function() {
@@ -60,8 +62,9 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 								var COUNT = StudentData[0].activecourses.length;
 								for (var i = 0; i < COUNT; i++) {
 									var newboard = template.clone();
-									jQuery('.heading', newboard).text(StudentData[0].activecourses[i].name);
-									jQuery('.subtitle', newboard).text(StudentData[0].activecourses[i].progress + '% Done');
+									jQuery('.class-name', newboard).text(StudentData[0].activecourses[i].name);
+									jQuery('.class-progress', newboard).text(StudentData[0].activecourses[i].progress + '% Done');
+									jQuery('.class-select', newboard).attr('name', StudentData[0].activecourses[i].name);
 									jQuery('#carousel').append(newboard);
 									if (i === COUNT - 1) {
 										jQuery('#carousel').append('<div class="empty"></div>');
@@ -117,6 +120,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 										function t(e) {
 											e.find("a").stop().fadeTo(500, 0);
 											e.addClass("selected");
+											e.find("a").stop().addClass("selected");
 											e.unbind("click")
 										}
 
@@ -151,6 +155,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 													onBefore : function(t, n) {
 														t.find("a").stop().fadeTo(500, 1);
 														t.removeClass("selected");
+														t.find("a").removeClass("selected");
 														t.prev().unbind("click");
 														t.next().unbind("click");
 														n.prev().click(function(t) {
@@ -179,7 +184,21 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 								}
 							}
 						})
+						activateEvents();
 					}
+
+					function activateEvents() {
+						$('.class-select').on('click', function() {
+							if ($(this).hasClass('selected')) {
+								var selectedQuiz = $(this).attr('name');
+								jQuery.cookie('quiz', selectedQuiz, {
+									path : '/',
+									expires : 100
+								});
+								window.location.assign('/univ/module/quiz');
+							}
+						});
+					};
 
 				});
 

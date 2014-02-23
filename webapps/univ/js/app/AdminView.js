@@ -11,11 +11,11 @@ define(['../../js/lib/modernizr-2.5.3.min',
 
 	var QuizView = ( function() {
 
-			var work_script_params = {
-				"workBg" : "..\/..\/img\/classbg.png",
-				"carouselurl" : "..\/..\/js\/jquery.carousel.min.js",
-				"swipejsurl" : "..\/..\/js\/swipe.min.js"
-			};
+			// var work_script_params = {
+				// "workBg" : "..\/..\/img\/classbg.png",
+				// "carouselurl" : "..\/..\/js\/jquery.carousel.min.js",
+				// "swipejsurl" : "..\/..\/js\/swipe.min.js"
+			// };
 			var TOTALQUESTIONS = 10;
 			var COMPLETED = 0;
 
@@ -226,7 +226,7 @@ define(['../../js/lib/modernizr-2.5.3.min',
 					jQuery('#admin-done').on('click', function(e) {
 						e.preventDefault();
 						var currentlocation = window.location.href;
-						window.location.assign(currentlocation.split('view/admin')[0]);
+						window.location.assign('/univ');
 					});
 
 					//Class Progress Tracking.
@@ -325,7 +325,10 @@ define(['../../js/lib/modernizr-2.5.3.min',
 					jQuery('#signout-button').on('click', function(e) {
 						e.preventDefault();
 						jQuery.removeCookie('user', {
-							path : '/univ'
+							path : '/'
+						});
+						jQuery.removeCookie('subuser', {
+							path : '/'
 						});
 						window.setTimeout('location.reload()', 1000);
 						// refresh after 1 sec

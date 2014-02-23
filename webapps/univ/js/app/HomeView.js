@@ -110,7 +110,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound'], func
 						if (inputuname !== 'error' && inputpass !== null) {
 							// successful validation and create cookie
 							jQuery.cookie('user', inputuname, {
-								expires : 100
+								expires : 100,
+								path: '/' 
 							});
 							var currentusr = jQuery.cookie('user');
 							var currentlocation = window.location.href;
@@ -129,7 +130,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound'], func
 								jQuery(this).blur();
 								jQuery('#slogan-input').focus().click();
 								jQuery.cookie('user', 'home');
-								window.location.assign('module/studentlist');
+								jQuery.cookie('subuser', 'You');
+								window.location.assign('/univ/module/class');
 							}
 						}
 					});

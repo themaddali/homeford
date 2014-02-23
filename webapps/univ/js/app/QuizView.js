@@ -1,16 +1,17 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib/plugins-min','../../js/lib/jquery.cookie','../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr,spin,plugins,cookie,carousel,service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, service) {"use strict";
 
 	var QuizView = ( function() {
 
-			var work_script_params = {
-				"workBg" : "..\/..\/img\/classbg.png",
+			var quiz_params = {
+				"Bg" : "..\/..\/img\/classbg.png",
 				"carouselurl" : "..\/..\/js\/jquery.carousel.min.js",
 				"swipejsurl" : "..\/..\/js\/swipe.min.js"
 			};
 			var TOTALQUESTIONS = 10;
 			var COMPLETED = 0;
+			var QUIZ;
 
 			/**
 			 * Constructor
@@ -18,7 +19,6 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 			function QuizView() {
 
 				jQuery(document).ready(function(e) {
-					
 
 					var t = {
 						lines : 17,
@@ -34,18 +34,15 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 						top : "auto",
 						left : "auto"
 					}, n = document.getElementById("preloader"), r = (new Spinner(t)).spin(n);
-					e.backstretch(work_script_params.workBg);
-					var i = e(window).height(), s = e("#contact-modal").height(), o = i / 2 - s / 2;
-					e("a[rel*=theModal]").leanModal({
-						top : o,
-						overlay : .7,
-						closeButton : ".modal_close"
-					});
-
+					e.backstretch(quiz_params.Bg);
 					if (!jQuery.cookie('user')) {
 						var currentlocation = window.location.href;
 						window.location.assign('/univ');
 					} else {
+						if (jQuery.cookie('quiz')) {
+							jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
+							QUIZ = jQuery.cookie('quiz');
+						}
 						jQuery('#loggedin-user').text(jQuery.cookie('user'));
 					}
 
@@ -72,19 +69,18 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 								var template = jQuery('#quiz-option-template').remove().attr('id', '');
 								var COUNT = StudentData[0].activecourses.length;
 								for (var i = 0; i < COUNT; i++) {
+									jQuery('#quiz-option-active').text(StudentData[0].activecourses[i].name);
+									//COMPLETED = (StudentData[0].activecourses[i].progress) / 10;
+									//progress(COMPLETED, jQuery('#progressBar'));
+									//setCards(COMPLETED);
 									var newboard = template.clone();
-									if (i == 0) {
-										jQuery('#quiz-option-active').text(StudentData[0].activecourses[i].name);
-										COMPLETED = (StudentData[0].activecourses[i].progress) / 10;
-										progress(COMPLETED, jQuery('#progressBar'));
-										setCards(COMPLETED);
+									jQuery('.quiz-option', newboard).text(StudentData[0].activecourses[i].name);
+									jQuery('#quiz-options').append(newboard);
 
-									} else {
-										jQuery('.quiz-option', newboard).text(StudentData[0].activecourses[i].name);
-										jQuery('#quiz-options').append(newboard);
-									}
 									if (i === COUNT - 1) {
 										jQuery('#quiz-options').append('<li class="back"><a href="../../model/class">Back to Class</a></li>');
+										jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
+										setCards(COMPLETED);
 										loadPage();
 									}
 								}
@@ -96,10 +92,10 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 						Modernizr.load({
 							test : Modernizr.touch,
 							yep : {
-								loadSwipejs : work_script_params.swipejsurl
+								loadSwipejs : quiz_params.swipejsurl
 							},
 							nope : {
-								loadCarousel : work_script_params.carouselurl
+								loadCarousel : quiz_params.carouselurl
 							},
 							callback : {
 								loadSwipejs : function(t, n, i) {
@@ -204,20 +200,43 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 								}
 							}
 						})
+						activateEvents();
 					};
 
-					jQuery('.answer-option').on('click', function() {
-						if (jQuery(this).attr('data-id') === 'correct') {
-							jQuery(this).addClass('correct');
-							setTimeout(function() {
-								//jQuery('.qtn').parent(".quizboard").addClass('correct');
-								e("#carousel").trigger("next", 1);
-								generateQuiz();
-							}, 1000);
-						} else {
-							jQuery(this).addClass('incorrect');
-						}
-					});
+					function activateEvents() {
+						$('.answer-option').on('click', function() {
+
+							if (jQuery(this).attr('data-id') === 'correct') {
+								jQuery(this).addClass('correct');
+								setTimeout(function() {
+									jQuery('.qtn').parent(".quizboard").addClass('correct');
+									$("#carousel").trigger("next", 1);
+									generateQuiz();
+								}, 1000);
+							} else {
+								jQuery(this).addClass('incorrect');
+							}
+						});
+
+						$('.quiz-option').click(function() {
+							var selectedQuiz = $(this).text();
+							var progress = $('#progressBar > div').text().split("%")[0];
+							quizChange(QUIZ,progress,selectedQuiz);
+						});
+					};
+					
+					function quizChange(currentquiz,progress,newquiz){
+						// Accept the current info and progress
+						// Push it to DB
+						// Adjust the cookies.
+						jQuery.cookie('quiz', newquiz, {
+									path : '/',
+									expires : 100
+								});
+						QUIZ = newquiz;
+						jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
+						generateQuiz();
+					}
 
 					function generateQuiz() {
 						//jQuery('.quizboard .correct').removeClass('correct');
@@ -259,6 +278,11 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 						}, 500).html(percent + "%&nbsp; ");
 					}
 
+					//http://stackoverflow.com/questions/5306680/move-an-array-element-from-one-array-position-to-another
+					Array.prototype.move = function(from, to) {
+						this.splice(to, 0, this.splice(from, 1)[0]);
+					};
+
 				});
 
 				this.pause = function() {
@@ -269,8 +293,13 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 
 				};
 
-				this.init = function(args) {
-					//To Drive from Outside Calls
+				this.setQuiz = function(quizseelction) {
+					QUIZ = quizseelction;
+					jQuery('#quiz-option-active').text(QUIZ);
+				};
+
+				this.init = function() {
+
 				};
 
 			}

@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib/plugins-min','../../js/lib/jquery.cookie','../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr,spin,plugins,cookie,carousel,service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, service) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -33,9 +33,9 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 					e.backstretch(work_script_params.workBg);
 					var i = e(window).height(), s = e("#contact-modal").height(), o = i / 2 - s / 2;
 					e("a[rel*=theModal]").leanModal({
-					top : o,
-					overlay : .7,
-					closeButton : ".modal_close"
+						top : o,
+						overlay : .7,
+						closeButton : ".modal_close"
 					});
 
 					if (!jQuery.cookie('user')) {
@@ -48,7 +48,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 					jQuery('#loggedin-user').on('click', function(e) {
 						e.preventDefault();
 						var currentlocation = window.location.href;
-						window.location.assign(currentlocation.split('module/studentlist')[0] + 'module/admin')
+						window.location.assign('/univ/module/admin');
 					});
 
 					setTimeout(function() {
@@ -62,6 +62,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 									var newboard = template.clone();
 									jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 									jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
+									jQuery('.student-select', newboard).attr('name', UnivData[0].students[i].name);
 									for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
 										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
 									}
@@ -71,8 +72,12 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 										loadPage();
 									}
 									if (COUNT === 1) {
-									//No Need of selection
-									window.location.assign('../module/class');
+										//No Need of selection
+										jQuery.cookie('sub-user', UnivData[0].students[i].name, {
+											expires : 100
+										});
+
+										window.location.assign('/univ/module/class');
 									}
 								}
 							}
@@ -124,6 +129,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 										function t(e) {
 											e.find("a").stop().fadeTo(500, 0);
 											e.addClass("selected");
+											e.find("a").stop().addClass("selected");
 											e.unbind("click")
 										}
 
@@ -158,6 +164,7 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 													onBefore : function(t, n) {
 														t.find("a").stop().fadeTo(500, 1);
 														t.removeClass("selected");
+														t.find("a").removeClass("selected");
 														t.prev().unbind("click");
 														t.next().unbind("click");
 														n.prev().click(function(t) {
@@ -186,7 +193,22 @@ define(['../../js/lib/modernizr-2.5.3.min','../../js/lib/spin.min','../../js/lib
 								}
 							}
 						})
+						activateEvents();
 					}
+					
+					function activateEvents() {
+						$('.student-select').on('click', function() {
+							if ($(this).hasClass('selected')) {
+								// successful selection of user for context, and create cookie
+								var selectedUser = $(this).attr('name');
+								jQuery.cookie('subuser', selectedUser, {
+									path : '/',
+									expires : 100
+								});
+								window.location.assign('/univ/module/class');
+							}
+						});
+					};
 
 				});
 
