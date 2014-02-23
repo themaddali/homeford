@@ -4,11 +4,13 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 
 	var StudentListView = ( function() {
 
-			var work_script_params = {
+			var student_params = {
 				"workBg" : "..\/..\/img\/classbg.png",
 				"carouselurl" : "..\/..\/js\/lib\/jquery.carousel.min.js",
 				"swipejsurl" : "..\/..\/js\/lib\/swipe.min.js"
 			};
+			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>'
+			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>'
 
 			/**
 			 * Constructor
@@ -30,7 +32,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						top : "auto",
 						left : "auto"
 					}, n = document.getElementById("preloader"), r = (new Spinner(t)).spin(n);
-					e.backstretch(work_script_params.workBg);
+					e.backstretch(student_params.workBg);
 					var i = e(window).height(), s = e("#contact-modal").height(), o = i / 2 - s / 2;
 					e("a[rel*=theModal]").leanModal({
 						top : o,
@@ -63,9 +65,18 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 									jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 									jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
 									jQuery('.student-select', newboard).attr('name', UnivData[0].students[i].name);
+									if (UnivData[0].students[i].security === 'true')
+									{
+										jQuery('.student-name', newboard).prepend(LOCKPANEL);
+									}
+									if (UnivData[0].students[i].security !== 'true')
+									{
+										jQuery('.student-name', newboard).prepend(UNLOCKPANEL);
+									}
 									for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
 										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
 									}
+									
 									jQuery('#carousel').append(newboard);
 									if (i === COUNT - 1) {
 										jQuery('#carousel').append('<div class="empty"></div>');
@@ -88,10 +99,10 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						Modernizr.load({
 							test : Modernizr.touch,
 							yep : {
-								loadSwipejs : work_script_params.swipejsurl
+								loadSwipejs : student_params.swipejsurl
 							},
 							nope : {
-								loadCarousel : work_script_params.carouselurl
+								loadCarousel : student_params.carouselurl
 							},
 							callback : {
 								loadSwipejs : function(t, n, i) {

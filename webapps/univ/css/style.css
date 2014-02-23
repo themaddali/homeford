@@ -1268,6 +1268,18 @@ html.touch #subnav {
 	background-color: white;
 	text-align: center
 }
+
+#carousel .studentboard.selected  i {
+	display: inline;
+	padding-left: 5px;
+	padding-right: 10px;
+	color: white;
+}
+
+#carousel div.studentboard i {
+	display: none;
+}
+
 #carousel img {
 	width: 370px;
 	height: 183px;
@@ -1292,6 +1304,8 @@ html.touch #subnav {
 	font-weight: 400;
 	line-height: 1.2em;
 }
+
+
 #carousel .student-info {
 	display: inline-block;
 	width: 340px;
