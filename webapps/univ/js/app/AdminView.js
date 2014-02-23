@@ -1,28 +1,13 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min',
-	    '../../js/lib/spin.min',
-	     '../../js/lib/plugins-min', 
-	     '../../js/lib/jquery.cookie', 
-	     '../../js/lib/jquery.carousel.min',
-	     '../../js/lib/Chart.min',
-	      '../app/service/DataService'], 
-	      function(modernizr, spin, plugins, cookie, carousel,chart,service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../../js/lib/Chart.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, chart, service) {"use strict";
 
-	var QuizView = ( function() {
-
-			// var work_script_params = {
-				// "workBg" : "..\/..\/img\/classbg.png",
-				// "carouselurl" : "..\/..\/js\/jquery.carousel.min.js",
-				// "swipejsurl" : "..\/..\/js\/swipe.min.js"
-			// };
-			var TOTALQUESTIONS = 10;
-			var COMPLETED = 0;
+	var AdminView = ( function() {
 
 			/**
 			 * Constructor
 			 */
-			function QuizView() {
+			function AdminView() {
 
 				jQuery(document).ready(function(e) {
 					var t = {
@@ -199,6 +184,27 @@ define(['../../js/lib/modernizr-2.5.3.min',
 					e("#prev").bind("click", function() {
 						h()
 					});
+
+					setTimeout(function() {
+						service.getUnivObject({
+							success : function(UnivData) {
+								console.log(UnivData);
+								var studentmintabletemplate = jQuery('#students-table-min-template').remove().attr('id', '');
+								var COUNT = UnivData[0].students.length;
+								for (var i = 0; i < COUNT; i++) {
+									var newelement = studentmintabletemplate.clone();
+									jQuery('.students-table-min-id', newelement).text(UnivData[0].students[i].id);
+									jQuery('.students-table-min-name', newelement).text(UnivData[0].students[i].name);
+									jQuery('#admin-students-table-min').append(newelement);
+									if (i === COUNT - 1) {
+										// jQuery('#carousel').append('<div class="empty"></div>');
+										// loadPage();
+									}
+								}
+							}
+						});
+					}, 500);
+
 					e("#nav-dashboard").bind("click", function() {
 						e("#subnav ul").children().removeClass("selected");
 						e("#nav-dashboard").addClass("selected");
@@ -349,8 +355,8 @@ define(['../../js/lib/modernizr-2.5.3.min',
 
 			}
 
-			return QuizView;
+			return AdminView;
 		}());
 
-	return new QuizView();
+	return new AdminView();
 });

@@ -95,6 +95,24 @@
 					<p class="designation">
 						Students
 					</p>
+					<br />
+					<br />
+					<table id="admin-students-table-min">
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+						</tr>
+						<tr id="students-table-min-template">
+							<td class="students-table-min-id"></td>
+							<td class="students-table-min-name"></td>
+						</tr>
+					</table>
+				</div>
+				<div class="panel scroll-pane">
+					<h3 style="padding-bottom: 0px">Manage</h3>
+					<p class="designation">
+						Students
+					</p>
 					<p class="half-height">
 						<!-- <input type="button" value="Add New Student" /> -->
 					</p>
@@ -172,13 +190,13 @@
 
 		<a href="#" id="prev"></a>
 		<a href="#" id="next"></a>
-		
+
 		<!-- Le javascript
 		================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="./../../js/lib/require.js"></script>
 		<script type="text/javascript">
-			require(['./../../js/lib/jquery','./../../js/common'], function(common) {
+			require(['./../../js/lib/jquery', './../../js/common'], function(common) {
 				require(['../../../../js/app/AdminView']);
 			});
 		</script>

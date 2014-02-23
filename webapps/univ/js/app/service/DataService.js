@@ -29,8 +29,17 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 				
-				this.getStudentObject = function(handlers) {
-					$.getJSON("/../univ/data/studentinfo.json", function(json) {
+				this.getStudentObject = function(studentid,handlers) {
+					var thisURL;
+					if (studentid !== 'Doug Stamper')
+					{
+						thisURL = "/../univ/data/studentinfo-four.json;"
+					}
+					else
+					{
+						thisURL = "/../univ/data/studentinfo-one.json;"
+					}
+					$.getJSON(thisURL, function(json) {
 						if (json)
 						{
 							handlers.success(json);

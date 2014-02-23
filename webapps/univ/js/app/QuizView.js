@@ -62,7 +62,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					}
 
 					setTimeout(function() {
-						service.getStudentObject({
+						service.getStudentObject(jQuery.cookie('subuser') ,{
 							success : function(StudentData) {
 								console.log(StudentData);
 								//Create the student panels on the fly (DB should send this info per user/univ)

@@ -9,6 +9,8 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 				"carouselurl" : "..\/..\/js\/lib\/jquery.carousel.min.js",
 				"swipejsurl" : "..\/..\/js\/lib\/swipe.min.js"
 			};
+			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>'
+			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>'
 
 			/**
 			 * Constructor
@@ -43,7 +45,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						window.location.assign('/univ');
 					} else {
 						if (jQuery.cookie('subuser')) {
-							jQuery('#loggedin-user').text(jQuery.cookie('user') + '>' + jQuery.cookie('subuser') );
+							jQuery('#loggedin-user').text(jQuery.cookie('user') + '>' + jQuery.cookie('subuser'));
 						}
 					}
 
@@ -54,7 +56,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					});
 
 					setTimeout(function() {
-						service.getStudentObject({
+						service.getStudentObject(jQuery.cookie('subuser'), {
 							success : function(StudentData) {
 								console.log(StudentData);
 								//Create the student panels on the fly (DB should send this info per user/univ)
@@ -63,20 +65,20 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								for (var i = 0; i < COUNT; i++) {
 									var newboard = template.clone();
 									jQuery('.class-name', newboard).text(StudentData[0].activeassignments[i].name);
-									if (StudentData[0].activeassignments[i].assignmentmodel === 'task' )
-									{
-										jQuery('.class-binder', newboard).attr('src','../../img/taskbook.jpg');
+									if (StudentData[0].activeassignments[i].assignmentmodel === 'task') {
+										jQuery('.class-binder', newboard).attr('src', '../../img/taskbook.jpg');
 									}
 									jQuery('.class-progress', newboard).text(StudentData[0].activeassignments[i].progress + '% Done');
 									jQuery('.class-select', newboard).attr('name', StudentData[0].activeassignments[i].name);
 									jQuery('#carousel').append(newboard);
 									if (i === COUNT - 1) {
 										jQuery('#carousel').append('<div class="empty"></div>');
-										loadPage();
+										populateStudentOptions();
 									}
 								}
 							}
 						});
+						
 					}, 500);
 
 					function loadPage() {
@@ -190,6 +192,28 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						})
 						activateEvents();
 					}
+					
+					function populateStudentOptions() {
+						service.getUnivObject({
+							success : function(UnivData) {
+								console.log(UnivData);
+								//Create the student panels on the fly (DB should send this info per user/univ)
+								var droptemplate = jQuery('#student-option-template').remove().attr('id', '');
+								var COUNT = UnivData[0].students.length;
+								for (var i = 0; i < COUNT; i++) {
+									var newoption = droptemplate.clone();
+									jQuery('.student-option', newoption).text(UnivData[0].students[i].name);
+									jQuery('#student-options').append(newoption);
+									if (i === COUNT - 1) {
+										jQuery('#student-options').append('<li class="back"><a href="../../model/studentlist">Back to Student List</a></li>');
+										jQuery('#student-option-active').text(jQuery.cookie('subuser'));
+										loadPage();
+									}
+
+								}
+							}
+						});
+					}
 
 					function activateEvents() {
 						$('.class-select').on('click', function() {
@@ -202,7 +226,24 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								window.location.assign('/univ/module/quiz');
 							}
 						});
+
+						$('.student-option').click(function() {
+							var selectedStudent = $(this).text();
+							userChange(jQuery.cookie('subuser'), selectedStudent);
+						});
 					};
+
+					function userChange(currentuser, newuser) {
+						// Accept the current user and next
+						// Push it to DB
+						// Adjust the cookies.
+						jQuery.cookie('subuser', newuser, {
+							path : '/',
+							expires : 100
+						});
+						jQuery('#student-option-active').text(jQuery.cookie('subuser'));
+						location.reload();
+					}
 
 				});
 

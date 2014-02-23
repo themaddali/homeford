@@ -65,18 +65,17 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 									jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 									jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
 									jQuery('.student-select', newboard).attr('name', UnivData[0].students[i].name);
-									if (UnivData[0].students[i].security === 'true')
-									{
+									if (UnivData[0].students[i].security === true) {
 										jQuery('.student-name', newboard).prepend(LOCKPANEL);
+										jQuery('.student-select', newboard).attr('security', UnivData[0].students[i].security);
 									}
-									if (UnivData[0].students[i].security !== 'true')
-									{
+									if (UnivData[0].students[i].security !== true) {
 										jQuery('.student-name', newboard).prepend(UNLOCKPANEL);
 									}
 									for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
 										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
 									}
-									
+
 									jQuery('#carousel').append(newboard);
 									if (i === COUNT - 1) {
 										jQuery('#carousel').append('<div class="empty"></div>');
@@ -206,19 +205,32 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						})
 						activateEvents();
 					}
-					
+
 					function activateEvents() {
 						$('.student-select').on('click', function() {
 							if ($(this).hasClass('selected')) {
 								// successful selection of user for context, and create cookie
 								var selectedUser = $(this).attr('name');
-								jQuery.cookie('subuser', selectedUser, {
-									path : '/',
-									expires : 100
-								});
-								window.location.assign('/univ/module/class');
+								var selectedUserSecurity = $(this).attr('security');
+								if (selectedUserSecurity !== "true") {
+									jQuery.cookie('subuser', selectedUser, {
+										path : '/',
+										expires : 100
+									});
+									window.location.assign('/univ/module/class');
+								} else {
+									alert('A password panel will authenticate here');
+									jQuery.cookie('subuser', selectedUser, {
+										path : '/',
+										expires : 100
+									});
+									window.location.assign('/univ/module/class');
+									
+								}
+
 							}
 						});
+
 					};
 
 				});

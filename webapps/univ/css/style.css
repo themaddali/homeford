@@ -1476,7 +1476,7 @@ html.touch #subnav {
 	background-color: #fbb913;
 }
 
-.quiz-option {
+.quiz-option, .student-option {
 	cursor: pointer;
 }
 

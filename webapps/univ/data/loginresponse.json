@@ -54,9 +54,9 @@
         "students": [
              {
                 "id": "T3-001",
-                "name": "Student 1",
+                "name": "Claire Underwood",
                 "email": "jr1@james.com",
-                "security": "true",
+                "security": true,
         		"phone": "",
         		"image": "../../img/student4.jpg",
         		"gender": "male",
@@ -72,9 +72,9 @@
             },
              {
                 "id": "T3-002",
-                "name": "Student 2",
+                "name": "Doug Stamper",
                 "email": "jr2@james.com",
-                "security": "false",
+                "security": false,
                 "image": "../../img/student1.jpg",
         		"phone": "",
         		"gender": "female",
@@ -94,9 +94,9 @@
             },
             {
                 "id": "T3-002",
-                "name": "Student 3",
+                "name": "Ms Joe Barnes",
                 "email": "jr2@james.com",
-                "security": "true",
+                "security": true,
                 "image": "../../img/student2.jpg",
         		"phone": "",
         		"gender": "female",
