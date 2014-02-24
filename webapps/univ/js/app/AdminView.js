@@ -6,7 +6,13 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 
 			/**
 			 * Constructor
+			 * 
 			 */
+			
+			var MALEICON = '<i class="icon-male  icon-1x "></i>'
+			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
+
+
 			function AdminView() {
 
 				jQuery(document).ready(function(e) {
@@ -188,18 +194,33 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					setTimeout(function() {
 						service.getUnivObject({
 							success : function(UnivData) {
-								console.log(UnivData);
-								var studentmintabletemplate = jQuery('#students-table-min-template').remove().attr('id', '');
+								//OverView Panel Load
+								jQuery('.univ-name').text(UnivData[0].univname);
+								jQuery('.univ-id').text(UnivData[0].id);
+								jQuery('.univ-about').text(UnivData[0].about);
+								jQuery('.univ-admin').text(UnivData[0].adminname);
+								jQuery('.univ-created').text(UnivData[0].created);
+								jQuery('.univ-email').text(UnivData[0].email);
+								jQuery('.univ-phone').text(UnivData[0].phone);
+								jQuery('.univ-address').text(UnivData[0].address);
+								jQuery('.univ-faculty').text(UnivData[0].faculty.length);
+								jQuery('.univ-students').text(UnivData[0].students.length);
+								
+								//Student Manage Panel Load
+								var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
 								var COUNT = UnivData[0].students.length;
 								for (var i = 0; i < COUNT; i++) {
-									var newelement = studentmintabletemplate.clone();
-									jQuery('.students-table-min-id', newelement).text(UnivData[0].students[i].id);
-									jQuery('.students-table-min-name', newelement).text(UnivData[0].students[i].name);
-									jQuery('#admin-students-table-min').append(newelement);
-									if (i === COUNT - 1) {
-										// jQuery('#carousel').append('<div class="empty"></div>');
-										// loadPage();
+									var newelement = studentmintemplate.clone();
+									if (UnivData[0].students[i].gender === 'female')
+									{
+										jQuery('.students-list-min', newelement).html(FEMALEICON+'<strong>'+UnivData[0].students[i].name+'</strong>'+UnivData[0].students[i].id);
 									}
+									else
+									{
+										jQuery('.students-list-min', newelement).html(MALEICON+'<strong>'+UnivData[0].students[i].name+'</strong>'+UnivData[0].students[i].id);
+									}
+									jQuery('#students-list-min').append(newelement);
+									
 								}
 							}
 						});

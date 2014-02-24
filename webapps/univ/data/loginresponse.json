@@ -1,13 +1,13 @@
 [
     {
         "id": "T1-001",
-        "univname": "James Home",
-        "adminname": "Mr James",
+        "univname": "House Of Cards University",
+        "adminname": "Reed Hastings",
         "created": "2012-04-08T12:48:34 +07:00",
-        "email": "family@james.com",
+        "email": "hoc@netflix.com",
         "phone": "+1 (887) 444-2667",
         "address": "930 Benson Avenue, Silkworth, Pennsylvania, 1014",
-        "about": "Esse id ex esse irure veniam nisi laboris consequat ad.\r\n",
+        "about": "House of Cards University is an American political drama University series developed and produced by Beau Willimon. It is an adaptation of a previous BBC couse of the same name and is based on the novel  ",
         "faculty": [
              {
                 "id": "T2-001",
@@ -59,7 +59,7 @@
                 "security": true,
         		"phone": "",
         		"image": "../../img/student4.jpg",
-        		"gender": "male",
+        		"gender": "female",
        			"courses": [
             			{	
             			"instructor": "T2-001",
@@ -77,7 +77,7 @@
                 "security": false,
                 "image": "../../img/student1.jpg",
         		"phone": "",
-        		"gender": "female",
+        		"gender": "male",
        			"courses": [
             			{	
             			"instructor": "T2-001",

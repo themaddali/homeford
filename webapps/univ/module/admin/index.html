@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>Homeford Univerity</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../css/font-awesome.css">
 		<link rel="stylesheet" href="../../css/style.css">
 		<meta name="description" content=""/>
 	</head>
@@ -48,17 +49,78 @@
 			<div class="contain">
 
 				<div class="panel scroll-pane">
-					<h3 style="padding-bottom: 0px">Report Card</h3>
+					<h3 style="padding-bottom: 0px">Organization</h3>
 					<p class="designation">
 						Overview
 					</p>
-					<canvas id="polar-chart"></canvas>
-					<p>
-						Knowledge is a familiarity with someone or something, which can include facts, information, descriptions, or skills acquired through experience or education. It can refer to the theoretical or practical understanding of a subject. It can be implicit (as with practical skill or expertise) or explicit (as with the theoretical understanding of a subject); it can be more or less formal or systematic.[1] In philosophy, the study of knowledge is called epistemology; the philosopher Plato famously defined knowledge as "justified true belief." However, no single agreed upon definition of knowledge exists, though there are numerous theories to explain it.
-					</p>
-					<p>
-						Knowledge acquisition involves complex cognitive processes: perception, communication, association and reasoning; while knowledge is also said to be related to the capacity of acknowledgment in human beings.
-					</p>
+					<a class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					<form class="show-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Univ Name</label>
+									<div class="form-content univ-name">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Univ ID</label>
+									<div class="form-content univ-id">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>About</label>
+									<div class="form-content univ-about">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Primary Contact</label>
+									<div class="form-content univ-admin">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Established</label>
+									<div class="form-content univ-created">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Email</label>
+									<div class="form-content univ-email">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Phone</label>
+									<div class="form-content univ-phone">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Address</label>
+									<div class="form-content univ-address">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Total Faculty</label>
+									<div class="form-content univ-faculty">
+										
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Enrolled Students</label>
+									<div class="form-content univ-students">
+										
+									</div>
+								</li>
+								
+							</ol>
+						</fieldset>
+					</form>
 					<br />
 					<br />
 				</div>
@@ -91,22 +153,20 @@
 					<br />
 				</div>
 				<div class="panel scroll-pane">
+
 					<h3 style="padding-bottom: 0px">Manage</h3>
 					<p class="designation">
 						Students
 					</p>
+					<a class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
 					<br />
-					<br />
-					<table id="admin-students-table-min">
-						<tr>
-							<th>ID</th>
-							<th>Name</th>
-						</tr>
-						<tr id="students-table-min-template">
-							<td class="students-table-min-id"></td>
-							<td class="students-table-min-name"></td>
-						</tr>
-					</table>
+					<div id="student-min-list">
+						<ul id="students-list-min">
+							<li id="students-list-min-template">
+								<a class="students-list-min"><strong>Name</strong>ID</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="panel scroll-pane">
 					<h3 style="padding-bottom: 0px">Manage</h3>
@@ -119,6 +179,7 @@
 					<p class="designation">
 						Tests
 					</p>
+					<canvas id="polar-chart"></canvas>
 					<br />
 					<br />
 				</div>
@@ -212,14 +273,14 @@
 			</div>
 		</footer>
 
-		<script type='text/javascript' src='../../js/plugins-min.js'></script>
+		<!-- <script type='text/javascript' src='../../js/plugins-min.js'></script>
 		<script type='text/javascript'>
-			/* <![CDATA[ */
-			var about_script_params = {
-				"aboutBg" : "..\/..\/img\/classbg.png"
-			};
-			/* ]]> */
+		/* <![CDATA[ */
+		var about_script_params = {
+		"aboutBg" : "..\/..\/img\/classbg.png"
+		};
+		/* ]]> */
 		</script>
-		<script type='text/javascript' src='admin.js'></script>
+		<script type='text/javascript' src='admin.js'></script> -->
 	</body>
 </html>
