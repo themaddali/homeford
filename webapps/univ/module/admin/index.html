@@ -264,7 +264,10 @@
 							<ol>
 								<li class="form-item">
 									<label>Student Name</label>
-									<input type="text" autofocus />
+									<input id="student-name" type="text" autofocus />
+									<div class="form-guide">
+										<label for="student-name">Yo! Pick some name</label>
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Student ID</label>
@@ -276,19 +279,20 @@
 								</li>
 								<li class="form-item">
 									<label>Gender</label>
-									<input type="radio" name="sex" value="male">
-									Male
-									<br>
-									<input type="radio" name="sex" value="female">
-									Female
+									<span>
+										<input type="radio" name="sex" value="male">
+										Male
+										<input type="radio" name="sex" value="female">
+										Female
+									</span>
 								</li>
 								<li class="form-item">
 									<label>E Mail</label>
-									<input type="email" />
+									<span>Testing a long name just to see if it exxpands</span>
 								</li>
 								<li class="form-item">
 									<label>Phone</label>
-									<input type="tel" />
+									<input type="tel" value="123455678912345678981234556789921344556677" />
 								</li>
 								<li class="form-item">
 									<label>Primary Contact</label>

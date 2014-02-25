@@ -268,7 +268,6 @@ td {
 	padding: 0.2em 0;
 }
 
-
 ::-moz-selection {
 	background: #ffe39c;
 	color: #333;
@@ -1194,15 +1193,15 @@ body.error404 {
 	font-size: 1em;
 	line-height: 1.6em;
 	color: #444;
-	overflow:scroll;
+	overflow: scroll;
 	height: 90%;
 }
 
-.edit-form  {
+.edit-form {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.edit-form fieldset  {
+.edit-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -1226,7 +1225,7 @@ body.error404 {
 .edit-form li input {
 	margin-bottom: 5px;
 	font-size: 1em;
-	border : none;
+	border: none;
 	border-bottom: 1px solid;
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 }
@@ -1237,6 +1236,17 @@ body.error404 {
 	font-size: 14px;
 	line-height: 17px;
 }
+
+/*.edit-form li.form-item span {
+	display: inline-flex;
+}*/
+.edit-form li.form-item span input {
+	margin-left: 10px;
+}
+.edit-form li.form-item span input:first-of-type {
+	margin-left: 0px;
+}
+
 .edit-form li.form-item > label:first-of-type {
 	max-width: 170px;
 	width: 40%;
@@ -1249,21 +1259,18 @@ body.error404 {
 	box-sizing: border-box;
 	cursor: default;
 }
-/*.edit-form li.form-item > label:first-of-type.condensed {
-	width: auto;
-	cursor: default;
-}*/
-.edit-form li.form-item > .form-content {
-	width: 60%;
-	margin-bottom: 5px;
-	font-size: 13px;
-	color: #000;
-}
+
+/*.edit-form li.form-item > .form-content {
+ width: 60%;
+ margin-bottom: 5px;
+ font-size: 13px;
+ color: #000;
+ }*/
 .edit-form li.form-item > .form-content {
 	width: 60%;
 	margin-bottom: 5px;
 	font-size: 14px;
-	border : none;
+	border: none;
 	border-bottom: 1px solid;
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 	color: #000;
