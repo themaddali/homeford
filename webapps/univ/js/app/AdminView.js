@@ -360,6 +360,13 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						window.setTimeout('location.reload()', 1000);
 						// refresh after 1 sec
 					});
+					
+					jQuery('#student-manage').on('click',function(){
+						jQuery('#student-edit-modal').slideDown(500);
+					});
+					jQuery('#student-edit-modal-close').on('click',function(){
+						jQuery('#student-edit-modal').slideUp(500);
+					});
 				});
 
 				this.pause = function() {

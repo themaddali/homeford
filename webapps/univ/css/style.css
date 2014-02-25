@@ -249,7 +249,7 @@ textarea {
 }
 
 input:invalid, textarea:invalid {
-	background-color: #f0dddd;
+	background-color: #FC7C7C;
 }
 
 table {
@@ -268,9 +268,7 @@ td {
 	padding: 0.2em 0;
 }
 
-/* ===================================================
- Author: Sumit Paul, Studio Kudos
- =================================================== */
+
 ::-moz-selection {
 	background: #ffe39c;
 	color: #333;
@@ -1039,7 +1037,7 @@ body.error404 {
 	top: 0;
 	left: 0;
 	width: 9000px;
-	height: 100%;
+	height: 100;
 }
 
 .panel {
@@ -1101,7 +1099,7 @@ body.error404 {
 
 .panel div #student-min-list {
 	width: 320px;
-	font-family: Georgia, Times, serif;
+	font-family: "brandon-grotesque", sans-serif;
 	font-size: 15px;
 }
 .panel div #student-min-list ul {
@@ -1133,11 +1131,142 @@ body.error404 {
 .panel div #student-min-list ul li a:hover {
 	color: #fbb913;
 	font-size: 1.1em;
-	/*background-image: url(../images/hover.png);*/
 	background-repeat: repeat-x;
 }
 .panel div #student-min-list ul li a strong {
 	margin-right: 10px;
+}
+
+/*Popup's from Admin Page - Models*/
+
+.modal-body {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120%;
+	z-index: 10;
+	background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+.modal-body .modal-container {
+	position: absolute;
+	margin-top: 4%;
+	margin-left: 10%;
+	width: 80%;
+	height: 80%;
+	z-index: 20;
+	border: solid 0px white;
+	background-color: white
+}
+.modal-body .modal-container header {
+	background-color: grey;
+	font-size: 1.2em;
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	padding: 20px;
+	padding-left: 15px;
+}
+
+.modal-body .modal-container header input {
+	position: absolute;
+	right: 3%;
+	height: 42px;
+	background-color: #fbb913;
+	font-size: 1em;
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	border: none;
+	cursor: pointer;
+	top: 12px;
+}
+
+#student-edit-modal-close {
+	top: 12px;
+}
+
+.modal-body .modal-container .modal-contents {
+	padding: 15px 30px 0 30px;
+	margin: 0;
+	font-family: "brandon-grotesque", sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 1em;
+	line-height: 1.6em;
+	color: #444;
+	overflow:scroll;
+	height: 90%;
+}
+
+.edit-form  {
+	width: 100%;
+	margin-bottom: 20px;
+}
+.edit-form fieldset  {
+	margin: 20px 0px;
+	border: none;
+}
+
+.edit-form fieldset:first-of-type {
+	margin-top: 0px;
+}
+.edit-form fieldset:last-of-type {
+	margin-bottom: 0px;
+}
+
+.edit-form li.form-item {
+	font-size: 0px;
+}
+.edit-form li {
+	padding-bottom: 10px;
+}
+.edit-form li.form-item:last-of-type {
+	margin-bottom: 0px;
+}
+.edit-form li input {
+	margin-bottom: 5px;
+	font-size: 1em;
+	border : none;
+	border-bottom: 1px solid;
+	border-bottom-color: rgba(114, 114, 114, 0.71);
+}
+
+.edit-form li.form-item > * {
+	vertical-align: top;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 17px;
+}
+.edit-form li.form-item > label:first-of-type {
+	max-width: 170px;
+	width: 40%;
+	margin-bottom: 5px;
+	color: #7f7f7f;
+	padding-right: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: default;
+}
+/*.edit-form li.form-item > label:first-of-type.condensed {
+	width: auto;
+	cursor: default;
+}*/
+.edit-form li.form-item > .form-content {
+	width: 60%;
+	margin-bottom: 5px;
+	font-size: 13px;
+	color: #000;
+}
+.edit-form li.form-item > .form-content {
+	width: 60%;
+	margin-bottom: 5px;
+	font-size: 14px;
+	border : none;
+	border-bottom: 1px solid;
+	border-bottom-color: rgba(114, 114, 114, 0.71);
+	color: #000;
 }
 
 .panel p.half-height {
@@ -1221,11 +1350,6 @@ body.error404 {
 .panel form.show-form fieldset:last-of-type {
 	margin-bottom: 0px;
 }
-/*.panel form.show-form fieldset > legend {
-	color: #737373;
-	font-size: 16px;
-	padding-bottom: 20px;
-}*/
 .panel form.show-form li.form-item {
 	font-size: 0px;
 }
@@ -1260,7 +1384,6 @@ body.error404 {
 	font-size: 13px;
 	color: #000;
 }
-
 
 .press {
 	width: 560px;
