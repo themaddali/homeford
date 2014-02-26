@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Homeford Univerity</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../../css/font-awesome.css">
+		<link rel="stylesheet" href="../../../css/style.css">
+		<meta name="description" content=""/>
+	</head>
+
+	<body class="home page page-id-188 page-template page-template-about-php">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+			<nav id="main-nav">
+				<ul>
+					<li>
+						<a id="admin-done" href="#">Done</a>
+					</li>
+					<li>
+						<a id="signout-button" class="login" href="#">SignOut</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<div id="student-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					Overview
+					<!-- <a id="edit-student-save"><i class="icon-check  icon-1x "></i></a> -->
+					<input type="button" value="Edit">
+				</header>
+				<div class="modal-contents">
+					<form class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Univ Name</label>
+									<input id="univ-name" type="text" autofocus />
+								</li>
+								<li class="form-item">
+									<label>Univ ID</label>
+									<input id="univ-id" type="text" />
+								</li>
+								<li class="form-item">
+									<label>About</label>
+									<input id="univ-about" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Primary Contact</label>
+									<input id="univ-admin" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Established</label>
+									<input id="univ-created" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Email</label>
+									<input id="univ-email" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Phone</label>
+									<input id="univ-phone" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Address</label>
+									<input id="univ-address" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Total Faculty</label>
+									<input id="univ-faculty" readonly type="text" />
+								</li>
+								<li class="form-item">
+									<label>Enrolled Students</label>
+									<input id="univ-students" readonly type="text" />
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<div id="overview-edit-modal-close" class="modal_close"></div>
+			</div>
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="./../../../js/lib/require.js"></script>
+		<script type="text/javascript">
+			require(['./../../../js/lib/jquery', './../../../js/common'], function(common) {
+				require(['../../../../../js/app/OverViewView']);
+			});
+		</script>
+
+		<div id="preloader"></div>
+		<footer>
+			<div id="contact-info">
+				123.456.7890 &nbsp;&nbsp; <a id="contact-email" target="_blank">info@homeford.com</a>
+				<span class="ss-social"> <a href="http://www.facebook.com" target="_blank"><img src="../../../img/ss-facebook.png" alt="facebook"></a> <a href="http://www.twitter.com" target="_blank"><img src="../../../img/ss-twitter.png" alt="twitter"></a> <a href="http://pinterest.com/" target="_blank"><img src="../../../img/ss-pinterest.png" alt="pinterest"></a> </span>
+			</div>
+			<div id="copyright">
+				&copy; Homeford University 2014
+			</div>
+		</footer>
+
+	</body>
+</html>

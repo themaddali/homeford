@@ -1129,7 +1129,7 @@ body.error404 {
 
 .panel div #student-min-list ul li a:hover {
 	color: #fbb913;
-	font-size: 1.1em;
+	font-size: 1em;
 	background-repeat: repeat-x;
 }
 .panel div #student-min-list ul li a strong {
@@ -1139,7 +1139,6 @@ body.error404 {
 /*Popup's from Admin Page - Models*/
 
 .modal-body {
-	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -1179,8 +1178,24 @@ body.error404 {
 	cursor: pointer;
 	top: 12px;
 }
+.modal-body .modal-container header a {
+	position: absolute;
+	right: 3%;
+	top: 12px;
+	width: 42px;
+	height: 42px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #fbb913;
+	font-size: 1em;
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	border: none;
+	cursor: pointer;
+	top: 12px;
+}
 
-#student-edit-modal-close {
+#student-edit-modal-close,#overview-edit-modal-close {
 	top: 12px;
 }
 
@@ -1235,19 +1250,20 @@ body.error404 {
 	display: inline-block;
 	font-size: 14px;
 	line-height: 17px;
+	width: 60%;
 }
 
 /*.edit-form li.form-item span {
-	display: inline-flex;
-}*/
+ display: inline-flex;
+ }*/
 .edit-form li.form-item span input {
-	margin-left: 10px;
+	margin-left: 0px;
 }
-.edit-form li.form-item span input:first-of-type {
+.edit-form li.form-item input {
 	margin-left: 0px;
 }
 
-.edit-form li.form-item > label:first-of-type {
+.edit-form li.form-item > label{
 	max-width: 170px;
 	width: 40%;
 	margin-bottom: 5px;
@@ -1260,12 +1276,7 @@ body.error404 {
 	cursor: default;
 }
 
-/*.edit-form li.form-item > .form-content {
- width: 60%;
- margin-bottom: 5px;
- font-size: 13px;
- color: #000;
- }*/
+
 .edit-form li.form-item > .form-content {
 	width: 60%;
 	margin-bottom: 5px;

@@ -6,12 +6,11 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 
 			/**
 			 * Constructor
-			 * 
+			 *
 			 */
-			
+
 			var MALEICON = '<i class="icon-male  icon-1x "></i>'
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
-
 
 			function AdminView() {
 
@@ -205,22 +204,23 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								jQuery('.univ-address').text(UnivData[0].address);
 								jQuery('.univ-faculty').text(UnivData[0].faculty.length);
 								jQuery('.univ-students').text(UnivData[0].students.length);
-								
+
 								//Student Manage Panel Load
 								var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
 								var COUNT = UnivData[0].students.length;
 								for (var i = 0; i < COUNT; i++) {
 									var newelement = studentmintemplate.clone();
-									if (UnivData[0].students[i].gender === 'female')
-									{
-										jQuery('.students-list-min', newelement).html(FEMALEICON+'<strong>'+UnivData[0].students[i].name+'</strong>'+UnivData[0].students[i].id);
-									}
-									else
-									{
-										jQuery('.students-list-min', newelement).html(MALEICON+'<strong>'+UnivData[0].students[i].name+'</strong>'+UnivData[0].students[i].id);
+									if (UnivData[0].students[i].gender === 'female') {
+										jQuery('.students-list-min', newelement).html(FEMALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
+									} else {
+										jQuery('.students-list-min', newelement).html(MALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
 									}
 									jQuery('#students-list-min').append(newelement);
-									
+									jQuery('.students-list-min').on('click', function() {
+										//studentedit.loadData($(this).text());
+										window.location.assign('subuseredit');
+									});
+
 								}
 							}
 						});
@@ -346,7 +346,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						jQuery.removeCookie('user', {
 							path : '/univ'
 						});
-						window.location.assign(currentlocation.split('module/admin')[0]);
+						window.location.assign('/univ');
 					}
 
 					jQuery('#signout-button').on('click', function(e) {
@@ -360,13 +360,14 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						window.setTimeout('location.reload()', 1000);
 						// refresh after 1 sec
 					});
-					
-					jQuery('#student-manage').on('click',function(){
-						jQuery('#student-edit-modal').slideDown(500);
+
+					jQuery('#student-manage').on('click', function() {
+						window.location.assign('subuseradd');
 					});
-					jQuery('#student-edit-modal-close').on('click',function(){
-						jQuery('#student-edit-modal').slideUp(500);
+					jQuery('#overview-manage').on('click', function() {
+						window.location.assign('overview ');
 					});
+
 				});
 
 				this.pause = function() {
