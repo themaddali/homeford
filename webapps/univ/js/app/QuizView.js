@@ -12,6 +12,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 			var TOTALQUESTIONS = 10;
 			var COMPLETED = 0;
 			var QUIZ;
+			var QUOTEICON = '<i class="icon-quote-left"></i>';
 
 			/**
 			 * Constructor
@@ -227,6 +228,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						$('#chat-module').click(function() {
 							$('#chatnav').toggleClass('active');
 							$('#chat-input').val('Get me: ' + $('.quizboard.selected>.qtn').text() + ' now');
+							$('#chat-input').focus();
 						});
 						$('#chat-send').click(function() {
 							$('#chatnav').toggleClass('active');
@@ -239,17 +241,17 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					};
 
 					setTimeout(function() {
-						setNotification('Whats going on?');
+						setNotification('Whats going on?','Venkat');
 					}, 5000);
 
 					setInterval(function() {
-						setNotification('Are you done with this bro?');
+						setNotification('Are you done with this bro?','Venkat');
 					}, 500000);
 
-					function setNotification(message) {
+					function setNotification(message, sender) {
 						$('#chat-module').addClass('notify');
 						$('#chatnav').addClass('active');
-						$('#chat-input').val(message);
+						$('#chat-input').val(sender+' says :'+message );
 						$('#chat-input').attr('readonly', 'readonly');
 						$('#chat-send').val('dismiss');
 					}
