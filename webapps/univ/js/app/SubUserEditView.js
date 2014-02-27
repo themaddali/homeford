@@ -12,9 +12,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 			function SubUserView() {
 
 				jQuery(document).ready(function(e) {
-					$('.edit-form .form-item').on('mouseover', onOverContent);
-					$('.edit-form .form-item').on('focus', onOverContent);
-
+					
 					if (!jQuery.cookie('user') || jQuery.cookie('user') === 'home') {
 						var currentlocation = window.location.href;
 						jQuery.removeCookie('user', {

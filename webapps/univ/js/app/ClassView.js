@@ -205,7 +205,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 									jQuery('.student-option', newoption).text(UnivData[0].students[i].name);
 									jQuery('#student-options').append(newoption);
 									if (i === COUNT - 1) {
-										jQuery('#student-options').append('<li class="back"><a href="../../model/studentlist">Back to Student List</a></li>');
+										jQuery('#student-options').append('<li class="back"><a href="../../module/studentlist">Back to Student List</a></li>');
 										jQuery('#student-option-active').text(jQuery.cookie('subuser'));
 										loadPage();
 									}

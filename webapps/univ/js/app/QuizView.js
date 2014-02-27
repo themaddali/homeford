@@ -242,7 +242,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 
 					setTimeout(function() {
 						setNotification('Whats going on?','Venkat');
-					}, 5000);
+					}, 10000); //10seconds
 
 					setInterval(function() {
 						setNotification('Are you done with this bro?','Venkat');
@@ -251,7 +251,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					function setNotification(message, sender) {
 						$('#chat-module').addClass('notify');
 						$('#chatnav').addClass('active');
-						$('#chat-input').val(sender+' says :'+message );
+						$('#chat-input').val(sender+' says : '+message );
 						$('#chat-input').attr('readonly', 'readonly');
 						$('#chat-send').val('dismiss');
 					}
