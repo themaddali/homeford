@@ -424,7 +424,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					new Chart(studentctx1).Doughnut(studentdata1);
 					new Chart(rankingctx).Bar(rankingdata);
 					new Chart(rankingctx1).Bar(rankingdata1);
-					new Chart(polarctx).PolarArea(curentdata);
+					//new Chart(polarctx).PolarArea(curentdata);
 					//new Chart(accountsctx).Bar(accountsData,accountsOptions);
 					//Mobile set
 					new Chart(document.getElementById("polar-chart-phone").getContext("2d")).PolarArea(curentdata);
