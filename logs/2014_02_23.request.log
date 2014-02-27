@@ -10108,3 +10108,6 @@
 0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:39:55 +0000] "GET /univ/img/project-page-logo.png HTTP/1.1" 304 0 
 0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:39:55 +0000] "GET /univ/img/pointer-back.png HTTP/1.1" 304 0 
 0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:39:55 +0000] "GET /univ/js/app/QuizView.js HTTP/1.1" 200 10585 
+0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:42:56 +0000] "GET /univ/model/class HTTP/1.1" 404 1381 
+0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:43:03 +0000] "GET /univ/model/class HTTP/1.1" 404 1381 
+0:0:0:0:0:0:0:1 -  -  [27/Feb/2014:01:43:06 +0000] "GET /univ/js/app/QuizView.js HTTP/1.1" 304 0 

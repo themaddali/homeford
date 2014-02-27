@@ -78,7 +78,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 									jQuery('#quiz-options').append(newboard);
 
 									if (i === COUNT - 1) {
-										jQuery('#quiz-options').append('<li class="back"><a href="../../model/class">Back to Class</a></li>');
+										jQuery('#quiz-options').append('<li class="back"><a href="../../module/class">Back to Class</a></li>');
 										jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
 										setCards(COMPLETED);
 										loadPage();
