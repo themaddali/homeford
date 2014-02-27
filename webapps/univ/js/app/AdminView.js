@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../../js/lib/Chart.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, chart, service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, chart, raphael, morris, service) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -217,7 +217,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 									}
 									jQuery('#students-list-min').append(newelement);
 									jQuery('.students-list-min').on('click', function() {
-										//studentedit.loadData($(this).text());
+										//usereditview.loadData('Doug Stamper');
 										window.location.assign('subuseredit');
 									});
 
@@ -285,13 +285,14 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						segmentStrokeColor : "#fff",
 						segmentStrokeWidth : 2,
 						percentageInnerCutout : 50,
-						animation : true,
+						animation : false,
 						animationSteps : 100,
 						animationEasing : "easeOutBounce",
 						animateRotate : true,
 						animateScale : false,
 						onAnimationComplete : null
 					};
+
 					var rankingdata = {
 						labels : ["Maths", "Numbers", "Colors"],
 						datasets : [{
@@ -304,6 +305,81 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 							data : [28, 48, 40]
 						}]
 					};
+
+					Morris.Line({
+						element : 'accounts-chart',
+						data : [{
+							y : '2013-09',
+							a : 13000,
+							b : 11000
+						}, {
+							y : '2013-10',
+							a : 15000,
+							b : 14000
+						}, {
+							y : '2013-11',
+							a : 9000,
+							b : 8700
+						}, {
+							y : '2013-12',
+							a : 9500,
+							b : 9000
+						}, {
+							y : '2014-01',
+							a : 14000,
+							b : 11500
+						}, {
+							y : '2014-02',
+							a : 17000,
+							b : 13000
+						}],
+						xkey : 'y',
+						xLabels : 'month',
+						preUnits : '$',
+						lineColors : ['#009ACD', '#e34a33'],
+						lineWidth : 4,
+						pointSize : 5,
+						ykeys : ['a', 'b'],
+						labels : ['Cash Inflow', 'Expenses']
+					});
+
+					Morris.Donut({
+						element : 'student-donut-1',
+						data : [{
+							label : "October",
+							value : 12
+						}, {
+							label : "Novemeber",
+							value : 15
+						}, {
+							label : "December",
+							value : 16
+						}, {
+							label : "January",
+							value : 20
+						}, {
+							label : "Feburary",
+							value : 19
+						}, {
+							label : "March",
+							value : 25
+						}]
+					});
+					Morris.Donut({
+						element : 'student-donut-2',
+						data : [{
+							label : "October",
+							value : 12
+						}, {
+							label : "Novemeber",
+							value : 15
+						},
+						{
+							label : "January",
+							value : 19
+						}]
+					});
+
 					var rankingdata1 = {
 						labels : ["Maths", "Numbers", "Colors"],
 						datasets : [{
@@ -314,6 +390,18 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 							fillColor : "rgba(151,187,205,0.5)",
 							strokeColor : "rgba(151,187,205,1)",
 							data : [75, 98, 90]
+						}]
+					};
+					var accountsData = {
+						labels : ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
+						datasets : [{
+							fillColor : "rgba(220,220,220,0.5)",
+							strokeColor : "rgba(220,220,220,1)",
+							data : [1250, 1400, 1400, 1550, 2000, 1800],
+						}, {
+							fillColor : "rgba(151,187,205,0.5)",
+							strokeColor : "rgba(151,187,205,1)",
+							data : [1100, 1200, 1100, 1850, 1700, 1400]
 						}]
 					};
 					var curentdata = [{
@@ -329,6 +417,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					var studentctx = document.getElementById("progress-chart").getContext("2d");
 					var studentctx1 = document.getElementById("progress-chart-1").getContext("2d");
 					var rankingctx = document.getElementById("ranking-chart").getContext("2d");
+					//var accountsctx = document.getElementById("accounts-chart").getContext("2d");
 					var rankingctx1 = document.getElementById("ranking-chart-1").getContext("2d");
 					var polarctx = document.getElementById("polar-chart").getContext("2d");
 					new Chart(studentctx).Doughnut(studentdata, studentoptions);
@@ -336,6 +425,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					new Chart(rankingctx).Bar(rankingdata);
 					new Chart(rankingctx1).Bar(rankingdata1);
 					new Chart(polarctx).PolarArea(curentdata);
+					//new Chart(accountsctx).Bar(accountsData,accountsOptions);
 					//Mobile set
 					new Chart(document.getElementById("polar-chart-phone").getContext("2d")).PolarArea(curentdata);
 					new Chart(document.getElementById("ranking-chart-phone").getContext("2d")).Bar(rankingdata1);

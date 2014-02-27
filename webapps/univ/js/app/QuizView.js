@@ -62,7 +62,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					}
 
 					setTimeout(function() {
-						service.getStudentObject(jQuery.cookie('subuser') ,{
+						service.getStudentObject(jQuery.cookie('subuser'), {
 							success : function(StudentData) {
 								console.log(StudentData);
 								//Create the student panels on the fly (DB should send this info per user/univ)
@@ -221,18 +221,47 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						$('.quiz-option').click(function() {
 							var selectedQuiz = $(this).text();
 							var progress = $('#progressBar > div').text().split("%")[0];
-							quizChange(QUIZ,progress,selectedQuiz);
+							quizChange(QUIZ, progress, selectedQuiz);
 						});
+
+						$('#chat-module').click(function() {
+							$('#chatnav').toggleClass('active');
+							$('#chat-input').val('Get me: ' + $('.quizboard.selected>.qtn').text() + ' now');
+						});
+						$('#chat-send').click(function() {
+							$('#chatnav').toggleClass('active');
+							$('#chat-input').val('');
+							$('#chat-module').removeClass('notify');
+							$('#chat-input').removeAttr('readonly');
+							$('#chat-send').val('send');
+						});
+
 					};
-					
-					function quizChange(currentquiz,progress,newquiz){
+
+					setTimeout(function() {
+						setNotification('Whats going on?');
+					}, 5000);
+
+					setInterval(function() {
+						setNotification('Are you done with this bro?');
+					}, 500000);
+
+					function setNotification(message) {
+						$('#chat-module').addClass('notify');
+						$('#chatnav').addClass('active');
+						$('#chat-input').val(message);
+						$('#chat-input').attr('readonly', 'readonly');
+						$('#chat-send').val('dismiss');
+					}
+
+					function quizChange(currentquiz, progress, newquiz) {
 						// Accept the current info and progress
 						// Push it to DB
 						// Adjust the cookies.
 						jQuery.cookie('quiz', newquiz, {
-									path : '/',
-									expires : 100
-								});
+							path : '/',
+							expires : 100
+						});
 						QUIZ = newquiz;
 						jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
 						generateQuiz();

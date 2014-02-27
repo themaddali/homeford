@@ -40,7 +40,7 @@
 				<header>
 					Student
 
-					<input type="button" value="Edit">
+					<input type="button" value="Save">
 				</header>
 				<div class="modal-contents">
 					<form class="edit-form">
@@ -48,7 +48,10 @@
 							<ol>
 								<li class="form-item">
 									<label>Student Name</label>
-									<input id="student-name" type="text" autofocus />
+									<select id="student-select">
+										<option>None Selected</option>
+									</select>
+									<!-- <input id="student-name" type="text" autofocus /> -->
 
 								</li>
 								<li class="form-item">
@@ -69,7 +72,7 @@
 								</li>
 								<li class="form-item">
 									<label>E Mail</label>
-									<span>Testing a long name just to see if it exxpands</span>
+									<span>Testing a long name just to see if it expands</span>
 								</li>
 								<li class="form-item">
 									<label>Phone</label>

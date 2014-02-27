@@ -1195,7 +1195,7 @@ body.error404 {
 	top: 12px;
 }
 
-#student-edit-modal-close,#overview-edit-modal-close {
+#student-edit-modal-close, #overview-edit-modal-close {
 	top: 12px;
 }
 
@@ -1263,7 +1263,7 @@ body.error404 {
 	margin-left: 0px;
 }
 
-.edit-form li.form-item > label{
+.edit-form li.form-item > label {
 	max-width: 170px;
 	width: 40%;
 	margin-bottom: 5px;
@@ -1275,7 +1275,6 @@ body.error404 {
 	box-sizing: border-box;
 	cursor: default;
 }
-
 
 .edit-form li.form-item > .form-content {
 	width: 60%;
@@ -1342,6 +1341,16 @@ body.error404 {
 	width: 330px;
 	height: 175px;
 	margin: 30px 0 0 30px;
+}
+.panel div .half {
+	width: 400px;
+	height: 190px;
+	/*margin: 30px 0 0 30px;*/
+}
+.panel div .full {
+	width: 400px;
+	height: 380px;
+	/*margin: 30px 0 0 30px;*/
 }
 .panel .jspVerticalBar {
 	background-color: transparent;
@@ -1738,7 +1747,8 @@ html.touch #subnav {
 #progressBar div {
 	height: 100%;
 	color: white;
-	font-size: 1.4em;
+	font-size: 1em;
+	font-weight: 600;
 	text-align: right;
 	padding-left: 5px;
 	line-height: 45px; /* same as #progressBar height if we want text middle aligned */
@@ -2285,6 +2295,111 @@ html.no-touch #gradient-right {
 	font-weight: 400;
 	color: #ccc;
 }
+
+/*Chat Module*/
+#chat-module {
+	float: left;
+	width: 100px;
+	height: 44px;
+	opacity: 0.8;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+#chat-module a i {
+	color: white;
+	padding-right: 5px;
+}
+#chat-module.notify a i {
+	color: #fbb913;
+	font-size:1.3em;
+	padding-right: 5px;
+}
+
+#chat-module:hover {
+	opacity: 0.99;
+	background: #444;
+}
+#chat-module a {
+	display: block;
+	margin: 13px 12px 12px 20px;
+	text-transform: uppercase;
+	font-size: 0.95em;
+	font-weight: 600;
+	color: #fff;
+}
+#chat-module a span {
+	font-weight: 400;
+	color: #ccc;
+}
+
+#chatnav {
+	display: none;
+	-webkit-transition: opacity 3s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+	
+}
+#chatnav.active {
+	opacity : 1;
+	-webkit-transition: opacity 2s ease-in-out;
+	-moz-transition: opacity 2s ease-in-out;
+	-o-transition: opacity 2s ease-in-out;
+	transition: opacity 2s ease-in-out;
+    display: inline-block;
+	position: absolute;
+	top: 44px;
+	left: 0;
+	z-index: 9999;
+	width: 80%;
+	margin-left:10%;
+	min-height: 44px;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-color: black;
+	height: auto;
+	background-color: #444444;
+	color: #fff;
+	text-align: center;
+}
+
+#chatnav.active div {
+	color: white;
+	padding: 5px;
+}
+
+#chatnav.active > input {
+	text-align: left;
+	margin-top: 4px;
+	color: white;
+	font-size: 1.2em;
+	padding:5px;
+	border-color: none;
+	height: 80%;
+}
+#chatnav.active > input[type="text"] {
+	width:80%;
+	color: #fbb913;
+	font-weight: 200;
+	border: 1px solid #fbb913;
+}
+#chatnav.active > input[type="text"] {
+	width:80%;
+	color: #fbb913;
+	font-weight: 200;
+	border: 1px solid #fbb913;
+}
+#chatnav.active > input[type="button"] {
+	width:15%;
+	text-align: center;
+	color: white;
+	background-color: #fbb913;
+	text-transform: capitalize;
+}
+
 
 /* =================== Swipejs Slideshow ======================= */
 #slider {

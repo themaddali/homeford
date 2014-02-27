@@ -29,15 +29,6 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 
 				});
 
-				// mouse is over a form element
-				function onOverContent(event) {
-					var messageContainer = $('.form-guide', event.target);
-					messageContainer.toggleClass('hp-empty', $.grep(messageContainer.children(), function(e) {
-						return ('none' !== $(e).css('display') && 'hidden' !== $(e).css('visibility'));
-					}).length === 0);
-				}
-
-
 				this.pause = function() {
 
 				};
@@ -50,12 +41,13 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 					//To Drive from Outside Calls
 				};
 
-				this.loadData = function() {
-					service.getStudentObject({
+				this.loadData = function(studentname) {
+					service.getStudentObject(studentname,{
 							success : function(StudentData) {
 								//OverView Panel Load
 								console.log('Edit Student -'+ StudentData);
-								// jQuery('.univ-name').text(UnivData[0].univname);
+								jQuery('#student-name').text('T'+StudentData[0].name);
+								jQuery('#student-name').val('V'+StudentData[0].name);
 								// jQuery('.univ-id').text(UnivData[0].id);
 								// jQuery('.univ-about').text(UnivData[0].about);
 								// jQuery('.univ-admin').text(UnivData[0].adminname);
