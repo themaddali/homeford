@@ -419,7 +419,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					var rankingctx = document.getElementById("ranking-chart").getContext("2d");
 					//var accountsctx = document.getElementById("accounts-chart").getContext("2d");
 					var rankingctx1 = document.getElementById("ranking-chart-1").getContext("2d");
-					var polarctx = document.getElementById("polar-chart").getContext("2d");
+					//var polarctx = document.getElementById("polar-chart").getContext("2d");
 					new Chart(studentctx).Doughnut(studentdata, studentoptions);
 					new Chart(studentctx1).Doughnut(studentdata1);
 					new Chart(rankingctx).Bar(rankingdata);
