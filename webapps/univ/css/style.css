@@ -2622,6 +2622,12 @@ div.mc-image {
 	outline: none;
 }
 
+input:focus, textarea:focus {
+    outline: none;
+    border-bottom : 2px solid #7f7f7f;
+    font-weight: 600;
+}
+
 .jspCorner {
 	background: #eeeef4;
 	float: left;
