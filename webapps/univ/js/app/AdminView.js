@@ -224,7 +224,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								}
 							}
 						});
-					}, 500);
+					}, 0);
 
 					e("#nav-dashboard").bind("click", function() {
 						e("#subnav ul").children().removeClass("selected");

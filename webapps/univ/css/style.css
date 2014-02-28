@@ -249,7 +249,9 @@ textarea {
 }
 
 input:invalid, textarea:invalid {
-	border : 2px red solid;
+	background-color: #FC7C7C;
+	color: white;
+	border : 3px red solid;
 }
 
 table {

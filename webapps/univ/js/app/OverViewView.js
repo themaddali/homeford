@@ -34,7 +34,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 
 							}
 						});
-					}, 500);
+					}, 0);
 
 					if (!jQuery.cookie('user') || jQuery.cookie('user') === 'home') {
 						var currentlocation = window.location.href;

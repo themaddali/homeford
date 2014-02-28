@@ -87,7 +87,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 								}
 							}
 						});
-					}, 500);
+					}, 0);
 
 					function loadPage() {
 						Modernizr.load({
