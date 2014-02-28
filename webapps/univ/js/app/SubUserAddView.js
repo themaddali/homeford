@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../app/service/DataService'], function(modernizr, cookie, service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../app/service/DataService', '../../js/lib/jquery.validate.min'], function(modernizr, cookie, service, formvalidate) {"use strict";
 
 	var SubUserView = ( function() {
 
@@ -12,9 +12,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 			function SubUserView() {
 
 				jQuery(document).ready(function(e) {
-					$('.edit-form .form-item').on('mouseover', onOverContent);
-					$('.edit-form .form-item').on('focus', onOverContent);
-
+					
 					setTimeout(function() {
 						service.getUnivObject({
 							success : function(UnivData) {
@@ -46,8 +44,56 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 						window.location.assign('/univ');
 					}
 
-					jQuery('#student-edit-modal-close').on('click', function() {
+					jQuery('#student-add-modal-close').on('click', function() {
 						window.location.assign('/univ/module/admin');
+					});
+
+					jQuery('#student-add-submit').on('click', function() {
+						if ($("#add-form").valid())
+						{
+							window.location.assign('/univ/module/admin');
+						}
+					});
+					
+					$("#add-form").validate({
+						rules : {
+							studentname : {
+								required : true,
+								minlength : 3
+							},
+							studentid : {
+								required : true,
+							},
+							studentdob : {
+								required : true,
+								date: true
+							},
+							studentemail : {
+								email : true
+							},
+							studentphone : {
+								digits : true
+							},
+							studentescalation : {
+								required : true
+							},
+							studentescalationemail : {
+								required : true,
+								email : true
+							},
+							studentescalationphone : {
+								required : true,
+								digits : true
+							},
+							studentescalationbackupphone : {
+								required : true,
+								digits : true
+							},
+							studentescalationbackupemail : {
+								required : true,
+								email : true
+							},
+						}
 					});
 
 				});

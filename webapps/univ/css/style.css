@@ -249,7 +249,7 @@ textarea {
 }
 
 input:invalid, textarea:invalid {
-	background-color: #FC7C7C;
+	border : 2px red solid;
 }
 
 table {
@@ -437,6 +437,21 @@ body.error404 {
 	border-color: #fbb913;
 	font-weight: normal;
 	color: #fbb913;
+}
+
+/*Place Holder Rules*/
+/* do not group these rules */
+#slogan-input::-webkit-input-placeholder {
+  color: #7f7f7f;
+  font-size: 1em
+}
+#slogan-input:-moz-placeholder {
+  color: #7f7f7f;
+  font-size: 1em
+}
+#slogan-input:-ms-input-placeholder { /* IE10+ */
+  color: #7f7f7f;
+  font-size: 1em
 }
 
 /*.twitter-typeahead {
@@ -676,7 +691,7 @@ body.error404 {
 	margin-bottom: 5px;
 	border-color: #fbb913;
 	font-weight: normal;
-	color: #fbb913;
+	color: black;
 }
 .login-input-button {
 	font-size: 22px;
@@ -695,6 +710,21 @@ body.error404 {
 	-moz-transition: all 0.1s linear;
 	-o-transition: all 0.1s linear;
 	transition: all 0.1s linear;
+}
+
+/*Place Holder Rules*/
+/* do not group these rules */
+.login-input :-webkit-input-placeholder {
+  color: #7f7f7f;
+  font-size: 1em
+}
+.login-input :-moz-placeholder {
+  color: #7f7f7f;
+  font-size: 1em
+}
+.login-input :-ms-input-placeholder { /* IE10+ */
+  color: #7f7f7f;
+  font-size: 1em
 }
 #login-modal p a {
 	display: inline;
@@ -1250,7 +1280,7 @@ body.error404 {
 	display: inline-block;
 	font-size: 14px;
 	line-height: 17px;
-	width: 60%;
+	width: 50%;
 }
 
 /*.edit-form li.form-item span {
@@ -1274,6 +1304,32 @@ body.error404 {
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	cursor: default;
+}
+
+form li.form-item >label.error {
+	color: red;
+	font-size: 12px;
+	padding-left: 10px;
+	vertical-align: bottom;
+}
+
+/*Place Holder Rules*/
+/* do not group these rules */
+*::-webkit-input-placeholder {
+  color: #7f7f7f;
+  font-size: 13px
+}
+*:-moz-placeholder {
+  color: #7f7f7f;
+  font-size: 13px
+}
+*:-ms-input-placeholder { /* IE10+ */
+  color: #7f7f7f;
+  font-size: 13px
+}
+
+form input.error {
+	border-bottom: 2px solid red;
 }
 
 .edit-form li.form-item > .form-content {
@@ -2313,7 +2369,7 @@ html.no-touch #gradient-right {
 }
 #chat-module.notify a i {
 	color: #fbb913;
-	font-size:1.3em;
+	font-size: 1.3em;
 	padding-right: 5px;
 }
 
@@ -2337,24 +2393,23 @@ html.no-touch #gradient-right {
 #chatnav {
 	display: none;
 	-webkit-transition: opacity 3s ease-out;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-	
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
 }
 #chatnav.active {
-	opacity : 1;
+	opacity: 1;
 	-webkit-transition: opacity 2s ease-in-out;
 	-moz-transition: opacity 2s ease-in-out;
 	-o-transition: opacity 2s ease-in-out;
 	transition: opacity 2s ease-in-out;
-    display: inline-block;
+	display: inline-block;
 	position: absolute;
 	top: 44px;
 	left: 0;
 	z-index: 9999;
 	width: 80%;
-	margin-left:10%;
+	margin-left: 10%;
 	min-height: 44px;
 	border-bottom: 1px solid;
 	border-left: 1px solid;
@@ -2376,30 +2431,29 @@ html.no-touch #gradient-right {
 	margin-top: 4px;
 	color: white;
 	font-size: 1.2em;
-	padding:5px;
+	padding: 5px;
 	border-color: none;
 	height: 80%;
 }
 #chatnav.active > input[type="text"] {
-	width:80%;
+	width: 80%;
 	color: #fbb913;
 	font-weight: 200;
 	border: 1px solid #fbb913;
 }
 #chatnav.active > input[type="text"] {
-	width:80%;
+	width: 80%;
 	color: #fbb913;
 	font-weight: 200;
 	border: 1px solid #fbb913;
 }
 #chatnav.active > input[type="button"] {
-	width:15%;
+	width: 15%;
 	text-align: center;
 	color: white;
 	background-color: #fbb913;
 	text-transform: capitalize;
 }
-
 
 /* =================== Swipejs Slideshow ======================= */
 #slider {

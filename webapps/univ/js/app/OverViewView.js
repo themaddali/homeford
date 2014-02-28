@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../app/service/DataService'], function(modernizr, cookie, service) {"use strict";
+define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../app/service/DataService', '../../js/lib/jquery.validate.min'], function(modernizr, cookie, service, validate) {"use strict";
 
 	var SubUserView = ( function() {
 
@@ -46,6 +46,39 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 
 					jQuery('#overview-edit-modal-close').on('click', function() {
 						window.location.assign('/univ/module/admin');
+					});
+
+					jQuery('#overview-edit').on('click', function() {
+						if ($("#overview-edit-form").valid()) {
+							window.location.assign('/univ/module/admin');
+						}
+					});
+
+					$("#overview-edit-form").validate({
+						rules : {
+							univname : {
+								required : true,
+								minlength : 3
+							},
+							univid : {
+								required : true,
+							},
+							univadmin : {
+								required : true,
+							},
+							univcreated : {
+								required : true,
+								date : true
+							},
+							univemail : {
+								required : true,
+								email : true
+							},
+							univphone : {
+								required : true,
+								digits : true
+							},
+						}
 					});
 
 				});

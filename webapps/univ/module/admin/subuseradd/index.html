@@ -35,87 +35,87 @@
 			</nav>
 		</header>
 
-		<div id="student-edit-modal" class="modal-body">
+		<div id="student-add-modal" class="modal-body">
 			<div class="modal-container">
 				<header>
 				 Student
 
-					<input type="button" value="Add">
+					<input id="student-add-submit" type="button" value="Add">
 				</header>
 				<div class="modal-contents">
-					<form class="edit-form">
+					<form id="add-form" class="edit-form">
 						<fieldset>
 							<ol>
 								<li class="form-item">
-									<label>Student Name</label>
-									<input id="student-name" type="text" autofocus />
+									<label for="student-name">Student Name</label>
+									<input id="student-name" placeholder="Full Name" name="studentname" type="text" autofocus />
 
 								</li>
 								<li class="form-item">
-									<label>Student ID</label>
-									<input type="text" />
+									<label for="student-id">Student ID</label>
+									<input id="student-id" placeholder="ID / Leave black to auto generate" name="studentid" type="text" />
 								</li>
 								<li class="form-item">
-									<label>Date of Birth</label>
-									<input type="text" />
+									<label for="student-dob">Date of Birth</label>
+									<input id="student-dob" placeholder="Mon DD YYYY" name="studentdob" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Gender</label>
 									<span>
-										<input type="radio" name="sex" value="male">
+										<input type="radio" name="sex" value="male" checked="checked">
 										Male
 										<input type="radio" name="sex" value="female">
 										Female </span>
 								</li>
 								<li class="form-item">
 									<label>E Mail</label>
-									<span>Testing a long name just to see if it exxpands</span>
+									<input name="studentemail" placeholder="optional" id="student-email" name="studentemail" />
 								</li>
 								<li class="form-item">
 									<label>Phone</label>
-									<input type="tel" value="123455678912345678981234556789921344556677" />
+									<input name="studentphone" placeholder="optional" id="student-phone"/>
 								</li>
 								<li class="form-item">
 									<label>Primary Contact</label>
-									<input type="text" />
+									<input name="studentescalation" id="student-escalation" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Primary Contact Email</label>
-									<input type="email" />
+									<input name="studentescalationemail" id="student-escalation-email" />
 								</li>
 								<li class="form-item">
 									<label>Primary Contact Phone</label>
-									<input type="tel" />
+									<input name="studentescalationphone" id="student-escalation-phone"  />
 								</li>
 								<li class="form-item">
 									<label>Secondary Contact Email</label>
-									<input type="email" />
+									<input name="studentescalationbackupemail" id="student-escalation-backup-email" />
 								</li>
 								<li class="form-item">
 									<label>Secondary Contact Phone</label>
-									<input type="tel" />
+									<input name="studentescalationbackupphone" id="student-escalation-backup-phone" />
 								</li>
 								<li class="form-item">
 									<label>Address</label>
-									<input type="text" />
+									<input name="studentaddress" placeholder="optional" id="student-address" type="text" />
 								</li>
 								<li class="form-item">
 									<label>About</label>
-									<input type="text" />
+									<input name="studentabout" placeholder="optional" id="student-about" type="text" />
 								</li>
 								<li class="form-item">
 									<label>School Name</label>
-									<input type="text" />
+									<input name="studentschool" placeholder="optional" id="student-school" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Image</label>
-									<input type="file" />
+									<input name="studentimage" placeholder="optional" id="student-image" type="file" />
 								</li>
 							</ol>
 						</fieldset>
 					</form>
 				</div>
-				<div id="student-edit-modal-close" class="modal_close"></div>
+				<div id="student-add-modal-close" class="modal_close"></div>
 			</div>
 		</div>
 
