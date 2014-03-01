@@ -60,7 +60,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound'], func
 						queryTokenizer : Bloodhound.tokenizers.whitespace,
 						limit : 5,
 						prefetch : {
-							url : '../univ/data/countries.json',
+							url : '../univ/data/univslist.json',
 							filter : function(list) {
 								return jQuery.map(list, function(country) {
 									return {
@@ -130,7 +130,10 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound'], func
 								jQuery(this).blur();
 								jQuery('#slogan-input').focus().click();
 								jQuery.cookie('user', 'home');
-								jQuery.cookie('subuser', 'You');
+								jQuery.cookie('subuser', 'You', {
+										path : '/',
+										expires : 100
+									});
 								window.location.assign('/univ/module/class');
 							}
 						}
