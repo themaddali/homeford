@@ -18,11 +18,23 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							jQuery('#student-name').val(StudentData[0].name);
 							jQuery('#student-id').val(StudentData[0].id);
 							jQuery('#student-dob').val(StudentData[0].dob);
+							if(StudentData[0].gender === 'male')
+							{
+								jQuery('input:radio[name=sex]')[0].checked = true;
+							}
+							else
+							{
+								jQuery('input:radio[name=sex]')[1].checked = true;
+							}
 							jQuery('#student-email').val(StudentData[0].email);
 							jQuery('#student-phone').val(StudentData[0].phone);
 							jQuery('#student-primary-contact').val(StudentData[0].realschoolname);
 							jQuery('#student-primary-email').val(StudentData[0].immediatecontactemail);
 							jQuery('#student-primary-phone').val(StudentData[0].immediatecontactphone);
+							jQuery('#student-address').val(StudentData[0].location);
+							jQuery('#student-notes').val(StudentData[0].notes);
+							jQuery('#student-school').val(StudentData[0].realschoolname);
+							//jQuery('#student-image').val(StudentData[0].image);
 						}
 					});
 				}
