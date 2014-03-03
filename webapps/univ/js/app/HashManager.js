@@ -1,4 +1,4 @@
-define(['Events'], function(Events) {"use strict";
+define(['../app/Events'], function(events) {"use strict";
     var HashManager = ( function() {
         /**
          * @class Singleton class to encapsulate access to the
@@ -14,7 +14,7 @@ define(['Events'], function(Events) {"use strict";
              * Event dispatcher.
              * @type {EventDispatcher}
              */
-            var dispatcher = new EventDispatcher();
+            var dispatcher = new events();
             
             /**
              * Only initialize once.

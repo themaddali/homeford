@@ -1,13 +1,13 @@
 [
     {
         "id": "T1-001",
-        "univname": "House Of Cards University",
-        "adminname": "Reed Hastings",
+        "univname": "James Home",
+        "adminname": "Mr James",
         "created": "2012-04-08T12:48:34 +07:00",
-        "email": "hoc@netflix.com",
+        "email": "family@james.com",
         "phone": "+1 (887) 444-2667",
         "address": "930 Benson Avenue, Silkworth, Pennsylvania, 1014",
-        "about": "House of Cards University is an American political drama University series developed and produced by Beau Willimon. It is an adaptation of a previous BBC couse of the same name and is based on the novel  ",
+        "about": "This is the first virtual university. we are parents from Foster City!",
         "faculty": [
              {
                 "id": "T2-001",
@@ -54,12 +54,11 @@
         "students": [
              {
                 "id": "T3-001",
-                "name": "Claire Underwood",
+                "name": "Shelby Jr 1",
                 "email": "jr1@james.com",
-                "security": true,
         		"phone": "",
-        		"image": "../../univ/img/student4.jpg",
-        		"gender": "female",
+        		"image": "img/student4.jpg",
+        		"gender": "male",
        			"courses": [
             			{	
             			"instructor": "T2-001",
@@ -68,48 +67,7 @@
             		    {	
             			"instructor": "T2-001",
             			"name":"Colors001"
-           				}]    
-            },
-             {
-                "id": "T3-002",
-                "name": "Doug Stamper",
-                "email": "jr2@james.com",
-                "security": false,
-                "image": "../../univ/img/student1.jpg",
-        		"phone": "",
-        		"gender": "male",
-       			"courses": [
-            			{	
-            			"instructor": "T2-001",
-            			"name":"Maths004"
-           				},
-           				{	
-            			"instructor": "T2-001",
-            			"name":"Know US States"
-           				},
-            		    {	
-            			"instructor": "T2-001",
-            			"name":"Numbers009"
-           				}]	    
-            },
-            {
-                "id": "T3-002",
-                "name": "Ms Joe Barnes",
-                "email": "jr2@james.com",
-                "security": true,
-                "image": "../../univ/img/student2.jpg",
-        		"phone": "",
-        		"gender": "female",
-       			"courses": [
-            			{	
-            			"instructor": "T2-001",
-            			"name":"Indian Politics"
-           				},
-           				{	
-            			"instructor": "T2-001",
-            			"name":"OOPS Concepts"
-           				}]	    
-            }
-        ]
+           				}]
+           		}]
       }
 ]

@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>Homeford Univerity</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="../../css/style.css">
 		<meta name="description" content=""/>
 	</head>
 
@@ -19,7 +18,7 @@
 		<div id="project-nav">
 
 			<div id="back-to-work">
-				<a href="/univ/module/studentlist/">Back</a>
+				<a href="#/studentlist">Back</a>
 			</div>
 
 			<div id="project-page-logo" class="ir">
@@ -30,42 +29,29 @@
 			<div id="project-dropdown">
 				<a id="student-option-active"> </a>
 				<ul id="student-options">
-					<li id="student-option-template">
-						<a class="student-option">Student</a>
+					<li>
+						<a id="add-task" class="student-option">Add Task</a>
+					</li>
+					<li>
+						<a id="drop-task" class="student-option">Drop Task </a>
+					</li>
+					<li>
+						<a id="tsask-social" class="student-option">Post Social</a>
 					</li>
 				</ul>
 			</div>
 
-			<!-- <div id="share-project">
-				<div id="progressBar">
-					<div>0%</div>
-				</div>
-			</div> -->
-
 		</div>
-
-		<!-- <header id="fluid-nav">
-		<div id="logo">
-		<a href=""></a>
-		</div>
-
-		<nav id="main-nav">
-		<ul>
-		<li>
-		<a class="login" id="loggedin-user">Signed In</a>
-		</li>
-		</ul>
-		</nav>
-		</header> -->
 		<div id="wrapper" class="hidden">
 			<div id="carousel">
 				<div class="empty"></div>
 				<div id="classboard-template" class="classboard">
-					<img src="../../img/classbook.jpg" class="class-binder">
+					<img src="../../univ/img/classbook.jpg" class="class-binder">
 					<span class="class-name">Class Name</span>
 					<span class="class-progress">Progress</span>
 					<a class="class-select" style="background: transparent no-repeat 0 0;"></a>
 				</div>
+
 			</div>
 		</div>
 
@@ -75,35 +61,18 @@
 					<li>
 						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Colors</span>
 						<br />
-						<span class="subtitle">Solids</span> <img src="../../img/colorsbook1.png" alt="Slide" /> </a>
+						<span class="subtitle">Solids</span> <img src="../../univ/img/colorsbook1.png" alt="Slide" /> </a>
 					</li>
-					<li>
-						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Maths</span>
-						<br />
-						<span class="subtitle">Basics</span> <img src="../../img/mathsbook1.png" alt="Slide" /> </a>
-					</li>
-					<li>
-						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Numbers</span>
-						<br />
-						<span class="subtitle">1-100</span> <img src="../../img/numbersbook.png" alt="Slide" /> </a>
-					</li>
+
 				</ul>
 			</div>
+		</div>
+		<div style="display:none" id="templates">
+
 		</div>
 
 		<a href="#" id="prev"></a>
 		<a href="#" id="next"></a>
-
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="./../../js/lib/require.js"></script>
-		<script type="text/javascript">
-			require(['./../../js/lib/jquery', './../../js/common'], function(common) {
-				require(['../../../../js/app/ClassView']);
-			});
-		</script>
-
 		<div id="touch-instruction">
 			<p>
 				Swipe to navigate

@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<title>Homeford Univerity</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link rel="stylesheet" href="../../../css/font-awesome.css">
-		<link rel="stylesheet" href="../../../css/style.css">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/style.css">
 		<meta name="description" content=""/>
 	</head>
 
@@ -48,19 +48,17 @@
 							<ol>
 								<li class="form-item">
 									<label>Student Name</label>
-									<select id="student-select">
-										<option>None Selected</option>
-									</select>
+									<input id="student-name" type="text" />
 									<!-- <input id="student-name" type="text" autofocus /> -->
 
 								</li>
 								<li class="form-item">
 									<label>Student ID</label>
-									<input type="text" />
+									<input id="student-id"  type="text" />
 								</li>
 								<li class="form-item">
 									<label>Date of Birth</label>
-									<input type="text" />
+									<input id="student-dob" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Gender</label>
@@ -72,23 +70,23 @@
 								</li>
 								<li class="form-item">
 									<label>E Mail</label>
-									<span>Testing a long name just to see if it expands</span>
+									<input id="student-email" type="text"/>
 								</li>
 								<li class="form-item">
 									<label>Phone</label>
-									<input type="tel" value="123455678912345678981234556789921344556677" />
+									<input id="student-phone" type="text"/>
 								</li>
 								<li class="form-item">
 									<label>Primary Contact</label>
-									<input type="text" />
+									<input id="student-primary-contact" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Primary Contact Email</label>
-									<input type="email" />
+									<input id="student-primary-email" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Primary Contact Phone</label>
-									<input type="tel" />
+									<input id="student-primary-phone" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Secondary Contact Email</label>
@@ -122,21 +120,11 @@
 			</div>
 		</div>
 
-		<!-- Le javascript
-		================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="./../../../js/lib/require.js"></script>
-		<script type="text/javascript">
-			require(['./../../../js/lib/jquery', './../../../js/common'], function(common) {
-				require(['../../../../../js/app/SubUserEditView']);
-			});
-		</script>
-
 		<div id="preloader"></div>
 		<footer>
 			<div id="contact-info">
 				123.456.7890 &nbsp;&nbsp; <a id="contact-email" target="_blank">info@homeford.com</a>
-				<span class="ss-social"> <a href="http://www.facebook.com" target="_blank"><img src="../../../img/ss-facebook.png" alt="facebook"></a> <a href="http://www.twitter.com" target="_blank"><img src="../../../img/ss-twitter.png" alt="twitter"></a> <a href="http://pinterest.com/" target="_blank"><img src="../../../img/ss-pinterest.png" alt="pinterest"></a> </span>
+				<span class="ss-social"> <a href="http://www.facebook.com" target="_blank"><img src="img/ss-facebook.png" alt="facebook"></a> <a href="http://www.twitter.com" target="_blank"><img src="img/ss-twitter.png" alt="twitter"></a> <a href="http://pinterest.com/" target="_blank"><img src="img/ss-pinterest.png" alt="pinterest"></a> </span>
 			</div>
 			<div id="copyright">
 				&copy; Homeford University 2014

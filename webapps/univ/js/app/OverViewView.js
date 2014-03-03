@@ -1,87 +1,56 @@
 //View that will drive the Students list page.
 
-define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../app/service/DataService', '../../js/lib/jquery.validate.min'], function(modernizr, cookie, service, validate) {"use strict";
+define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Pager'], function(modernizr, cookie, service, validate, router, pager) {"use strict";
 
-	var SubUserView = ( function() {
+	var OverViewView = ( function() {
 
 			/**
 			 * Constructor
 			 *
 			 */
+			var SPINNERICON = '<i class="icon-male  icon-1x "></i>'
 
-			function SubUserView() {
+			function OverViewView() {
 
-				jQuery(document).ready(function(e) {
+				function populateData() {
+					service.getUnivObject({
+						success : function(UnivData) {
+							//OverView Panel Load
+							jQuery('#univ-name').val(UnivData[0].univname);
+							jQuery('#univ-id').val(UnivData[0].id);
+							jQuery('#univ-about').val(UnivData[0].about);
+							jQuery('#univ-admin').val(UnivData[0].adminname);
+							jQuery('#univ-created').val(UnivData[0].created);
+							jQuery('#univ-email').val(UnivData[0].email);
+							jQuery('#univ-phone').val(UnivData[0].phone);
+							jQuery('#univ-address').val(UnivData[0].address);
+							jQuery('#univ-faculty').val(UnivData[0].faculty.length);
+							jQuery('#univ-students').val(UnivData[0].students.length);
 
-					setTimeout(function() {
-						service.getUnivObject({
-							success : function(UnivData) {
-								//OverView Panel Load
-								jQuery('#univ-name').val(UnivData[0].univname);
-								jQuery('#univ-id').val(UnivData[0].id);
-								jQuery('#univ-about').val(UnivData[0].about);
-								jQuery('#univ-admin').val(UnivData[0].adminname);
-								jQuery('#univ-created').val(UnivData[0].created);
-								jQuery('#univ-email').val(UnivData[0].email);
-								jQuery('#univ-phone').val(UnivData[0].phone);
-								jQuery('#univ-address').val(UnivData[0].address);
-								jQuery('#univ-faculty').val(UnivData[0].faculty.length);
-								jQuery('#univ-students').val(UnivData[0].students.length);
+							//Student Manage Panel Load
+							var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
+							var COUNT = UnivData[0].students.length;
 
-								//Student Manage Panel Load
-								var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
-								var COUNT = UnivData[0].students.length;
+						}
+					});
+				}
 
-							}
-						});
-					}, 0);
-
-					if (!jQuery.cookie('user') || jQuery.cookie('user') === 'home') {
-						var currentlocation = window.location.href;
+				function checkForActiveCookie() {
+					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						return true;
+					} else {
+						//Paranoid Cookie Clearing
 						jQuery.removeCookie('user', {
 							path : '/univ'
 						});
-						window.location.assign('/univ');
+						jQuery.removeCookie('subuser', {
+							path : '/univ'
+						});
+						router.go('/home', '/admin/overview');
+						return false;
 					}
+				}
 
-					jQuery('#overview-edit-modal-close').on('click', function() {
-						window.location.assign('/univ/module/admin');
-					});
-
-					jQuery('#overview-edit').on('click', function() {
-						if ($("#overview-edit-form").valid()) {
-							window.location.assign('/univ/module/admin');
-						}
-					});
-
-					$("#overview-edit-form").validate({
-						rules : {
-							univname : {
-								required : true,
-								minlength : 3
-							},
-							univid : {
-								required : true,
-							},
-							univadmin : {
-								required : true,
-							},
-							univcreated : {
-								required : true,
-								date : true
-							},
-							univemail : {
-								required : true,
-								email : true
-							},
-							univphone : {
-								required : true,
-								digits : true
-							},
-						}
-					});
-
-				});
 
 				this.pause = function() {
 
@@ -92,13 +61,67 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/jquery.cookie', '../ap
 				};
 
 				this.init = function(args) {
-					//To Drive from Outside Calls
+					//Check for Cookoverview-manageie before doing any thing.
+					//Light weight DOM.
+
+					if (checkForActiveCookie() === true) {
+
+						populateData();
+
+						//HTML Event - Actions
+						jQuery('#overview-edit-modal-close').on('click', function() {
+							//Fix this in a more dynamic way later.
+							var golocation = (window.location.href).split('#')[0] + 'admin';
+							pager.makeViewReload('admin', golocation);
+							router.go('/admin', '#/admin/overview');
+						});
+
+						jQuery('#overview-edit').on('click', function() {
+							if ($("#overview-edit-form").valid()) {
+								jQuery('#overview-edit').val('Saving....');
+								setTimeout(function() {
+									jQuery('#overview-edit').val('Edit');
+									var golocation = (window.location.href).split('#')[0] + 'admin';
+									pager.makeViewReload('admin', golocation);
+									router.go('/admin', '#/admin/overview');
+								}, 3000);
+							}
+						});
+
+						jQuery("#overview-edit-form").validate({
+							rules : {
+								univname : {
+									required : true,
+									minlength : 3
+								},
+								univid : {
+									required : true,
+								},
+								univadmin : {
+									required : true,
+								},
+								univcreated : {
+									required : true,
+									date : true
+								},
+								univemail : {
+									required : true,
+									email : true
+								},
+								univphone : {
+									required : true,
+									digits : true
+								},
+							}
+						});
+
+					} // Cookie Guider
 				};
 
 			}
 
-			return SubUserView;
+			return OverViewView;
 		}());
 
-	return new SubUserView();
+	return new OverViewView();
 });

@@ -1044,6 +1044,25 @@ body.error404 {
 	display: none;
 }
 
+/*No-Page*/
+#nopage-warning {
+	font-size: 1.2em;
+	color: white;
+	margin-left:15%;
+	width: 70%;
+	top: 60%;
+	padding: 15px;
+	text-align: center;
+	border : 1px solid #fbb913; 
+}
+#nopage-warning i {
+	padding-right:20px; 
+}
+#nopage-warning p > a {
+	font-size: 1em;
+	color: #fbb913;
+}
+
 /* =================== About Page ======================= */
 .page-template-about-php #prev, .page-template-about-php #next {
 	display: none;
@@ -1051,7 +1070,7 @@ body.error404 {
 
 #wrapper-about {
 	position: relative;
-	margin-top: 38px;
+	margin-top: -10px;
 	width: 100%;
 	height: 540px;
 	margin-bottom: 40px;
@@ -2119,6 +2138,23 @@ html.no-touch .page-template-about-php #prev {
 	background-color: #000;
 }
 html.no-touch .page-template-about-php #next {
+	display: block;
+	position: fixed;
+	right: 0;
+	bottom: 47%;
+	margin-right: 0px;
+	background-color: #000;
+}
+#prev.admin-control-prev {
+	display: block;
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 47%;
+	margin-left: 0px;
+	background-color: #000;
+}
+#next.admin-control-next {
 	display: block;
 	position: fixed;
 	right: 0;

@@ -1,6 +1,4 @@
-//View that will drive the Students list page.
-
-define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/lib/plugins-min', '../../js/lib/jquery.cookie', '../../js/lib/jquery.carousel.min', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService'], function(modernizr, spin, plugins, cookie, carousel, chart, raphael, morris, service) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router','../app/SubUserEditView'], function(modernizr, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -8,13 +6,19 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 			 * Constructor
 			 *
 			 */
-
+			var PARMS = {
+				"workBg" : "img\/classbg.png",
+			};
 			var MALEICON = '<i class="icon-male  icon-1x "></i>'
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
 
 			function AdminView() {
 
-				jQuery(document).ready(function(e) {
+				function showBG() {
+					jQuery.backstretch(PARMS.workBg);
+				}
+
+				function createPanels() {
 					var t = {
 						lines : 17,
 						length : 6,
@@ -28,234 +32,178 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						zIndex : 2e9,
 						top : "auto",
 						left : "auto"
-					}, n = document.getElementById("preloader"), r = (new Spinner(t)).spin(n), i = e(window).height(), s = e("#contact-modal").height(), o = i / 2 - s / 2;
-					e("a[rel*=theModal]").leanModal({
-						top : o,
-						overlay : .7,
-						closeButton : ".modal_close"
-					});
-					e(window).resize(function() {
-						e("#contact-modal").css({
-							top : e(window).height() / 2 - s / 2 + "px"
-						});
-						e("#wrapper-about").css({
-							marginTop : e(window).height() / 2 - 350 + "px"
-						})
-					}).resize();
-					var u = e(".panel").width(), a = 560, f = 40;
-					e(".panel").each(function(t) {
-						t === 0 ? e(this).css({
-							"margin-left" : f + "px"
-						}) : t === 4 ? e(this).css({
-							"margin-left" : "1800px"
-						}) : t === 5 ? e(this).css({
-							"margin-left" : "2240px"
-						}) : e(this).css({
-							"margin-left" : f + t * (40 + u) + "px"
-						});
-						t === 5 && e(this).css({
-							"margin-right" : f + "px"
-						})
-					});
-					e(".scroll-pane").jScrollPane();
-					e("#wrapper-about").waitForImages(function() {
+					};
+					var n = document.getElementById("preloader");
+					var r = (new Spinner(t)).spin(n);
+					var u = jQuery(".panel").width()
+					var a = 560;
+					var f = 40;
+					jQuery("#wrapper-about").waitForImages(function() {
 						r.stop();
-						e("#wrapper-about").animate({
+						jQuery("#wrapper-about").animate({
 							opacity : 1
 						}, 600)
 					});
+					if (Modernizr.touch) {
+						buildSwipe();
+					} else {
+						buildCarousal(u, f, t, n, r);
+					}
+					//ActivatePanelEvents();
+				}
+
+				function buildCarousal(u, f, t, n, r) {
+					jQuery(".panel").each(function(t) {
+						t === 0 ? jQuery(this).css({
+							"margin-left" : f + "px"
+						}) : t === 4 ? jQuery(this).css({
+							"margin-left" : "1800px"
+						}) : t === 5 ? jQuery(this).css({
+							"margin-left" : "2240px"
+						}) : jQuery(this).css({
+							"margin-left" : f + t * (40 + u) + "px"
+						});
+						t === 5 && jQuery(this).css({
+							"margin-right" : f + "px"
+						})
+					});
+
 					var l = 0, c = function() {
 						if (l === 0) {
 							l++;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-bios").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-bios").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-440px"
 							}, 400)
 						} else if (l === 1) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-880px"
 							}, 400)
 						} else if (l === 2) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-1320px"
 							}, 400)
 						} else if (l === 3) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-1760px"
 							}, 400)
 						} else if (l === 4) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-2200px"
 							}, 400)
 						} else if (l === 5) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-2640px"
 							}, 400)
 						} else if (l === 6) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-3080px"
 							}, 400)
 						} else if (l === 7) {
 							l++;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-3520px"
 							}, 400)
 						} else if (l === 8) {
 							l++;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-connect").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-connect").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-3960px"
 							}, 400)
 						} else if (l === 9) {
 							l++;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-press").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-press").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-4400px"
 							}, 400)
 						}
 					}, h = function() {
 						if (l === 1) {
 							l--;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-mgh").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-mgh").addClass("selected");
+							jQuery(".contain").animate({
 								left : "0px"
 							}, 400)
 						} else if (l === 2) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-440px"
 							}, 400)
 						} else if (l === 3) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-880px"
 							}, 400)
 						} else if (l === 4) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-1320px"
 							}, 400)
 						} else if (l === 5) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-1760px"
 							}, 400)
 						} else if (l === 6) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-2200px"
 							}, 400)
 						} else if (l === 7) {
 							l--;
-							e(".contain").animate({
+							jQuery(".contain").animate({
 								left : "-2640px"
 							}, 400)
 						} else if (l === 8) {
 							l--;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-bios").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-bios").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-3080px"
 							}, 400)
 						} else if (l === 9) {
 							l--;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-connect").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-connect").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-3520px"
 							}, 400)
 						} else if (l === 10) {
 							l--;
-							e("#subnav ul").children().removeClass("selected");
-							e("#nav-connect").addClass("selected");
-							e(".contain").animate({
+							jQuery("#subnav ul").children().removeClass("selected");
+							jQuery("#nav-connect").addClass("selected");
+							jQuery(".contain").animate({
 								left : "-3960px"
 							}, 400)
 						}
 					};
-					e("#next").bind("click", function() {
+					jQuery("#next").bind("click", function() {
 						c()
 					});
-					e("#prev").bind("click", function() {
+					jQuery("#prev").bind("click", function() {
 						h()
 					});
-
-					setTimeout(function() {
-						service.getUnivObject({
-							success : function(UnivData) {
-								//OverView Panel Load
-								jQuery('.univ-name').text(UnivData[0].univname);
-								jQuery('.univ-id').text(UnivData[0].id);
-								jQuery('.univ-about').text(UnivData[0].about);
-								jQuery('.univ-admin').text(UnivData[0].adminname);
-								jQuery('.univ-created').text(UnivData[0].created);
-								jQuery('.univ-email').text(UnivData[0].email);
-								jQuery('.univ-phone').text(UnivData[0].phone);
-								jQuery('.univ-address').text(UnivData[0].address);
-								jQuery('.univ-faculty').text(UnivData[0].faculty.length);
-								jQuery('.univ-students').text(UnivData[0].students.length);
-
-								//Student Manage Panel Load
-								var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
-								var COUNT = UnivData[0].students.length;
-								for (var i = 0; i < COUNT; i++) {
-									var newelement = studentmintemplate.clone();
-									if (UnivData[0].students[i].gender === 'female') {
-										jQuery('.students-list-min', newelement).html(FEMALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
-									} else {
-										jQuery('.students-list-min', newelement).html(MALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
-									}
-									jQuery('#students-list-min').append(newelement);
-									jQuery('.students-list-min').on('click', function() {
-										//usereditview.loadData('Doug Stamper');
-										window.location.assign('subuseredit');
-									});
-
-								}
-							}
-						});
-					}, 0);
-
-					e("#nav-dashboard").bind("click", function() {
-						e("#subnav ul").children().removeClass("selected");
-						e("#nav-dashboard").addClass("selected");
-						l = 0;
-						e(".contain").animate({
-							left : "0px"
-						}, 400)
-					});
-					e("#nav-profile").bind("click", function() {
-						e("#subnav ul").children().removeClass("selected");
-						e("#nav-profile").addClass("selected");
-						l = 1;
-						e(".contain").animate({
-							left : "-440px"
-						}, 400)
-					});
-
-					e(document).bind("keyup", "right", function() {
+					jQuery(document).bind("keyup", "right", function() {
 						c()
 					});
-					e(document).bind("keyup", "left", function() {
+					jQuery(document).bind("keyup", "left", function() {
 						h()
 					})
+					populateData();
+					populateGraphs();
+				}
 
-					jQuery('#admin-done').on('click', function(e) {
-						e.preventDefault();
-						var currentlocation = window.location.href;
-						window.location.assign('/univ');
-					});
-
+				function populateGraphs() {
 					//Class Progress Tracking.
 					var studentdata = [{
 						value : 30,
@@ -373,8 +321,7 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 						}, {
 							label : "Novemeber",
 							value : 15
-						},
-						{
+						}, {
 							label : "January",
 							value : 19
 						}]
@@ -431,45 +378,113 @@ define(['../../js/lib/modernizr-2.5.3.min', '../../js/lib/spin.min', '../../js/l
 					new Chart(document.getElementById("ranking-chart-phone").getContext("2d")).Bar(rankingdata1);
 					new Chart(document.getElementById("progress-chart-phone").getContext("2d")).Doughnut(studentdata1);
 
-					if (!jQuery.cookie('user') || jQuery.cookie('user') === 'home') {
-						var currentlocation = window.location.href;
+				}
+
+				function checkForActiveCookie() {
+					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						return true;
+					} else {
+						//Paranoid Cookie Clearing
 						jQuery.removeCookie('user', {
 							path : '/univ'
 						});
-						window.location.assign('/univ');
-					}
-
-					jQuery('#signout-button').on('click', function(e) {
-						e.preventDefault();
-						jQuery.removeCookie('user', {
-							path : '/'
-						});
 						jQuery.removeCookie('subuser', {
-							path : '/'
+							path : '/univ'
 						});
-						window.setTimeout('location.reload()', 1000);
-						// refresh after 1 sec
+						router.go('/home', '/admin');
+						return false;
+					}
+				}
+
+				function populateData() {
+					service.getUnivObject({
+						success : function(UnivData) {
+							//OverView Panel Load
+							jQuery('.univ-name').text(UnivData[0].univname);
+							jQuery('.univ-id').text(UnivData[0].id);
+							jQuery('.univ-about').text(UnivData[0].about);
+							jQuery('.univ-admin').text(UnivData[0].adminname);
+							jQuery('.univ-created').text(UnivData[0].created);
+							jQuery('.univ-email').text(UnivData[0].email);
+							jQuery('.univ-phone').text(UnivData[0].phone);
+							jQuery('.univ-address').text(UnivData[0].address);
+							jQuery('.univ-faculty').text(UnivData[0].faculty.length);
+							jQuery('.univ-students').text(UnivData[0].students.length);
+
+							//Student Manage Panel Load
+							var studentmintemplate = jQuery('#students-list-min-template').remove().attr('id', '');
+							var COUNT = UnivData[0].students.length;
+							for (var i = 0; i < COUNT; i++) {
+								var newelement = studentmintemplate.clone();
+								if (UnivData[0].students[i].gender === 'female') {
+									jQuery('.students-list-min', newelement).html(FEMALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
+								} else {
+									jQuery('.students-list-min', newelement).html(MALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
+								}
+								jQuery('#students-list-min').append(newelement);
+								jQuery('.students-list-min').on('click', function() {
+									var userClicked = jQuery(this).find('strong').html();
+									subusereditview.activeUser(userClicked);
+									router.go('/admin/subuseredit', '/admin');
+								});
+
+							}
+						}
 					});
 
-					jQuery('#student-manage').on('click', function() {
-						window.location.assign('subuseradd');
-					});
-					jQuery('#overview-manage').on('click', function() {
-						window.location.assign('overview ');
-					});
+				}
 
-				});
+				function displayAlert() {
+					//This should never show up.
+					alert('Error in Loading! Please Refresh the page!');
+				}
+
 
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
-
+					showBG();
 				};
 
 				this.init = function(args) {
-					//To Drive from Outside Calls
+					//Check for Cookoverview-manageie before doing any thing.
+					//Light weight DOM.
+
+					if (checkForActiveCookie() === true) {
+						//Rich Experience First.... Load BG
+						showBG();
+						jQuery(".scroll-pane").jScrollPane();
+
+						createPanels();
+
+						//HTML Event - Actions
+						jQuery('#signout-button').on('click', function(e) {
+							e.preventDefault();
+							jQuery.removeCookie('user', {
+								path : '/'
+							});
+							jQuery.removeCookie('subuser', {
+								path : '/'
+							});
+							router.go('/home', 'admin');
+							window.setTimeout('location.reload()', 500);
+							// refresh after 1/2 sec
+						});
+
+						jQuery('#student-manage').on('click', function() {
+							router.go('/admin/subuseradd', 'admin');
+						});
+						// jQuery('#overview-manage').on('click', function() {
+						// router.go('/admin/overview', 'admin');
+						// });
+						jQuery('#admin-done').on('click', function() {
+							var currentlocation = window.location.href;
+							router.go('/home', '/admin');
+						});
+
+					} // Cookie Guider
 				};
 
 			}
