@@ -6,8 +6,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 			var PARMS = {
 				"workBg" : "img\/classbg.png",
-				"carouselurl" : "..\/..\/univ\/js\/lib\/jquery.carousel.min.js",
-				"swipejsurl" : "..\/..\/univ\/js\/lib\/swipe.min.js"
+				"carouselurl" : "js\/lib\/jquery.carousel.min.js",
+				"swipejsurl" : "js\/lib\/swipe.min.js"
 			};
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>'
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>'

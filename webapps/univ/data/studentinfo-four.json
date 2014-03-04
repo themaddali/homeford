@@ -5,7 +5,7 @@
                 "univname": "Shelby University",
                 "email": "jr1@james.com",
         		"phone": "9848098480",
-        		"image": "../../univ/img/student4.jpg",
+        		"image": "img/student4.jpg",
         		"notes": "",
         		"gender": "female",
         		"dob": "Today",
@@ -18,7 +18,7 @@
         		"ranking": "6",
         		"totalcourcesdone": "26",
         		"incentive": "Disney Land",
-        		"incentiveimage": "../../img/disney.jpg",
+        		"incentiveimage": "img/disney.jpg",
         		"activeassignments": [
             			{	
             			"instructor": "T2-001",

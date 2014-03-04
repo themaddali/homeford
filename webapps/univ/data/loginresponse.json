@@ -58,7 +58,7 @@
                 "email": "jr1@james.com",
                 "security": true,
         		"phone": "",
-        		"image": "../../univ/img/student4.jpg",
+        		"image": "img/student4.jpg",
         		"gender": "female",
        			"courses": [
             			{	
@@ -75,7 +75,7 @@
                 "name": "Doug Stamper",
                 "email": "jr2@james.com",
                 "security": false,
-                "image": "../../univ/img/student1.jpg",
+                "image": "img/student1.jpg",
         		"phone": "",
         		"gender": "male",
        			"courses": [
@@ -97,7 +97,7 @@
                 "name": "Ms Joe Barnes",
                 "email": "jr2@james.com",
                 "security": true,
-                "image": "../../univ/img/student2.jpg",
+                "image": "img/student2.jpg",
         		"phone": "",
         		"gender": "female",
        			"courses": [

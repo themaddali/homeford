@@ -35,7 +35,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 								var newboard = PanelTemplate.clone();
 								jQuery('.class-name', newboard).text(StudentData[0].activeassignments[i].name);
 								if (StudentData[0].activeassignments[i].assignmentmodel === 'task') {
-									jQuery('.class-binder', newboard).attr('src', '../../univ/img/taskbook.jpg');
+									jQuery('.class-binder', newboard).attr('src', 'img/taskbook.jpg');
 								}
 								jQuery('.class-progress', newboard).text(StudentData[0].activeassignments[i].progress + '% Done');
 								jQuery('.class-select', newboard).attr('name', StudentData[0].activeassignments[i].name);

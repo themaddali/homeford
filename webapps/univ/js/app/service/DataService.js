@@ -17,7 +17,7 @@ define(['jquery'], function() {"use strict";
 				 */
 
 				this.getUnivObject = function(handlers) {
-					$.getJSON("/../univ/data/loginresponse.json", function(json) {
+					$.getJSON("data/loginresponse.json", function(json) {
 						if (json)
 						{
 							handlers.success(json);
@@ -33,11 +33,11 @@ define(['jquery'], function() {"use strict";
 					var thisURL;
 					if (studentid !== 'Doug Stamper')
 					{
-						thisURL = "/../univ/data/studentinfo-four.json;"
+						thisURL = "data/studentinfo-four.json;"
 					}
 					else
 					{
-						thisURL = "/../univ/data/studentinfo-one.json;"
+						thisURL = "data/studentinfo-one.json;"
 					}
 					$.getJSON(thisURL, function(json) {
 						if (json)
