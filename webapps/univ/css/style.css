@@ -1208,6 +1208,16 @@ body.error404 {
 	border: solid 0px white;
 	background-color: white
 }
+.modal-body .modal-container.login {
+	position: absolute;
+	margin-top: 5%;
+	margin-left: 30%;
+	width: 40%;
+	height: 45%;
+	z-index: 20;
+	border: solid 0px white;
+	background-color: white
+}
 .modal-body .modal-container header {
 	background-color: grey;
 	font-size: 1.2em;
@@ -1246,7 +1256,7 @@ body.error404 {
 	top: 12px;
 }
 
-#student-edit-modal-close, #overview-edit-modal-close {
+#student-edit-modal-close, #overview-edit-modal-close, #login-close {
 	top: 12px;
 }
 
@@ -1261,6 +1271,22 @@ body.error404 {
 	color: #444;
 	overflow: scroll;
 	height: 90%;
+}
+.modal-body .modal-container.login .modal-contents {
+	padding: 0px;
+	
+}
+.modal-body .modal-container .modal-contents div.footer {
+	padding: 10px;
+	margin: 0;
+	font-weight: 500;
+	line-height: 0.9em;
+	background-color: rgba(236, 93, 87, 0.87);
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	text-align: center;
+	width: 100%
+	
 }
 
 .edit-form {

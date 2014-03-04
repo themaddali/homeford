@@ -8,7 +8,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 			 * Constructor
 			 *
 			 */
-			var SPINNERICON = '<i class="icon-male  icon-1x "></i>'
+			
 
 			function OverViewView() {
 
