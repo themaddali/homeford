@@ -29,6 +29,17 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                
+                router.map('@', '^/@(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/home/pre-index.html','../app/PreHomeView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                
                 router.map('entry', '^/entry(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {

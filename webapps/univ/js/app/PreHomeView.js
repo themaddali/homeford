@@ -1,8 +1,8 @@
 //View that will drive the main landing page.
 
-define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../app/Router'], function(spin, cookie, plugin, flatvid, typeahead, bloodhound, router) {"use strict";
+define(['../app/Router', 'cookie'], function(router, cookie) {"use strict";
 
-	var HomeView = ( function() {
+	var PreHomeView = ( function() {
 
 			var home_script_params = {
 				"bgArray" : ["img\/1.jpg", "img\/2.jpg", "img\/3.jpg", "img\/4.jpg", "img\/5.jpg"]
@@ -11,25 +11,25 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 			/**
 			 * Constructor
 			 */
-			function HomeView() {
+			function PreHomeView() {
 				//Variable Zone.
-				var t = {
-					lines : 17,
-					length : 6,
-					width : 4,
-					radius : 12,
-					rotate : 0,
-					color : "#ccc",
-					speed : 2.2,
-					trail : 60,
-					className : "spinner",
-					zIndex : -2e9,
-					top : "auto",
-					left : "auto"
-				};
-				var n = document.getElementById("preloader");
-				var r = (new Spinner(t)).spin(n);
-				var i = home_script_params.bgArray;
+				// var t = {
+					// lines : 17,
+					// length : 6,
+					// width : 4,
+					// radius : 12,
+					// rotate : 0,
+					// color : "#ccc",
+					// speed : 2.2,
+					// trail : 60,
+					// className : "spinner",
+					// zIndex : -2e9,
+					// top : "auto",
+					// left : "auto"
+				// };
+				// var n = document.getElementById("preloader");
+				// var r = (new Spinner(t)).spin(n);
+				// var i = home_script_params.bgArray;
 
 				function startCoverShow() {
 					jQuery.backstretch(i, {
@@ -78,15 +78,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
+						var currentlocation = window.location.href;
 						router.go('/studentlist', '/home');
-						return true;
-					} else {
-						return false;
-					}
-				}
-
-				function checkForActiveEntityCookie() {
-					if (jQuery.cookie('entity')) {
 						return true;
 					} else {
 						return false;
@@ -109,22 +102,23 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 					//Light weight DOM.
 					if (checkForActiveCookie() === false) {
 						//Rich Experience First.. Load BG
-						startCoverShow();
+						//startCoverShow();
 						//Get the suggestions to search connected.
-						if (checkForActiveEntityCookie()) {
-							jQuery('#slogan-input').hide();
-							jQuery('#knownentity').text(jQuery.cookie('entity'));
-						} else {
-							activateSuggestionSearch();
+						//activateSuggestionSearch();
 
-							//Hack - Must be fixed in CSS
-							//Alignment mismatch :(
-							jQuery('#slogan-input').css('background-color', 'white');
-							jQuery('#slogan-input').css('vertical-align', 'middle');
-							jQuery('.tt-dropdown-menu').css('top', 'inherit');
-							jQuery('#slogan-input').focus();
+						var entity = router.location();
+						jQuery.cookie('entity', entity, {
+							expires : 100,
+							path : '/'
+						});
+						router.go('/home', '/prehome');
 
-						}
+						//Hack - Must be fixed in CSS
+						//Alignment mismatch :(
+						// jQuery('#slogan-input').css('background-color', 'white');
+						// jQuery('#slogan-input').css('vertical-align', 'middle');
+						// jQuery('.tt-dropdown-menu').css('top', 'inherit');
+						// jQuery('#slogan-input').focus();
 
 						//HTML Event - Actions
 						jQuery('#login-modal-link').click(function() {
@@ -134,8 +128,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 				};
 			}
 
-			return HomeView;
+			return PreHomeView;
 		}());
 
-	return new HomeView();
+	return new PreHomeView();
 });
