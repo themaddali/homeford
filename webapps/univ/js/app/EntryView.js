@@ -30,7 +30,14 @@ define(['spin', 'cookie', '../app/Router', 'validate'], function(spin, cookie, r
 				};
 
 				this.init = function() {
-					jQuery('#user-domain').val(jQuery.cookie('entity'));
+					if (!jQuery.cookie('entity'))
+					{
+						jQuery('#user-domain').removeAttr('readonly');
+					}
+					else
+					{
+						jQuery('#user-domain').val('Active Domain: '+jQuery.cookie('entity'));
+					}
 					
 					jQuery('#login-button').on('click', function(e) {
 						if ($("#login-form").valid()) {
