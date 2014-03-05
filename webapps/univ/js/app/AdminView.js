@@ -7,7 +7,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			 *
 			 */
 			var PARMS = {
-				"workBg" : "img\/classbg.png",
+				"Bg" : "img\/classbg.png",
 			};
 			var MALEICON = '<i class="icon-male  icon-1x "></i>'
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
@@ -15,7 +15,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			function AdminView() {
 
 				function showBG() {
-					jQuery.backstretch(PARMS.workBg);
+					jQuery.backstretch(PARMS.Bg);
 				}
 
 				function createPanels() {

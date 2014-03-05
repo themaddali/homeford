@@ -50,6 +50,18 @@ define(['jquery'], function() {"use strict";
 						}
 					});
 				}
+				
+				this.validateEntity = function(entity, handlers) {
+					//DB call to confirm if this entity or univ exists.
+					if (entity.toUpperCase() === 'KUBO' || entity.toUpperCase() === 'PIANO')
+					{
+						handlers.success(true);
+					}
+					else
+					{
+						handlers.success(false);
+					}
+				}
 
 				this.pause = function() {
 					// No implementation needed for this here.

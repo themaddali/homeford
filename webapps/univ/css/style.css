@@ -251,7 +251,7 @@ textarea {
 input:invalid, textarea:invalid {
 	background-color: #FC7C7C;
 	color: white;
-	border : 3px red solid;
+	border: 3px red solid;
 }
 
 table {
@@ -374,6 +374,7 @@ body.error404 {
 	-o-transition: color 0.3s ease-in-out;
 	transition: color 0.3s ease-in-out;
 	font-weight: 500;
+	cursor: pointer;
 }
 #main-nav li a.current, #static-main-nav li a.current {
 	color: #fbb913;
@@ -384,6 +385,11 @@ body.error404 {
 }
 #main-nav li a:hover, #static-main-nav li a:hover {
 	color: #fbb913;
+	cursor: pointer;
+}
+
+#knownentity {
+	cursor: pointer;
 }
 
 #static-nav {
@@ -401,6 +407,34 @@ body.error404 {
 	position: static;
 	margin: 0;
 	float: right;
+}
+
+#pre-load-message {
+	margin-top: 5px;
+	color: white;
+	font-style: italic;
+	text-transform: capitalize;
+}
+
+#register-link {
+	text-align: center;
+	background-color: #fbb913;
+	font-size: 1em;
+	color: white;
+	padding: 5px;
+	border: none;
+	font-weight: 700;
+	width: 100%
+}
+
+#register-link:hover {
+	padding: 6px;
+	font-weight: 800;
+}
+
+#register-wrapper {
+	width:100%;
+	text-align: left;
 }
 
 #slogan {
@@ -444,16 +478,16 @@ body.error404 {
 /*Place Holder Rules*/
 /* do not group these rules */
 #slogan-input::-webkit-input-placeholder {
-  color: #7f7f7f;
-  font-size: 1em
+	color: #7f7f7f;
+	font-size: 1em
 }
 #slogan-input:-moz-placeholder {
-  color: #7f7f7f;
-  font-size: 1em
+	color: #7f7f7f;
+	font-size: 1em
 }
-#slogan-input:-ms-input-placeholder { /* IE10+ */
-  color: #7f7f7f;
-  font-size: 1em
+#slogan-input:-ms-input-placeholder {/* IE10+ */
+	color: #7f7f7f;
+	font-size: 1em
 }
 
 /*.twitter-typeahead {
@@ -717,16 +751,16 @@ body.error404 {
 /*Place Holder Rules*/
 /* do not group these rules */
 .login-input :-webkit-input-placeholder {
-  color: #7f7f7f;
-  font-size: 1em
+	color: #7f7f7f;
+	font-size: 1em
 }
 .login-input :-moz-placeholder {
-  color: #7f7f7f;
-  font-size: 1em
+	color: #7f7f7f;
+	font-size: 1em
 }
-.login-input :-ms-input-placeholder { /* IE10+ */
-  color: #7f7f7f;
-  font-size: 1em
+.login-input :-ms-input-placeholder {/* IE10+ */
+	color: #7f7f7f;
+	font-size: 1em
 }
 #login-modal p a {
 	display: inline;
@@ -1048,15 +1082,15 @@ body.error404 {
 #nopage-warning {
 	font-size: 1.2em;
 	color: white;
-	margin-left:15%;
+	margin-left: 15%;
 	width: 70%;
 	top: 60%;
 	padding: 15px;
 	text-align: center;
-	border : 1px solid #fbb913; 
+	border: 1px solid #fbb913;
 }
 #nopage-warning i {
-	padding-right:20px; 
+	padding-right: 20px;
 }
 #nopage-warning p > a {
 	font-size: 1em;
@@ -1274,7 +1308,6 @@ body.error404 {
 }
 .modal-body .modal-container.login .modal-contents {
 	padding: 0px;
-	
 }
 .modal-body .modal-container .modal-contents div.footer {
 	padding: 10px;
@@ -1286,7 +1319,6 @@ body.error404 {
 	color: white;
 	text-align: center;
 	width: 100%
-	
 }
 
 .edit-form {
@@ -1353,7 +1385,7 @@ body.error404 {
 	cursor: default;
 }
 
-form li.form-item >label.error {
+form li.form-item > label.error {
 	color: red;
 	font-size: 12px;
 	padding-left: 10px;
@@ -1363,16 +1395,16 @@ form li.form-item >label.error {
 /*Place Holder Rules*/
 /* do not group these rules */
 *::-webkit-input-placeholder {
-  color: #7f7f7f;
-  font-size: 13px
+	color: #7f7f7f;
+	font-size: 13px
 }
 *:-moz-placeholder {
-  color: #7f7f7f;
-  font-size: 13px
+	color: #7f7f7f;
+	font-size: 13px
 }
-*:-ms-input-placeholder { /* IE10+ */
-  color: #7f7f7f;
-  font-size: 13px
+*:-ms-input-placeholder {/* IE10+ */
+	color: #7f7f7f;
+	font-size: 13px
 }
 
 form input.error {
@@ -2685,8 +2717,8 @@ div.mc-image {
 }
 
 input:focus, textarea:focus {
-    outline: none;
-    font-weight: 600;
+	outline: none;
+	font-weight: 600;
 }
 
 .jspCorner {

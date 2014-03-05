@@ -116,7 +116,6 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 							jQuery('#knownentity').text(jQuery.cookie('entity'));
 						} else {
 							activateSuggestionSearch();
-
 							//Hack - Must be fixed in CSS
 							//Alignment mismatch :(
 							jQuery('#slogan-input').css('background-color', 'white');
@@ -128,6 +127,9 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 
 						//HTML Event - Actions
 						jQuery('#login-modal-link').click(function() {
+							router.go('/entry', '/home');
+						});
+						jQuery('#knownentity').click(function() {
 							router.go('/entry', '/home');
 						});
 					} // Cookie Guider

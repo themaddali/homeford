@@ -1,89 +1,54 @@
 //View that will drive the main landing page.
 
-define(['../app/Router', 'cookie'], function(router, cookie) {"use strict";
+define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], function(router, cookie, plugins, service) {"use strict";
 
 	var PreHomeView = ( function() {
-
-			var home_script_params = {
-				"bgArray" : ["img\/1.jpg", "img\/2.jpg", "img\/3.jpg", "img\/4.jpg", "img\/5.jpg"]
-			};
 
 			/**
 			 * Constructor
 			 */
+			var PARMS = {
+				"Bg" : "img\/classbg.png",
+			};
+			
 			function PreHomeView() {
-				//Variable Zone.
-				// var t = {
-					// lines : 17,
-					// length : 6,
-					// width : 4,
-					// radius : 12,
-					// rotate : 0,
-					// color : "#ccc",
-					// speed : 2.2,
-					// trail : 60,
-					// className : "spinner",
-					// zIndex : -2e9,
-					// top : "auto",
-					// left : "auto"
-				// };
-				// var n = document.getElementById("preloader");
-				// var r = (new Spinner(t)).spin(n);
-				// var i = home_script_params.bgArray;
-
-				function startCoverShow() {
-					jQuery.backstretch(i, {
-						duration : 3e3,
-						fade : 750
-					}, function() {
-						r.stop()
-						jQuery("#preloader").hide();
-					});
+				
+				function showBG() {
+					jQuery.backstretch(PARMS.Bg);
 				}
 
-				// setTimeout(function() {
-				// jQuery('#slogan-input').css('background-color', 'white');
-				// jQuery('#slogan-input').css('vertical-align', 'middle');
-				// jQuery('.tt-dropdown-menu').css('top', 'inherit');
-				// jQuery('#slogan-input').focus();
-				// }, 500);
-
-				function activateSuggestionSearch() {
-
-					var countries = new Bloodhound({
-						datumTokenizer : function(d) {
-							return Bloodhound.tokenizers.whitespace(d.name);
-						},
-						queryTokenizer : Bloodhound.tokenizers.whitespace,
-						limit : 5,
-						prefetch : {
-							url : '../univ/data/univslist.json',
-							filter : function(list) {
-								return jQuery.map(list, function(country) {
-									return {
-										name : country
-									};
-								});
-							}
-						}
-					});
-					countries.initialize();
-					//activateSuggestionSearch();
-					jQuery('#slogan-input').typeahead(null, {
-						name : 'countries',
-						displayKey : 'name',
-						source : countries.ttAdapter()
-					});
-				}
-
-				function checkForActiveCookie() {
-					if (jQuery.cookie('user')) {
+				function setActiveCookie() {
+					if (jQuery.cookie('entity')) {
 						var currentlocation = window.location.href;
 						router.go('/studentlist', '/home');
 						return true;
 					} else {
 						return false;
 					}
+				}
+
+				function validateEntity() {
+					var entity = router.location().substring(1);
+					service.validateEntity(entity,{
+						success : function(response) {
+							console.log('Sub Domain' + response);
+							if (response === true) {
+								jQuery.cookie('entity', entity, {
+									expires : 100,
+									path : '/'
+								});
+								router.go('/home', '/pre');
+							}
+							else
+							{
+								jQuery('#entity-response').text(entity);
+								setTimeout(function(){
+									$('#register-link').fadeIn(1500);
+								},1000);
+								//jQuery('#entity-response').append('<p style="font-seze:12px;" id="pre-load-message"></p>');
+							}
+						}
+					});
 				}
 
 
@@ -97,34 +62,10 @@ define(['../app/Router', 'cookie'], function(router, cookie) {"use strict";
 				};
 
 				this.init = function(args) {
-
-					//Check for Cookie before doing any thing.
-					//Light weight DOM.
-					if (checkForActiveCookie() === false) {
-						//Rich Experience First.. Load BG
-						//startCoverShow();
-						//Get the suggestions to search connected.
-						//activateSuggestionSearch();
-
-						var entity = router.location();
-						jQuery.cookie('entity', entity, {
-							expires : 100,
-							path : '/'
-						});
-						router.go('/home', '/prehome');
-
-						//Hack - Must be fixed in CSS
-						//Alignment mismatch :(
-						// jQuery('#slogan-input').css('background-color', 'white');
-						// jQuery('#slogan-input').css('vertical-align', 'middle');
-						// jQuery('.tt-dropdown-menu').css('top', 'inherit');
-						// jQuery('#slogan-input').focus();
-
-						//HTML Event - Actions
-						jQuery('#login-modal-link').click(function() {
-							router.go('/entry', '/home');
-						});
-					} // Cookie Guider
+					//Lets create some background for UX
+					showBG();
+					//Validate the ID.
+					validateEntity();
 				};
 			}
 

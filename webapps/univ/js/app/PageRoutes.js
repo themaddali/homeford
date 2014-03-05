@@ -30,16 +30,6 @@ function (router, cookie, urlFragment ) { "use strict";
                     }
                 });
                 
-                router.map('@', '^/@(/.*|$)', {
-                	container: CONTAINER,
-                    enter: function (location, result) {
-                        require(['text!Pages/home/pre-index.html','../app/PreHomeView'],
-                        function (page, view) {
-                             result.load(page, view);
-                        });
-                    }
-                });
-                
                 router.map('entry', '^/entry(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
@@ -90,15 +80,25 @@ function (router, cookie, urlFragment ) { "use strict";
                     }
                 });
                 
-                 router.map('no route', '^.*', {
+                router.map('no route', '^.*', {
                 	container: CONTAINER,
                     enter: function (location, result) {
-                        require(['text!Pages/no-page.html'],
-                        function (page) {
-                            result.load(page);
+                        require(['text!Pages/home/pre-index.html','../app/PreHomeView'],
+                        function (page, view) {
+                            result.load(page,view);
                         });
                     }
                 });
+                
+                 // router.map('no route', '^.*', {
+                	// container: CONTAINER,
+                    // enter: function (location, result) {
+                        // require(['text!Pages/no-page.html'],
+                        // function (page) {
+                            // result.load(page);
+                        // });
+                    // }
+                // });
                 
                 
                 
