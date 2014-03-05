@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['spin', 'cookie', '../app/Router', 'validate'], function(spin, cookie, router, validate) {"use strict";
+define(['spin', 'cookie', '../app/Router', 'validate', 'typeahead', 'bloodhound'], function(spin, cookie, router, validate, typeahead, bloodhound) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -11,6 +11,34 @@ define(['spin', 'cookie', '../app/Router', 'validate'], function(spin, cookie, r
 			var ERROR = '<i style="padding-right:10px" class="icon-exclamation icon-1x "></i>';
 			
 			function EntryView() {
+				
+				function activateSuggestionSearch() {
+
+					var entities = new Bloodhound({
+						datumTokenizer : function(d) {
+							return Bloodhound.tokenizers.whitespace(d.name);
+						},
+						queryTokenizer : Bloodhound.tokenizers.whitespace,
+						limit : 5,
+						prefetch : {
+							url : 'data/univslist.json',
+							filter : function(list) {
+								return jQuery.map(list, function(country) {
+									return {
+										name : country
+									};
+								});
+							}
+						}
+					});
+					entities.initialize();
+					//activateSuggestionSearch();
+					jQuery('#user-domain').typeahead(null, {
+						name : 'entities',
+						displayKey : 'name',
+						source : entities.ttAdapter()
+					});
+				}
 
 				function Authenticate(username, password) {
 					jQuery.cookie('user', username, {
@@ -33,10 +61,13 @@ define(['spin', 'cookie', '../app/Router', 'validate'], function(spin, cookie, r
 					if (!jQuery.cookie('entity'))
 					{
 						jQuery('#user-domain').removeAttr('readonly');
+						jQuery('#user-domain').removeClass('onlyone');
+						activateSuggestionSearch();
 					}
 					else
 					{
-						jQuery('#user-domain').val('Active Domain: '+jQuery.cookie('entity'));
+						jQuery('#user-domain').addClass('onlyone');
+						jQuery('#user-domain').val('Active Domain: '+jQuery.cookie('entity').toUpperCase());
 					}
 					
 					jQuery('#login-button').on('click', function(e) {

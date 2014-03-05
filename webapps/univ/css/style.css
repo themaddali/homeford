@@ -433,7 +433,7 @@ body.error404 {
 }
 
 #register-wrapper {
-	width:100%;
+	width: 100%;
 	text-align: left;
 }
 
@@ -554,6 +554,34 @@ body.error404 {
 	border-bottom: 2px solid;
 }
 
+/*Inside a Form*/
+form .tt-dropdown-menu {
+	/*min-width: 160px;*/
+	margin-top: -4px;
+	margin-bottom: 0px;
+	cursor:pointer;
+	width: 90%;
+	font-size: 1em;
+	color: #7f7f7f;
+	
+}
+
+form .tt-suggestion {
+	margin-left: -5%;
+	margin-top : 0px;
+	background-color : white;
+	padding-top	: 2px;
+	padding-bottom	: 2px;
+	width:110%;
+	border-bottom: 1px solid #7f7f7f;
+	border-left: 1px solid #7f7f7f;
+	border-right: 1px solid #7f7f7f;
+}
+
+form .tt-suggestion:hover {
+	border-bottom: 2px solid #7f7f7f;
+}
+
 /*.tt-suggestion {
  display: block;
  padding: 3px 20px;
@@ -654,18 +682,18 @@ body.error404 {
 }
 
 .partition-line {
-	padding:0px;
-	margin-left:15%;
-	width:70%;
+	padding: 0px;
+	margin-left: 15%;
+	width: 70%;
 	text-align: center;
 	border-bottom: 1px dotted #7f7f7f;
 }
 
 .modal-social {
-	padding:10px;
+	padding: 10px;
 }
 .modal-social img {
-	padding-left:10px;
+	padding-left: 10px;
 }
 .modal-social span {
 	font-size: 14px;
@@ -682,30 +710,31 @@ body.error404 {
 	-moz-box-shadow: 2px 3px 4px #444444;
 	box-shadow: 2px 3px 4px #444444;
 }
-#login-form input{
+#login-form input {
 	font-size: 20px;
 }
-#login-form ol{
-	margin-left:-40px;
+#login-form ol {
+	margin-left: -40px;
 	margin-top: 10px;
 	text-align: center;
 }
 
 #login-button {
-	margin-top:10px;
-	padding:0px;
-	padding-top:10px;
-	padding-bottom:10px;
+	margin-top: 10px;
+	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: #fbb913;
 	font-size: 18px;
 	font-family: "brandon-grotesque", sans-serif;
 	color: white;
 	border: none;
+	cursor: pointer;
 }
 #login-button-facebook {
-	padding:0px;
-	padding-top:10px;
-	padding-bottom:10px;
+	padding: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	background-color: #3B5998;
 	font-size: 18px;
 	font-family: "brandon-grotesque", sans-serif;
@@ -717,7 +746,7 @@ body.error404 {
 	border: none;
 }
 
-#login-form ol:first-of-type{
+#login-form ol:first-of-type {
 	margin-top: 30px;
 }
 
@@ -1387,6 +1416,17 @@ body.error404 {
 .edit-form fieldset {
 	margin: 20px 0px;
 	border: none;
+}
+
+#user-domain {
+	width: 100%
+}
+
+#user-domain.onlyone {
+	border-bottom: none;
+	color: #7f7f7f;
+	font-size : 13px;
+	text-align: center;
 }
 
 .edit-form fieldset:first-of-type {
