@@ -388,7 +388,7 @@ body.error404 {
 	cursor: pointer;
 }
 
-#knownentity {
+#entity-edit {
 	cursor: pointer;
 }
 
@@ -653,6 +653,25 @@ body.error404 {
 	border-bottom: 0px;
 }
 
+.partition-line {
+	padding:0px;
+	margin-left:15%;
+	width:70%;
+	text-align: center;
+	border-bottom: 1px dotted #7f7f7f;
+}
+
+.modal-social {
+	padding:10px;
+}
+.modal-social img {
+	padding-left:10px;
+}
+.modal-social span {
+	font-size: 14px;
+	cursor: pointer;
+}
+
 /* =================== Login Modal ======================= */
 #login-modal {
 	display: none;
@@ -663,6 +682,45 @@ body.error404 {
 	-moz-box-shadow: 2px 3px 4px #444444;
 	box-shadow: 2px 3px 4px #444444;
 }
+#login-form input{
+	font-size: 20px;
+}
+#login-form ol{
+	margin-left:-40px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+#login-button {
+	margin-top:10px;
+	padding:0px;
+	padding-top:10px;
+	padding-bottom:10px;
+	background-color: #fbb913;
+	font-size: 18px;
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	border: none;
+}
+#login-button-facebook {
+	padding:0px;
+	padding-top:10px;
+	padding-bottom:10px;
+	background-color: #3B5998;
+	font-size: 18px;
+	font-family: "brandon-grotesque", sans-serif;
+	color: white;
+	border: none;
+}
+#login-button-facebook i {
+	color: white;
+	border: none;
+}
+
+#login-form ol:first-of-type{
+	margin-top: 30px;
+}
+
 #login-modal a {
 	display: block;
 	width: 400px;
@@ -1247,7 +1305,7 @@ body.error404 {
 	margin-top: 5%;
 	margin-left: 30%;
 	width: 40%;
-	height: 45%;
+	height: 65%;
 	z-index: 20;
 	border: solid 0px white;
 	background-color: white
@@ -1273,6 +1331,7 @@ body.error404 {
 	cursor: pointer;
 	top: 12px;
 }
+
 .modal-body .modal-container header a {
 	position: absolute;
 	right: 3%;

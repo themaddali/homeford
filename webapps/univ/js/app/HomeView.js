@@ -4,10 +4,11 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 
 	var HomeView = ( function() {
 
-			var home_script_params = {
-				"bgArray" : ["img\/1.jpg", "img\/2.jpg", "img\/3.jpg", "img\/4.jpg", "img\/5.jpg"]
+			var PARAM = {
+				"Bg" : ["img\/1.jpg", "img\/2.jpg", "img\/3.jpg", "img\/4.jpg", "img\/5.jpg"]
 			};
 
+			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
 			/**
 			 * Constructor
 			 */
@@ -29,7 +30,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 				};
 				var n = document.getElementById("preloader");
 				var r = (new Spinner(t)).spin(n);
-				var i = home_script_params.bgArray;
+				var i = PARAM.Bg;
 
 				function startCoverShow() {
 					jQuery.backstretch(i, {
@@ -114,6 +115,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 						if (checkForActiveEntityCookie()) {
 							jQuery('#slogan-input').hide();
 							jQuery('#knownentity').text(jQuery.cookie('entity'));
+							jQuery('#knownentity').append(EDIT);
+
 						} else {
 							activateSuggestionSearch();
 							//Hack - Must be fixed in CSS
@@ -129,9 +132,25 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 						jQuery('#login-modal-link').click(function() {
 							router.go('/entry', '/home');
 						});
-						jQuery('#knownentity').click(function() {
-							router.go('/entry', '/home');
+						
+						
+						jQuery('#entity-edit').click(function() {
+							jQuery.removeCookie('entity', {
+								path : '/'
+							});
+							jQuery('#knownentity').hide();
+							jQuery('#slogan-input').fadeIn();
 						});
+
+						jQuery('#knownentity').on({
+							mouseenter : function() {
+								jQuery('#entity-edit').fadeIn(500);
+							},
+							mouseleave : function() {
+								jQuery('#entity-edit').fadeOut(500);
+							}
+						});
+
 					} // Cookie Guider
 				};
 			}
