@@ -565,7 +565,7 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
             }
             
             function cancelDialogs() {
-                //$('.hp-dia//log-container.hp-active .hp-cancel').trigger('click');
+                
             }
             
             function returnToPrevious(from) {

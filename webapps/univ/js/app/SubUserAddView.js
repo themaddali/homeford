@@ -48,13 +48,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 					}
 				}
 
-				// mouse is over a form element
-				function onOverContent(event) {
-					var messageContainer = $('.form-guide', event.target);
-					messageContainer.toggleClass('hp-empty', $.grep(messageContainer.children(), function(e) {
-						return ('none' !== $(e).css('display') && 'hidden' !== $(e).css('visibility'));
-					}).length === 0);
-				}
+				
 
 
 				this.pause = function() {

@@ -1,70 +1,73 @@
 
-JETTY
-=====
+HOMEFORD
+========
 
-The Jetty project is a 100% Java HTTP Server, HTTP Client
-and Servlet Container.
+Homeford is the code name for the project that is aimed at developed a framework that 
+can be used by any one for any purpose.
 
+Oops thats too generic..
 
-The Jetty @ eclipse project is based on the Jetty project at codehaus
+"A management framework between a person and their immediate supervising entity and 
+immediate reporting entity" 
 
-  http://jetty.codehaus.org
+MISSION BUZZ WORDS
+==================
 
-Ongoing development is now at the eclipse foundation
+1/ Lightweight
+2/ Customizable
+3/ Adaptable
+4/ Out of the Box ready
+5/ Scalable 
+6/ Stable
+7/ Secure
 
-  http://www.eclipse.org/jetty/
+TECHNOLOGY STACK
+================
 
+1/ Backend
+	a/ My SQL DB
+	b/ Mongo DB as backup of HA
 
-Jetty @ eclipse is open source and is dual licensed using the apache 2.0 and
-eclipse public license 1.0.   You may choose either license when distributing
-jetty.
+2/ MiddleTier
+	a/ Sun JAVA
+	b/ Spring MVC model
+	c/ Spring Security
+	d/ REST interface
+	e/ JSON data exchange
+	
+3/ FrontEnd
+	a/ HTML5 , CSS#
+	b/ Reqire.js
+	c/ Router and Pagination.
+	d/ Localization Expandability
+	e/ JQuery
 
+4/ Webserver
+	a/ Jetty out of the box.
 
+LICENSING
+=========
 
-BUILDING JETTY
-==============
+As of now there is no licensing for the front end.
+Actually there wont be licensing for frontend ever.
+There are several libraries and codes repos used in getting this to the current
+state. We havent given a great thought on the license models. Most of the libraries 
+we use are MIT licensed. If you find we are using some of your licensed stuff, let
+us know and we will pull it down ASAP. Honestly we dont have time/money to entertain 
+legal followups.
 
-Jetty uses maven 2 as its build system.  Maven will fetch
-the dependancies, build the server and assemble a runnable
-version:
+TO TEST GUI
+===========
 
-  mvn install
-
-
-
-RUNNING JETTY
-=============
-
-The run directory is either the top-level of a binary release
-or jetty-distribution/target/assembly-prep directory when built from
-source.
-
-To run with the default options:
-
-  java -jar start.jar
-
-To see the available options and the default arguments
-provided by the start.ini file:
-
-  java -jar start.jar --help
-
-To run with extra configuration file(s) appended, eg SSL
-
-  java -jar start.jar etc/jetty-ssl.xml
-
-To run with properties 
-
-  java -jar start.jar jetty.port=8081
-
-To run with extra configuration file(s) prepended, eg logging & jmx
-
-  java -jar start.jar --pre=etc/jetty-logging.xml --pre=etc/jetty-jmx.xml 
-
-To run without the args from start.ini 
-
-  java -jar start.jar --ini OPTIONS=Server,websocket etc/jetty.xml etc/jetty-deploy.xml etc/jetty-ssl.xml
-
-to list the know OPTIONS:
-
-  java -jar start.jar --list-options
+This repo is packed with webserver. 
+1/ Download the whole package
+2/ using CMDline naviga to the place where you download the package.
+3/ Unzip the package
+4/ If java is in path, then issue java -jar start.jar
+5/ The CMD will show few lines of blah.. blah.. and wont return prompt.
+6/ This means webserver is running. Yahoooooooo!!!!!!
+7/ Use any bowser ( you know right... any doesn't include IE :) ) and point to 
+   localhost:8080/univ     
+8/ If port 8080 is occupied ot java not available, Google can help you.
+9/ Enjoy and please do report bugs to us!
 

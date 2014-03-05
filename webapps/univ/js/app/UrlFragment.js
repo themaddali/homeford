@@ -281,21 +281,14 @@ define(['jquery'
             };
 
             /**
-             * Replace the URIS in any .hp-anchor-uri anchor hrefs within ROOT.
+             * Replace the URIS in any  anchor hrefs within ROOT.
              * @public
              * @param {string} ROOT The context to look for anchors in.
              * @param {Array} uris The new uris to replace with.
              * @param {string} multiSelectId The multi-select id (optional).
              */
             this.replaceHrefUris = function (ROOT, uris, multiSelectId) {
-                $('.hp-anchor-uri', ROOT).each(function (i) {
-                    $(this).attr('href', '#' +
-                        self.replaceUris($(this).attr('href'), uris, multiSelectId));
-                });
-                if ($(ROOT).hasClass('hp-anchor-uri')) {
-                    $(ROOT).attr('href', '#' +
-                        self.replaceUris($(ROOT).attr('href'), uris, multiSelectId));
-                }
+                
             };
 
             function replaceHrefParameters(elem, parameters) {
@@ -307,13 +300,7 @@ define(['jquery'
             }
 
             this.replaceHrefParametersFromFragment = function (context, fragment) {
-                var parameters = fragment.split('?')[1];
-                $('.hp-anchor-uri', context).each(function (i, elem) {
-                    replaceHrefParameters(elem, parameters);
-                });
-                if ($(context).hasClass('hp-anchor-uri')) {
-                    replaceHrefParameters(context, parameters);
-                }
+              
             };
             
             // Decode a string that has been "html entities" encoded so that it can be displayed properly
