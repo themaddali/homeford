@@ -47,7 +47,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 
 				this.init = function() {
 					if (!jQuery.cookie('entity')) {
-						jQuery('#user-domain').removeAttr('readonly');
+						jQuery('#user-domain').removeAttr('disabled');
 						jQuery('#user-domain').removeClass('onlyone');
 						activateSuggestionSearch();
 					} else {
