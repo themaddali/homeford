@@ -55,6 +55,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 
 					jQuery('#register-button').on('click', function(e) {
 						if ($("#register-form").valid()) {
+							
 							e.preventDefault();
 						}
 					});

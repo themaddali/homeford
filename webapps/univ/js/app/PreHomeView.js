@@ -10,6 +10,7 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 			var PARMS = {
 				"Bg" : "img\/classbg.png",
 			};
+			var ENTITY;
 			
 			function PreHomeView() {
 				
@@ -28,7 +29,15 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 				}
 
 				function validateEntity() {
-					var entity = router.location().substring(1);
+					if (ENTITY === null || !ENTITY)
+					{
+						var entity = router.location().substring(1);
+					}
+					else
+					{
+						var entity = ENTITY;
+						ENTITY = null;
+					}
 					service.validateEntity(entity,{
 						success : function(response) {
 							console.log('Sub Domain' + response);
@@ -59,6 +68,10 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 					//Forcing to reload all view.
 					location.reload();
 				};
+				
+				this.setEntity = function(entity){
+					ENTITY = entity;
+				}
 
 				this.init = function(args) {
 					//Lets create some background for UX

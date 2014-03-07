@@ -132,8 +132,17 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 						jQuery('#login-modal-link').click(function() {
 							router.go('/entry', '/home');
 						});
-						
-						
+
+						jQuery('#slogan-input').keypress(function() {
+							var keycode = (event.keyCode ? event.keyCode : event.which);
+							if (keycode == '13') {
+								var queryString = jQuery('#slogan-input').val();
+								//prehomeview.setEntity(queryString);
+								router.go('/'+queryString, '/home');
+							}
+							
+						});
+
 						jQuery('#entity-edit').click(function() {
 							jQuery.removeCookie('entity', {
 								path : '/'
