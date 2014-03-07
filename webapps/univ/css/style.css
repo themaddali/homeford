@@ -713,16 +713,16 @@ form .tt-suggestion:hover {
 	-moz-box-shadow: 2px 3px 4px #444444;
 	box-shadow: 2px 3px 4px #444444;
 }
-#login-form input {
+#login-form input, #register-form input {
 	font-size: 20px;
 }
-#login-form ol {
+#login-form ol,#register-form ol {
 	margin-left: -40px;
 	margin-top: 10px;
 	text-align: center;
 }
 
-#login-button {
+#login-button,#register-button {
 	margin-top: 10px;
 	padding: 0px;
 	padding-top: 10px;
@@ -734,7 +734,7 @@ form .tt-suggestion:hover {
 	border: none;
 	cursor: pointer;
 }
-#login-button-facebook {
+#login-button-facebook,#register-button-facebook {
 	padding: 0px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -744,13 +744,26 @@ form .tt-suggestion:hover {
 	color: white;
 	border: none;
 }
-#login-button-facebook i {
+#login-button-facebook i,#register-button-facebook i {
 	color: white;
 	border: none;
 }
 
-#login-form ol:first-of-type {
+#login-form ol:first-of-type,#register-form ol:first-of-type {
 	margin-top: 30px;
+}
+
+/*jQuery Ui Widgets Styling*/
+.ui-datepicker td {
+    border: 1px solid #CCC;
+    padding: 0;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    border: solid #FFF;
+    border-width: 1px 0 0 1px;
 }
 
 #login-modal a {

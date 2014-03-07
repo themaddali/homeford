@@ -66,6 +66,11 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 					showBG();
 					//Validate the ID.
 					validateEntity();
+					
+					jQuery('#register-link').on('click',function() {
+						router.go('/register','/entry');
+					});
+					
 				};
 			}
 

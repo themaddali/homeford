@@ -39,6 +39,16 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                
+                router.map('register', '^/register(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/register/index.html','../app/RegisterView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 router.map('studentlist', '^/studentlist(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
