@@ -699,14 +699,14 @@ body .ui-tooltip {
 	border-width: 2px
 }
 .ui-widget {
-	font-family: "brandon-grotesque", sans-serif;;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em
 }
 .ui-widget .ui-widget {
 	font-size: 1em
 }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-	font-family: "brandon-grotesque", sans-serif;;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em
 }
 .ui-widget-content {

@@ -27,7 +27,7 @@ html {
 }
 
 html, button, input, select, textarea {
-	font-family: sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #222;
 }
 
@@ -108,8 +108,7 @@ mark {
 }
 
 pre, code, kbd, samp {
-	font-family: monospace, serif;
-	_font-family: 'courier new', monospace;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em;
 }
 
@@ -295,7 +294,7 @@ td {
 }
 
 body {
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	font-weight: 400;
 	background: #616970;
@@ -670,7 +669,7 @@ body.error404 {
 	padding-bottom: 10px;
 	background-color: #fbb913;
 	font-size: 18px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -681,7 +680,7 @@ body.error404 {
 	padding-bottom: 10px;
 	background-color: #3B5998;
 	font-size: 18px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	border: none;
 }
@@ -1189,7 +1188,7 @@ body.error404 {
 	text-transform: uppercase;
 	padding-top: 0;
 	font-size: 0.9em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #888;
 }
 
@@ -1198,7 +1197,7 @@ body.error404 {
 	text-transform: uppercase;
 	padding-top: 0;
 	font-size: 0.9em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #888;
 }
 
@@ -1209,7 +1208,7 @@ body.error404 {
 	left: 310px;
 	text-transform: uppercase;
 	font-size: 0.9em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #fbb913;
 	padding: 10px;
 	width: 100px;
@@ -1227,16 +1226,16 @@ body.error404 {
 
 .panel div #student-min-list {
 	width: 320px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
 .panel div #student-min-list ul {
 	list-style: none;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
 .panel div #student-min-list ul li a {
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em;
 	display: block;
 	text-decoration: none;
@@ -1299,7 +1298,7 @@ body.error404 {
 .modal-body .modal-container header {
 	background-color: grey;
 	font-size: 1.2em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	padding: 20px;
 	padding-left: 15px;
@@ -1311,7 +1310,7 @@ body.error404 {
 	height: 42px;
 	background-color: #fbb913;
 	font-size: 1em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -1328,7 +1327,7 @@ body.error404 {
 	vertical-align: middle;
 	background-color: #fbb913;
 	font-size: 1em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	border: none;
 	cursor: pointer;
@@ -1342,7 +1341,7 @@ body.error404 {
 .modal-body .modal-container .modal-contents {
 	padding: 15px 30px 0 30px;
 	margin: 0;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	font-weight: 500;
 	font-size: 1em;
@@ -1360,7 +1359,7 @@ body.error404 {
 	font-weight: 500;
 	line-height: 0.9em;
 	background-color: rgba(236, 93, 87, 0.87);
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	text-align: center;
 	width: 100%
@@ -1478,7 +1477,7 @@ form input.error {
 	padding-top: 0;
 	height: 180px;
 	font-size: 0.9em;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #888;
 }
 .panel h3 {
@@ -1617,7 +1616,7 @@ form input.error {
 	padding: 7px 0 0 240px;
 	margin-left: 30px;
 	margin-right: 40px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 0.9em;
@@ -1628,7 +1627,7 @@ form input.error {
 	padding: 0 0 15px 240px;
 	margin-left: 30px;
 	margin-right: 40px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	font-weight: 500;
 	font-size: 1.2em;
@@ -1984,7 +1983,7 @@ html.touch #subnav {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #blog-content .post h1, #blog-content .post h2, #blog-content .post h3, #blog-content .post h4, #blog-content .post h5, #blog-content .post h6, #blog-content .post small {
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 }
 #blog-content .post h2.post-title {
@@ -2075,7 +2074,7 @@ input#searchsubmit {
 	font-size: 0.9em;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	font-family: "brandon-grotesque", sans-serif;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	color: #fff;
 	-webkit-transition: background-color 0.3s ease-in-out;
