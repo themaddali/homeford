@@ -1,42 +1,30 @@
 //View that will drive the main landing page.
 
-define(['spin', 'cookie', '../app/Router', 'validate', 'typeahead', 'bloodhound'], function(spin, cookie, router, validate, typeahead, bloodhound) {"use strict";
+define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService'], function(jqueryui, spin, cookie, router, validate, service) {"use strict";
 
 	var EntryView = ( function() {
 
 			/**
 			 * Constructor
 			 */
-			
-			var ERROR = '<i style="padding-right:10px" class="icon-exclamation icon-1x "></i>';
-			
-			function EntryView() {
-				
-				function activateSuggestionSearch() {
 
-					var entities = new Bloodhound({
-						datumTokenizer : function(d) {
-							return Bloodhound.tokenizers.whitespace(d.name);
-						},
-						queryTokenizer : Bloodhound.tokenizers.whitespace,
-						limit : 5,
-						prefetch : {
-							url : 'data/univslist.json',
-							filter : function(list) {
-								return jQuery.map(list, function(country) {
-									return {
-										name : country
-									};
+			var ERROR = '<i style="padding-right:10px" class="icon-exclamation icon-1x "></i>';
+
+			function EntryView() {
+
+				function activateSuggestionSearch() {
+					service.entityList({
+						success : function(result) {
+							console.log('Entity List' + result);
+							if (result !== 'error') {
+								$("#user-domain").autocomplete({
+									source : function(request, response) {
+										var results = $.ui.autocomplete.filter(result, request.term);
+										response(results.slice(0, 5));
+									}
 								});
 							}
 						}
-					});
-					entities.initialize();
-					//activateSuggestionSearch();
-					jQuery('#user-domain').typeahead(null, {
-						name : 'entities',
-						displayKey : 'name',
-						source : entities.ttAdapter()
 					});
 				}
 
@@ -58,18 +46,15 @@ define(['spin', 'cookie', '../app/Router', 'validate', 'typeahead', 'bloodhound'
 				};
 
 				this.init = function() {
-					if (!jQuery.cookie('entity'))
-					{
+					if (!jQuery.cookie('entity')) {
 						jQuery('#user-domain').removeAttr('readonly');
 						jQuery('#user-domain').removeClass('onlyone');
 						activateSuggestionSearch();
-					}
-					else
-					{
+					} else {
 						jQuery('#user-domain').addClass('onlyone');
-						jQuery('#user-domain').val('Active Domain: '+jQuery.cookie('entity').toUpperCase());
+						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
 					}
-					
+
 					jQuery('#login-button').on('click', function(e) {
 						if ($("#login-form").valid()) {
 							e.preventDefault();
@@ -79,32 +64,28 @@ define(['spin', 'cookie', '../app/Router', 'validate', 'typeahead', 'bloodhound'
 							if (inputuname !== 'error@e.com') {
 								// successful validation and create cookie
 								Authenticate(inputuname, inputpass);
-							}
-							else
-							{
+							} else {
 								jQuery('#login-notification').fadeIn(1000);
-								jQuery('#login-notification').html(ERROR+' Invalid Login: '+ inputpass);
+								jQuery('#login-notification').html(ERROR + ' Invalid Login: ' + inputpass);
 							}
 						}
 
 					});
 
-					jQuery('#user-name').on('keyup',function() {
+					jQuery('#user-name').on('keyup', function() {
 						jQuery('#login-notification').fadeOut(1000);
 					});
-					
-					jQuery('#user-password').on('keyup',function() {
+
+					jQuery('#user-password').on('keyup', function() {
 						jQuery('#login-notification').fadeOut(1000);
 					});
-					jQuery('#register-now').on('click',function() {
-						router.go('/register','/entry');
+					jQuery('#register-now').on('click', function() {
+						router.go('/register', '/entry');
 					});
 
-					jQuery('#login-close').on('click',function() {
-						router.go('/home','/entry');
+					jQuery('#login-close').on('click', function() {
+						router.go('/home', '/entry');
 					});
-
-					
 
 					jQuery("#login-form").validate({
 						rules : {

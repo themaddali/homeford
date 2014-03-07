@@ -170,7 +170,8 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	cursor: default
+	cursor: default;
+	z-index : 200;
 }
 .ui-button {
 	display: inline-block;
@@ -249,7 +250,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	padding: 0
 }
 .ui-datepicker {
-	width: 17em;
+	width: 20%;
 	/*padding: .2em .2em 0;*/
 	display: none
 }
@@ -476,7 +477,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+	border-bottom : 1px dotted #7f7f7f;
 }
 .ui-menu .ui-menu-divider {
 	margin: 5px -2px 5px -2px;

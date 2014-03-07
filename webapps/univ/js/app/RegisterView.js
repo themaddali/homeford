@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', 'typeahead', 'bloodhound'], function(jqueryui, spin, cookie, router, validate, typeahead, bloodhound) {"use strict";
+define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService'], function(jqueryui, spin, cookie, router, validate, service) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -11,30 +11,18 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', 'typeahead', 
 			function EntryView() {
 
 				function activateSuggestionSearch() {
-
-					var entities = new Bloodhound({
-						datumTokenizer : function(d) {
-							return Bloodhound.tokenizers.whitespace(d.name);
-						},
-						queryTokenizer : Bloodhound.tokenizers.whitespace,
-						limit : 5,
-						prefetch : {
-							url : 'data/univslist.json',
-							filter : function(list) {
-								return jQuery.map(list, function(country) {
-									return {
-										name : country
-									};
+					service.entityList({
+						success : function(result) {
+							console.log('Entity List' + result);
+							if (result !== 'error') {
+								$("#new-user-domain").autocomplete({
+									source : function(request, response) {
+										var results = $.ui.autocomplete.filter(result, request.term);
+										response(results.slice(0, 5));
+									}
 								});
 							}
 						}
-					});
-					entities.initialize();
-					//activateSuggestionSearch();
-					jQuery('#user-domain').typeahead(null, {
-						name : 'entities',
-						displayKey : 'name',
-						source : entities.ttAdapter()
 					});
 				}
 
@@ -108,6 +96,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', 'typeahead', 
 							},
 							RDOB : {
 								required : true,
+								date : true
 							},
 						}
 					});

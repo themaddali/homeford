@@ -45,7 +45,6 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 								setTimeout(function(){
 									$('#register-link').fadeIn(1500);
 								},1000);
-								//jQuery('#entity-response').append('<p style="font-seze:12px;" id="pre-load-message"></p>');
 							}
 						}
 					});

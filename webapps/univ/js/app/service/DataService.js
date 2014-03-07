@@ -4,7 +4,6 @@ define(['jquery'], function() {"use strict";
 	var DataService = ( function() {
 
 			//Global Variables
-			
 
 			/**
 			 * @constructor
@@ -18,49 +17,48 @@ define(['jquery'], function() {"use strict";
 
 				this.getUnivObject = function(handlers) {
 					$.getJSON("data/loginresponse.json", function(json) {
-						if (json)
-						{
+						if (json) {
 							handlers.success(json);
-						}
-						else
-						{
+						} else {
 							handlers.success('Error');
 						}
 					});
 				}
-				
-				this.getStudentObject = function(studentid,handlers) {
+
+				this.getStudentObject = function(studentid, handlers) {
 					var thisURL;
-					if (studentid !== 'Doug Stamper')
-					{
+					if (studentid !== 'Doug Stamper') {
 						thisURL = "data/studentinfo-four.json;"
-					}
-					else
-					{
+					} else {
 						thisURL = "data/studentinfo-one.json;"
 					}
 					$.getJSON(thisURL, function(json) {
-						if (json)
-						{
+						if (json) {
 							handlers.success(json);
-						}
-						else
-						{
+						} else {
 							handlers.success('Error');
 						}
 					});
 				}
-				
+
 				this.validateEntity = function(entity, handlers) {
 					//DB call to confirm if this entity or univ exists.
-					if (entity.toUpperCase() === 'KUBO' || entity.toUpperCase() === 'PIANO')
-					{
+					if (entity.toUpperCase() === 'KUBO' || entity.toUpperCase() === 'PIANO') {
 						handlers.success(true);
-					}
-					else
-					{
+					} else {
 						handlers.success(false);
 					}
+				}
+
+				this.entityList = function(handlers) {
+					var thisURL = "data/univslist.json";
+					$.getJSON(thisURL, function(json) {
+						if (json) {
+							handlers.success(json);
+						} else {
+							handlers.success('Error');
+						}
+					});
 				}
 
 				this.pause = function() {
