@@ -1729,6 +1729,90 @@ html.touch #subnav {
 	line-height: 0.8em;
 }
 
+/*===========Cards Template - Responive==========*/
+.content {  
+	margin-left: 10%;
+    position:fixed;
+    top:92px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    overflow:scroll;
+    -webkit-overflow-scrolling:touch;
+    margin-bottom:30px;
+}
+
+.float-left .studentboard {
+    float:left;
+    width:300px;  
+    height:300px;
+}
+
+.studentboard {
+    background:#FFF;
+    padding:0px;
+    margin:15px;
+    overflow:hidden;
+    cursor: pointer;
+}
+.studentboard:hover > img {
+    border-top: 3px solid  #fbb913;
+}
+
+.studentboard img {
+    width:100%;
+    height:45%;
+    padding:0px;
+    margin:0px;
+    background-position:center;
+    background-repeat:no-repeat;
+    position:relative;
+    overflow:hidden;
+}
+
+.studentboard div.student-name {
+	width: 100%;
+	background-color: #fbb913;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: white;
+	/*padding : 10px 0px;
+	text-align: center;
+	width: 100%;
+	color: #fbb913;
+	border-bottom: 3px dotted #fbb913;*/
+}
+
+.studentboard i {
+	display: inline;
+	padding-right: 10px;
+	color: white;
+}
+
+.studentboard div.student-info {
+	display: inline-block;
+	background-color: white;
+	padding-top: 5px;
+	/*top: 70px;*/
+	text-align: left;
+	margin-left: 10px;
+	color: white;
+	font-size: 0.9em;
+	font-weight: 400;
+}
+
+.studentboard div.student-info li {
+	color: #493E3E;
+	margin-left: 10px;
+	list-style: none;
+	font-size: 0.9em;
+	border-left: 4px solid #fbb913;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+
 /*==================Student Profiles=============*/
 
 #carousel .studentboard {

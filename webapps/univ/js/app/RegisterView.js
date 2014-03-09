@@ -26,12 +26,24 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					});
 				}
 
-				function Authenticate(username, password) {
-					jQuery.cookie('user', username, {
-						expires : 100,
-						path : '/'
+				function RegisterUser(username, password, domain) {
+					service.registerNewUser(username,password,domain,{
+						success : function(RegisterData) {
+							if (RegisterData.status === 'success')
+							{
+								alert('Success '+RegisterData.message);
+							}
+							else
+							{
+								alert ('Fail:'+ RegisterData.message);
+							}
+						}
 					});
-					router.go('/studentlist', '/entry');
+					// jQuery.cookie('user', username, {
+						// expires : 100,
+						// path : '/'
+					// });
+					// router.go('/studentlist', '/entry');
 				}
 
 
@@ -55,7 +67,10 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 
 					jQuery('#register-button').on('click', function(e) {
 						if ($("#register-form").valid()) {
-							
+							var inputuname = jQuery('#new-user-name').val();
+							var inputpass = jQuery('#new-user-password').val();
+							var inputdomain = jQuery('#new-user-domain').val();
+							RegisterUser(inputuname,inputpass,inputdomain);
 							e.preventDefault();
 						}
 					});
@@ -79,7 +94,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					jQuery("#register-form").validate({
 						rules : {
 							Rfirstname : {
-								required : true,
+								required : false,
 							},
 							Rusername : {
 								required : true,
@@ -96,7 +111,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 								required : true,
 							},
 							RDOB : {
-								required : true,
+								required : false,
 								date : true
 							},
 						}

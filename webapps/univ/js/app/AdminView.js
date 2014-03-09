@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router','../app/SubUserEditView'], function(modernizr, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView'], function(modernizr, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -461,16 +461,20 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 
 						//HTML Event - Actions
 						jQuery('#signout-button').on('click', function(e) {
-							e.preventDefault();
-							jQuery.removeCookie('user', {
-								path : '/'
+							service.Logout({
+								success : function() {
+									jQuery.removeCookie('user', {
+										path : '/'
+									});
+									jQuery.removeCookie('subuser', {
+										path : '/'
+									});
+									router.go('/home', 'admin');
+									window.setTimeout('location.reload()', 500);
+									// refresh after 1/2 sec
+								},
 							});
-							jQuery.removeCookie('subuser', {
-								path : '/'
-							});
-							router.go('/home', 'admin');
-							window.setTimeout('location.reload()', 500);
-							// refresh after 1/2 sec
+
 						});
 
 						jQuery('#student-manage').on('click', function() {

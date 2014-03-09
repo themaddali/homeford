@@ -26,7 +26,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						success : function(UnivData) {
 							console.log('UnivData');
 							console.log(UnivData);
-							jQuery("#preloader").hide();
+							
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var template = jQuery('#student-template').remove().attr('id', '');
 							var COUNT = UnivData[0].students.length;
@@ -43,13 +43,20 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 									jQuery('.student-name', newboard).prepend(UNLOCKPANEL);
 								}
 								for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
-									jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
+									if ( j < 2 ) {
+										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
+									}
+									if (j ==2 && UnivData[0].students[i].courses.length > 3) {
+										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + " ..... and "+(UnivData[0].students[i].courses.length-2) +" more</li>");
+									}
 								}
 
-								jQuery('#carousel').append(newboard);
+								jQuery('#card-canvas').append(newboard);
 								if (i === COUNT - 1) {
-									jQuery('#carousel').append('<div class="empty"></div>');
-									createPanels();
+									//jQuery('#carousel').append('<div class="empty"></div>');
+									//createPanels();
+									jQuery("#preloader").hide();
+									ActivatePanelEvents();
 								}
 								if (COUNT === 0) {
 									//No Need of selection. ONly Student so take in to class zone.
@@ -194,10 +201,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 				}
 
 				function ActivatePanelEvents() {
-					jQuery('.student-select').on('click', function() {
-						if ($(this).hasClass('selected')) {
+					jQuery('.studentboard').on('click', function() {
 							// successful selection of user for context, and create cookie
-							var selectedUser = $(this).attr('name');
+							var selectedUser = $(this).find('.student-name').text();
 							var selectedUserSecurity = $(this).attr('security');
 							if (selectedUserSecurity !== "true") {
 								jQuery.cookie('subuser', selectedUser, {
@@ -212,7 +218,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 								});
 								router.go('/class', '/studentlist');
 							}
-						}
 					});
 				};
 

@@ -28,12 +28,22 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					});
 				}
 
-				function Authenticate(username, password) {
-					jQuery.cookie('user', username, {
-						expires : 100,
-						path : '/'
+				function Authenticate(username, password, domain) {
+					service.Login(username, password, {
+						success : function(LoginData) {
+							if (LoginData !== 'error') {
+								jQuery.cookie('user', username, {
+									expires : 100,
+									path : '/'
+								});
+								router.go('/studentlist', '/entry');
+							} else {
+								jQuery('#login-notification').fadeIn(1000);
+								jQuery('#login-notification').html("User/Password Combination Invalid!");
+							}
+						}
 					});
-					router.go('/studentlist', '/entry');
+
 				}
 
 

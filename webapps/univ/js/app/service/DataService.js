@@ -25,6 +25,46 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
+				this.registerNewUser = function(username,password,domain,handlers) {
+					$.ajax({
+						url : '/homeford/api/signup',
+						type : 'POST',
+						async : 'async',
+						contentType: "application/json", 
+						data: JSON.stringify({'password':password,'email':username,"domain":{"domainName":domain}}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+				this.Login = function(username,password,handlers) {
+					$.ajax({
+						url : '/homeford/j_spring_security_check',
+						type : 'POST',
+						async : 'async',
+						data: 'j_username='+username+'&j_password='+password,
+						success : function(data) {
+							handlers.success(data);
+						},
+						error : function(data) {
+							handlers.success('error');
+						}
+					});
+				}
+				this.Logout = function(handlers) {
+					$.ajax({
+						url : '/homeford/j_spring_security_logout',
+						type : 'POST',
+						async : 'async',
+						success : function(data) {
+							handlers.success(data);
+						},
+						error : function(data) {
+							handlers.success('error');
+						}
+					});
+				}
+
 				this.getStudentObject = function(studentid, handlers) {
 					var thisURL;
 					if (studentid !== 'Doug Stamper') {
