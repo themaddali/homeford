@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService'], function(jqueryui, spin, cookie, router, validate, service) {"use strict";
+define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService','../app/Notify'], function(jqueryui, spin, cookie, router, validate, service,notify) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -31,11 +31,11 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						success : function(RegisterData) {
 							if (RegisterData.status === 'success')
 							{
-								alert('Success '+RegisterData.message);
+								notify.showNotification('OK',RegisterData.message,'entry','2000');
 							}
 							else
 							{
-								alert ('Fail:'+ RegisterData.message);
+								notify.showNotification('ERROR',RegisterData.message);
 							}
 						}
 					});

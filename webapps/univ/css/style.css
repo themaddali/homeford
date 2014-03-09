@@ -1303,6 +1303,31 @@ body.error404 {
 	padding: 20px;
 	padding-left: 15px;
 }
+.edit-notify.OK{
+	display : none;
+	background-color: #33CC33;
+	font-size: 1.2em;
+	position : absolute;
+	width: 100%;
+	top:0px;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: white;
+	padding: 20px 0px;
+}
+.edit-notify.ERROR{
+	display : none;
+	background-color: #FF3333;
+	font-size: 1.2em;
+	position : absolute;
+	width: 100%;
+	top:0px;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: white;
+	padding: 20px 0px;
+}
+.notify-message {
+	padding-left: 10px;
+}
 
 .modal-body .modal-container header input {
 	position: absolute;
@@ -1745,7 +1770,7 @@ html.touch #subnav {
 .float-left .studentboard {
     float:left;
     width:300px;  
-    height:300px;
+    height:350px;
 }
 
 .studentboard {

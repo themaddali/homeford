@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService'], function(jqueryui, spin, cookie, router, validate, service) {"use strict";
+define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService', '../app/Notify'], function(jqueryui, spin, cookie, router, validate, service, notify) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -8,8 +8,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			 * Constructor
 			 */
 
-			var ERROR = '<i style="padding-right:10px" class="icon-exclamation icon-1x "></i>';
-
+			
 			function EntryView() {
 
 				function activateSuggestionSearch() {
@@ -32,14 +31,13 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
+								notify.showNotification('OK','Login Success','studentlist','2000');
 								jQuery.cookie('user', username, {
 									expires : 100,
 									path : '/'
 								});
-								router.go('/studentlist', '/entry');
 							} else {
-								jQuery('#login-notification').fadeIn(1000);
-								jQuery('#login-notification').html("User/Password Combination Invalid!");
+								notify.showNotification('ERROR','Username/Password Combination Invalid');
 							}
 						}
 					});
