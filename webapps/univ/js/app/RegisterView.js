@@ -31,7 +31,8 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						success : function(RegisterData) {
 							if (RegisterData.status === 'success')
 							{
-								notify.showNotification('OK',RegisterData.message,'entry','2000');
+								notify.showNotification('OK','Congratulations!!!',null,'2000');
+								Login(username, password);
 							}
 							else
 							{
@@ -39,11 +40,22 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							}
 						}
 					});
-					// jQuery.cookie('user', username, {
-						// expires : 100,
-						// path : '/'
-					// });
-					// router.go('/studentlist', '/entry');
+				}
+				
+				function Login(username, password){
+					service.Login(username, password, {
+						success : function(LoginData) {
+							if (LoginData !== 'error') {
+								notify.showNotification('OK','Congratulations!!!','studentlist','1000');
+								jQuery.cookie('user', username, {
+									expires : 100,
+									path : '/'
+								});
+							} else {
+								notify.showNotification('ERROR','Some thing didnt go right!');
+							}
+						}
+					});
 				}
 
 
