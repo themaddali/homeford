@@ -14,13 +14,14 @@ define(['../app/Router', 'cookie', '../app/service/DataService'], function(route
 			function Notify() {
 				
 				function showNotification(status,message,toroute,duration) {
+					jQuery('div.edit-notify').remove();
 					if (!duration){
 						duration = 5000; ///defaulting to 5 seconds
 					}
 					if (jQuery.find('.modal-body'))
 					{
 						var CLASS = "edit-notify " + status;
-													var notification = '<div class="'+CLASS+'">'+OK+'<span class="notify-message">'+message+'</span></div>';
+						var notification = '<div class="'+CLASS+'">'+OK+'<span class="notify-message">'+message+'</span></div>';
 						if (status === 'ERROR')
 						{
 							var notification = '<div class="'+CLASS+'">'+ERROR+'<span class="notify-message">'+message+'</span></div>';
