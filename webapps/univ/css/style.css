@@ -2740,11 +2740,14 @@ html.no-touch #gradient-right {
 	position: absolute;
 	top: 50px;
 	z-index: 9999;
-	margin-left: 30%;
-	width: 40%;
+	width: 100%;
 	min-height: 44px;
-	border :none;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-color: black;
 	height: auto;
+	background-color: #444444;
 	color: #fff;
 	text-align: center;
 }
@@ -2761,31 +2764,28 @@ html.no-touch #gradient-right {
 	font-size: 1.2em;
 	padding: 5px;
 	border-color: none;
+	height: 80%;
 }
-
 #searchbar.active > input[type="text"] {
-	width: 97%;
-	height: 97%;
+	width: 50%;
+	min-width : 100px;
 	color: #fbb913;
-	font-weight: 500;
+	font-weight: 200;
 	border: 1px solid #fbb913;
 }
-#searchbar.active > input[type="text"]:focus {
-	border: 2px solid #fbb913;
-	font-weight: 600;
-	text-align: left;
+#searchbar.active > input[type="text"] {
+	width: 80%;
+	color: #fbb913;
+	font-weight: 200;
+	border: 1px solid #fbb913;
 }
-#searchbar.active button {
-	border: none;
-	height: 28px;
-	margin-top: 4px;
-	background:#FFFFFF;
-	cursor:pointer;
-	position:absolute;
-	right:4px;
-	top:2px;
+#searchbar.active > input[type="button"] {
+	width: 15%;
+	text-align: center;
+	color: white;
+	background-color: #fbb913;
+	text-transform: capitalize;
 }
-
 
 /* =================== Swipejs Slideshow ======================= */
 #slider {
