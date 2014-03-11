@@ -7,6 +7,8 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			/**
 			 * Constructor
 			 */
+			
+			var ENTITY;
 
 			function EntryView() {
 
