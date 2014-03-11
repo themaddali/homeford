@@ -8,40 +8,58 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			 * Constructor
 			 */
 
-			
 			function EntryView() {
 
 				function activateSuggestionSearch() {
-					service.entityList({
-						success : function(result) {
-							console.log('Entity List' + result);
-							if (result !== 'error') {
-								$("#user-domain").autocomplete({
-									source : function(request, response) {
-										var results = $.ui.autocomplete.filter(result, request.term);
-										response(results.slice(0, 5));
-									}
-								});
+					if (checkForActiveCookie() === false) {
+						service.entityList({
+							success : function(result) {
+								console.log('Entity List' + result);
+								if (result !== 'error') {
+									$("#user-domain").autocomplete({
+										source : function(request, response) {
+											var results = $.ui.autocomplete.filter(result, request.term);
+											response(results.slice(0, 5));
+										}
+									});
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 
 				function Authenticate(username, password, domain) {
-					service.Login(username, password, {
-						success : function(LoginData) {
-							if (LoginData !== 'error') {
-								notify.showNotification('OK','Login Success','studentlist','2000');
-								jQuery.cookie('user', username, {
-									expires : 100,
-									path : '/'
-								});
-							} else {
-								notify.showNotification('ERROR','Username/Password Combination Invalid');
+					//Local Testing
+					if (username === 'venkat@test.com' && password === "test") {
+						notify.showNotification('OK', 'Login Success - Local', 'studentlist', '2000');
+						jQuery.cookie('user', username, {
+							expires : 100,
+							path : '/'
+						});
+					} else {
+						service.Login(username, password, {
+							success : function(LoginData) {
+								if (LoginData !== 'error') {
+									notify.showNotification('OK', 'Login Success', 'studentlist', '2000');
+									jQuery.cookie('user', username, {
+										expires : 100,
+										path : '/'
+									});
+								} else {
+									notify.showNotification('ERROR', 'Username/Password Combination Invalid');
+								}
 							}
-						}
-					});
+						});
+					}
+				}
 
+				function checkForActiveCookie() {
+					if (jQuery.cookie('user')) {
+						router.go('/studentlist', '/entry');
+						return true;
+					} else {
+						return false;
+					}
 				}
 
 
@@ -50,7 +68,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 				};
 
 				this.resume = function() {
-
+					checkForActiveCookie()
 				};
 
 				this.init = function() {
