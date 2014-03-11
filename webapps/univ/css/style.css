@@ -1762,7 +1762,7 @@ html.touch #subnav {
     bottom:0px;
     left:0px;
     right:0px;
-    overflow:scroll;
+    overflow:auto;
     -webkit-overflow-scrolling:touch;
     margin-bottom:30px;
 }
@@ -1773,11 +1773,21 @@ html.touch #subnav {
     height:350px;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px; }
+
+::-webkit-scrollbar-track:hover {
+  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2); }
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(164, 164, 164, 0.5); }
+
 .studentboard {
     background:#FFF;
     padding:0px;
     margin:15px;
-    overflow:hidden;
+    overflow:auto;
     cursor: pointer;
 }
 .studentboard:hover > img {
@@ -2712,6 +2722,71 @@ html.no-touch #gradient-right {
 	text-transform: capitalize;
 }
 
+/*========Search Bar=========*/
+#searchbar {
+	display: none;
+	-webkit-transition: opacity 3s ease-out;
+	opacity: 0;
+	height: 0;
+	overflow: hidden;
+}
+#searchbar.active {
+	opacity: 1;
+	-webkit-transition: opacity 2s ease-in-out;
+	-moz-transition: opacity 2s ease-in-out;
+	-o-transition: opacity 2s ease-in-out;
+	transition: opacity 2s ease-in-out;
+	display: inline-block;
+	position: absolute;
+	top: 50px;
+	z-index: 9999;
+	width: 100%;
+	min-height: 44px;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+	border-color: black;
+	height: auto;
+	background-color: #444444;
+	color: #fff;
+	text-align: center;
+}
+
+#searchbar.active div {
+	color: white;
+	padding: 5px;
+}
+
+#searchbar.active > input {
+	text-align: center;
+	margin-top: 4px;
+	color: white;
+	font-size: 1.2em;
+	padding: 5px;
+	border-color: none;
+	height: 80%;
+}
+#searchbar.active > input[type="text"] {
+	width: 50%;
+	min-width : 100px;
+	color: #fbb913;
+	font-weight: 200;
+	border: 1px solid #fbb913;
+}
+#searchbar.active > input[type="text"] {
+	width: 80%;
+	color: #fbb913;
+	font-weight: 200;
+	border: 1px solid #fbb913;
+}
+#searchbar.active > input[type="button"] {
+	width: 15%;
+	text-align: center;
+	color: white;
+	background-color: #fbb913;
+	text-transform: capitalize;
+}
+
 /* =================== Swipejs Slideshow ======================= */
 #slider {
 	margin: 0px;
@@ -2938,6 +3013,12 @@ footer a:hover {
 #copyright {
 	float: right;
 	padding: 10px 40px 10px 10px;
+}
+
+#login-info {
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px
 }
 
 .ss-social {

@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService','../app/Notify'], function(jqueryui, spin, cookie, router, validate, service,notify) {"use strict";
+define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/service/DataService', '../app/Notify'], function(jqueryui, spin, cookie, router, validate, service, notify) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -11,48 +11,56 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			function EntryView() {
 
 				function activateSuggestionSearch() {
-					service.entityList({
-						success : function(result) {
-							console.log('Entity List' + result);
-							if (result !== 'error') {
-								$("#new-user-domain").autocomplete({
-									source : function(request, response) {
-										var results = $.ui.autocomplete.filter(result, request.term);
-										response(results.slice(0, 5));
-									}
-								});
+					if (checkForActiveCookie() === false) {
+						service.entityList({
+							success : function(result) {
+								console.log('Entity List' + result);
+								if (result !== 'error') {
+									$("#new-user-domain").autocomplete({
+										source : function(request, response) {
+											var results = $.ui.autocomplete.filter(result, request.term);
+											response(results.slice(0, 5));
+										}
+									});
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 
 				function RegisterUser(username, password, domain) {
-					service.registerNewUser(username,password,domain,{
+					service.registerNewUser(username, password, domain, {
 						success : function(RegisterData) {
-							if (RegisterData.status === 'success')
-							{
-								notify.showNotification('OK','Congratulations!!!',null,'2000');
+							if (RegisterData.status === 'success') {
+								notify.showNotification('OK', 'Congratulations!!!', null, '2000');
 								Login(username, password);
-							}
-							else
-							{
-								notify.showNotification('ERROR',RegisterData.message);
+							} else {
+								notify.showNotification('ERROR', RegisterData.message);
 							}
 						}
 					});
 				}
 				
-				function Login(username, password){
+				function checkForActiveCookie() {
+					if (jQuery.cookie('user')) {
+						router.go('/studentlist', '/register');
+						return true;
+					} else {
+						return false;
+					}
+				}
+
+				function Login(username, password) {
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
-								notify.showNotification('OK','Congratulations!!!','studentlist','1000');
+								notify.showNotification('OK', 'Congratulations!!!', 'studentlist', '1000');
 								jQuery.cookie('user', username, {
 									expires : 100,
 									path : '/'
 								});
 							} else {
-								notify.showNotification('ERROR','Some thing didnt go right!');
+								notify.showNotification('ERROR', 'Some thing didnt go right!');
 							}
 						}
 					});
@@ -64,7 +72,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 				};
 
 				this.resume = function() {
-
+					checkForActiveCookie();
 				};
 
 				this.init = function() {
@@ -82,7 +90,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							var inputuname = jQuery('#new-user-name').val();
 							var inputpass = jQuery('#new-user-password').val();
 							var inputdomain = jQuery('#new-user-domain').val();
-							RegisterUser(inputuname,inputpass,inputdomain);
+							RegisterUser(inputuname, inputpass, inputdomain);
 							e.preventDefault();
 						}
 					});

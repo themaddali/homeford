@@ -223,7 +223,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#loggedin-user').text(jQuery.cookie('user'));
+						jQuery('#option-active').text(jQuery.cookie('user'));
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
