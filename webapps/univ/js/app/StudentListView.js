@@ -55,6 +55,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 								if (i === COUNT - 1) {
 									//jQuery('#carousel').append('<div class="empty"></div>');
 									//createPanels();
+									if (COUNT > 12)
+									{
+										jQuery('#searchbar').addClass('active');
+									}
+									else
+									{
+										jQuery('#searchbar').removeClass('active');
+									}
 									jQuery("#preloader").hide();
 									ActivatePanelEvents();
 								}
