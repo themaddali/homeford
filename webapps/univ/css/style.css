@@ -656,13 +656,13 @@ body.error404 {
 #login-form input, #register-form input {
 	font-size: 20px;
 }
-#login-form ol,#register-form ol {
+#login-form ol, #register-form ol {
 	margin-left: -40px;
 	margin-top: 10px;
 	text-align: center;
 }
 
-#login-button,#register-button {
+#login-button, #register-button {
 	margin-top: 10px;
 	padding: 0px;
 	padding-top: 10px;
@@ -674,7 +674,7 @@ body.error404 {
 	border: none;
 	cursor: pointer;
 }
-#login-button-facebook,#register-button-facebook {
+#login-button-facebook, #register-button-facebook {
 	padding: 0px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -685,26 +685,24 @@ body.error404 {
 	border: none;
 }
 
-#login-button-facebook i,#register-button-facebook i {
+#login-button-facebook i, #register-button-facebook i {
 	color: white;
 	border: none;
 }
 
-#login-form ol:first-of-type,#register-form ol:first-of-type {
+#login-form ol:first-of-type, #register-form ol:first-of-type {
 	margin-top: 30px;
 }
 
 /*jQuery Ui Widgets Styling*/
 .ui-datepicker td {
-    border: 1px solid #CCC;
-    padding: 0;
+	border: 1px solid #CCC;
+	padding: 0;
 }
 
-.ui-state-default,
-.ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default {
-    border: solid #FFF;
-    border-width: 1px 0 0 1px;
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+	border: solid #FFF;
+	border-width: 1px 0 0 1px;
 }
 
 #login-modal a {
@@ -1303,24 +1301,24 @@ body.error404 {
 	padding: 20px;
 	padding-left: 15px;
 }
-.edit-notify.OK{
-	display : none;
+.edit-notify.OK {
+	display: none;
 	background-color: #33CC33;
 	font-size: 1.2em;
-	position : absolute;
+	position: absolute;
 	width: 100%;
-	top:0px;
+	top: 0px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	padding: 20px 0px;
 }
-.edit-notify.ERROR{
-	display : none;
+.edit-notify.ERROR {
+	display: none;
 	background-color: #FF3333;
 	font-size: 1.2em;
-	position : absolute;
+	position: absolute;
 	width: 100%;
-	top:0px;
+	top: 0px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	padding: 20px 0px;
@@ -1755,54 +1753,63 @@ html.touch #subnav {
 }
 
 /*===========Cards Template - Responive==========*/
-.content {  
-	margin-left: 10%;
-    position:fixed;
-    top:92px;
-    bottom:0px;
-    left:0px;
-    right:0px;
-    overflow:auto;
-    -webkit-overflow-scrolling:touch;
-    margin-bottom:30px;
+.content {
+	margin-left: 5%;
+	position: fixed;
+	top: 92px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	margin-bottom: 30px;
 }
 
 .float-left .studentboard {
-    float:left;
-    width:300px;  
-    height:350px;
+	float: left;
+	width: 300px;
+	height: 350px;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px; }
+	width: 10px;
+	height: 10px;
+}
 
 ::-webkit-scrollbar-track:hover {
-  -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2); }
+	-webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+}
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(164, 164, 164, 0.5); }
+	background-color: rgba(164, 164, 164, 0.5);
+}
 
 .studentboard {
-    background:#FFF;
-    padding:0px;
-    margin:15px;
-    overflow:auto;
-    cursor: pointer;
+	background: #FFF;
+	padding: 0px;
+	margin: 15px;
+	overflow: auto;
+	cursor: pointer;
 }
-.studentboard:hover > img {
-    border-top: 3px solid  #fbb913;
+.studentboard:hover {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	border: 2px solid #fbb913;
 }
+/*.studentboard:hover > img {
+ border-top: 3px solid #fbb913;
+ }*/
 
 .studentboard img {
-    width:100%;
-    height:45%;
-    padding:0px;
-    margin:0px;
-    background-position:center;
-    background-repeat:no-repeat;
-    position:relative;
-    overflow:hidden;
+	width: 100%;
+	height: 45%;
+	padding: 0px;
+	margin: 0px;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
 }
 
 .studentboard div.student-name {
@@ -1813,10 +1820,10 @@ html.touch #subnav {
 	text-align: center;
 	color: white;
 	/*padding : 10px 0px;
-	text-align: center;
-	width: 100%;
-	color: #fbb913;
-	border-bottom: 3px dotted #fbb913;*/
+	 text-align: center;
+	 width: 100%;
+	 color: #fbb913;
+	 border-bottom: 3px dotted #fbb913;*/
 }
 
 .studentboard i {
@@ -1846,7 +1853,6 @@ html.touch #subnav {
 	padding: 5px;
 	margin-bottom: 5px;
 }
-
 
 /*==================Student Profiles=============*/
 
@@ -2452,12 +2458,66 @@ html.no-touch #gradient-right {
 }
 
 #project-page-logo {
-	float: right;
+	float: left;
 	width: 181px;
 	height: 18px;
 	background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
 	margin: 14px 12px 0 12px;
 }
+#user-info {
+	display: block;
+	float: right;
+	text-transform: uppercase;
+	font-size: 0.95em;
+	font-weight: 600;
+	padding: 12px 15px;
+	cursor: pointer;
+}
+#user-info:hover {
+	color: #fff;
+	background-color: #444;
+	font-weight: 700;
+}
+
+
+#search-context {
+	/*background: transparent url("../img/pointer-back.png") no-repeat 7px 18px;*/
+	text-align: center;
+	float: left;
+	margin-left:20px;
+	margin-right: 20px;
+	width: 60%;
+	height: 44px;
+	text-align: left;
+	opacity: 0.3;
+	-webkit-transition: opacity 0.3s ease-in-out;
+	-moz-transition: opacity 0.3s ease-in-out;
+	-o-transition: opacity 0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
+	-webkit-transition: background-color 0.3s ease-in-out;
+	-moz-transition: background-color 0.3s ease-in-out;
+	-o-transition: background-color 0.3s ease-in-out;
+	transition: background-color 0.3s ease-in-out;
+}
+#search-context:hover {
+	opacity: 0.99;
+	background-color: #444;
+}
+
+#search-context > span {
+	display: block;
+	margin-left: 12px;
+	font-weight: 400;
+	color: #fff;
+}
+#search-context a span {
+	font-weight: 400;
+	color: #ccc;
+}
+#search-context:active {
+	background-position: 7px 19px;
+}
+
 #project-page-logo a {
 	display: block;
 	width: 100%;
@@ -2467,7 +2527,8 @@ html.no-touch #gradient-right {
 	margin: 0;
 }
 
-/* =================== Project Dropdown Menu ======================= */
+/* =================== Dropdown Menu ======================= */
+
 #project-dropdown {
 	position: relative;
 	float: left;
@@ -2740,14 +2801,11 @@ html.no-touch #gradient-right {
 	position: absolute;
 	top: 50px;
 	z-index: 9999;
-	width: 100%;
+	margin-left: 30%;
+	width: 40%;
 	min-height: 44px;
-	border-bottom: 1px solid;
-	border-left: 1px solid;
-	border-right: 1px solid;
-	border-color: black;
+	border: none;
 	height: auto;
-	background-color: #444444;
 	color: #fff;
 	text-align: center;
 }
@@ -2764,27 +2822,29 @@ html.no-touch #gradient-right {
 	font-size: 1.2em;
 	padding: 5px;
 	border-color: none;
-	height: 80%;
 }
+
 #searchbar.active > input[type="text"] {
-	width: 50%;
-	min-width : 100px;
+	width: 97%;
+	height: 97%;
 	color: #fbb913;
-	font-weight: 200;
+	font-weight: 500;
 	border: 1px solid #fbb913;
 }
-#searchbar.active > input[type="text"] {
-	width: 80%;
-	color: #fbb913;
-	font-weight: 200;
-	border: 1px solid #fbb913;
+#searchbar.active > input[type="text"]:focus {
+	border: 2px solid #fbb913;
+	font-weight: 600;
+	text-align: left;
 }
-#searchbar.active > input[type="button"] {
-	width: 15%;
-	text-align: center;
-	color: white;
-	background-color: #fbb913;
-	text-transform: capitalize;
+#searchbar.active button {
+	border: none;
+	height: 28px;
+	margin-top: 4px;
+	background: #FFFFFF;
+	cursor: pointer;
+	position: absolute;
+	right: 4px;
+	top: 2px;
 }
 
 /* =================== Swipejs Slideshow ======================= */
@@ -3579,6 +3639,7 @@ footer a:hover {
 	}
 
 	#project-page-logo {
+		float: left;
 		width: 24px;
 		height: 18px;
 		background: transparent url("../img/project-page-logo.png") no-repeat 0 0;

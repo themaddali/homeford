@@ -55,6 +55,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 								if (i === COUNT - 1) {
 									//jQuery('#carousel').append('<div class="empty"></div>');
 									//createPanels();
+									if (COUNT > 14)
+									{
+										jQuery('#searchbar').addClass('active');
+									}
+									else
+									{
+										jQuery('#searchbar').removeClass('active');
+									}
 									jQuery("#preloader").hide();
 									ActivatePanelEvents();
 								}
@@ -223,7 +231,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#option-active').text(jQuery.cookie('user'));
+						jQuery('#user-info').append(jQuery.cookie('user').split('@')[0]);
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
@@ -254,7 +262,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						populateStudentList();
 
 						//HTML Event - Actions
-						jQuery('#loggedin-user').on('click', function(e) {
+						jQuery('#user-info').on('click', function(e) {
 							router.go('/admin', '/studentlist');
 						});
 
