@@ -231,7 +231,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#user-info').append(jQuery.cookie('user').split('@')[0]);
+						jQuery('#user-name').append(jQuery.cookie('user').split('@')[0]);
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
@@ -262,7 +262,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						populateStudentList();
 
 						//HTML Event - Actions
-						jQuery('#user-info').on('click', function(e) {
+						jQuery('.user-info').on('click', function(e) {
 							router.go('/admin', '/studentlist');
 						});
 

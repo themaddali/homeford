@@ -480,6 +480,16 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 						jQuery('#student-manage').on('click', function() {
 							router.go('/admin/subuseradd', 'admin');
 						});
+						jQuery('.adminboard').on('click', function() {
+							// if (jQuery(this).hasClass('active')){
+								// jQuery(this).removeClass('active');
+							// }
+							// else
+							// {
+								// jQuery('.adminboard').removeClass('active');
+								// jQuery(this).addClass('active');
+							// }
+						});
 						// jQuery('#overview-manage').on('click', function() {
 						// router.go('/admin/overview', 'admin');
 						// });

@@ -72,8 +72,8 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 						jQuery('#overview-edit-modal-close').on('click', function() {
 							//Fix this in a more dynamic way later.
 							var golocation = (window.location.href).split('#')[0] + 'admin';
-							pager.makeViewReload('admin', golocation);
-							router.go('/admin', '#/admin/overview');
+							//pager.makeViewReload('admin', golocation);
+							router.go('/admin/show', '#/admin/overview');
 						});
 
 						jQuery('#overview-edit').on('click', function() {
@@ -82,8 +82,8 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 								setTimeout(function() {
 									jQuery('#overview-edit').val('Edit');
 									var golocation = (window.location.href).split('#')[0] + 'admin';
-									pager.makeViewReload('admin', golocation);
-									router.go('/admin', '#/admin/overview');
+									//pager.makeViewReload('admin', golocation);
+									router.go('/admin/show', '#/admin/overview');
 								}, 3000);
 							}
 						});
