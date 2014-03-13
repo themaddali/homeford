@@ -1764,6 +1764,7 @@ html.touch #subnav {
 
 /*===========Cards Template - Responive==========*/
 .content {
+	text-align: center;
 	margin-left: 5%;
 	position: fixed;
 	top: 92px;
@@ -1776,15 +1777,17 @@ html.touch #subnav {
 }
 
 .float-left .studentboard {
-	float: left;
+	display: inline-block;
 	width: 300px;
 	height: 350px;
+	text-align: left;
 }
 .float-left .adminboard {
-	float: left;
+	display: inline-block;
 	width: 400px;
 	height: 450px;
 	cursor: default;
+	text-align: left;
 }
 .float-left .adminboard.active {
 	float: left;

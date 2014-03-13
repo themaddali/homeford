@@ -145,23 +145,6 @@
 						"name": "Numbers009"
 					}
 				]
-			}, {
-				"id": "T3-006",
-				"name": "Ms Christna Salinger",
-				"email": "jr2@james.com",
-				"security": true,
-				"image": "img/student3.jpg",
-				"phone": "",
-				"gender": "female",
-				"courses": [
-					{
-						"instructor": "T2-001",
-						"name": "Indian Politics"
-					}, {
-						"instructor": "T2-001",
-						"name": "OOPS Concepts"
-					}
-				]
 			}
 		]
 	}
