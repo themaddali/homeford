@@ -231,7 +231,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#user-name').append(jQuery.cookie('user').split('@')[0]);
+						jQuery('#user-name-value').text(jQuery.cookie('user').split('@')[0]);
 						return true;
 					} else {
 						router.go('/home', '/studentlist');

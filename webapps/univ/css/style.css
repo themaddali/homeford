@@ -1784,6 +1784,7 @@ html.touch #subnav {
 	float: left;
 	width: 400px;
 	height: 450px;
+	cursor: default;
 }
 .float-left .adminboard.active {
 	float: left;
@@ -3228,7 +3229,9 @@ footer a:hover {
 		height: 44px;
 		margin: 0px;
 	}
-	
+	#user-name-value {
+		display : none;
+	}		
 
 	.modal-body .modal-container.login {
 		width: 100%;

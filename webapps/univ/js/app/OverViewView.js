@@ -82,7 +82,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 								setTimeout(function() {
 									jQuery('#overview-edit').val('Edit');
 									var golocation = (window.location.href).split('#')[0] + 'admin';
-									//pager.makeViewReload('admin', golocation);
+									pager.makeViewReload('admin', golocation);
 									router.go('/admin/show', '#/admin/overview');
 								}, 3000);
 							}

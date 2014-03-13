@@ -24,6 +24,18 @@ define(['jquery'], function() {"use strict";
 						}
 					});
 				}
+				
+				this.getUserProfile = function(handlers) {
+					$.ajax({
+						url : '/homeford/api/userprofile',
+						type : 'GET',
+						async : 'async',
+						contentType: "application/json", 
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
 
 				this.registerNewUser = function(username,password,domain,handlers) {
 					$.ajax({
