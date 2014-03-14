@@ -29,28 +29,19 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 				}
 
 				function Authenticate(username, password, domain) {
-					//Local Testing
-					if (username === 'venkat@test.com' && password === "test") {
-						notify.showNotification('OK', 'Login Success - Local', 'studentlist', '2000');
-						jQuery.cookie('user', username, {
-							expires : 100,
-							path : '/'
-						});
-					} else {
-						service.Login(username, password, {
-							success : function(LoginData) {
-								if (LoginData !== 'error') {
-									notify.showNotification('OK', 'Login Success', 'studentlist', '2000');
-									jQuery.cookie('user', username, {
-										expires : 100,
-										path : '/'
-									});
-								} else {
-									notify.showNotification('ERROR', 'Username/Password Combination Invalid');
-								}
+					service.Login(username, password, {
+						success : function(LoginData) {
+							if (LoginData !== 'error') {
+								notify.showNotification('OK', 'Login Success', 'studentlist', '2000');
+								jQuery.cookie('user', username, {
+									expires : 100,
+									path : '/'
+								});
+							} else {
+								notify.showNotification('ERROR', 'Username/Password Combination Invalid');
 							}
-						});
-					}
+						}
+					});
 				}
 
 				function checkForActiveCookie() {

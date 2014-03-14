@@ -1192,7 +1192,7 @@ body.error404 {
 }
 
 /*Student-min-list*/
-.panel div #student-min-list {
+.adminboard div #student-min-list {
 	text-transform: uppercase;
 	padding-top: 0;
 	font-size: 0.9em;
@@ -1200,7 +1200,7 @@ body.error404 {
 	color: #888;
 }
 
-.panel a.panel-control {
+.adminboard a.panel-control {
 	display: inline;
 	position: relative;
 	top: -50px;
@@ -1213,27 +1213,30 @@ body.error404 {
 	width: 100px;
 	cursor: pointer;
 }
+.adminboard.active a.panel-control {
+	left: 740px;
+}
 
-.panel a.panel-control:hover {
+.adminboard a.panel-control:hover {
 	background-color: #fbb913;
 	color: white;
 }
 
-.panel a i {
+.adminboard a i {
 	padding-right: 5px;
 }
 
-.panel div #student-min-list {
+.adminboard div#student-min-list {
 	width: 320px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.panel div #student-min-list ul {
+.adminboard div#student-min-list ul {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.panel div #student-min-list ul li a {
+.adminboard div#student-min-list ul li a {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em;
 	display: block;
@@ -1248,18 +1251,18 @@ body.error404 {
 	cursor: pointer;
 }
 
-.panel div #student-min-list ul li i {
+.adminboard div#student-min-list ul li i {
 	padding-right: 10px;
 	padding-left: 5px;
 	color: #888;
 }
 
-.panel div #student-min-list ul li a:hover {
+.adminboard div#student-min-list ul li a:hover {
 	color: #fbb913;
 	font-size: 1em;
 	background-repeat: repeat-x;
 }
-.panel div #student-min-list ul li a strong {
+.adminboard div#student-min-list ul li a strong {
 	margin-right: 10px;
 }
 
@@ -1496,26 +1499,33 @@ form input.error {
 	color: #000;
 }
 
-.panel p.half-height {
+.adminboard p.half-height {
 	padding-top: 0;
-	height: 180px;
+	height: 50%;
 	font-size: 0.9em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #888;
 }
-.panel h3 {
-	padding: 25px 30px 15px 30px;
+.adminboard h3 {
+	padding: 10px;
 	margin: 0;
-	font-size: 1.35em;
+	font-size: 1.15em;
 	font-weight: 500;
 }
-.panel h4 {
+.adminboard p {
+	color: #7f7f7f;
+	padding: 5px 10px;
+	margin: 0;
+	font-size: 1em;
+	font-weight: 500;
+}
+.adminboard h4 {
 	margin: 0;
 	font-size: 1.35em;
 	font-weight: 500;
 	border-top: 1px solid #ccc;
 }
-.panel h4 a {
+.adminboard h4 a {
 	display: block;
 	width: 340px;
 	height: 76px;
@@ -1527,79 +1537,79 @@ form input.error {
 	-ms-transition: color 0.3s ease-in-out;
 	transition: color 0.3s ease-in-out;
 }
-.panel h4 a:hover {
+.adminboard h4 a:hover {
 	color: #000;
 }
-.panel h4:hover {
+.adminboard h4:hover {
 	background-color: #fbb913;
 }
-.panel h4 a:active {
+.adminboard h4 a:active {
 	position: static;
 }
-.panel h4.last {
+.adminboard h4.last {
 	border-bottom: 1px solid #ccc;
 }
-.panel.connect h3 {
+.adminboard.connect h3 {
 	padding-bottom: 35px;
 }
-.panel img {
+.adminboard img {
 	width: 330px;
 	height: 175px;
 	margin: 30px 0 0 30px;
 }
-.panel canvas {
+.adminboard canvas {
 	width: 330px;
 	height: 175px;
 	margin: 30px 0 0 30px;
 }
-.panel div .half {
-	width: 400px;
+.adminboard div .half {
+	width: 380px;
 	height: 190px;
 	/*margin: 30px 0 0 30px;*/
 }
-.panel div .full {
+.adminboard div .full {
 	width: 400px;
 	height: 380px;
 	/*margin: 30px 0 0 30px;*/
 }
-.panel .jspVerticalBar {
+.adminboard .jspVerticalBar {
 	background-color: transparent;
 }
-.panel .jspTrack {
+.adminboard .jspTrack {
 	background-color: transparent;
 }
-.panel .jspDrag {
+.adminboard .jspDrag {
 	background-color: #CBCECF;
 }
 
 /*form-view*/
-.panel form.show-form {
+.adminboard form.show-form {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.panel form.show-form fieldset {
+.adminboard form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
-.panel form.show-form fieldset:first-of-type {
+.adminboard form.show-form fieldset:first-of-type {
 	margin-top: 0px;
 }
-.panel form.show-form fieldset:last-of-type {
+.adminboard form.show-form fieldset:last-of-type {
 	margin-bottom: 0px;
 }
-.panel form.show-form li.form-item {
+.adminboard form.show-form li.form-item {
 	font-size: 0px;
 }
-.panel form.show-form li.form-item:last-of-type {
+.adminboard form.show-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
-.panel form.show-form li.form-item > * {
+.adminboard form.show-form li.form-item > * {
 	vertical-align: top;
 	display: inline-block;
 	font-size: 13px;
 	line-height: 17px;
 }
-.panel form.show-form li.form-item > label:first-of-type {
+.adminboard form.show-form li.form-item > label:first-of-type {
 	max-width: 170px;
 	width: 33%;
 	margin-bottom: 5px;
@@ -1611,11 +1621,11 @@ form input.error {
 	box-sizing: border-box;
 	cursor: default;
 }
-.panel form.show-form li.form-item > label:first-of-type.condensed {
+.adminboard form.show-form li.form-item > label:first-of-type.condensed {
 	width: auto;
 	cursor: default;
 }
-.panel form.show-form li.form-item > .form-content {
+.adminboard form.show-form li.form-item > .form-content {
 	width: 66%;
 	margin-bottom: 5px;
 	font-size: 13px;
@@ -1754,6 +1764,7 @@ html.touch #subnav {
 
 /*===========Cards Template - Responive==========*/
 .content {
+	text-align: center;
 	margin-left: 5%;
 	position: fixed;
 	top: 92px;
@@ -1766,9 +1777,22 @@ html.touch #subnav {
 }
 
 .float-left .studentboard {
-	float: left;
+	display: inline-block;
 	width: 300px;
 	height: 350px;
+	text-align: left;
+}
+.float-left .adminboard {
+	display: inline-block;
+	width: 400px;
+	height: 450px;
+	cursor: default;
+	text-align: left;
+}
+.float-left .adminboard.active {
+	float: left;
+	width: 830px;
+	height: 450px;
 }
 
 ::-webkit-scrollbar {
@@ -1784,26 +1808,23 @@ html.touch #subnav {
 	background-color: rgba(164, 164, 164, 0.5);
 }
 
-.studentboard {
+.studentboard, .adminboard {
 	background: #FFF;
 	padding: 0px;
 	margin: 15px;
 	overflow: auto;
 	cursor: pointer;
 }
-.studentboard:hover {
+.studentboard:hover, .adminboard:hover {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	border: 2px solid #fbb913;
 }
-/*.studentboard:hover > img {
- border-top: 3px solid #fbb913;
- }*/
 
 .studentboard img {
 	width: 100%;
-	height: 45%;
+	height: 50%;
 	padding: 0px;
 	margin: 0px;
 	background-position: center;
@@ -2464,27 +2485,26 @@ html.no-touch #gradient-right {
 	background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
 	margin: 14px 12px 0 12px;
 }
-#user-info {
+.user-info {
 	display: block;
 	float: right;
 	text-transform: uppercase;
 	font-size: 0.95em;
-	font-weight: 600;
-	padding: 12px 15px;
+	font-weight: 500;
+	padding: 12px 20px;
 	cursor: pointer;
 }
-#user-info:hover {
+.user-info:hover {
 	color: #fff;
 	background-color: #444;
-	font-weight: 700;
+	font-weight: 600;
 }
-
 
 #search-context {
 	/*background: transparent url("../img/pointer-back.png") no-repeat 7px 18px;*/
 	text-align: center;
 	float: left;
-	margin-left:20px;
+	margin-left: 20px;
 	margin-right: 20px;
 	width: 60%;
 	height: 44px;
@@ -3187,6 +3207,39 @@ footer a:hover {
 	#slider-container {
 		position: absolute;
 		width: 100%;
+	}
+
+	.studentboard, .adminboard {
+		width: 100%;
+		height: 200px;
+		padding: 0px;
+	}
+
+	.content {
+		width: 100%;
+		margin: 0px;
+	}
+
+	.studentboard div.student-info {
+		display: none;
+	}
+	.studentboard img {
+		display: none;
+	}
+	.float-left .studentboard {
+		float: none;
+		width: 100%;
+		height: 44px;
+		margin: 0px;
+	}
+	#user-name-value {
+		display : none;
+	}		
+
+	.modal-body .modal-container.login {
+		width: 100%;
+		height: 100%;
+		margin: 0px;
 	}
 
 	#wrapper-touch {

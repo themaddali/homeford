@@ -18,6 +18,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 					jQuery.backstretch(PARMS.Bg);
 				}
 
+
 				function createPanels() {
 					var t = {
 						lines : 17,
@@ -371,12 +372,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 					new Chart(studentctx1).Doughnut(studentdata1);
 					new Chart(rankingctx).Bar(rankingdata);
 					new Chart(rankingctx1).Bar(rankingdata1);
-					//new Chart(polarctx).PolarArea(curentdata);
-					//new Chart(accountsctx).Bar(accountsData,accountsOptions);
-					//Mobile set
-					new Chart(document.getElementById("polar-chart-phone").getContext("2d")).PolarArea(curentdata);
-					new Chart(document.getElementById("ranking-chart-phone").getContext("2d")).Bar(rankingdata1);
-					new Chart(document.getElementById("progress-chart-phone").getContext("2d")).Doughnut(studentdata1);
 
 				}
 
@@ -431,8 +426,23 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 							}
 						}
 					});
+					service.getUserProfile({
+						success : function(UserProfile) {
+							//OverView Panel Load
+							jQuery('.user-first-name').text(UserProfile.firstName);
+							jQuery('.user-last-name').text(UserProfile.lastName);
+							jQuery('.user-id').text(UserProfile.id);
+							jQuery('.user-name').text(UserProfile.username);
+							jQuery('.user-password').text('*******');
+							jQuery('.user-email').text(UserProfile.email);
+							jQuery('.user-phone').text(UserProfile.phoneNumber);
+							jQuery('.user-domain').text(UserProfile.domains[0].domainName);
+							jQuery('.user-image').text('None Available');
+						}
+					});
 
 				}
+
 
 				function displayAlert() {
 					//This should never show up.
@@ -457,7 +467,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 						showBG();
 						jQuery(".scroll-pane").jScrollPane();
 
-						createPanels();
+						populateData();
+						populateGraphs();
 
 						//HTML Event - Actions
 						jQuery('#signout-button').on('click', function(e) {
@@ -480,9 +491,16 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 						jQuery('#student-manage').on('click', function() {
 							router.go('/admin/subuseradd', 'admin');
 						});
-						// jQuery('#overview-manage').on('click', function() {
-						// router.go('/admin/overview', 'admin');
-						// });
+						jQuery('.adminboard').on('click', function() {
+							// if (jQuery(this).hasClass('active')){
+							// jQuery(this).removeClass('active');
+							// }
+							// else
+							// {
+							// jQuery('.adminboard').removeClass('active');
+							// jQuery(this).addClass('active');
+							// }
+						});
 						jQuery('#admin-done').on('click', function() {
 							var currentlocation = window.location.href;
 							router.go('/home', '/admin');

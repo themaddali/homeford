@@ -26,7 +26,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						success : function(UnivData) {
 							console.log('UnivData');
 							console.log(UnivData);
-							
+
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var template = jQuery('#student-template').remove().attr('id', '');
 							var COUNT = UnivData[0].students.length;
@@ -43,11 +43,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 									jQuery('.student-name', newboard).prepend(UNLOCKPANEL);
 								}
 								for (var j = 0; j < UnivData[0].students[i].courses.length; j++) {
-									if ( j < 2 ) {
+									if (j < 2) {
 										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + "</li>");
 									}
-									if (j ==2 && UnivData[0].students[i].courses.length > 3) {
-										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + " ..... and "+(UnivData[0].students[i].courses.length-2) +" more</li>");
+									if (j == 2 && UnivData[0].students[i].courses.length > 3) {
+										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + " ..... and " + (UnivData[0].students[i].courses.length - 2) + " more</li>");
 									}
 								}
 
@@ -55,13 +55,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 								if (i === COUNT - 1) {
 									//jQuery('#carousel').append('<div class="empty"></div>');
 									//createPanels();
-									if (COUNT > 14)
-									{
+									if (COUNT > 14) {
 										jQuery('#searchbar').addClass('active');
-									}
-									else
-									{
+									} else {
 										jQuery('#searchbar').removeClass('active');
+									}
+									if (COUNT % 2 != 0) {
+										var newboard = template.clone();
+										jQuery('#card-canvas').append(newboard);
 									}
 									jQuery("#preloader").hide();
 									ActivatePanelEvents();
@@ -73,6 +74,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 									});
 									router.go('/class', 'studentlist');
 								}
+
 							}
 						}
 					});
@@ -210,28 +212,28 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
-							// successful selection of user for context, and create cookie
-							var selectedUser = $(this).find('.student-name').text();
-							var selectedUserSecurity = $(this).attr('security');
-							if (selectedUserSecurity !== "true") {
-								jQuery.cookie('subuser', selectedUser, {
-									path : '/',
-									expires : 100
-								});
-								router.go('/class', '/studentlist');
-							} else {
-								jQuery.cookie('subuser', selectedUser, {
-									path : '/',
-									expires : 100
-								});
-								router.go('/class', '/studentlist');
-							}
+						// successful selection of user for context, and create cookie
+						var selectedUser = $(this).find('.student-name').text();
+						var selectedUserSecurity = $(this).attr('security');
+						if (selectedUserSecurity !== "true") {
+							jQuery.cookie('subuser', selectedUser, {
+								path : '/',
+								expires : 100
+							});
+							router.go('/class', '/studentlist');
+						} else {
+							jQuery.cookie('subuser', selectedUser, {
+								path : '/',
+								expires : 100
+							});
+							router.go('/class', '/studentlist');
+						}
 					});
 				};
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#user-info').append(jQuery.cookie('user').split('@')[0]);
+						jQuery('#user-name-value').text(jQuery.cookie('user').split('@')[0]);
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
@@ -262,7 +264,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						populateStudentList();
 
 						//HTML Event - Actions
-						jQuery('#user-info').on('click', function(e) {
+						jQuery('.user-info').on('click', function(e) {
 							router.go('/admin', '/studentlist');
 						});
 
@@ -275,4 +277,4 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 		}());
 
 	return new StudentListView();
-});
+}); 
