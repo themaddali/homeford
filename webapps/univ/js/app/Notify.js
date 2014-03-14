@@ -27,9 +27,11 @@ define(['../app/Router', 'cookie', '../app/service/DataService'], function(route
 							var notification = '<div class="'+CLASS+'">'+ERROR+'<span class="notify-message">'+message+'</span></div>';
 						}
 						jQuery('.modal-container').append(notification);
+						jQuery('.modal_close').fadeOut();
 						jQuery('.edit-notify').slideDown(1000);
 						setTimeout(function(){
 							jQuery('.edit-notify').slideUp(1000);
+							jQuery('.modal_close').fadeIn();
 							if (toroute){
 								router.go('/'+toroute,"/home");
 							}

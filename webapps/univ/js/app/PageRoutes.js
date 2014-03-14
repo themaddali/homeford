@@ -77,18 +77,38 @@ function (router, cookie, urlFragment ) { "use strict";
                     }
                 });
                 
-                router.map('admin', '^/admin'+urlFragment.pagePatternTerminal, {
+                router.map('profileedit', '^/profileedit(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
-                        require(['text!Pages/admin/index.html',
-                        '../app/AdminView',
-                        '../app/AdminRoutes'],
-                        function (page, view, routes) {
-                        	 routes.register();
-                             result.load(page, view, routes);
+                        require(['text!Pages/profileedit/index.html','../app/ProfileEditView'],
+                        function (page, view) {
+                             result.load(page, view);
                         });
                     }
                 });
+                
+                router.map('admin', '^/admin(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/admin/index.html','../app/AdminView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                
+                // router.map('admin', '^/admin'+urlFragment.pagePatternTerminal, {
+                	// container: CONTAINER,
+                    // enter: function (location, result) {
+                        // require(['text!Pages/admin/index.html',
+                        // '../app/AdminView',
+                        // '../app/AdminRoutes'],
+                        // function (page, view, routes) {
+                        	 // routes.register();
+                             // result.load(page, view, routes);
+                        // });
+                    // }
+                // });
                 
                 router.map('prehome', '^/prehome(/.*|$)', {
                 	container: CONTAINER,

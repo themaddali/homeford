@@ -69,8 +69,11 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							if ($("#profile-edit-form").valid()) {
 								notify.showNotification('OK', 'Information Updated!!!');
 							}
+							setTimeout(function(){
+								router.returnToPrevious();
+							}, 6000); //Need to update to handler
 						});
-						
+
 						jQuery('#profile-password').change(function() {
 							jQuery('#password-reenter-item').show();
 						});
