@@ -3,7 +3,7 @@ define(['jquery'], function() {"use strict";
 
 	var DataService = ( function() {
 
-			//Global Variables
+			var ACTIVEDOMAIN;
 
 			/**
 			 * @constructor
@@ -37,27 +37,37 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
-				this.invite = function() {
-					console.log('here');
+				this.sendInvite = function(email, message,domain,handlers) {
 					$.ajax({
 						url : '/homeford/api/invitee',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
 						data : JSON.stringify({
-							'email' : 'venkat@yahoo.com',
-							'text' : 'Login... Guys its rocking',
-							'domainName': 'Invenkt',
-							'roles' : [{"roleName":"ROLE_TIER2"},{"roleName":"ROLE_TIER3"}]
+							'email' : email,
+							'text' : message,
+							'domainName': domain,
+							'roles' : [{"roleName":"ROLE_TIER2"}] //Default Admin
 						}),
 						success : function(data) {
-							alert(data);
+							handlers.success(data);
+						}
+					});
+				}
+				
+				this.getInviteStatus = function(handlers) {
+					$.ajax({
+						url : '/homeford/api/invitee',
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
 						}
 					});
 				}
 
 				this.setUserProfile = function(id, firstname, lastname, email, phone, handlers) {
-					console.log('here');
 					$.ajax({
 						url : '/homeford/api/userprofile/' + id,
 						type : 'POST',

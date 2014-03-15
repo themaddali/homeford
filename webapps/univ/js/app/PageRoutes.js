@@ -97,6 +97,16 @@ function (router, cookie, urlFragment ) { "use strict";
                     }
                 });
                 
+                router.map('invite', '^/invite(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/invite/index.html','../app/InviteView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                
                 // router.map('admin', '^/admin'+urlFragment.pagePatternTerminal, {
                 	// container: CONTAINER,
                     // enter: function (location, result) {

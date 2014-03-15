@@ -9,8 +9,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			var PARMS = {
 				"Bg" : "img\/classbg.png",
 			};
-			var MALEICON = '<i class="icon-male  icon-1x "></i>'
-			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
+			var MALEICON = '<i class="icon-male  icon-1x "></i>';
+			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
+			var EMAILICON = '<i class="icon-envelope  icon-1x "></i>';
 
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
@@ -367,17 +368,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 						value : 64,
 						color : "#21323D"
 					}];
-					var studentctx = document.getElementById("progress-chart").getContext("2d");
-					var studentctx1 = document.getElementById("progress-chart-1").getContext("2d");
-					var rankingctx = document.getElementById("ranking-chart").getContext("2d");
-					//var accountsctx = document.getElementById("accounts-chart").getContext("2d");
-					var rankingctx1 = document.getElementById("ranking-chart-1").getContext("2d");
-					//var polarctx = document.getElementById("polar-chart").getContext("2d");
-					new Chart(studentctx).Doughnut(studentdata, studentoptions);
-					new Chart(studentctx1).Doughnut(studentdata1);
-					new Chart(rankingctx).Bar(rankingdata);
-					new Chart(rankingctx1).Bar(rankingdata1);
-
 				}
 
 				function checkForActiveCookie() {
@@ -455,7 +445,17 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 									}
 								}
 							}
-							// jQuery('.user-image').text('None Available');
+						}
+					});
+					service.getInviteStatus({
+						success : function(InviteList) {
+							var adminmintemplate = jQuery('#admin-list-min-template').remove().attr('id', '');
+							var ADMINCOUNT = InviteList.length;
+							for (var i = 0; i < ADMINCOUNT; i++) {
+								var newadminelement = adminmintemplate.clone();
+								jQuery('.admin-list-min', newadminelement).html(EMAILICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].domainName);
+								jQuery('#admin-list-min').append(newadminelement);
+							}
 						}
 					});
 
@@ -465,6 +465,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
 				}
+				
+				this.reloadData = function() {
+					populateData();
+				}
 
 
 				this.pause = function() {
@@ -473,6 +477,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 
 				this.resume = function() {
 					showBG();
+					populateData();
 				};
 
 				this.init = function(args) {
@@ -512,11 +517,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 
 						});
 						jQuery('#admin-done').on('click', function() {
-							var currentlocation = window.location.href;
 							router.go('/home', '/admin');
-						});
-						jQuery('#account-manage').on('click', function() {
-							service.invite();
 						});
 
 					} // Cookie Guider

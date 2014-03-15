@@ -107,7 +107,7 @@
 				</form>
 			</div>
 			<div class="adminboard">
-				<h3 style="padding-bottom: 0px">Profile</h3>
+				<h3 style="padding-bottom: 0px">User Profile</h3>
 				<p class="designation">
 					Overview
 				</p>
@@ -163,17 +163,17 @@
 
 								</div>
 							</li>
-							<li id="profile-domainview-template" class="form-item">
+							<li id="profile-domainview-template" class="form-item" style="display:none">
 								<label></label>
-								<div class="form-content user-domain">
+								<div class="form-content" id="user-domain">
 
 								</div>
 							</li>
 							<!-- <li class="form-item">
-								<label>Image</label>
-								<div class="form-content user-image">
+							<label>Image</label>
+							<div class="form-content user-image">
 
-								</div>
+							</div>
 							</li> -->
 						</ol>
 					</fieldset>
@@ -182,18 +182,18 @@
 			<div class="adminboard">
 				<div>
 					<h3 style="padding-bottom: 0px">Strength</h3>
-				<p class="designation">
-					Students
-				</p>
-				<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
-				<div class="half" id="student-donut-1"></div>
-				<p class="designation">
-					Faculty
-				</p>
-				<div class="half" id="student-donut-2"></div>
-				<br />
+					<p class="designation">
+						Students
+					</p>
+					<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					<div class="half" id="student-donut-1"></div>
+					<p class="designation">
+						Faculty
+					</p>
+					<div class="half" id="student-donut-2"></div>
+					<br />
 				</div>
-				
+
 			</div>
 			<div class="adminboard">
 				<h3 style="padding-bottom: 0px">Manage</h3>
@@ -207,7 +207,22 @@
 			<div class="adminboard">
 				<h3 style="padding-bottom: 0px">Manage</h3>
 				<p class="designation">
-					Students
+					Admins
+				</p>
+				<a id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
+				<br />
+				<div id="admin-min-list">
+					<ul id="admin-list-min">
+						<li id="admin-list-min-template">
+							<a class="admin-list-min"><strong>Name</strong>ID</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Manage</h3>
+				<p class="designation">
+					Members
 				</p>
 				<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
 				<br />
@@ -219,37 +234,10 @@
 					</ul>
 				</div>
 			</div>
-			<div class="adminboard">
-				<h3 style="padding-bottom: 0px">Student</h3>
-				<p class="designation">
-					Ciriculam
-				</p>
-				<canvas id="progress-chart"></canvas>
-				<p class="designation">
-					Progress
-				</p>
-				<canvas id="progress-chart-1"></canvas>
-				<br />
-				<br />
-			</div>
-			<div class="adminboard">
-				<h3 style="padding-bottom: 0px">Relative Info</h3>
-				<p class="designation">
-					Average Scores
-				</p>
-				<canvas id="ranking-chart"></canvas>
-				<p class="designation">
-					Averages Timespent
-				</p>
-				<canvas id="ranking-chart-1"></canvas>
-
-				<br />
-				<br />
-			</div>
 		</div>
 
 		<!-- <div id="preloader"></div> -->
-		
+
 		<footer>
 			<div id="contact-info">
 				123.456.7890 &nbsp;&nbsp; <a id="contact-email" target="_blank">info@homeford.com</a>

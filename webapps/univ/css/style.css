@@ -248,9 +248,7 @@ textarea {
 }
 
 input:invalid, textarea:invalid {
-	background-color: #FC7C7C;
-	color: white;
-	border: 3px red solid;
+	border-bottom: 3px solid red;
 }
 
 table {
@@ -1192,7 +1190,7 @@ body.error404 {
 }
 
 /*Student-min-list*/
-.adminboard div #student-min-list {
+.adminboard div #student-min-list,.adminboard div #admin-min-list {
 	text-transform: uppercase;
 	padding-top: 0;
 	font-size: 0.9em;
@@ -1226,17 +1224,17 @@ body.error404 {
 	padding-right: 5px;
 }
 
-.adminboard div#student-min-list {
+.adminboard div#student-min-list,.adminboard div#admin-min-list {
 	width: 320px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul {
+.adminboard div#student-min-list ul,.adminboard div#admin-min-list ul {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul li a {
+.adminboard div#student-min-list ul li a,.adminboard div#admin-min-list ul li a  {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 1em;
 	display: block;
@@ -1251,19 +1249,23 @@ body.error404 {
 	cursor: pointer;
 }
 
-.adminboard div#student-min-list ul li i {
+.adminboard div#student-min-list ul li i,.adminboard div#admin-min-list ul li i {
 	padding-right: 10px;
 	padding-left: 5px;
 	color: #888;
 }
 
-.adminboard div#student-min-list ul li a:hover {
+.adminboard div#student-min-list ul li a:hover,.adminboard div#admin-min-list ul li a:hover {
 	color: #fbb913;
 	font-size: 1em;
 	background-repeat: repeat-x;
 }
-.adminboard div#student-min-list ul li a strong {
+.adminboard div#student-min-list ul li a strong,.adminboard div#admin-min-list ul li a strong {
 	margin-right: 10px;
+}
+
+.adminboard > p.sub-heading {
+	font-size: 0.9em;
 }
 
 /*Popup's from Admin Page - Models*/

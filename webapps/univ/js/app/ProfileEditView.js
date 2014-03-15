@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify'], function(modernizr, cookie, service, validate, router, notify) {"use strict";
+define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify','..app/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
 
 	var ProfileEditView = ( function() {
 
@@ -8,8 +8,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 			 * Constructor
 			 *
 			 */
-			
-			
+
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
@@ -28,19 +27,18 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
 							if (UserProfile.domains.length === 1) {
-								jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' +ROLEMAP[UserProfile.domains[0].roleName]);
+								jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if(i===0){
-										jQuery('#profile-domains').val(UserProfile.domains[0].domainName+ ' : ' +ROLEMAP[UserProfile.domains[0].roleName]);
-									}
-									else{
-										var template = jQuery('#profile-domain-template').attr('id','');
+									if (i === 0) {
+										jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+									} else {
+										var template = jQuery('#profile-domain-template').attr('id', '');
 										template.show();
-										jQuery('#profile-domain-list', template).val(UserProfile.domains[i].domainName+ ' : ' +ROLEMAP[UserProfile.domains[0].roleName]);
+										jQuery('#profile-domain-list', template).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
 										jQuery('#profile-form').append(template);
 									}
-									
+
 								}
 							}
 
@@ -99,11 +97,10 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 										}
 									}
 								});
-
+								setTimeout(function() {
+									router.returnToPrevious();
+								}, 6000);
 							}
-							setTimeout(function() {
-								router.returnToPrevious();
-							}, 6000);
 							//Need to update to handler
 						});
 
