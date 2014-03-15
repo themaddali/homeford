@@ -35,7 +35,7 @@
 				<div class="modal-contents">
 					<form id="profile-edit-form" class="edit-form">
 						<fieldset>
-							<ol>
+							<ol id="profile-form">
 								<li class="form-item">
 									<label>First Name</label>
 									<input placeholder="First Name"  id="profile-first-name" name="profilefirstname" type="text" autofocus />
@@ -46,7 +46,7 @@
 								</li>
 								<li class="form-item">
 									<label>ID Number</label>
-									<input placeholder="Unique ID (readonly)" id="profile-id" name="profileid" type="text" />
+									<input placeholder="Unique ID (readonly)" readonly id="profile-id" name="profileid" type="text" />
 								</li>
 								<li class="form-item">
 									<label>Email</label>
@@ -65,8 +65,12 @@
 									<input placeholder="*******" id="profile-password-repeat" name="profilepasswordrepeat" type="text" />
 								</li>
 								<li class="form-item">
-									<label>Doamins</label>
-									<input placeholder="Active Domains" id="profile-domains" name="profiledomains" type="text" />
+									<label>Domains</label>
+									<input placeholder="Active Domains" readonly id="profile-domains" name="profiledomains" type="text" />
+								</li>
+								<li class="form-item" id="profile-domain-template" style="display: none">
+									<label></label>
+									<input placeholder="Active Domains" readonly id="profile-domain-list" name="profiledomains" type="text" />
 								</li>
 								</ol>
 						</fieldset>

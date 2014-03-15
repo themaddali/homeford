@@ -40,7 +40,6 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 					}
 					service.validateEntity(entity,{
 						success : function(response) {
-							console.log('Sub Domain' + response);
 							if (response === true) {
 								jQuery.cookie('entity', entity, {
 									expires : 100,

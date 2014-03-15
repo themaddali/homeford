@@ -24,37 +24,84 @@ define(['jquery'], function() {"use strict";
 						}
 					});
 				}
-				
+
 				this.getUserProfile = function(handlers) {
 					$.ajax({
 						url : '/homeford/api/userprofile',
 						type : 'GET',
 						async : 'async',
-						contentType: "application/json", 
+						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data);
 						}
 					});
 				}
 
-				this.registerNewUser = function(username,password,domain,handlers) {
+				this.invite = function() {
+					console.log('here');
 					$.ajax({
-						url : '/homeford/api/signup',
+						url : '/homeford/api/invitee',
 						type : 'POST',
 						async : 'async',
-						contentType: "application/json", 
-						data: JSON.stringify({'password':password,'email':username,"domain":{"domainName":domain}}),
+						contentType : "application/json",
+						data : JSON.stringify({
+							'email' : 'venkat@yahoo.com',
+							'text' : 'Login... Guys its rocking',
+							'domainName': 'Invenkt',
+							'roles' : [{"roleName":"ROLE_TIER2"},{"roleName":"ROLE_TIER3"}]
+						}),
+						success : function(data) {
+							alert(data);
+						}
+					});
+				}
+
+				this.setUserProfile = function(id, firstname, lastname, email, phone, handlers) {
+					console.log('here');
+					$.ajax({
+						url : '/homeford/api/userprofile/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'id' : id,
+							'firstName' : firstname,
+							'lastname' : lastname,
+							'phoneNumber' : phone,
+							'email' : email
+						}),
 						success : function(data) {
 							handlers.success(data);
 						}
 					});
 				}
-				this.Login = function(username,password,handlers) {
+
+				this.registerNewUser = function(username, password, domain, handlers) {
+					$.ajax({
+						url : '/homeford/api/signup',
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'password' : password,
+							'email' : username,
+							"domain" : {
+								"domainName" : domain,
+								"isPublic" : true,
+								"autoJoin" : true
+							}
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+				this.Login = function(username, password, handlers) {
 					$.ajax({
 						url : '/homeford/j_spring_security_check',
 						type : 'POST',
 						async : 'async',
-						data: 'j_username='+username+'&j_password='+password,
+						data : 'j_username=' + username + '&j_password=' + password,
 						success : function(data) {
 							handlers.success(data);
 						},
@@ -94,21 +141,25 @@ define(['jquery'], function() {"use strict";
 				}
 
 				this.validateEntity = function(entity, handlers) {
-					//DB call to confirm if this entity or univ exists.
-					if (entity.toUpperCase() === 'KUBO' || entity.toUpperCase() === 'PIANO') {
-						handlers.success(true);
-					} else {
-						handlers.success(false);
-					}
+					$.ajax({
+						url : '/homeford/api/getdomain?domainname=' + entity,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
 				}
 
 				this.entityList = function(handlers) {
-					var thisURL = "data/univslist.json";
-					$.getJSON(thisURL, function(json) {
-						if (json) {
-							handlers.success(json);
-						} else {
-							handlers.success('Error');
+					$.ajax({
+						url : '/homeford/api/getpublicdomains',
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
 						}
 					});
 				}

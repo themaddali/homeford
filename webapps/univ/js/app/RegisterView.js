@@ -7,7 +7,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			/**
 			 * Constructor
 			 */
-			
+
 			var ENTITY;
 
 			function EntryView() {
@@ -16,18 +16,27 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					if (checkForActiveCookie() === false) {
 						service.entityList({
 							success : function(result) {
-								console.log('Entity List' + result);
 								if (result !== 'error') {
-									$("#new-user-domain").autocomplete({
-										source : function(request, response) {
-											var results = $.ui.autocomplete.filter(result, request.term);
-											response(results.slice(0, 5));
+									var justList =[];
+									for (var i = 0; i < result.length; i++) {
+										justList.push(result[i].domainName);
+										if (i === result.length-1){
+											addSuggestions(justList);
 										}
-									});
+									}
 								}
 							}
 						});
 					}
+				}
+
+				function addSuggestions(justList) {
+					$("#new-user-domain").autocomplete({
+						source : function(request, response) {
+							var results = $.ui.autocomplete.filter(justList, request.term);
+							response(results.slice(0, 5));
+						}
+					});
 				}
 
 				function RegisterUser(username, password, domain) {
@@ -42,7 +51,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						}
 					});
 				}
-				
+
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
 						router.go('/studentlist', '/register');

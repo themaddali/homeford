@@ -114,7 +114,7 @@
 				<a href="#/profileedit" id="profile-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
 				<form class="show-form">
 					<fieldset>
-						<ol>
+						<ol id="profileview-form">
 							<li class="form-item">
 								<label>First Name</label>
 								<div class="form-content user-first-name">
@@ -159,16 +159,22 @@
 							</li>
 							<li class="form-item">
 								<label>Active Domains</label>
+								<div class="form-content" id="user-domain">
+
+								</div>
+							</li>
+							<li id="profile-domainview-template" class="form-item">
+								<label></label>
 								<div class="form-content user-domain">
 
 								</div>
 							</li>
-							<li class="form-item">
+							<!-- <li class="form-item">
 								<label>Image</label>
 								<div class="form-content user-image">
 
 								</div>
-							</li>
+							</li> -->
 						</ol>
 					</fieldset>
 				</form>

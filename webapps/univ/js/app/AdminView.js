@@ -12,12 +12,17 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			var MALEICON = '<i class="icon-male  icon-1x "></i>'
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>'
 
+			var ROLEMAP = {
+				'ROLE_TIER1' : 'Owner',
+				'ROLE_TIER2' : 'Admin',
+				'ROLE_TIER3' : 'Member'
+			}
+
 			function AdminView() {
 
 				function showBG() {
 					jQuery.backstretch(PARMS.Bg);
 				}
-
 
 				function createPanels() {
 					var t = {
@@ -436,13 +441,25 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 							jQuery('.user-password').text('*******');
 							jQuery('.user-email').text(UserProfile.email);
 							jQuery('.user-phone').text(UserProfile.phoneNumber);
-							jQuery('.user-domain').text(UserProfile.domains[0].domainName);
-							jQuery('.user-image').text('None Available');
+							if (UserProfile.domains.length === 1) {
+								jQuery('#user-domain').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+							} else {
+								for (var i = 0; i < UserProfile.domains.length; i++) {
+									if (i === 0) {
+										jQuery('#user-domain').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+									} else {
+										var template = jQuery('#profile-domainview-template').attr('id', '');
+										template.show();
+										jQuery('#user-domain', template).text(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+										jQuery('#profileview-form').append(template);
+									}
+								}
+							}
+							// jQuery('.user-image').text('None Available');
 						}
 					});
 
 				}
-
 
 				function displayAlert() {
 					//This should never show up.
@@ -492,18 +509,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 							router.go('/admin/subuseradd', 'admin');
 						});
 						jQuery('.adminboard').on('click', function() {
-							// if (jQuery(this).hasClass('active')){
-							// jQuery(this).removeClass('active');
-							// }
-							// else
-							// {
-							// jQuery('.adminboard').removeClass('active');
-							// jQuery(this).addClass('active');
-							// }
+
 						});
 						jQuery('#admin-done').on('click', function() {
 							var currentlocation = window.location.href;
 							router.go('/home', '/admin');
+						});
+						jQuery('#account-manage').on('click', function() {
+							service.invite();
 						});
 
 					} // Cookie Guider

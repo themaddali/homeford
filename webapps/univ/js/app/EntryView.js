@@ -16,16 +16,26 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							success : function(result) {
 								console.log('Entity List' + result);
 								if (result !== 'error') {
-									$("#user-domain").autocomplete({
-										source : function(request, response) {
-											var results = $.ui.autocomplete.filter(result, request.term);
-											response(results.slice(0, 5));
+									var justList =[];
+									for (var i = 0; i < result.length; i++) {
+										justList.push(result[i].domainName);
+										if (i === result.length-1){
+											addSuggestions(justList);
 										}
-									});
+									}
 								}
 							}
 						});
 					}
+				}
+				
+				function addSuggestions(justList) {
+					$("#user-domain").autocomplete({
+						source : function(request, response) {
+							var results = $.ui.autocomplete.filter(justList, request.term);
+							response(results.slice(0, 5));
+						}
+					});
 				}
 
 				function Authenticate(username, password, domain) {
@@ -114,7 +124,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 								required : true,
 							},
 							userdomain : {
-								required : true,
+								required : false,
 							},
 						}
 					});
