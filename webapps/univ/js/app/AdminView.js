@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView'], function(modernizr, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -12,6 +12,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			var MALEICON = '<i class="icon-male  icon-1x "></i>';
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
 			var EMAILICON = '<i class="icon-envelope-alt  icon-1x "></i>';
+			var PENDINGICON = '<i class="icon-envelope-alt  icon-1x "></i>';
 
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
@@ -387,7 +388,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 				}
 
 				function populateData() {
-					jQuery('#admin-list-min').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
 							//OverView Panel Load
@@ -413,6 +413,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 									jQuery('.students-list-min', newelement).html(MALEICON + '<strong>' + UnivData[0].students[i].name + '</strong>' + UnivData[0].students[i].id);
 								}
 								jQuery('#students-list-min').append(newelement);
+								jQuery("#students-list-min").sortable();
 								jQuery('.students-list-min').on('click', function() {
 									var userClicked = jQuery(this).find('strong').html();
 									subusereditview.activeUser(userClicked);
@@ -450,34 +451,49 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 					});
 					service.getInviteStatus({
 						success : function(InviteList) {
+							jQuery('#admin-list-min').empty();
 							var adminmintemplate = jQuery('#admin-list-min-template').remove().attr('id', '');
+							//Forbackup
+							var backupAdmintemplate = adminmintemplate.clone();
+							backupAdmintemplate.attr('id', 'admin-list-min-template');
+							jQuery('#manage-admin').append(backupAdmintemplate);
 							adminmintemplate.show();
 							var ADMINCOUNT = InviteList.length;
 							for (var i = 0; i < ADMINCOUNT; i++) {
 								var newadminelement = adminmintemplate.clone();
-								jQuery('.admin-list-min', newadminelement).html(EMAILICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].domainName);
+								jQuery('.admin-list-min', newadminelement).html(EMAILICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].status);
 								jQuery('#admin-list-min').append(newadminelement);
-								if (i === ADMINCOUNT -1)
-								{
-									adminmintemplate.hide();
-									adminmintemplate.attr('id','admin-list-min-template');
-									jQuery('#manage-admin').append(adminmintemplate);
+								$("#admin-list-min").sortable();
+								if (i === ADMINCOUNT - 1) {
+									sortListElements("#admin-list-min");
 								}
 							}
 						}
 					});
+				}
 
+				function sortListElements(LIST) {
+					var $list = jQuery(LIST);
+					var $listLi = $('li', $list);
+					$listLi.sort(function(a, b) {
+						var keyA = $(a).text();
+						var keyB = $(b).text();
+						return (keyA < keyB) ? 1 : 0;
+					});
+					$.each($listLi, function(index, row) {
+						$list.append(row);
+					});
 				}
 
 				function displayAlert() {
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
 				}
-				
+
+
 				this.reloadData = function() {
 					populateData();
 				}
-
 
 				this.pause = function() {
 
@@ -485,7 +501,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 
 				this.resume = function() {
 					showBG();
-					populateData();
+					//populateData();
 				};
 
 				this.init = function(args) {
