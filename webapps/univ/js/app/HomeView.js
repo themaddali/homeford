@@ -42,13 +42,6 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 					});
 				}
 
-				// setTimeout(function() {
-				// jQuery('#slogan-input').css('background-color', 'white');
-				// jQuery('#slogan-input').css('vertical-align', 'middle');
-				// jQuery('.tt-dropdown-menu').css('top', 'inherit');
-				// jQuery('#slogan-input').focus();
-				// }, 500);
-
 				function activateSuggestionSearch() {
 
 					var countries = new Bloodhound({

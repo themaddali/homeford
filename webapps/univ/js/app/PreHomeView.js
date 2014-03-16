@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], function(router, cookie, plugins, service) {"use strict";
+define(['../app/Router', 'cookie','plugins', '../app/service/DataService','../app/RegisterView'], function(router, cookie, plugins, service, register) {"use strict";
 
 	var PreHomeView = ( function() {
 
@@ -79,6 +79,7 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService'], func
 					validateEntity();
 					
 					jQuery('#register-link').on('click',function() {
+						register.entity(jQuery('#entity-response').text());
 						router.go('/register','/entry');
 					});
 					

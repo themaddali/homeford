@@ -1236,7 +1236,7 @@ body.error404 {
 }
 .adminboard div#student-min-list ul li a,.adminboard div#admin-min-list ul li a  {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	font-size: 1em;
+	font-size: 0.9em;
 	display: block;
 	text-decoration: none;
 	color: #000000;
@@ -1257,7 +1257,7 @@ body.error404 {
 
 .adminboard div#student-min-list ul li a:hover,.adminboard div#admin-min-list ul li a:hover {
 	color: #fbb913;
-	font-size: 1em;
+	font-size: 0.9em;
 	background-repeat: repeat-x;
 }
 .adminboard div#student-min-list ul li a strong,.adminboard div#admin-min-list ul li a strong {
@@ -1766,7 +1766,7 @@ html.touch #subnav {
 
 /*===========Cards Template - Responive==========*/
 .content {
-	text-align: center;
+	/*text-align: center;*/
 	margin-left: 5%;
 	position: fixed;
 	top: 92px;
@@ -2492,14 +2492,14 @@ html.no-touch #gradient-right {
 	float: right;
 	text-transform: uppercase;
 	font-size: 0.95em;
-	font-weight: 500;
+	font-weight: 400;
 	padding: 12px 20px;
 	cursor: pointer;
 }
 .user-info:hover {
 	color: #fff;
 	background-color: #444;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 #search-context {

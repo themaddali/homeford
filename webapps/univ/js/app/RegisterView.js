@@ -13,30 +13,24 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			function EntryView() {
 
 				function activateSuggestionSearch() {
+					if (ENTITY)
+					{
+						jQuery('#new-user-domain').val(ENTITY);
+					}
 					if (checkForActiveCookie() === false) {
 						service.entityList({
 							success : function(result) {
 								if (result !== 'error') {
-									var justList =[];
-									for (var i = 0; i < result.length; i++) {
-										justList.push(result[i].domainName);
-										if (i === result.length-1){
-											addSuggestions(justList);
+									$("#new-user-domain").autocomplete({
+										source : function(request, response) {
+											var results = $.ui.autocomplete.filter(result, request.term);
+											response(results.slice(0, 5));
 										}
-									}
+									});
 								}
 							}
 						});
 					}
-				}
-
-				function addSuggestions(justList) {
-					$("#new-user-domain").autocomplete({
-						source : function(request, response) {
-							var results = $.ui.autocomplete.filter(justList, request.term);
-							response(results.slice(0, 5));
-						}
-					});
 				}
 
 				function RegisterUser(username, password, domain) {
@@ -75,6 +69,10 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							}
 						}
 					});
+				}
+				
+				this.entity = function(entity) {
+					ENTITY = entity;
 				}
 
 

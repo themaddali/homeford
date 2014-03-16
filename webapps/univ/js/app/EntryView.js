@@ -16,26 +16,16 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							success : function(result) {
 								console.log('Entity List' + result);
 								if (result !== 'error') {
-									var justList =[];
-									for (var i = 0; i < result.length; i++) {
-										justList.push(result[i].domainName);
-										if (i === result.length-1){
-											addSuggestions(justList);
+									$("#user-domain").autocomplete({
+										source : function(request, response) {
+											var results = $.ui.autocomplete.filter(result, request.term);
+											response(results.slice(0, 5));
 										}
-									}
+									});
 								}
 							}
 						});
 					}
-				}
-				
-				function addSuggestions(justList) {
-					$("#user-domain").autocomplete({
-						source : function(request, response) {
-							var results = $.ui.autocomplete.filter(justList, request.term);
-							response(results.slice(0, 5));
-						}
-					});
 				}
 
 				function Authenticate(username, password, domain) {
@@ -88,13 +78,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							jQuery('#login-error').hide();
 							var inputuname = jQuery('#user-name').val();
 							var inputpass = jQuery('#user-password').val();
-							if (inputuname !== 'error@e.com') {
-								// successful validation and create cookie
-								Authenticate(inputuname, inputpass);
-							} else {
-								jQuery('#login-notification').fadeIn(1000);
-								jQuery('#login-notification').html(ERROR + ' Invalid Login: ' + inputpass);
-							}
+							Authenticate(inputuname, inputpass);
 						}
 
 					});
@@ -106,6 +90,19 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					jQuery('#user-password').on('keyup', function() {
 						jQuery('#login-notification').fadeOut(1000);
 					});
+
+					jQuery('#user-password').bind('keypress', function(e) {
+						if (e.keyCode === 13) {
+							if ($("#login-form").valid()) {
+								e.preventDefault();
+								jQuery('#login-error').hide();
+								var inputuname = jQuery('#user-name').val();
+								var inputpass = jQuery('#user-password').val();
+								Authenticate(inputuname, inputpass);
+							}
+						}
+					});
+
 					jQuery('#register-now').on('click', function() {
 						router.go('/register', '/entry');
 					});

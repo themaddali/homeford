@@ -61,7 +61,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							if ($("#invite-form").valid()) {
 								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "")
 								{
-									jQuery('#invite-message').val("Hi, I am addming you as an admin to this domain. Register and use!!");
+									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
 								}
 								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), {
 									success : function(response) {

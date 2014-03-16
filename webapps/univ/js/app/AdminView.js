@@ -11,7 +11,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 			};
 			var MALEICON = '<i class="icon-male  icon-1x "></i>';
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
-			var EMAILICON = '<i class="icon-envelope  icon-1x "></i>';
+			var EMAILICON = '<i class="icon-envelope-alt  icon-1x "></i>';
 
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
@@ -387,6 +387,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 				}
 
 				function populateData() {
+					jQuery('#admin-list-min').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
 							//OverView Panel Load
@@ -450,11 +451,18 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js
 					service.getInviteStatus({
 						success : function(InviteList) {
 							var adminmintemplate = jQuery('#admin-list-min-template').remove().attr('id', '');
+							adminmintemplate.show();
 							var ADMINCOUNT = InviteList.length;
 							for (var i = 0; i < ADMINCOUNT; i++) {
 								var newadminelement = adminmintemplate.clone();
 								jQuery('.admin-list-min', newadminelement).html(EMAILICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].domainName);
 								jQuery('#admin-list-min').append(newadminelement);
+								if (i === ADMINCOUNT -1)
+								{
+									adminmintemplate.hide();
+									adminmintemplate.attr('id','admin-list-min-template');
+									jQuery('#manage-admin').append(adminmintemplate);
+								}
 							}
 						}
 					});

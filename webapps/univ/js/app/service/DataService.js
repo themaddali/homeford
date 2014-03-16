@@ -4,6 +4,7 @@ define(['jquery'], function() {"use strict";
 	var DataService = ( function() {
 
 			var ACTIVEDOMAIN;
+			var DOMAINLIST;
 
 			/**
 			 * @constructor
@@ -37,7 +38,7 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
-				this.sendInvite = function(email, message,domain,handlers) {
+				this.sendInvite = function(email, message, domain, handlers) {
 					$.ajax({
 						url : '/homeford/api/invitee',
 						type : 'POST',
@@ -46,15 +47,17 @@ define(['jquery'], function() {"use strict";
 						data : JSON.stringify({
 							'email' : email,
 							'text' : message,
-							'domainName': domain,
-							'roles' : [{"roleName":"ROLE_TIER2"}] //Default Admin
+							'domainName' : domain,
+							'roles' : [{
+								"roleName" : "ROLE_TIER2"
+							}] //Default Admin
 						}),
 						success : function(data) {
 							handlers.success(data);
 						}
 					});
 				}
-				
+
 				this.getInviteStatus = function(handlers) {
 					$.ajax({
 						url : '/homeford/api/invitee',
@@ -163,15 +166,27 @@ define(['jquery'], function() {"use strict";
 				}
 
 				this.entityList = function(handlers) {
-					$.ajax({
-						url : '/homeford/api/getpublicdomains',
-						type : 'GET',
-						async : 'async',
-						contentType : "application/json",
-						success : function(data) {
-							handlers.success(data);
-						}
-					});
+					if (DOMAINLIST) {
+						handlers.success(DOMAINLIST);
+					} else {
+						$.ajax({
+							url : '/homeford/api/getpublicdomains',
+							type : 'GET',
+							async : 'async',
+							contentType : "application/json",
+							success : function(data) {
+								var justList = [];
+								for (var i = 0; i < data.length; i++) {
+									justList.push(data[i].domainName);
+									if (i === data.length - 1) {
+										DOMAINLIST = justList;
+										handlers.success(justList);
+									}
+								}
+
+							}
+						});
+					}
 				}
 
 				this.pause = function() {
