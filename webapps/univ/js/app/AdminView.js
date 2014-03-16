@@ -12,7 +12,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 			var MALEICON = '<i class="icon-male  icon-1x "></i>';
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
 			var EMAILICON = '<i class="icon-envelope-alt  icon-1x "></i>';
-			var PENDINGICON = '<i class="icon-envelope-alt  icon-1x "></i>';
+			var ACCEPTEDICON = '<i class="icon-check icon-1x "></i>';
+			var PENDINGICON = '<i class="icon-spinner icon-1x "></i>';
 
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
@@ -461,27 +462,18 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							var ADMINCOUNT = InviteList.length;
 							for (var i = 0; i < ADMINCOUNT; i++) {
 								var newadminelement = adminmintemplate.clone();
-								jQuery('.admin-list-min', newadminelement).html(EMAILICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].status);
+								if (InviteList[i].status == 'ACCEPTED') {
+									jQuery('.admin-list-min', newadminelement).html(ACCEPTEDICON + '<strong>' + InviteList[i].email + '</strong>');
+								} else {
+									jQuery('.admin-list-min', newadminelement).html(PENDINGICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].status).addClass('pending');
+								}
 								jQuery('#admin-list-min').append(newadminelement);
 								$("#admin-list-min").sortable();
 								if (i === ADMINCOUNT - 1) {
-									sortListElements("#admin-list-min");
+
 								}
 							}
 						}
-					});
-				}
-
-				function sortListElements(LIST) {
-					var $list = jQuery(LIST);
-					var $listLi = $('li', $list);
-					$listLi.sort(function(a, b) {
-						var keyA = $(a).text();
-						var keyB = $(b).text();
-						return (keyA < keyB) ? 1 : 0;
-					});
-					$.each($listLi, function(index, row) {
-						$list.append(row);
 					});
 				}
 

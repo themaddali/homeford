@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify','../app/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -14,6 +14,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			}
+			var activeDomains = [];
 
 			function InviteView() {
 
@@ -32,9 +33,39 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 						return false;
 					}
 				}
-				
-				function clearForm(){
+
+				function populateData() {
+					service.getUserProfile({
+						success : function(UserProfile) {
+							var activeDomains = [];
+							for (var i = 0; i < UserProfile.domains.length; i++) {
+								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
+									activeDomains.push(UserProfile.domains[i].domainName);
+									if (UserProfile.domains.length ===1){
+										jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
+									}
+								if (i == UserProfile.domains.length - 1) {
+									jQuery.validator.addMethod("domainValidation", function(value, element) {
+										if (activeDomains.indexOf(value) === -1) {
+											return false;
+										} else
+											return true;
+									}, "Oops! You canot send invite to this domain!");
+									$("#invite-domain").autocomplete({
+										source : function(request, response) {
+											var results = $.ui.autocomplete.filter(activeDomains, request.term);
+											response(results.slice(0, 5));
+										}
+									});
+								}
+							}
+						}
+					});
+				}
+
+				function clearForm() {
 					jQuery('.form-item > input').val("");
+					jQuery('#member-role').prop('checked', false);
 				}
 
 
@@ -44,6 +75,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 
 				this.resume = function() {
 					clearForm();
+					populateData();
 				};
 
 				this.init = function(args) {
@@ -52,18 +84,23 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 
 					if (checkForActiveCookie() === true) {
 
+						populateData();
+
 						//HTML Event - Actions
 						jQuery('#invite-modal-close').on('click', function() {
 							router.returnToPrevious();
 						});
 
 						jQuery('#invite-send').on('click', function() {
+							var roles = [{"roleName" : "ROLE_TIER2"}];
 							if ($("#invite-form").valid()) {
-								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "")
-								{
+								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
 									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
 								}
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), {
+								if ($('#member-role').is(":checked")) {
+									roles = [{"roleName" : "ROLE_TIER2"},{"roleName" : "ROLE_TIER3"}];
+								}
+								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
 									success : function(response) {
 										if (response !== 'error') {
 											notify.showNotification('OK', response.message);
@@ -89,10 +126,14 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							rules : {
 								invitedomain : {
 									required : true,
+									domainValidation : true
 								},
 								inviteemail : {
 									required : true,
 									email : true
+								},
+								roles : {
+									required : true
 								}
 							}
 						});

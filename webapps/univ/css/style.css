@@ -1190,7 +1190,7 @@ body.error404 {
 }
 
 /*Student-min-list*/
-.adminboard div #student-min-list,.adminboard div #admin-min-list {
+.adminboard div #student-min-list, .adminboard div #admin-min-list {
 	text-transform: uppercase;
 	padding-top: 0;
 	font-size: 0.9em;
@@ -1224,17 +1224,17 @@ body.error404 {
 	padding-right: 5px;
 }
 
-.adminboard div#student-min-list,.adminboard div#admin-min-list {
+.adminboard div#student-min-list, .adminboard div#admin-min-list {
 	width: 320px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul,.adminboard div#admin-min-list ul {
+.adminboard div#student-min-list ul, .adminboard div#admin-min-list ul {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul li a,.adminboard div#admin-min-list ul li a  {
+.adminboard div#student-min-list ul li a, .adminboard div#admin-min-list ul li a {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 0.9em;
 	display: block;
@@ -1249,18 +1249,30 @@ body.error404 {
 	cursor: pointer;
 }
 
-.adminboard div#student-min-list ul li i,.adminboard div#admin-min-list ul li i {
+.adminboard div#student-min-list ul li a.pending, .adminboard div#admin-min-list ul li a.pending {
+	cursor: default;
+	color: #888;
+	font-weight: 400;
+}
+
+.adminboard div#student-min-list ul li a.pending:hover, .adminboard div#admin-min-list ul li a.pending:hover {
+	cursor: default;
+	color: #888;
+}
+
+.adminboard div#student-min-list ul li i, .adminboard div#admin-min-list ul li i {
 	padding-right: 10px;
 	padding-left: 5px;
 	color: #888;
 }
 
-.adminboard div#student-min-list ul li a:hover,.adminboard div#admin-min-list ul li a:hover {
+.adminboard div#student-min-list ul li a:hover, .adminboard div#admin-min-list ul li a:hover {
 	color: #fbb913;
 	font-size: 0.9em;
 	background-repeat: repeat-x;
 }
-.adminboard div#student-min-list ul li a strong,.adminboard div#admin-min-list ul li a strong {
+
+.adminboard div#student-min-list ul li a strong, .adminboard div#admin-min-list ul li a strong {
 	margin-right: 10px;
 }
 
@@ -1434,6 +1446,14 @@ body.error404 {
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 }
 
+.edit-form li input[type="checkbox"] {
+	position: relative;
+	*overflow: hidden;
+	height: 14px;
+	width: 14px;
+	font-size: 14px;
+}
+
 .edit-form li.form-item > * {
 	vertical-align: top;
 	display: inline-block;
@@ -1445,8 +1465,12 @@ body.error404 {
 /*.edit-form li.form-item span {
  display: inline-flex;
  }*/
+.edit-form li.form-item span {
+	color : #7f7f7f;
+}
 .edit-form li.form-item span input {
 	margin-left: 0px;
+	padding-bottom: 5px;
 }
 .edit-form li.form-item input {
 	margin-left: 0px;
@@ -1466,10 +1490,19 @@ body.error404 {
 }
 
 form li.form-item > label.error {
+	display : inline;
 	color: red;
 	font-size: 12px;
 	padding-left: 10px;
 	vertical-align: bottom;
+}
+form li.form-item  span > label.error {
+	display : inline;
+	color: red;
+	font-size: 12px;
+	padding-left: 10px;
+	vertical-align: bottom;
+	float: right;
 }
 
 /*Place Holder Rules*/
@@ -3235,8 +3268,8 @@ footer a:hover {
 		margin: 0px;
 	}
 	#user-name-value {
-		display : none;
-	}		
+		display: none;
+	}
 
 	.modal-body .modal-container.login {
 		width: 100%;

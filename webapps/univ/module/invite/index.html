@@ -6,6 +6,7 @@
 		<title>Homeford Univerity</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
 		<meta name="description" content=""/>
 
 	</head>
@@ -37,7 +38,7 @@
 							<ol>
 								<li class="form-item">
 									<label>Email</label>
-									<input placeholder="Email Address" id="invite-email" name="inviteemail" type="email" />
+									<input placeholder="Email Address" id="invite-email" name="inviteemail" type="email" autofocus />
 								</li>
 								<li class="form-item">
 									<label>Message</label>
@@ -46,6 +47,15 @@
 								<li class="form-item">
 									<label>Domain</label>
 									<input placeholder="Admin to which domain" id="invite-domain" name="invitedomain" type="text" />
+								</li>
+								<li class="form-item">
+									<label>Access Level</label>
+									<span>
+										<input id="admin-role" onclick="return false" type="checkbox" name="roles" value="Admin" checked="checked">
+										Admin - Only assign work
+										<br>
+										<input id="member-role" type="checkbox" name="roles" value="Member">
+										Member - Accept work to do </span>
 								</li>
 							</ol>
 						</fieldset>

@@ -12,6 +12,11 @@ define(['jquery'], function() {"use strict";
 			 */
 			function DataService() {
 
+				//http://www.wrichards.com/blog/2011/11/jquery-sorting-json-results/
+				function sortJsonByStatus(a, b) {
+					return a.status.toLowerCase() > b.status.toLowerCase() ? 1 : -1;
+				};
+
 				/**
 				 * @public
 				 */
@@ -38,7 +43,7 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
-				this.sendInvite = function(email, message, domain, handlers) {
+				this.sendInvite = function(email, message, domain, roles ,handlers) {
 					$.ajax({
 						url : '/homeford/api/invitee',
 						type : 'POST',
@@ -48,9 +53,7 @@ define(['jquery'], function() {"use strict";
 							'email' : email,
 							'text' : message,
 							'domainName' : domain,
-							'roles' : [{
-								"roleName" : "ROLE_TIER2"
-							}] //Default Admin
+							'roles' : roles
 						}),
 						success : function(data) {
 							handlers.success(data);
@@ -65,7 +68,7 @@ define(['jquery'], function() {"use strict";
 						async : 'async',
 						contentType : "application/json",
 						success : function(data) {
-							handlers.success(data);
+							handlers.success(data.sort(sortJsonByStatus));
 						}
 					});
 				}
@@ -77,9 +80,8 @@ define(['jquery'], function() {"use strict";
 						async : 'async',
 						contentType : "application/json",
 						data : JSON.stringify({
-							'id' : id,
 							'firstName' : firstname,
-							'lastname' : lastname,
+							'lastName' : lastname,
 							'phoneNumber' : phone,
 							'email' : email
 						}),

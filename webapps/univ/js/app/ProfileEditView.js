@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify','..app/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
 
 	var ProfileEditView = ( function() {
 
@@ -91,21 +91,26 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), {
 									success : function(response) {
 										if (response !== 'error') {
-											notify.showNotification('OK', 'Information Updated!!!');
+											notify.showNotification('OK', response.message);
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}
+										setTimeout(function() {
+											router.returnToPrevious();
+											admin.reloadData();
+										}, 6000);
 									}
 								});
-								setTimeout(function() {
-									router.returnToPrevious();
-								}, 6000);
 							}
 							//Need to update to handler
 						});
 
-						jQuery('#profile-password').change(function() {
-							jQuery('#password-reenter-item').show();
+						jQuery('#profile-password').keyup(function() {
+							jQuery('#password-reenter-item').fadeIn();
+							if (jQuery('#profile-password').val()== "")
+							{
+								jQuery('#password-reenter-item').fadeOut();
+							}
 						});
 
 						jQuery("#profile-edit-form").validate({
@@ -114,7 +119,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 									required : true,
 								},
 								profilepassword : {
-									required : true,
+									required : false,
 								},
 								profilepasswordrepeat : {
 									equalTo : "#profile-password"
