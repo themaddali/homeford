@@ -114,8 +114,8 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 								});
 								setTimeout(function() {
 									router.returnToPrevious();
-									admin.reloadData();
-								}, 6000);
+									//admin.reloadData();
+								}, 5000);
 							}
 
 							//Need to update to handler

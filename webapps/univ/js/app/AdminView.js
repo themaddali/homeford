@@ -492,7 +492,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 
 				this.resume = function() {
 					showBG();
-					//populateData();
+					populateData();
 				};
 
 				this.init = function(args) {
