@@ -430,7 +430,6 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							jQuery('.user-first-name').text(UserProfile.firstName);
 							jQuery('.user-last-name').text(UserProfile.lastName);
 							jQuery('.user-id').text(UserProfile.id);
-							jQuery('.user-name').text(UserProfile.username);
 							jQuery('.user-password').text('*******');
 							jQuery('.user-email').text(UserProfile.email);
 							jQuery('.user-phone').text(UserProfile.phoneNumber);

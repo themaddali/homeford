@@ -16,6 +16,7 @@ require({
 		swipe : 'swipe.min',
 		carousel : "jquery.carousel.min",
 		validate : "jquery.validate.min",
+		uniform : "jquery.uniform.min",
 		Pages : '../../module',
 		},
 	priority : ['modernizr', 'jquery'],

@@ -487,21 +487,6 @@ body.error404 {
 	font-size: 1em
 }
 
-/*.twitter-typeahead {
- width: 100%;
- position: relative;
- }*/
-
-/*.twitter-typeahead .tt-query,
- .twitter-typeahead .tt-hint {
- margin-bottom: 0;
- width:100%;
- height: 34px;
- position: absolute;
- top:0;
- left:0;
- }*/
-
 .twitter-typeahead .tt-hint {
 	display: none;
 	color: #a1a1a1;
@@ -542,80 +527,6 @@ body.error404 {
 
 .tt-suggestion p {
 	margin: 0;
-}
-
-/* =================== Music ======================= */
-#music {
-	position: fixed;
-	display: block;
-	bottom: 80px;
-	right: 40px;
-	width: 44px;
-	height: 44px;
-	background: transparent url("../img/volume-off.png") no-repeat center center;
-}
-#music.active {
-	background: transparent url("../img/volume-on.png") no-repeat center center;
-}
-
-/* =================== Contact Modal ======================= */
-#contact-modal {
-	display: none;
-	width: 400px;
-	height: 540px;
-	background-color: #fff;
-	-webkit-box-shadow: 2px 3px 4px #444444;
-	-moz-box-shadow: 2px 3px 4px #444444;
-	box-shadow: 2px 3px 4px #444444;
-}
-#contact-modal a {
-	display: block;
-	width: 400px;
-	height: 200px;
-	margin: 0 0 20px 0;
-}
-#contact-modal a:active {
-	position: static;
-}
-#contact-modal span {
-	display: block;
-	padding: 0;
-	background: black url("../img/map-icon.png") no-repeat center center;
-	width: 100%;
-	height: 100%;
-}
-#contact-modal img {
-	opacity: 1;
-	-webkit-transition: opacity 0.3s ease-in-out;
-	-moz-transition: opacity 0.3s ease-in-out;
-	-o-transition: opacity 0.3s ease-in-out;
-	transition: opacity 0.3s ease-in-out;
-}
-#contact-modal img:hover {
-	opacity: 0.6;
-}
-#contact-modal p {
-	border-bottom: 1px solid #ccc;
-	margin: 0 30px 3px 30px;
-	padding: 0 0 5px 0;
-}
-#contact-modal p {
-	font-size: 1.15em;
-	color: #888;
-}
-#contact-modal p a {
-	display: inline;
-}
-#contact-modal p.contact-heading, #contact-modal p.modal-social-heading {
-	color: #000;
-	border: 0;
-	font-size: 1em;
-	font-weight: 500;
-	margin: 10px 15px 5px 30px;
-	padding: 0;
-}
-#contact-modal .modal-social {
-	border-bottom: 0px;
 }
 
 .partition-line {
@@ -1191,7 +1102,7 @@ body.error404 {
 
 /*Student-min-list*/
 .adminboard div #student-min-list, .adminboard div #admin-min-list {
-	text-transform: uppercase;
+	text-transform: capitalize;
 	padding-top: 0;
 	font-size: 0.9em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -1252,7 +1163,16 @@ body.error404 {
 .adminboard div#student-min-list ul li a.pending, .adminboard div#admin-min-list ul li a.pending {
 	cursor: default;
 	color: #888;
-	font-weight: 400;
+	font-size: 10px;
+	font-weight: 300;
+	text-transform: lowercase;
+	font-style : italic;
+}
+.adminboard div#student-min-list ul li a.pending strong, .adminboard div#admin-min-list ul li a.pending strong {
+	cursor: default;
+	color: #888;
+	font-weight: 300;
+	font-size: 13px;
 }
 
 .adminboard div#student-min-list ul li a.pending:hover, .adminboard div#admin-min-list ul li a.pending:hover {
@@ -1268,13 +1188,18 @@ body.error404 {
 
 .adminboard div#student-min-list ul li a:hover, .adminboard div#admin-min-list ul li a:hover {
 	color: #fbb913;
-	font-size: 0.9em;
 	background-repeat: repeat-x;
 }
 
 .adminboard div#student-min-list ul li a strong, .adminboard div#admin-min-list ul li a strong {
 	margin-right: 10px;
 }
+/*.adminboard div#student-min-list ul li a.pending, .adminboard div#admin-min-list ul li a.pending {
+	margin-right: 10px;
+	text-transform: normal;
+	font-weight: 300;
+	font-size: 10px;
+}*/
 
 .adminboard > p.sub-heading {
 	font-size: 0.9em;
@@ -1435,6 +1360,11 @@ body.error404 {
 .edit-form li {
 	padding-bottom: 10px;
 }
+.edit-form li.filler {
+	padding-bottom: 5px;
+	margin-top: -5px;
+}
+
 .edit-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
@@ -1445,13 +1375,16 @@ body.error404 {
 	border-bottom: 1px solid;
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 }
-
-.edit-form li input[type="checkbox"] {
-	position: relative;
-	*overflow: hidden;
-	height: 14px;
-	width: 14px;
-	font-size: 14px;
+.edit-form li select {
+	-webkit-appearance: none;
+	border-radius: 0;
+	background-color: #FFFFFF;
+	background: transparent url("../img/select-down.png") no-repeat right;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border-bottom: 1px solid;
+	border-bottom-color: rgba(114, 114, 114, 0.71);
 }
 
 .edit-form li.form-item > * {
@@ -1462,11 +1395,9 @@ body.error404 {
 	width: 50%;
 }
 
-/*.edit-form li.form-item span {
- display: inline-flex;
- }*/
 .edit-form li.form-item span {
-	color : #7f7f7f;
+	color: #7f7f7f;
+	font-size: 13px;
 }
 .edit-form li.form-item span input {
 	margin-left: 0px;
@@ -1490,14 +1421,14 @@ body.error404 {
 }
 
 form li.form-item > label.error {
-	display : inline;
+	display: inline;
 	color: red;
 	font-size: 12px;
 	padding-left: 10px;
 	vertical-align: bottom;
 }
 form li.form-item  span > label.error {
-	display : inline;
+	display: inline;
 	color: red;
 	font-size: 12px;
 	padding-left: 10px;
@@ -1618,6 +1549,7 @@ form input.error {
 }
 
 /*form-view*/
+
 .adminboard form.show-form {
 	width: 100%;
 	margin-bottom: 20px;
@@ -1644,6 +1576,7 @@ form input.error {
 	font-size: 13px;
 	line-height: 17px;
 }
+
 .adminboard form.show-form li.form-item > label:first-of-type {
 	max-width: 170px;
 	width: 33%;

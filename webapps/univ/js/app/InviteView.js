@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView', 'uniform'], function(cookie, service, validate, router, notify, admin, uniform) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -35,15 +35,17 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				}
 
 				function populateData() {
+					jQuery('#invite-domain').empty();
 					service.getUserProfile({
 						success : function(UserProfile) {
 							var activeDomains = [];
 							for (var i = 0; i < UserProfile.domains.length; i++) {
 								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
 									activeDomains.push(UserProfile.domains[i].domainName);
-									if (UserProfile.domains.length ===1){
-										jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
-									}
+									jQuery('#invite-domain').append('<option>'+UserProfile.domains[i].domainName+'</option>');
+								if (UserProfile.domains.length === 1) {
+									jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
+								}
 								if (i == UserProfile.domains.length - 1) {
 									jQuery.validator.addMethod("domainValidation", function(value, element) {
 										if (activeDomains.indexOf(value) === -1) {
@@ -51,12 +53,6 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 										} else
 											return true;
 									}, "Oops! You canot send invite to this domain!");
-									$("#invite-domain").autocomplete({
-										source : function(request, response) {
-											var results = $.ui.autocomplete.filter(activeDomains, request.term);
-											response(results.slice(0, 5));
-										}
-									});
 								}
 							}
 						}
@@ -84,6 +80,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 
 					if (checkForActiveCookie() === true) {
 
+
 						populateData();
 
 						//HTML Event - Actions
@@ -92,13 +89,19 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 						});
 
 						jQuery('#invite-send').on('click', function() {
-							var roles = [{"roleName" : "ROLE_TIER2"}];
+							var roles = [{
+								"roleName" : "ROLE_TIER2"
+							}];
 							if ($("#invite-form").valid()) {
 								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
 									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
 								}
 								if ($('#member-role').is(":checked")) {
-									roles = [{"roleName" : "ROLE_TIER2"},{"roleName" : "ROLE_TIER3"}];
+									roles = [{
+										"roleName" : "ROLE_TIER2"
+									}, {
+										"roleName" : "ROLE_TIER3"
+									}];
 								}
 								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
 									success : function(response) {
