@@ -26,6 +26,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
+							var template = jQuery('#profile-domain-template').attr('id', '');
 							if (UserProfile.domains.length === 1) {
 								jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
 							} else {
@@ -33,10 +34,10 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 									if (i === 0) {
 										jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
 									} else {
-										var template = jQuery('#profile-domain-template').attr('id', '');
-										template.show();
-										jQuery('#profile-domain-list', template).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-										jQuery('#profile-form').append(template);
+										var activetemplate = template.clone();
+										activetemplate.show();
+										jQuery('#profile-domain-list', activetemplate).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
+										jQuery('#profile-form').append(activetemplate);
 									}
 
 								}

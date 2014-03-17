@@ -10,6 +10,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService'], function(route
 			var PAGE;
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
+			var INFO = '<i style="padding:0px 10px" class="icon-info icon-1x "></i>';
 			
 			function Notify() {
 				

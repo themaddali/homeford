@@ -33,12 +33,12 @@
 			</div>
 		</div>
 		<div id="card-canvas" class="content float-left">
-			<div class="adminboard">
+			<div class="adminboard T1">
 				<h3 style="padding-bottom: 0px">Organization</h3>
 				<p class="designation">
 					Overview
 				</p>
-				<a href="#/admin/overview" id="overview-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+				<a href="#/admin/overview" id="overview-manage" class="panel-control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
 				<form class="show-form">
 					<fieldset>
 						<ol>
@@ -157,12 +157,7 @@
 
 								</div>
 							</li>
-							<li id="profile-domainview-template" class="form-item" style="display:none">
-								<label></label>
-								<div class="form-content" id="user-domain">
 
-								</div>
-							</li>
 							<!-- <li class="form-item">
 							<label>Image</label>
 							<div class="form-content user-image">
@@ -174,12 +169,21 @@
 				</form>
 			</div>
 			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Strength</h3>
+				<p class="designation">
+					Total
+				</p>
+				<a id="domain-strength" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+				<div class="full" id="domain-strength-chart"></div>
+
+			</div>
+			<div class="adminboard T1">
 				<div>
 					<h3 style="padding-bottom: 0px">Strength</h3>
 					<p class="designation">
 						Students
 					</p>
-					<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					<a id="account-manage" class="panel-control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
 					<div class="half" id="student-donut-1"></div>
 					<p class="designation">
 						Faculty
@@ -189,7 +193,7 @@
 				</div>
 
 			</div>
-			<div class="adminboard">
+			<div class="adminboard T1">
 				<h3 style="padding-bottom: 0px">Manage</h3>
 				<p class="designation">
 					Accounts
@@ -229,6 +233,14 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div style="display:none" class="templates-div">
+			<li id="profile-domainview-template" class="form-item">
+				<label></label>
+				<div class="form-content user-domain">
+
+				</div>
+			</li>
 		</div>
 
 		<!-- <div id="preloader"></div> -->

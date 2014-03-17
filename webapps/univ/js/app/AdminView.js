@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView','../app/InviteView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview, invite) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -19,7 +19,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			};
-			var PENDINGLIST =[];
+			var PENDINGLIST = [];
+			var DOMAINSTRENGTHDATA = {
+				y : 0,
+				a : 0,
+				b : 0
+			};
 
 			function AdminView() {
 
@@ -27,241 +32,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 					jQuery.backstretch(PARMS.Bg);
 				}
 
-				function createPanels() {
-					var t = {
-						lines : 17,
-						length : 6,
-						width : 4,
-						radius : 12,
-						rotate : 0,
-						color : "#ccc",
-						speed : 2.2,
-						trail : 60,
-						className : "spinner",
-						zIndex : 2e9,
-						top : "auto",
-						left : "auto"
-					};
-					var n = document.getElementById("preloader");
-					var r = (new Spinner(t)).spin(n);
-					var u = jQuery(".panel").width()
-					var a = 560;
-					var f = 40;
-					jQuery("#wrapper-about").waitForImages(function() {
-						r.stop();
-						jQuery("#wrapper-about").animate({
-							opacity : 1
-						}, 600)
-					});
-					if (Modernizr.touch) {
-						buildSwipe();
-					} else {
-						buildCarousal(u, f, t, n, r);
-					}
-					//ActivatePanelEvents();
-				}
-
-				function buildCarousal(u, f, t, n, r) {
-					jQuery(".panel").each(function(t) {
-						t === 0 ? jQuery(this).css({
-							"margin-left" : f + "px"
-						}) : t === 4 ? jQuery(this).css({
-							"margin-left" : "1800px"
-						}) : t === 5 ? jQuery(this).css({
-							"margin-left" : "2240px"
-						}) : jQuery(this).css({
-							"margin-left" : f + t * (40 + u) + "px"
-						});
-						t === 5 && jQuery(this).css({
-							"margin-right" : f + "px"
-						})
-					});
-
-					var l = 0, c = function() {
-						if (l === 0) {
-							l++;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-bios").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-440px"
-							}, 400)
-						} else if (l === 1) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-880px"
-							}, 400)
-						} else if (l === 2) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-1320px"
-							}, 400)
-						} else if (l === 3) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-1760px"
-							}, 400)
-						} else if (l === 4) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-2200px"
-							}, 400)
-						} else if (l === 5) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-2640px"
-							}, 400)
-						} else if (l === 6) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-3080px"
-							}, 400)
-						} else if (l === 7) {
-							l++;
-							jQuery(".contain").animate({
-								left : "-3520px"
-							}, 400)
-						} else if (l === 8) {
-							l++;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-connect").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-3960px"
-							}, 400)
-						} else if (l === 9) {
-							l++;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-press").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-4400px"
-							}, 400)
-						}
-					}, h = function() {
-						if (l === 1) {
-							l--;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-mgh").addClass("selected");
-							jQuery(".contain").animate({
-								left : "0px"
-							}, 400)
-						} else if (l === 2) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-440px"
-							}, 400)
-						} else if (l === 3) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-880px"
-							}, 400)
-						} else if (l === 4) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-1320px"
-							}, 400)
-						} else if (l === 5) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-1760px"
-							}, 400)
-						} else if (l === 6) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-2200px"
-							}, 400)
-						} else if (l === 7) {
-							l--;
-							jQuery(".contain").animate({
-								left : "-2640px"
-							}, 400)
-						} else if (l === 8) {
-							l--;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-bios").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-3080px"
-							}, 400)
-						} else if (l === 9) {
-							l--;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-connect").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-3520px"
-							}, 400)
-						} else if (l === 10) {
-							l--;
-							jQuery("#subnav ul").children().removeClass("selected");
-							jQuery("#nav-connect").addClass("selected");
-							jQuery(".contain").animate({
-								left : "-3960px"
-							}, 400)
-						}
-					};
-					jQuery("#next").bind("click", function() {
-						c()
-					});
-					jQuery("#prev").bind("click", function() {
-						h()
-					});
-					jQuery(document).bind("keyup", "right", function() {
-						c()
-					});
-					jQuery(document).bind("keyup", "left", function() {
-						h()
-					})
-					populateData();
-					populateGraphs();
-				}
-
 				function populateGraphs() {
-					//Class Progress Tracking.
-					var studentdata = [{
-						value : 30,
-						color : "#F7464A"
-					}, {
-						value : 50,
-						color : "#E2EAE9"
-					}, {
-						value : 100,
-						color : "#D4CCC5"
-					}];
-
-					//Class Progress Tracking.
-					var studentdata1 = [{
-						value : 100,
-						color : "#F7464A"
-					}, {
-						value : 100,
-						color : "#E2EAE9"
-					}, {
-						value : 100,
-						color : "#D4CCC5"
-					}];
-
-					var studentoptions = {
-						segmentShowStroke : true,
-						segmentStrokeColor : "#fff",
-						segmentStrokeWidth : 2,
-						percentageInnerCutout : 50,
-						animation : false,
-						animationSteps : 100,
-						animationEasing : "easeOutBounce",
-						animateRotate : true,
-						animateScale : false,
-						onAnimationComplete : null
-					};
-
-					var rankingdata = {
-						labels : ["Maths", "Numbers", "Colors"],
-						datasets : [{
-							fillColor : "rgba(220,220,220,0.5)",
-							strokeColor : "rgba(220,220,220,1)",
-							data : [65, 59, 90]
-						}, {
-							fillColor : "rgba(151,187,205,0.5)",
-							strokeColor : "rgba(151,187,205,1)",
-							data : [28, 48, 40]
-						}]
-					};
 
 					Morris.Line({
 						element : 'accounts-chart',
@@ -335,41 +106,6 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							value : 19
 						}]
 					});
-
-					var rankingdata1 = {
-						labels : ["Maths", "Numbers", "Colors"],
-						datasets : [{
-							fillColor : "rgba(220,220,220,0.5)",
-							strokeColor : "rgba(220,220,220,1)",
-							data : [80, 90, 90]
-						}, {
-							fillColor : "rgba(151,187,205,0.5)",
-							strokeColor : "rgba(151,187,205,1)",
-							data : [75, 98, 90]
-						}]
-					};
-					var accountsData = {
-						labels : ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar"],
-						datasets : [{
-							fillColor : "rgba(220,220,220,0.5)",
-							strokeColor : "rgba(220,220,220,1)",
-							data : [1250, 1400, 1400, 1550, 2000, 1800],
-						}, {
-							fillColor : "rgba(151,187,205,0.5)",
-							strokeColor : "rgba(151,187,205,1)",
-							data : [1100, 1200, 1100, 1850, 1700, 1400]
-						}]
-					};
-					var curentdata = [{
-						value : 30,
-						color : "#D97041"
-					}, {
-						value : 90,
-						color : "#C7604C"
-					}, {
-						value : 64,
-						color : "#21323D"
-					}];
 				}
 
 				function checkForActiveCookie() {
@@ -388,7 +124,37 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 					}
 				}
 
-				function populateData() {
+				function getInfoByPrivilage() {
+					var OWNERLEVEL = 0;
+					var ADMINLEVEL = 0;
+					service.getUserProfile({
+						success : function(UserProfile) {
+							for (var i = 0; i < UserProfile.domains.length; i++) {
+								if (ROLEMAP[UserProfile.domains[i].roleName] !== 'Owner') {
+									ADMINLEVEL = ADMINLEVEL + 1;
+								} else {
+									OWNERLEVEL = OWNERLEVEL + 1;
+								}
+							}
+							if (OWNERLEVEL !== UserProfile.domains.length) {
+								//User is not owner. Filter stuff.
+								jQuery('.T1').hide();
+								populateUserData();
+								populateInviteData();
+								populateDomainData();
+								//Should clean memebr list out
+							} else {
+								jQuery('.T1').show();
+								populateDomainData();
+								populateUserData();
+								populateInviteData();
+								populateGraphs();
+							}
+						}
+					});
+				}
+
+				function populateDomainData() {
 					service.getUnivObject({
 						success : function(UnivData) {
 							//OverView Panel Load
@@ -420,10 +186,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 									subusereditview.activeUser(userClicked);
 									router.go('/admin/subuseredit', '/admin');
 								});
-
 							}
 						}
 					});
+				}
+
+				function populateUserData() {
 					service.getUserProfile({
 						success : function(UserProfile) {
 							//OverView Panel Load
@@ -433,22 +201,25 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							jQuery('.user-password').text('*******');
 							jQuery('.user-email').text(UserProfile.email);
 							jQuery('.user-phone').text(UserProfile.phoneNumber);
+							var template = jQuery('#profile-domainview-template').attr('id', '');
 							if (UserProfile.domains.length === 1) {
-								jQuery('#user-domain').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+								jQuery('#user-domain').html(UserProfile.domains[0].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[0].roleName] + '</span>');
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
 									if (i === 0) {
-										jQuery('#user-domain').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+										jQuery('#user-domain').html(UserProfile.domains[0].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[0].roleName] + '</span>');
 									} else {
-										var template = jQuery('#profile-domainview-template').attr('id', '');
-										template.show();
-										jQuery('#user-domain', template).text(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-										jQuery('#profileview-form').append(template);
+										var activetemplate = template.clone();
+										jQuery('.user-domain', activetemplate).html(UserProfile.domains[i].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[i].roleName] + '</span>');
+										jQuery('#profileview-form').append(activetemplate);
 									}
 								}
 							}
 						}
 					});
+				}
+
+				function populateInviteData() {
 					service.getInviteStatus({
 						success : function(InviteList) {
 							jQuery('#admin-list-min').empty();
@@ -463,17 +234,37 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 								var newadminelement = adminmintemplate.clone();
 								if (InviteList[i].status == 'ACCEPTED') {
 									jQuery('.admin-list-min', newadminelement).html(ACCEPTEDICON + '<strong>' + InviteList[i].email + '</strong>');
+									DOMAINSTRENGTHDATA.a = DOMAINSTRENGTHDATA.a+1; 
 								} else {
 									jQuery('.admin-list-min', newadminelement).html(PENDINGICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].status).addClass('pending');
+									DOMAINSTRENGTHDATA.b = DOMAINSTRENGTHDATA.b+1; 
 									PENDINGLIST.push(InviteList[i].email);
 								}
 								jQuery('#admin-list-min').append(newadminelement);
 								$("#admin-list-min").sortable();
 								if (i === ADMINCOUNT - 1) {
+									DOMAINSTRENGTHDATA.y ="2014-02";
+									var domainsData =[];
+									domainsData.push(DOMAINSTRENGTHDATA);
 									invite.pendingList(PENDINGLIST);
+									populateDomainStrengthGraphs(domainsData);
 								}
 							}
 						}
+					});
+				}
+
+				function populateDomainStrengthGraphs(domainsData) {
+					Morris.Line({
+						element : 'domain-strength-chart',
+						data : domainsData,
+						xkey : 'y',
+						xLabels : 'month',
+						lineColors : ['#009ACD', '#e34a33'],
+						lineWidth : 4,
+						pointSize : 5,
+						ykeys : ['a', 'b'],
+						labels : ['Accepted', 'Pending']
 					});
 				}
 
@@ -493,7 +284,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 
 				this.resume = function() {
 					showBG();
-					populateData();
+					getInfoByPrivilage();
 				};
 
 				this.init = function(args) {
@@ -503,10 +294,10 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						showBG();
+						jQuery('.T1').hide();
 						jQuery(".scroll-pane").jScrollPane();
-
-						populateData();
-						populateGraphs();
+						// Get Privilage
+						getInfoByPrivilage();
 
 						//HTML Event - Actions
 						jQuery('#signout-button').on('click', function(e) {
