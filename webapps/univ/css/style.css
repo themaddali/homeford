@@ -1166,7 +1166,7 @@ body.error404 {
 	font-size: 10px;
 	font-weight: 300;
 	text-transform: lowercase;
-	font-style : italic;
+	font-style: italic;
 }
 .adminboard div#student-min-list ul li a.pending strong, .adminboard div#admin-min-list ul li a.pending strong {
 	cursor: default;
@@ -1195,11 +1195,11 @@ body.error404 {
 	margin-right: 10px;
 }
 /*.adminboard div#student-min-list ul li a.pending, .adminboard div#admin-min-list ul li a.pending {
-	margin-right: 10px;
-	text-transform: normal;
-	font-weight: 300;
-	font-size: 10px;
-}*/
+ margin-right: 10px;
+ text-transform: normal;
+ font-weight: 300;
+ font-size: 10px;
+ }*/
 
 .adminboard > p.sub-heading {
 	font-size: 0.9em;
@@ -1369,6 +1369,7 @@ body.error404 {
 	margin-bottom: 0px;
 }
 .edit-form li input {
+	border-radius: 0;
 	margin-bottom: 5px;
 	font-size: 1em;
 	border: none;
@@ -3181,6 +3182,27 @@ footer a:hover {
 		width: 100%;
 		height: 200px;
 		padding: 0px;
+	}
+
+	.edit-form li.form-item > * {
+		vertical-align: top;
+		display: inline-block;
+		font-size: 13px;
+		line-height: 16px;
+		width: 90%;
+	}
+
+	.modal-body .modal-container {
+		margin: 0%;
+		width: 100%;
+		height: 100%
+	}
+
+	.modal-body .modal-container header input {
+		right: 15%;
+		height: 41px;
+		font-size: 0.8em;
+		top: 11px;
 	}
 
 	.content {
