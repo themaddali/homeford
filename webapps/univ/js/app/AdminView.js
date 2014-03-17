@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView','../app/InviteView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -14,12 +14,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 			var EMAILICON = '<i class="icon-envelope-alt  icon-1x "></i>';
 			var ACCEPTEDICON = '<i class="icon-check icon-1x "></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x "></i>';
-
 			var ROLEMAP = {
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
+			var PENDINGLIST =[];
 
 			function AdminView() {
 
@@ -465,11 +465,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 									jQuery('.admin-list-min', newadminelement).html(ACCEPTEDICON + '<strong>' + InviteList[i].email + '</strong>');
 								} else {
 									jQuery('.admin-list-min', newadminelement).html(PENDINGICON + '<strong>' + InviteList[i].email + '</strong>' + InviteList[i].status).addClass('pending');
+									PENDINGLIST.push(InviteList[i].email);
 								}
 								jQuery('#admin-list-min').append(newadminelement);
 								$("#admin-list-min").sortable();
 								if (i === ADMINCOUNT - 1) {
-
+									invite.pendingList(PENDINGLIST);
 								}
 							}
 						}

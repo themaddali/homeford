@@ -15,6 +15,8 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				'ROLE_TIER3' : 'Member'
 			}
 			var activeDomains = [];
+			var pendingList;
+			var validator;
 
 			function InviteView() {
 
@@ -42,7 +44,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 							for (var i = 0; i < UserProfile.domains.length; i++) {
 								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
 									activeDomains.push(UserProfile.domains[i].domainName);
-									jQuery('#invite-domain').append('<option>'+UserProfile.domains[i].domainName+'</option>');
+								jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
 								if (UserProfile.domains.length === 1) {
 									jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
 								}
@@ -62,8 +64,14 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				function clearForm() {
 					jQuery('.form-item > input').val("");
 					jQuery('#member-role').prop('checked', false);
+					jQuery('.edit-notify').hide();
+					jQuery('.modal_close').show();
 				}
 
+
+				this.pendingList = function(pendinglist) {
+					pendingList = pendinglist;
+				}
 
 				this.pause = function() {
 
@@ -72,6 +80,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				this.resume = function() {
 					clearForm();
 					populateData();
+					validator.resetForm();
 				};
 
 				this.init = function(args) {
@@ -79,7 +88,6 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
-
 
 						populateData();
 
@@ -125,7 +133,14 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 							jQuery('#password-reenter-item').show();
 						});
 
-						jQuery("#invite-form").validate({
+						jQuery.validator.addMethod("notRepeated", function(value, element) {
+							if (pendingList.indexOf(value) === -1) {
+								return true;
+							} else
+								return false;
+						}, "This email already has a request pending.");
+
+						validator = jQuery("#invite-form").validate({
 							rules : {
 								invitedomain : {
 									required : true,
@@ -133,7 +148,8 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 								},
 								inviteemail : {
 									required : true,
-									email : true
+									email : true,
+									notRepeated : true
 								},
 								roles : {
 									required : true
