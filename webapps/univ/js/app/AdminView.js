@@ -173,16 +173,16 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							var memberheadertemplate = jQuery('#member-header-template').attr('id', '');
 							var membercontenttemplate = jQuery('#member-content-template').attr('id', '');
 							//Backing the template
-							jQuery('.templates-div').append(memberheadertemplate.attr('id','member-header-template'));
-							jQuery('.templates-div').append(membercontenttemplate.attr('id','member-content-template'));
+							jQuery('.templates-div').append(memberheadertemplate.attr('id', 'member-header-template'));
+							jQuery('.templates-div').append(membercontenttemplate.attr('id', 'member-content-template'));
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
 								var headerelement = memberheadertemplate.clone();
 								var contentelement = membercontenttemplate.clone();
 								if (UnivData[0].students[i].gender === 'female') {
-									headerelement.html(FEMALEICON + UnivData[0].students[i].name );
+									headerelement.html(FEMALEICON + UnivData[0].students[i].name);
 								} else {
-									headerelement.html(MALEICON +UnivData[0].students[i].name );
+									headerelement.html(MALEICON + UnivData[0].students[i].name);
 								}
 								jQuery('.memberid', contentelement).html(UnivData[0].students[i].id);
 								jQuery('.membersecurity', contentelement).html(UnivData[0].students[i].security);
@@ -216,7 +216,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							jQuery('.user-email').text(UserProfile.email);
 							jQuery('.user-phone').text(UserProfile.phoneNumber);
 							var template = jQuery('#profile-domainview-template').attr('id', '');
-							jQuery('.templates-div').append(template.attr('id','profile-domainview-template'));
+							jQuery('.templates-div').append(template.attr('id', 'profile-domainview-template'));
 							if (UserProfile.domains.length === 1) {
 								jQuery('#user-domain').html(UserProfile.domains[0].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[0].roleName] + '</span>');
 							} else {
@@ -241,17 +241,17 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							var adminheadertemplate = jQuery('#admin-header-template').attr('id', '');
 							var admincontenttemplate = jQuery('#admin-content-template').attr('id', '');
 							//Backing the template
-							jQuery('.templates-div').append(adminheadertemplate.attr('id','admin-header-template'));
-							jQuery('.templates-div').append(admincontenttemplate.attr('id','admin-content-template'));
+							jQuery('.templates-div').append(adminheadertemplate.attr('id', 'admin-header-template'));
+							jQuery('.templates-div').append(admincontenttemplate.attr('id', 'admin-content-template'));
 							var ADMINCOUNT = InviteList.length;
 							for (var i = 0; i < ADMINCOUNT; i++) {
 								var headerelement = adminheadertemplate.clone();
 								var contentelement = admincontenttemplate.clone();
 								if (InviteList[i].status == 'ACCEPTED') {
-									headerelement.html(ACCEPTEDICON +  InviteList[i].email );
+									headerelement.html(ACCEPTEDICON + InviteList[i].email);
 									DOMAINSTRENGTHDATA.a = DOMAINSTRENGTHDATA.a + 1;
 								} else {
-									headerelement.html(PENDINGICON +InviteList[i].email).addClass('pending');
+									headerelement.html(PENDINGICON + InviteList[i].email).addClass('pending');
 									DOMAINSTRENGTHDATA.b = DOMAINSTRENGTHDATA.b + 1;
 									PENDINGLIST.push(InviteList[i].email);
 								}
@@ -318,8 +318,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 
 				this.resume = function() {
 					showBG();
-					jQuery("#members-accordion").accordion('destroy');
-					jQuery("#admin-accordion").accordion('destroy');
+					if (jQuery("#members-accordion").hasClass('ui-accordion')) {
+						jQuery("#members-accordion").accordion('destroy');
+					}
+					if (jQuery("#admin-accordion").hasClass('ui-accordion')) {
+						jQuery("#admin-accordion").accordion('destroy');
+					}
 					populateUserData();
 					populateInviteData();
 					populateDomainData();
