@@ -5,7 +5,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/1.jpg", "img\/2.jpg", "img\/3.jpg", "img\/4.jpg", "img\/5.jpg", "img\/6.jpg", "img\/7.jpg"]
+				"Bg" : ["img\/5.jpg","img\/2.jpg", "img\/6.jpg"]
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
@@ -34,8 +34,8 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 
 				function startCoverShow() {
 					jQuery.backstretch(i, {
-						duration : 3e3,
-						fade : 750
+						duration : 7000,
+						fade : 1000
 					}, function() {
 						r.stop()
 						jQuery("#preloader").hide();

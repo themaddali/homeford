@@ -18,7 +18,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 			function StudentListView() {
 
 				function showBG() {
-					jQuery.backstretch(PARMS.workBg);
+					//jQuery.backstretch(PARMS.workBg);
 				}
 
 				function populateStudentList() {

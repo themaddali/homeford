@@ -306,7 +306,8 @@ body a:active {
 }
 
 body.home {
-	background: #000;
+	/*background: #000;*/
+	background:  #FFFFFF;
 }
 
 body.error404 {
@@ -442,7 +443,7 @@ body.error404 {
 	margin: 0px 40px 20px 0;
 	color: #fff;
 	text-transform: uppercase;
-	text-shadow: 1px 1px 1px #444;
+	text-shadow: 2px 2px 2px #444;
 	font-size: 1.75em;
 	letter-spacing: 2px;
 }
@@ -1234,7 +1235,7 @@ body.error404 {
 	width: 100%;
 	height: 120%;
 	z-index: 10;
-	background-color: rgba(0,0,0,0.5); /*dim the background*/
+	background-color: rgba(241, 186, 47, 0.45) /*dim the background*/
 }
 .modal-body .modal-container {
 	position: absolute;
@@ -1785,6 +1786,9 @@ html.touch #subnav {
 	width: 300px;
 	height: 350px;
 	text-align: left;
+	-webkit-box-sizing: border-box;
+	border: 2px solid #444;
+	box-shadow: 3px 3px 2px #444;
 }
 .float-left .adminboard {
 	float: left;
@@ -1792,6 +1796,9 @@ html.touch #subnav {
 	height: 450px;
 	cursor: default;
 	text-align: left;
+	-webkit-box-sizing: border-box;
+	border: 2px solid #444;
+	box-shadow: 3px 3px 2px #444;
 }
 .float-left .adminboard.active {
 	float: left;
@@ -1824,6 +1831,7 @@ html.touch #subnav {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	border: 2px solid #fbb913;
+	box-shadow: 3px 3px 2px #444;
 }
 
 .studentboard img {
