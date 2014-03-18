@@ -1122,16 +1122,14 @@ body.error404 {
 	padding: 10px;
 	width: 100px;
 	cursor: pointer;
-	border: 1px solid #FFFFFF;
+	/*border: 1px solid #FFFFFF;*/
 }
 .adminboard.active a.panel-control {
 	left: 740px;
 }
 
 .adminboard a.panel-control:hover {
-	/*background-color: white;
-	color: #fbb913;*/
-	border: 3px solid #FFFFFF;
+	 text-decoration: underline;
 }
 
 .adminboard a i {
@@ -1258,7 +1256,7 @@ body.error404 {
 	background-color: white
 }
 .modal-body .modal-container header {
-	background-color: #FBB913;
+	background-color: #444;
 	font-size: 1.2em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -1299,7 +1297,7 @@ body.error404 {
 	font-size: 1em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
-	border: 1px solid #FFFFFF;
+	border: none;
 	cursor: pointer;
 	top: 12px;
 }
@@ -1307,7 +1305,7 @@ body.error404 {
 .modal-body .modal-container header input:hover {
 	/*background-color: #FFFFFF;*/
 	/*color: #fbb913;*/
-	border: 3px solid #FFFFFF;
+	border: 2px solid #FFFFFF;
 }
 
 .modal-body .modal-container header a {
