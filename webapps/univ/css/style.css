@@ -2,6 +2,13 @@
  Header Info
  ============================================================================= */
 /* HTML5 Boilerplate  */
+
+/*COLORS
+/*#fbb913
+#0087C0*/
+
+
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
 }
@@ -210,6 +217,8 @@ button, input {
 
 button, input[type="button"], input[type="reset"], input[type="submit"] {
 	cursor: pointer;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 	-webkit-appearance: button;
 	*overflow: visible;
 }
@@ -287,7 +296,7 @@ td {
 	width: 100%;
 	text-align: center;
 	color: #000;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	font-size: 0.9em;
 }
 
@@ -307,7 +316,7 @@ body a:active {
 
 body.home {
 	/*background: #000;*/
-	background:  #FFFFFF;
+	background: #f3f3f3;
 }
 
 body.error404 {
@@ -375,14 +384,14 @@ body.error404 {
 	cursor: pointer;
 }
 #main-nav li a.current, #static-main-nav li a.current {
-	color: #fbb913;
+	color: #0087C0;
 }
 #main-nav li a.login, #static-main-nav li a.login {
 	color: #aaa;
 	cursor: pointer;
 }
 #main-nav li a:hover, #static-main-nav li a:hover {
-	color: #fbb913;
+	color: #0087C0;
 	cursor: pointer;
 }
 
@@ -416,7 +425,7 @@ body.error404 {
 
 #register-link {
 	text-align: center;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	font-size: 1em;
 	color: white;
 	padding: 5px;
@@ -449,7 +458,7 @@ body.error404 {
 }
 #slogan span {
 	font-weight: normal;
-	color: #fbb913;
+	color: #0087C0;
 }
 #slogan-input {
 	padding: 10px 10px;
@@ -468,9 +477,9 @@ body.error404 {
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 5px;
-	border-color: #fbb913;
+	border-color: #0087C0;
 	font-weight: normal;
-	color: #fbb913;
+	color: #0087C0;
 }
 
 /*Place Holder Rules*/
@@ -531,10 +540,10 @@ body.error404 {
 }
 
 .partition-line {
-	padding: 0px;
+	/*padding: 0px;
 	margin-left: 15%;
 	width: 70%;
-	text-align: center;
+	text-align: center;*/
 	border-bottom: 1px dotted #7f7f7f;
 }
 
@@ -549,7 +558,7 @@ body.error404 {
 	cursor: pointer;
 }
 .modal-social span:hover {
-	color: #fbb913;
+	color: #0087C0;
 	cursor: pointer;
 }
 
@@ -577,7 +586,7 @@ body.error404 {
 	padding: 0px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	font-size: 18px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -677,14 +686,14 @@ body.error404 {
 	text-align: center;
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 5px;
-	border-color: #fbb913;
+	border-color: #0087C0;
 	font-weight: normal;
 	color: black;
 }
 .login-input-button {
 	font-size: 22px;
 	padding: 10px 18px;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	border: 0;
 	color: white;
 	width: 100%;
@@ -716,7 +725,7 @@ body.error404 {
 }
 #login-modal p a {
 	display: inline;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 0.65em;
 	width: 100%;
 	text-align: center;
@@ -727,7 +736,6 @@ body.error404 {
 .error-text {
 	color: red;
 }
-
 
 /* =================== Share Modal ======================= */
 #share-modal {
@@ -845,7 +853,7 @@ body.error404 {
 	top: 40px;
 	left: 20px;
 	z-index: 20;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -857,7 +865,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: 20;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -900,7 +908,7 @@ body.error404 {
 	text-shadow: 1px 1px;
 	left: 20px;
 	z-index: -1;
-	color: #fbb913;
+	color: #0087C0;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-right: 3px;
@@ -915,7 +923,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: -1;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.5em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -950,7 +958,7 @@ body.error404 {
 	top: 40px;
 	left: 20px;
 	z-index: 10;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -962,7 +970,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: 10;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -1040,14 +1048,14 @@ body.error404 {
 	top: 60%;
 	padding: 15px;
 	text-align: center;
-	border: 1px solid #fbb913;
+	border: 1px solid #0087C0;
 }
 #nopage-warning i {
 	padding-right: 20px;
 }
 #nopage-warning p > a {
 	font-size: 1em;
-	color: #fbb913;
+	color: #0087C0;
 }
 
 /* =================== About Page ======================= */
@@ -1130,7 +1138,7 @@ body.error404 {
 }
 
 .adminboard a.panel-control:hover {
-	 text-decoration: underline;
+	text-decoration: underline;
 }
 
 .adminboard a i {
@@ -1142,7 +1150,7 @@ body.error404 {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul, .adminboard div#admin-min-list ul,.adminboard ul  {
+.adminboard div#student-min-list ul, .adminboard div#admin-min-list ul, .adminboard ul {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
@@ -1161,10 +1169,10 @@ body.error404 {
 	padding-left: 10px;
 	cursor: pointer;
 }
-.adminboard  div.ui-accordion-content-active ul{
+.adminboard  div.ui-accordion-content-active ul {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	padding : 0px;
+	padding: 0px;
 	margin: 0px
 }
 
@@ -1208,7 +1216,7 @@ body.error404 {
 }
 
 .adminboard div#student-min-list ul li a:hover, .adminboard div#admin-min-list ul li a:hover {
-	color: #fbb913;
+	color: #0087C0;
 	background-repeat: repeat-x;
 }
 
@@ -1233,9 +1241,9 @@ body.error404 {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 120%;
-	z-index: 10;
-	background-color: rgba(241, 186, 47, 0.45) /*dim the background*/
+	height: 100%;
+	z-index: 100;
+	background-color: rgba(0, 0, 0, 0.6); /*dim the background*/
 }
 .modal-body .modal-container {
 	position: absolute;
@@ -1257,12 +1265,28 @@ body.error404 {
 	background-color: white
 }
 .modal-body .modal-container header {
-	background-color: #444;
+	background-color: #f3f3f3;
 	font-size: 1.2em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: white;
+	color: black;
+	text-overflow: ellipsis;
 	padding: 20px;
 	padding-left: 15px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.modal-body .modal-container footer {
+	background-color: #FFFFFF;
+	border-top: 1px solid #d9d9d9;
+	font-size: 1.2em;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: black;
+	text-overflow: ellipsis;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 60px;
 }
 .edit-notify.OK {
 	display: none;
@@ -1290,23 +1314,38 @@ body.error404 {
 	padding-left: 10px;
 }
 
-.modal-body .modal-container header input {
+.modal-body .modal-container footer .edit-controls{
 	position: absolute;
-	right: 3%;
-	height: 42px;
-	background-color: #fbb913;
-	font-size: 1em;
-	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	padding: 15px
+	right: 3px;
+	text-align: right;
+	margin-top: 15px;
+	width: 100%;
+	height: 60px
+}
+
+.modal-body .modal-container header input,.modal-body .modal-container footer input {
+	padding: 5px 10px;
+	background-color: #0087C0;
+	font-size: 0.9em;
 	color: white;
 	border: none;
 	cursor: pointer;
-	top: 12px;
+	float: right;
+	margin-right: 15px;
+	border: 2px solid #e6e6e6;
+}
+.modal-body .modal-container header input.secondary,.modal-body .modal-container footer input.secondary {
+	border: 2px solid #e6e6e6;
+	cursor: pointer;
+	background-color: #FFFFFF;
+	color: black;	
 }
 
-.modal-body .modal-container header input:hover {
+.modal-body .modal-container header input:hover,.modal-body .modal-container footer input:hover {
 	/*background-color: #FFFFFF;*/
-	/*color: #fbb913;*/
-	border: 2px solid #FFFFFF;
+	/*color: #0087C0;*/
+	border: 2px solid #999;
 }
 
 .modal-body .modal-container header a {
@@ -1317,7 +1356,7 @@ body.error404 {
 	height: 42px;
 	text-align: center;
 	vertical-align: middle;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	font-size: 1em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -1340,7 +1379,7 @@ body.error404 {
 	line-height: 1.6em;
 	color: #444;
 	overflow: scroll;
-	height: 90%;
+	height: 80%;
 }
 .modal-body .modal-container.login .modal-contents {
 	padding: 0px;
@@ -1354,7 +1393,7 @@ body.error404 {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	text-align: center;
-	width: 100%
+	width: 80%
 }
 
 .edit-form {
@@ -1506,7 +1545,7 @@ form input.error {
 	margin: 0;
 	font-size: 1.15em;
 	font-weight: 500;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: white;
 }
 .adminboard p {
@@ -1538,7 +1577,7 @@ form input.error {
 	color: #000;
 }
 .adminboard h4:hover {
-	background-color: #fbb913;
+	background-color: #0087C0;
 }
 .adminboard h4 a:active {
 	position: static;
@@ -1709,7 +1748,7 @@ html.no-touch #subnav ul li a {
 	transition: color 0.3s ease-in-out;
 }
 html.no-touch #subnav ul li a:hover {
-	color: #fbb913;
+	color: #0087C0;
 }
 html.no-touch #subnav ul li.selected {
 	background-color: #848C92;
@@ -1755,7 +1794,7 @@ html.touch #subnav {
 	top: 130px;
 	left: 210px;
 	z-index: 10;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.2em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -1763,8 +1802,8 @@ html.touch #subnav {
 
 /*INFO*/
 .info {
-	border : 1px solid rgba(114, 114, 114, 0.71);
-	padding : 7px;
+	border: 1px solid rgba(114, 114, 114, 0.71);
+	padding: 7px;
 }
 
 /*===========Cards Template - Responive==========*/
@@ -1807,6 +1846,11 @@ html.touch #subnav {
 }
 
 ::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+}
+
+::-webkit-scrollbar:hover {
 	width: 10px;
 	height: 10px;
 }
@@ -1830,7 +1874,7 @@ html.touch #subnav {
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-	border: 2px solid #fbb913;
+	border: 2px solid #0087C0;
 	box-shadow: 3px 3px 2px #444;
 }
 
@@ -1847,7 +1891,7 @@ html.touch #subnav {
 
 .studentboard div.student-name {
 	width: 100%;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
@@ -1855,8 +1899,8 @@ html.touch #subnav {
 	/*padding : 10px 0px;
 	 text-align: center;
 	 width: 100%;
-	 color: #fbb913;
-	 border-bottom: 3px dotted #fbb913;*/
+	 color: #0087C0;
+	 border-bottom: 3px dotted #0087C0;*/
 }
 
 .studentboard i {
@@ -1882,7 +1926,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	list-style: none;
 	font-size: 0.9em;
-	border-left: 4px solid #fbb913;
+	border-left: 4px solid #0087C0;
 	padding: 5px;
 	margin-bottom: 5px;
 }
@@ -1915,7 +1959,7 @@ html.touch #subnav {
 	display: inline-block;
 	width: 340px;
 	left: 0;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 20px;
@@ -1951,7 +1995,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	list-style: none;
 	font-size: 0.9em;
-	border-left: 4px solid #fbb913;
+	border-left: 4px solid #0087C0;
 	padding: 5px;
 	margin-bottom: 5px;
 }
@@ -2022,7 +2066,7 @@ html.touch #subnav {
 	top: 20px;
 	left: 20px;
 	z-index: 10;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -2032,7 +2076,7 @@ html.touch #subnav {
 	display: inline-block;
 	width: 340px;
 	left: 0;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 20px;
@@ -2060,7 +2104,7 @@ html.touch #subnav {
 	top: 250px;
 	text-align: center;
 	z-index: 999;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 1em;
@@ -2070,14 +2114,14 @@ html.touch #subnav {
 }
 
 #carousel .active {
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: white;
 }
 
 #carousel div.selected span input:hover {
 	width: 49%;
 	left: 0;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: white;
 }
 
@@ -2098,7 +2142,7 @@ html.touch #subnav {
 	padding-left: 5px;
 	line-height: 45px; /* same as #progressBar height if we want text middle aligned */
 	width: 0;
-	background-color: #fbb913;
+	background-color: #0087C0;
 }
 
 .quiz-option, .student-option {
@@ -2181,7 +2225,7 @@ html.touch #subnav {
 	color: #444;
 }
 #blog-content .post small a:hover {
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: #000;
 }
 #blog-content .post a {
@@ -2193,7 +2237,7 @@ html.touch #subnav {
 	transition: background-color 0.3s ease-in-out;
 }
 #blog-content .post a:hover {
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: #000;
 }
 
@@ -2348,7 +2392,7 @@ input#searchsubmit:hover {
 	transition: all 0.3s ease-in-out;
 }
 #blog-nav a:hover {
-	background-color: #fbb913;
+	background-color: #0087C0;
 	color: #000;
 }
 
@@ -2728,7 +2772,7 @@ html.no-touch #gradient-right {
 	padding-right: 5px;
 }
 #chat-module.notify a i {
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 1.3em;
 	padding-right: 5px;
 }
@@ -2797,21 +2841,21 @@ html.no-touch #gradient-right {
 }
 #chatnav.active > input[type="text"] {
 	width: 80%;
-	color: #fbb913;
+	color: #0087C0;
 	font-weight: 200;
-	border: 1px solid #fbb913;
+	border: 1px solid #0087C0;
 }
 #chatnav.active > input[type="text"] {
 	width: 80%;
-	color: #fbb913;
+	color: #0087C0;
 	font-weight: 200;
-	border: 1px solid #fbb913;
+	border: 1px solid #0087C0;
 }
 #chatnav.active > input[type="button"] {
 	width: 15%;
 	text-align: center;
 	color: white;
-	background-color: #fbb913;
+	background-color: #0087C0;
 	text-transform: capitalize;
 }
 
@@ -2859,12 +2903,12 @@ html.no-touch #gradient-right {
 #searchbar.active > input[type="text"] {
 	width: 97%;
 	height: 97%;
-	color: #fbb913;
+	color: #0087C0;
 	font-weight: 500;
-	border: 1px solid #fbb913;
+	border: 1px solid #0087C0;
 }
 #searchbar.active > input[type="text"]:focus {
-	border: 2px solid #fbb913;
+	border: 2px solid #0087C0;
 	font-weight: 600;
 	text-align: left;
 }
@@ -3071,7 +3115,7 @@ footer {
 	-moz-transition: background-color 0.3s ease-in-out;
 	-o-transition: background-color 0.3s ease-in-out;
 	transition: background-color 0.3s ease-in-out;
-	color: #fbb913;
+	color: #0087C0;
 	font-size: 0.85em;
 }
 footer:hover {
@@ -3084,14 +3128,14 @@ footer p {
 }
 footer a {
 	text-decoration: none;
-	color: #fbb913;
+	color: #0087C0;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
 	transition: color 0.3s ease-in-out;
 }
 footer a:visited {
-	color: #fbb913;
+	color: #0087C0;
 }
 footer a:hover {
 	color: #fff;
@@ -3237,7 +3281,7 @@ footer a:hover {
 
 	.modal-body .modal-container {
 		border: 0px;
-		}
+	}
 
 	.content {
 		width: 100%;
@@ -3292,7 +3336,7 @@ footer a:hover {
 		top: 50px;
 		left: 20px;
 		z-index: 20;
-		color: #fbb913;
+		color: #0087C0;
 		font-size: 1.2em;
 		font-weight: 700;
 	}
@@ -3327,7 +3371,7 @@ footer a:hover {
 		display: inline-block;
 		width: 189px;
 		left: 0;
-		background-color: #fbb913;
+		background-color: #0087C0;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 0;
@@ -3355,7 +3399,7 @@ footer a:hover {
 		top: 120px;
 		text-align: center;
 		z-index: 10;
-		color: #fbb913;
+		color: #0087C0;
 		font-size: 1.8em;
 		font-weight: 400;
 		line-height: 1em;
@@ -3562,7 +3606,7 @@ footer a:hover {
 	#slogan-submit {
 		font-size: 22px;
 		padding: 10px 18px;
-		background-color: #fbb913;
+		background-color: #0087C0;
 		border: 0;
 		color: white;
 		width: 100%;

@@ -72,7 +72,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
 					}
 
-					jQuery('#login-button').on('click', function(e) {
+					jQuery('#reg-login').on('click', function(e) {
 						if ($("#login-form").valid()) {
 							e.preventDefault();
 							jQuery('#login-error').hide();
