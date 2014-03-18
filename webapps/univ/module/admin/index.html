@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="css/font-awesome.css">
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="css/morris.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
 		<meta name="description" content=""/>
 	</head>
 
@@ -207,16 +208,17 @@
 				<p class="designation">
 					Admins
 				</p>
-				<a id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
+				<a id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Send</a>
 				<br />
+				<div id="admin-accordion">
+
+				</div>
 				<div id="admin-min-list">
 					<ul id="admin-list-min">
 
 					</ul>
 				</div>
-				<li id="admin-list-min-template" style="display: none">
-					<a class="admin-list-min"><strong>Name</strong>ID</a>
-				</li>
+				
 			</div>
 			<div class="adminboard">
 				<h3 style="padding-bottom: 0px">Manage</h3>
@@ -225,13 +227,80 @@
 				</p>
 				<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
 				<br />
-				<div id="student-min-list">
-					<ul id="students-list-min">
-						<li id="students-list-min-template">
-							<a class="students-list-min"><strong>Name</strong>ID</a>
-						</li>
-					</ul>
+				<div id="members-accordion">
+
 				</div>
+			</div>
+			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Assignments</h3>
+				<p class="designation">
+					TO-DO List
+				</p>
+				<a id="assignment-todo-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
+				<br />
+				<div id="to-do-accordion">
+					<a>Test</a>
+					<div>
+						<div class="accordian-progressbar" id="to-do-progressbar"></div>
+						<form class="show-form">
+							<fieldset>
+								<ol id="profileview-form">
+									<li class="form-item">
+										<label>First Name</label>
+										<div class="form-content user-first-name">
+											TESTSTST
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Last Name</label>
+										<div class="form-content user-last-name">
+											Test
+										</div>
+									</li>
+								</ol>
+							</fieldset>
+						</form>
+					</div>
+					<a>Test 2</a>
+					<div>
+						<div class="accordian-progressbar" id="to-do-progressbar"></div>
+						<ul class="tasks-list-min">
+							<li>
+								List item one
+							</li>
+							<li>
+								List item two
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Assignments</h3>
+				<p class="designation">
+					Quiz
+				</p>
+				<a id="assignment-quiz-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
+				<br />
+
+			</div>
+			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Assignments</h3>
+				<p class="designation">
+					Surveys / Polls
+				</p>
+				<a id="assignment-polls-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
+				<br />
+
+			</div>
+			<div class="adminboard">
+				<h3 style="padding-bottom: 0px">Assignments</h3>
+				<p class="designation">
+					Custom
+				</p>
+				<a id="assignment-custom-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
+				<br />
+
 			</div>
 		</div>
 		<div style="display:none" class="templates-div">
@@ -241,6 +310,66 @@
 
 				</div>
 			</li>
+			<a id="member-header-template" class="students-list-min"></a>
+			<div id="member-content-template">
+				<form class="show-form">
+					<fieldset>
+						<ol>
+							<li class="form-item">
+								<label>ID #</label>
+								<div class="form-content memberid">
+
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Security</label>
+								<div class="form-content membersecurity">
+
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Courses #</label>
+								<div class="form-content membercourses">
+
+								</div>
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
+			<a id="admin-header-template" class="admmin-list-min"></a>
+			<div id="admin-content-template">
+				<form class="show-form">
+					<fieldset>
+						<ol id="admincontentlist">
+							<li class="form-item">
+								<label>ID #</label>
+								<div class="form-content adminid">
+
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Status</label>
+								<div class="form-content adminstatus">
+
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Domain</label>
+								<div class="form-content admindomain">
+
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Roles</label>
+								<div class="form-content adminroles">
+
+								</div>
+							</li>
+						</ol>
+					</fieldset>
+				</form>
+			</div>
 		</div>
 
 		<!-- <div id="preloader"></div> -->

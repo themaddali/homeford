@@ -727,6 +727,7 @@ body.error404 {
 	color: red;
 }
 
+
 /* =================== Share Modal ======================= */
 #share-modal {
 	display: none;
@@ -1140,7 +1141,7 @@ body.error404 {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
 }
-.adminboard div#student-min-list ul, .adminboard div#admin-min-list ul {
+.adminboard div#student-min-list ul, .adminboard div#admin-min-list ul,.adminboard ul  {
 	list-style: none;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-size: 15px;
@@ -1158,6 +1159,25 @@ body.error404 {
 	border-bottom-color: #CCCCCC;
 	padding-left: 10px;
 	cursor: pointer;
+}
+.adminboard  div.ui-accordion-content-active ul{
+	list-style: none;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	padding : 0px;
+	margin: 0px
+}
+
+.adminboard  div.ui-accordion-content-active ul li {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	font-size: 0.9em;
+	display: block;
+	text-decoration: none;
+	color: #000000;
+	background-color: white;
+	line-height: 2em;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #CCCCCC;
 }
 
 .adminboard div#student-min-list ul li a.pending, .adminboard div#admin-min-list ul li a.pending {
@@ -1746,13 +1766,13 @@ html.touch #subnav {
 }
 
 .float-left .studentboard {
-	display: inline-block;
+	float: left;
 	width: 300px;
 	height: 350px;
 	text-align: left;
 }
 .float-left .adminboard {
-	display: inline-block;
+	float: left;
 	width: 400px;
 	height: 450px;
 	cursor: default;

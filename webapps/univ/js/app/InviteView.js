@@ -134,10 +134,14 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 						});
 
 						jQuery.validator.addMethod("notRepeated", function(value, element) {
-							if (pendingList.indexOf(value) === -1) {
-								return true;
+							if (pendingList) {
+								if (pendingList.indexOf(value) === -1) {
+									return true;
+								} else
+									return false;
 							} else
-								return false;
+								return true;
+
 						}, "This email already has a request pending.");
 
 						validator = jQuery("#invite-form").validate({
