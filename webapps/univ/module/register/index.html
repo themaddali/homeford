@@ -40,7 +40,7 @@
 									<input placeholder="First Name" name="Rfirstname" id="new-user-firstname" type="text" autofocus/>
 								</li> -->
 								<li class="form-item">
-									<input placeholder="E-mail Address" name="Rusername" id="new-user-name" type="email" autofocus/>
+									<input placeholder="E-mail Address" name="Rusername" id="new-user-name" type="email" autofocus autocomplete/>
 								</li>
 								<li class="form-item">
 									<input placeholder="Password" name="Rpassword" id="new-user-password" type="password" />
@@ -50,6 +50,9 @@
 								</li>
 								<li class="form-item">
 									<input placeholder="Your Domain" name="Rdomain" id="new-user-domain"/>
+								</li>
+								<li id="RInfo" class="form-item" style="display: none">
+									<p class="info"></p>
 								</li>
 								<!-- <li class="form-item">
 									<input type="checkbox" value="Rpublic" name="Rvisibility" id="user-domain-visibile" checked /> Show in Search

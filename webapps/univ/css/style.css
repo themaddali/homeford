@@ -1113,23 +1113,25 @@ body.error404 {
 .adminboard a.panel-control {
 	display: inline;
 	position: relative;
-	top: -50px;
+	top: -65px;
 	left: 310px;
 	text-transform: uppercase;
 	font-size: 0.9em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: #fbb913;
+	color: #FFFFFF;
 	padding: 10px;
 	width: 100px;
 	cursor: pointer;
+	border: 1px solid #FFFFFF;
 }
 .adminboard.active a.panel-control {
 	left: 740px;
 }
 
 .adminboard a.panel-control:hover {
-	background-color: #fbb913;
-	color: white;
+	/*background-color: white;
+	color: #fbb913;*/
+	border: 3px solid #FFFFFF;
 }
 
 .adminboard a i {
@@ -1256,7 +1258,7 @@ body.error404 {
 	background-color: white
 }
 .modal-body .modal-container header {
-	background-color: grey;
+	background-color: #FBB913;
 	font-size: 1.2em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -1297,9 +1299,15 @@ body.error404 {
 	font-size: 1em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
-	border: none;
+	border: 1px solid #FFFFFF;
 	cursor: pointer;
 	top: 12px;
+}
+
+.modal-body .modal-container header input:hover {
+	/*background-color: #FFFFFF;*/
+	/*color: #fbb913;*/
+	border: 3px solid #FFFFFF;
 }
 
 .modal-body .modal-container header a {
@@ -1448,6 +1456,7 @@ form li.form-item > label.error {
 	padding-left: 10px;
 	vertical-align: bottom;
 }
+
 form li.form-item  span > label.error {
 	display: inline;
 	color: red;
@@ -1473,7 +1482,7 @@ form li.form-item  span > label.error {
 }
 
 form input.error {
-	border-bottom: 2px solid red;
+	border-bottom: 3px solid red;
 }
 
 .edit-form li.form-item > .form-content {
@@ -1498,6 +1507,8 @@ form input.error {
 	margin: 0;
 	font-size: 1.15em;
 	font-weight: 500;
+	background-color: #fbb913;
+	color: white;
 }
 .adminboard p {
 	color: #7f7f7f;
@@ -1517,7 +1528,7 @@ form input.error {
 	width: 340px;
 	height: 76px;
 	padding: 15px 30px 0 30px;
-	color: #444;
+	color: #FFFFFF;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
@@ -1749,6 +1760,12 @@ html.touch #subnav {
 	font-size: 1.2em;
 	font-weight: 400;
 	line-height: 0.8em;
+}
+
+/*INFO*/
+.info {
+	border : 1px solid rgba(114, 114, 114, 0.71);
+	padding : 7px;
 }
 
 /*===========Cards Template - Responive==========*/

@@ -155,6 +155,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				}
 
 				function populateDomainData() {
+					jQuery('#members-accordion').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
 							//OverView Panel Load

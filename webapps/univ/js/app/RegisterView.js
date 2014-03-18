@@ -9,17 +9,21 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 			 */
 
 			var ENTITY;
+			var DOMAINSLIST;
+			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
+			var OK = '<i style="padding:0px 10px" class="icon-magic icon-1x "></i>';
+			var INFO = '<i style="padding:0px 10px" class="icon-info icon-1x "></i>';
 
 			function EntryView() {
 
 				function activateSuggestionSearch() {
-					if (ENTITY)
-					{
+					if (ENTITY) {
 						jQuery('#new-user-domain').val(ENTITY);
 					}
 					if (checkForActiveCookie() === false) {
 						service.entityList({
 							success : function(result) {
+								DOMAINSLIST = result;
 								if (result !== 'error') {
 									$("#new-user-domain").autocomplete({
 										source : function(request, response) {
@@ -70,11 +74,11 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						}
 					});
 				}
-				
+
+
 				this.entity = function(entity) {
 					ENTITY = entity;
 				}
-
 
 				this.pause = function() {
 
@@ -82,6 +86,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 
 				this.resume = function() {
 					checkForActiveCookie();
+					jQuery('.info').hide();
 				};
 
 				this.init = function() {
@@ -116,8 +121,25 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						jQuery('#login-notification').fadeOut(1000);
 					});
 
+					jQuery('#new-user-domain').keyup(function() {
+						//Sanity
+						jQuery('#new-user-domain').css("text-transform", "uppercase");
+						var domainrequest = jQuery('#new-user-domain').val();
+						if (domainrequest === "") {
+							jQuery('#new-user-domain').css("text-transform", "none");
+							jQuery('#RInfo').fadeOut();
+						} else {
+							jQuery('#RInfo').fadeIn();
+							if (DOMAINSLIST && DOMAINSLIST.indexOf(domainrequest) !== -1) {
+								jQuery('.info').html(INFO + 'This University Exists. You will be added as admin');
+							} else {
+								jQuery('.info').html(OK + 'This is a new university, You will be the owner');
+							}
+						}
+					});
+
 					jQuery('#login-close').on('click', function() {
-						router.go('/home', '/entry');
+						router.returnToPrevious();
 					});
 
 					jQuery("#register-form").validate({
@@ -143,7 +165,13 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 								required : false,
 								date : true
 							},
-						}
+						},
+						messages : {
+							Rusername : "*",
+							Rpassword : "*",
+							Rpasswordrepeat : "*",
+							Rdomain : "*"
+						},
 					});
 
 				};

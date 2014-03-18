@@ -108,7 +108,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 					});
 
 					jQuery('#login-close').on('click', function() {
-						router.go('/home', '/entry');
+						router.returnToPrevious();
 					});
 
 					jQuery("#login-form").validate({
@@ -123,7 +123,12 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							userdomain : {
 								required : false,
 							},
-						}
+						},
+						messages : {
+							username : "*",
+							userpassword : "*",
+							userdomain : "*"
+						},
 					});
 
 				};

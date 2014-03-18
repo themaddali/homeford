@@ -45,7 +45,7 @@ define(['../app/Router', 'cookie','plugins', '../app/service/DataService','../ap
 									expires : 100,
 									path : '/'
 								});
-								router.go('/home', '/pre');
+								router.go('/entry', '/pre');
 							}
 							else
 							{
