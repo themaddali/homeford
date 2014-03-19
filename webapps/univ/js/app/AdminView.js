@@ -29,7 +29,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 			function AdminView() {
 
 				function showBG() {
-					jQuery.backstretch(PARMS.Bg);
+					//jQuery.backstretch(PARMS.Bg);
 				}
 
 				function populateGraphs() {
