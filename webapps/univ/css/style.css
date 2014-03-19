@@ -4,10 +4,11 @@
 /* HTML5 Boilerplate  */
 
 /*COLORS
-/*#fbb913
-#0087C0*/
-
-
+ /*#fbb913
+ Actual #0784E3
+ INFO : #79c3fb
+ Header : #0784E3;
+ Light #2fbcf7*/
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
@@ -222,6 +223,9 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	-webkit-appearance: button;
 	*overflow: visible;
 }
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+	border: 2px solid #0784E3;
+}
 
 button[disabled], input[disabled] {
 	cursor: default;
@@ -296,7 +300,7 @@ td {
 	width: 100%;
 	text-align: center;
 	color: #000;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	font-size: 0.9em;
 }
 
@@ -384,14 +388,14 @@ body.error404 {
 	cursor: pointer;
 }
 #main-nav li a.current, #static-main-nav li a.current {
-	color: #0087C0;
+	color: #0784E3;
 }
 #main-nav li a.login, #static-main-nav li a.login {
 	color: #aaa;
 	cursor: pointer;
 }
 #main-nav li a:hover, #static-main-nav li a:hover {
-	color: #0087C0;
+	color: #0784E3;
 	cursor: pointer;
 }
 
@@ -425,7 +429,7 @@ body.error404 {
 
 #register-link {
 	text-align: center;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	font-size: 1em;
 	color: white;
 	padding: 5px;
@@ -458,9 +462,11 @@ body.error404 {
 }
 #slogan span {
 	font-weight: normal;
-	color: #0087C0;
+	color: #0784E3;
 }
 #slogan-input {
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 	padding: 10px 10px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -477,9 +483,9 @@ body.error404 {
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 5px;
-	border-color: #0087C0;
+	border-color: #0784E3;
 	font-weight: normal;
-	color: #0087C0;
+	color: #0784E3;
 }
 
 /*Place Holder Rules*/
@@ -541,9 +547,9 @@ body.error404 {
 
 .partition-line {
 	/*padding: 0px;
-	margin-left: 15%;
-	width: 70%;
-	text-align: center;*/
+	 margin-left: 15%;
+	 width: 70%;
+	 text-align: center;*/
 	border-bottom: 1px dotted #7f7f7f;
 }
 
@@ -558,35 +564,18 @@ body.error404 {
 	cursor: pointer;
 }
 .modal-social span:hover {
-	color: #0087C0;
+	color: #0784E3;
 	cursor: pointer;
 }
 
 /* =================== Login Modal ======================= */
-#login-modal {
-	display: none;
-	width: 400px;
-	height: 540px;
-	background-color: #fff;
-	-webkit-box-shadow: 2px 3px 4px #444444;
-	-moz-box-shadow: 2px 3px 4px #444444;
-	box-shadow: 2px 3px 4px #444444;
-}
-#login-form input, #register-form input {
-	font-size: 20px;
-}
-#login-form ol, #register-form ol {
-	margin-left: -40px;
-	margin-top: 10px;
-	text-align: center;
-}
 
 #login-button, #register-button {
 	margin-top: 10px;
 	padding: 0px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	font-size: 18px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -686,14 +675,14 @@ body.error404 {
 	text-align: center;
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 5px;
-	border-color: #0087C0;
+	border-color: #0784E3;
 	font-weight: normal;
 	color: black;
 }
 .login-input-button {
 	font-size: 22px;
 	padding: 10px 18px;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	border: 0;
 	color: white;
 	width: 100%;
@@ -725,7 +714,7 @@ body.error404 {
 }
 #login-modal p a {
 	display: inline;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 0.65em;
 	width: 100%;
 	text-align: center;
@@ -796,9 +785,9 @@ body.error404 {
 	width: 42px;
 	height: 42px;
 	background: transparent url("../img/modal-close.png") no-repeat 0 0;
-	-webkit-box-shadow: 2px 3px 4px #444444;
-	-moz-box-shadow: 2px 3px 4px #444444;
-	box-shadow: 2px 3px 4px #444444;
+	/*-webkit-box-shadow: 2px 3px 4px #444444;
+	 -moz-box-shadow: 2px 3px 4px #444444;
+	 box-shadow: 2px 3px 4px #444444;*/
 	cursor: pointer;
 }
 
@@ -853,7 +842,7 @@ body.error404 {
 	top: 40px;
 	left: 20px;
 	z-index: 20;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -865,7 +854,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: 20;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -908,7 +897,7 @@ body.error404 {
 	text-shadow: 1px 1px;
 	left: 20px;
 	z-index: -1;
-	color: #0087C0;
+	color: #0784E3;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	padding-right: 3px;
@@ -923,7 +912,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: -1;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.5em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -958,7 +947,7 @@ body.error404 {
 	top: 40px;
 	left: 20px;
 	z-index: 10;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -970,7 +959,7 @@ body.error404 {
 	top: 90px;
 	left: 20px;
 	z-index: 10;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -988,7 +977,7 @@ body.error404 {
 
 #prev, #next {
 	display: block;
-	width: 44px;
+	width: 50px;
 	height: 50px;
 	margin-top: -30px;
 	position: absolute;
@@ -1048,14 +1037,14 @@ body.error404 {
 	top: 60%;
 	padding: 15px;
 	text-align: center;
-	border: 1px solid #0087C0;
+	border: 1px solid #0784E3;
 }
 #nopage-warning i {
 	padding-right: 20px;
 }
 #nopage-warning p > a {
 	font-size: 1em;
-	color: #0087C0;
+	color: #0784E3;
 }
 
 /* =================== About Page ======================= */
@@ -1216,7 +1205,7 @@ body.error404 {
 }
 
 .adminboard div#student-min-list ul li a:hover, .adminboard div#admin-min-list ul li a:hover {
-	color: #0087C0;
+	color: #0784E3;
 	background-repeat: repeat-x;
 }
 
@@ -1252,18 +1241,10 @@ body.error404 {
 	width: 80%;
 	height: 80%;
 	z-index: 20;
-	border: solid 0px white;
+	border: solid 2px #0784E3;
 	background-color: white
 }
-.modal-body .modal-container.login {
-	position: absolute;
-	margin-top: 5%;
-	margin-left: 30%;
-	width: 40%;
-	z-index: 20;
-	border: solid 0px white;
-	background-color: white
-}
+
 .modal-body .modal-container header {
 	background-color: #f3f3f3;
 	font-size: 1.2em;
@@ -1290,7 +1271,7 @@ body.error404 {
 }
 .edit-notify.OK {
 	display: none;
-	background-color: #33CC33;
+	background-color: #07e366;
 	font-size: 1.2em;
 	position: absolute;
 	width: 100%;
@@ -1301,7 +1282,7 @@ body.error404 {
 }
 .edit-notify.ERROR {
 	display: none;
-	background-color: #FF3333;
+	background-color: #e30716;
 	font-size: 1.2em;
 	position: absolute;
 	width: 100%;
@@ -1314,37 +1295,35 @@ body.error404 {
 	padding-left: 10px;
 }
 
-.modal-body .modal-container footer .edit-controls{
+.modal-body .modal-container footer .edit-controls {
 	position: absolute;
-	padding: 15px
-	right: 3px;
+	padding: 10px;
 	text-align: right;
-	margin-top: 15px;
 	width: 100%;
 	height: 60px
 }
 
-.modal-body .modal-container header input,.modal-body .modal-container footer input {
-	padding: 5px 10px;
-	background-color: #0087C0;
+.modal-body .modal-container header input, .modal-body .modal-container footer input {
+	padding: 10px;
+	background-color: #0784E3;
 	font-size: 0.9em;
 	color: white;
 	border: none;
 	cursor: pointer;
 	float: right;
-	margin-right: 15px;
+	margin-right: 20px;
 	border: 2px solid #e6e6e6;
 }
-.modal-body .modal-container header input.secondary,.modal-body .modal-container footer input.secondary {
+.modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
 	border: 2px solid #e6e6e6;
 	cursor: pointer;
 	background-color: #FFFFFF;
-	color: black;	
+	color: black;
 }
 
-.modal-body .modal-container header input:hover,.modal-body .modal-container footer input:hover {
+.modal-body .modal-container header input:hover, .modal-body .modal-container footer input:hover {
 	/*background-color: #FFFFFF;*/
-	/*color: #0087C0;*/
+	/*color: #0784E3;*/
 	border: 2px solid #999;
 }
 
@@ -1356,7 +1335,7 @@ body.error404 {
 	height: 42px;
 	text-align: center;
 	vertical-align: middle;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	font-size: 1em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
@@ -1381,7 +1360,7 @@ body.error404 {
 	overflow: scroll;
 	height: 80%;
 }
-.modal-body .modal-container.login .modal-contents {
+.modal-body .modal-container .modal-contents {
 	padding: 0px;
 }
 .modal-body .modal-container .modal-contents div.footer {
@@ -1399,6 +1378,7 @@ body.error404 {
 .edit-form {
 	width: 100%;
 	margin-bottom: 20px;
+	overflow: auto;
 }
 .edit-form fieldset {
 	margin: 20px 0px;
@@ -1435,27 +1415,32 @@ body.error404 {
 	margin-bottom: 0px;
 }
 .edit-form li input {
+	padding: 10px;
 	border-radius: 0;
 	margin-bottom: 5px;
 	font-size: 1em;
 	border: none;
-	border-bottom: 1px solid;
-	border-bottom-color: rgba(114, 114, 114, 0.71);
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
 }
 .edit-form li select {
 	-webkit-appearance: none;
+	padding: 10px;
+	margin-bottom: 5px;
 	border-radius: 0;
 	background-color: #FFFFFF;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
 	font-size: 1em;
-	border: none;
-	border-bottom: 1px solid;
-	border-bottom-color: rgba(114, 114, 114, 0.71);
 }
 
 .edit-form li.form-item > * {
-	vertical-align: top;
+	vertical-align: center;
 	display: inline-block;
 	font-size: 14px;
 	line-height: 17px;
@@ -1492,7 +1477,8 @@ form li.form-item > label.error {
 	color: red;
 	font-size: 12px;
 	padding-left: 10px;
-	vertical-align: bottom;
+	vertical-align: middle;
+	padding: 12px;
 }
 
 form li.form-item  span > label.error {
@@ -1520,7 +1506,7 @@ form li.form-item  span > label.error {
 }
 
 form input.error {
-	border-bottom: 3px solid red;
+	border: 2px solid red;
 }
 
 .edit-form li.form-item > .form-content {
@@ -1543,9 +1529,9 @@ form input.error {
 .adminboard h3 {
 	padding: 10px;
 	margin: 0;
-	font-size: 1.15em;
+	font-size: 1.1em;
 	font-weight: 500;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: white;
 }
 .adminboard p {
@@ -1577,7 +1563,7 @@ form input.error {
 	color: #000;
 }
 .adminboard h4:hover {
-	background-color: #0087C0;
+	background-color: #0784E3;
 }
 .adminboard h4 a:active {
 	position: static;
@@ -1600,7 +1586,7 @@ form input.error {
 }
 .adminboard div .half {
 	width: 380px;
-	height: 190px;
+	height: 150px;
 	/*margin: 30px 0 0 30px;*/
 }
 .adminboard div .full {
@@ -1748,7 +1734,7 @@ html.no-touch #subnav ul li a {
 	transition: color 0.3s ease-in-out;
 }
 html.no-touch #subnav ul li a:hover {
-	color: #0087C0;
+	color: #0784E3;
 }
 html.no-touch #subnav ul li.selected {
 	background-color: #848C92;
@@ -1794,7 +1780,7 @@ html.touch #subnav {
 	top: 130px;
 	left: 210px;
 	z-index: 10;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.2em;
 	font-weight: 400;
 	line-height: 0.8em;
@@ -1802,42 +1788,49 @@ html.touch #subnav {
 
 /*INFO*/
 .info {
-	border: 1px solid rgba(114, 114, 114, 0.71);
-	padding: 7px;
+	border: 2px solid rgba(114, 114, 114, 0.71);
+	padding: 13px;
+	background-color : #79c3fb;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 }
 
 /*===========Cards Template - Responive==========*/
+
+.main-content {
+	background: white;
+	position: relative;
+}
+
 .content {
-	/*text-align: center;*/
-	margin-left: 5%;
-	position: fixed;
-	top: 92px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
+	text-align: center;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	top: 75px;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
-	margin-bottom: 30px;
+	background-color: #FFFFFF;
 }
 
 .float-left .studentboard {
 	float: left;
+	/*display: inline-table;*/
 	width: 300px;
 	height: 350px;
 	text-align: left;
-	-webkit-box-sizing: border-box;
-	border: 2px solid #444;
-	box-shadow: 3px 3px 2px #444;
+	border: 3px solid #444;
 }
+
 .float-left .adminboard {
 	float: left;
 	width: 400px;
 	height: 450px;
 	cursor: default;
 	text-align: left;
-	-webkit-box-sizing: border-box;
-	border: 2px solid #444;
-	box-shadow: 3px 3px 2px #444;
+	border: 3px solid #444;
+	overflow: hidden
 }
 .float-left .adminboard.active {
 	float: left;
@@ -1847,7 +1840,7 @@ html.touch #subnav {
 
 ::-webkit-scrollbar {
 	width: 0px;
-	height: 0px;
+	height: 5px;
 }
 
 ::-webkit-scrollbar:hover {
@@ -1866,16 +1859,13 @@ html.touch #subnav {
 .studentboard, .adminboard {
 	background: #FFF;
 	padding: 0px;
-	margin: 15px;
-	overflow: auto;
+	margin: 5px;
+	/*overflow: auto;*/
 	cursor: pointer;
 }
 .studentboard:hover, .adminboard:hover {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	border: 2px solid #0087C0;
-	box-shadow: 3px 3px 2px #444;
+	border: 3px solid #0784E3;
+	overflow-y: scroll;
 }
 
 .studentboard img {
@@ -1891,7 +1881,7 @@ html.touch #subnav {
 
 .studentboard div.student-name {
 	width: 100%;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
@@ -1899,8 +1889,8 @@ html.touch #subnav {
 	/*padding : 10px 0px;
 	 text-align: center;
 	 width: 100%;
-	 color: #0087C0;
-	 border-bottom: 3px dotted #0087C0;*/
+	 color: #0784E3;
+	 border-bottom: 3px dotted #0784E3;*/
 }
 
 .studentboard i {
@@ -1926,7 +1916,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	list-style: none;
 	font-size: 0.9em;
-	border-left: 4px solid #0087C0;
+	border-left: 4px solid #0784E3;
 	padding: 5px;
 	margin-bottom: 5px;
 }
@@ -1959,7 +1949,7 @@ html.touch #subnav {
 	display: inline-block;
 	width: 340px;
 	left: 0;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 20px;
@@ -1995,7 +1985,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	list-style: none;
 	font-size: 0.9em;
-	border-left: 4px solid #0087C0;
+	border-left: 4px solid #0784E3;
 	padding: 5px;
 	margin-bottom: 5px;
 }
@@ -2066,7 +2056,7 @@ html.touch #subnav {
 	top: 20px;
 	left: 20px;
 	z-index: 10;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 2.8em;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -2076,7 +2066,7 @@ html.touch #subnav {
 	display: inline-block;
 	width: 340px;
 	left: 0;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	padding-left: 20px;
@@ -2104,7 +2094,7 @@ html.touch #subnav {
 	top: 250px;
 	text-align: center;
 	z-index: 999;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.8em;
 	font-weight: 400;
 	line-height: 1em;
@@ -2114,14 +2104,14 @@ html.touch #subnav {
 }
 
 #carousel .active {
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: white;
 }
 
 #carousel div.selected span input:hover {
 	width: 49%;
 	left: 0;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: white;
 }
 
@@ -2142,7 +2132,7 @@ html.touch #subnav {
 	padding-left: 5px;
 	line-height: 45px; /* same as #progressBar height if we want text middle aligned */
 	width: 0;
-	background-color: #0087C0;
+	background-color: #0784E3;
 }
 
 .quiz-option, .student-option {
@@ -2225,7 +2215,7 @@ html.touch #subnav {
 	color: #444;
 }
 #blog-content .post small a:hover {
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: #000;
 }
 #blog-content .post a {
@@ -2237,7 +2227,7 @@ html.touch #subnav {
 	transition: background-color 0.3s ease-in-out;
 }
 #blog-content .post a:hover {
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: #000;
 }
 
@@ -2392,7 +2382,7 @@ input#searchsubmit:hover {
 	transition: all 0.3s ease-in-out;
 }
 #blog-nav a:hover {
-	background-color: #0087C0;
+	background-color: #0784E3;
 	color: #000;
 }
 
@@ -2423,7 +2413,7 @@ html.no-touch .single-projects #prev {
 	left: 0;
 	bottom: 47%;
 	margin-left: 0px;
-	width: 44px;
+	width: 50px;
 	height: 50px;
 	background-color: #000;
 	-webkit-box-shadow: 1px 1px 10px #444444;
@@ -2524,35 +2514,42 @@ html.no-touch #gradient-right {
 
 /* =================== Project Page Styles ======================= */
 #project-nav {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 9999;
 	width: 100%;
-	height: 44px;
-	background-color: #000;
+	height: 50px;
+	/*background-color: #000;*/
 	color: #fff;
+	background-color: #f3f3f3;
+	color: #666666;
+	text-overflow: ellipsis;
+	border-bottom: 3px solid #d9d9d9;
 }
 
 #project-page-logo {
 	float: left;
 	width: 181px;
-	height: 18px;
+	height: 23px;
 	background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
-	margin: 14px 12px 0 12px;
+	margin: 18px 12px 0 12px;
 }
+
 .user-info {
 	display: block;
 	float: right;
 	text-transform: uppercase;
 	font-size: 0.95em;
 	font-weight: 400;
-	padding: 12px 20px;
+	padding: 15px 20px;
 	cursor: pointer;
+	border-left: 3px solid #d9d9d9;
 }
 .user-info:hover {
-	color: #fff;
-	background-color: #444;
+	/*color: #fff;*/
+	border-bottom: 3px solid #0784E3;
+	/*background-color: #d9d9d9;*/
 	font-weight: 500;
 }
 
@@ -2563,7 +2560,7 @@ html.no-touch #gradient-right {
 	margin-left: 20px;
 	margin-right: 20px;
 	width: 60%;
-	height: 44px;
+	height: 50px;
 	text-align: left;
 	opacity: 0.3;
 	-webkit-transition: opacity 0.3s ease-in-out;
@@ -2599,6 +2596,7 @@ html.no-touch #gradient-right {
 	width: 100%;
 	height: 100%;
 }
+
 #project-page-logo h1 {
 	margin: 0;
 }
@@ -2610,7 +2608,7 @@ html.no-touch #gradient-right {
 	float: left;
 	background: #444444 url("../img/pointer-bottom.png") no-repeat 275px 19px;
 	width: 300px;
-	height: 44px;
+	height: 50px;
 	opacity: 0.8;
 	-webkit-transition: opacity 0.3s ease-in-out;
 	-moz-transition: opacity 0.3s ease-in-out;
@@ -2689,7 +2687,7 @@ html.no-touch #gradient-right {
 	background-color: #444;
 }
 #project-dropdown:hover ul {
-	top: 44px;
+	top: 50px;
 	opacity: 1;
 }
 
@@ -2698,7 +2696,7 @@ html.no-touch #gradient-right {
 	float: left;
 	background: transparent url("../img/pointer-back.png") no-repeat 7px 18px;
 	width: 70px;
-	height: 44px;
+	height: 50px;
 	text-align: right;
 	opacity: 0.8;
 	-webkit-transition: opacity 0.3s ease-in-out;
@@ -2772,7 +2770,7 @@ html.no-touch #gradient-right {
 	padding-right: 5px;
 }
 #chat-module.notify a i {
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 1.3em;
 	padding-right: 5px;
 }
@@ -2809,7 +2807,7 @@ html.no-touch #gradient-right {
 	transition: opacity 2s ease-in-out;
 	display: inline-block;
 	position: absolute;
-	top: 44px;
+	top: 50px;
 	left: 0;
 	z-index: 9999;
 	width: 80%;
@@ -2841,21 +2839,21 @@ html.no-touch #gradient-right {
 }
 #chatnav.active > input[type="text"] {
 	width: 80%;
-	color: #0087C0;
+	color: #0784E3;
 	font-weight: 200;
-	border: 1px solid #0087C0;
+	border: 1px solid #0784E3;
 }
 #chatnav.active > input[type="text"] {
 	width: 80%;
-	color: #0087C0;
+	color: #0784E3;
 	font-weight: 200;
-	border: 1px solid #0087C0;
+	border: 1px solid #0784E3;
 }
 #chatnav.active > input[type="button"] {
 	width: 15%;
 	text-align: center;
 	color: white;
-	background-color: #0087C0;
+	background-color: #0784E3;
 	text-transform: capitalize;
 }
 
@@ -2903,12 +2901,17 @@ html.no-touch #gradient-right {
 #searchbar.active > input[type="text"] {
 	width: 97%;
 	height: 97%;
-	color: #0087C0;
+	color: #0784E3;
 	font-weight: 500;
-	border: 1px solid #0087C0;
+	border: 1px solid #0784E3;
 }
 #searchbar.active > input[type="text"]:focus {
-	border: 2px solid #0087C0;
+	border: 2px solid #0784E3;
+	font-weight: 600;
+	text-align: left;
+}
+#searchbar.active > select:focus {
+	border: 2px solid #0784E3;
 	font-weight: 600;
 	text-align: left;
 }
@@ -3115,7 +3118,7 @@ footer {
 	-moz-transition: background-color 0.3s ease-in-out;
 	-o-transition: background-color 0.3s ease-in-out;
 	transition: background-color 0.3s ease-in-out;
-	color: #0087C0;
+	color: #0784E3;
 	font-size: 0.85em;
 }
 footer:hover {
@@ -3128,14 +3131,14 @@ footer p {
 }
 footer a {
 	text-decoration: none;
-	color: #0087C0;
+	color: #0784E3;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
 	transition: color 0.3s ease-in-out;
 }
 footer a:visited {
-	color: #0087C0;
+	color: #0784E3;
 }
 footer a:hover {
 	color: #fff;
@@ -3271,12 +3274,14 @@ footer a:hover {
 		padding: 0px;
 	}
 
-	.edit-form li.form-item > * {
-		vertical-align: top;
-		display: inline-block;
-		font-size: 13px;
-		line-height: 16px;
-		width: 90%;
+	.modal-body .modal-container footer {
+		position: relative;
+		bottom: 20px;
+	}
+	form li.form-item > label.error {
+		display: none;
+		font-size: 0;
+		padding: 0px
 	}
 
 	.modal-body .modal-container {
@@ -3297,14 +3302,14 @@ footer a:hover {
 	.float-left .studentboard {
 		float: none;
 		width: 100%;
-		height: 44px;
+		height: 50px;
 		margin: 0px;
 	}
 	#user-name-value {
 		display: none;
 	}
 
-	.modal-body .modal-container.login {
+	.modal-body .modal-container {
 		width: 100%;
 		height: 100%;
 		margin: 0px;
@@ -3336,7 +3341,7 @@ footer a:hover {
 		top: 50px;
 		left: 20px;
 		z-index: 20;
-		color: #0087C0;
+		color: #0784E3;
 		font-size: 1.2em;
 		font-weight: 700;
 	}
@@ -3371,7 +3376,7 @@ footer a:hover {
 		display: inline-block;
 		width: 189px;
 		left: 0;
-		background-color: #0087C0;
+		background-color: #0784E3;
 		padding-top: 10px;
 		padding-bottom: 10px;
 		padding-left: 0;
@@ -3399,7 +3404,7 @@ footer a:hover {
 		top: 120px;
 		text-align: center;
 		z-index: 10;
-		color: #0087C0;
+		color: #0784E3;
 		font-size: 1.8em;
 		font-weight: 400;
 		line-height: 1em;
@@ -3562,31 +3567,6 @@ footer a:hover {
 		box-shadow: 0px 0px 0px #444444;
 	}
 
-	#login-modal {
-		width: auto;
-		height: auto;
-		padding-top: 5px;
-		padding-bottom: 15px;
-		-webkit-box-shadow: 0px 0px 0px #444444;
-		-moz-box-shadow: 0px 0px 0px #444444;
-		box-shadow: 0px 0px 0px #444444;
-	}
-	#login-modal p {
-		width: 75%;
-		border-bottom: 1px solid #ccc;
-		margin: 0 15px 5px 15px;
-		padding: 0 0 5px 0;
-		font-size: 0.9em;
-		color: #888;
-	}
-	#login-modal p.contact-heading, #login-modal p.modal-social-heading {
-		color: #000;
-		border: 0;
-		font-weight: 500;
-		margin: 10px 15px 0 15px;
-		padding: 0;
-	}
-
 	#slogan {
 		display: block;
 		width: 100% !important;
@@ -3606,7 +3586,7 @@ footer a:hover {
 	#slogan-submit {
 		font-size: 22px;
 		padding: 10px 18px;
-		background-color: #0087C0;
+		background-color: #0784E3;
 		border: 0;
 		color: white;
 		width: 100%;
@@ -3682,7 +3662,7 @@ footer a:hover {
 
 	#fluid-nav {
 		height: auto;
-		background: #000;
+		background: #f3f3f3;
 	}
 
 	#static-nav {
@@ -3728,6 +3708,7 @@ footer a:hover {
 	}
 	#main-nav li a, #static-main-nav li a {
 		text-transform: none;
+		float: right;
 	}
 
 	#static-main-nav {
@@ -3762,7 +3743,7 @@ footer a:hover {
 	#project-page-logo {
 		float: left;
 		width: 24px;
-		height: 18px;
+		height: 23px;
 		background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
 	}
 

@@ -99,7 +99,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
 					}
 
-					jQuery('#register-button').on('click', function(e) {
+					jQuery('#register').on('click', function(e) {
 						if ($("#register-form").valid()) {
 							var inputuname = jQuery('#new-user-name').val();
 							var inputpass = jQuery('#new-user-password').val();
@@ -167,10 +167,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							},
 						},
 						messages : {
-							Rusername : "*",
-							Rpassword : "*",
-							Rpasswordrepeat : "*",
-							Rdomain : "*"
+							Rusername : "Valid Email Needed",
 						},
 					});
 

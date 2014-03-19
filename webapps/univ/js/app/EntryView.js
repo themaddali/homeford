@@ -125,9 +125,7 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							},
 						},
 						messages : {
-							username : "*",
-							userpassword : "*",
-							userdomain : "*"
+							username : "Valid Email Needed",
 						},
 					});
 

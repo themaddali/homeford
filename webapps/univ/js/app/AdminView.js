@@ -7,7 +7,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 			 *
 			 */
 			var PARMS = {
-				"Bg" : "img\/classbg.png",
+				"Bg" : "img\/4.jpg",
 			};
 			var MALEICON = '<i class="icon-male  icon-1x "></i>';
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
