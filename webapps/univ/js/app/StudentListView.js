@@ -60,10 +60,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 									} else {
 										jQuery('#searchbar').removeClass('active');
 									}
-									if (COUNT % 2 != 0) {
-										var newboard = template.clone();
-										jQuery('#card-canvas').append(newboard);
-									}
+									//jQuery('#card-canvas').append(createnewboard);
 									jQuery("#preloader").hide();
 									ActivatePanelEvents();
 								}

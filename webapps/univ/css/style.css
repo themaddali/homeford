@@ -1455,7 +1455,7 @@ body.error404 {
 	font-size: 1em;
 }
 .edit-form li.form-item label.form-helper {
-	margin-left:15px;
+	margin-left: 15px;
 	font-size: 13px;
 	padding-left: 10px;
 	border-left: 1px solid #0784E3;
@@ -1551,6 +1551,55 @@ form input.error {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #888;
 }
+
+/*DASHBOARD THEMING*/
+.adminboard header {
+	background-color: #FFFFFF;
+	font-weight: 700;
+	font-size: 1em;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: black;
+	text-overflow: ellipsis;
+	padding: 10px;
+	padding-left: 15px;
+	border-bottom: 1px solid #d9d9d9;
+	border-top-left-radius: 10px;
+}
+.adminboard header a.control {
+	font-weight: 500;
+	float: right;
+	font-size: 0.8em;
+	color: #444;
+	cursor: pointer;
+}
+.adminboard header a.control:hover {
+	color: #0784E3;
+}
+
+.adminboard footer {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	text-align: center;
+	background-color: #FFFFFF;
+	font-size: 0.8em;
+	color: #7f7f7f;
+	position: relative;
+	top: 355px;
+	padding-top: 6px;
+	border-top: 1px dotted #d9d9d9;
+	border-bottom-right-radius: 10px;
+	cursor: pointer;
+}
+.adminboard footer:hover {
+	text-align: center;
+	background-color: #FFFFFF;
+	font-size: 0.8em;
+	color: #0784E3;
+	position: relative;
+	top: 355px;
+	border-top: 1px dotted #d9d9d9;
+	border-bottom-right-radius: 10px;
+}
+
 .adminboard h3 {
 	padding: 10px;
 	margin: 0;
@@ -2564,7 +2613,7 @@ html.no-touch #gradient-right {
 	background-color: #f3f3f3;
 	color: #666666;
 	text-overflow: ellipsis;
-	border-bottom: 3px solid #d9d9d9;
+	border-bottom: 2px solid #d9d9d9;
 }
 
 #project-page-logo {
