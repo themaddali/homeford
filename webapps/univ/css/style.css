@@ -1307,7 +1307,7 @@ body.error404 {
 
 .modal-body .modal-container footer .edit-controls {
 	position: absolute;
-	padding: 10px;
+	padding: 7px;
 	text-align: right;
 	width: 100%;
 	height: 60px
@@ -1435,6 +1435,12 @@ body.error404 {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
+.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper {
+	display: inline;
+}
+.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper {
+	display: inline;
+}
 .edit-form li select {
 	-webkit-appearance: none;
 	padding: 10px;
@@ -1447,6 +1453,15 @@ body.error404 {
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
 	font-size: 1em;
+}
+.edit-form li.form-item label.form-helper {
+	margin-left:15px;
+	font-size: 13px;
+	padding-left: 10px;
+	border-left: 1px solid #0784E3;
+	/*background: transparent url("../img/next-up.png") no-repeat left;*/
+	font-style: italic;
+	display: none;
 }
 
 .edit-form li.form-item > * {
