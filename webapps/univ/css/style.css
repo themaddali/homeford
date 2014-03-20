@@ -1582,7 +1582,7 @@ form input.error {
 }
 .adminboard .dash-info-visual {
 	height: 42%;
-	border-top: 1px dotted #d9d9d9;
+	/*border-top: 1px dotted #d9d9d9;*/
 }
 .adminboard .dash-info-3key {
 	font-size: 4em;
@@ -1593,12 +1593,13 @@ form input.error {
 	position: relative;
 	height: 100%;
 	width: 33%;
-	border-right: 1px dotted #d9d9d9;
+	/*border-right: 1px dotted #d9d9d9;*/
 }
 .adminboard div.value {
-	font-size: 40px;
+	font-size: 30px;
 	padding: 5px;
 	margin-top: 40%;
+	letter-spacing: -2px;
 }
 .adminboard div.value-desc {
 	font-size: 14px;
@@ -1610,7 +1611,7 @@ form input.error {
 	font-size: 4em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #7f7f7f;
-	float:left;
+	float: left;
 	position: relative;
 	height: 100%;
 	width: 50%;
@@ -1621,11 +1622,43 @@ form input.error {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #7f7f7f;
 	text-align: center;
-	float:left;
+	float: left;
 	position: relative;
 	height: 100%;
 	width: 100%;
 	border-right: 1px dotted #d9d9d9;
+}
+
+.adminboard .dash-info-visual img {
+	padding: 0px;
+	height: 90%;
+	margin-top: 5px;
+	height: 95%;
+	width: auto;
+}
+.adminboard .dash-info-visual div.full {
+	padding: 0px;
+	height: 90%;
+	margin-top: 5px;
+	height: 95%;
+	width: auto;
+}
+
+.adminboard footer a {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	text-align: center;
+	background-color: #FFFFFF;
+	font-size: 1em;
+	color: #7f7f7f;
+	cursor: pointer;
+}
+.adminboard footer a:hover {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	text-align: center;
+	background-color: #FFFFFF;
+	font-size: 1em;
+	color: #0784E3;
+	cursor: pointer;
 }
 
 .adminboard footer {
@@ -1649,6 +1682,9 @@ form input.error {
 	position: relative;
 	border-top: 1px dotted #d9d9d9;
 	border-bottom-right-radius: 10px;
+}
+.adminboard footer:hover .more-info {
+	color: #0784E3;
 }
 
 .adminboard h3 {
@@ -1731,7 +1767,7 @@ form input.error {
 
 /*form-view*/
 
-.adminboard form.show-form,.modal-contents form.show-form {
+.adminboard form.show-form, .modal-contents form.show-form {
 	width: 100%;
 	margin-bottom: 20px;
 }
@@ -1739,19 +1775,19 @@ form input.error {
 	margin: 20px 0px;
 	border: none;
 }
-.adminboard form.show-form fieldset:first-of-type,.modal-contents form.show-form fieldset:first-of-type  {
+.adminboard form.show-form fieldset:first-of-type, .modal-contents form.show-form fieldset:first-of-type {
 	margin-top: 0px;
 }
-.adminboard form.show-form fieldset:last-of-type,.modal-contents form.show-form fieldset:last-of-type  {
+.adminboard form.show-form fieldset:last-of-type, .modal-contents form.show-form fieldset:last-of-type {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item, .modal-contents form.show-form li.form-item  {
+.adminboard form.show-form li.form-item, .modal-contents form.show-form li.form-item {
 	font-size: 0px;
 }
-.adminboard form.show-form li.form-item:last-of-type,.modal-contents  form.show-form li.form-item:last-of-type {
+.adminboard form.show-form li.form-item:last-of-type, .modal-contents  form.show-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item > *,.modal-contents form.show-form li.form-item > *  {
+.adminboard form.show-form li.form-item > *, .modal-contents form.show-form li.form-item > * {
 	vertical-align: top;
 	display: inline-block;
 	font-size: 13px;
@@ -1770,11 +1806,11 @@ form input.error {
 	box-sizing: border-box;
 	cursor: default;
 }
-.adminboard form.show-form li.form-item > label:first-of-type.condensed,.modal-contents form.show-form li.form-item > label:first-of-type.condensed {
+.adminboard form.show-form li.form-item > label:first-of-type.condensed, .modal-contents form.show-form li.form-item > label:first-of-type.condensed {
 	width: auto;
 	cursor: default;
 }
-.adminboard form.show-form li.form-item > .form-content,.modal-contents form.show-form li.form-item > .form-content {
+.adminboard form.show-form li.form-item > .form-content, .modal-contents form.show-form li.form-item > .form-content {
 	width: 66%;
 	margin-bottom: 5px;
 	font-size: 13px;

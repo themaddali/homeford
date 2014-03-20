@@ -64,7 +64,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 						xkey : 'y',
 						xLabels : 'month',
 						preUnits : '$',
-						lineColors : ['#009ACD', '#e34a33'],
+						lineColors : ['#0784E3', '#e36607'],
 						lineWidth : 4,
 						pointSize : 5,
 						ykeys : ['a', 'b'],
@@ -218,7 +218,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 					var _ownerof = 0;
 					service.getUserProfile({
 						success : function(UserProfile) {
-							updatePanelValues('#user-id-value', UserProfile.id);
+							updatePanelValues('#user-id-value', 'K-'+UserProfile.id);
 							if (UserProfile.domains.length === 1) {
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);

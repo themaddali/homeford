@@ -35,6 +35,329 @@
 		</div>
 		<div class="main-content">
 			<div id="card-canvas" class="content float-left">
+
+				<!-- <div class="adminboard">
+				<h3>User Profile</h3>
+				<p class="designation">
+				Overview
+				</p>
+				<a href="#/profileedit" id="profile-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+				<form class="show-form">
+				<fieldset>
+				<ol id="profileview-form">
+				<li class="form-item">
+				<label>First Name</label>
+				<div class="form-content user-first-name">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>Last Name</label>
+				<div class="form-content user-last-name">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>User Id</label>
+				<div class="form-content user-id">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>Password</label>
+				<div class="form-content user-password">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>Email</label>
+				<div class="form-content user-email">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>Phone</label>
+				<div class="form-content user-phone">
+
+				</div>
+				</li>
+				<li class="form-item">
+				<label>Active Domains</label>
+				<div class="form-content" id="user-domain">
+
+				</div>
+				</li>
+				</ol>
+				</fieldset>
+				</form>
+				</div> -->
+				<div class="adminboard">
+					<header>
+						User Profile
+						<a href="#/profileedit" class="control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div id="user-id-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									user id
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="user-owner-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									domain owner
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="user-admin-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									domain admin
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								<img src="../../univ/img/sampledonut.png">
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<a class="more-info" href="#/profileview"> <i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More </a>
+						</div>
+					</footer>
+
+				</div>
+				<div class="adminboard">
+					<header>
+						Context Example
+						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div class="value">
+									100 %
+								</div>
+								<div class="value-desc">
+									value1
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div class="value">
+									16
+								</div>
+								<div class="value-desc">
+									value 2
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div class="value">
+									34
+								</div>
+								<div class="value-desc">
+									value 3
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								<img src="../../univ/img/sampledonut.png">
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+						</div>
+					</footer>
+				</div>
+				<div class="adminboard">
+					<header>
+						Accounts
+						<a href="" class="control T1"><i class="icon-cogs  icon-1x "></i>Manage</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div id="accounts-in-value" class="value">
+									$16,000
+								</div>
+								<div class="value-desc">
+									Income
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="accounts-out-value" class="value">
+									$14,500
+								</div>
+								<div class="value-desc">
+									Expenditure
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="user-balance-value" class="value">
+									$1,500
+								</div>
+								<div class="value-desc">
+									Profit
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								<img src="../../univ/img/sampledonut.png">
+								<!-- <div class="full" id="accounts-chart"></div> -->
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<a class="more-info" href="#/profileview"> <i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More </a>
+						</div>
+					</footer>
+
+				</div>
+				<div class="adminboard T1">
+					<h3>Manage</h3>
+					<p class="designation">
+						Accounts
+					</p>
+					<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+					<div class="full" id="accounts-chart"></div>
+
+				</div>
+				<div id="manage-admin" class="adminboard">
+					<h3>Manage</h3>
+					<p class="designation">
+						Admins
+					</p>
+					<a style="left:307px" id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
+					<br />
+					<div id="admin-accordion">
+
+					</div>
+					<div id="admin-min-list">
+						<ul id="admin-list-min">
+
+						</ul>
+					</div>
+
+				</div>
+				<div class="adminboard">
+					<header>
+						Admins
+						<a id="" class="control T1"><i class="icon-envelope  icon-1x "></i>Invite</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div id="invite-total-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									total
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="invite-accept-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									active
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="invite-pending-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									pending
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								<img src="../../univ/img/sampledonut.png">
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+						</div>
+					</footer>
+
+				</div>
+				<div class="adminboard">
+					<h3>Manage</h3>
+					<p class="designation">
+						Members
+					</p>
+					<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
+					<br />
+					<div id="members-accordion">
+
+					</div>
+				</div>
+				<div class="adminboard">
+					<header>
+						Members
+						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Send</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div id="members-total-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									total
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="members-male-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									male
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="members-female-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									female
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								<img src="../../univ/img/sampledonut.png">
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+						</div>
+					</footer>
+
+				</div>
 				<div class="adminboard T1">
 					<h3>Organization</h3>
 					<p class="designation">
@@ -109,291 +432,6 @@
 							</fieldset>
 						</form>
 					</div>
-
-				</div>
-				<!-- <div class="adminboard">
-					<h3>User Profile</h3>
-					<p class="designation">
-						Overview
-					</p>
-					<a href="#/profileedit" id="profile-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
-					<form class="show-form">
-						<fieldset>
-							<ol id="profileview-form">
-								<li class="form-item">
-									<label>First Name</label>
-									<div class="form-content user-first-name">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Last Name</label>
-									<div class="form-content user-last-name">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>User Id</label>
-									<div class="form-content user-id">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Password</label>
-									<div class="form-content user-password">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Email</label>
-									<div class="form-content user-email">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Phone</label>
-									<div class="form-content user-phone">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Active Domains</label>
-									<div class="form-content" id="user-domain">
-
-									</div>
-								</li>
-							</ol>
-						</fieldset>
-					</form>
-				</div> -->
-				<div class="adminboard">
-					<header>
-						User Profile
-						<a href="#/profileedit" class="control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
-					</header>
-					<body>
-						<div class="dash-info-reg">
-							<div class="dash-info-3key">
-								<div id="user-id-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									user id
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="user-owner-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									owner
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="user-admin-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									admin
-								</div>
-							</div>
-						</div>
-						<div class="dash-info-visual">
-							<div class="dash-info-1key">
-								4
-							</div>
-						</div>
-
-					</body>
-					<footer>
-						<div>
-							<a href="#/profileview"> <i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More </a>
-						</div>
-					</footer>
-
-				</div>
-				<!-- <div class="adminboard">
-				<h3>Strength</h3>
-				<p class="designation">
-
-				</p>
-				<a id="domain-strength" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
-				<div class="full" id="domain-strength-chart"></div>
-
-				</div> -->
-				<div class="adminboard">
-					<header>
-						Context Example
-						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
-					</header>
-					<body>
-						<div class="dash-info-reg">
-							<div class="dash-info-3key">
-								<div class="value">
-									100%
-								</div>
-								<div class="value-desc">
-									value1
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div class="value">
-									16
-								</div>
-								<div class="value-desc">
-									value2
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div class="value">
-									34
-								</div>
-								<div class="value-desc">
-									value3
-								</div>
-							</div>
-						</div>
-						<div class="dash-info-visual">
-							<div class="dash-info-1key">
-								-
-							</div>
-						</div>
-
-					</body>
-					<footer>
-						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
-						</div>
-					</footer>
-
-				</div>
-				<div class="adminboard T1">
-					<h3>Manage</h3>
-					<p class="designation">
-						Accounts
-					</p>
-					<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
-					<div class="full" id="accounts-chart"></div>
-
-				</div>
-				<div id="manage-admin" class="adminboard">
-					<h3>Manage</h3>
-					<p class="designation">
-						Admins
-					</p>
-					<a style="left:307px" id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
-					<br />
-					<div id="admin-accordion">
-
-					</div>
-					<div id="admin-min-list">
-						<ul id="admin-list-min">
-
-						</ul>
-					</div>
-
-				</div>
-				<div class="adminboard">
-					<header>
-						Invitations
-						<a id="" class="control T1"><i class="icon-envelope  icon-1x "></i>Send</a>
-					</header>
-					<body>
-						<div class="dash-info-reg">
-							<div class="dash-info-3key">
-								<div id="invite-total-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									sent
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="invite-accept-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									accepted
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="invite-pending-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									pending
-								</div>
-							</div>
-						</div>
-						<div class="dash-info-visual">
-							<div class="dash-info-1key">
-								4
-							</div>
-						</div>
-
-					</body>
-					<footer>
-						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
-						</div>
-					</footer>
-
-				</div>
-				<div class="adminboard">
-					<h3>Manage</h3>
-					<p class="designation">
-						Members
-					</p>
-					<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
-					<br />
-					<div id="members-accordion">
-
-					</div>
-				</div>
-				<div class="adminboard">
-					<header>
-						Members
-						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Send</a>
-					</header>
-					<body>
-						<div class="dash-info-reg">
-							<div class="dash-info-3key">
-								<div id="members-total-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									total
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="members-male-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									male
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="members-female-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									female
-								</div>
-							</div>
-						</div>
-						<div class="dash-info-visual">
-							<div class="dash-info-1key">
-								4
-							</div>
-						</div>
-
-					</body>
-					<footer>
-						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
-						</div>
-					</footer>
 
 				</div>
 				<div class="adminboard">
