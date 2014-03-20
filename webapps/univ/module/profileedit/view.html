@@ -24,61 +24,67 @@
 
 		</header>
 
-		<div id="profile-edit-modal" class="modal-body">
+		<div id="profile-view-modal" class="modal-body">
 			<div class="modal-container">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					Profile Edit
+					User Profile
 				</header>
 				<div class="modal-contents">
-					<form id="profile-edit-form" class="edit-form">
+					<form class="show-form">
 						<fieldset>
-							<ol id="profile-form">
+							<ol id="profileview-form">
 								<li class="form-item">
 									<label>First Name</label>
-									<input placeholder="First Name"  id="profile-first-name" name="profilefirstname" type="text" autofocus />
+									<div class="form-content user-first-name">
+
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Last Name</label>
-									<input placeholder="Last Name" id="profile-last-name" name="profilelastname" type="text" />
+									<div class="form-content user-last-name">
+
+									</div>
 								</li>
 								<li class="form-item">
-									<label>ID Number</label>
-									<input placeholder="Unique ID (readonly)" readonly id="profile-id" name="profileid" type="text" />
+									<label>User Id</label>
+									<div class="form-content user-id">
+
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Password</label>
+									<div class="form-content user-password">
+
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Email</label>
-									<input placeholder="email ID / Signed In" id="profile-email" readonly name="profileemail" type="text" />
+									<div class="form-content user-email">
+
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Phone</label>
-									<input placeholder="Phone Number" id="profile-phone" name="profilephone" type="text" />
+									<div class="form-content user-phone">
+
+									</div>
 								</li>
 								<li class="form-item">
-									<label>New Password</label>
-									<input placeholder="******" id="profile-password" name="profilepassword" type="password" />
-								</li>
-								<li id="password-reenter-item" style="display:none"  class="form-item">
-									<label>Re Enter Password</label>
-									<input placeholder="*******" id="profile-password-repeat" name="profilepasswordrepeat" type="text" />
-								</li>
-								<li class="form-item">
-									<label>Domains</label>
-									<input placeholder="Active Domains" readonly id="profile-domains" name="profiledomains" type="text" />
-								</li>
-								<li class="form-item" id="profile-domain-template" style="display: none">
-									<label></label>
-									<input placeholder="Active Domains" readonly id="profile-domain-list" name="profiledomains" type="text" />
+									<label>Active Domains</label>
+									<div class="form-content" id="user-domain">
+
+									</div>
 								</li>
 							</ol>
 						</fieldset>
 					</form>
 				</div>
-				<footer>
+				<!-- <footer>
 					<div class="edit-controls">
 						<input id="profile-edit" type="button" value="Update">
 					</div>
-				</footer>
+				</footer> -->
 				<div id="profile-edit-modal-close" class="modal_close"></div>
 			</div>
 		</div>

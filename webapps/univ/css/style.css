@@ -1576,6 +1576,58 @@ form input.error {
 	color: #0784E3;
 }
 
+.adminboard .dash-info-reg {
+	height: 42%;
+	border-top: 1px dotted #d9d9d9;
+}
+.adminboard .dash-info-visual {
+	height: 42%;
+	border-top: 1px dotted #d9d9d9;
+}
+.adminboard .dash-info-3key {
+	font-size: 4em;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #7f7f7f;
+	text-align: center;
+	float: left;
+	position: relative;
+	height: 100%;
+	width: 33%;
+	border-right: 1px dotted #d9d9d9;
+}
+.adminboard div.value {
+	font-size: 40px;
+	padding: 5px;
+	margin-top: 40%;
+}
+.adminboard div.value-desc {
+	font-size: 14px;
+	padding: 0px;
+	margin-top: -15px;
+}
+.adminboard .dash-info-2key {
+	text-align: center;
+	font-size: 4em;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #7f7f7f;
+	float:left;
+	position: relative;
+	height: 100%;
+	width: 50%;
+	border-right: 1px dotted #d9d9d9;
+}
+.adminboard .dash-info-1key {
+	font-size: 4em;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #7f7f7f;
+	text-align: center;
+	float:left;
+	position: relative;
+	height: 100%;
+	width: 100%;
+	border-right: 1px dotted #d9d9d9;
+}
+
 .adminboard footer {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	text-align: center;
@@ -1583,19 +1635,18 @@ form input.error {
 	font-size: 0.8em;
 	color: #7f7f7f;
 	position: relative;
-	top: 355px;
-	padding-top: 6px;
+	padding-top: 4px;
 	border-top: 1px dotted #d9d9d9;
 	border-bottom-right-radius: 10px;
 	cursor: pointer;
 }
+
 .adminboard footer:hover {
 	text-align: center;
 	background-color: #FFFFFF;
 	font-size: 0.8em;
 	color: #0784E3;
 	position: relative;
-	top: 355px;
 	border-top: 1px dotted #d9d9d9;
 	border-bottom-right-radius: 10px;
 }
@@ -1680,34 +1731,34 @@ form input.error {
 
 /*form-view*/
 
-.adminboard form.show-form {
+.adminboard form.show-form,.modal-contents form.show-form {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.adminboard form.show-form fieldset {
+.adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
-.adminboard form.show-form fieldset:first-of-type {
+.adminboard form.show-form fieldset:first-of-type,.modal-contents form.show-form fieldset:first-of-type  {
 	margin-top: 0px;
 }
-.adminboard form.show-form fieldset:last-of-type {
+.adminboard form.show-form fieldset:last-of-type,.modal-contents form.show-form fieldset:last-of-type  {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item {
+.adminboard form.show-form li.form-item, .modal-contents form.show-form li.form-item  {
 	font-size: 0px;
 }
-.adminboard form.show-form li.form-item:last-of-type {
+.adminboard form.show-form li.form-item:last-of-type,.modal-contents  form.show-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item > * {
+.adminboard form.show-form li.form-item > *,.modal-contents form.show-form li.form-item > *  {
 	vertical-align: top;
 	display: inline-block;
 	font-size: 13px;
 	line-height: 17px;
 }
 
-.adminboard form.show-form li.form-item > label:first-of-type {
+.adminboard form.show-form li.form-item > label:first-of-type, .modal-contents form.show-form li.form-item > label:first-of-type {
 	max-width: 170px;
 	width: 33%;
 	margin-bottom: 5px;
@@ -1719,11 +1770,11 @@ form input.error {
 	box-sizing: border-box;
 	cursor: default;
 }
-.adminboard form.show-form li.form-item > label:first-of-type.condensed {
+.adminboard form.show-form li.form-item > label:first-of-type.condensed,.modal-contents form.show-form li.form-item > label:first-of-type.condensed {
 	width: auto;
 	cursor: default;
 }
-.adminboard form.show-form li.form-item > .form-content {
+.adminboard form.show-form li.form-item > .form-content,.modal-contents form.show-form li.form-item > .form-content {
 	width: 66%;
 	margin-bottom: 5px;
 	font-size: 13px;

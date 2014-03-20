@@ -77,6 +77,16 @@ function (router, cookie, urlFragment ) { "use strict";
                     }
                 });
                 
+                router.map('profileview', '^/profileview(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/profileedit/view.html','../app/ProfileView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                
                 router.map('profileedit', '^/profileedit(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {

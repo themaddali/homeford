@@ -155,6 +155,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				}
 
 				function populateDomainData() {
+					var _membersmale = 0;
+					var _membersfemale = 0;
 					jQuery('#members-accordion').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
@@ -178,11 +180,16 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							jQuery('.templates-div').append(membercontenttemplate.attr('id', 'member-content-template'));
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
+								updatePanelValues('#members-total-value', COUNT);
 								var headerelement = memberheadertemplate.clone();
 								var contentelement = membercontenttemplate.clone();
 								if (UnivData[0].students[i].gender === 'female') {
+									_membersfemale = _membersfemale + 1;
+									updatePanelValues('#members-female-value', _membersfemale);
 									headerelement.html(FEMALEICON + UnivData[0].students[i].name);
 								} else {
+									_membersmale = _membersmale + 1;
+									updatePanelValues('#members-male-value', _membersmale);
 									headerelement.html(MALEICON + UnivData[0].students[i].name);
 								}
 								jQuery('.memberid', contentelement).html(UnivData[0].students[i].id);
@@ -207,27 +214,25 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				}
 
 				function populateUserData() {
+					var _adminof = 0;
+					var _ownerof = 0;
 					service.getUserProfile({
 						success : function(UserProfile) {
-							//OverView Panel Load
-							jQuery('.user-first-name').text(UserProfile.firstName);
-							jQuery('.user-last-name').text(UserProfile.lastName);
-							jQuery('.user-id').text(UserProfile.id);
-							jQuery('.user-password').text('*******');
-							jQuery('.user-email').text(UserProfile.email);
-							jQuery('.user-phone').text(UserProfile.phoneNumber);
-							var template = jQuery('#profile-domainview-template').attr('id', '');
-							jQuery('.templates-div').append(template.attr('id', 'profile-domainview-template'));
+							updatePanelValues('#user-id-value', UserProfile.id);
 							if (UserProfile.domains.length === 1) {
-								jQuery('#user-domain').html(UserProfile.domains[0].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[0].roleName] + '</span>');
+								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
+									updatePanelValues('#user-admin-value', 1);
+								} else {
+									updatePanelValues('#user-owner-value', 1);
+								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (i === 0) {
-										jQuery('#user-domain').html(UserProfile.domains[0].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[0].roleName] + '</span>');
+									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
+										_adminof = _adminof + 1;
+										updatePanelValues('#user-admin-value', _adminof);
 									} else {
-										var activetemplate = template.clone();
-										jQuery('.user-domain', activetemplate).html(UserProfile.domains[i].domainName + '<span style="font-style: italic; padding-left:5px; font-size: 10px">' + ROLEMAP[UserProfile.domains[i].roleName] + '</span>');
-										jQuery('#profileview-form').append(activetemplate);
+										_ownerof = _ownerof + 1;
+										updatePanelValues('#user-owner-value', _ownerof);
 									}
 								}
 							}
@@ -236,6 +241,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				}
 
 				function populateInviteData() {
+					var _inviteaccept = 0;
+					var _invitepending = 0;
 					service.getInviteStatus({
 						success : function(InviteList) {
 							jQuery('#admin-accordion').empty();
@@ -246,12 +253,17 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							jQuery('.templates-div').append(admincontenttemplate.attr('id', 'admin-content-template'));
 							var ADMINCOUNT = InviteList.length;
 							for (var i = 0; i < ADMINCOUNT; i++) {
+								updatePanelValues('#invite-total-value', ADMINCOUNT);
 								var headerelement = adminheadertemplate.clone();
 								var contentelement = admincontenttemplate.clone();
 								if (InviteList[i].status == 'ACCEPTED') {
+									_inviteaccept = _inviteaccept + 1;
+									updatePanelValues('#invite-accept-value', _inviteaccept);
 									headerelement.html(ACCEPTEDICON + InviteList[i].email);
 									DOMAINSTRENGTHDATA.a = DOMAINSTRENGTHDATA.a + 1;
 								} else {
+									_invitepending = _invitepending + 1;
+									updatePanelValues('#invite-pending-value', _invitepending);
 									headerelement.html(PENDINGICON + InviteList[i].email).addClass('pending');
 									DOMAINSTRENGTHDATA.b = DOMAINSTRENGTHDATA.b + 1;
 									PENDINGLIST.push(InviteList[i].email);
@@ -287,6 +299,10 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							}
 						}
 					});
+				}
+
+				function updatePanelValues(name, value) {
+					$(name).text(value);
 				}
 
 				function populateDomainStrengthGraphs(domainsData) {
