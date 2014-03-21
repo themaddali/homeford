@@ -21,27 +21,29 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 					service.getUserProfile({
 						success : function(UserProfile) {
 							//OverView Panel Load
-							jQuery('.user-first-name').text(UserProfile.firstName);
-							jQuery('.user-last-name').text(UserProfile.lastName);
-							jQuery('.user-id').text(UserProfile.id);
-							jQuery('.user-email').text(UserProfile.email);
-							jQuery('.user-phone').text(UserProfile.phoneNumber);
-							// var template = jQuery('#profile-domain-template').attr('id', '');
-							// if (UserProfile.domains.length === 1) {
-								// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-							// } else {
-								// for (var i = 0; i < UserProfile.domains.length; i++) {
-									// if (i === 0) {
-										// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-									// } else {
-										// var activetemplate = template.clone();
-										// activetemplate.show();
-										// jQuery('#profile-domain-list', activetemplate).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
-										// jQuery('#profile-form').append(activetemplate);
-									// }
-// 
-								// }
-							// }
+							jQuery('#profile-first-name').text(UserProfile.firstName);
+							jQuery('#profile-last-name').text(UserProfile.lastName);
+							jQuery('#profile-id').text(UserProfile.id);
+							jQuery('#profile-email').text(UserProfile.email);
+							jQuery('#profile-phone').text(UserProfile.phoneNumber);
+							var template = jQuery('#profile-domain-template').attr('id', '');
+							//backupagain
+							jQuery('#div-template').append(template.attr('id','profile-domain-template'))
+							if (UserProfile.domains.length === 1) {
+								 jQuery('#profile-domains').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+							 } else {
+								for (var i = 0; i < UserProfile.domains.length; i++) {
+									if (i === 0) {
+										jQuery('#profile-domains').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+										jQuery('#profile-domains').parent().addClass('hassecondary');
+									} else {
+										var activetemplate = template.clone();
+										jQuery('#profile-domain-list', activetemplate).text(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
+										jQuery('#profile-form').append(activetemplate);
+									}
+
+								}
+							}
 						}
 					});
 				}
@@ -68,7 +70,7 @@ define(['modernizr', 'cookie', '../app/service/DataService', 'validate', '../app
 				};
 
 				this.resume = function() {
-
+					populateData()
 				};
 
 				this.init = function(args) {

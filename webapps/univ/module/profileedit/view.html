@@ -24,66 +24,48 @@
 
 		</header>
 
-		<div id="profile-view-modal" class="modal-body">
-			<div class="modal-container">
+		<div id="profile-view-modal" class="modal-body view">
+			<div class="modal-container view">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					User Profile
 				</header>
 				<div class="modal-contents">
-					<form class="show-form">
+					<form id="profile-edit-form" class="view-form">
 						<fieldset>
-							<ol id="profileview-form">
+							<ol id="profile-form">
 								<li class="form-item">
 									<label>First Name</label>
-									<div class="form-content user-first-name">
-
-									</div>
+									<span id="profile-first-name"></span>
 								</li>
 								<li class="form-item">
 									<label>Last Name</label>
-									<div class="form-content user-last-name">
-
-									</div>
+									<span id="profile-last-name"></span>
 								</li>
 								<li class="form-item">
-									<label>User Id</label>
-									<div class="form-content user-id">
-
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Password</label>
-									<div class="form-content user-password">
-
-									</div>
+									<label>ID Number</label>
+									<span id="profile-id"></span>
 								</li>
 								<li class="form-item">
 									<label>Email</label>
-									<div class="form-content user-email">
-
-									</div>
+									<span id="profile-email"></span>
 								</li>
 								<li class="form-item">
 									<label>Phone</label>
-									<div class="form-content user-phone">
-
-									</div>
+									<span id="profile-phone"></span>
 								</li>
 								<li class="form-item">
-									<label>Active Domains</label>
-									<div class="form-content" id="user-domain">
-
-									</div>
+									<label>Domains</label>
+									<span id="profile-domains"></span>
 								</li>
 							</ol>
 						</fieldset>
 					</form>
 				</div>
 				<!-- <footer>
-					<div class="edit-controls">
-						<input id="profile-edit" type="button" value="Update">
-					</div>
+				<div class="edit-controls">
+				<input id="profile-edit" type="button" value="Update">
+				</div>
 				</footer> -->
 				<div id="profile-edit-modal-close" class="modal_close"></div>
 			</div>
@@ -94,15 +76,12 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 
 		<div id="preloader"></div>
-		<!-- <footer>
-		<div id="contact-info">
-		123.456.7890 &nbsp;&nbsp; <a id="contact-email" target="_blank">info@homeford.com</a>
-		<span class="ss-social"> <a href="http://www.facebook.com" target="_blank"><img src="img/ss-facebook.png" alt="facebook"></a> <a href="http://www.twitter.com" target="_blank"><img src="img/ss-twitter.png" alt="twitter"></a> <a href="http://pinterest.com/" target="_blank"><img src="img/ss-pinterest.png" alt="pinterest"></a> </span>
+		<div id="div-template" style="display:none">
+			<li class="secondary form-item" id="profile-domain-template">
+				<label></label>
+				<span id="profile-domain-list"></span>
+			</li>
 		</div>
-		<div id="copyright">
-		&copy; Homeford University 2014
-		</div>
-		</footer> -->
 
 	</body>
 </html>

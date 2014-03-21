@@ -1234,6 +1234,7 @@ body.error404 {
 	z-index: 100;
 	background-color: rgba(0, 0, 0, 0.6); /*dim the background*/
 }
+
 .modal-body .modal-container {
 	position: absolute;
 	margin-top: 4%;
@@ -1390,9 +1391,22 @@ body.error404 {
 	margin-bottom: 20px;
 	overflow: auto;
 }
+.view-form {
+	width: 100%;
+	margin-bottom: 20px;
+	overflow: auto;
+	text-align : center;
+}
 .edit-form fieldset {
 	margin: 20px 0px;
 	border: none;
+}
+.view-form fieldset {
+	margin: 20px 0px;
+	border: none;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #user-domain.onlyone {
@@ -1406,14 +1420,39 @@ body.error404 {
 .edit-form fieldset:first-of-type {
 	margin-top: 0px;
 }
+.view-form fieldset:first-of-type {
+	margin-top: 0px;
+}
 .edit-form fieldset:last-of-type {
+	margin-bottom: 0px;
+}
+.view-form fieldset:last-of-type {
 	margin-bottom: 0px;
 }
 
 .edit-form li.form-item {
 	font-size: 0px;
 }
+.view-form li.form-item {
+	font-size: 0px;
+	border-bottom: 2px dotted #f3f3f3;
+	margin-right: 25px;
+	padding: 10px;
+}
+.view-form li.form-item.hassecondary {
+	border-bottom: none;
+}
+.view-form li.form-item.secondary {
+	font-size: 0px;
+	border-bottom: 0px dotted #f3f3f3;
+	margin-right: 25px;
+	padding: 10px;
+	padding-top: 5px;
+}
 .edit-form li {
+	padding-bottom: 10px;
+}
+.view-form li {
 	padding-bottom: 10px;
 }
 .edit-form li.filler {
@@ -1424,6 +1463,13 @@ body.error404 {
 .edit-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
+.view-form li.form-item:last-of-type {
+	margin-bottom: 0px;
+}
+.view-form li.form-item.secondary:last-of-type {
+	border-bottom: 2px dotted #f3f3f3;
+}
+
 .edit-form li input {
 	padding: 10px;
 	border-radius: 0;
@@ -1471,10 +1517,22 @@ body.error404 {
 	line-height: 17px;
 	width: 50%;
 }
+.view-form li.form-item > * {
+	text-align : left;
+	vertical-align: center;
+	display: inline-block;
+	font-size: 14px;
+	line-height: 17px;
+	width: 50%;
+}
 
 .edit-form li.form-item span {
 	color: #7f7f7f;
 	font-size: 13px;
+}
+.view-form li.form-item span {
+	color: black;
+	font-size: 14px;
 }
 .edit-form li.form-item span input {
 	margin-left: 0px;
@@ -1485,6 +1543,19 @@ body.error404 {
 }
 
 .edit-form li.form-item > label {
+	max-width: 170px;
+	width: 40%;
+	margin-bottom: 5px;
+	color: #7f7f7f;
+	padding-right: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: default;
+}
+.view-form li.form-item > label {
+	text-align : left;
 	max-width: 170px;
 	width: 40%;
 	margin-bottom: 5px;
