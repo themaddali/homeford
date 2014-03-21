@@ -116,6 +116,15 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                router.map('adminslist', '^/adminslist(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/invite/view.html','../app/AdminsList'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 
                 // router.map('admin', '^/admin'+urlFragment.pagePatternTerminal, {
                 	// container: CONTAINER,

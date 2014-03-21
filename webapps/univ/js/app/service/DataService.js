@@ -43,7 +43,7 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
-				this.sendInvite = function(email, message, domain, roles ,handlers) {
+				this.sendInvite = function(email, message, domain, roles, handlers) {
 					$.ajax({
 						url : '/homeford/api/invitee',
 						type : 'POST',
@@ -61,11 +61,11 @@ define(['jquery'], function() {"use strict";
 					});
 				}
 
-				this.getInviteStatus = function(handlers) {
+				this.getInviteStatus = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/invitee',
+						url : '/homeford/api/inviteeusers?domainname=' + domain,
 						type : 'GET',
-						async : 'async',
+						async : false,
 						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data.sort(sortJsonByStatus));

@@ -19,6 +19,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			};
+			var ACTIVEDOMAINS = [];
 			var PENDINGLIST = [];
 			var DOMAINSTRENGTHDATA = {
 				y : 0,
@@ -34,78 +35,78 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 
 				function populateGraphs() {
 
-					Morris.Line({
-						element : 'accounts-chart',
-						data : [{
-							y : '2013-09',
-							a : 13000,
-							b : 11000
-						}, {
-							y : '2013-10',
-							a : 15000,
-							b : 14000
-						}, {
-							y : '2013-11',
-							a : 9000,
-							b : 8700
-						}, {
-							y : '2013-12',
-							a : 9500,
-							b : 9000
-						}, {
-							y : '2014-01',
-							a : 14000,
-							b : 11500
-						}, {
-							y : '2014-02',
-							a : 17000,
-							b : 13000
-						}],
-						xkey : 'y',
-						xLabels : 'month',
-						preUnits : '$',
-						lineColors : ['#0784E3', '#e36607'],
-						lineWidth : 4,
-						pointSize : 5,
-						ykeys : ['a', 'b'],
-						labels : ['Cash Inflow', 'Expenses']
-					});
-
-					Morris.Donut({
-						element : 'student-donut-1',
-						data : [{
-							label : "October",
-							value : 12
-						}, {
-							label : "Novemeber",
-							value : 15
-						}, {
-							label : "December",
-							value : 16
-						}, {
-							label : "January",
-							value : 20
-						}, {
-							label : "Feburary",
-							value : 19
-						}, {
-							label : "March",
-							value : 25
-						}]
-					});
-					Morris.Donut({
-						element : 'student-donut-2',
-						data : [{
-							label : "October",
-							value : 12
-						}, {
-							label : "Novemeber",
-							value : 15
-						}, {
-							label : "January",
-							value : 19
-						}]
-					});
+					// Morris.Line({
+					// element : 'accounts-chart',
+					// data : [{
+					// y : '2013-09',
+					// a : 13000,
+					// b : 11000
+					// }, {
+					// y : '2013-10',
+					// a : 15000,
+					// b : 14000
+					// }, {
+					// y : '2013-11',
+					// a : 9000,
+					// b : 8700
+					// }, {
+					// y : '2013-12',
+					// a : 9500,
+					// b : 9000
+					// }, {
+					// y : '2014-01',
+					// a : 14000,
+					// b : 11500
+					// }, {
+					// y : '2014-02',
+					// a : 17000,
+					// b : 13000
+					// }],
+					// xkey : 'y',
+					// xLabels : 'month',
+					// preUnits : '$',
+					// lineColors : ['#0784E3', '#e36607'],
+					// lineWidth : 4,
+					// pointSize : 5,
+					// ykeys : ['a', 'b'],
+					// labels : ['Cash Inflow', 'Expenses']
+					// });
+					//
+					// Morris.Donut({
+					// element : 'student-donut-1',
+					// data : [{
+					// label : "October",
+					// value : 12
+					// }, {
+					// label : "Novemeber",
+					// value : 15
+					// }, {
+					// label : "December",
+					// value : 16
+					// }, {
+					// label : "January",
+					// value : 20
+					// }, {
+					// label : "Feburary",
+					// value : 19
+					// }, {
+					// label : "March",
+					// value : 25
+					// }]
+					// });
+					// Morris.Donut({
+					// element : 'student-donut-2',
+					// data : [{
+					// label : "October",
+					// value : 12
+					// }, {
+					// label : "Novemeber",
+					// value : 15
+					// }, {
+					// label : "January",
+					// value : 19
+					// }]
+					// });
 				}
 
 				function checkForActiveCookie() {
@@ -138,17 +139,20 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 							}
 							if (OWNERLEVEL !== UserProfile.domains.length) {
 								//User is not owner. Filter stuff.
-								jQuery('.T1').hide();
-								populateUserData();
-								populateInviteData();
-								populateDomainData();
+								// jQuery('.T1').hide();
+								// populateUserData();
+								// populateInviteData();
+								// populateDomainData();
 								//Should clean memebr list out
+								//Testing All Now
+								jQuery('.T1').show();
+								populateDomainData();
+								populateUserData();
 							} else {
 								jQuery('.T1').show();
 								populateDomainData();
 								populateUserData();
-								populateInviteData();
-								populateGraphs();
+								//populateGraphs();
 							}
 						}
 					});
@@ -216,10 +220,13 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				function populateUserData() {
 					var _adminof = 0;
 					var _ownerof = 0;
+					ACTIVEDOMAINS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
-							updatePanelValues('#user-id-value', 'K-'+UserProfile.id);
+							updatePanelValues('#user-id-value', 'K-' + UserProfile.id);
 							if (UserProfile.domains.length === 1) {
+								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
+								populateInviteData(ACTIVEDOMAINS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
 								} else {
@@ -227,6 +234,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
+									ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 										_adminof = _adminof + 1;
 										updatePanelValues('#user-admin-value', _adminof);
@@ -234,71 +242,49 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 										_ownerof = _ownerof + 1;
 										updatePanelValues('#user-owner-value', _ownerof);
 									}
+									if (i === UserProfile.domains.length - 1) {
+										//Remove duplicates
+										ACTIVEDOMAINS = ACTIVEDOMAINS.filter(function(elem, pos) {
+											return ACTIVEDOMAINS.indexOf(elem) == pos;
+										})
+										populateInviteData(ACTIVEDOMAINS);
+									}
 								}
 							}
 						}
 					});
 				}
 
-				function populateInviteData() {
+				function populateInviteData(activedomains) {
 					var _inviteaccept = 0;
 					var _invitepending = 0;
-					service.getInviteStatus({
-						success : function(InviteList) {
-							jQuery('#admin-accordion').empty();
-							var adminheadertemplate = jQuery('#admin-header-template').attr('id', '');
-							var admincontenttemplate = jQuery('#admin-content-template').attr('id', '');
-							//Backing the template
-							jQuery('.templates-div').append(adminheadertemplate.attr('id', 'admin-header-template'));
-							jQuery('.templates-div').append(admincontenttemplate.attr('id', 'admin-content-template'));
-							var ADMINCOUNT = InviteList.length;
-							for (var i = 0; i < ADMINCOUNT; i++) {
-								updatePanelValues('#invite-total-value', ADMINCOUNT);
-								var headerelement = adminheadertemplate.clone();
-								var contentelement = admincontenttemplate.clone();
-								if (InviteList[i].status == 'ACCEPTED') {
-									_inviteaccept = _inviteaccept + 1;
-									updatePanelValues('#invite-accept-value', _inviteaccept);
-									headerelement.html(ACCEPTEDICON + InviteList[i].email);
-									DOMAINSTRENGTHDATA.a = DOMAINSTRENGTHDATA.a + 1;
-								} else {
-									_invitepending = _invitepending + 1;
-									updatePanelValues('#invite-pending-value', _invitepending);
-									headerelement.html(PENDINGICON + InviteList[i].email).addClass('pending');
-									DOMAINSTRENGTHDATA.b = DOMAINSTRENGTHDATA.b + 1;
-									PENDINGLIST.push(InviteList[i].email);
-								}
-								jQuery('.adminid', contentelement).html(InviteList[i].id);
-								jQuery('.adminstatus', contentelement).html(InviteList[i].status);
-								jQuery('.admindomain', contentelement).html(InviteList[i].domainName);
-								if (InviteList[i].roles.length == 1) {
-									jQuery('.adminroles', contentelement).html(ROLEMAP[InviteList[i].roles[0].roleName]);
-								} else {
-									for (var j = 0; j < InviteList[i].roles.length; j++) {
-										if (j == 0) {
-											jQuery('.adminroles', contentelement).html(ROLEMAP[InviteList[i].roles[0].roleName]);
+					var _invitetotal =0;
+					//Catch Error
+					if (activedomains) {
+						for (var z = 0; z < activedomains.length; z++) {
+							service.getInviteStatus(activedomains[z], {
+								success : function(InviteList) {
+									var ADMINCOUNT = InviteList.length;
+									_invitetotal = _invitetotal + ADMINCOUNT;
+									for (var i = 0; i < ADMINCOUNT; i++) {
+										updatePanelValues('#invite-total-value', _invitetotal);
+										if (InviteList[i].status == 'ACCEPTED') {
+											_inviteaccept = _inviteaccept + 1;
+											updatePanelValues('#invite-accept-value', _inviteaccept);
 										} else {
-											jQuery('#admincontentlist', contentelement).append('<li class="form-item"><label></label><div class="form-content">' + ROLEMAP[InviteList[i].roles[j].roleName] + '</div></li>');
+											_invitepending = _invitepending + 1;
+											updatePanelValues('#invite-pending-value', _invitepending);
+											PENDINGLIST.push(InviteList[i].email);
+										}
+
+										if (i === ADMINCOUNT - 1) {
+											//Future
 										}
 									}
 								}
-
-								jQuery('#admin-accordion').append(headerelement);
-								jQuery('#admin-accordion').append(contentelement);
-								if (i === ADMINCOUNT - 1) {
-									jQuery("#admin-accordion").accordion({
-										collapsible : true,
-										active : false
-									});
-									DOMAINSTRENGTHDATA.y = "2014-02";
-									var domainsData = [];
-									domainsData.push(DOMAINSTRENGTHDATA);
-									invite.pendingList(PENDINGLIST);
-									//populateDomainStrengthGraphs(domainsData);
-								}
-							}
+							});
 						}
-					});
+					}
 				}
 
 				function updatePanelValues(name, value) {
@@ -325,6 +311,10 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				}
 
 
+				this.getActiveDomains = function() {
+					return ACTIVEDOMAINS;
+				}
+
 				this.reloadData = function() {
 					populateData();
 				}
@@ -335,15 +325,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 
 				this.resume = function() {
 					showBG();
-					if (jQuery("#members-accordion").hasClass('ui-accordion')) {
-						jQuery("#members-accordion").accordion('destroy');
-					}
-					if (jQuery("#admin-accordion").hasClass('ui-accordion')) {
-						jQuery("#admin-accordion").accordion('destroy');
-					}
-					populateUserData();
-					populateInviteData();
-					populateDomainData();
+					getInfoByPrivilage();
+
 				};
 
 				this.init = function(args) {

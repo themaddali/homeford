@@ -178,7 +178,7 @@
 					</body>
 					<footer>
 						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+							<a class="more-info" href="#/example"> <i class="icon-align-justify  icon-1x" style="padding-right: 5px"></i>More</a>
 						</div>
 					</footer>
 				</div>
@@ -224,37 +224,37 @@
 					</body>
 					<footer>
 						<div>
-							<a class="more-info" href="#/profileview"> <i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More </a>
+							<a class="more-info" href="#/acounts"> <i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More </a>
 						</div>
 					</footer>
 
 				</div>
-				<div class="adminboard T1">
-					<h3>Manage</h3>
-					<p class="designation">
-						Accounts
-					</p>
-					<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
-					<div class="full" id="accounts-chart"></div>
+				<!-- <div class="adminboard T1">
+				<h3>Manage</h3>
+				<p class="designation">
+				Accounts
+				</p>
+				<a id="account-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Edit</a>
+				<div class="full" id="accounts-chart"></div>
+
+				</div> -->
+				<!-- <div id="manage-admin" class="adminboard">
+				<h3>Manage</h3>
+				<p class="designation">
+				Admins
+				</p>
+				<a style="left:307px" id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
+				<br />
+				<div id="admin-accordion">
 
 				</div>
-				<div id="manage-admin" class="adminboard">
-					<h3>Manage</h3>
-					<p class="designation">
-						Admins
-					</p>
-					<a style="left:307px" id="admin-manage" href="#/invite" class="panel-control"><i class="icon-cogs  icon-1x "></i>Invite</a>
-					<br />
-					<div id="admin-accordion">
+				<div id="admin-min-list">
+				<ul id="admin-list-min">
 
-					</div>
-					<div id="admin-min-list">
-						<ul id="admin-list-min">
-
-						</ul>
-					</div>
-
+				</ul>
 				</div>
+
+				</div> -->
 				<div class="adminboard">
 					<header>
 						Admins
@@ -296,22 +296,12 @@
 					</body>
 					<footer>
 						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+							<a class="more-info" href="#/adminslist"> <i class="icon-align-justify  icon-1x" style="padding-right: 5px"></i>More </a>
 						</div>
 					</footer>
 
 				</div>
-				<div class="adminboard">
-					<h3>Manage</h3>
-					<p class="designation">
-						Members
-					</p>
-					<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
-					<br />
-					<div id="members-accordion">
 
-					</div>
-				</div>
 				<div class="adminboard">
 					<header>
 						Members
@@ -357,6 +347,63 @@
 						</div>
 					</footer>
 
+				</div>
+				<div class="adminboard">
+					<header>
+						Quiz
+						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Assign</a>
+					</header>
+					<body>
+						<div class="dash-info-reg">
+							<div class="dash-info-3key">
+								<div id="members-total-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									total
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="members-male-value" class="value">
+									45%
+								</div>
+								<div class="value-desc">
+									done
+								</div>
+							</div>
+							<div class="dash-info-3key">
+								<div id="members-male-value" class="value">
+									84%
+								</div>
+								<div class="value-desc">
+									average
+								</div>
+							</div>
+						</div>
+						<div class="dash-info-visual">
+							<div class="dash-info-1key">
+								4
+							</div>
+						</div>
+
+					</body>
+					<footer>
+						<div>
+							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+						</div>
+					</footer>
+
+				</div>
+				<div class="adminboard">
+					<h3>Manage</h3>
+					<p class="designation">
+						Members
+					</p>
+					<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
+					<br />
+					<div id="members-accordion">
+
+					</div>
 				</div>
 				<div class="adminboard T1">
 					<h3>Organization</h3>
@@ -434,241 +481,52 @@
 					</div>
 
 				</div>
-				<div class="adminboard">
-					<h3>Assignments</h3>
-					<p class="designation">
-						ToDo List
-					</p>
-					<a id="assignment-todo-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
-					<div class="card-body">
-						<div id="to-do-accordion">
-							<a>Test</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<form class="show-form">
-									<fieldset>
-										<ol id="profileview-form">
-											<li class="form-item">
-												<label>First Name</label>
-												<div class="form-content user-first-name">
-													TESTSTST
-												</div>
-											</li>
-											<li class="form-item">
-												<label>Last Name</label>
-												<div class="form-content user-last-name">
-													Test
-												</div>
-											</li>
-										</ol>
-									</fieldset>
-								</form>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-							<a>Test 2</a>
-							<div>
-								<div class="accordian-progressbar" id="to-do-progressbar"></div>
-								<ul class="tasks-list-min">
-									<li>
-										List item one
-									</li>
-									<li>
-										List item two
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+				<!-- <div class="adminboard">
+				<h3>Assignments</h3>
+				<p class="designation">
+				ToDo List
+				</p>
+				<a id="assignment-todo-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
+				<div class="card-body">
+				<div id="to-do-accordion">
+				<a>Test</a>
+				<div>
+				<div class="accordian-progressbar" id="to-do-progressbar"></div>
+				<form class="show-form">
+				<fieldset>
+				<ol id="profileview-form">
+				<li class="form-item">
+				<label>First Name</label>
+				<div class="form-content user-first-name">
+				TESTSTST
 				</div>
-				<div class="adminboard">
-					<header>
-						Quiz
-						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Assign</a>
-					</header>
-					<body>
-						<div class="dash-info-reg">
-							<div class="dash-info-3key">
-								<div id="members-total-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									total
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="members-male-value" class="value">
-									45%
-								</div>
-								<div class="value-desc">
-									done
-								</div>
-							</div>
-							<div class="dash-info-3key">
-								<div id="members-male-value" class="value">
-									84%
-								</div>
-								<div class="value-desc">
-									average
-								</div>
-							</div>
-						</div>
-						<div class="dash-info-visual">
-							<div class="dash-info-1key">
-								4
-							</div>
-						</div>
-
-					</body>
-					<footer>
-						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
-						</div>
-					</footer>
-
+				</li>
+				<li class="form-item">
+				<label>Last Name</label>
+				<div class="form-content user-last-name">
+				Test
 				</div>
+				</li>
+				</ol>
+				</fieldset>
+				</form>
+				</div>
+				<a>Test 2</a>
+				<div>
+				<div class="accordian-progressbar" id="to-do-progressbar"></div>
+				<ul class="tasks-list-min">
+				<li>
+				List item one
+				</li>
+				<li>
+				List item two
+				</li>
+				</ul>
+				</div>
+				</div>
+				</div>
+				</div> -->
+
 			</div>
 		</div>
 		<div style="display:none" class="templates-div">

@@ -380,6 +380,8 @@ body.error404 {
 	text-decoration: none;
 	text-transform: uppercase;
 	color: #fff;
+	padding-bottom : 5px;
+	border-bottom: 4px solid #0784E3;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
@@ -397,6 +399,7 @@ body.error404 {
 #main-nav li a:hover, #static-main-nav li a:hover {
 	color: #0784E3;
 	cursor: pointer;
+	border : none;
 }
 
 #entity-edit {
@@ -1395,7 +1398,7 @@ body.error404 {
 	width: 100%;
 	margin-bottom: 20px;
 	overflow: auto;
-	text-align : center;
+	text-align: center;
 }
 .edit-form fieldset {
 	margin: 20px 0px;
@@ -1407,6 +1410,31 @@ body.error404 {
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+/*VIEW TABLE*/
+.view-table {
+	width: 90%;
+	color: red;
+	margin-left: 5%;
+	margin-top: 15px;
+	padding: 10px;
+}
+
+.view-table > thead tr {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #7f7f7f;
+	border-bottom: 2px dotted #d9d9d9;
+	height: 35px;
+	font-size: 15px;
+}
+.view-table > tbody tr {
+	height: 35px;
+	padding: 10px;
+	font-size: 14px;
+	line-height: 35px;
+	color: black;
+	border-bottom: 2px dotted #d9d9d9;
 }
 
 #user-domain.onlyone {
@@ -1435,7 +1463,7 @@ body.error404 {
 }
 .view-form li.form-item {
 	font-size: 0px;
-	border-bottom: 2px dotted #f3f3f3;
+	border-bottom: 2px dotted #d9d9d9;
 	margin-right: 25px;
 	padding: 10px;
 }
@@ -1444,7 +1472,7 @@ body.error404 {
 }
 .view-form li.form-item.secondary {
 	font-size: 0px;
-	border-bottom: 0px dotted #f3f3f3;
+	border-bottom: 0px dotted #d9d9d9;
 	margin-right: 25px;
 	padding: 10px;
 	padding-top: 5px;
@@ -1467,7 +1495,7 @@ body.error404 {
 	margin-bottom: 0px;
 }
 .view-form li.form-item.secondary:last-of-type {
-	border-bottom: 2px dotted #f3f3f3;
+	border-bottom: 2px dotted #d9d9d9;
 }
 
 .edit-form li input {
@@ -1518,7 +1546,7 @@ body.error404 {
 	width: 50%;
 }
 .view-form li.form-item > * {
-	text-align : left;
+	text-align: left;
 	vertical-align: center;
 	display: inline-block;
 	font-size: 14px;
@@ -1555,7 +1583,7 @@ body.error404 {
 	cursor: default;
 }
 .view-form li.form-item > label {
-	text-align : left;
+	text-align: left;
 	max-width: 170px;
 	width: 40%;
 	margin-bottom: 5px;
@@ -1602,7 +1630,7 @@ form li.form-item  span > label.error {
 }
 
 form input.error {
-	border: 1px solid #e30716;;
+	border: 1px solid #e30716;
 }
 
 .edit-form li.form-item > .form-content {
@@ -1671,11 +1699,10 @@ form input.error {
 	padding: 5px;
 	margin-top: 40%;
 	letter-spacing: -2px;
-}
-.adminboard div.value-desc {
+}.adminboard div.value-desc {
 	font-size: 14px;
 	padding: 0px;
-	margin-top: -15px;
+	margin-top: -10px;
 }
 .adminboard .dash-info-2key {
 	text-align: center;
@@ -2032,16 +2059,18 @@ html.touch #subnav {
 .main-content {
 	background: white;
 	position: fixed;
-	top: 62px;
-	left: 10px;
-	right: 10px;
-	bottom: 10px;
+	top: 67px;
+	left: 15px;
+	right: 15px;
+	bottom: 15px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	overflow: auto;
 }
 
 .content {
 	text-align: center;
-	margin-left: 10px;
+	margin-left: 15px;
 	margin-right: 10px;
 	margin-bottom: 10px;
 	position: absolute;
@@ -2053,7 +2082,6 @@ html.touch #subnav {
 
 .float-left .studentboard {
 	float: left;
-	/*display: inline-table;*/
 	width: 300px;
 	height: 350px;
 	text-align: left;
