@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/lib/Chart.min', '../../js/lib/raphael', '../../js/lib/morris.min', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, carousel, swipe, chart, raphael, morris, service, router, subusereditview, invite) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, plot, service, router, subusereditview, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -26,6 +26,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				a : 0,
 				b : 0
 			};
+			var s1 = [['a', 6], ['b', 8], ['c', 14], ['d', 20]];
+			var s2 = [['a', 8], ['b', 12], ['c', 6], ['d', 9]];
 
 			function AdminView() {
 
@@ -148,10 +150,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 								jQuery('.T1').show();
 								populateDomainData();
 								populateUserData();
+								populateDonut();
 							} else {
 								jQuery('.T1').show();
 								populateDomainData();
 								populateUserData();
+								populateDonut();
 								//populateGraphs();
 							}
 						}
@@ -258,7 +262,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 				function populateInviteData(activedomains) {
 					var _inviteaccept = 0;
 					var _invitepending = 0;
-					var _invitetotal =0;
+					var _invitetotal = 0;
 					//Catch Error
 					if (activedomains) {
 						for (var z = 0; z < activedomains.length; z++) {
@@ -291,18 +295,23 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../../js/
 					$(name).text(value);
 				}
 
-				function populateDomainStrengthGraphs(domainsData) {
-					Morris.Line({
-						element : 'domain-strength-chart',
-						data : domainsData,
-						xkey : 'y',
-						xLabels : 'month',
-						lineColors : ['#009ACD', '#e34a33'],
-						lineWidth : 4,
-						pointSize : 5,
-						ykeys : ['a', 'b'],
-						labels : ['Accepted', 'Pending']
-					});
+				function populateDonut() {
+					// var plot3 = $.jqplot('profile-donut', [s1, s2], {
+						// seriesDefaults : {
+							// // make this a donut chart.
+							// renderer : $.jqplot.DonutRenderer,
+							// rendererOptions : {
+								// // Donut's can be cut into slices like pies.
+								// sliceMargin : 3,
+								// // Pies and donuts can start at any arbitrary angle.
+								// startAngle : -90,
+								// showDataLabels : true,
+								// // By default, data labels show the percentage of the donut/pie.
+								// // You can show the data 'value' or data 'label' instead.
+								// dataLabels : 'value'
+							// }
+						// }
+					// });
 				}
 
 				function displayAlert() {
