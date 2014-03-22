@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, plot, service, router, subusereditview, invite) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, raphael, elychart, service, router, subusereditview, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -26,89 +26,27 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 				a : 0,
 				b : 0
 			};
-			var s1 = [['a', 6], ['b', 8], ['c', 14], ['d', 20]];
-			var s2 = [['a', 8], ['b', 12], ['c', 6], ['d', 9]];
+			var donutdata = [{
+				value : 30,
+				color : "#F7464A"
+			}, {
+				value : 50,
+				color : "#e36607"
+			}, {
+				value : 100,
+				color : "#e30784"
+			}, {
+				value : 40,
+				color : "#07e366"
+			}, {
+				value : 120,
+				color : "#0784e3"
+			}];
 
 			function AdminView() {
 
 				function showBG() {
 					//jQuery.backstretch(PARMS.Bg);
-				}
-
-				function populateGraphs() {
-
-					// Morris.Line({
-					// element : 'accounts-chart',
-					// data : [{
-					// y : '2013-09',
-					// a : 13000,
-					// b : 11000
-					// }, {
-					// y : '2013-10',
-					// a : 15000,
-					// b : 14000
-					// }, {
-					// y : '2013-11',
-					// a : 9000,
-					// b : 8700
-					// }, {
-					// y : '2013-12',
-					// a : 9500,
-					// b : 9000
-					// }, {
-					// y : '2014-01',
-					// a : 14000,
-					// b : 11500
-					// }, {
-					// y : '2014-02',
-					// a : 17000,
-					// b : 13000
-					// }],
-					// xkey : 'y',
-					// xLabels : 'month',
-					// preUnits : '$',
-					// lineColors : ['#0784E3', '#e36607'],
-					// lineWidth : 4,
-					// pointSize : 5,
-					// ykeys : ['a', 'b'],
-					// labels : ['Cash Inflow', 'Expenses']
-					// });
-					//
-					// Morris.Donut({
-					// element : 'student-donut-1',
-					// data : [{
-					// label : "October",
-					// value : 12
-					// }, {
-					// label : "Novemeber",
-					// value : 15
-					// }, {
-					// label : "December",
-					// value : 16
-					// }, {
-					// label : "January",
-					// value : 20
-					// }, {
-					// label : "Feburary",
-					// value : 19
-					// }, {
-					// label : "March",
-					// value : 25
-					// }]
-					// });
-					// Morris.Donut({
-					// element : 'student-donut-2',
-					// data : [{
-					// label : "October",
-					// value : 12
-					// }, {
-					// label : "Novemeber",
-					// value : 15
-					// }, {
-					// label : "January",
-					// value : 19
-					// }]
-					// });
 				}
 
 				function checkForActiveCookie() {
@@ -150,13 +88,10 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 								jQuery('.T1').show();
 								populateDomainData();
 								populateUserData();
-								populateDonut();
 							} else {
 								jQuery('.T1').show();
 								populateDomainData();
 								populateUserData();
-								populateDonut();
-								//populateGraphs();
 							}
 						}
 					});
@@ -224,6 +159,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 				function populateUserData() {
 					var _adminof = 0;
 					var _ownerof = 0;
+					var _profiledata = [0,0];
 					ACTIVEDOMAINS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
@@ -233,8 +169,12 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 								populateInviteData(ACTIVEDOMAINS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
+									_profiledata[0] = 1;
+									updatePanelGraphs('#profile-donut', _profiledata);
 								} else {
 									updatePanelValues('#user-owner-value', 1);
+									_profiledata[1] = 1;
+									updatePanelGraphs('#profile-donut', _profiledata);
 								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
@@ -242,15 +182,19 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 										_adminof = _adminof + 1;
 										updatePanelValues('#user-admin-value', _adminof);
+										_profiledata[0] = _adminof;
 									} else {
 										_ownerof = _ownerof + 1;
 										updatePanelValues('#user-owner-value', _ownerof);
+										_profiledata[1] = _ownerof;
+										
 									}
 									if (i === UserProfile.domains.length - 1) {
 										//Remove duplicates
 										ACTIVEDOMAINS = ACTIVEDOMAINS.filter(function(elem, pos) {
 											return ACTIVEDOMAINS.indexOf(elem) == pos;
 										})
+										updatePanelGraphs('#profile-donut', _profiledata);
 										populateInviteData(ACTIVEDOMAINS);
 									}
 								}
@@ -263,6 +207,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 					var _inviteaccept = 0;
 					var _invitepending = 0;
 					var _invitetotal = 0;
+					var _invitedata = [0,0];
 					//Catch Error
 					if (activedomains) {
 						for (var z = 0; z < activedomains.length; z++) {
@@ -274,15 +219,17 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 										updatePanelValues('#invite-total-value', _invitetotal);
 										if (InviteList[i].status == 'ACCEPTED') {
 											_inviteaccept = _inviteaccept + 1;
+											_invitedata[0] =_inviteaccept;
 											updatePanelValues('#invite-accept-value', _inviteaccept);
 										} else {
 											_invitepending = _invitepending + 1;
 											updatePanelValues('#invite-pending-value', _invitepending);
+											_invitedata[1] =_invitepending;
 											PENDINGLIST.push(InviteList[i].email);
 										}
 
 										if (i === ADMINCOUNT - 1) {
-											//Future
+											updatePanelGraphs('#invite-donut', _invitedata);
 										}
 									}
 								}
@@ -295,23 +242,68 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 					$(name).text(value);
 				}
 
-				function populateDonut() {
-					// var plot3 = $.jqplot('profile-donut', [s1, s2], {
-						// seriesDefaults : {
-							// // make this a donut chart.
-							// renderer : $.jqplot.DonutRenderer,
-							// rendererOptions : {
-								// // Donut's can be cut into slices like pies.
-								// sliceMargin : 3,
-								// // Pies and donuts can start at any arbitrary angle.
-								// startAngle : -90,
-								// showDataLabels : true,
-								// // By default, data labels show the percentage of the donut/pie.
-								// // You can show the data 'value' or data 'label' instead.
-								// dataLabels : 'value'
-							// }
-						// }
-					// });
+				function updatePanelGraphs(name, data) {
+					$(name).chart({
+						template : "pie_basic_2",
+						values : {
+							serie1 : data
+						},
+						labels : [],
+						tooltips : {
+							serie1 : data
+						},
+						defaultSeries : {
+							r : -0.5,
+							values : [{
+								plotProps : {
+									fill : "#0784E3"
+								}
+							}, {
+								plotProps : {
+									fill : "green"
+								}
+							}]
+						}
+					});
+				}
+
+				function setCanvas() {
+					jQuery.elycharts.templates['pie_basic_2'] = {
+						type : "pie",
+						style : {
+							"background-color" : "white"
+						},
+						defaultSeries : {
+							plotProps : {
+								stroke : "white",
+								"stroke-width" : 0, //upto 3
+								opacity : 1
+							},
+							highlight : {
+								newProps : {
+									opacity : 0.6
+								}
+							},
+							tooltip : {
+								active : true,
+								frameProps : {
+									opacity : 1,
+									roundedCorners : 10,
+									fill : "white",
+								}
+							},
+							label : {
+								active : true,
+								props : {
+									fill : "#0784E3"
+								}
+							},
+							startAnimation : {
+								active : true,
+								type : "avg"
+							}
+						}
+					};
 				}
 
 				function displayAlert() {
@@ -353,16 +345,8 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'plot', '../app/service/DataSer
 							collapsible : true,
 							active : false
 						});
-						// progressbar.progressbar({
-						// value : false,
-						// change : function() {
-						// progressLabel.text(progressbar.progressbar("value") + "%");
-						// },
-						// complete : function() {
-						// progressLabel.text("Done!");
-						// }
-						// });
 						// Get Privilage
+						setCanvas();
 						getInfoByPrivilage();
 
 						//HTML Event - Actions

@@ -1279,31 +1279,37 @@ body.error404 {
 }
 .edit-notify.OK {
 	display: none;
-	border-bottom: 1px solid #d9d9d9;
+	background-color: #f3f3f3;
+	border-bottom: 4px solid #07e366;
 	border-top-left-radius: 10px;
-	background-color: #07e366;
 	font-size: 1.2em;
 	position: absolute;
 	width: 100%;
 	top: 0px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	text-overflow: ellipsis;
-	color: white;
+	color: black;
 	padding: 20px 0px;
 }
+.edit-notify.OK i {
+	color: #07e366;
+}
 .edit-notify.ERROR {
-	border-bottom: 1px solid #d9d9d9;
+	border-bottom: 4px solid #e30716;
 	border-top-left-radius: 10px;
 	display: none;
-	background-color: #e30716;
+	background-color: #f3f3f3;
 	font-size: 1.2em;
 	position: absolute;
 	text-overflow: ellipsis;
 	width: 100%;
 	top: 0px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: white;
+	color: black;
 	padding: 20px 0px;
+}
+.edit-notify.ERROR i {
+	color: #e30716;
 }
 .notify-message {
 	padding-left: 10px;
@@ -1839,9 +1845,9 @@ form input.error {
 	margin: 30px 0 0 30px;
 }
 .adminboard canvas {
-	width: 330px;
-	height: 175px;
-	margin: 30px 0 0 30px;
+	/*width: 300px;
+	height: 150px;*/
+	margin: 0px;
 }
 .adminboard div .half {
 	width: 380px;
@@ -3432,6 +3438,11 @@ footer a:hover {
 	text-align: center;
 	padding-top: 10px;
 	padding-bottom: 10px
+}
+
+#register-now {
+	padding: 5px;
+	border-bottom: 2px solid #0784E3;
 }
 
 .ss-social {
