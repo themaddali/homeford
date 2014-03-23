@@ -1521,7 +1521,8 @@ body.error404 {
 .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper {
 	display: inline;
 }
-.edit-form li select {
+
+.edit-form li select.edit-select{
 	-webkit-appearance: none;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -1532,7 +1533,8 @@ body.error404 {
 	border-color: rgba(114, 114, 114, 0.71);
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
-	font-size: 1em;
+	font-size: 14px;
+	width: calc(50% + 22px);
 }
 .edit-form li.form-item label.form-helper {
 	margin-left: 15px;
@@ -1550,6 +1552,21 @@ body.error404 {
 	font-size: 14px;
 	line-height: 17px;
 	width: 50%;
+}
+.edit-form li.form-item a {
+	vertical-align: center;
+	display: inline-block;
+	font-size: 12px;
+	line-height: 12px;
+	width: 50%;
+	padding:20px;
+	padding-top: 0px;
+	color : black;
+	cursor: pointer;
+	text-align : right;
+}
+.edit-form li.form-item a :hover {
+	color: #0784E3;
 }
 .view-form li.form-item > * {
 	text-align: left;
@@ -3440,9 +3457,13 @@ footer a:hover {
 	padding-bottom: 10px
 }
 
-#register-now {
+#forgot-password, #register-now{
 	padding: 5px;
-	border-bottom: 2px solid #0784E3;
+	border-bottom: 1px solid white;
+}
+
+#forgot-password: hover, #register-now:hover {
+	border-bottom: 1px solid #007DBA;
 }
 
 .ss-social {

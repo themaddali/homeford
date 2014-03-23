@@ -1,11 +1,11 @@
 //View that will drive the main landing page.
 
-define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../app/Router'], function(spin, cookie, plugin, flatvid, typeahead, bloodhound, router) {"use strict";
+define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../app/Router','../app/service/DataService'], function(spin, cookie, plugin, flatvid, typeahead, bloodhound, router, service) {"use strict";
 
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/5.jpg","img\/2.jpg", "img\/6.jpg"]
+				"Bg" : ["img\/5.jpg", "img\/2.jpg", "img\/6.jpg"]
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
@@ -33,13 +33,27 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 				var i = PARAM.Bg;
 
 				function startCoverShow() {
-					jQuery.backstretch(i, {
-						duration : 7000,
-						fade : 1000
-					}, function() {
-						r.stop()
-						jQuery("#preloader").hide();
+					service.getFlickList('sfo', {
+						success : function(list) {
+							jQuery.backstretch(list, {
+								duration : 7000,
+								fade : 1000
+							}, function() {
+								r.stop()
+								jQuery("#preloader").hide();
+							});
+						},
+						error : function() {
+							jQuery.backstretch(i, {
+								duration : 7000,
+								fade : 1000
+							}, function() {
+								r.stop()
+								jQuery("#preloader").hide();
+							});
+						}
 					});
+
 				}
 
 				function activateSuggestionSearch() {
@@ -131,9 +145,9 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 							if (keycode == '13') {
 								var queryString = jQuery('#slogan-input').val();
 								//prehomeview.setEntity(queryString);
-								router.go('/'+queryString, '/home');
+								router.go('/' + queryString, '/home');
 							}
-							
+
 						});
 
 						jQuery('#entity-edit').click(function() {

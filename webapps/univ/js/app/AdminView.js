@@ -229,6 +229,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 										}
 
 										if (i === ADMINCOUNT - 1) {
+											invite.pendingList(PENDINGLIST);
 											updatePanelGraphs('#invite-donut', _invitedata);
 										}
 									}

@@ -4,6 +4,7 @@ require({
 		jquery : 'jquery',
 		jqueryui : 'jquery-ui',
 		modernizr : 'modernizr-2.5.3.min',
+		backstrech : 'backstrech',
 		spin : 'spin.min',
 		migrate : 'jquery-migrate.min',
 		typeahead : 'typeahead.bundle',
