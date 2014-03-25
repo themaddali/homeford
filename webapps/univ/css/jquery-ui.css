@@ -64,7 +64,9 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%
+	height: 100%;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 .ui-resizable {
 	position: relative
@@ -171,11 +173,12 @@
 	overflow: auto
 }
 .ui-autocomplete {
+	background-color: white;
 	position: absolute;
 	top: 0;
 	left: 0;
 	cursor: default;
-	z-index : 200;
+	z-index: 200;
 }
 .ui-button {
 	display: inline-block;
@@ -481,7 +484,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	border-bottom : 1px dotted #7f7f7f;
+	border-bottom: 1px dotted #7f7f7f;
 }
 .ui-menu .ui-menu-divider {
 	margin: 5px -2px 5px -2px;
@@ -493,8 +496,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 .ui-menu .ui-menu-item a {
 	text-decoration: none;
 	display: block;
-	padding: 2px .4em;
-	line-height: 1.5;
+	padding: 5px .4em;
+	line-height: 2;
 	min-height: 0;
 	font-weight: normal
 }
@@ -714,8 +717,8 @@ body .ui-tooltip {
 	font-size: 1em
 }
 .ui-widget-content {
-	border: 2px solid #0784E3;
-	color: #222
+	border: 2px solid;
+	color: #222;
 }
 .ui-widget-content a {
 	color: #222
@@ -740,7 +743,7 @@ body .ui-tooltip {
 	text-decoration: none
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-	border: 2px solid #0784E3;
+	border-bottom: 1px solid #0784E3;
 	/*background: #0784E3 url(images/ui-bg_glass_75_fbb913_1x400.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #212121

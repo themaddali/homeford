@@ -10,6 +10,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 			 */
 
 			var validator;
+			var ActiveMembers = 'All Members';
 
 			function ToDoAssignView() {
 
@@ -30,32 +31,11 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				}
 
 				function populateData() {
-					jQuery('#invite-domain').empty();
-					service.getUserProfile({
-						success : function(UserProfile) {
-							var activeDomains = [];
-							for (var i = 0; i < UserProfile.domains.length; i++) {
-								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
-									activeDomains.push(UserProfile.domains[i].domainName);
-								jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
-								if (UserProfile.domains.length === 1) {
-									jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
-								}
-								if (i == UserProfile.domains.length - 1) {
-									jQuery.validator.addMethod("domainValidation", function(value, element) {
-										if (activeDomains.indexOf(value) === -1) {
-											return false;
-										} else
-											return true;
-									}, "Oops! You canot send invite to this domain!");
-								}
-							}
-						}
-					});
+					jQuery('#member-list').val(ActiveMembers);
 				}
 				
-				function clearForm() {
-					
+				this.selectedMembers = function(info){
+					ActiveMembers = info;
 				}
 
 				this.pause = function() {
@@ -63,9 +43,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				};
 
 				this.resume = function() {
-					clearForm();
 					populateData();
-					validator.resetForm();
 				};
 
 				this.init = function(args) {
@@ -80,7 +58,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 							router.returnToPrevious();
 						});
 						
-						jQuery('#member-list').keyup(function(){
+						jQuery('#member-list').click(function(){
 							router.go('/memberspick');
 						});
 

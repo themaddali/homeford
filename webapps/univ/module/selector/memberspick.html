@@ -20,14 +20,24 @@
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					Select Members
-					<div class="metadata">selected</div>
 				</header>
+				<div class="canvas-header">
+					<a id="checkbox-control" >Un-Select All</a>
+					<input class="card-search" type="search" placeholder="search by name" />
+					<div class="metadata">
+						selected
+					</div>
+				</div>
 				<div class="modal-contents cards">
 					<div class="edit-card-canvas">
-						<div class="membercard" id="member-template">
-							<input class="membercard-checkbox" type="checkbox" checked/> 
-							<div class="membercard-name">Name</div>
-							<div class="membercard-id">ID</div>
+						<div class="membercard active" id="member-template">
+							<input class="membercard-checkbox" type="checkbox" checked/>
+							<div class="membercard-name">
+								Name
+							</div>
+							<div class="membercard-id">
+								ID
+							</div>
 						</div>
 					</div>
 				</div>

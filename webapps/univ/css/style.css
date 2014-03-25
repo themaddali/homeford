@@ -380,7 +380,7 @@ body.error404 {
 	text-decoration: none;
 	text-transform: uppercase;
 	color: #fff;
-	padding-bottom : 5px;
+	padding-bottom: 5px;
 	border-bottom: 4px solid #0784E3;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
@@ -399,7 +399,7 @@ body.error404 {
 #main-nav li a:hover, #static-main-nav li a:hover {
 	color: #0784E3;
 	cursor: pointer;
-	border : none;
+	border: none;
 }
 
 #entity-edit {
@@ -1262,13 +1262,6 @@ body.error404 {
 	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
 }
-.modal-body .modal-container header .metadata {
-	display: inline;
-	float: right;
-	font-size: 14px;
-	font-style: italic;
-	color: #444;
-}
 
 .modal-body .modal-container footer {
 	background-color: #FFFFFF;
@@ -1411,7 +1404,7 @@ body.error404 {
 	height: 80%;
 }
 .modal-body .modal-container .modal-contents.cards {
-	height: 70%;
+	height: 65%;
 }
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
@@ -1466,7 +1459,7 @@ body.error404 {
 	border-bottom: 2px dotted #d9d9d9;
 	height: 35px;
 	font-size: 15px;
-	text-align : left;
+	text-align: left;
 }
 .view-table > thead tr th {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -1475,7 +1468,7 @@ body.error404 {
 	height: 35px;
 	font-size: 15px;
 	font-weight: 400;
-	cursor : pointer;
+	cursor: pointer;
 	background: transparent url("../img/select-down.png") no-repeat right;
 	background-position: 90% 50%;
 	/*border-right: 1px dotted #d9d9d9;*/
@@ -1572,14 +1565,14 @@ body.error404 {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper,.edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper,.edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 
-.edit-form li select.edit-select{
+.edit-form li select.edit-select {
 	-webkit-appearance: none;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -1616,11 +1609,11 @@ body.error404 {
 	font-size: 12px;
 	line-height: 12px;
 	width: 50%;
-	padding:20px;
+	padding: 20px;
 	padding-top: 0px;
-	color : black;
+	color: black;
 	cursor: pointer;
-	text-align : right;
+	text-align: right;
 }
 .edit-form li.form-item a :hover {
 	color: #0784E3;
@@ -1648,6 +1641,15 @@ body.error404 {
 }
 .edit-form li.form-item input {
 	margin-left: 0px;
+}
+.edit-form li.form-item input.input-label {
+	border-color: #FFFFFF;
+	padding-left: 0px;
+	cursor: pointer;
+}
+.edit-form li.form-item input.input-label:hover {
+	color: #007DBA;
+	cursor: pointer;
 }
 
 .edit-form li.form-item > label {
@@ -1779,7 +1781,8 @@ form input.error {
 	padding: 5px;
 	margin-top: 40%;
 	letter-spacing: -2px;
-}.adminboard div.value-desc {
+}
+.adminboard div.value-desc {
 	font-size: 14px;
 	padding: 0px;
 	margin-top: -10px;
@@ -1920,7 +1923,7 @@ form input.error {
 }
 .adminboard canvas {
 	/*width: 300px;
-	height: 150px;*/
+	 height: 150px;*/
 	margin: 0px;
 }
 .adminboard div .half {
@@ -2243,23 +2246,78 @@ html.touch #subnav {
 .membercard:hover {
 	border: 2px solid #0784E3;
 }
+.membercard.active {
+	border: 2px solid #0784E3;
+}
+
+.canvas-header {
+	padding: 15px;
+	padding-top: 20px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #d9d9d9;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.canvas-header .metadata {
+	display: inline;
+	float: right;
+	font-size: 14px;
+	font-style: italic;
+	color: #444;
+	margin-top: 3px;
+}
+
+.canvas-header input {
+	width: 50%;
+	margin-top: -15px;
+	padding: 10px;
+	border-radius: 0;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
+	background: url("../img/search.png") no-repeat right;
+	background-position-x: 99%;
+}
+.canvas-header input:active {
+	border-color: #007DBA;
+	background: none;
+}
+.canvas-header input:focus {
+	border-color: #007DBA;
+	background: none;
+}
+.canvas-header a {
+	float: left;
+	color: #007DBA;
+	font-size: 13px;
+	cursor: pointer;
+	margin-top: 5px;
+}
+.canvas-header a:hover {
+	color: #007DBA;
+}
 
 .membercard .membercard-id {
 	font-size: 12px;
-	color : #7f7f7f;
+	color: #7f7f7f;
 	margin-top: -5px;
-	margin-left: 15px;
+	margin-left: 25px;
 }
 .membercard .membercard-name {
 	font-size: 14px;
-	color : #0784E3;
-	margin-top : 20px;
-	margin-left: 15px
+	color: black;
+	margin-top: 0px;
+	margin-left: 25px
 }
 .membercard .membercard-checkbox {
 	float: left;
 	margin-left: 5px;
-	margin-top: 5px;
+	margin-top: 7px;
 }
 .studentboard img {
 	width: 100%;
@@ -3554,7 +3612,7 @@ footer a:hover {
 	padding-bottom: 10px
 }
 
-#forgot-password, #register-now{
+#forgot-password, #register-now {
 	padding: 5px;
 	border-bottom: 1px solid white;
 }
