@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie,jqueryui, service, validate, router, notify, admin) {"use strict";
 
 	var ToDoAssignView = ( function() {
 
@@ -52,6 +52,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 
 					if (checkForActiveCookie() === true) {
 						populateData();
+						jQuery("#task-deadline").datepicker();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
