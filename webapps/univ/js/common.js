@@ -18,6 +18,7 @@ require({
 		carousel : "jquery.carousel.min",
 		validate : "jquery.validate.min",
 		raphael : "raphael",
+		tablesorter : "jquery.tablesorter.min",
 		elychart : "elycharts",
 		plot : "jquery.jqplot.min",
 		Pages : '../../module',

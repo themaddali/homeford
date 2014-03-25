@@ -8,7 +8,7 @@ define(['jquery'], function() {"use strict";
 
 			/**
 			 * @constructor
-			 * @type {Complianceiew}
+			 * @type {}
 			 */
 			function DataService() {
 

@@ -110,34 +110,50 @@ function (router, cookie, urlFragment ) { "use strict";
                 router.map('invite', '^/invite(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
-                        require(['text!Pages/invite/index.html','../app/InviteView'],
-                        function (page, view) {
-                             result.load(page, view);
-                        });
-                    }
-                });
-                router.map('adminslist', '^/adminslist(/.*|$)', {
-                	container: CONTAINER,
-                    enter: function (location, result) {
-                        require(['text!Pages/invite/view.html','../app/AdminsList'],
+                        require(['text!Pages/invite/new.html','../app/InviteView'],
                         function (page, view) {
                              result.load(page, view);
                         });
                     }
                 });
                 
-                // router.map('admin', '^/admin'+urlFragment.pagePatternTerminal, {
-                	// container: CONTAINER,
-                    // enter: function (location, result) {
-                        // require(['text!Pages/admin/index.html',
-                        // '../app/AdminView',
-                        // '../app/AdminRoutes'],
-                        // function (page, view, routes) {
-                        	 // routes.register();
-                             // result.load(page, view, routes);
-                        // });
-                    // }
-                // });
+                router.map('adminslist', '^/adminslist(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/invite/view.html','../app/AdminsListView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                router.map('adminslistedit', '^/adminslistedit(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/invite/edit.html','../app/AdminsEditView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                
+                router.map('memberslist', '^/memberslist(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/members/view.html','../app/MembersListView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                router.map('memberslistedit', '^/memberslistedit(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/members/edit.html','../app/MembersEditView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 
                 router.map('prehome', '^/prehome(/.*|$)', {
                 	container: CONTAINER,
@@ -157,19 +173,6 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
-                
-                 // router.map('no route', '^.*', {
-                	// container: CONTAINER,
-                    // enter: function (location, result) {
-                        // require(['text!Pages/no-page.html'],
-                        // function (page) {
-                            // result.load(page);
-                        // });
-                    // }
-                // });
-                
-                
-                
             }
         }
 

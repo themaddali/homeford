@@ -24,22 +24,21 @@
 
 		</header>
 
-		<div id="profile-view-modal" class="modal-body view">
+		<div id="members-view-modal" class="modal-body view">
 			<div class="modal-container view">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					Admins List
+					Members List
 				</header>
 				<div class="modal-contents">
-					<table id="adminslist-table" class="view-table">
+					<table id="members-table" class="view-table">
 						<thead>
 							<tr>
 								<!-- <th style="background: none"></th> -->
-								<th>Email Id</th>
-								<th>Invited By</th>
-								<th>Status</th>
-								<th>Domain</th>
-								<th>Roles</th>
+								<th>Name</th>
+								<th>ID</th>
+								<th>Security</th>
+								<th>Courses</th>
 								<th style="background: none"></th>
 							</tr>
 						</thead>
@@ -58,14 +57,13 @@
 
 		<div id="preloader"></div>
 		<table id="div-template" style="display:none">
-			<tr id="admin-template">
-				<!-- <td class="admin-icon"></td> -->
-				<td class="admin-email"></td>
-				<td class="admin-invitedby"></td>
-				<td class="admin-status" style="text-transform: capitalize"></td>
-				<td class="admin-domain" style="text-transform: uppercase"></td>
-				<td class="admin-roles"></td>
-				<td class="admin-action" style="color:white"><i class="icon-cog  icon-1x "></i></td>
+			<tr id="members-template">
+				<!-- <td class="members-icon"></td> -->
+				<td class="members-name"></td>
+				<td class="members-id"></td>
+				<td class="members-security"></td>
+				<td class="members-courses"></td>
+				<td class="members-action" style="color:white"><i class="icon-cog  icon-1x "></i></td>
 			</tr>
 		</table>
 

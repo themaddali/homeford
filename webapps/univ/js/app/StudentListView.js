@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router'], function(modernizr, spin, plugins, cookie, service, router) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, router, notify) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -259,6 +259,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						//Rich Experience First.... Load BG
 						showBG();
 						populateStudentList();
+						
+						setTimeout (function(){
+							notify.showMessage('INFO','I am testing this big long ajdfhkasdjflksd jfgjn jn jn jfn ','admin');
+						}, 5000);
 
 						//HTML Event - Actions
 						jQuery('.user-info').on('click', function(e) {

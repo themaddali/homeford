@@ -1291,8 +1291,25 @@ body.error404 {
 	color: black;
 	padding: 20px 0px;
 }
+.edit-notify.INFO {
+	display: none;
+	background-color: #f3f3f3;
+	border-bottom: 4px solid #0784E3;
+	border-top-left-radius: 10px;
+	font-size: 1.2em;
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	text-overflow: ellipsis;
+	color: black;
+	padding: 20px 0px;
+}
 .edit-notify.OK i {
 	color: #07e366;
+}
+.edit-notify.INFO i {
+	color: #0784E3;
 }
 .edit-notify.ERROR {
 	border-bottom: 4px solid #e30716;
@@ -1339,6 +1356,12 @@ body.error404 {
 	cursor: pointer;
 	background-color: #FFFFFF;
 	color: black;
+}
+.modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative {
+	border: 2px solid #e6e6e6;
+	cursor: pointer;
+	background-color: #e30716;
+	color: white;
 }
 
 .modal-body .modal-container header input:hover, .modal-body .modal-container footer input:hover {
@@ -1433,6 +1456,19 @@ body.error404 {
 	border-bottom: 2px dotted #d9d9d9;
 	height: 35px;
 	font-size: 15px;
+	text-align : left;
+}
+.view-table > thead tr th {
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
+	color: #7f7f7f;
+	border-bottom: 2px dotted #d9d9d9;
+	height: 35px;
+	font-size: 15px;
+	font-weight: 400;
+	cursor : pointer;
+	background: transparent url("../img/select-down.png") no-repeat right;
+	background-position: 90% 50%;
+	/*border-right: 1px dotted #d9d9d9;*/
 }
 .view-table > tbody tr {
 	height: 35px;
@@ -1441,6 +1477,17 @@ body.error404 {
 	line-height: 35px;
 	color: black;
 	border-bottom: 2px dotted #d9d9d9;
+	cursor: pointer;
+}
+.view-table > tbody tr:hover {
+	border-bottom: 2px dotted #007DBA;
+}
+
+.view-table > tbody tr.rowactive {
+	cursor: default;
+}
+.view-table > tbody tr.rowactive i {
+	cursor: pointer;
 }
 
 #user-domain.onlyone {
@@ -1515,10 +1562,10 @@ body.error404 {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper {
+.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper,.edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper {
+.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper,.edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 

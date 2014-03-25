@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/service/DataService', '../app/Router', '../app/SubUserEditView', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, raphael, elychart, service, router, subusereditview, invite) {"use strict";
+define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/service/DataService', '../app/Router', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, raphael, elychart, service, router, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -100,6 +100,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 				function populateDomainData() {
 					var _membersmale = 0;
 					var _membersfemale = 0;
+					var _membersdata =[0,0];
 					jQuery('#members-accordion').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
@@ -116,40 +117,43 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 							jQuery('.univ-students').text(UnivData[0].students.length);
 
 							//Student Manage Panel Load
-							var memberheadertemplate = jQuery('#member-header-template').attr('id', '');
-							var membercontenttemplate = jQuery('#member-content-template').attr('id', '');
+							//var memberheadertemplate = jQuery('#member-header-template').attr('id', '');
+							//var membercontenttemplate = jQuery('#member-content-template').attr('id', '');
 							//Backing the template
-							jQuery('.templates-div').append(memberheadertemplate.attr('id', 'member-header-template'));
-							jQuery('.templates-div').append(membercontenttemplate.attr('id', 'member-content-template'));
+							//jQuery('.templates-div').append(memberheadertemplate.attr('id', 'member-header-template'));
+							//jQuery('.templates-div').append(membercontenttemplate.attr('id', 'member-content-template'));
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
 								updatePanelValues('#members-total-value', COUNT);
-								var headerelement = memberheadertemplate.clone();
-								var contentelement = membercontenttemplate.clone();
+								//var headerelement = memberheadertemplate.clone();
+								//var contentelement = membercontenttemplate.clone();
 								if (UnivData[0].students[i].gender === 'female') {
 									_membersfemale = _membersfemale + 1;
+									_membersdata[0] = _membersfemale;
 									updatePanelValues('#members-female-value', _membersfemale);
-									headerelement.html(FEMALEICON + UnivData[0].students[i].name);
+									//headerelement.html(FEMALEICON + UnivData[0].students[i].name);
 								} else {
 									_membersmale = _membersmale + 1;
+									_membersdata[1] = _membersmale;
 									updatePanelValues('#members-male-value', _membersmale);
-									headerelement.html(MALEICON + UnivData[0].students[i].name);
+									//headerelement.html(MALEICON + UnivData[0].students[i].name);
 								}
-								jQuery('.memberid', contentelement).html(UnivData[0].students[i].id);
-								jQuery('.membersecurity', contentelement).html(UnivData[0].students[i].security);
-								jQuery('.membercourses', contentelement).html(UnivData[0].students[i].courses.length);
-								jQuery('#members-accordion').append(headerelement);
-								jQuery('#members-accordion').append(contentelement);
-								jQuery('.students-list-min').on('click', function() {
-									var userClicked = jQuery(this).find('strong').html();
-									subusereditview.activeUser(userClicked);
-									router.go('/admin/subuseredit', '/admin');
-								});
+								//jQuery('.memberid', contentelement).html(UnivData[0].students[i].id);
+								//jQuery('.membersecurity', contentelement).html(UnivData[0].students[i].security);
+								//jQuery('.membercourses', contentelement).html(UnivData[0].students[i].courses.length);
+								//jQuery('#members-accordion').append(headerelement);
+								//jQuery('#members-accordion').append(contentelement);
+								// jQuery('.students-list-min').on('click', function() {
+									// var userClicked = jQuery(this).find('strong').html();
+									// subusereditview.activeUser(userClicked);
+									// router.go('/admin/subuseredit', '/admin');
+								// });
 								if (i === COUNT - 1) {
-									jQuery("#members-accordion").accordion({
-										collapsible : true,
-										active : false
-									});
+									updatePanelGraphs('#members-donut', _membersdata);
+									// jQuery("#members-accordion").accordion({
+										// collapsible : true,
+										// active : false
+									// });
 								}
 							}
 						}
@@ -169,11 +173,11 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 								populateInviteData(ACTIVEDOMAINS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
-									_profiledata[0] = 1;
+									_profiledata[1] = 1;
 									updatePanelGraphs('#profile-donut', _profiledata);
 								} else {
 									updatePanelValues('#user-owner-value', 1);
-									_profiledata[1] = 1;
+									_profiledata[0] = 1;
 									updatePanelGraphs('#profile-donut', _profiledata);
 								}
 							} else {
@@ -182,11 +186,11 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 										_adminof = _adminof + 1;
 										updatePanelValues('#user-admin-value', _adminof);
-										_profiledata[0] = _adminof;
+										_profiledata[1] = _adminof;
 									} else {
 										_ownerof = _ownerof + 1;
 										updatePanelValues('#user-owner-value', _ownerof);
-										_profiledata[1] = _ownerof;
+										_profiledata[0] = _ownerof;
 										
 									}
 									if (i === UserProfile.domains.length - 1) {
@@ -277,7 +281,7 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 						defaultSeries : {
 							plotProps : {
 								stroke : "white",
-								"stroke-width" : 0, //upto 3
+								"stroke-width" : 2, //upto 3
 								opacity : 1
 							},
 							highlight : {

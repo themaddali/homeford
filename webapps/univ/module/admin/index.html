@@ -92,7 +92,7 @@
 				</div> -->
 				<div class="adminboard">
 					<header>
-						User Profile
+						Your Profile
 						<a href="#/profileedit" class="control T1"><i class="icon-cogs  icon-1x "></i>Edit</a>
 					</header>
 					<body>
@@ -214,7 +214,7 @@
 				<div class="adminboard">
 					<header>
 						Members
-						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Send</a>
+						<a id="" class="control T1"><i class="icon-cogs  icon-1x "></i>Manage</a>
 					</header>
 					<body>
 						<div class="dash-info-reg">
@@ -227,14 +227,6 @@
 								</div>
 							</div>
 							<div class="dash-info-3key">
-								<div id="members-male-value" class="value">
-									0
-								</div>
-								<div class="value-desc">
-									male
-								</div>
-							</div>
-							<div class="dash-info-3key">
 								<div id="members-female-value" class="value">
 									0
 								</div>
@@ -242,17 +234,25 @@
 									female
 								</div>
 							</div>
+							<div class="dash-info-3key">
+								<div id="members-male-value" class="value">
+									0
+								</div>
+								<div class="value-desc">
+									male
+								</div>
+							</div>
 						</div>
 						<div class="dash-info-visual">
 							<div class="dash-info-1key">
-								<img src="../../univ/img/sampledonut.png">
+								<div id="members-donut" style="width: 400px; height: 230px; margin-top: -30px;"></div>
 							</div>
 						</div>
 
 					</body>
 					<footer>
 						<div>
-							<i class="icon-align-justify  icon-1x " style="padding-right: 5px"></i>More
+							<a class="more-info" href="#/memberslist"> <i class="icon-align-justify  icon-1x" style="padding-right: 5px"></i>More </a>
 						</div>
 					</footer>
 
@@ -395,17 +395,7 @@
 					</footer>
 
 				</div>
-				<div class="adminboard">
-					<h3>Manage</h3>
-					<p class="designation">
-						Members
-					</p>
-					<a id="student-manage" class="panel-control"><i class="icon-cogs  icon-1x "></i>Add</a>
-					<br />
-					<div id="members-accordion">
-
-					</div>
-				</div>
+				
 				<div class="adminboard T1">
 					<h3>Organization</h3>
 					<p class="designation">
@@ -480,54 +470,7 @@
 							</fieldset>
 						</form>
 					</div>
-
 				</div>
-				<!-- <div class="adminboard">
-				<h3>Assignments</h3>
-				<p class="designation">
-				ToDo List
-				</p>
-				<a id="assignment-todo-control" class="panel-control"><i class="icon-cogs  icon-1x "></i>New</a>
-				<div class="card-body">
-				<div id="to-do-accordion">
-				<a>Test</a>
-				<div>
-				<div class="accordian-progressbar" id="to-do-progressbar"></div>
-				<form class="show-form">
-				<fieldset>
-				<ol id="profileview-form">
-				<li class="form-item">
-				<label>First Name</label>
-				<div class="form-content user-first-name">
-				TESTSTST
-				</div>
-				</li>
-				<li class="form-item">
-				<label>Last Name</label>
-				<div class="form-content user-last-name">
-				Test
-				</div>
-				</li>
-				</ol>
-				</fieldset>
-				</form>
-				</div>
-				<a>Test 2</a>
-				<div>
-				<div class="accordian-progressbar" id="to-do-progressbar"></div>
-				<ul class="tasks-list-min">
-				<li>
-				List item one
-				</li>
-				<li>
-				List item two
-				</li>
-				</ul>
-				</div>
-				</div>
-				</div>
-				</div> -->
-
 			</div>
 		</div>
 		<div style="display:none" class="templates-div">
@@ -537,79 +480,7 @@
 
 				</div>
 			</li>
-			<a id="member-header-template" class="students-list-min"></a>
-			<div id="member-content-template">
-				<form class="show-form">
-					<fieldset>
-						<ol>
-							<li class="form-item">
-								<label>ID #</label>
-								<div class="form-content memberid">
-
-								</div>
-							</li>
-							<li class="form-item">
-								<label>Security</label>
-								<div class="form-content membersecurity">
-
-								</div>
-							</li>
-							<li class="form-item">
-								<label>Courses #</label>
-								<div class="form-content membercourses">
-
-								</div>
-							</li>
-						</ol>
-					</fieldset>
-				</form>
-			</div>
-			<a id="admin-header-template" class="admmin-list-min"></a>
-			<div id="admin-content-template">
-				<form class="show-form">
-					<fieldset>
-						<ol id="admincontentlist">
-							<li class="form-item">
-								<label>ID #</label>
-								<div class="form-content adminid">
-
-								</div>
-							</li>
-							<li class="form-item">
-								<label>Status</label>
-								<div class="form-content adminstatus">
-
-								</div>
-							</li>
-							<li class="form-item">
-								<label>Domain</label>
-								<div class="form-content admindomain">
-
-								</div>
-							</li>
-							<li class="form-item">
-								<label>Roles</label>
-								<div class="form-content adminroles">
-
-								</div>
-							</li>
-						</ol>
-					</fieldset>
-				</form>
-			</div>
 		</div>
-
-		<!-- <div id="preloader"></div> -->
-
-		<!-- <footer>
-		<div id="contact-info">
-		123.456.7890 &nbsp;&nbsp; <a id="contact-email" target="_blank">info@homeford.com</a>
-		<!-- <span class="ss-social"> <a href="http://www.facebook.com" target="_blank"><img src="img/ss-facebook.png" alt="facebook"></a> <a href="http://www.twitter.com" target="_blank"><img src="img/ss-twitter.png" alt="twitter"></a> <a href="http://pinterest.com/" target="_blank"><img src="img/ss-pinterest.png" alt="pinterest"></a> </span>
-		</div>
-		<div id="copyright">
-		&copy; Homeford University 2014
-		</div>
-		</footer> -->
 
 	</body>
 </html>

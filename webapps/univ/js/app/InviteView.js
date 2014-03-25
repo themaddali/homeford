@@ -60,7 +60,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 						}
 					});
 				}
-
+				
 				function clearForm() {
 					jQuery('.form-item > input').val("");
 					jQuery('#member-role').prop('checked', false);
