@@ -338,11 +338,17 @@ body.error404 {
 
 /* =================== Home & Main Nav styles ======================= */
 #fluid-nav {
-	height: 150px;
+	height: 77px;
+	position: fixed;
+	/*background: #FFFFFF;
+	border-bottom : 2px solid grey;*/
+	width: 100%;
+	margin-top:10px;
+	
 }
 
 #logo, #static-logo {
-	margin: 40px 0 0 40px;
+	margin: 5px 0 0 40px;
 	float: left;
 	width: 197px;
 	height: 74px;
@@ -364,7 +370,7 @@ body.error404 {
 }
 
 #main-nav, #static-main-nav {
-	margin: 40px 40px 0 0;
+	margin: 20px 40px 0 0;
 	float: right;
 }
 #main-nav li, #static-main-nav li {
@@ -379,9 +385,9 @@ body.error404 {
 #main-nav li a, #static-main-nav li a {
 	text-decoration: none;
 	text-transform: uppercase;
-	color: #fff;
+	color: #0784E3;
 	padding-bottom: 5px;
-	border-bottom: 4px solid #0784E3;
+	border-bottom: 3px solid #0784E3;
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
@@ -399,7 +405,7 @@ body.error404 {
 #main-nav li a:hover, #static-main-nav li a:hover {
 	color: #0784E3;
 	cursor: pointer;
-	border: none;
+	border-bottom: 4px solid #0784E3;
 }
 
 #entity-edit {
