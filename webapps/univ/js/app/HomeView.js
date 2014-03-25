@@ -5,7 +5,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/5.jpg", "img\/2.jpg", "img\/6.jpg"]
+				"Bg" : ["img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"]
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
@@ -36,7 +36,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 					service.getFlickList('sfo', {
 						success : function(list) {
 							jQuery.backstretch(list, {
-								duration : 7000,
+								duration : 9000,
 								fade : 1000
 							}, function() {
 								r.stop()
@@ -45,7 +45,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../a
 						},
 						error : function() {
 							jQuery.backstretch(i, {
-								duration : 7000,
+								duration : 9000,
 								fade : 1000
 							}, function() {
 								r.stop()

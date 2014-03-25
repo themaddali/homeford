@@ -463,9 +463,9 @@ body.error404 {
 	bottom: 60px;
 	z-index: 9996;
 	margin: 0px 40px 20px 0;
-	color: #fff;
+	color: #666666;
 	text-transform: uppercase;
-	text-shadow: 2px 2px 2px #444;
+	/*text-shadow: 2px 2px 2px #444;*/
 	font-size: 1.75em;
 	letter-spacing: 2px;
 }
