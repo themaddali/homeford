@@ -15,43 +15,35 @@
 
 		</header>
 
-		<div id="invite-edit-modal" class="modal-body">
+		<div id="todo-edit-modal" class="modal-body">
 			<div class="modal-container">
 				<header>
-					<i style="padding-right:10px" class="icon-envelope icon-1x "></i>
-					Admin Invite
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					New To Do Task
 				</header>
 				<div class="modal-contents">
-					<form id="invite-form" class="edit-form">
+					<form id="todo-edit-form" class="edit-form">
 						<fieldset>
 							<ol>
 								<li class="form-item">
-									<label>Email</label>
-									<input placeholder="Email Address" id="invite-email" name="inviteemail" type="email" autofocus autocomplete />
-									<label class="form-helper">Email id for the invite</label>
+									<label>Task Name</label>
+									<input placeholder="Ex: Practice Painting"  id="task-name" name="taskname" type="text" autofocus />
+									<label class="form-helper">Short name describing the task.</label>
 								</li>
 								<li class="form-item">
-									<label>Message</label>
-									<input placeholder="Any custom message to send (Optional)" id="invite-message" name="invitemessage" type="text" />
-									<label class="form-helper">If you want a special message</label>
+									<label>Task Duration</label>
+									<input placeholder="Ex: 10 Days" id="task-duration" name="taskduration" type="text" />
+									<label class="form-helper">Deadline for the task</label>
 								</li>
 								<li class="form-item">
-									<label>Domain</label>
-									<select class="edit-select" placeholder="Admin to which domain" id="invite-domain" name="invitedomain" type="text">
-
-									</select>
+									<label>Task Beneifit</label>
+									<input placeholder="Ex: You get $5 credit" id="task-benefit" name="taskbenefit" type="text" />
+									<label class="form-helper">Persuading benefit on completion</label>
 								</li>
 								<li class="form-item">
-									<label>Access Level</label>
-									<span>
-										<input id="admin-role" onclick="return false" type="checkbox" name="roles" value="Admin" checked="checked"/>
-										Admin - Only assign work </span>
-								</li>
-								<li class="form-item filler">
-									<label></label>
-									<span>
-										<input  id="member-role" type="checkbox" name="roles" value="Member"/>
-										Member - Accept work to do </span>
+									<label>Assign To</label>
+									<input placeholder="All Memebers" id="member-list" name="memberslist" type="text" />
+									<label class="form-helper">Select whom to assign</label>
 								</li>
 							</ol>
 						</fieldset>
@@ -59,10 +51,11 @@
 				</div>
 				<footer>
 					<div class="edit-controls">
-						<input id="invite-send" type="button" value="Send">
+						<input id="member-edit" type="button" value="Update">
+						<input class="negative" type="button" value="Remove Member">
 					</div>
 				</footer>
-				<div id="invite-modal-close" class="modal_close"></div>
+				<div class="modal_close"></div>
 			</div>
 		</div>
 

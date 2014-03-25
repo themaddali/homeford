@@ -129,13 +129,6 @@ define(['jqueryui', 'spin', 'cookie', '../app/Router', 'validate', '../app/servi
 							jQuery('#new-user-domain').css("text-transform", "none");
 							jQuery('#RInfo').fadeOut();
 						} else {
-							// jQuery('#RInfo').fadeIn();
-							// if (DOMAINSLIST && DOMAINSLIST.indexOf(domainrequest) !== -1) {
-								// jQuery('.info').html(INFO + 'This University Exists. You will be added as admin');
-							// } else {
-								// jQuery('.info').html(OK + 'This is a new university, You will be the owner');
-							// }
-							//jQuery('#RInfo').fadeIn();
 							if (DOMAINSLIST && DOMAINSLIST.indexOf(domainrequest) !== -1) {
 								jQuery('#domain-info').text('Existing Domain, Adds as Admin');
 							} else {

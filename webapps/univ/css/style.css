@@ -308,7 +308,7 @@ body {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	font-weight: 400;
-	background: #616970;
+	background: white;
 }
 body a {
 	text-decoration: none;
@@ -1262,6 +1262,13 @@ body.error404 {
 	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
 }
+.modal-body .modal-container header .metadata {
+	display: inline;
+	float: right;
+	font-size: 14px;
+	font-style: italic;
+	color: #444;
+}
 
 .modal-body .modal-container footer {
 	background-color: #FFFFFF;
@@ -1402,6 +1409,9 @@ body.error404 {
 	color: #444;
 	overflow: scroll;
 	height: 80%;
+}
+.modal-body .modal-container .modal-contents.cards {
+	height: 70%;
 }
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
@@ -2172,6 +2182,25 @@ html.touch #subnav {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+.edit-card-canvas {
+	padding: 15px;
+}
+
+.membercard {
+	float: left;
+	width: 150px;
+	height: 70px;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
+	margin: 5px;
+	padding: 5px;
+	overflow: hidden;
+}
+
 .float-left .adminboard.active {
 	float: left;
 	width: 830px;
@@ -2210,6 +2239,27 @@ html.touch #subnav {
 .adminboard:hover {
 	border: 2px solid #0784E3;
 	/*overflow-y: scroll;*/
+}
+.membercard:hover {
+	border: 2px solid #0784E3;
+}
+
+.membercard .membercard-id {
+	font-size: 12px;
+	color : #7f7f7f;
+	margin-top: -5px;
+	margin-left: 15px;
+}
+.membercard .membercard-name {
+	font-size: 14px;
+	color : #0784E3;
+	margin-top : 20px;
+	margin-left: 15px
+}
+.membercard .membercard-checkbox {
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
 }
 .studentboard img {
 	width: 100%;

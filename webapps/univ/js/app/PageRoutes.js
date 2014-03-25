@@ -154,6 +154,24 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                router.map('todoassign', '^/todoassign(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/todo/assign.html','../app/ToDoAssignView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
+                router.map('memberspick', '^/memberspick(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/selector/memberspick.html','../app/MembersPickView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 
                 router.map('prehome', '^/prehome(/.*|$)', {
                 	container: CONTAINER,

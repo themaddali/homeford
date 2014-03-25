@@ -2,23 +2,16 @@
 
 define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
 
-	var InviteView = ( function() {
+	var ToDoAssignView = ( function() {
 
 			/**
 			 * Constructor
 			 *
 			 */
 
-			var ROLEMAP = {
-				'ROLE_TIER1' : 'Owner',
-				'ROLE_TIER2' : 'Admin',
-				'ROLE_TIER3' : 'Member'
-			}
-			var activeDomains = [];
-			var pendingList;
 			var validator;
 
-			function InviteView() {
+			function ToDoAssignView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -62,15 +55,7 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 				}
 				
 				function clearForm() {
-					jQuery('.form-item > input').val("");
-					jQuery('#member-role').prop('checked', false);
-					jQuery('.edit-notify').hide();
-					jQuery('.modal_close').show();
-				}
-
-
-				this.pendingList = function(pendinglist) {
-					pendingList = pendinglist;
+					
 				}
 
 				this.pause = function() {
@@ -88,12 +73,15 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
-
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
+						});
+						
+						jQuery('#member-list').keyup(function(){
+							router.go('/memberspick');
 						});
 
 						jQuery('#invite-send').on('click', function() {
@@ -166,8 +154,8 @@ define(['cookie', '../app/service/DataService', 'validate', '../app/Router', '..
 
 			}
 
-			return InviteView;
+			return ToDoAssignView;
 		}());
 
-	return new InviteView();
+	return new ToDoAssignView();
 });
