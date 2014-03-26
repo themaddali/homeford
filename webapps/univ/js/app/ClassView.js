@@ -1,6 +1,4 @@
-//View that will drive the Students list page.
-
-define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/service/DataService', '../app/Router'], function(modernizr, spin, plugins, cookie, carousal, swipe, service, router) {"use strict";
+define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify'], function(modernizr, jqueryui, spin, plugins, cookie, service, router, notify) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -14,38 +12,28 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 			function ClassView() {
 
 				function showBG() {
-					jQuery.backstretch(PARMS.workBg);
+					//jQuery.backstretch(PARMS.workBg);
 				}
 
 				//For Panels
 				function populateClass() {
-					service.getStudentObject(jQuery.cookie('subuser'), {
+					service.getStudentObject('test', {
 						success : function(StudentData) {
-							console.log('StudentData');
-							console.log(StudentData);
 							//Create the student panels on the fly (DB should send this info per user/univ)
-							var PanelTemplate = jQuery('#classboard-template').remove().attr('id', '');
+							var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
 							var COUNT = StudentData[0].activeassignments.length;
 							for (var i = 0; i < COUNT; i++) {
-								if (i === 0) {
-									//Clear the list
-									jQuery('#carousel').empty();
-									jQuery('#carousel').append('<div class="empty"></div>');
-								}
 								var newboard = PanelTemplate.clone();
 								jQuery('.class-name', newboard).text(StudentData[0].activeassignments[i].name);
 								if (StudentData[0].activeassignments[i].assignmentmodel === 'task') {
-									jQuery('.class-binder', newboard).attr('src', 'img/taskbook.jpg');
+									//jQuery('.class-binder', newboard).attr('src', 'img/taskbook.jpg');
 								}
-								jQuery('.class-progress', newboard).text(StudentData[0].activeassignments[i].progress + '% Done');
+								jQuery('.class-progress', newboard).progressbar({value: parseInt(StudentData[0].activeassignments[i].progress)});
+								jQuery('.class-progress-label', newboard).text(StudentData[0].activeassignments[i].progress + ' % Done');
 								jQuery('.class-select', newboard).attr('name', StudentData[0].activeassignments[i].name);
-								jQuery('#carousel').append(newboard);
+								jQuery('#class-canvas').append(newboard);
 								if (i === COUNT - 1) {
-									jQuery('#carousel').append('<div class="empty"></div>');
-									//Uncomment this if you want to load info sequentially from init
-									//populateAvailableStudents();
 									ActivatePanelEvents()
-									createPanels();
 								}
 							}
 						}
@@ -220,7 +208,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						showBG();
-						jQuery('#student-option-active').text(jQuery.cookie('subuser'));
 						populateClass();
 
 						//HTML Event - Actions

@@ -1942,34 +1942,34 @@ form input.error {
 
 /*form-view*/
 
-.adminboard form.show-form, .modal-contents form.show-form {
+.classboard form.show-form, .adminboard form.show-form, .modal-contents form.show-form {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset, , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
-.adminboard form.show-form fieldset:first-of-type, .modal-contents form.show-form fieldset:first-of-type {
+.classboard form.show-form fieldset:first-of-type, .adminboard form.show-form fieldset:first-of-type, .modal-contents form.show-form fieldset:first-of-type {
 	margin-top: 0px;
 }
-.adminboard form.show-form fieldset:last-of-type, .modal-contents form.show-form fieldset:last-of-type {
+.classboard form.show-form fieldset:last-of-type, .adminboard form.show-form fieldset:last-of-type, .modal-contents form.show-form fieldset:last-of-type {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item, .modal-contents form.show-form li.form-item {
+.classboard form.show-form li.form-item, .adminboard form.show-form li.form-item, .modal-contents form.show-form li.form-item {
 	font-size: 0px;
 }
-.adminboard form.show-form li.form-item:last-of-type, .modal-contents  form.show-form li.form-item:last-of-type {
+.classboard form.show-form li.form-item:last-of-type, .adminboard form.show-form li.form-item:last-of-type, .modal-contents  form.show-form li.form-item:last-of-type {
 	margin-bottom: 0px;
 }
-.adminboard form.show-form li.form-item > *, .modal-contents form.show-form li.form-item > * {
+.classboard form.show-form li.form-item > *, .adminboard form.show-form li.form-item > *, .modal-contents form.show-form li.form-item > * {
 	vertical-align: top;
 	display: inline-block;
 	font-size: 13px;
 	line-height: 17px;
 }
 
-.adminboard form.show-form li.form-item > label:first-of-type, .modal-contents form.show-form li.form-item > label:first-of-type {
+.classboard form.show-form li.form-item > label:first-of-type, .adminboard form.show-form li.form-item > label:first-of-type, .modal-contents form.show-form li.form-item > label:first-of-type {
 	max-width: 170px;
 	width: 33%;
 	margin-bottom: 5px;
@@ -1985,7 +1985,7 @@ form input.error {
 	width: auto;
 	cursor: default;
 }
-.adminboard form.show-form li.form-item > .form-content, .modal-contents form.show-form li.form-item > .form-content {
+.classboard form.show-form li.form-item > .form-content, .adminboard form.show-form li.form-item > .form-content, .modal-contents form.show-form li.form-item > .form-content {
 	width: 66%;
 	margin-bottom: 5px;
 	font-size: 13px;
@@ -2110,16 +2110,43 @@ html.touch #subnav {
 	line-height: 1.2em;
 }
 
-#carousel .class-progress {
-	display: block;
-	position: absolute;
-	top: 130px;
-	left: 210px;
-	z-index: 10;
-	color: #0784E3;
-	font-size: 1.2em;
-	font-weight: 400;
-	line-height: 0.8em;
+.classboard div.class-progress {
+	border-radius: 0px;
+	margin: 10px;
+	margin-top: 20px;
+	color: #d9d9d9;
+	height: 15px;
+}
+
+.classboard div.class-progress-label {
+	font-size: 13px;
+	margin-top: -10px;
+	color: #7f7f7f;
+	text-align: center;
+}
+
+.classboard div.class-info {
+	text-align: center;
+	padding: 10px;
+	margin-top: 30%;
+}
+
+.classboard div.class-info div.label {
+	font-size: 13px;
+	font-style: italic;
+	color: #7f7f7f;;
+}
+
+.classboard div.footer {
+	text-align: center;
+	font-size: 0.8em;
+	border-top: 1px dotted #d9d9d9;
+	margin-top: 40px;
+	color: #7f7f7f;
+}
+
+.classboard div.class-progress div.ui-corner-left {
+	border-radius: 0px;
 }
 
 /*INFO*/
@@ -2145,18 +2172,18 @@ html.touch #subnav {
 	overflow: auto;
 }
 .main-content-header .titleinfo {
-	font-size : 1em;
-	font-weight : 700;
+	font-size: 1em;
+	font-weight: 700;
 	float: left;
 	margin-left: 15px;
 	padding: 6px;
 }
 .main-content-header .metainfo {
-	color : #737373;
-	font-size : 0.8em;
-	font-weight : 400;
-	font-style : italic;
-	float : right;
+	color: #737373;
+	font-size: 0.8em;
+	font-weight: 400;
+	font-style: italic;
+	float: right;
 	margin-right: 15px;
 	padding: 9px;
 }
@@ -2185,7 +2212,7 @@ html.touch #subnav {
 	background-color: #FFFFFF;
 }
 
-.float-left .studentboard {
+.float-left .studentboard, .float-left .classboard {
 	float: left;
 	width: 300px;
 	height: 350px;
@@ -2250,7 +2277,7 @@ html.touch #subnav {
 	background-color: rgba(164, 164, 164, 0.5);
 }
 
-.studentboard, .adminboard {
+.studentboard, .adminboard, .classboard {
 	background: #FFF;
 	padding: 0px;
 	margin: 5px;
@@ -2258,13 +2285,10 @@ html.touch #subnav {
 	cursor: pointer;
 }
 
-.studentboard:hover {
+.studentboard:hover, .adminboard:hover, .classboard:hover {
 	border: 2px solid #0784E3;
 }
-.adminboard:hover {
-	border: 2px solid #0784E3;
-	/*overflow-y: scroll;*/
-}
+
 .membercard:hover {
 	border: 1px solid #0784E3;
 }
@@ -2393,6 +2417,16 @@ html.touch #subnav {
 	border-left: 3px solid #0784E3;
 	padding: 5px;
 	margin-bottom: 5px;
+}
+
+.classboard div.class-name {
+	font-weight: 700;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: #0784E3;
+	border-bottom: 1px solid #d9d9d9;
 }
 
 /*==================Student Profiles=============*/

@@ -1,4 +1,3 @@
-//View that will drive the Students list page.
 
 define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, router, notify) {"use strict";
 
@@ -6,8 +5,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 			var PARMS = {
 				"workBg" : "img\/classbg.png",
-				"carouselurl" : "js\/lib\/jquery.carousel.min.js",
-				"swipejsurl" : "js\/lib\/swipe.min.js"
 			};
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>'
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>'
@@ -24,9 +21,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 				function populateStudentList() {
 					service.getUnivObject({
 						success : function(UnivData) {
-							console.log('UnivData');
-							console.log(UnivData);
-
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var template = jQuery('#student-template').remove().attr('id', '');
 							var COUNT = UnivData[0].students.length;

@@ -8,67 +8,80 @@
 			</div>
 		</noscript>
 		<div id="project-nav">
-
-			<div id="back-to-work">
-				<a href="#/studentlist">Back</a>
-			</div>
-
 			<div id="project-page-logo" class="ir">
 				<a href=""></a>
 				<h1>Homeford University</h1>
 			</div>
-
-			<div id="project-dropdown">
-				<a id="student-option-active"> </a>
-				<ul id="student-options">
-					<li>
-						<a id="add-task" class="student-option">Add Task</a>
-					</li>
-					<li>
-						<a id="drop-task" class="student-option">Drop Task </a>
-					</li>
-					<li>
-						<a id="tsask-social" class="student-option">Post Social</a>
-					</li>
-				</ul>
+			<div></div>
+			<div class="user-info" id="user-name">
+				<i class="icon-user  icon-1x " style="padding-right: 5px"></i>
+				<span id="user-name-value"></span>
 			</div>
-
+			<div class="user-info" id="alert">
+				<i class="icon-bell-alt icon-1x " style="padding-right: 5px"></i>
+				<span id="alert-value">0</span>
+			</div>
 		</div>
-		<div id="wrapper" class="hidden">
-			<div id="carousel">
-				<div class="empty"></div>
-				<div id="classboard-template" class="classboard">
-					<img src="img/classbook.jpg" class="class-binder">
-					<span class="class-name">Class Name</span>
-					<span class="class-progress">Progress</span>
+		<div class="main-content-header">
+			<div class="titleinfo">
+				Active Tasks
+			</div>
+			<div class="metainfo"></div>
+		</div>
+		<div class="main-content">
+			<div id="class-canvas" class="content float-left">
+				<div class="classboard" id="class-template">
+					<div class="class-name">
+						Class Name
+					</div>
+					<div class="class-progress"></div>
+					<div class="class-progress-label">
+						Progress
+					</div>
+					<div class="class-info">
+						<div class="label">
+							Assigned By
+						</div>
+						<div>
+							Mr James Thomas
+						</div>
+						<div class="label">
+							Due By
+						</div>
+						<div>
+							May 10th 2014
+						</div>
+					</div>
+					<div class="footer">
+						last worked on: 17th March 2014
+					</div>
+					<!-- <form class="show-form">
+					<fieldset>
+					<ol>
+					<li class="form-item">
+					<label>Assigned By</label>
+					<div class="form-content univ-id">
+					Mr. John Thomas
+					</div>
+					</li>
+					<li class="form-item">
+					<label>Deadline</label>
+					<div class="form-content univ-about">
+					Apr 26, 2014
+					</div>
+					</li>
+					<li class="form-item">
+					<label>Last Worked On</label>
+					<div class="form-content univ-about">
+					Mar 25, 2014
+					</div>
+					</li>
+					</ol>
+					</fieldset>
+					</form> -->
 					<a class="class-select" style="background: transparent no-repeat 0 0;"></a>
 				</div>
-
 			</div>
-		</div>
-
-		<div id="slider-container">
-			<div id="wrapper-touch" class="hidden" >
-				<ul>
-					<li>
-						<a href="../course"> <span class="gradient-work-img"></span> <span class="heading">Colors</span>
-						<br />
-						<span class="subtitle">Solids</span> <img src="img/colorsbook1.png" alt="Slide" /> </a>
-					</li>
-
-				</ul>
-			</div>
-		</div>
-		<div style="display:none" id="templates">
-
-		</div>
-
-		<a href="#" id="prev"></a>
-		<a href="#" id="next"></a>
-		<div id="touch-instruction">
-			<p>
-				Swipe to navigate
-			</p>
 		</div>
 
 		<div id="preloader"></div>

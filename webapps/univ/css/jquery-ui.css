@@ -732,7 +732,7 @@ body .ui-tooltip {
 }
 .ui-widget-header {
 	border: 1px solid #FFF;
-	/*background: #0784E3 url(images/ui-bg_flat_0_fbb913_40x100.png) 50% 50% repeat-x;*/
+	background: #0784E3 url(images/ui-bg_flat_0_fbb913_40x100.png) 50% 50% repeat-x;
 	color: #7f7f7f;
 	font-weight: bold
 }
