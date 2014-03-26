@@ -611,17 +611,6 @@ body.error404 {
 	margin-top: 30px;
 }
 
-/*jQuery Ui Widgets Styling*/
-.ui-datepicker td {
-	border: 1px solid #CCC;
-	padding: 0;
-}
-
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	border: solid #FFF;
-	border-width: 1px 0 0 1px;
-}
-
 #login-modal a {
 	display: block;
 	width: 400px;

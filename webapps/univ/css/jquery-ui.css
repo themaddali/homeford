@@ -257,9 +257,9 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	padding: 0
 }
 .ui-datepicker {
-	width: 20%;
-	/*padding: .2em .2em 0;*/
-	display: none
+	width: 39%;
+	padding: 5px;
+	display: none;
 }
 .ui-datepicker .ui-datepicker-header {
 	position: relative;
@@ -269,7 +269,8 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	position: absolute;
 	top: 2px;
 	width: 1.8em;
-	height: 1.8em
+	height: 1.8em;
+	background-image: url("../img/direction.png");
 }
 .ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover {
 	top: 1px
@@ -308,7 +309,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 }
 .ui-datepicker table {
 	width: 100%;
-	font-size: .7em;
+	font-size: .8em;
 	border-collapse: collapse;
 	margin: 0 0 .4em
 }
@@ -316,11 +317,13 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	padding: .7em .3em;
 	text-align: center;
 	font-weight: bold;
-	border: 0
+	border: 0;
+	color: #737373;
+	
 }
 .ui-datepicker td {
 	border: 0;
-	padding: 1px
+	padding: 2px
 }
 .ui-datepicker td span, .ui-datepicker td a {
 	display: block;
@@ -707,10 +710,14 @@ body .ui-tooltip {
 }
 .ui-widget {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	font-size: 1em
+	font-size: 1em;
+	margin-top: 0px;
+	border-color: #007DBA;
 }
 .ui-widget .ui-widget {
-	font-size: 1em
+	font-size: 1em;
+	margin-top: 5px;
+	border-color: #007DBA;
 }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -718,7 +725,7 @@ body .ui-tooltip {
 }
 .ui-widget-content {
 	border: 2px solid;
-	color: #222;
+	color: #007DBA;
 }
 .ui-widget-content a {
 	color: #222
@@ -726,7 +733,7 @@ body .ui-tooltip {
 .ui-widget-header {
 	border: 1px solid #FFF;
 	/*background: #0784E3 url(images/ui-bg_flat_0_fbb913_40x100.png) 50% 50% repeat-x;*/
-	color: #FFF;
+	color: #7f7f7f;
 	font-weight: bold
 }
 .ui-widget-header a {
@@ -736,14 +743,17 @@ body .ui-tooltip {
 	border: 2px solid #d3d3d3;
 	/*background: #fff  50% 50% repeat-x;*/
 	font-weight: bold;
-	color: #555
+	color: #555;
+	height: 15px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
 	color: #555;
 	text-decoration: none
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
-	border-bottom: 1px solid #0784E3;
+	border: 1px solid #0784E3;
 	/*background: #0784E3 url(images/ui-bg_glass_75_fbb913_1x400.png) 50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #212121
@@ -764,7 +774,7 @@ body .ui-tooltip {
 	text-decoration: none
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-	border: 1px solid #0784E3;
+	border: 2px solid #0784E3;
 	background: #FFF url(images/ui-bg_glass_0_FFFFFF_1x400.png) 50% 50% repeat-x;
 	color: #000
 }
@@ -802,8 +812,8 @@ body .ui-tooltip {
 	width: 16px;
 	height: 16px
 }
-.ui-icon, .ui-widget-content .ui-icon {
-	background-image: url(images/ui-icons_222222_256x240.png)
+/*.ui-icon, .ui-widget-content .ui-icon {
+	background-image: url(images/ui-icons_FFFFFF_256x240.png)
 }
 .ui-widget-header .ui-icon {
 	background-image: url(images/ui-icons_FFFFFF_256x240.png)
@@ -822,7 +832,7 @@ body .ui-tooltip {
 }
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {
 	background-image: url(images/ui-icons_cd0a0a_256x240.png)
-}
+}*/
 .ui-icon-blank {
 	background-position: 16px 16px
 }
@@ -1349,7 +1359,7 @@ body .ui-tooltip {
 	background-position: -80px -224px
 }
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
-	border-top-left-radius: 0
+	border-top-left-radius: 7px
 }
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
 	border-top-right-radius: 0
@@ -1358,12 +1368,13 @@ body .ui-tooltip {
 	border-bottom-left-radius: 0
 }
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
-	border-bottom-right-radius: 0
+	border-bottom-right-radius: 7px
 }
 .ui-widget-overlay {
 	background: #aaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
 	opacity: .3;
-	filter: Alpha(Opacity=30)
+	filter: Alpha(Opacity=30);
+	margin-top: 5px;
 }
 .ui-widget-shadow {
 	margin: -8px 0 0 -8px;

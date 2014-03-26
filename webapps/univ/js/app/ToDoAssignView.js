@@ -31,6 +31,7 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 				}
 
 				function populateData() {
+					jQuery("#task-deadline").datepicker({ minDate: 0});
 					jQuery('#member-list').val(ActiveMembers);
 				}
 				
@@ -44,6 +45,7 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 
 				this.resume = function() {
 					populateData();
+					
 				};
 
 				this.init = function(args) {
@@ -52,11 +54,18 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 
 					if (checkForActiveCookie() === true) {
 						populateData();
-						jQuery("#task-deadline").datepicker();
-
+						
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
+						});
+						
+						//JQ UI Bug of -Index.
+						jQuery('#task-deadline').focus(function(){
+							setTimeout (function(){
+								jQuery('#ui-datepicker-div').css('background-color','white');
+								jQuery('#ui-datepicker-div').css('z-index','200');
+							}, 100);
 						});
 						
 						jQuery('#member-list').click(function(){
