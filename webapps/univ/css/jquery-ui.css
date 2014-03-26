@@ -724,7 +724,7 @@ body .ui-tooltip {
 	font-size: 1em
 }
 .ui-widget-content {
-	border: 2px solid;
+	border: 1px solid;
 	color: #007DBA;
 }
 .ui-widget-content a {
@@ -740,7 +740,7 @@ body .ui-tooltip {
 	color: #FFF
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	border: 2px solid #d3d3d3;
+	border: 1px solid #d3d3d3;
 	/*background: #fff  50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #555;
@@ -774,7 +774,7 @@ body .ui-tooltip {
 	text-decoration: none
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-	border: 2px solid #0784E3;
+	border: 1px solid #0784E3;
 	background: #FFF url(images/ui-bg_glass_0_FFFFFF_1x400.png) 50% 50% repeat-x;
 	color: #000
 }

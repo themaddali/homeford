@@ -2146,10 +2146,10 @@ html.touch #subnav {
 }
 .main-content-header .titleinfo {
 	font-size : 1em;
-	font-weight : 600;
+	font-weight : 700;
 	float: left;
 	margin-left: 15px;
-	padding: 7px;
+	padding: 6px;
 }
 .main-content-header .metainfo {
 	color : #737373;
@@ -2217,7 +2217,7 @@ html.touch #subnav {
 	width: 150px;
 	height: 70px;
 	text-align: left;
-	border: 2px solid #d9d9d9;
+	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	overflow: none;
@@ -2266,10 +2266,10 @@ html.touch #subnav {
 	/*overflow-y: scroll;*/
 }
 .membercard:hover {
-	border: 2px solid #0784E3;
+	border: 1px solid #0784E3;
 }
 .membercard.active {
-	border: 2px solid #0784E3;
+	border: 1px solid #0784E3;
 }
 
 .canvas-header {
