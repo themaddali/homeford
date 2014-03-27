@@ -42,6 +42,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 
 				function showMessage(status, message, toroute, duration) {
 					jQuery('div.edit-notify').remove();
+					jQuery('.page').append('<audio id="notifyAudio"><source src="media/notify.ogg" type="audio/ogg"><source src="media/notify.mp3" type="audio/mpeg"><source src="media/notify.wav" type="audio/wav"></audio>');
 					if (!duration) {
 						duration = 5000;
 						///defaulting to 5 seconds
@@ -57,6 +58,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						}
 						jQuery('#project-nav').append(notification);
 						jQuery('.edit-notify').slideDown(1000);
+						$('#notifyAudio')[0].play();
 						setTimeout (function(){
 								//jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
 								//var count = parseInt(jQuery('#alert-value').text()) + 1;

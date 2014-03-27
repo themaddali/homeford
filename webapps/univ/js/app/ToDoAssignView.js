@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(cookie,jqueryui, service, validate, router, notify, admin) {"use strict";
+define(['jquery','modernizr', 'cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(jQuery, modernizr, cookie, jqueryui, service, validate, router, notify, admin) {"use strict";
 
 	var ToDoAssignView = ( function() {
 
@@ -31,11 +31,16 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 				}
 
 				function populateData() {
-					jQuery("#task-deadline").datepicker({ minDate: 0});
+					if (!Modernizr.inputtypes.date) {
+						jQuery("#task-deadline").datepicker({
+							minDate : 0
+						});
+					}
 					jQuery('#member-list').text(ActiveMembers);
 				}
-				
-				this.selectedMembers = function(info){
+
+
+				this.selectedMembers = function(info) {
 					ActiveMembers = info;
 				}
 
@@ -45,7 +50,7 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 
 				this.resume = function() {
 					populateData();
-					
+
 				};
 
 				this.init = function(args) {
@@ -54,21 +59,21 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 
 					if (checkForActiveCookie() === true) {
 						populateData();
-						
+
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});
-						
+
 						//JQ UI Bug of -Index.
-						jQuery('#task-deadline').focus(function(){
-							setTimeout (function(){
-								jQuery('#ui-datepicker-div').css('background-color','white');
-								jQuery('#ui-datepicker-div').css('z-index','200');
+						jQuery('#task-deadline').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
 						});
-						
-						jQuery('#member-list').click(function(){
+
+						jQuery('#member-list').click(function() {
 							router.go('/memberspick');
 						});
 

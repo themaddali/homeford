@@ -5,6 +5,7 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/Da
 			var PARMS = {
 				"workBg" : "img\/classbg.png",
 			};
+			var ACTIVESTUDENT;
 			
 			/**
 			 * Constructor
@@ -17,19 +18,23 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/Da
 
 				//For Panels
 				function populateClass() {
-					service.getStudentObject('test', {
+					jQuery('.subtitleinfo').text(ACTIVESTUDENT);
+					service.getStudentObject(ACTIVESTUDENT, {
 						success : function(StudentData) {
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
 							var COUNT = StudentData[0].activeassignments.length;
 							for (var i = 0; i < COUNT; i++) {
+								jQuery('.metainfo').text(COUNT+ ' Tasks');
 								var newboard = PanelTemplate.clone();
 								jQuery('.class-name', newboard).text(StudentData[0].activeassignments[i].name);
 								if (StudentData[0].activeassignments[i].assignmentmodel === 'task') {
 									//jQuery('.class-binder', newboard).attr('src', 'img/taskbook.jpg');
 								}
-								jQuery('.class-progress', newboard).progressbar({value: parseInt(StudentData[0].activeassignments[i].progress)});
-								jQuery('.class-progress-label', newboard).text(StudentData[0].activeassignments[i].progress + ' % Done');
+								jQuery('.class-progress', newboard).progressbar();
+								var value = parseInt(StudentData[0].activeassignments[i].progress);
+								jQuery('.class-progress', newboard).progressbar("value",value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
+								jQuery('.class-progress-label', newboard).text(StudentData[0].activeassignments[i].progress + '% Done');
 								jQuery('.class-select', newboard).attr('name', StudentData[0].activeassignments[i].name);
 								jQuery('#class-canvas').append(newboard);
 								if (i === COUNT - 1) {
@@ -191,6 +196,10 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/Da
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
 				}
+				
+				this.activeStudent = function(activedata){
+					ACTIVESTUDENT = activedata;
+				}
 
 
 				this.pause = function() {
@@ -199,6 +208,7 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/Da
 
 				this.resume = function() {
 					showBG();
+					populateClass();
 				};
 
 				this.init = function(args) {

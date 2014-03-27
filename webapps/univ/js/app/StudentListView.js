@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService','../app/ClassView', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -24,6 +24,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 							var template = jQuery('#student-template').remove().attr('id', '');
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
+								jQuery('.metainfo').text(COUNT+ ' Members');
 								var newboard = template.clone();
 								jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 								jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
@@ -204,20 +205,22 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
 						var selectedUser = $(this).find('.student-name').text();
-						var selectedUserSecurity = $(this).attr('security');
-						if (selectedUserSecurity !== "true") {
-							jQuery.cookie('subuser', selectedUser, {
-								path : '/',
-								expires : 100
-							});
-							router.go('/class', '/studentlist');
-						} else {
-							jQuery.cookie('subuser', selectedUser, {
-								path : '/',
-								expires : 100
-							});
-							router.go('/class', '/studentlist');
-						}
+						classview.activeStudent(selectedUser);
+						router.go('/class', '/studentlist');
+						// var selectedUserSecurity = $(this).attr('security');
+						// if (selectedUserSecurity !== "true") {
+							// jQuery.cookie('subuser', selectedUser, {
+								// path : '/',
+								// expires : 100
+							// });
+							// router.go('/class', '/studentlist');
+						// } else {
+							// jQuery.cookie('subuser', selectedUser, {
+								// path : '/',
+								// expires : 100
+							// });
+							// router.go('/class', '/studentlist');
+						// }
 					});
 				};
 
