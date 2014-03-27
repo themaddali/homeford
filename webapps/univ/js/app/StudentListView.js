@@ -223,7 +223,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						jQuery('#user-name-value').text(jQuery.cookie('user').split('@')[0]);
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
@@ -258,17 +257,29 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						}, 5000);
 
 						//HTML Event - Actions
-						jQuery('.user-info').on('click', function(e) {
+						jQuery('#user-name').on('click', function(e) {
 							banner.ShowUser();
-							jQuery('.userflyout').mouseleave(function() {
-								banner.HideUser();
+							jQuery('#signout').on('click', function(e) {
+								banner.logout();
 							});
-							
+							jQuery('#banner-dashboard').on('click', function(e) {
+								banner.HideUser();
+								router.go('/admin');
+							});
+							jQuery('.userflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideUser();
+								}, 500);
+							});
 						});
-
-						// jQuery('.userflyout').mouseout(function() {
-							// banner.HideUser();
-						// });
+						jQuery('#alert').on('click', function(e) {
+							banner.ShowAlert();
+							jQuery('.alertflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideAlert();
+								}, 500);
+							});
+						});
 
 					} // Cookie Guider
 				};

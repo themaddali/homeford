@@ -32,7 +32,7 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 
 				function populateData() {
 					jQuery("#task-deadline").datepicker({ minDate: 0});
-					jQuery('#member-list').val(ActiveMembers);
+					jQuery('#member-list').text(ActiveMembers);
 				}
 				
 				this.selectedMembers = function(info){

@@ -800,7 +800,16 @@ body.error404 {
 }
 
 /*FLYOUTS*/
+
+#alert {
+	color: #666666;
+}
+#alert.active {
+	color: #007DBA;
+}
+
 .userflyout {
+	font-size: 14px;
 	background: #FFFFFF;
 	float: right;
 	display: block;
@@ -808,9 +817,38 @@ body.error404 {
 	top: 50px;
 	border: 1px solid #d9d9d9;
 	border-bottom: 4px solid #0784E3;
-	width: 200px;
-	height: 100px;
+	width: 250px;
+	height: 95px;
 	margin-right: -190px;
+}
+.alertflyout {
+	font-size: 14px;
+	background: #FFFFFF;
+	float: right;
+	display: block;
+	position: relative;
+	top: 50px;
+	border: 1px solid #d9d9d9;
+	border-bottom: 4px solid #0784E3;
+	width: 250px;
+	height: 65px;
+	margin-right: -190px;
+}
+.userflyout div.flyout-label, .alertflyout div.flyout-label {
+	margin-top: 10px;
+	margin-left: 0px;
+	padding-left: 10px;
+}
+.userflyout a.flyout-link, .alertflyout a.flyout-link {
+	display: block;
+	margin-top: 10px;
+	margin-left: 0px;
+	padding-left: 10px;
+	color: #007DBA;
+	cursor: pointer;
+}
+.userflyout a.flyout-link:hover, .alertflyout a.flyout-link:hover {
+	font-weight: 700;
 }
 
 /* =================== Work Page Carousel ======================= */
@@ -1301,8 +1339,8 @@ body.error404 {
 }
 .edit-notify.INFO {
 	display: none;
-	background-color: #f3f3f3;
-	border-bottom: 4px solid #0784E3;
+	/*background-color: #f3f3f3;*/
+	border-bottom: 3px solid #0784E3;
 	border-top-left-radius: 10px;
 	font-size: 1.2em;
 	position: absolute;
@@ -1580,6 +1618,13 @@ body.error404 {
 	display: inline;
 }
 
+.edit-form li a.input-link:focus + .form-helper{
+	display: inline
+}
+.edit-form li a.input-link:hover + .form-helper{
+	display: inline
+}
+
 .edit-form li select.edit-select {
 	-webkit-appearance: none;
 	padding: 10px;
@@ -1655,6 +1700,18 @@ body.error404 {
 	padding-left: 0px;
 	cursor: pointer;
 }
+.edit-form li.form-item a.input-link {
+	font-size: 14px;
+	line-height: 20px;
+	padding: 10px;
+	text-align: left;
+	padding-left: 0px;
+}
+.edit-form li.form-item a.input-link:hover,.edit-form li.form-item a.input-link:active,.edit-form li.form-item a.input-link:focus {
+	color: #007DBA;
+}
+
+
 .edit-form li.form-item input.input-label:hover {
 	color: #007DBA;
 	cursor: pointer;
@@ -1960,7 +2017,7 @@ form input.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,  , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,    , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2143,12 +2200,13 @@ html.touch #subnav {
 	text-align: center;
 	padding: 10px;
 	margin-top: 30%;
+	font-weight: 600;
 }
 
 .classboard div.class-info div.label {
 	font-size: 13px;
 	font-style: italic;
-	color: #7f7f7f;;
+	color: #7f7f7f;
 }
 
 .classboard div.footer {
@@ -2157,6 +2215,7 @@ html.touch #subnav {
 	border-top: 1px dotted #d9d9d9;
 	margin-top: 40px;
 	color: #7f7f7f;
+	padding: 4px;
 }
 
 .classboard div.class-progress div.ui-corner-left {
@@ -2189,9 +2248,19 @@ html.touch #subnav {
 	font-size: 1em;
 	font-weight: 700;
 	float: left;
-	margin-left: 15px;
+	margin-top: 2px;
+	margin-left: 10px;
 	padding: 6px;
 }
+.main-content-header > a {
+	float: left;
+	padding: 10px;
+	width: 10px;
+	margin-left: 10px;
+	margin-top: 4px;
+	background: url("../img/select-back.png") no-repeat;
+}
+
 .main-content-header .metainfo {
 	color: #737373;
 	font-size: 0.8em;
@@ -2439,7 +2508,9 @@ html.touch #subnav {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	text-align: center;
-	color: #0784E3;
+	color: #FFFFFF;
+	border-top-left-radius: 5px;
+	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
 }
 

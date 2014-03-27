@@ -107,7 +107,7 @@ define(['cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/
 							jQuery('.metadata').text(numberOfChecked + ' of ' + totalCheckboxes + ' selected');
 						});
 
-						jQuery('.card-search').keyup(function(event) {
+						jQuery('.card-search').change(function(event) {
 								var searchword = jQuery('.card-search').val();
 								var cardlist = jQuery('.edit-card-canvas .membercard-name');
 								for (var i=0; i< cardlist.length; i++){

@@ -1,4 +1,4 @@
-define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/service/DataService', '../app/Router', '../app/InviteView'], function(jqueryui, spin, plugins, cookie, raphael, elychart, service, router, invite) {"use strict";
+define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../app/service/DataService','../app/service/BannerService', '../app/Router', '../app/InviteView'], function(jqueryui,raphael, spin, plugins, cookie, elychart, service,banner, router, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -354,32 +354,11 @@ define(['jqueryui', 'spin', 'plugins', 'cookie', 'raphael', 'elychart', '../app/
 						setCanvas();
 						getInfoByPrivilage();
 
-						//HTML Event - Actions
-						jQuery('#signout-button').on('click', function(e) {
-							service.Logout({
-								success : function() {
-									jQuery.removeCookie('user', {
-										path : '/'
-									});
-									jQuery.removeCookie('subuser', {
-										path : '/'
-									});
-									router.go('/home', 'admin');
-									window.setTimeout('location.reload()', 500);
-									// refresh after 1/2 sec
-								},
-							});
-
-						});
-
-						jQuery('#student-manage').on('click', function() {
-							router.go('/admin/subuseradd', 'admin');
-						});
 						jQuery('.adminboard').on('click', function() {
 
 						});
 						jQuery('#admin-done').on('click', function() {
-							router.go('/home', '/admin');
+							router.returnToPrevious();
 						});
 
 					} // Cookie Guider
