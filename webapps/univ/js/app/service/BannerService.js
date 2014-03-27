@@ -12,14 +12,16 @@ define(['jquery'], function() {"use strict";
 			 */
 			function BannerService() {
 
-				
-				this.user = function(){
+				this.ShowUser = function() {
 					var useroption = '<div class="userflyout"><div class="">' + 'Admin' + '</span></div>';
-					$('#project-nav').append(useroption);
+					jQuery('#project-nav').append(useroption);
 				}
-				
+				this.HideUser = function() {
+					jQuery('.userflyout').remove();
+				}
+
 				this.newNotify = function(status, message, link, details) {
-					
+
 				}
 
 				this.pause = function() {
@@ -31,7 +33,7 @@ define(['jquery'], function() {"use strict";
 				};
 
 				this.init = function() {
-					
+
 				};
 			}
 

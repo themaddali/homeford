@@ -801,12 +801,13 @@ body.error404 {
 
 /*FLYOUTS*/
 .userflyout {
+	background: #FFFFFF;
 	float: right;
 	display: block;
 	position: relative;
 	top: 50px;
 	border: 1px solid #d9d9d9;
-	border-bottom: 3px solid #0784E3;
+	border-bottom: 4px solid #0784E3;
 	width: 200px;
 	height: 100px;
 	margin-right: -190px;

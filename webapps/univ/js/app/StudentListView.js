@@ -1,5 +1,4 @@
-
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService','../app/service/BannerService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -253,16 +252,23 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService','
 						//Rich Experience First.... Load BG
 						showBG();
 						populateStudentList();
-						
-						setTimeout (function(){
-							notify.showMessage('INFO','I am testing this big long ajdfhkasdjflksd jfgjn jn jn jfn ','admin');
+
+						setTimeout(function() {
+							notify.showMessage('INFO', 'I am testing this big long ajdfhkasdjflksd jfgjn jn jn jfn ', 'admin');
 						}, 5000);
 
 						//HTML Event - Actions
 						jQuery('.user-info').on('click', function(e) {
-							banner.user();
-							//router.go('/admin', '/studentlist');
+							banner.ShowUser();
+							jQuery('.userflyout').mouseleave(function() {
+								banner.HideUser();
+							});
+							
 						});
+
+						// jQuery('.userflyout').mouseout(function() {
+							// banner.HideUser();
+						// });
 
 					} // Cookie Guider
 				};
@@ -273,4 +279,4 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService','
 		}());
 
 	return new StudentListView();
-}); 
+});
