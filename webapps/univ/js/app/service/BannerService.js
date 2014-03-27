@@ -1,7 +1,7 @@
 define(['jquery'], function() {"use strict";
 	// "use strict";
 
-	var AlertService = ( function() {
+	var BannerService = ( function() {
 
 			var ACTIVEDOMAIN;
 			var DOMAINLIST;
@@ -10,9 +10,13 @@ define(['jquery'], function() {"use strict";
 			 * @constructor
 			 * @type {}
 			 */
-			function AlertService() {
+			function BannerService() {
 
 				
+				this.user = function(){
+					var useroption = '<div class="userflyout"><div class="">' + 'Admin' + '</span></div>';
+					$('#project-nav').append(useroption);
+				}
 				
 				this.newNotify = function(status, message, link, details) {
 					
@@ -27,13 +31,12 @@ define(['jquery'], function() {"use strict";
 				};
 
 				this.init = function() {
-					//getUnivData();
-					this.resume();
+					
 				};
 			}
 
-			return new AlertService();
+			return new BannerService();
 		}());
 
-	return AlertService;
+	return BannerService;
 });

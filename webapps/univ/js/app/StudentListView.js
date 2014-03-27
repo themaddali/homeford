@@ -1,5 +1,5 @@
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService','../app/service/BannerService', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -260,7 +260,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 						//HTML Event - Actions
 						jQuery('.user-info').on('click', function(e) {
-							router.go('/admin', '/studentlist');
+							banner.user();
+							//router.go('/admin', '/studentlist');
 						});
 
 					} // Cookie Guider

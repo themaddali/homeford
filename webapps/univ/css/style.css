@@ -799,6 +799,19 @@ body.error404 {
 	display: none;
 }
 
+/*FLYOUTS*/
+.userflyout {
+	float: right;
+	display: block;
+	position: relative;
+	top: 50px;
+	border: 1px solid #d9d9d9;
+	border-bottom: 3px solid #0784E3;
+	width: 200px;
+	height: 100px;
+	margin-right: -190px;
+}
+
 /* =================== Work Page Carousel ======================= */
 #wrapper {
 	width: 100%;
@@ -1946,7 +1959,7 @@ form input.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset, , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,  , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
