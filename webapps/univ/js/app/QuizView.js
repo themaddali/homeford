@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/service/DataService', '../app/Router'], function(modernizr, spin, plugins, cookie, carousel, swipe, service, router) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router'], function(modernizr, spin, plugins, cookie, service, router) {"use strict";
 
 	var QuizView = ( function() {
 
@@ -18,23 +18,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 			function QuizView() {
 
 				function showBG() {
-					jQuery.backstretch(PARMS.workBg);
+					//jQuery.backstretch(PARMS.workBg);
 				}
-
-				var t = {
-					lines : 17,
-					length : 6,
-					width : 4,
-					radius : 12,
-					rotate : 0,
-					color : "#ccc",
-					speed : 2.2,
-					trail : 60,
-					className : "spinner",
-					zIndex : 2e9,
-					top : "auto",
-					left : "auto"
-				}, n = document.getElementById("preloader"), r = (new Spinner(t)).spin(n);
 
 				//Create the quiz panels on the fly (DB should send this info per user/teacher/quiz)
 				//Testing with 10 Questions - completed ones
@@ -51,11 +36,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 					}
 				}
 
-				//List in the dropdown to switch between the quizes for this T3 user
 				function populateAvailableQuizs() {
 					service.getStudentObject(jQuery.cookie('subuser'), {
 						success : function(StudentData) {
-							console.log('Quiz View: Student Data for Quiz LIst : ' + StudentData);
+							console.log('Quiz View: Student Data for Quiz List : ' + StudentData);
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var template = jQuery('#quiz-option-template').remove().attr('id', '');
 							var COUNT = StudentData[0].activeassignments.length;
@@ -76,108 +60,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 					});
 				}
 
-				function createPanels() {
-					var t = {
-						lines : 17,
-						length : 6,
-						width : 4,
-						radius : 12,
-						rotate : 0,
-						color : "#ccc",
-						speed : 2.2,
-						trail : 60,
-						className : "spinner",
-						zIndex : 2e9,
-						top : "auto",
-						left : "auto"
-					};
-
-					var n = document.getElementById("preloader");
-					var r = (new Spinner(t)).spin(n);
-					if (Modernizr.touch) {
-						buildSwipe();
-					} else {
-						buildCarousal(n, r);
-					}
-					ActivatePanelEvents();
-				};
-
-				function buildCarousal(n, r) {
-					function t(e) {
-						e.find("a").stop().fadeTo(500, 0);
-						e.addClass("selected");
-						e.find("a").stop().addClass("selected");
-						e.unbind("click")
-						generateQuiz();
-						var totalobjects = (jQuery('.quizboard').length) + COMPLETED;
-						var currentobject = ((jQuery('.selected > .qtnnumber').text()).split("#")[1]);
-						progress(Math.round((100 / totalobjects) * currentobject), jQuery('#progressBar'));
-					}
-
-
-					jQuery("#wrapper").removeClass("hidden");
-					jQuery("#wrapper-touch").remove();
-					jQuery("#wrapper").waitForImages(function() {
-						r.stop();
-						jQuery("#wrapper").animate({
-							opacity : 1
-						}, 600)
-					});
-
-					jQuery("#carousel").carouFredSel({
-						circular : !1,
-						width : "100%",
-						height : 490,
-						items : 3,
-						auto : !1,
-						prev : {
-							button : "#prev",
-							key : "left"
-						},
-						next : {
-							button : "#next",
-							key : "right"
-						},
-						scroll : {
-							items : 1,
-							duration : 1e3,
-							easing : "quadratic",
-							onBefore : function(t, n) {
-								t.find("a").stop().fadeTo(500, 1);
-								t.removeClass("selected");
-								t.find("a").removeClass("selected");
-								t.prev().unbind("click");
-								t.next().unbind("click");
-								n.prev().click(function(t) {
-									t.preventDefault();
-									jQuery("#carousel").trigger("prev", 1)
-								});
-								n.next().click(function(t) {
-									t.preventDefault();
-									jQuery("#carousel").trigger("next", 1)
-								})
-							},
-							onAfter : function(e, n) {
-								t(n.eq(1))
-							}
-						},
-						onCreate : function(n) {
-							t(n.eq(1));
-							jQuery("#carousel div.selected").next().click(function(t) {
-								t.preventDefault();
-								jQuery("#carousel").trigger("next", 1)
-							})
-						}
-					})
-				}
-
-				function buildSwipe() {
-					alert('swipe time');
-				}
-
 				function ActivatePanelEvents() {
 					$('.answer-option').on('click', function() {
-
 						if (jQuery(this).attr('data-id') === 'correct') {
 							jQuery(this).addClass('correct');
 							setTimeout(function() {
@@ -310,20 +194,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'carousel', 'swipe', '../app/s
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
-						showBG();
+						//showBG();
 						//Get the active student info and create the panels.
-						populateAvailableQuizs();
-						//populateAvailableStudents();
-
-						//Create panels ASYNC - After gathering data
-						//Fool Proof + Latency Issue taken care.
-						//createPanels();
-
-						//HTML Event - Actions
-						jQuery('#loggedin-user').on('click', function() {
-							router.go('/admin', '/class');
-						});
-
+						//populateAvailableQuizs();
 					} // Cookie Guider
 
 				};

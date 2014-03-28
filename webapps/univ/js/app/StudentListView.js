@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService','../app/ClassView', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService', '../app/ClassView', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -18,13 +18,15 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 				}
 
 				function populateStudentList() {
+					jQuery('#card-canvas').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
-							//Create the student panels on the fly (DB should send this info per user/univ)
 							var template = jQuery('#student-template').remove().attr('id', '');
+							//BackingUp
+							jQuery('.div-template').append(template.attr('id', 'student-template'));
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
-								jQuery('.metainfo').text(COUNT+ ' Members');
+								jQuery('.metainfo').text(COUNT + ' Members');
 								var newboard = template.clone();
 								jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 								jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
@@ -44,7 +46,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 										jQuery('.student-info', newboard).append("<li>" + UnivData[0].students[i].courses[j].name + " ..... and " + (UnivData[0].students[i].courses.length - 2) + " more</li>");
 									}
 								}
-
 								jQuery('#card-canvas').append(newboard);
 								if (i === COUNT - 1) {
 									//jQuery('#carousel').append('<div class="empty"></div>');
@@ -71,136 +72,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 					});
 				}
 
-				function createPanels() {
-					var t = {
-						lines : 17,
-						length : 6,
-						width : 4,
-						radius : 12,
-						rotate : 0,
-						color : "#ccc",
-						speed : 2.2,
-						trail : 60,
-						className : "spinner",
-						zIndex : 2e9,
-						top : "auto",
-						left : "auto"
-					};
-
-					var n = document.getElementById("preloader");
-					var r = (new Spinner(t)).spin(n);
-					Modernizr.load({
-						test : Modernizr.touch,
-						yep : {
-							loadSwipejs : PARMS.swipejsurl
-						},
-						nope : {
-							loadCarousel : PARMS.carouselurl
-						},
-						callback : {
-							loadSwipejs : function(t, n, i) {
-								jQuery(function() {
-									jQuery("#wrapper-touch").removeClass("hidden");
-									jQuery("#wrapper").remove();
-									var t = new Swipe(document.getElementById("wrapper-touch"), {
-										speed : 500,
-										callback : function(e, t, n) {
-										}
-									});
-									jQuery("a#prev").click(function() {
-										t.prev()
-									});
-									jQuery("a#next").click(function() {
-										t.next()
-									});
-									jQuery(window).resize(function() {
-										jQuery(window).width() > 480 ? e("#slider-container").css({
-											top : jQuery(window).height() / 2 - 225 + "px"
-										}) : jQuery("#slider-container").css({
-											top : "80px"
-										})
-									}).resize();
-									jQuery("#wrapper-touch").waitForImages(function() {
-										r.stop();
-										jQuery("#wrapper-touch").animate({
-											opacity : 1
-										}, 600)
-									})
-								})
-							},
-							loadCarousel : function(t, n, i) {
-								jQuery(function() {
-									function t(e) {
-										e.find("a").stop().fadeTo(500, 0);
-										e.addClass("selected");
-										e.find("a").stop().addClass("selected");
-										e.unbind("click")
-									}
-
-
-									jQuery("#wrapper").removeClass("hidden");
-									jQuery("#wrapper-touch").remove();
-									jQuery("#wrapper").waitForImages(function() {
-										r.stop();
-										jQuery("#wrapper").animate({
-											opacity : 1
-										}, 600)
-									});
-									jQuery(function() {
-										jQuery("#carousel").carouFredSel({
-											circular : !1,
-											width : "100%",
-											height : 490,
-											items : 3,
-											auto : !1,
-											prev : {
-												button : "#prev",
-												key : "left"
-											},
-											next : {
-												button : "#next",
-												key : "right"
-											},
-											scroll : {
-												items : 1,
-												duration : 1e3,
-												easing : "quadratic",
-												onBefore : function(t, n) {
-													t.find("a").stop().fadeTo(500, 1);
-													t.removeClass("selected");
-													t.find("a").removeClass("selected");
-													t.prev().unbind("click");
-													t.next().unbind("click");
-													n.prev().click(function(t) {
-														t.preventDefault();
-														jQuery("#carousel").trigger("prev", 1)
-													});
-													n.next().click(function(t) {
-														t.preventDefault();
-														jQuery("#carousel").trigger("next", 1)
-													})
-												},
-												onAfter : function(e, n) {
-													t(n.eq(1))
-												}
-											},
-											onCreate : function(n) {
-												t(n.eq(1));
-												jQuery("#carousel div.selected").next().click(function(t) {
-													t.preventDefault();
-													jQuery("#carousel").trigger("next", 1)
-												})
-											}
-										})
-									})
-								})
-							}
-						}
-					})
-					//Activate the events for lazy DOM elemets.
-					ActivatePanelEvents();
-				}
-
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
@@ -209,17 +80,17 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						router.go('/class', '/studentlist');
 						// var selectedUserSecurity = $(this).attr('security');
 						// if (selectedUserSecurity !== "true") {
-							// jQuery.cookie('subuser', selectedUser, {
-								// path : '/',
-								// expires : 100
-							// });
-							// router.go('/class', '/studentlist');
+						// jQuery.cookie('subuser', selectedUser, {
+						// path : '/',
+						// expires : 100
+						// });
+						// router.go('/class', '/studentlist');
 						// } else {
-							// jQuery.cookie('subuser', selectedUser, {
-								// path : '/',
-								// expires : 100
-							// });
-							// router.go('/class', '/studentlist');
+						// jQuery.cookie('subuser', selectedUser, {
+						// path : '/',
+						// expires : 100
+						// });
+						// router.go('/class', '/studentlist');
 						// }
 					});
 				};
