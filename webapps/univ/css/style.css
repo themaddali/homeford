@@ -20,10 +20,6 @@ audio, canvas, video {
 	*zoom: 1;
 }
 
-audio:not([controls]) {
-	display: none;
-}
-
 [hidden] {
 	display: none;
 }
@@ -223,7 +219,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	-webkit-appearance: button;
 	*overflow: visible;
 }
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input:focus {
 	border: 1px solid #0784E3;
 }
 
@@ -818,7 +814,7 @@ body.error404 {
 	border: 1px solid #d9d9d9;
 	border-bottom: 4px solid #0784E3;
 	width: 250px;
-	height: 95px;
+	height: 113px;
 	margin-right: -190px;
 }
 .alertflyout {
@@ -846,6 +842,9 @@ body.error404 {
 	padding-left: 10px;
 	color: #007DBA;
 	cursor: pointer;
+	border-top: 1px dotted #d9d9d9;
+	margin-top: 10px;
+	padding-top: 6px;
 }
 .userflyout a.flyout-link:hover, .alertflyout a.flyout-link:hover {
 	font-weight: 700;
@@ -1611,17 +1610,38 @@ body.error404 {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li textarea {
+	padding: 10px;
+	border-radius: 0;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
+}
+.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+	display: inline;
+}
+
+.edit-form li textarea.edittextarea:focus + .form-helper {
+	display: inline;
+}
+.edit-form li textarea.edittextarea:focus {
+	border-color: #007DBA;
+}
+.edit-form li textarea.edittextarea:hover + .form-helper {
 	display: inline;
 }
 
 .edit-form li a.input-link:focus + .form-helper {
 	display: inline
 }
-.edit-form li a.input-link:focus + .form-helper {
+.edit-form li a.input-link:hover + .form-helper {
 	display: inline
 }
 
@@ -2016,7 +2036,7 @@ form input.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,         , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,           , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
