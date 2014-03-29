@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService', '../app/ClassView', '../app/Router', '../app/Notify'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/service/BannerService', '../app/ClassView', '../app/Router', '../app/Notify', 'raphael'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -18,6 +18,13 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 				}
 
 				function populateStudentList() {
+					//Get User Profile
+					service.getUserProfile({
+						success: function(data){
+							//No Action needed now. Notifiy links auto.
+						}
+					});
+
 					jQuery('#card-canvas').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
@@ -125,10 +132,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						//Rich Experience First.... Load BG
 						showBG();
 						populateStudentList();
-
-						setTimeout(function() {
-							notify.showMessage('INFO', 'I am testing this big long ajdfhkasdjflksd jfgjn jn jn jfn ', 'admin');
-						}, 5000);
 
 						//HTML Event - Actions
 						jQuery('#user-name').on('click', function(e) {

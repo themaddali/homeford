@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['jquery','modernizr', 'cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(jQuery, modernizr, cookie, jqueryui, service, validate, router, notify, admin) {"use strict";
+define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../app/service/DataService', 'validate', '../app/Router', '../app/Notify', '../app/AdminView'], function(jQuery, modernizr, cookie, jqueryui, service, validate, router, notify, admin) {"use strict";
 
 	var ToDoAssignView = ( function() {
 
@@ -31,7 +31,9 @@ define(['jquery','modernizr', 'cookie', 'jqueryui', '../app/service/DataService'
 				}
 
 				function populateData() {
-					if (!Modernizr.inputtypes.date) {
+					if (Modernizr.touch && Modernizr.inputtypes.date) {
+						document.getElementById('task-deadline').type = 'date';
+					} else {
 						jQuery("#task-deadline").datepicker({
 							minDate : 0
 						});
@@ -77,34 +79,15 @@ define(['jquery','modernizr', 'cookie', 'jqueryui', '../app/service/DataService'
 							router.go('/memberspick');
 						});
 
-						jQuery('#invite-send').on('click', function() {
-							var roles = [{
-								"roleName" : "ROLE_TIER2"
-							}];
-							if ($("#invite-form").valid()) {
-								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
-									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
-								}
-								if ($('#member-role').is(":checked")) {
-									roles = [{
-										"roleName" : "ROLE_TIER2"
-									}, {
-										"roleName" : "ROLE_TIER3"
-									}];
-								}
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
-									success : function(response) {
-										if (response !== 'error') {
-											notify.showNotification('OK', response.message);
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-								setTimeout(function() {
-									router.returnToPrevious();
-									//admin.reloadData();
-								}, 5000);
+						jQuery('#task-assign').on('click', function() {
+							if ($(".edit-form").valid()) {
+								var _tname = jQuery('#task-name').val();
+								var _tdesc = jQuery('#task-desc').val();
+								var _tdue = jQuery('#task-deadline').val();
+								var _tbenefit = jQuery('#task-benefit').val();
+								var _tassignto = jQuery('#member-list').text();
+								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
+								console.log('Create Now');
 							}
 
 							//Need to update to handler
@@ -125,20 +108,20 @@ define(['jquery','modernizr', 'cookie', 'jqueryui', '../app/service/DataService'
 
 						}, "This email already has a request pending.");
 
-						validator = jQuery("#invite-form").validate({
+						validator = jQuery(".edit-form").validate({
 							rules : {
-								invitedomain : {
+								taskname : {
 									required : true,
-									domainValidation : true
 								},
-								inviteemail : {
+								taskdesc : {
 									required : true,
-									email : true,
-									notRepeated : true
 								},
-								roles : {
-									required : true
-								}
+								taskdeadline : {
+									required : true,
+								},
+								todopriority : {
+									required : true,
+								},
 							}
 						});
 

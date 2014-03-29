@@ -10,7 +10,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 			var PAGE;
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
-			var INFO = '<i style="padding:0px 10px" class="icon-bell fo icon-1x "></i>';
+			var INFO = '<i style="padding:0px 10px" class="icon-bell-alt icon-1x "></i>';
 
 			function Notify() {
 
@@ -64,8 +64,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 								//var count = parseInt(jQuery('#alert-value').text()) + 1;
 								jQuery('#alert').addClass('active');
 								jQuery('.edit-notify').slideUp(1000);
-							}, 3000);
-
+							}, 5000);
 						//5 Seconds is enough to catch attention
 					}
 				}
