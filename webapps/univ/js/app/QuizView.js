@@ -9,8 +9,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 			};
 			var TOTALQUESTIONS = 10;
 			var COMPLETED = 0;
-			var QUIZ;
-			var QUOTEICON = '<i class="icon-quote-left"></i>';
+			var ACTIVEQUIZ;
 
 			/**
 			 * Constructor
@@ -95,15 +94,15 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				};
 
-				setTimeout(function() {
-					setNotification('Whats going on?', 'Venkat');
-				}, 10000);
-				//10seconds
-
-				setInterval(function() {
-					setNotification('Are you done with this bro?', 'Venkat');
-				}, 500000);
-
+				// setTimeout(function() {
+					// setNotification('Whats going on?', 'Venkat');
+				// }, 10000);
+				// //10seconds
+// 
+				// setInterval(function() {
+					// setNotification('Are you done with this bro?', 'Venkat');
+				// }, 500000);
+	
 				function setNotification(message, sender) {
 					$('#chat-module').addClass('notify');
 					$('#chatnav').addClass('active');
@@ -179,6 +178,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 						return false;
 					}
 				}
+				
+				this.activeTask = function(selectedinput) {
+					ACTIVEQUIZ = selectedinput;
+				}
 
 
 				this.pause = function() {
@@ -187,12 +190,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../app/service/DataService', 
 
 				this.resume = function() {
 					showBG();
+					jQuery('.subtitleinfo').text(ACTIVEQUIZ);
 				};
 
 				this.init = function() {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
+						jQuery('.subtitleinfo').text(ACTIVEQUIZ);
 						//Rich Experience First.... Load BG
 						//showBG();
 						//Get the active student info and create the panels.

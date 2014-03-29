@@ -1,4 +1,4 @@
-define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify'], function(modernizr, jqueryui, spin, plugins, cookie, service, router, notify) {"use strict";
+define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/DataService', '../app/Router', '../app/Notify','../app/QuizView'], function(modernizr, jqueryui, spin, plugins, cookie, service, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -82,8 +82,8 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../app/service/Da
 
 				function ActivatePanelEvents() {
 					jQuery('.classboard').on('click', function() {
-						var selectedQuiz = $(this).attr('name');
-						console.log(selectedQuiz);
+						var selectedQuiz = $(this).find('.class-name').text();
+						quizview.activeTask(selectedQuiz);
 						// jQuery.cookie('quiz', selectedQuiz, {
 						// path : '/',
 						// expires : 100

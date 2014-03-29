@@ -2305,7 +2305,6 @@ html.touch #subnav {
 	margin-left: 10px;
 	padding: 5px;
 	overflow: hidden;
-	/*border-left: 1px solid #f3f3f3;*/
 	height: 34px;
 	color: #737373;
 }
@@ -2332,10 +2331,58 @@ html.touch #subnav {
 .main-content {
 	background: white;
 	position: fixed;
-	/*top: 67px;*/
 	top: 95px;
 	left: 10px;
 	right: 10px;
+	bottom: 10px;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	overflow: auto;
+}
+.main-content.action {
+	background: white;
+	position: fixed;
+	top: 95px;
+	left: 10px;
+	right: 110px;
+	bottom: 110px;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	overflow: auto;
+}
+.helpers {
+	background: white;
+	position: fixed;
+	top: 95px;
+	right: 10px;
+	bottom: 110px;
+	width: 90px;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	overflow: auto;
+}
+
+.helpers div.item{
+	text-align: center;
+	height: 20%;
+	cursor: pointer;
+}
+.helpers div.item a{
+	margin: 10px;
+	text-align: center;
+	color: #d9d9d9;
+	cursor: pointer;
+}
+.helpers div.item a:hover{
+	color: #007DBA;
+}
+
+.secondary-action {
+	background: white;
+	position: fixed;
+	left: 10px;
+	right: 10px;
+	height: 90px;
 	bottom: 10px;
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
@@ -2350,19 +2397,6 @@ html.touch #subnav {
 	position: absolute;
 	top: 15px;
 	overflow: none;
-	-webkit-overflow-scrolling: touch;
-	background-color: #FFFFFF;
-}
-.fullcontent {
-	text-align: center;
-	margin-left: 15px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	position: absolute;
-	top: 15px;
-	overflow: none;
-	width: 97%;
-	height: 80%;
 	-webkit-overflow-scrolling: touch;
 	background-color: #FFFFFF;
 }
