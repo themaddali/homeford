@@ -68,10 +68,15 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 							for (var i = 0; i < fullmessage.length; i++) {
 								var _notification = {};
 								_notification.title = message;
-								_notification.description = 'You are invited to join '+ fullmessage[i].domainName+ '.</br> This invitation is sent to you by '+ fullmessage[i].email + '. </br>Message says: '+fullmessage[i].text;
+								_notification.domain = fullmessage[i].domainName;
+								var sentinfo = fullmessage[i].sentBy.split('email=')[1];
+								sentinfo = sentinfo.split(',')[0];
+								_notification.by = sentinfo;
+								_notification.msg = fullmessage[i].text;
 								_notification.status = status;
 								_notification.time = new Date();
 								_notification.keyword = keyword;
+								_notification.inviteid = fullmessage[i].id;
 								NOTIFICATIONS.push(_notification);
 							}
 						}
@@ -90,6 +95,10 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 
 				this.getNotifications = function() {
 					return NOTIFICATIONS;
+				}
+
+				this.removeNotifications = function(indexnum) {
+					NOTIFICATIONS.splice(indexnum, 1);
 				}
 
 				this.pause = function() {

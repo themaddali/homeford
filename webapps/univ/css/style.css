@@ -377,12 +377,17 @@ body.error404 {
 	margin-left: 20px;
 	color: #fff;
 }
+
+a.goback {
+	cursor: pointer;
+}
+
 #main-nav li a, #static-main-nav li a {
 	text-decoration: none;
 	text-transform: uppercase;
 	color: #0784E3;
 	padding-bottom: 5px;
-	border-bottom: 3px solid #0784E3;
+	/*border-bottom: 3px solid #0784E3;*/
 	-webkit-transition: color 0.3s ease-in-out;
 	-moz-transition: color 0.3s ease-in-out;
 	-o-transition: color 0.3s ease-in-out;
@@ -400,7 +405,7 @@ body.error404 {
 #main-nav li a:hover, #static-main-nav li a:hover {
 	color: #0784E3;
 	cursor: pointer;
-	border-bottom: 4px solid #0784E3;
+	border-bottom: 2px solid #0784E3;
 }
 
 #entity-edit {
@@ -801,7 +806,7 @@ body.error404 {
 	color: #666666;
 }
 #alert.active {
-	color: #007DBA;
+	color: #0784E3;
 }
 
 .userflyout {
@@ -840,7 +845,7 @@ body.error404 {
 	margin-top: 10px;
 	margin-left: 0px;
 	padding-left: 10px;
-	color: #007DBA;
+	color: #0784E3;
 	cursor: pointer;
 	border-top: 1px dotted #d9d9d9;
 	margin-top: 10px;
@@ -1483,6 +1488,14 @@ body.error404 {
 	overflow: auto;
 	text-align: center;
 }
+
+.view-form-control input {
+ padding: 10px;
+ background-color: #0784E3;
+ color: white;
+ border : 0px solid white;	
+}
+
 .edit-form fieldset {
 	margin: 20px 0px;
 	border: none;
@@ -1534,7 +1547,7 @@ body.error404 {
 	cursor: pointer;
 }
 .view-table > tbody tr:hover {
-	border-bottom: 2px dotted #007DBA;
+	border-bottom: 2px dotted #0784E3;
 }
 
 .view-table > tbody tr.rowactive {
@@ -1628,10 +1641,10 @@ body.error404 {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li input[type="file"]:focus + .form-helper,.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="file"]:hover + .form-helper,.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 
@@ -1639,7 +1652,7 @@ body.error404 {
 	display: inline;
 }
 .edit-form li textarea.edittextarea:focus {
-	border-color: #007DBA;
+	border-color: #0784E3;
 }
 .edit-form li textarea.edittextarea:hover + .form-helper {
 	display: inline;
@@ -1651,10 +1664,10 @@ body.error404 {
 .edit-form li a.input-link:hover + .form-helper {
 	display: inline
 }
-.edit-form li div:hover + .form-helper {
+.edit-form li div#progressslider:hover + .form-helper {
 	display: inline
 }
-.edit-form li div:focus + .form-helper {
+.edit-form li div#progressslider:focus + .form-helper {
 	display: inline
 }
 
@@ -1741,11 +1754,11 @@ body.error404 {
 	padding-left: 0px;
 }
 .edit-form li.form-item a.input-link:hover, .edit-form li.form-item a.input-link:active, .edit-form li.form-item a.input-link:focus {
-	color: #007DBA;
+	color: #0784E3;
 }
 
 .edit-form li.form-item input.input-label:hover {
-	color: #007DBA;
+	color: #0784E3;
 	cursor: pointer;
 }
 
@@ -2241,7 +2254,7 @@ html.touch #subnav {
 	border-radius: 0px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	color: #007DBA;
+	color: #0784E3;
 	height: 50px;
 	overflow: scroll;
 	padding: 10px
@@ -2331,7 +2344,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	margin-bottom: 3px;
 	margin-top: 4px;
-	background: url("../img/select-back.png") no-repeat;
+	background: url("../img/go-back.png") no-repeat;
 	padding-right: 0px;
 }
 
@@ -2390,7 +2403,7 @@ html.touch #subnav {
 	cursor: pointer;
 }
 .helpers div.item a:hover {
-	color: #007DBA;
+	color: #0784E3;
 }
 
 .secondary-action {
@@ -2449,7 +2462,7 @@ html.touch #subnav {
 .float-left .notifycard {
 	float: left;
 	width: 100%;
-	height: 153px;
+	height: 200px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: none;
@@ -2480,7 +2493,7 @@ html.touch #subnav {
 	padding: 5px;
 	margin-left: 10px;
 	color: #7f7f7f;
-	height: 70px;
+	height: 105px;
 	font-size: 14px;
 }
 .float-left .notifycard div.foot {
@@ -2493,7 +2506,7 @@ html.touch #subnav {
 	float: right;
 	margin-right: 5px;
 	margin-top: 5px;
-	padding: 5px;
+	padding: 10px;
 	border: 2px solid white;
 }
 .float-left .notifycard div.foot button:hover {
@@ -2681,22 +2694,22 @@ html.touch #subnav {
 	background-position-x: 99%;
 }
 .canvas-header input:active {
-	border-color: #007DBA;
+	border-color: #0784E3;
 	background: none;
 }
 .canvas-header input:focus {
-	border-color: #007DBA;
+	border-color: #0784E3;
 	background: none;
 }
 .canvas-header a {
 	float: left;
-	color: #007DBA;
+	color: #0784E3;
 	font-size: 13px;
 	cursor: pointer;
 	margin-top: 5px;
 }
 .canvas-header a:hover {
-	color: #007DBA;
+	color: #0784E3;
 }
 
 .membercard .membercard-id {
@@ -2981,6 +2994,20 @@ html.touch #subnav {
 .ui-datepicker-header {
 	background-color: white;
 }
+
+.ui-datepicker-next.ui-corner-all {
+	border-radius: 0px;
+}
+
+.ui-datepicker-next.ui-corner-all {
+	background: url("../img/select-front.png") no-repeat;
+	cursor: pointer;
+}
+
+.ui-datepicker-prev.ui-corner-all {
+	cursor : pointer;
+}
+
 
 #progressBar {
 	width: 100%;
@@ -4031,7 +4058,7 @@ footer a:hover {
 }
 
 #forgot-password: hover, #register-now:hover {
-	border-bottom: 1px solid #007DBA;
+	border-bottom: 1px solid #0784E3;
 }
 
 .ss-social {

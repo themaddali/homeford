@@ -79,10 +79,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					});
 				}
 				
-				function setNotifications(){
-					jQuery('.edit-notify').hide();
-				}
-
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
@@ -127,7 +123,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 
 				this.resume = function() {
 					showBG();
-					setNotifications();
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
 				};
 
 				this.init = function(args) {
@@ -162,6 +159,12 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								}, 500);
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
+						});
+						jQuery('.goback').click(function(){
+							router.returnToPrevious();
+						});
+						jQuery('.mainlogo').click(function(){
+							router.go('/studentlist');
 						});
 
 					} // Cookie Guider

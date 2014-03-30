@@ -103,7 +103,7 @@ define(['jqueryui', 'spin', 'cookie', '../../Router', 'validate', '../../service
 						if ($("#register-form").valid()) {
 							var inputuname = jQuery('#new-user-name').val();
 							var inputpass = jQuery('#new-user-password').val();
-							var inputdomain = jQuery('#new-user-domain').val();
+							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
 							RegisterUser(inputuname, inputpass, inputdomain);
 							e.preventDefault();
 						}

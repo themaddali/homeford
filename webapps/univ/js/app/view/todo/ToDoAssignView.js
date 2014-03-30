@@ -33,10 +33,19 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 				function populateData() {
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('task-deadline').type = 'date';
+						document.getElementById('task-startdate').type = 'date';
 					} else {
+						var date = new Date();
+						var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+						var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
 						jQuery("#task-deadline").datepicker({
-							minDate : 0
+							minDate : 0,
 						});
+						jQuery("#task-startdate").datepicker({
+							minDate : 0,
+						});
+						jQuery("#task-startdate").val(today);
+						//jQuery("#task-deadline").val(next);
 					}
 					jQuery('#member-list').text(ActiveMembers);
 				}
@@ -69,6 +78,12 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 
 						//JQ UI Bug of -Index.
 						jQuery('#task-deadline').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
+							}, 100);
+						});
+						jQuery('#task-startdate').focus(function() {
 							setTimeout(function() {
 								jQuery('#ui-datepicker-div').css('background-color', 'white');
 								jQuery('#ui-datepicker-div').css('z-index', '200');

@@ -1,10 +1,10 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../Router'], function(modernizr, spin, plugins, cookie, service, router) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService',  '../../Router', '../../Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
 
 	var QuizView = ( function() {
 
-			var ACTIVEQUIZ;
+			var ACTIVEQUIZ = {};
 
 			/**
 			 * Constructor
@@ -32,17 +32,32 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					$('#chat-send').val('dismiss');
 				}
 
-				function quizChange(currentquiz, progress, newquiz) {
-					// Accept the current info and progress
-					// Push it to DB
-					// Adjust the cookies.
-					jQuery.cookie('quiz', newquiz, {
-						path : '/',
-						expires : 100
-					});
-					QUIZ = newquiz;
-					jQuery('#quiz-option-active').text(jQuery.cookie('quiz'));
-					generateQuiz();
+				function populateData() {
+					if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
+						router.go('/class');
+					} else {
+						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
+						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
+						jQuery('#progressslider').slider({
+							animate : true,
+							range : "min",
+							value : ACTIVEQUIZ.progress,
+							min : 0,
+							max : 100,
+							step : 1,
+							slide : function(event, ui) {
+								$("#progressvalue").html(ui.value + '%');
+							}
+						});
+						if (Modernizr.touch && Modernizr.inputtypes.date) {
+							document.getElementById('task-time').type = 'date';
+						} else {
+							jQuery("#task-time").datepicker({
+								minDate : 0,
+								defaultDate: new Date()
+							});
+						}
+					}
 				}
 
 				function checkForActiveCookie() {
@@ -61,35 +76,61 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 				}
 
 				this.pause = function() {
-
+					populateData();
 				};
 
 				this.resume = function() {
-					showBG();
-					jQuery('.subtitleinfo').text(ACTIVEQUIZ);
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
+					populateData();
 				};
 
 				this.init = function() {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
-						jQuery('.subtitleinfo').text(ACTIVEQUIZ);
-						jQuery('#progressslider').slider({
-							animate : true,
-							range : "min",
-							value : 0,
-							min : 0,
-							max : 100,
-							step : 1,
-							slide : function(event, ui) {
-								$("#progressvalue").html(ui.value+'%');
-							}
+						populateData();
+
+						//JQ UI Bug of -Index.
+						jQuery('#task-time').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
+							}, 100);
 						});
 
-						//Rich Experience First.... Load BG
-						//showBG();
-						//Get the active student info and create the panels.
-						//populateAvailableQuizs();
+						jQuery('#user-name').on('click', function(e) {
+							banner.ShowUser();
+							jQuery('#signout').on('click', function(e) {
+								banner.logout();
+							});
+							jQuery('#banner-dashboard').on('click', function(e) {
+								banner.HideUser();
+								router.go('/admin');
+							});
+							jQuery('.userflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideUser();
+								}, 500);
+							});
+						});
+						jQuery('#alert').on('click', function(e) {
+							banner.ShowAlert();
+							jQuery('.alertflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideAlert();
+								}, 500);
+							});
+							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
+						});
+						
+						jQuery('.mainlogo').click(function(){
+							router.go('/studentlist');
+						});
+						jQuery('.goback').click(function(){
+							router.returnToPrevious();
+						});
+
 					} // Cookie Guider
 
 				};

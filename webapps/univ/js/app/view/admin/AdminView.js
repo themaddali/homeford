@@ -360,6 +360,13 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 						jQuery('#admin-done').on('click', function() {
 							router.returnToPrevious();
 						});
+						
+						jQuery('.goback').click(function(){
+							router.returnToPrevious();
+						});
+						jQuery('.mainlogo').click(function(){
+							router.go('/studentlist');
+						});
 
 					} // Cookie Guider
 				};

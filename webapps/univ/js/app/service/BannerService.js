@@ -15,7 +15,7 @@ define(['jquery', 'cookie','../service/DataService','../Router'], function(jQuer
 				this.ShowUser = function() {
 					jQuery('.userflyout').remove();
 					jQuery('.alertflyout').remove();
-					var useroption = '<div class="userflyout"><div class="flyout-label">' + 'Logged In' + '</div><a id="banner-dashboard" href="#/admin" class="flyout-link">' + 'Dashboard' + '</a><a class="flyout-link" id="signout">' + 'SignOut' + '</a></div>';
+					var useroption = '<div class="userflyout"><div class="flyout-label">' + 'Logged In' + '</div><a id="banner-dashboard" href="#/admin" class="flyout-link">' + 'Administration' + '</a><a class="flyout-link" id="signout">' + 'SignOut' + '</a></div>';
 					jQuery('#project-nav').append(useroption);
 					jQuery('.flyout-label').text(jQuery.cookie('user'));
 				}

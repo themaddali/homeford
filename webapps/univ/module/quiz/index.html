@@ -8,7 +8,7 @@
 		</noscript>
 		<div id="project-nav">
 			<div id="project-page-logo" class="ir">
-				<a href="#/home"></a>
+				<a class="mainlogo"></a>
 				<h1>Homeford University</h1>
 			</div>
 			<div></div>
@@ -56,7 +56,7 @@
 			<input type="button" id="chat-send" value="send" />
 		</div>
 		<div class="main-content-header">
-			<a class="goback" href="#/class"></a>
+			<a class="goback"></a>
 			<div class="titleinfo">
 				Active Tasks
 				<span class="subtitleinfo"></span>
@@ -74,7 +74,7 @@
 								<li class="form-item">
 									<label>Current Progress</label>
 									<div id="progressslider"></div>
-									<label class="form-helper">Close guestimate, what % is the progrss now</label>
+									<label class="form-helper">Close guestimate, what % is the progress now</label>
 								</li>
 								<li class="form-item">
 									<label></label>
@@ -82,17 +82,25 @@
 								</li>
 								<li class="form-item">
 									<label>Notes</label>
-									<textarea class="edittextarea" placeholder="Ex: Few lines of what to do?" id="task-desc" name="taskdesc"></textarea>
+									<textarea class="edittextarea" placeholder="Ex: Few lines of what you have done?" id="task-desc" name="taskdesc"></textarea>
 									<label class="form-helper">Any notes for future reference</label>
 								</li>
 								<li class="form-item">
+									<label>Time Stamp</label>
+									<input placeholder="Select a date" id="task-time" name="tasktime" type="text" />
+									<label class="form-helper">Defaults to now</label>
+								</li>
+								<li class="form-item">
 									<label>Attach Files</label>
-									<input placeholder="Select a date" id="task-deadline" name="taskdeadline" type="file" />
+									<input placeholder="Select a file" id="task-files" name="taskfiles" type="file" />
 									<label class="form-helper">Optional attachements</label>
 								</li>
 							</ol>
 						</fieldset>
 					</form>
+				</div>
+				<div class="view-form-control" >
+					<input type="button" value="Update Progress" />
 				</div>
 
 			</div>

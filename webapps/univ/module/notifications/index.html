@@ -8,7 +8,7 @@
 		</noscript>
 		<div id="project-nav">
 			<div id="project-page-logo" class="ir">
-				<a href="#/home"></a>
+				<a class="mainlogo"></a>
 				<h1>Homeford University</h1>
 			</div>
 			<div></div>
@@ -17,6 +17,7 @@
 			</div>
 		</div>
 		<div class="main-content-header">
+			<a class="goback"></a>
 			<div class="titleinfo">
 				Notifications
 			</div>
@@ -26,23 +27,46 @@
 			<div id="card-canvas" class="contentfull float-left">
 
 			</div>
+			<div id="noinfo" style="text-align: center; padding-top: 30px; display: none">
+				No Notifications Available!
+			</div>
 		</div>
 		<div style="display:none" class="div-template">
 			<div class="notifycard" id="notify-template">
 				<div class="head">
 					<div class="title">
-						
+
+					</div>
+					<div class="inviteid" style="display:none">
+
 					</div>
 					<div class="timestamp">
-						
+
 					</div>
 				</div>
 				<div class="body">
-					
+					<form id="profile-edit-form" class="edit-form">
+						<fieldset>
+							<ol id="profile-form">
+								<li class="form-item">
+									<label>Domain</label>
+									<span class="inviteddomain"></span>
+								</li>
+								<li class="form-item">
+									<label>Invited By</label>
+									<span class="invitedby"></span>
+								</li>
+								<li class="form-item">
+									<label>Message</label>
+									<span class="invitedmsg"></span>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
 				</div>
 				<div class="foot">
 					<button class="action">
-						
+
 					</button>
 				</div>
 			</div>

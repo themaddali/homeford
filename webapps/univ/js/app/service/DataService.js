@@ -131,7 +131,8 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 					if (invitesarray.length > 0) {
 						setTimeout(function() {
 							notify.showMessage('INFO', 'Pending Invitation', invitesarray, 'Accept', 'notifications');
-						}, 3000); //Check after 3 seconds. Cooling time
+						}, 3000);
+						//Check after 3 seconds. Cooling time
 					}
 				}
 
@@ -158,10 +159,22 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 					$.ajax({
 						url : '/homeford/api/inviteeusers?domainname=' + domain,
 						type : 'GET',
-						async : false,
+						async : 'async',
 						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data.sort(sortJsonByStatus));
+						}
+					});
+				}
+
+				this.acceptInvite = function(id, handlers) {
+					$.ajax({
+						url : '/homeford/api/acceptinvitee?id=' + id,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
 						}
 					});
 				}

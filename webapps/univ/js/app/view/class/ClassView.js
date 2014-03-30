@@ -1,4 +1,4 @@
-define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../Router', '../../Notify','../../view/quiz/QuizView'], function(modernizr, jqueryui, spin, plugins, cookie, service, router, notify, quizview) {"use strict";
+define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, jqueryui, spin, plugins, cookie, service, banner, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -19,7 +19,7 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 				//For Panels
 				function populateClass() {
 					jQuery('#class-canvas').empty();
-					if (!ACTIVESTUDENT || ACTIVESTUDENT == "") {
+					if (!ACTIVESTUDENT || ACTIVESTUDENT === "" || ACTIVESTUDENT === null) {
 						router.go('/studentlist');
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVESTUDENT);
@@ -57,8 +57,6 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 				function populateAvailableStudents() {
 					service.getUnivObject({
 						success : function(UnivData) {
-							console.log('UnivData');
-							console.log(UnivData);
 							//Create the student panels on the fly (DB should send this info per user/univ)
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
@@ -82,7 +80,9 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 
 				function ActivatePanelEvents() {
 					jQuery('.classboard').on('click', function() {
-						var selectedQuiz = $(this).find('.class-name').text();
+						var selectedQuiz = {};
+						selectedQuiz.name = $(this).find('.class-name').text();
+						selectedQuiz.progress = $(this).find('.class-progress-label').text().split("%")[0];
 						quizview.activeTask(selectedQuiz);
 						// jQuery.cookie('quiz', selectedQuiz, {
 						// path : '/',
@@ -118,7 +118,8 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 				};
 
 				this.resume = function() {
-					showBG();
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
 					populateClass();
 				};
 
@@ -132,14 +133,36 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 						populateClass();
 
 						//HTML Event - Actions
-						jQuery('#loggedin-user').on('click', function() {
-							router.go('/admin', '/class');
+						jQuery('#user-name').on('click', function(e) {
+							banner.ShowUser();
+							jQuery('#signout').on('click', function(e) {
+								banner.logout();
+							});
+							jQuery('#banner-dashboard').on('click', function(e) {
+								banner.HideUser();
+								router.go('/admin');
+							});
+							jQuery('.userflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideUser();
+								}, 500);
+							});
 						});
-
-						jQuery('.student-option').on('click', function() {
-							alert('Work in Progress');
+						jQuery('#alert').on('click', function(e) {
+							banner.ShowAlert();
+							jQuery('.alertflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideAlert();
+								}, 500);
+							});
+							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
-
+						jQuery('.goback').click(function(){
+							router.go('/studentlist');
+						});
+						jQuery('.mainlogo').click(function() {
+							router.go('/studentlist');
+						});
 					} // Cookie Guider
 				};
 
