@@ -61,7 +61,6 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						$('#notifyAudio')[0].play();
 						setTimeout (function(){
 								//jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
-								//var count = parseInt(jQuery('#alert-value').text()) + 1;
 								jQuery('#alert').addClass('active');
 								jQuery('.edit-notify').slideUp(1000);
 							}, 5000);
