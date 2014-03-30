@@ -129,7 +129,9 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 				//ListenPending Invites
 				function listenPendingInvites(invitesarray) {
 					if (invitesarray.length > 0) {
-						notify.showMessage('INFO', 'Pending Invitation', invitesarray, 'Accept', 'notifications');
+						setTimeout(function() {
+							notify.showMessage('INFO', 'Pending Invitation', invitesarray, 'Accept', 'notifications');
+						}, 3000); //Check after 3 seconds. Cooling time
 					}
 				}
 

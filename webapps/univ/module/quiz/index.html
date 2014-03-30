@@ -61,10 +61,39 @@
 				Active Tasks
 				<span class="subtitleinfo"></span>
 			</div>
-			<div class="metainfo">Due in 21 days</div>
+			<div class="metainfo">
+				Due in 21 days
+			</div>
 		</div>
 		<div class="main-content action">
-			<div id="action-canvas" class="content float-left">
+			<div id="action-canvas" class="contentfull float-left">
+				<div class="card-form-container">
+					<form id="todo-assign-form" class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Current Progress</label>
+									<div id="progressslider"></div>
+									<label class="form-helper">Close guestimate, what % is the progrss now</label>
+								</li>
+								<li class="form-item">
+									<label></label>
+									<label style="font-size: 14px" id="progressvalue">0%</label>
+								</li>
+								<li class="form-item">
+									<label>Notes</label>
+									<textarea class="edittextarea" placeholder="Ex: Few lines of what to do?" id="task-desc" name="taskdesc"></textarea>
+									<label class="form-helper">Any notes for future reference</label>
+								</li>
+								<li class="form-item">
+									<label>Attach Files</label>
+									<input placeholder="Select a date" id="task-deadline" name="taskdeadline" type="file" />
+									<label class="form-helper">Optional attachements</label>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
 
 			</div>
 		</div>

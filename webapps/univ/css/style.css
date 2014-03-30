@@ -1574,6 +1574,7 @@ body.error404 {
 	margin-right: 25px;
 	padding: 10px;
 }
+
 .view-form li.form-item.hassecondary {
 	border-bottom: none;
 }
@@ -1648,6 +1649,12 @@ body.error404 {
 	display: inline
 }
 .edit-form li a.input-link:hover + .form-helper {
+	display: inline
+}
+.edit-form li div:hover + .form-helper {
+	display: inline
+}
+.edit-form li div:focus + .form-helper {
 	display: inline
 }
 
@@ -2045,7 +2052,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,               , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2423,6 +2430,12 @@ html.touch #subnav {
 	background-color: #FFFFFF;
 }
 
+.contentfull div.card-form-container {
+	margin: 10px;
+	width: 100%;
+	text-align: left;
+}
+
 .float-left .studentboard, .float-left .classboard {
 	float: left;
 	width: 300px;
@@ -2459,7 +2472,7 @@ html.touch #subnav {
 .float-left .notifycard div.head div.timestamp {
 	color: black;
 	font-style: italic;
-	font-size : 12px;
+	font-size: 12px;
 	float: right;
 	margin-right: 10px;
 }
@@ -2477,7 +2490,7 @@ html.touch #subnav {
 .float-left .notifycard div.foot button {
 	background-color: #0784E3;
 	color: #FFFFFF;
-	float : right;
+	float: right;
 	margin-right: 5px;
 	margin-top: 5px;
 	padding: 5px;
@@ -2590,6 +2603,29 @@ html.touch #subnav {
 
 ::-webkit-scrollbar-thumb {
 	background-color: rgba(164, 164, 164, 0.5);
+}
+
+/*SLIDERS*/
+
+.edit-form li.form-item div.ui-slider {
+	height: 10px;
+	position: relative;
+	margin: 0;
+	padding: 0 10px;
+	border-color: rgba(114, 114, 114, 0.71);
+	cursor: pointer;
+}
+
+.edit-form li.form-item div.ui-slider a.ui-slider-handle {
+	width: 0px;
+	height: 15px;
+	position: absolute;
+	top: -15px;
+	margin-left: -7px;
+	z-index: 200;
+	border-radius: 25px;
+	cursor: pointer;
+	background-color: white;
 }
 
 .studentboard, .adminboard, .classboard {
