@@ -1,4 +1,4 @@
-define(['jquery','../Notify'], function(jquery, notify) {"use strict";
+define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 	// "use strict";
 
 	var DataService = ( function() {
@@ -129,7 +129,7 @@ define(['jquery','../Notify'], function(jquery, notify) {"use strict";
 				//ListenPending Invites
 				function listenPendingInvites(invitesarray) {
 					if (invitesarray.length > 0) {
-						notify.showMessage('INFO', 'You are invited to join '+invitesarray.length + ' new groups.', 'notifications');
+						notify.showMessage('INFO', 'You are invited to join ' + invitesarray.length + ' new groups.', invitesarray, 'ACCEPTINVITE', 'notifications');
 					}
 				}
 

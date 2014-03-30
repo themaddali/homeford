@@ -11,6 +11,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
 			var INFO = '<i style="padding:0px 10px" class="icon-bell-alt icon-1x "></i>';
+			var NOTIFICATIONS =[];
 
 			function Notify() {
 
@@ -40,7 +41,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 					}
 				}
 
-				function showMessage(status, message, toroute, duration) {
+				function showMessage(status, message, fullmessage, keyword, toroute, duration) {
 					jQuery('div.edit-notify').remove();
 					jQuery('.page').append('<audio id="notifyAudio"><source src="media/notify.ogg" type="audio/ogg"><source src="media/notify.mp3" type="audio/mpeg"><source src="media/notify.wav" type="audio/wav"></audio>');
 					if (!duration) {
@@ -56,6 +57,13 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						else if (status === 'INFO') {
 							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '">' + INFO + '<span style="cursor: pointer" class="notify-message">' + message + '</span></div>';
 						}
+						var _notification= {};
+						_notification.title = message;
+						_notification.description = fullmessage;
+						_notification.status = status;
+						_notification.time = new Date();
+						_notification.keyword = keyword;
+						NOTIFICATIONS.push(_notification);
 						jQuery('#project-nav').append(notification);
 						jQuery('.edit-notify').slideDown(1000);
 						$('#notifyAudio')[0].play();
@@ -67,6 +75,10 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						//5 Seconds is enough to catch attention
 					}
 				}
+				
+				this.getNotifications = function() {
+					return NOTIFICATIONS;
+				}
 
 
 				this.pause = function() {
@@ -77,12 +89,12 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 
 				};
 
-				this.showNotification = function(status, message, toroute, duration) {
+				this.showNotification = function(status, message,fullmessage,keyword, toroute, duration) {
 					showNotification(status, message, toroute, duration);
 				}
 
-				this.showMessage = function(status, message, toroute, duration) {
-					showMessage(status, message, toroute, duration);
+				this.showMessage = function(status, message, fullmessage, keyword, toroute, duration) {
+					showMessage(status, message, fullmessage, keyword, toroute, duration);
 				}
 
 				this.init = function(args) {

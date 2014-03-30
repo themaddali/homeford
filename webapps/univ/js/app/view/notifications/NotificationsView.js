@@ -1,20 +1,14 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify',], function(cookie, service, validate, router, notify) {"use strict";
 
 	var InviteView = ( function() {
 
 			/**
 			 * Constructor
-			 *
 			 */
 
-			var ROLEMAP = {
-				'ROLE_TIER1' : 'Owner',
-				'ROLE_TIER2' : 'Admin',
-				'ROLE_TIER3' : 'Member'
-			}
-			var activeDomains = [];
+			var NOTIFICATION;
 			var pendingList;
 			var validator;
 
@@ -37,50 +31,27 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}
 
 				function populateData() {
-					jQuery('#invite-domain').empty();
-					service.getUserProfile({
-						success : function(UserProfile) {
-							var activeDomains = [];
-							for (var i = 0; i < UserProfile.domains.length; i++) {
-								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
-									activeDomains.push(UserProfile.domains[i].domainName);
-								jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
-								if (UserProfile.domains.length === 1) {
-									jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
-								}
-								if (i == UserProfile.domains.length - 1) {
-									jQuery.validator.addMethod("domainValidation", function(value, element) {
-										if (activeDomains.indexOf(value) === -1) {
-											return false;
-										} else
-											return true;
-									}, "Oops! You canot send invite to this domain!");
-								}
-							}
-						}
-					});
-				}
-				
-				function clearForm() {
-					jQuery('.form-item > input').val("");
-					jQuery('#member-role').prop('checked', false);
-					jQuery('.edit-notify').hide();
-					jQuery('.modal_close').show();
+					NOTIFICATION = notify.getNotifications();
+					for (var i=0; i<NOTIFICATION.length; i++) {
+						var template = jQuery('#notify-template').attr('id','');
+						//Backing the template
+						jQuery('.div-template').append(template.attr('id', 'notify-template'));
+						var thistemplate = template.clone();
+						jQuery('.title', thistemplate).text(NOTIFICATION.title);
+						jQuery('.timestamp', thistemplate).text(NOTIFICATION.timestamp);
+						jQuery('.body', thistemplate).text(NOTIFICATION.fullmessage);
+						jQuery('.action', thistemplate).text(NOTIFICATION.keyword);
+						jQuery('#card-canvas').append(thistemplate);
+					}
 				}
 
-
-				this.pendingList = function(pendinglist) {
-					pendingList = pendinglist;
-				}
 
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
-					clearForm();
 					populateData();
-					validator.resetForm();
 				};
 
 				this.init = function(args) {
@@ -88,82 +59,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
-
 						populateData();
-
 						//HTML Event - Actions
-						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
-						});
 
-						jQuery('#invite-send').on('click', function() {
-							var roles = [{
-								"roleName" : "ROLE_TIER2"
-							}];
-							if ($("#invite-form").valid()) {
-								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
-									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
-								}
-								if ($('#member-role').is(":checked")) {
-									roles = [{
-										"roleName" : "ROLE_TIER2"
-									}, {
-										"roleName" : "ROLE_TIER3"
-									}];
-								}
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
-									success : function(response) {
-										if (response !== 'error') {
-											notify.showNotification('OK', response.message);
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-								setTimeout(function() {
-									router.returnToPrevious();
-									//admin.reloadData();
-								}, 5000);
-							}
-
-							//Need to update to handler
-						});
-
-						jQuery('#profile-password').change(function() {
-							jQuery('#password-reenter-item').show();
-						});
 						jQuery('#notification-done').click(function() {
 							router.returnToPrevious();
 						});
-
-						jQuery.validator.addMethod("notRepeated", function(value, element) {
-							if (pendingList) {
-								if (pendingList.indexOf(value) === -1) {
-									return true;
-								} else
-									return false;
-							} else
-								return true;
-
-						}, "This email already has a request pending.");
-
-						validator = jQuery("#invite-form").validate({
-							rules : {
-								invitedomain : {
-									required : true,
-									domainValidation : true
-								},
-								inviteemail : {
-									required : true,
-									email : true,
-									notRepeated : true
-								},
-								roles : {
-									required : true
-								}
-							}
-						});
-
 					} // Cookie Guider
 				};
 
