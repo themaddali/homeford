@@ -53,9 +53,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							document.getElementById('task-time').type = 'date';
 						} else {
 							jQuery("#task-time").datepicker({
-								minDate : 0,
-								defaultDate: new Date()
+								minDate : -7
 							});
+							var date = new Date();
+							var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+							jQuery("#task-time").val(today);
 						}
 					}
 				}

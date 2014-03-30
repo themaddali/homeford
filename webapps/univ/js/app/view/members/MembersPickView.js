@@ -98,47 +98,42 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 							}
 							var numberOfChecked = $('input:checkbox:checked').length;
 							var totalCheckboxes = $('input:checkbox').length;
-							if (numberOfChecked !== totalCheckboxes){
+							if (numberOfChecked !== totalCheckboxes) {
 								jQuery('#checkbox-control').text('Select All');
-							}
-							else{
+							} else {
 								jQuery('#checkbox-control').text('Un-Select All');
 							}
 							jQuery('.metadata').text(numberOfChecked + ' of ' + totalCheckboxes + ' selected');
 						});
 
 						jQuery('.card-search').change(function(event) {
-								var searchword = jQuery('.card-search').val();
-								var cardlist = jQuery('.edit-card-canvas .membercard-name');
-								for (var i=0; i< cardlist.length; i++){
-									var thiscard = cardlist[i];
-									thiscard.parentElement.style.display ='';
-									if (thiscard.textContent.indexOf(searchword) != -1){
-										//thiscard.parentElement.stlye.display = '';
-									}
-									else
-									{
-										thiscard.parentElement.style.display = 'none';
-									}
+							var searchword = jQuery('.card-search').val();
+							var cardlist = jQuery('.edit-card-canvas .membercard-name');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.parentElement.style.display = '';
+								if (thiscard.textContent.indexOf(searchword) != -1) {
+									//thiscard.parentElement.stlye.display = '';
+								} else {
+									thiscard.parentElement.style.display = 'none';
 								}
+							}
 						});
 						jQuery('.card-search').click(function(event) {
-								var searchword = jQuery('.card-search').val();
-								var cardlist = jQuery('.edit-card-canvas .membercard-name');
-								for (var i=0; i< cardlist.length; i++){
-									var thiscard = cardlist[i];
-									thiscard.parentElement.style.display ='';
-									if (thiscard.textContent.indexOf(searchword) != -1){
-										//thiscard.parentElement.stlye.display = '';
-									}
-									else
-									{
-										thiscard.parentElement.style.display = 'none';
-									}
+							var searchword = jQuery('.card-search').val();
+							var cardlist = jQuery('.edit-card-canvas .membercard-name');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.parentElement.style.display = '';
+								if (thiscard.textContent.indexOf(searchword) != -1) {
+									//thiscard.parentElement.stlye.display = '';
+								} else {
+									thiscard.parentElement.style.display = 'none';
 								}
+							}
 						});
-						
-						jQuery('#members-pick').click(function(){
+
+						jQuery('#members-pick').click(function() {
 							todoassign.selectedMembers(jQuery('.metadata').text());
 							router.returnToPrevious();
 						});

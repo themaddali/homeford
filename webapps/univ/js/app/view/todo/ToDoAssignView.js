@@ -101,6 +101,8 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _tdue = jQuery('#task-deadline').val();
 								var _tbenefit = jQuery('#task-benefit').val();
 								var _tassignto = jQuery('#member-list').text();
+								var _thelpurl = jQuery('#task-helper-url').text();
+								var _thelpyoutube = jQuery('#task-helper-youtube').text();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								console.log('Create Now');
 							}

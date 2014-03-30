@@ -114,7 +114,7 @@
 				"email": "jr1@james.com",
 				"security": true,
 				"phone": "",
-				"image": "img/student1.jpg",
+				"image": "",
 				"gender": "male",
 				"courses": [
 					{
@@ -170,7 +170,7 @@
 				"name": "Tester",
 				"email": "jr2@james.com",
 				"security": false,
-				"image": "img/student4.jpg",
+				"image": "",
 				"phone": "",
 				"gender": "male",
 				"courses": [

@@ -219,7 +219,7 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	-webkit-appearance: button;
 	*overflow: visible;
 }
-input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input:focus {
+input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input:focus {
 	border: 1px solid #0784E3;
 }
 
@@ -1641,10 +1641,10 @@ a.goback {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="file"]:focus + .form-helper,.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li input[type="web"]:focus + .form-helper,.edit-form li input[type="file"]:focus + .form-helper,.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="file"]:hover + .form-helper,.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="web"]:hover + .form-helper,.edit-form li input[type="file"]:hover + .form-helper,.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 

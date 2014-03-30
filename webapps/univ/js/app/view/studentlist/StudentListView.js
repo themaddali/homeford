@@ -35,6 +35,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							for (var i = 0; i < COUNT; i++) {
 								jQuery('.metainfo').text(COUNT + ' Members');
 								var newboard = template.clone();
+								if (!UnivData[0].students[i].image || UnivData[0].students[i].image === "") {
+									UnivData[0].students[i].image = "img/noimg.png"
+								}
 								jQuery('.student-name', newboard).text(UnivData[0].students[i].name);
 								jQuery('.student-headshot', newboard).attr('src', UnivData[0].students[i].image);
 								jQuery('.student-select', newboard).attr('name', UnivData[0].students[i].name);
