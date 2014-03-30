@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -131,6 +131,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						jQuery('#profile-password').change(function() {
 							jQuery('#password-reenter-item').show();
+						});
+						jQuery('#notification-done').click(function() {
+							router.returnToPrevious();
 						});
 
 						jQuery.validator.addMethod("notRepeated", function(value, element) {
