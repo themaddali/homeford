@@ -11,7 +11,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
 			var INFO = '<i style="padding:0px 10px" class="icon-bell-alt icon-1x "></i>';
-			var NOTIFICATIONS =[];
+			var NOTIFICATIONS = [];
 
 			function Notify() {
 
@@ -50,36 +50,47 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 					}
 					if (jQuery.find('#project-nav')) {
 						var CLASS = "edit-notify " + status;
-						var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '">' + OK + '<span style="cursor: pointer" class="notify-message">' + message + '</span></div>';
+						var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '"><a href="#/notifications">' + OK + '<span style="cursor: pointer" class="notify-message">' + message + '</span></a></div>';
 						if (status === 'ERROR') {
-							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '">' + ERROR + '<span style="cursor: pointer" class="notify-message">' + message + '</span></div>';
+							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '"><a href="#/notifications">' + ERROR + '<span style="cursor: pointer" class="notify-message">' + message + '</span></a></div>';
+						} else if (status === 'INFO') {
+							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '"><a href="#/notifications">' + INFO + '<span style="cursor: pointer" class="notify-message">' + message + '</span></a></div>';
 						}
-						else if (status === 'INFO') {
-							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '">' + INFO + '<span style="cursor: pointer" class="notify-message">' + message + '</span></div>';
+						if (!fullmessage[0]) {
+							var _notification = {};
+							_notification.title = message;
+							_notification.description = fullmessage;
+							_notification.status = status;
+							_notification.time = new Date();
+							_notification.keyword = keyword;
+							NOTIFICATIONS.push(_notification);
+						} else {
+							for (var i = 0; i < fullmessage.length; i++) {
+								var _notification = {};
+								_notification.title = message;
+								_notification.description = 'You are invited to join '+ fullmessage[i].domainName+ '.</br> This invitation is sent to you by '+ fullmessage[i].email + '. </br>Message says: '+fullmessage[i].text;
+								_notification.status = status;
+								_notification.time = new Date();
+								_notification.keyword = keyword;
+								NOTIFICATIONS.push(_notification);
+							}
 						}
-						var _notification= {};
-						_notification.title = message;
-						_notification.description = fullmessage;
-						_notification.status = status;
-						_notification.time = new Date();
-						_notification.keyword = keyword;
-						NOTIFICATIONS.push(_notification);
 						jQuery('#project-nav').append(notification);
 						jQuery('.edit-notify').slideDown(1000);
 						$('#notifyAudio')[0].play();
-						setTimeout (function(){
-								//jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
-								jQuery('#alert').addClass('active');
-								jQuery('.edit-notify').slideUp(1000);
-							}, 5000);
+						setTimeout(function() {
+							//jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
+							jQuery('#alert').addClass('active');
+							jQuery('.edit-notify').slideUp(1000);
+						}, 5000);
 						//5 Seconds is enough to catch attention
 					}
 				}
-				
+
+
 				this.getNotifications = function() {
 					return NOTIFICATIONS;
 				}
-
 
 				this.pause = function() {
 
@@ -89,7 +100,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 
 				};
 
-				this.showNotification = function(status, message,fullmessage,keyword, toroute, duration) {
+				this.showNotification = function(status, message, toroute, duration) {
 					showNotification(status, message, toroute, duration);
 				}
 

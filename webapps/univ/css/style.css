@@ -1376,6 +1376,12 @@ body.error404 {
 .notify-message {
 	padding-left: 10px;
 }
+.edit-notify a {
+	color: black
+}
+.edit-notify a:hover {
+	color: #0784E3;
+}
 
 .modal-body .modal-container footer .edit-controls {
 	position: absolute;
@@ -2436,6 +2442,7 @@ html.touch #subnav {
 	overflow: none;
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	margin-bottom: 10px;
 }
 .float-left .notifycard div.head {
 	padding: 5px;
@@ -2461,6 +2468,7 @@ html.touch #subnav {
 	margin-left: 10px;
 	color: #7f7f7f;
 	height: 70px;
+	font-size: 14px;
 }
 .float-left .notifycard div.foot {
 	border-top: 1px solid #d9d9d9;

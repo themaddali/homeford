@@ -78,6 +78,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						}
 					});
 				}
+				
+				function setNotifications(){
+					jQuery('.edit-notify').hide();
+				}
 
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
@@ -123,6 +127,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 
 				this.resume = function() {
 					showBG();
+					setNotifications();
 				};
 
 				this.init = function(args) {
@@ -156,6 +161,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 									banner.HideAlert();
 								}, 500);
 							});
+							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
 
 					} // Cookie Guider

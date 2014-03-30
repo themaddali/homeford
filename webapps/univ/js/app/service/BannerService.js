@@ -27,7 +27,7 @@ define(['jquery', 'cookie','../service/DataService','../Router'], function(jQuer
 					jQuery('#alert').removeClass('active');
 					jQuery('.alertflyout').remove();
 					jQuery('.userflyout').remove();
-					var alertoption = '<div class="alertflyout"><div class="flyout-label">' + 'No New Alerts' + '</div><a id="banner-alert" href="#/notifications" class="flyout-link">' + 'All Alerts' + '</a></div>';
+					var alertoption = '<div class="alertflyout"><div class="flyout-label">' + 'No New Alerts' + '</div><a id="banner-alert" href="#/notifications" class="flyout-link">' + 'View All' + '</a></div>';
 					jQuery('#project-nav').append(alertoption);
 				};
 

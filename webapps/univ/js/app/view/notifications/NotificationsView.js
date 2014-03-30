@@ -31,16 +31,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}
 
 				function populateData() {
+					jQuery('#card-canvas').empty();
 					NOTIFICATION = notify.getNotifications();
+					var template = jQuery('#notify-template').attr('id','');
+					//Backing the template
+					jQuery('.div-template').append(template.attr('id', 'notify-template'));
 					for (var i=0; i<NOTIFICATION.length; i++) {
-						var template = jQuery('#notify-template').attr('id','');
-						//Backing the template
-						jQuery('.div-template').append(template.attr('id', 'notify-template'));
 						var thistemplate = template.clone();
-						jQuery('.title', thistemplate).text(NOTIFICATION.title);
-						jQuery('.timestamp', thistemplate).text(NOTIFICATION.timestamp);
-						jQuery('.body', thistemplate).text(NOTIFICATION.fullmessage);
-						jQuery('.action', thistemplate).text(NOTIFICATION.keyword);
+						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
+						jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
+						jQuery('.body', thistemplate).html(NOTIFICATION[i].description);
+						jQuery('.action', thistemplate).text(NOTIFICATION[i].keyword);
 						jQuery('#card-canvas').append(thistemplate);
 					}
 				}
