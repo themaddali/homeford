@@ -31,6 +31,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				}
+				
 				function jsonFlickrFeed(o) {
 					var imagelist = [];
 					for (var i = 0; i < 3; i++) {
@@ -126,6 +127,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						});
 					}
 				}
+				
 				//ListenPending Invites
 				function listenPendingInvites(invitesarray) {
 					if (invitesarray.length > 0) {
@@ -133,6 +135,33 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							notify.showMessage('INFO', 'Pending Invitation', invitesarray, 'Accept', 'notifications');
 						}, 3000);
 						//Check after 3 seconds. Cooling time
+					}
+				}
+				
+				//Get only folks with T3 privilage
+				this.getMembers = function(domain,handlers) {
+					$.ajax({
+						url : '/homeford/api/getdomainsusers?domainname=' + domain,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(getmembersonly(data));
+						}
+					});
+				}
+				
+				function getmembersonly(data) {
+					var membersdata =[];
+					for (var i=0; i< data.length; i++) {
+						for (var j=0; j< data[i].roles.length; j++) {
+							if (data[i].roles[j].roleName === 'ROLE_TIER3') {
+								membersdata.push(data[i]);
+							}
+						}
+						if (i === data.length-1) {
+							return membersdata;
+						}
 					}
 				}
 

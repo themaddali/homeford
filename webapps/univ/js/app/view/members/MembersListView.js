@@ -43,29 +43,63 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function loadTable(activedomains) {
-					service.getUnivObject({
-						success : function(UnivData) {
-							var rowtemplate = jQuery('#members-template').attr('id', '');
-							//Backing the template
-							jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
-							var COUNT = UnivData[0].students.length;
-							for (var i = 0; i < COUNT; i++) {
-								var row = rowtemplate.clone();
-								if (UnivData[0].students[i].gender === 'female') {
-									//jQuery('.members-icon', row).empty().append(FEMALEICON);
-								} else {
-									//jQuery('.members-icon', row).empty().append(MALEICON);
+					var rowtemplate = jQuery('#members-template').attr('id', '');
+					//Backing the template
+					jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
+					for (var i = 0; i < activedomains.length; i++) {
+						service.getMembers(activedomains[i], {
+							success : function(data) {
+								for (var j = 0; j < data.length; j++) {
+									var row = rowtemplate.clone();
+									if (!data[j].firstName || data[j].firstName === 'null' || data[j].firstName === null)
+									{
+										data[j].firstName = "  "
+									}
+									if (data[j].lastName == 'null' || data[j].lastName == null || !data[j].lastName)
+									{
+										data[j].lastName = "  "
+									}
+									jQuery('.members-name', row).text(data[j].firstName+' '+data[j].lastName);
+									jQuery('.members-id', row).text(data[j].id);
+									jQuery('.members-email', row).text(data[j].email);
+									if (data[j].roles.length > 1){
+										jQuery('.members-roles', row).text('Member (+Admin)');
+									}
+									else{
+										jQuery('.members-roles', row).text('Member Only');
+									}
+									jQuery('.view-table  tbody').append(row);
+									if (j === data.length - 1) {
+										jQuery('.view-table').trigger("update");
+										activateTableClicks();
+									}
 								}
-								jQuery('.members-name', row).text(UnivData[0].students[i].name);
-								jQuery('.members-id', row).text(UnivData[0].students[i].id);
-								jQuery('.members-security', row).text(UnivData[0].students[i].security);
-								jQuery('.members-courses', row).text(UnivData[0].students[i].courses.length);
-								jQuery('.view-table  tbody').append(row);
-								jQuery('.view-table').trigger("update");
-								activateTableClicks();
 							}
-						}
-					});
+						});
+					}
+					// service.getUnivObject({
+					// success : function(UnivData) {
+					// var rowtemplate = jQuery('#members-template').attr('id', '');
+					// //Backing the template
+					// jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
+					// var COUNT = UnivData[0].students.length;
+					// for (var i = 0; i < COUNT; i++) {
+					// var row = rowtemplate.clone();
+					// if (UnivData[0].students[i].gender === 'female') {
+					// //jQuery('.members-icon', row).empty().append(FEMALEICON);
+					// } else {
+					// //jQuery('.members-icon', row).empty().append(MALEICON);
+					// }
+					// jQuery('.members-name', row).text(UnivData[0].students[i].name);
+					// jQuery('.members-id', row).text(UnivData[0].students[i].id);
+					// jQuery('.members-security', row).text(UnivData[0].students[i].security);
+					// jQuery('.members-courses', row).text(UnivData[0].students[i].courses.length);
+					// jQuery('.view-table  tbody').append(row);
+					// jQuery('.view-table').trigger("update");
+					// activateTableClicks();
+					// }
+					// }
+					// });
 				}
 
 				function activateTableClicks() {
@@ -86,7 +120,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
 					});
-					
+
 					jQuery('.members-action').click(function(e) {
 						if (jQuery(this).parent().hasClass('rowactive')) {
 							rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];

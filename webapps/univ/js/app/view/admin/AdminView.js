@@ -1,4 +1,4 @@
-define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService','../../service/BannerService', '../../Router', '../../view/invite/InviteView'], function(jqueryui,raphael, spin, plugins, cookie, elychart, service,banner, router, invite) {"use strict";
+define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -98,62 +98,26 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 				}
 
 				function populateDomainData() {
-					var _membersmale = 0;
-					var _membersfemale = 0;
-					var _membersdata =[0,0];
-					jQuery('#members-accordion').empty();
+					// var _membersmale = 0;
+					// var _membersfemale = 0;
+					// var _membersdata =[0,0];
+					//jQuery('#members-accordion').empty();
 					service.getUnivObject({
 						success : function(UnivData) {
-							//OverView Panel Load
-							jQuery('.univ-name').text(UnivData[0].univname);
-							jQuery('.univ-id').text(UnivData[0].id);
-							jQuery('.univ-about').text(UnivData[0].about);
-							jQuery('.univ-admin').text(UnivData[0].adminname);
-							jQuery('.univ-created').text(UnivData[0].created);
-							jQuery('.univ-email').text(UnivData[0].email);
-							jQuery('.univ-phone').text(UnivData[0].phone);
-							jQuery('.univ-address').text(UnivData[0].address);
-							jQuery('.univ-faculty').text(UnivData[0].faculty.length);
-							jQuery('.univ-students').text(UnivData[0].students.length);
-
-							//Student Manage Panel Load
-							//var memberheadertemplate = jQuery('#member-header-template').attr('id', '');
-							//var membercontenttemplate = jQuery('#member-content-template').attr('id', '');
-							//Backing the template
-							//jQuery('.templates-div').append(memberheadertemplate.attr('id', 'member-header-template'));
-							//jQuery('.templates-div').append(membercontenttemplate.attr('id', 'member-content-template'));
 							var COUNT = UnivData[0].students.length;
 							for (var i = 0; i < COUNT; i++) {
-								updatePanelValues('#members-total-value', COUNT);
-								//var headerelement = memberheadertemplate.clone();
-								//var contentelement = membercontenttemplate.clone();
+								//updatePanelValues('#members-total-value', COUNT);
 								if (UnivData[0].students[i].gender === 'female') {
-									_membersfemale = _membersfemale + 1;
-									_membersdata[0] = _membersfemale;
-									updatePanelValues('#members-female-value', _membersfemale);
-									//headerelement.html(FEMALEICON + UnivData[0].students[i].name);
+									// _membersfemale = _membersfemale + 1;
+									// _membersdata[0] = _membersfemale;
+									// updatePanelValues('#members-female-value', _membersfemale);
 								} else {
-									_membersmale = _membersmale + 1;
-									_membersdata[1] = _membersmale;
-									updatePanelValues('#members-male-value', _membersmale);
-									//headerelement.html(MALEICON + UnivData[0].students[i].name);
+									// _membersmale = _membersmale + 1;
+									// _membersdata[1] = _membersmale;
+									// updatePanelValues('#members-male-value', _membersmale);
 								}
-								//jQuery('.memberid', contentelement).html(UnivData[0].students[i].id);
-								//jQuery('.membersecurity', contentelement).html(UnivData[0].students[i].security);
-								//jQuery('.membercourses', contentelement).html(UnivData[0].students[i].courses.length);
-								//jQuery('#members-accordion').append(headerelement);
-								//jQuery('#members-accordion').append(contentelement);
-								// jQuery('.students-list-min').on('click', function() {
-									// var userClicked = jQuery(this).find('strong').html();
-									// subusereditview.activeUser(userClicked);
-									// router.go('/admin/subuseredit', '/admin');
-								// });
 								if (i === COUNT - 1) {
-									updatePanelGraphs('#members-donut', _membersdata);
-									// jQuery("#members-accordion").accordion({
-										// collapsible : true,
-										// active : false
-									// });
+									//updatePanelGraphs('#members-donut', _membersdata);
 								}
 							}
 						}
@@ -163,7 +127,7 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 				function populateUserData() {
 					var _adminof = 0;
 					var _ownerof = 0;
-					var _profiledata = [0,0];
+					var _profiledata = [0, 0];
 					ACTIVEDOMAINS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
@@ -171,6 +135,7 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 							if (UserProfile.domains.length === 1) {
 								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
 								populateInviteData(ACTIVEDOMAINS);
+								populateMembersData(ACTIVEDOMAINS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -191,7 +156,6 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 										_ownerof = _ownerof + 1;
 										updatePanelValues('#user-owner-value', _ownerof);
 										_profiledata[0] = _ownerof;
-										
 									}
 									if (i === UserProfile.domains.length - 1) {
 										//Remove duplicates
@@ -200,6 +164,7 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 										})
 										updatePanelGraphs('#profile-donut', _profiledata);
 										populateInviteData(ACTIVEDOMAINS);
+										populateMembersData(ACTIVEDOMAINS);
 									}
 								}
 							}
@@ -211,7 +176,7 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 					var _inviteaccept = 0;
 					var _invitepending = 0;
 					var _invitetotal = 0;
-					var _invitedata = [0,0];
+					var _invitedata = [0, 0];
 					//Catch Error
 					if (activedomains) {
 						for (var z = 0; z < activedomains.length; z++) {
@@ -223,15 +188,14 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 										updatePanelValues('#invite-total-value', _invitetotal);
 										if (InviteList[i].status == 'ACCEPTED') {
 											_inviteaccept = _inviteaccept + 1;
-											_invitedata[0] =_inviteaccept;
+											_invitedata[0] = _inviteaccept;
 											updatePanelValues('#invite-accept-value', _inviteaccept);
 										} else {
 											_invitepending = _invitepending + 1;
 											updatePanelValues('#invite-pending-value', _invitepending);
-											_invitedata[1] =_invitepending;
+											_invitedata[1] = _invitepending;
 											PENDINGLIST.push(InviteList[i].email);
 										}
-
 										if (i === ADMINCOUNT - 1) {
 											invite.pendingList(PENDINGLIST);
 											updatePanelGraphs('#invite-donut', _invitedata);
@@ -240,6 +204,35 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 								}
 							});
 						}
+					}
+				}
+
+				function populateMembersData(activedomains) {
+					var _memberst2t3 = 0;
+					var _memberst3 = 0;
+					var _memberstotal = 0;
+					var _membersdata = [0, 0];
+					for (var i = 0; i < activedomains.length; i++) {
+						service.getMembers(activedomains[i], {
+							success : function(data) {
+								_memberstotal = _memberstotal + data.length;
+								for (var j = 0; j < data.length; j++) {
+									updatePanelValues('#members-total-value', _memberstotal);
+									if (data[j].roles.length > 1) {
+										_memberst2t3 = _memberst2t3 + 1;
+										updatePanelValues('#members-t2t3-value', _memberst2t3);
+										_membersdata[0] = _memberst2t3;
+									} else {
+										_memberst3 = _memberst3 + 1;
+										updatePanelValues('#members-t3-value', _memberst3);
+										_membersdata[1] = _memberst3;
+									}
+									if (j === data.length - 1) {
+										updatePanelGraphs('#members-donut', _membersdata);
+									}
+								}
+							}
+						});
 					}
 				}
 
@@ -360,11 +353,11 @@ define(['jqueryui','raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../se
 						jQuery('#admin-done').on('click', function() {
 							router.returnToPrevious();
 						});
-						
-						jQuery('.goback').click(function(){
+
+						jQuery('.goback').click(function() {
 							router.returnToPrevious();
 						});
-						jQuery('.mainlogo').click(function(){
+						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
 
