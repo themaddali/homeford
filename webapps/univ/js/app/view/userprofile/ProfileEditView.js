@@ -26,24 +26,21 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
-							var template = jQuery('#profile-domain-template').attr('id', '');
-							if (UserProfile.domains.length === 1) {
-								jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-							} else {
-								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (i === 0) {
-										jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-									} else {
-										var activetemplate = template.clone();
-										activetemplate.show();
-										jQuery('#profile-domain-list', activetemplate).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
-										jQuery('#profile-form').append(activetemplate);
-									}
-
-								}
-							}
-
-							//jQuery('#profile-image').text('None Available');
+							//var template = jQuery('#profile-domain-template').attr('id', '');
+							// if (UserProfile.domains.length === 1) {
+							// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+							// } else {
+							// for (var i = 0; i < UserProfile.domains.length; i++) {
+							// if (i === 0) {
+							// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+							// } else {
+							// var activetemplate = template.clone();
+							// activetemplate.show();
+							// jQuery('#profile-domain-list', activetemplate).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
+							// jQuery('#profile-form').append(activetemplate);
+							// }
+							// }
+							// }
 						}
 					});
 				}
@@ -108,8 +105,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						jQuery('#profile-password').keyup(function() {
 							jQuery('#password-reenter-item').fadeIn();
-							if (jQuery('#profile-password').val()== "")
-							{
+							if (jQuery('#profile-password').val() == "") {
 								jQuery('#password-reenter-item').fadeOut();
 							}
 						});

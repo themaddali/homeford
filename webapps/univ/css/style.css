@@ -1534,7 +1534,7 @@ a.goback {
 	font-weight: 400;
 	cursor: pointer;
 	background: transparent url("../img/select-down.png") no-repeat right;
-	background-position: 90% 50%;
+	background-position: 80% 50%;
 	/*border-right: 1px dotted #d9d9d9;*/
 }
 .view-table > tbody tr {
@@ -1668,6 +1668,12 @@ a.goback {
 	display: inline
 }
 .edit-form li div#progressslider:focus + .form-helper {
+	display: inline
+}
+.edit-form li select.edit-select:hover + .form-helper {
+	display: inline
+}
+.edit-form li select.edit-select:focus + .form-helper {
 	display: inline
 }
 

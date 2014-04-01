@@ -10,6 +10,8 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 			 */
 
 			var validator;
+			var membernames = [];
+			var memberids = [];
 
 			function ToDoAssignView() {
 
@@ -31,20 +33,108 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 
 				function populateData() {
 					jQuery('#invite-domain').empty();
-					var membernames = [];
+					jQuery('.edit-card-canvas').empty();
+					jQuery('#checkbox-control').text('Un-Select All');
+					membernames = [];
+					memberids = [];
+					var memberscount = 0;
 					var template = jQuery('#member-template').remove().attr('id', '');
-					for (var i = 1; i <= 50; i++) {
-						jQuery('.metadata').text(i + ' of ' + i + ' selected');
-						var thisitem = template.clone();
-						jQuery('.membercard-name', thisitem).text('Mr. John testing long - ' + i);
-						membernames.push(jQuery('.membercard-name', thisitem).text());
-						jQuery('.membercard-id', thisitem).text('ID # ' + i);
-						jQuery('.edit-card-canvas').append(thisitem);
+					//backuptemplate
+					jQuery('.div-template').append(template.attr('id', 'member-template'));
+					var activedomains = service.returnDomainList();
+					for (var i = 0; i < activedomains.length; i++) {
+						service.getMembersOnly(activedomains[i], {
+							success : function(data) {
+								var thisitem = template.clone();
+								for (var j = 0; j < data.length; j++) {
+									var roles = JSON.stringify(data[j].roles);
+									if (roles.indexOf('ROLE_TIER3') !== -1) {
+										memberscount = memberscount + 1;
+										jQuery('.metadata').text(memberscount + ' of ' + memberscount + ' selected');
+										var thisitem = template.clone();
+										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
+											jQuery('.membercard-name', thisitem).text(data[j].email);
+										} else {
+											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
+										}
+										jQuery('.membercard-checkbox', thisitem).attr('checked','checked');
+										membernames.push(jQuery('.membercard-name', thisitem).text());
+										memberids.push(data[j].id);
+										jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
+										jQuery('.edit-card-canvas').append(thisitem);
+									}
+									if (j === data.length - 1) {
+										$(".card-search").autocomplete({
+											source : function(request, response) {
+												var results = $.ui.autocomplete.filter(membernames, request.term);
+												response(results.slice(0, 5));
+											}
+										});
+										activateEvents();
+									}
+								}
+							}
+						});
 					}
-					$(".card-search").autocomplete({
-						source : function(request, response) {
-							var results = $.ui.autocomplete.filter(membernames, request.term);
-							response(results.slice(0, 5));
+				}
+
+				function activateEvents() {
+					jQuery('#checkbox-control').click(function() {
+						var numberOfChecked = $('input:checkbox:checked').length-1;
+						var totalCheckboxes = $('input:checkbox').length-1;
+						if (numberOfChecked === totalCheckboxes && numberOfChecked !== 0) {
+							jQuery('#checkbox-control').text('Select All');
+							$(".membercard-checkbox").prop('checked', false);
+							jQuery('.membercard').removeClass('active');
+							jQuery('.metadata').text('0 of ' + totalCheckboxes + ' selected');
+						} else {
+							jQuery('#checkbox-control').text('Un-Select All');
+							$(".membercard-checkbox").prop('checked', true);
+							jQuery('.membercard').addClass('active');
+							jQuery('.metadata').text(totalCheckboxes + ' of ' + totalCheckboxes + ' selected');
+						}
+					});
+
+					jQuery('.membercard-checkbox').change(function() {
+						if (!$(this).is(':checked')) {
+							jQuery(this).parent().removeClass('active');
+						} else {
+							jQuery(this).parent().addClass('active');
+						}
+						var numberOfChecked = $('input:checkbox:checked').length-1;
+						var totalCheckboxes = $('input:checkbox').length-1;
+						if (numberOfChecked !== totalCheckboxes) {
+							jQuery('#checkbox-control').text('Select All');
+						} else {
+							jQuery('#checkbox-control').text('Un-Select All');
+						}
+						jQuery('.metadata').text(numberOfChecked + ' of ' + totalCheckboxes + ' selected');
+					});
+
+					jQuery('.card-search').change(function(event) {
+						var searchword = jQuery('.card-search').val();
+						var cardlist = jQuery('.edit-card-canvas .membercard-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.indexOf(searchword) != -1) {
+								//thiscard.parentElement.stlye.display = '';
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
+					jQuery('.card-search').click(function(event) {
+						var searchword = jQuery('.card-search').val();
+						var cardlist = jQuery('.edit-card-canvas .membercard-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.indexOf(searchword) != -1) {
+								//thiscard.parentElement.stlye.display = '';
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
 						}
 					});
 				}
@@ -59,7 +149,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 				};
 
 				this.resume = function() {
-
+					populateData();
 				};
 
 				this.init = function(args) {
@@ -74,67 +164,11 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 							router.returnToPrevious();
 						});
 
-						jQuery('#checkbox-control').click(function() {
-							var numberOfChecked = $('input:checkbox:checked').length;
-							var totalCheckboxes = $('input:checkbox').length;
-							if (numberOfChecked === totalCheckboxes && numberOfChecked !== 0) {
-								jQuery('#checkbox-control').text('Select All');
-								$(".membercard-checkbox").prop('checked', false);
-								jQuery('.membercard').removeClass('active');
-								jQuery('.metadata').text('0 of ' + totalCheckboxes + ' selected');
-							} else {
-								jQuery('#checkbox-control').text('Un-Select All');
-								$(".membercard-checkbox").prop('checked', true);
-								jQuery('.membercard').addClass('active');
-								jQuery('.metadata').text(totalCheckboxes + ' of ' + totalCheckboxes + ' selected');
-							}
-						});
-
-						jQuery('.membercard-checkbox').change(function() {
-							if (!$(this).is(':checked')) {
-								jQuery(this).parent().removeClass('active');
-							} else {
-								jQuery(this).parent().addClass('active');
-							}
-							var numberOfChecked = $('input:checkbox:checked').length;
-							var totalCheckboxes = $('input:checkbox').length;
-							if (numberOfChecked !== totalCheckboxes) {
-								jQuery('#checkbox-control').text('Select All');
-							} else {
-								jQuery('#checkbox-control').text('Un-Select All');
-							}
-							jQuery('.metadata').text(numberOfChecked + ' of ' + totalCheckboxes + ' selected');
-						});
-
-						jQuery('.card-search').change(function(event) {
-							var searchword = jQuery('.card-search').val();
-							var cardlist = jQuery('.edit-card-canvas .membercard-name');
-							for (var i = 0; i < cardlist.length; i++) {
-								var thiscard = cardlist[i];
-								thiscard.parentElement.style.display = '';
-								if (thiscard.textContent.indexOf(searchword) != -1) {
-									//thiscard.parentElement.stlye.display = '';
-								} else {
-									thiscard.parentElement.style.display = 'none';
-								}
-							}
-						});
-						jQuery('.card-search').click(function(event) {
-							var searchword = jQuery('.card-search').val();
-							var cardlist = jQuery('.edit-card-canvas .membercard-name');
-							for (var i = 0; i < cardlist.length; i++) {
-								var thiscard = cardlist[i];
-								thiscard.parentElement.style.display = '';
-								if (thiscard.textContent.indexOf(searchword) != -1) {
-									//thiscard.parentElement.stlye.display = '';
-								} else {
-									thiscard.parentElement.style.display = 'none';
-								}
-							}
-						});
-
 						jQuery('#members-pick').click(function() {
-							todoassign.selectedMembers(jQuery('.metadata').text());
+							var selectedMembers = {};
+							selectedMembers.text = jQuery('.metadata').text();
+							selectedMembers.list = memberids;
+							todoassign.selectedMembers(selectedMembers);
 							router.returnToPrevious();
 						});
 

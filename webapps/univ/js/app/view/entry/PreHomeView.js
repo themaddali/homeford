@@ -15,7 +15,7 @@ define(['../../Router', 'cookie','plugins', '../../service/DataService','../../v
 			function PreHomeView() {
 				
 				function showBG() {
-					jQuery.backstretch(PARMS.Bg);
+					//jQuery.backstretch(PARMS.Bg);
 				}
 
 				function setActiveCookie() {

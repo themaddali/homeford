@@ -47,12 +47,24 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 						jQuery("#task-startdate").val(today);
 						//jQuery("#task-deadline").val(next);
 					}
-					jQuery('#member-list').text(ActiveMembers);
+					jQuery('#member-list').text(ActiveMembers.text);
+					jQuery('#member-list').css('color', 'black');
+				}
+
+				function validAssignment() {
+					if (jQuery('#member-list').text() == 'None' || jQuery('#member-list').text().indexOf("0 of") !== -1) {
+						jQuery('#member-list').css('color', 'red');
+						return false;
+					} else {
+						jQuery('#member-list').css('color', 'black');
+						return true;
+					}
 				}
 
 
-				this.selectedMembers = function(info) {
-					ActiveMembers = info;
+				this.selectedMembers = function(selection) {
+					ActiveMembers = selection;
+					jQuery('#member-list').css('color', 'black');
 				}
 
 				this.pause = function() {
@@ -93,18 +105,29 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 						jQuery('#member-list').click(function() {
 							router.go('/memberspick');
 						});
+						
+						jQuery('#member-list').change(function(){
+							validAssignment();
+						});
 
 						jQuery('#task-assign').on('click', function() {
-							if ($(".edit-form").valid()) {
+							if ($(".edit-form").valid() && validAssignment()) {
 								var _tname = jQuery('#task-name').val();
 								var _tdesc = jQuery('#task-desc').val();
+								var _tfrom = jQuery('#task-startdate').val();
 								var _tdue = jQuery('#task-deadline').val();
 								var _tbenefit = jQuery('#task-benefit').val();
 								var _tassignto = jQuery('#member-list').text();
 								var _thelpurl = jQuery('#task-helper-url').text();
 								var _thelpyoutube = jQuery('#task-helper-youtube').text();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
-								console.log('Create Now');
+								var _ids = ActiveMembers.list;
+								var _domainids = service.returnDomainIDList();
+								service.AssignToDo(_domainids[0],_ids,_tname,_tdesc,_priority,_tfrom,_tdue,{
+									success: function(data){
+										router.go('/admin');
+									}
+								});
 							}
 							//Need to update to handler
 						});

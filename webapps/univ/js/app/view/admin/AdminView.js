@@ -1,4 +1,4 @@
-define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite) {"use strict";
+define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView','../../view/members/MembersPickView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -79,46 +79,17 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 							}
 							if (OWNERLEVEL !== UserProfile.domains.length) {
 								//User is not owner. Filter stuff.
-								// jQuery('.T1').hide();
-								// populateUserData();
-								// populateInviteData();
-								// populateDomainData();
+								jQuery('.T1').hide();
+								populateUserData();
+								populateInviteData();
 								//Should clean memebr list out
 								//Testing All Now
-								jQuery('.T1').show();
-								populateDomainData();
-								populateUserData();
+								// jQuery('.T1').show();
+								// populateDomainData();
+								// populateUserData();
 							} else {
 								jQuery('.T1').show();
-								populateDomainData();
 								populateUserData();
-							}
-						}
-					});
-				}
-
-				function populateDomainData() {
-					// var _membersmale = 0;
-					// var _membersfemale = 0;
-					// var _membersdata =[0,0];
-					//jQuery('#members-accordion').empty();
-					service.getUnivObject({
-						success : function(UnivData) {
-							var COUNT = UnivData[0].students.length;
-							for (var i = 0; i < COUNT; i++) {
-								//updatePanelValues('#members-total-value', COUNT);
-								if (UnivData[0].students[i].gender === 'female') {
-									// _membersfemale = _membersfemale + 1;
-									// _membersdata[0] = _membersfemale;
-									// updatePanelValues('#members-female-value', _membersfemale);
-								} else {
-									// _membersmale = _membersmale + 1;
-									// _membersdata[1] = _membersmale;
-									// updatePanelValues('#members-male-value', _membersmale);
-								}
-								if (i === COUNT - 1) {
-									//updatePanelGraphs('#members-donut', _membersdata);
-								}
 							}
 						}
 					});
@@ -182,9 +153,9 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 						for (var z = 0; z < activedomains.length; z++) {
 							service.getInviteStatus(activedomains[z], {
 								success : function(InviteList) {
-									var ADMINCOUNT = InviteList.length;
-									_invitetotal = _invitetotal + ADMINCOUNT;
-									for (var i = 0; i < ADMINCOUNT; i++) {
+									var INVITECOUNT = InviteList.length;
+									_invitetotal = _invitetotal + INVITECOUNT;
+									for (var i = 0; i < INVITECOUNT; i++) {
 										updatePanelValues('#invite-total-value', _invitetotal);
 										if (InviteList[i].status == 'ACCEPTED') {
 											_inviteaccept = _inviteaccept + 1;
@@ -196,7 +167,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 											_invitedata[1] = _invitepending;
 											PENDINGLIST.push(InviteList[i].email);
 										}
-										if (i === ADMINCOUNT - 1) {
+										if (i === INVITECOUNT - 1) {
 											invite.pendingList(PENDINGLIST);
 											updatePanelGraphs('#invite-donut', _invitedata);
 										}
@@ -208,24 +179,25 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 				}
 
 				function populateMembersData(activedomains) {
-					var _memberst2t3 = 0;
+					var _memberst2 = 0;
 					var _memberst3 = 0;
 					var _memberstotal = 0;
 					var _membersdata = [0, 0];
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembers(activedomains[i], {
 							success : function(data) {
-								_memberstotal = _memberstotal + data.length;
+								_memberstotal = _memberstotal + data.length -1 ;
 								for (var j = 0; j < data.length; j++) {
 									updatePanelValues('#members-total-value', _memberstotal);
-									if (data[j].roles.length > 1) {
-										_memberst2t3 = _memberst2t3 + 1;
-										updatePanelValues('#members-t2t3-value', _memberst2t3);
-										_membersdata[0] = _memberst2t3;
-									} else {
+									var roles = JSON.stringify(data[j].roles);
+									if (roles.indexOf('ROLE_TIER3') !== -1) {
 										_memberst3 = _memberst3 + 1;
 										updatePanelValues('#members-t3-value', _memberst3);
 										_membersdata[1] = _memberst3;
+									} else if (roles.indexOf('ROLE_TIER2') !== -1) {
+										_memberst2 = _memberst2 + 1;
+										updatePanelValues('#members-t2-value', _memberst2);
+										_membersdata[0] = _memberst2;
 									}
 									if (j === data.length - 1) {
 										updatePanelGraphs('#members-donut', _membersdata);

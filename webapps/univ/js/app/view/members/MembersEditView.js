@@ -18,9 +18,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
 						jQuery('#member-id').val(ACTIVEMEMBER.id);
-						jQuery('#member-security').val(ACTIVEMEMBER.security);
-						jQuery('#member-domain').val(ACTIVEMEMBER.domain);
-						jQuery('#member-courses').val(ACTIVEMEMBER.courses);
+						jQuery('#member-email').val(ACTIVEMEMBER.email);
+						//jQuery('#member-security').val(ACTIVEMEMBER.security);
+						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
+						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
 					}
 					else{
 						router.go('/memberslist')

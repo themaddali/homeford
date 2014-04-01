@@ -47,26 +47,30 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					//Backing the template
 					jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
 					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembers(activedomains[i], {
+						var thisdomaininstance = activedomains[i];
+						service.getMembers(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
 									var row = rowtemplate.clone();
-									if (!data[j].firstName || data[j].firstName === 'null' || data[j].firstName === null)
-									{
+									if (!data[j].firstName || data[j].firstName === 'null' || data[j].firstName === null) {
 										data[j].firstName = "  "
 									}
-									if (data[j].lastName == 'null' || data[j].lastName == null || !data[j].lastName)
-									{
+									if (data[j].lastName == 'null' || data[j].lastName == null || !data[j].lastName) {
 										data[j].lastName = "  "
 									}
-									jQuery('.members-name', row).text(data[j].firstName+' '+data[j].lastName);
+									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName);
 									jQuery('.members-id', row).text(data[j].id);
 									jQuery('.members-email', row).text(data[j].email);
-									if (data[j].roles.length > 1){
-										jQuery('.members-roles', row).text('Member (+Admin)');
-									}
-									else{
-										jQuery('.members-roles', row).text('Member Only');
+									jQuery('.members-domain', row).text(thisdomaininstance);
+									var roles = JSON.stringify(data[j].roles);
+									if (roles.indexOf('ROLE_TIER1') !== -1) {
+										jQuery('.members-roles', row).text('Owner');
+									} else if ((roles.indexOf('ROLE_TIER2') !== -1) && (roles.indexOf('ROLE_TIER3') == -1)) {
+										jQuery('.members-roles', row).text('Admin');
+									} else if ((roles.indexOf('ROLE_TIER2') !== -1) && (roles.indexOf('ROLE_TIER3') !== -1)) {
+										jQuery('.members-roles', row).text('Admin and Member');
+									} else if ((roles.indexOf('ROLE_TIER3') !== -1) && (roles.indexOf('ROLE_TIER2') == -1)) {
+										jQuery('.members-roles', row).text('Member');
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
@@ -119,20 +123,56 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('.members-action').css('color', 'white');
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
+						rowObject.firstname = jQuery(this).find('.members-name').text().split(" ")[0];
+						rowObject.lastname = jQuery(this).find('.members-name').text().split(" ")[1];
+						rowObject.security = jQuery(this).find('.members-security').text();
+						rowObject.id = jQuery(this).find('.members-id').text();
+						rowObject.email = jQuery(this).find('.members-email').text();
+						rowObject.roles = jQuery(this).find('.members-roles').text();
+						rowObject.domain = jQuery(this).find('.members-domain').text();
+						rowObject.courses = jQuery(this).find('.members-courses').text();
+						membersedit.setMemberInfo(rowObject);
+						router.go('/memberslistedit');
 					});
 
-					jQuery('.members-action').click(function(e) {
-						if (jQuery(this).parent().hasClass('rowactive')) {
-							rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];
-							rowObject.lastname = jQuery(this).parent().find('.members-name').text().split(" ")[1];
-							rowObject.security = jQuery(this).parent().find('.members-security').text();
-							rowObject.id = jQuery(this).parent().find('.members-id').text();
-							rowObject.domain = jQuery(this).parent().find('.members-domain').text();
-							rowObject.courses = jQuery(this).parent().find('.members-courses').text();
-							membersedit.setMemberInfo(rowObject);
-							router.go('/memberslistedit');
-						}
-					});
+					// jQuery('.members-action').click(function(e) {
+						// if (jQuery(this).parent().hasClass('rowactive')) {
+							// rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];
+							// rowObject.lastname = jQuery(this).parent().find('.members-name').text().split(" ")[1];
+							// rowObject.security = jQuery(this).parent().find('.members-security').text();
+							// rowObject.id = jQuery(this).parent().find('.members-id').text();
+							// rowObject.email = jQuery(this).parent().find('.members-email').text();
+							// rowObject.roles = jQuery(this).parent().find('.members-roles').text();
+							// rowObject.domain = jQuery(this).parent().find('.members-domain').text();
+							// rowObject.courses = jQuery(this).parent().find('.members-courses').text();
+							// membersedit.setMemberInfo(rowObject);
+							// router.go('/memberslistedit');
+						// }
+					// });
+
+					// TWO Step Approact, Click to activate, Gear to edit
+
+					// jQuery('.view-table tbody tr').click(function() {
+					// jQuery('.view-table tbody tr').removeClass('rowactive');
+					// jQuery('.members-action').css('color', 'white');
+					// jQuery(this).addClass('rowactive');
+					// jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
+					// });
+					//
+					// jQuery('.members-action').click(function(e) {
+					// if (jQuery(this).parent().hasClass('rowactive')) {
+					// rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];
+					// rowObject.lastname = jQuery(this).parent().find('.members-name').text().split(" ")[1];
+					// rowObject.security = jQuery(this).parent().find('.members-security').text();
+					// rowObject.id = jQuery(this).parent().find('.members-id').text();
+					// rowObject.email = jQuery(this).parent().find('.members-email').text();
+					// rowObject.roles = jQuery(this).parent().find('.members-roles').text();
+					// rowObject.domain = jQuery(this).parent().find('.members-domain').text();
+					// rowObject.courses = jQuery(this).parent().find('.members-courses').text();
+					// membersedit.setMemberInfo(rowObject);
+					// router.go('/memberslistedit');
+					// }
+					// });
 				}
 
 				function clearForm() {

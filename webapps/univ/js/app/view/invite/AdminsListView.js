@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/invite/AdminsEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, adminsedit) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/invite/AdminsEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, adminsedit) {"use strict";
 
 	var AdminsListView = ( function() {
 
@@ -37,7 +37,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
-					jQuery('#AdminsListView-table').tablesorter();
+					jQuery('.view-table').tablesorter();
 					var activedomains = admin.getActiveDomains();
 					if (!activedomains || activedomains.length == 0) {
 						router.go('/admin', '/adminslist');
@@ -75,9 +75,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.view-table  tbody').append(row);
 									if (i === ADMINCOUNT - 1 && activedomains.length > 0) {
 										activedomains.splice(0, 1);
-										jQuery('#AdminsListView-table').trigger("update");
-										//var sorting = [[2, 1], [0, 0]];
-										//jQuery("#AdminsListView-table").trigger("sorton", [sorting]);
+										jQuery('.view-table').trigger("update");
 										loadTable(activedomains);
 										activateTableClicks();
 									}
@@ -101,19 +99,33 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('.admin-action').css('color', 'white');
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
+						rowObject.email = jQuery(this).find('.admin-email').text();
+						rowObject.invitedby = jQuery(this).find('.admin-invitedby').text();
+						rowObject.status = jQuery(this).find('.admin-status').text();
+						rowObject.domain = jQuery(this).find('.admin-domain').text();
+						rowObject.roles = jQuery(this).find('.admin-roles').text();
+						adminsedit.setInviteInfo(rowObject);
+						router.go('/adminslistedit');
 					});
 
-					jQuery('.admin-action').click(function(e) {
-						if (jQuery(this).parent().hasClass('rowactive')) {
-							rowObject.email = jQuery(this).parent().find('.admin-email').text();
-							rowObject.invitedby = jQuery(this).parent().find('.admin-invitedby').text();
-							rowObject.status = jQuery(this).parent().find('.admin-status').text();
-							rowObject.domain = jQuery(this).parent().find('.admin-domain').text();
-							rowObject.roles = jQuery(this).parent().find('.admin-roles').text();
-							adminsedit.setInviteInfo(rowObject);
-							router.go('/adminslistedit');
-						}
-					});
+					// jQuery('.view-table tbody tr').click(function() {
+					// jQuery('.view-table tbody tr').removeClass('rowactive');
+					// jQuery('.admin-action').css('color', 'white');
+					// jQuery(this).addClass('rowactive');
+					// jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
+					// });
+					//
+					// jQuery('.admin-action').click(function(e) {
+					// if (jQuery(this).parent().hasClass('rowactive')) {
+					// rowObject.email = jQuery(this).parent().find('.admin-email').text();
+					// rowObject.invitedby = jQuery(this).parent().find('.admin-invitedby').text();
+					// rowObject.status = jQuery(this).parent().find('.admin-status').text();
+					// rowObject.domain = jQuery(this).parent().find('.admin-domain').text();
+					// rowObject.roles = jQuery(this).parent().find('.admin-roles').text();
+					// adminsedit.setInviteInfo(rowObject);
+					// router.go('/adminslistedit');
+					// }
+					// });
 				}
 
 				function clearForm() {
