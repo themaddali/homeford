@@ -105,8 +105,8 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 						jQuery('#member-list').click(function() {
 							router.go('/memberspick');
 						});
-						
-						jQuery('#member-list').change(function(){
+
+						jQuery('#member-list').change(function() {
 							validAssignment();
 						});
 
@@ -122,12 +122,18 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _thelpyoutube = jQuery('#task-helper-youtube').text();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
-								// var _ids = ActiveMembers.list.toString();
-								// _ids = "["+ _ids+"]";
 								var _domainids = service.returnDomainIDList();
-								service.AssignToDo(_domainids[0],_ids,_tname,_tdesc,_priority,_tfrom,_tdue,{
-									success: function(data){
-										router.go('/admin');
+								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, {
+									success : function(data) {
+										if (data !== 'error') {
+											notify.showNotification('OK', data.message);
+										} else {
+											notify.showNotification('ERROR', data.message);
+										}
+										setTimeout(function() {
+											router.returnToPrevious();
+											//admin.reloadData();
+										}, 5000);
 									}
 								});
 							}

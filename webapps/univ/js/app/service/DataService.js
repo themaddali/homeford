@@ -222,11 +222,10 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 
 				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/' + domainid,
+						url : '/homeford/api/todo/domain/' + domainid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
-						dataType: "json",
 						data : JSON.stringify({
 							'title' : title,
 							'desc' : desc,
