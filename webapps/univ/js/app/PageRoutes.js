@@ -154,6 +154,15 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                router.map('memberslistadd', '^/memberslistadd(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/members/add.html','../app/view/members/MembersAddView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 router.map('todoassign', '^/todoassign(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
