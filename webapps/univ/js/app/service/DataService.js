@@ -240,6 +240,18 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				};
+				
+				this.DomainToDoList = function(domainid,handlers) {
+					$.ajax({
+						url : '/homeford/api/todo/domain/' + domainid,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
 
 				this.Login = function(username, password, handlers) {
 					$.ajax({

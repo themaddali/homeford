@@ -1,4 +1,4 @@
-define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView','../../view/members/MembersPickView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
+define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/members/MembersPickView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -107,6 +107,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
 								populateInviteData(ACTIVEDOMAINS);
 								populateMembersData(ACTIVEDOMAINS);
+								populateToDoData(ACTIVEDOMAINS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -136,6 +137,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 										updatePanelGraphs('#profile-donut', _profiledata);
 										populateInviteData(ACTIVEDOMAINS);
 										populateMembersData(ACTIVEDOMAINS);
+										populateToDoData(ACTIVEDOMAINS);
 									}
 								}
 							}
@@ -186,7 +188,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembers(activedomains[i], {
 							success : function(data) {
-								_memberstotal = _memberstotal + data.length -1 ;
+								_memberstotal = _memberstotal + data.length - 1;
 								for (var j = 0; j < data.length; j++) {
 									updatePanelValues('#members-total-value', _memberstotal);
 									var roles = JSON.stringify(data[j].roles);
@@ -202,6 +204,35 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 									if (j === data.length - 1) {
 										updatePanelGraphs('#members-donut', _membersdata);
 									}
+								}
+							}
+						});
+					}
+				}
+
+				function populateToDoData(activedomains) {
+					var _todototal = 0;
+					var _tododone = 0;
+					var _tododata = [0, 0];
+					for (var i = 0; i < activedomains.length; i++) {
+						service.DomainToDoList(activedomains[i], {
+							success : function(data) {
+								_todototal = _todototal + data.length;
+								for (var j = 0; j < data.length; j++) {
+									//updatePanelValues('#members-total-value', _memberstotal);
+									//var roles = JSON.stringify(data[j].roles);
+									// if (roles.indexOf('ROLE_TIER3') !== -1) {
+										// _memberst3 = _memberst3 + 1;
+										// updatePanelValues('#members-t3-value', _memberst3);
+										// _membersdata[1] = _memberst3;
+									// } else if (roles.indexOf('ROLE_TIER2') !== -1) {
+										// _memberst2 = _memberst2 + 1;
+										// updatePanelValues('#members-t2-value', _memberst2);
+										// _membersdata[0] = _memberst2;
+									// }
+									// if (j === data.length - 1) {
+										// updatePanelGraphs('#members-donut', _membersdata);
+									// }
 								}
 							}
 						});
