@@ -122,6 +122,8 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _thelpyoutube = jQuery('#task-helper-youtube').text();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
+								// var _ids = ActiveMembers.list.toString();
+								// _ids = "["+ _ids+"]";
 								var _domainids = service.returnDomainIDList();
 								service.AssignToDo(_domainids[0],_ids,_tname,_tdesc,_priority,_tfrom,_tdue,{
 									success: function(data){

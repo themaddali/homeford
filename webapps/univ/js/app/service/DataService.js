@@ -226,6 +226,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
+						dataType: "json",
 						data : JSON.stringify({
 							'title' : title,
 							'desc' : desc,
