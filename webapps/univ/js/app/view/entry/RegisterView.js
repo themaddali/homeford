@@ -75,6 +75,27 @@ define(['jqueryui', 'spin', 'cookie', '../../Router', 'validate', '../../service
 					});
 				}
 
+				function parseQueryURL() {
+					var requesturl = router.location().substring(1);
+					if (requesturl.indexOf('email=') !== -1 && requesturl.indexOf('domain=') !== -1) {
+						var query = requesturl.split('email=')[1];
+						query = query.split("?");
+						jQuery('#new-user-name').val(query[0]);
+						jQuery('#new-user-domain').val(query[1].split("domain=")[1].toUpperCase());
+						jQuery('#new-user-name').attr('readonly',true);
+						jQuery('#new-user-doamin').attr('readonly',true);
+						jQuery('#new-user-password').focus();
+					}
+					else
+					{
+						jQuery('#new-user-name').val('');
+						jQuery('#new-user-domain').val('');
+						jQuery('#new-user-name').attr('readonly',false);
+						jQuery('#new-user-doamin').attr('readonly',false);
+						jQuery('#new-user-name').focus();
+					}
+				}
+
 
 				this.entity = function(entity) {
 					ENTITY = entity;
@@ -87,6 +108,7 @@ define(['jqueryui', 'spin', 'cookie', '../../Router', 'validate', '../../service
 				this.resume = function() {
 					checkForActiveCookie();
 					jQuery('.info').hide();
+					parseQueryURL();
 				};
 
 				this.init = function() {
@@ -98,6 +120,8 @@ define(['jqueryui', 'spin', 'cookie', '../../Router', 'validate', '../../service
 						jQuery('#user-domain').addClass('onlyone');
 						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
 					}
+
+					parseQueryURL();
 
 					jQuery('#register').on('click', function(e) {
 						if ($("#register-form").valid()) {
