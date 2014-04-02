@@ -37,30 +37,16 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 													data[j].image = "img/noimg.png"
 												}
 												_memberobject.image = data[j].image;
-												_memberobject.fname = data[j].firstName;
-												_memberobject.lname = data[j].lastName;
+												_memberobject.firstName = data[j].firstName;
+												_memberobject.lastName = data[j].lastName;
 												_memberobject.email = data[j].email;
 												_memberobject.id = data[j].id;
-												var list = service.returnDomainIDList();
-												service.MemberToDoList(list[0], data[j].id, {
-													success : function(tasks) {
-														for (var k = 0; k < tasks.length; k++) {
-															_memberobject.tasks = tasks;
-															MEMBEROBJECT.push(_memberobject);
-															if (k === tasks.length - 1 && finishflag == 1) {
-																displayCards(MEMBEROBJECT);
-															}
-															else
-															{
-																finishflag = finishflag-1;
-															}
-														}
-													}
-												});
+												MEMBEROBJECT.push(_memberobject);
 											}
 											if (j === data.length - 1) {
 												jQuery("#preloader").hide();
 												ActivatePanelEvents();
+												displayCards(MEMBEROBJECT);
 											}
 										}
 									}
@@ -80,22 +66,44 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						var newboard = template.clone();
 						if ((MEMBEROBJECT[i].firstName === 'null' || MEMBEROBJECT[i].firstName == null || MEMBEROBJECT[i].firstName === "" ) && (MEMBEROBJECT[i].lastName === 'null' || MEMBEROBJECT[i].lastName == null || MEMBEROBJECT[i].lastName === "")) {
 							jQuery('.student-name', newboard).text(MEMBEROBJECT[i].email);
+							jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].email);
 						} else {
 							jQuery('.student-name', newboard).text(MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
+							jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
 						}
 						jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
 						jQuery('.student-select', newboard).attr('name', jQuery('.student-name', newboard).val());
-						for (var k = 0; k < MEMBEROBJECT[i].tasks.length; k++) {
-							if (k < 2) {
-								jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + "</li>");
-							}
-							if (k == 2 && tasks.length > 3) {
-								jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + " ..... and " + (MEMBEROBJECT[i].tasks[k].length - 2) + " more</li>");
-							}
-							if (k === MEMBEROBJECT[i].tasks.length - 1) {
-								jQuery('#card-canvas').append(newboard);
-							}
+						// for (var k = 0; k < MEMBEROBJECT[i].tasks.length; k++) {
+						// if (k < 2) {
+						// jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + "</li>");
+						// }
+						// if (k == 2 && tasks.length > 3) {
+						// jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + " ..... and " + (MEMBEROBJECT[i].tasks[k].length - 2) + " more</li>");
+						// }
+						// if (k === MEMBEROBJECT[i].tasks.length - 1) {
+						// jQuery('#card-canvas').append(newboard);
+						// }
+						// }
+						jQuery('#card-canvas').append(newboard);
+						if (i == MEMBEROBJECT.length - 1) {
+							populateTasks(MEMBEROBJECT);
 						}
+					}
+				}
+
+				function populateTasks(MEMBEROBJECT) {
+					var list = service.returnDomainIDList();
+					for (var i = 0; i < MEMBEROBJECT.length; i++) {
+						service.MemberToDoList(list[0], MEMBEROBJECT[i].id, {
+							success : function(tasks) {
+								for (var k = 0; k < tasks.length; k++) {
+									jQuery('.student-info').append("<li>" + tasks[k].title +' id# '+tasks[k].id+ "</li>");
+									// if (k === tasks.length - 1) {
+										// displayCards(MEMBEROBJECT);
+									// }
+								}
+							}
+						});
 					}
 				}
 
