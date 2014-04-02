@@ -20,6 +20,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 				'ROLE_TIER3' : 'Member'
 			};
 			var ACTIVEDOMAINS = [];
+			var ACTIVEDOMAINIDS = [];
 			var PENDINGLIST = [];
 			var DOMAINSTRENGTHDATA = {
 				y : 0,
@@ -100,14 +101,16 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 					var _ownerof = 0;
 					var _profiledata = [0, 0];
 					ACTIVEDOMAINS = [];
+					ACTIVEDOMAINIDS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
 							updatePanelValues('#user-id-value', 'K-' + UserProfile.id);
 							if (UserProfile.domains.length === 1) {
 								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
+								ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
 								populateInviteData(ACTIVEDOMAINS);
 								populateMembersData(ACTIVEDOMAINS);
-								populateToDoData(ACTIVEDOMAINS);
+								populateToDoData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -120,6 +123,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
 									ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
+									ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 										_adminof = _adminof + 1;
 										updatePanelValues('#user-admin-value', _adminof);
@@ -137,7 +141,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 										updatePanelGraphs('#profile-donut', _profiledata);
 										populateInviteData(ACTIVEDOMAINS);
 										populateMembersData(ACTIVEDOMAINS);
-										populateToDoData(ACTIVEDOMAINS);
+										populateToDoData(ACTIVEDOMAINIDS);
 									}
 								}
 							}

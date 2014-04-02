@@ -22,7 +22,7 @@
 					Add New Member
 				</header>
 				<div class="modal-contents">
-					<form id="profile-edit-form" class="edit-form">
+					<form class="edit-form">
 						<fieldset>
 							<ol id="profile-form">
 								<li class="form-item">
@@ -35,43 +35,22 @@
 									<input placeholder="Last Name" id="member-last-name" name="memberlastname" type="text" />
 									<label class="form-helper">Last Name (Optional)</label>
 								</li>
-								<li class="form-item">
-									<label>ID Number</label>
-									<input placeholder="Unique ID (readonly)" readonly id="member-id" name="memberid" type="text" />
-									<label class="form-helper">Auto Generated - Readonly</label>
-								</li>
+								<div class="form-partition">
+									<span>OR</span>
+								</div>
 								<li class="form-item">
 									<label>Email</label>
-									<input placeholder="Registered Email ID" id="member-email" readonly name="memberemail" type="text" />
-									<label class="form-helper">Registered Email - Cant Edit</label>
+									<input placeholder="Invite by Email Address" id="member-email"  name="memberemail" type="email" />
+									<label class="form-helper">Email will be sent to register.</label>
 								</li>
-								<!-- <li class="form-item">
-									<label>Phone</label>
-									<input placeholder="Phone Number" id="member-phone" name="memberphone" type="text" />
-									<label class="form-helper"></label>
-								</li> -->
-								<!-- <li class="form-item">
-									<label>Security</label>
-									<input placeholder="Security Model" id="member-security" name="membersecurity" type="text" />
-								</li> -->
-								<li class="form-item">
-									<label>Domain</label>
-									<input placeholder="Active Domains" readonly id="member-domains" name="memberdomains" type="text" />
-									<label class="form-helper">Registered Domain - Cant Edit</label>
-								</li>
-								<li class="form-item">
-									<label>Roles</label>
-									<input placeholder="Roles" readonly id="member-roles" name="memberroles" type="text" />
-									<label class="form-helper">Assigned Roles - Cant Edit</label>
-								</li>
+								
 							</ol>
 						</fieldset>
 					</form>
 				</div>
 				<footer>
 					<div class="edit-controls">
-						<input id="member-edit" type="button" value="Update">
-						<input class="negative" type="button" value="Remove Member">
+						<input id="member-add" type="button" value="Add">
 					</div>
 				</footer>
 				<div class="modal_close"></div>

@@ -1581,6 +1581,21 @@ a.goback {
 .edit-form li.form-item {
 	font-size: 0px;
 }
+.edit-form div.form-partition {
+	height:10px;
+	border-bottom: 1px dotted #d9d9d9;
+	margin-bottom :  50px;
+	text-align: center;
+	margin-left: -30px;
+	margin-top: 20px;
+}
+.edit-form div.form-partition span {
+	color: #0784E3;
+	background-color: #FFFFFF ;
+	border-radius: 15px;
+	padding: 5px;
+	border: 1px solid #0784E3;
+}
 .view-form li.form-item {
 	font-size: 0px;
 	border-bottom: 2px dotted #d9d9d9;

@@ -123,9 +123,9 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
 								var _domainids = service.returnDomainIDList();
-								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, {
+								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue,_tbenefit,_thelpurl,_thelpyoutube, {
 									success : function(data) {
-										if (data !== 'error') {
+										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
 										} else {
 											notify.showNotification('ERROR', data.message);

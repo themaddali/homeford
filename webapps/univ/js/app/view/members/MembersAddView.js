@@ -9,23 +9,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			 *
 			 */
 
-			var ACTIVEMEMBER;
+			var validator;
 
 			function MembersEditView() {
 
 				function populateData() {
-					if (ACTIVEMEMBER){
-						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
-						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
-						jQuery('#member-id').val(ACTIVEMEMBER.id);
-						jQuery('#member-email').val(ACTIVEMEMBER.email);
-						//jQuery('#member-security').val(ACTIVEMEMBER.security);
-						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
-						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
-					}
-					else{
-						//router.go('/memberslist')
-					}
+
 				}
 
 				function checkForActiveCookie() {
@@ -43,11 +32,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						return false;
 					}
 				}
-				
-				this.setMemberInfo = function(MemberInfo){
-					ACTIVEMEMBER = MemberInfo;
-				}
 
+				function clearForm() {
+					jQuery('.form-item input').val("");
+					validator.resetForm();
+				};
 
 				this.pause = function() {
 
@@ -55,6 +44,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					clearForm();
 				};
 
 				this.init = function(args) {
@@ -70,28 +60,35 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.returnToPrevious();
 						});
 
-						jQuery('#member-edit').on('click', function() {
+						jQuery('#member-add').on('click', function() {
 							if ($(".edit-form").valid()) {
-								alert('action needed');
-								setTimeout ( function(){
-									router.returnToPrevious();
-								},1000);
+								var _domainid = service.returnDomainIDList();
+								var _userid = service.thisuserID();
+								service.addMemberRegular(_domainid[0], _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
+									success : function(data) {
+										if (data.status !== 'error') {
+											notify.showNotification('OK', data.message);
+										} else {
+											notify.showNotification('ERROR', data.message);
+										}
+										setTimeout(function() {
+											router.returnToPrevious();
+										}, 5000);
+									}
+								});
 							}
 						});
 
-						jQuery("#profile-edit-form").validate({
+						validator = jQuery(".edit-form").validate({
 							rules : {
-								profileid : {
-									required : true,
-								},
-								profilepassword : {
+								memberfirstname : {
 									required : false,
 								},
-								profilepasswordrepeat : {
-									equalTo : "#profile-password"
+								memberlastname : {
+									required : false,
 								},
-								profileemail : {
-									required : true,
+								memberemail : {
+									required : false,
 									email : true
 								}
 							}

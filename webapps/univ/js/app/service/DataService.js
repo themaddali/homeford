@@ -7,6 +7,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 			var ACTIVEDOMAINIDLIST = [];
 			var DOMAINLIST;
 			var USERPROFILE = null;
+			var USERID;
 
 			/**
 			 * @constructor
@@ -76,6 +77,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							success : function(data) {
 								listenPendingInvites(data.pendingInvitees);
 								USERPROFILE = data;
+								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {
 									if (ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
 										ACTIVEDOMAINLIST.push(data.domains[i].domainName);
@@ -97,6 +99,22 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}, 3000);
 						//Check after 3 seconds. Cooling time
 					}
+				}
+				
+				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
+					$.ajax({
+						url : '/homeford/api/addmember/' + domainid +'/'+ userid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'firstName' : fname,
+							'lastName' : lname,
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
 				}
 
 				//Get T1, T2 and T3 privilage
@@ -220,7 +238,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 					});
 				}
 
-				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, handlers) {
+				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate,benefit, url, youtube, handlers) {
 					$.ajax({
 						url : '/homeford/api/todo/domain/' + domainid,
 						type : 'POST',
@@ -234,6 +252,9 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							'todoStartDate' : startdate,
 							'todoEndDate' : enddate,
 							'userIds' : ids,
+							'benefit' : benefit,
+							'helper_url' : url,
+							'helper_youtube': youtube
 						}),
 						success : function(data) {
 							handlers.success(data);
@@ -341,6 +362,10 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 				}
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;
+				}
+				
+				this.thisuserID = function() {
+					return USERID;
 				}
 				
 				this.cleanUserProfile = function() {
