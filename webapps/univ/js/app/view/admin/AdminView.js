@@ -222,6 +222,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 						service.DomainToDoList(activedomains[i], {
 							success : function(data) {
 								_todototal = _todototal + data.length;
+								updatePanelValues('#todo-total-value', _todototal);
 								for (var j = 0; j < data.length; j++) {
 									//updatePanelValues('#members-total-value', _memberstotal);
 									//var roles = JSON.stringify(data[j].roles);
