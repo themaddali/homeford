@@ -37,6 +37,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						router.go('/class');
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
+						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
 						jQuery('#progressslider').slider({
 							animate : true,
@@ -101,6 +102,15 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					}
 				}
 
+				function daystogo(duedate) {
+					var oneDay = 24 * 60 * 60 * 1000;
+					// hours*minutes*seconds*milliseconds
+					var firstDate = new Date();
+					var secondDate = new Date (duedate);
+					var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
+					return diffDays;
+				}
+
 
 				this.activeTask = function(selectedinput) {
 					ACTIVEQUIZ = selectedinput;
@@ -129,17 +139,17 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
 						});
-						
-						jQuery('#updatetodo').click(function(){
+
+						jQuery('#updatetodo').click(function() {
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
 							var _timestamp = jQuery('#task-time').val();
 							var _commentstext = [];
 							var comments = {};
 							comments.text = jQuery('#task-desc').val();
 							_commentstext.push(comments);
-							service.updateToDo (ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
-								success: function(data) {
-									if (data.status =='success') {
+							service.updateToDo(ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
+								success : function(data) {
+									if (data.status == 'success') {
 										router.go('/class');
 									}
 								}
