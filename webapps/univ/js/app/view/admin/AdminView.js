@@ -80,7 +80,8 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 							}
 							if (OWNERLEVEL !== UserProfile.domains.length) {
 								//User is not owner. Filter stuff.
-								jQuery('.T1').hide();
+								//jQuery('.T1').hide();
+								jQuery('.T1').show();
 								populateUserData();
 								populateInviteData();
 								//Should clean memebr list out
@@ -91,6 +92,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 							} else {
 								jQuery('.T1').show();
 								populateUserData();
+								populateInviteData();
 							}
 						}
 					});

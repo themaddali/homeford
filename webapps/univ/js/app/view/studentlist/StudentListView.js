@@ -8,6 +8,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>';
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>';
 			var MEMBEROBJECT = [];
+			var template;
 
 			/**
 			 * Constructor
@@ -20,14 +21,12 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 
 				function populateStudentList() {
 					//Get User Profile
-					var finishflag;
 					service.getUserProfile({
 						success : function(data) {
 							var activedomains = service.returnDomainList();
 							for (var i = 0; i < activedomains.length; i++) {
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
-										finishflag = data.length;
 										for (var j = 0; j < data.length; j++) {
 											var _memberobject = {};
 											var roles = JSON.stringify(data[j].roles);
@@ -58,9 +57,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 
 				function displayCards(MEMBEROBJECT) {
 					jQuery('#card-canvas').empty();
-					var template = jQuery('#student-template').remove().attr('id', '');
-					//BackingUp
-					jQuery('.div-template').append(template.attr('id', 'student-template'));
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						jQuery('.metainfo').text(MEMBEROBJECT.length + ' Members');
 						var newboard = template.clone();
@@ -72,7 +68,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
 						}
 						jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
-						jQuery('.student-select', newboard).attr('name', jQuery('.student-name', newboard).val());
+						jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 						// for (var k = 0; k < MEMBEROBJECT[i].tasks.length; k++) {
 						// if (k < 2) {
 						// jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + "</li>");
@@ -86,32 +82,44 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						// }
 						jQuery('#card-canvas').append(newboard);
 						if (i == MEMBEROBJECT.length - 1) {
-							populateTasks(MEMBEROBJECT);
+							var MEMBEROBJECT_instance = MEMBEROBJECT;
+							populateTasks(MEMBEROBJECT_instance);
 						}
 					}
 				}
 
-				function populateTasks(MEMBEROBJECT) {
+				function populateTasks(members) {
 					var list = service.returnDomainIDList();
-					for (var i = 0; i < MEMBEROBJECT.length; i++) {
-						service.MemberToDoList(list[0], MEMBEROBJECT[i].id, {
+					var activememberid;
+						activememberid = members[0].id;
+						service.MemberToDoList(list[0], members[0].id, {
 							success : function(tasks) {
 								for (var k = 0; k < tasks.length; k++) {
-									jQuery('.student-info').append("<li>" + tasks[k].title +' id# '+tasks[k].id+ "</li>");
-									// if (k === tasks.length - 1) {
-										// displayCards(MEMBEROBJECT);
-									// }
+									//jQuery('.student-info').append("<li>" + tasks[k].title + ' id# ' + tasks[k].id + "</li>");
+									if (k < 2) {
+										jQuery('.studentboard[name="'+members[0].id+'"] .student-info').append("<li>" + tasks[k].title + "</li>");
+									}
+									if (k == 2 && tasks.length > 3) {
+										jQuery('.studentboard[name="'+members[0].id+'"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
+									}
+									if (k === tasks.length - 1) {
+										members.splice(0, 1);
+										ActivatePanelEvents();
+										if (members[0]){
+											populateTasks(members);
+										}
+									}
 								}
 							}
 						});
-					}
 				}
 
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
-						var selectedUser = $(this).find('.student-name').text();
-						classview.activeStudent(selectedUser);
+						var selectedUserName = $(this).find('.student-name').text();
+						var selectedUserId = $(this).attr('name');
+						classview.activeStudent(selectedUserName,selectedUserId);
 						router.go('/class', '/studentlist');
 						// var selectedUserSecurity = $(this).attr('security');
 						// if (selectedUserSecurity !== "true") {
@@ -160,6 +168,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
+						template = jQuery('#student-template').remove().attr('id', '');
 						showBG();
 						populateStudentList();
 

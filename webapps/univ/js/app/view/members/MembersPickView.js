@@ -11,7 +11,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 
 			var validator;
 			var membernames = [];
-			var memberids = [];
+			var template;
 
 			function ToDoAssignView() {
 
@@ -36,11 +36,9 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 					jQuery('.edit-card-canvas').empty();
 					jQuery('#checkbox-control').text('Un-Select All');
 					membernames = [];
-					memberids = [];
 					var memberscount = 0;
-					var template = jQuery('#member-template').remove().attr('id', '');
 					//backuptemplate
-					jQuery('.div-template').append(template.attr('id', 'member-template'));
+					//jQuery('.div-template').append(template.attr('id', 'member-template'));
 					var activedomains = service.returnDomainList();
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
@@ -59,7 +57,6 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 										}
 										jQuery('.membercard-checkbox', thisitem).attr('checked','checked');
 										membernames.push(jQuery('.membercard-name', thisitem).text());
-										memberids.push(data[j].id);
 										jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
 										jQuery('.edit-card-canvas').append(thisitem);
 									}
@@ -80,8 +77,8 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 
 				function activateEvents() {
 					jQuery('#checkbox-control').click(function() {
-						var numberOfChecked = $('input:checkbox:checked').length-1;
-						var totalCheckboxes = $('input:checkbox').length-1;
+						var numberOfChecked = $('input:checkbox:checked').length;
+						var totalCheckboxes = $('input:checkbox').length;
 						if (numberOfChecked === totalCheckboxes && numberOfChecked !== 0) {
 							jQuery('#checkbox-control').text('Select All');
 							$(".membercard-checkbox").prop('checked', false);
@@ -101,8 +98,8 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 						} else {
 							jQuery(this).parent().addClass('active');
 						}
-						var numberOfChecked = $('input:checkbox:checked').length-1;
-						var totalCheckboxes = $('input:checkbox').length-1;
+						var numberOfChecked = $('input:checkbox:checked').length;
+						var totalCheckboxes = $('input:checkbox').length;
 						if (numberOfChecked !== totalCheckboxes) {
 							jQuery('#checkbox-control').text('Select All');
 						} else {
@@ -157,6 +154,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
+						template = jQuery('#member-template').remove().attr('id', '');
 						populateData();
 
 						//HTML Event - Actions
@@ -165,9 +163,11 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 						});
 
 						jQuery('#members-pick').click(function() {
+							var selectedlist = $('input:checkbox:checked').parent().find('.membercard-id').text().replace(/\n/g, '').split('Id# ');
+							selectedlist.shift();
 							var selectedMembers = {};
 							selectedMembers.text = jQuery('.metadata').text();
-							selectedMembers.list = memberids;
+							selectedMembers.list = selectedlist;
 							todoassign.selectedMembers(selectedMembers);
 							router.returnToPrevious();
 						});

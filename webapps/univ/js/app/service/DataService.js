@@ -257,6 +257,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							'helper_youtube': youtube
 						}),
 						success : function(data) {
+							USERPROFILE = null;
 							handlers.success(data);
 						}
 					});
