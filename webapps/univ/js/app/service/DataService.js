@@ -286,6 +286,23 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				}
+				
+				this.updateToDo = function (todoid, progress, date, comments, handlers) {
+					$.ajax({
+						url : '/homeford/api/todo/' + todoid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'percentage' : progress,
+							'comments': comments
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							handlers.success(data);
+						}
+					});
+				}
 
 				this.Login = function(username, password, handlers) {
 					$.ajax({

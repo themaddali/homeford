@@ -69,17 +69,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						}
 						jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
 						jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
-						// for (var k = 0; k < MEMBEROBJECT[i].tasks.length; k++) {
-						// if (k < 2) {
-						// jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + "</li>");
-						// }
-						// if (k == 2 && tasks.length > 3) {
-						// jQuery('.student-info', newboard).append("<li>" + MEMBEROBJECT[i].tasks[k].title + " ..... and " + (MEMBEROBJECT[i].tasks[k].length - 2) + " more</li>");
-						// }
-						// if (k === MEMBEROBJECT[i].tasks.length - 1) {
-						// jQuery('#card-canvas').append(newboard);
-						// }
-						// }
 						jQuery('#card-canvas').append(newboard);
 						if (i == MEMBEROBJECT.length - 1) {
 							var MEMBEROBJECT_instance = MEMBEROBJECT;
@@ -91,27 +80,26 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 				function populateTasks(members) {
 					var list = service.returnDomainIDList();
 					var activememberid;
-						activememberid = members[0].id;
-						service.MemberToDoList(list[0], members[0].id, {
-							success : function(tasks) {
-								for (var k = 0; k < tasks.length; k++) {
-									//jQuery('.student-info').append("<li>" + tasks[k].title + ' id# ' + tasks[k].id + "</li>");
-									if (k < 2) {
-										jQuery('.studentboard[name="'+members[0].id+'"] .student-info').append("<li>" + tasks[k].title + "</li>");
-									}
-									if (k == 2 && tasks.length > 3) {
-										jQuery('.studentboard[name="'+members[0].id+'"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
-									}
-									if (k === tasks.length - 1) {
-										members.splice(0, 1);
-										ActivatePanelEvents();
-										if (members[0]){
-											populateTasks(members);
-										}
+					activememberid = members[0].id;
+					service.MemberToDoList(list[0], members[0].id, {
+						success : function(tasks) {
+							for (var k = 0; k < tasks.length; k++) {
+								if (k < 2) {
+									jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+								}
+								if (k == 2 && tasks.length > 3) {
+									jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
+								}
+								if (k === tasks.length - 1) {
+									members.splice(0, 1);
+									ActivatePanelEvents();
+									if (members[0]) {
+										populateTasks(members);
 									}
 								}
 							}
-						});
+						}
+					});
 				}
 
 				function ActivatePanelEvents() {
@@ -119,22 +107,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();
 						var selectedUserId = $(this).attr('name');
-						classview.activeStudent(selectedUserName,selectedUserId);
+						classview.activeStudent(selectedUserName, selectedUserId);
 						router.go('/class', '/studentlist');
-						// var selectedUserSecurity = $(this).attr('security');
-						// if (selectedUserSecurity !== "true") {
-						// jQuery.cookie('subuser', selectedUser, {
-						// path : '/',
-						// expires : 100
-						// });
-						// router.go('/class', '/studentlist');
-						// } else {
-						// jQuery.cookie('subuser', selectedUser, {
-						// path : '/',
-						// expires : 100
-						// });
-						// router.go('/class', '/studentlist');
-						// }
+
 					});
 				};
 

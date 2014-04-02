@@ -27,7 +27,6 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 						var list = service.returnDomainIDList();
 						service.MemberToDoList(list[0], ACTIVESTUDENTID, {
 							success : function(StudentData) {
-								//Create the student panels on the fly (DB should send this info per user/univ)
 								var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
 								//BackingUp
 								jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
@@ -36,9 +35,6 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 									jQuery('.metainfo').text(COUNT + ' Tasks');
 									var newboard = PanelTemplate.clone();
 									jQuery('.class-name', newboard).text(StudentData[i].title);
-									// if (StudentData[0].activeassignments[i].assignmentmodel === 'task') {
-										// //jQuery('.class-binder', newboard).attr('src', 'img/taskbook.jpg');
-									// }
 									jQuery('.class-progress', newboard).progressbar();
 									var value = parseInt(StudentData[i].percentage);
 									jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
@@ -47,6 +43,7 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 									jQuery('.due-date', newboard).text(StudentData[i].todoEndDate);
 									jQuery('.start-date', newboard).text(StudentData[i].todoStartDate);
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
+									newboard.attr('name',StudentData[i].id);
 									jQuery('.footer', newboard).text('last worked on: '+ StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {
@@ -63,11 +60,9 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 						var selectedQuiz = {};
 						selectedQuiz.name = $(this).find('.class-name').text();
 						selectedQuiz.progress = $(this).find('.class-progress-label').text().split("%")[0];
+						selectedQuiz.id = $(this).attr('name');
+						selectedQuiz.memberid = ACTIVESTUDENTID;
 						quizview.activeTask(selectedQuiz);
-						// jQuery.cookie('quiz', selectedQuiz, {
-						// path : '/',
-						// expires : 100
-						// });
 						router.go('/quiz', '/class');
 					});
 

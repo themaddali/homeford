@@ -1490,10 +1490,13 @@ a.goback {
 }
 
 .view-form-control input {
- padding: 10px;
- background-color: #0784E3;
- color: white;
- border : 0px solid white;	
+	padding: 10px;
+	background-color: #0784E3;
+	color: white;
+	border: 2px solid white;
+}
+.view-form-control input:hover {
+	border: 2px solid #999;
 }
 
 .edit-form fieldset {
@@ -1582,16 +1585,16 @@ a.goback {
 	font-size: 0px;
 }
 .edit-form div.form-partition {
-	height:10px;
+	height: 10px;
 	border-bottom: 1px dotted #d9d9d9;
-	margin-bottom :  50px;
+	margin-bottom: 50px;
 	text-align: center;
 	margin-left: -30px;
 	margin-top: 20px;
 }
 .edit-form div.form-partition span {
 	color: #0784E3;
-	background-color: #FFFFFF ;
+	background-color: #FFFFFF;
 	border-radius: 15px;
 	padding: 5px;
 	border: 1px solid #0784E3;
@@ -1656,10 +1659,10 @@ a.goback {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li input[type="web"]:focus + .form-helper,.edit-form li input[type="file"]:focus + .form-helper,.edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li input[type="web"]:focus + .form-helper, .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="web"]:hover + .form-helper,.edit-form li input[type="file"]:hover + .form-helper,.edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="web"]:hover + .form-helper, .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 
@@ -2086,7 +2089,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,               , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -3026,9 +3029,8 @@ html.touch #subnav {
 }
 
 .ui-datepicker-prev.ui-corner-all {
-	cursor : pointer;
+	cursor: pointer;
 }
-
 
 #progressBar {
 	width: 100%;

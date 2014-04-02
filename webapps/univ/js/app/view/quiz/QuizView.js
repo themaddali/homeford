@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService',  '../../Router', '../../Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
 
 	var QuizView = ( function() {
 
@@ -59,6 +59,35 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 							jQuery("#task-time").val(today);
 						}
+
+						//var list = service.returnDomainIDList();
+						// service.MemberToDoList(list[0], ACTIVEQUIZ.memberid, {
+						// success : function(StudentData) {
+						// $("#progressvalue").html(ACTIVEQUIZ.progress + '%');
+						// jQuery('#progressslider').slider({
+						// animate : true,
+						// range : "min",
+						// value : ACTIVEQUIZ.progress,
+						// min : 0,
+						// max : 100,
+						// step : 1,
+						// slide : function(event, ui) {
+						// $("#progressvalue").html(ui.value + '%');
+						// }
+						// });
+						// if (Modernizr.touch && Modernizr.inputtypes.date) {
+						// document.getElementById('task-time').type = 'date';
+						// } else {
+						// jQuery("#task-time").datepicker({
+						// minDate : -7
+						// });
+						// var date = new Date();
+						// var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+						// jQuery("#task-time").val(today);
+						// }
+						//
+						// }
+						// });
 					}
 				}
 
@@ -100,6 +129,22 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
 						});
+						
+						jQuery('#updatetodo').click(function(){
+							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
+							var _timestamp = jQuery('#task-time').val();
+							var _commentstext = [];
+							var comments = {};
+							comments.text = jQuery('#task-desc').val();
+							_commentstext.push(comments);
+							service.updateToDo (ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
+								success: function(data) {
+									if (data.status =='success') {
+										router.go('/class');
+									}
+								}
+							});
+						});
 
 						jQuery('#user-name').on('click', function(e) {
 							banner.ShowUser();
@@ -125,11 +170,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
-						
-						jQuery('.mainlogo').click(function(){
+
+						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
-						jQuery('.goback').click(function(){
+						jQuery('.goback').click(function() {
 							router.returnToPrevious();
 						});
 
