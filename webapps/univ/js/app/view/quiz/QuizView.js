@@ -106,9 +106,42 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					var oneDay = 24 * 60 * 60 * 1000;
 					// hours*minutes*seconds*milliseconds
 					var firstDate = new Date();
-					var secondDate = new Date (duedate);
+					var secondDate = new Date(duedate);
 					var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
 					return diffDays;
+				}
+				
+				//http://codepen.io/jasonday/pen/amlqz
+				function fluidDialog() {
+					var $visible = $(".ui-dialog:visible");
+					// each open dialog
+					$visible.each(function() {
+						var $this = $(this);
+						var dialog = $this.find(".ui-dialog-content");
+						// if fluid option == true
+						if (dialog.options.maxWidth && dialog.options.width) {
+							// fix maxWidth bug
+							$this.css("max-width", dialog.options.maxWidth);
+							//reposition dialog
+							dialog.option("position", dialog.options.position);
+						}
+
+						if (dialog.options.fluid) {
+							// namespace window resize
+							$(window).on("resize.responsive", function() {
+								var wWidth = $(window).width();
+								// check window width against dialog width
+								if (wWidth < dialog.options.maxWidth + 50) {
+									// keep dialog from filling entire screen
+									$this.css("width", "90%");
+
+								}
+								//reposition dialog
+								dialog.option("position", dialog.options.position);
+							});
+						}
+
+					});
 				}
 
 
@@ -140,6 +173,22 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							}, 100);
 						});
 
+						jQuery('#helper-youtube').click(function() {
+							$("#dialog-modal").dialog({
+								autoOpen : true,
+								width : 'auto', // overcomes width:'auto' and maxWidth bug
+								height : 300,
+								maxWidth : 600,
+								modal : true,
+								fluid : true, //new option
+								resizable : false,
+								open : function(event, ui) {
+									fluidDialog();
+									// needed when autoOpen is set to true in this codepen
+								}
+							});
+						});
+
 						jQuery('#updatetodo').click(function() {
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
 							var _timestamp = jQuery('#task-time').val();
@@ -154,6 +203,16 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 									}
 								}
 							});
+						});
+
+						// run function on all dialog opens
+						$(document).on("dialogopen", ".ui-dialog", function(event, ui) {
+							fluidDialog();
+						});
+
+						// remove window resize namespace
+						$(document).on("dialogclose", ".ui-dialog", function(event, ui) {
+							$(window).off("resize.responsive");
 						});
 
 						jQuery('#user-name').on('click', function(e) {

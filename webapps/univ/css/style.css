@@ -2398,7 +2398,7 @@ html.touch #subnav {
 	top: 95px;
 	left: 10px;
 	right: 110px;
-	bottom: 110px;
+	/*bottom: 110px;*/
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	overflow: auto;
@@ -2408,7 +2408,8 @@ html.touch #subnav {
 	position: fixed;
 	top: 95px;
 	right: 10px;
-	bottom: 110px;
+	/*bottom: 110px;*/
+	bottom: 10px;
 	width: 90px;
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
