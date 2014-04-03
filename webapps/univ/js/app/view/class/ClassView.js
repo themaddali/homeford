@@ -40,8 +40,12 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 									jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
 									jQuery('.class-progress-label', newboard).text(StudentData[i].percentage + '% Done');
 									jQuery('.class-select', newboard).attr('name', StudentData[i].title);
-									jQuery('.due-date', newboard).text(StudentData[i].todoEndDate.split(' ')[0]);
-									jQuery('.start-date', newboard).text(StudentData[i].todoStartDate.split(' ')[0]);
+									if (StudentData[i].todoEndDate){
+										jQuery('.due-date', newboard).text(StudentData[i].todoEndDate.split(' ')[0]);
+									}
+									if (StudentData[i].todoStartDate){
+										jQuery('.start-date', newboard).text(StudentData[i].todoStartDate.split(' ')[0]);
+									}
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
 									newboard.attr('name',StudentData[i].id);
 									jQuery('.footer', newboard).text('last worked on: '+ StudentData[i].lastUpdated);

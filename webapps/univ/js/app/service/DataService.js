@@ -45,23 +45,23 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 
 
 				this.getFlickList = function(keyword, handlers) {
-
-					var flickrurl = "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json";
-					$.ajax({
-						url : flickrurl,
-						type : 'GET',
-						async : 'async',
-						contentType : "application/json",
-						success : function(data) {
-							for (var i = 0; i < 10; i++) {
-								imagelist.push(data.items[i].media.m);
-							}
-							handlers.success(imagelist);
-						},
-						error : function() {
-							handlers.error();
-						}
-					});
+					handlers.error();
+					// var flickrurl = "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json";
+					// $.ajax({
+						// url : flickrurl,
+						// type : 'GET',
+						// async : 'async',
+						// contentType : "application/json",
+						// success : function(data) {
+							// for (var i = 0; i < 10; i++) {
+								// imagelist.push(data.items[i].media.m);
+							// }
+							// handlers.success(imagelist);
+						// },
+						// error : function() {
+							// handlers.error();
+						// }
+					// });
 				}
 
 				this.getUserProfile = function(handlers) {

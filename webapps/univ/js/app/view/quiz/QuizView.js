@@ -50,6 +50,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								$("#progressvalue").html(ui.value + '%');
 							}
 						});
+						jQuery('#progressslider').focus();
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
 							document.getElementById('task-time').type = 'date';
 						} else {
@@ -60,35 +61,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 							jQuery("#task-time").val(today);
 						}
-
-						//var list = service.returnDomainIDList();
-						// service.MemberToDoList(list[0], ACTIVEQUIZ.memberid, {
-						// success : function(StudentData) {
-						// $("#progressvalue").html(ACTIVEQUIZ.progress + '%');
-						// jQuery('#progressslider').slider({
-						// animate : true,
-						// range : "min",
-						// value : ACTIVEQUIZ.progress,
-						// min : 0,
-						// max : 100,
-						// step : 1,
-						// slide : function(event, ui) {
-						// $("#progressvalue").html(ui.value + '%');
-						// }
-						// });
-						// if (Modernizr.touch && Modernizr.inputtypes.date) {
-						// document.getElementById('task-time').type = 'date';
-						// } else {
-						// jQuery("#task-time").datepicker({
-						// minDate : -7
-						// });
-						// var date = new Date();
-						// var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-						// jQuery("#task-time").val(today);
-						// }
-						//
-						// }
-						// });
 					}
 				}
 
@@ -111,37 +83,24 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					return diffDays;
 				}
 
-				//http://codepen.io/jasonday/pen/amlqz
-				function fluidDialog() {
-					var $visible = $(".ui-dialog:visible");
-					// each open dialog
-					$visible.each(function() {
-						var $this = $(this);
-						var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
-						// if fluid option == true
-						if (dialog.options.maxWidth && dialog.options.width) {
-							// fix maxWidth bug
-							$this.css("max-width", dialog.options.maxWidth);
-							//reposition dialog
-							dialog.option("position", dialog.options.position);
-						}
-
-						if (dialog.options.fluid) {
-							// namespace window resize
-							$(window).on("resize.responsive", function() {
-								var wWidth = $(window).width();
-								// check window width against dialog width
-								if (wWidth < dialog.options.maxWidth + 50) {
-									// keep dialog from filling entire screen
-									$this.css("width", "90%");
-
-								}
-								//reposition dialog
-								dialog.option("position", dialog.options.position);
-							});
-						}
-
-					});
+				function helperMediaQuiries() {
+					var width = $(window).width();
+					var height = $(window).height();
+					if (width < 700 && width > 481) {
+						jQuery('.help-icon').removeClass('icon-3x').removeClass('icon-1x').addClass('icon-2x');
+						jQuery('.helpers').removeClass('medium').removeClass('small').addClass('medium');
+						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('medium');
+					}
+					else if (width <= 481) {
+						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-3x').addClass('icon-1x');
+						jQuery('.helpers').removeClass('medium').removeClass('small').addClass('small');
+						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('small');
+					}
+					else {
+						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-1x').addClass('icon-3x');
+						jQuery('.helpers').removeClass('medium').removeClass('small');
+						jQuery('.main-content').removeClass('medium');
+					}
 				}
 
 
@@ -164,6 +123,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
 						populateData();
+						helperMediaQuiries();
 
 						//JQ UI Bug of -Index.
 						jQuery('#task-time').focus(function() {
@@ -173,21 +133,10 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							}, 100);
 						});
 
-						// jQuery('#helper-youtube').click(function() {
-							// $("#dialog-modal").dialog({
-								// autoOpen : true,
-								// width : 'auto', // overcomes width:'auto' and maxWidth bug
-								// maxheight : 450,
-								// maxWidth : 854,
-								// modal : true,
-								// fluid : true, //new option
-								// resizable : false,
-								// open : function(event, ui) {
-									// fluidDialog();
-									// // needed when autoOpen is set to true in this codepen
-								// }
-							// });
-						// });
+						$(document).ready(helperMediaQuiries);
+						// When the page first loads
+						$(window).resize(helperMediaQuiries);
+						// When the browser changes size
 
 						jQuery('#updatetodo').click(function() {
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
@@ -209,7 +158,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							type : 'iframe',
 							mainClass : 'mfp-img-mobile',
 						});
-						
+
 						$('.helper-url').magnificPopup({
 							type : 'iframe',
 							mainClass : 'mfp-img-mobile',

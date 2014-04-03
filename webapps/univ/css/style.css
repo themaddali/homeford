@@ -1709,14 +1709,24 @@ a.goback {
 	font-size: 14px;
 	width: calc(50% + 22px);
 }
-.edit-form li.form-item label.form-helper {
+.edit-form li.form-item div.form-helper {
 	margin-left: 15px;
+	margin-right: 10px;
 	font-size: 13px;
 	padding-left: 10px;
 	border-left: 1px solid #0784E3;
 	/*background: transparent url("../img/next-up.png") no-repeat left;*/
 	font-style: italic;
 	display: none;
+	width: auto;
+	position: absolute;
+	font-style: italic;
+	color: #7f7f7f;
+}
+.edit-form li.form-item div.form-helper-message {
+	position: relative;
+	display: inline;
+	width: 150px;
 }
 
 .edit-form li.form-item > * {
@@ -2089,7 +2099,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                 , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                  , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2397,7 +2407,7 @@ html.touch #subnav {
 	position: fixed;
 	top: 95px;
 	left: 10px;
-	right: 110px;
+	right: 105px;
 	/*bottom: 110px;*/
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
@@ -2415,6 +2425,18 @@ html.touch #subnav {
 	border-bottom-right-radius: 0px;
 	overflow: auto;
 }
+.helpers.medium {
+	width: 60px;
+}
+.main-content.action.medium {
+	right: 75px;
+}
+.helpers.small {
+	width: 30px;
+}
+.main-content.action.small {
+	right: 45px;
+}
 
 .helpers div.item {
 	text-align: center;
@@ -2422,10 +2444,12 @@ html.touch #subnav {
 	cursor: pointer;
 }
 .helpers div.item a {
-	margin: 10px;
+	/*margin: 10px;*/
 	text-align: center;
 	color: #d9d9d9;
 	cursor: pointer;
+	top: 20%;
+	position: relative;
 }
 .helpers div.item a:hover {
 	color: #0784E3;
@@ -2837,7 +2861,7 @@ dialog-modal::-webkit-scrollbar {
 	padding-bottom: 10px;
 	text-align: center;
 	color: #FFFFFF;
-	border-top-left-radius: 5px;
+	border-top-left-radius: 8px;
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
 }
@@ -4604,6 +4628,7 @@ footer a:hover {
 	#wrapper-about {
 		overflow: scroll;
 	}
+	
 }
 @media screen and (max-width: 700px) {
 	#copyright {
