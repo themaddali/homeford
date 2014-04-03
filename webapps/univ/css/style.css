@@ -2089,7 +2089,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                 , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2441,6 +2441,28 @@ html.touch #subnav {
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 	overflow: auto;
+}
+
+/*DIALOGS*/
+.ui-dialog {
+	background-color: white;
+}
+
+.ui-dialog-title {
+	color: white;
+}
+
+.ui-dialog .ui-dialog-content {
+	padding: 2px;
+}
+
+.ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix {
+	border-bottom-right-radius: 0px;
+}
+
+dialog-modal::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
 }
 
 .content {

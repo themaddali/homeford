@@ -19,7 +19,7 @@ require({
 		raphael : "raphael",
 		tablesorter : "jquery.tablesorter.min",
 		elychart : "elycharts",
-		chosen : "chosen.jquery.min",
+		popup : "popup.min",
 		Pages : '../../module',
 		},
 	priority : ['modernizr', 'jquery'],

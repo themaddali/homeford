@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify'], function(modernizr, spin, plugins, cookie, service, banner, router, notify) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, spin, plugins, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var QuizView = ( function() {
 
@@ -110,14 +110,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
 					return diffDays;
 				}
-				
+
 				//http://codepen.io/jasonday/pen/amlqz
 				function fluidDialog() {
 					var $visible = $(".ui-dialog:visible");
 					// each open dialog
 					$visible.each(function() {
 						var $this = $(this);
-						var dialog = $this.find(".ui-dialog-content");
+						var dialog = $this.find(".ui-dialog-content").data("ui-dialog");
 						// if fluid option == true
 						if (dialog.options.maxWidth && dialog.options.width) {
 							// fix maxWidth bug
@@ -173,21 +173,21 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							}, 100);
 						});
 
-						jQuery('#helper-youtube').click(function() {
-							$("#dialog-modal").dialog({
-								autoOpen : true,
-								width : 'auto', // overcomes width:'auto' and maxWidth bug
-								height : 300,
-								maxWidth : 600,
-								modal : true,
-								fluid : true, //new option
-								resizable : false,
-								open : function(event, ui) {
-									fluidDialog();
-									// needed when autoOpen is set to true in this codepen
-								}
-							});
-						});
+						// jQuery('#helper-youtube').click(function() {
+							// $("#dialog-modal").dialog({
+								// autoOpen : true,
+								// width : 'auto', // overcomes width:'auto' and maxWidth bug
+								// maxheight : 450,
+								// maxWidth : 854,
+								// modal : true,
+								// fluid : true, //new option
+								// resizable : false,
+								// open : function(event, ui) {
+									// fluidDialog();
+									// // needed when autoOpen is set to true in this codepen
+								// }
+							// });
+						// });
 
 						jQuery('#updatetodo').click(function() {
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
@@ -205,14 +205,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							});
 						});
 
-						// run function on all dialog opens
-						$(document).on("dialogopen", ".ui-dialog", function(event, ui) {
-							fluidDialog();
+						$('.helper-youtube').magnificPopup({
+							type : 'iframe',
+							mainClass : 'mfp-img-mobile',
 						});
-
-						// remove window resize namespace
-						$(document).on("dialogclose", ".ui-dialog", function(event, ui) {
-							$(window).off("resize.responsive");
+						
+						$('.helper-url').magnificPopup({
+							type : 'iframe',
+							mainClass : 'mfp-img-mobile',
 						});
 
 						jQuery('#user-name').on('click', function(e) {
