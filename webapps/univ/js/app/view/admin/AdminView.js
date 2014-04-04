@@ -67,6 +67,7 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 				}
 
 				function getInfoByPrivilage() {
+					helperMediaQuiries();
 					var OWNERLEVEL = 0;
 					var ADMINLEVEL = 0;
 					service.getUserProfile({
@@ -318,6 +319,21 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
 				}
+				
+				function helperMediaQuiries() {
+					if ($('.adminboard').length > 2) {
+						var width = $('#card-canvas').width() - 30;
+						var rowholds = Math.floor(width / 404);
+						var fillerspace = width - (rowholds * 404);
+						//var eachfiller = 300+fillerspace/rowholds;
+						var newmargin = fillerspace / rowholds;
+						if (newmargin < 10) {
+							newmargin = 10;
+						}
+						$('.adminboard').css('margin-left', newmargin / 2);
+						$('.adminboard').css('margin-right', newmargin / 2);
+					}
+				}
 
 
 				this.getActiveDomains = function() {
@@ -356,6 +372,9 @@ define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../s
 						// Get Privilage
 						setCanvas();
 						getInfoByPrivilage();
+						
+						$(window).resize(helperMediaQuiries);
+						// When the browser changes size
 
 						jQuery('.adminboard').on('click', function() {
 

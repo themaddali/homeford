@@ -159,16 +159,18 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'mason', '../../service/DataSe
 				}
 
 				function helperMediaQuiries() {
-					var width = $('#card-canvas').width() - 30;
-					var rowholds = Math.floor(width / 304);
-					var fillerspace = width - (rowholds * 304);
-					//var eachfiller = 300+fillerspace/rowholds;
-					var newmargin = fillerspace / rowholds;
-					if (newmargin < 10) {
-						newmargin = 10;
+					if ($('.studentboard').length > 4) {
+						var width = $('#card-canvas').width() - 30;
+						var rowholds = Math.floor(width / 304);
+						var fillerspace = width - (rowholds * 304);
+						//var eachfiller = 300+fillerspace/rowholds;
+						var newmargin = fillerspace / rowholds;
+						if (newmargin < 10) {
+							newmargin = 10;
+						}
+						$('.studentboard').css('margin-left', newmargin / 2);
+						$('.studentboard').css('margin-right', newmargin / 2);
 					}
-					$('.studentboard').css('margin-left', newmargin / 2);
-					$('.studentboard').css('margin-right', newmargin / 2);
 				}
 
 

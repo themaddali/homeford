@@ -31,11 +31,9 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 								//BackingUp
 								jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
 								var COUNT = StudentData.length;
-								if(COUNT === 0) {
+								if (COUNT === 0) {
 									jQuery('#noinfo').fadeIn(1000);
-								}
-								else
-								{
+								} else {
 									jQuery('#noinfo').hide();
 								}
 								for (var i = 0; i < COUNT; i++) {
@@ -58,6 +56,7 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {
+										helperMediaQuiries();
 										ActivatePanelEvents()
 									}
 								}
@@ -93,6 +92,21 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 				function displayAlert() {
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
+				}
+
+				function helperMediaQuiries() {
+					if ($('.classboard').length > 4) {
+						var width = $('#class-canvas').width() - 30;
+						var rowholds = Math.floor(width / 304);
+						var fillerspace = width - (rowholds * 304);
+						//var eachfiller = 300+fillerspace/rowholds;
+						var newmargin = fillerspace / rowholds;
+						if (newmargin < 10) {
+							newmargin = 10;
+						}
+						$('.classboard').css('margin-left', newmargin / 2);
+						$('.classboard').css('margin-right', newmargin / 2);
+					}
 				}
 
 
@@ -136,6 +150,10 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 								}, 500);
 							});
 						});
+
+						$(window).resize(helperMediaQuiries);
+						// When the browser changes size
+
 						jQuery('#alert').on('click', function(e) {
 							banner.ShowAlert();
 							jQuery('.alertflyout').mouseleave(function() {
