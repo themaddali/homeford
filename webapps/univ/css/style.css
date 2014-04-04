@@ -1688,6 +1688,12 @@ a.goback {
 .edit-form li div#progressslider:focus + .form-helper {
 	display: inline
 }
+.ui-slider-handle:focus + .form-helper {
+	display: inline
+}
+.ui-slider-handle:hover + .form-helper {
+	display: inline
+}
 .edit-form li select.edit-select:hover + .form-helper {
 	display: inline
 }
@@ -2099,7 +2105,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                  , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                          , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2697,7 +2703,12 @@ dialog-modal::-webkit-scrollbar {
 	margin: 0;
 	padding: 0 10px;
 	border-color: rgba(114, 114, 114, 0.71);
+	border-radius: 0px;
 	cursor: pointer;
+}
+
+.ui-slider-range.ui-widget-header {
+	border-radius: 0px;
 }
 
 .edit-form li.form-item div.ui-slider a.ui-slider-handle {
@@ -2705,7 +2716,7 @@ dialog-modal::-webkit-scrollbar {
 	height: 15px;
 	position: absolute;
 	top: -15px;
-	margin-left: -7px;
+	margin-left: -21px;
 	z-index: 200;
 	border-radius: 25px;
 	cursor: pointer;
@@ -4270,9 +4281,15 @@ footer a:hover {
 		width: 100%;
 		margin: 0px;
 	}
+	.main-content,.main-content.action.small {
+		overflow-x: hidden;
+	}
 
 	.studentboard div.student-info {
 		display: none;
+	}
+	ul, ol {
+		padding: 0 0 0 5px;
 	}
 	.studentboard img {
 		display: none;
@@ -4283,8 +4300,74 @@ footer a:hover {
 		height: 50px;
 		margin: 0px;
 	}
+	.studentboard div.student-name {
+		border-top-left-radius: 10px;
+	}
+
 	#user-name-value {
 		display: none;
+	}
+
+	.edit-form li input[type="web"]:focus + .form-helper, .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+		display: none;
+	}
+	.edit-form li input[type="web"]:hover + .form-helper, .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+		display: none;
+	}
+
+	.edit-form li textarea.edittextarea:focus + .form-helper {
+		display: none;
+	}
+	.edit-form li textarea.edittextarea:hover + .form-helper {
+		display: none;
+	}
+
+	.edit-form li a.input-link:focus + .form-helper {
+		display: none
+	}
+	.edit-form li a.input-link:hover + .form-helper {
+		display: none
+	}
+	.edit-form li div#progressslider:hover + .form-helper {
+		display: none
+	}
+	.edit-form li div#progressslider:focus + .form-helper {
+		display: none
+	}
+	.ui-slider-handle:focus + .form-helper {
+		display: none
+	}
+	.ui-slider-handle:hover + .form-helper {
+		display: none
+	}
+	.edit-form li select.edit-select:hover + .form-helper {
+		display: none
+	}
+	.edit-form li select.edit-select:focus + .form-helper {
+		display: none
+	}
+
+	.main-content.action.small {
+		right: 10px;
+		bottom: 45px;
+	}
+	.helpers.small {
+		height: 35px;
+		position: fixed;
+		top: 94%;
+		background-color: white;
+		width: 100%;
+		float: left;
+		text-align: center;
+		right: 0;
+		padding-bottom: 10px;
+		padding-top: 0px;
+		overflow: hidden;
+	}
+	.helpers div.item {
+		display: inline;
+		padding-left: 30px;
+		padding-right: 30px;
 	}
 
 	.modal-body .modal-container {
@@ -4628,7 +4711,7 @@ footer a:hover {
 	#wrapper-about {
 		overflow: scroll;
 	}
-	
+
 }
 @media screen and (max-width: 700px) {
 	#copyright {
@@ -4641,7 +4724,7 @@ footer a:hover {
 
 	#fluid-nav {
 		height: auto;
-		background: #f3f3f3;
+		background: #FFFFFF;
 	}
 
 	#static-nav {

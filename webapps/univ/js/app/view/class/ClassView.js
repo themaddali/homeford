@@ -1,4 +1,4 @@
-define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, jqueryui, spin, plugins, cookie, service, banner, router, notify, quizview) {"use strict";
+define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, jqueryui, spin, knob, cookie, service, banner, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -31,6 +31,13 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 								//BackingUp
 								jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
 								var COUNT = StudentData.length;
+								if(COUNT === 0) {
+									jQuery('#noinfo').fadeIn(1000);
+								}
+								else
+								{
+									jQuery('#noinfo').hide();
+								}
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.metainfo').text(COUNT + ' Tasks');
 									var newboard = PanelTemplate.clone();
@@ -40,15 +47,15 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 									jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
 									jQuery('.class-progress-label', newboard).text(StudentData[i].percentage + '% Done');
 									jQuery('.class-select', newboard).attr('name', StudentData[i].title);
-									if (StudentData[i].todoEndDate){
+									if (StudentData[i].todoEndDate) {
 										jQuery('.due-date', newboard).text(StudentData[i].todoEndDate.split(' ')[0]);
 									}
-									if (StudentData[i].todoStartDate){
+									if (StudentData[i].todoStartDate) {
 										jQuery('.start-date', newboard).text(StudentData[i].todoStartDate.split(' ')[0]);
 									}
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
-									newboard.attr('name',StudentData[i].id);
-									jQuery('.footer', newboard).text('last worked on: '+ StudentData[i].lastUpdated);
+									newboard.attr('name', StudentData[i].id);
+									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {
 										ActivatePanelEvents()
@@ -138,7 +145,7 @@ define(['modernizr', 'jqueryui', 'spin', 'plugins', 'cookie', '../../service/Dat
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
-						jQuery('.goback').click(function(){
+						jQuery('.goback').click(function() {
 							router.go('/studentlist');
 						});
 						jQuery('.mainlogo').click(function() {

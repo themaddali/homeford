@@ -21,6 +21,8 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 
 				function populateStudentList() {
 					//Get User Profile
+					jQuery('#card-canvas').empty();
+					MEMBEROBJECT = [];
 					service.getUserProfile({
 						success : function(data) {
 							var activedomains = service.returnDomainList();
@@ -45,6 +47,13 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 											if (j === data.length - 1) {
 												jQuery("#preloader").hide();
 												ActivatePanelEvents();
+												if (MEMBEROBJECT.length === 0) {
+													if (COUNT === 0) {
+														jQuery('#noinfo').fadeIn(1000);
+													} else {
+														jQuery('#noinfo').hide();
+													}
+												}
 												displayCards(MEMBEROBJECT);
 											}
 										}
@@ -83,19 +92,27 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					activememberid = members[0].id;
 					service.MemberToDoList(list[0], members[0].id, {
 						success : function(tasks) {
-							for (var k = 0; k < tasks.length; k++) {
-								if (k < 2) {
-									jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
-								}
-								if (k == 2 && tasks.length > 3) {
-									jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
-								}
-								if (k === tasks.length - 1) {
-									members.splice(0, 1);
-									ActivatePanelEvents();
-									if (members[0]) {
-										populateTasks(members);
+							if (tasks.length > 0) {
+								for (var k = 0; k < tasks.length; k++) {
+									if (k < 2) {
+										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
 									}
+									if (k == 2 && tasks.length > 3) {
+										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
+									}
+									if (k === tasks.length - 1) {
+										members.splice(0, 1);
+										ActivatePanelEvents();
+										if (members[0]) {
+											populateTasks(members);
+										}
+									}
+								}
+							} else {
+								members.splice(0, 1);
+								ActivatePanelEvents();
+								if (members[0]) {
+									populateTasks(members);
 								}
 							}
 						}
@@ -136,6 +153,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					showBG();
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
+					if (!service.knowClenUserProfile && service.knowClenUserProfile == null) {
+						populateStudentList();
+					}
 				};
 
 				this.init = function(args) {

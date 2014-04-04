@@ -67,6 +67,9 @@
 		</div>
 		<div class="main-content action">
 			<div id="action-canvas" class="contentfull float-left">
+				<div id="noinfo" style="text-align: center; padding-top: 30px; display: none">
+					No Tasks Availabe. <a style="color: #0784E3" href='#/admin'>Assign New</a>
+				</div>
 				<div class="card-form-container">
 					<form id="todo-assign-form" class="edit-form">
 						<fieldset>
@@ -74,7 +77,7 @@
 								<li class="form-item">
 									<label>Current Progress</label>
 									<div id="progressslider"></div>
-									<div class="form-helper">
+									<div id='init-helper' class="form-helper">
 										Close guestimate, what % is the progress now
 									</div>
 								</li>
@@ -85,17 +88,23 @@
 								<li class="form-item">
 									<label>Notes</label>
 									<textarea class="edittextarea" placeholder="Ex: Few lines of what you have done?" id="task-desc" name="taskdesc"></textarea>
-									<div class="form-helper">Any notes for future reference</div>
+									<div class="form-helper">
+										Any notes for future reference
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Time Stamp</label>
 									<input placeholder="Select a date" id="task-time" name="tasktime" type="text" />
-									<div class="form-helper">Defaults to now</div>
+									<div class="form-helper">
+										Defaults to now
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Attach Files</label>
 									<input placeholder="Select a file" id="task-files" name="taskfiles" type="file" />
-									<div class="form-helper">Optional attachements</div>
+									<div class="form-helper">
+										Optional attachements
+									</div>
 								</li>
 							</ol>
 						</fieldset>
@@ -112,17 +121,16 @@
 				<a><i class=" help-icon icon-envelope icon-3x "></i></a>
 			</div>
 			<div class="item">
-				<a class="helper-url" href="https://en.wikipedia.org/wiki/Painting"><i class="icon-link help-icon  icon-3x "></i>
-				</a>
+				<a class="helper-url" href="https://en.wikipedia.org/wiki/Lamborghini_Aventador"><i class="icon-link help-icon  icon-3x "></i> </a>
 			</div>
 			<div class="item">
 				<a><i class="help-icon icon-book  icon-3x "></i></a>
 			</div>
 			<div class="item">
-				<a class="helper-youtube" href="http://www.youtube.com/watch?v=D4vblL1Q1gA?autoplay=0"><i  class="icon-youtube help-icon icon-3x "></i></a>
+				<a class="helper-youtube" href="http://www.youtube.com/watch?v=YPqIBIHrHkc?modestbranding=1&autoplay=1&cc_load_policy=1&controls=0&rel=0" frameborder="0"><i  class="icon-youtube help-icon icon-3x "></i></a>
 			</div>
 			<div class="item">
-				<a><i class="help-icon icon-facebook  icon-3x "></i></a>
+				<a class="helper-facebook" href="https://www.facebook.com/pages/Lamborghini-Aventador/141826469217376"><i class="help-icon icon-facebook  icon-3x "></i></a>
 			</div>
 		</div>
 		<!-- <div class="secondary-action" >

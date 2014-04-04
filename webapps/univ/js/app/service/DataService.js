@@ -401,6 +401,10 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 				this.cleanUserProfile = function() {
 					USERPROFILE = null;
 				}
+				
+				this.knowClenUserProfile = function () {
+					return USERPROFILE;
+				}
 
 				this.pause = function() {
 					// No implementation needed for this here.

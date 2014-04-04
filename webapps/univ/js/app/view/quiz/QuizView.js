@@ -36,6 +36,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
 						router.go('/class');
 					} else {
+						jQuery('#init-helper').css('display','inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
@@ -50,7 +51,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								$("#progressvalue").html(ui.value + '%');
 							}
 						});
-						jQuery('#progressslider').focus();
+						jQuery('.ui-slider-handle').focus();
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
 							document.getElementById('task-time').type = 'date';
 						} else {
@@ -92,7 +93,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('medium');
 					}
 					else if (width <= 481) {
-						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-3x').addClass('icon-1x');
+						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-3x').addClass('icon-2x');
 						jQuery('.helpers').removeClass('medium').removeClass('small').addClass('small');
 						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('small');
 					}
@@ -153,6 +154,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								}
 							});
 						});
+						
+						jQuery('#todo-assign-form').mousemove(function(){
+							jQuery('#init-helper').hide();
+							jQuery('#init-helper').css('display','');
+						});
 
 						$('.helper-youtube').magnificPopup({
 							type : 'iframe',
@@ -160,6 +166,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						});
 
 						$('.helper-url').magnificPopup({
+							type : 'iframe',
+							mainClass : 'mfp-img-mobile',
+						});
+						
+						$('.helper-facebook').magnificPopup({
 							type : 'iframe',
 							mainClass : 'mfp-img-mobile',
 						});

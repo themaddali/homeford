@@ -55,7 +55,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 										} else {
 											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
 										}
-										jQuery('.membercard-checkbox', thisitem).attr('checked','checked');
+										jQuery('.membercard-checkbox', thisitem).attr('checked', 'checked');
 										membernames.push(jQuery('.membercard-name', thisitem).text());
 										jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
 										jQuery('.edit-card-canvas').append(thisitem);
@@ -109,25 +109,40 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 					});
 
 					jQuery('.card-search').change(function(event) {
-						var searchword = jQuery('.card-search').val();
+						var searchword = jQuery('.card-search').val().toUpperCase();
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
 							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.indexOf(searchword) != -1) {
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
 								//thiscard.parentElement.stlye.display = '';
 							} else {
 								thiscard.parentElement.style.display = 'none';
 							}
 						}
 					});
-					jQuery('.card-search').click(function(event) {
-						var searchword = jQuery('.card-search').val();
+					jQuery('.ui-menu-item').click(function(event) {
+						var searchword = jQuery('.card-search').val().toUpperCase();
+						;
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
 							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.indexOf(searchword) != -1) {
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+								//thiscard.parentElement.stlye.display = '';
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
+					jQuery('.card-search').keyup(function(event) {
+						var searchword = jQuery('.card-search').val().toUpperCase();
+						;
+						var cardlist = jQuery('.edit-card-canvas .membercard-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
 								//thiscard.parentElement.stlye.display = '';
 							} else {
 								thiscard.parentElement.style.display = 'none';
@@ -155,6 +170,8 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
+						//Preactivate Dependency
+						todoassign.init();
 						populateData();
 
 						//HTML Event - Actions

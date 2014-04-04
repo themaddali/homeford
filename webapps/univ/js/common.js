@@ -19,6 +19,7 @@ require({
 		raphael : "raphael",
 		tablesorter : "jquery.tablesorter.min",
 		elychart : "elycharts",
+		knob : "knob",
 		popup : "popup.min",
 		Pages : '../../module',
 		},
