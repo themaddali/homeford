@@ -778,7 +778,7 @@ a.goback {
 
 .modal_close {
 	position: absolute;
-	top: 20px;
+	top: 15px;
 	right: -42px;
 	width: 42px;
 	height: 42px;
@@ -1489,6 +1489,12 @@ a.goback {
 	text-align: center;
 }
 
+div.formselction {
+	float: right;
+	width: 100px;
+	height: 30px;
+}
+
 .view-form-control input {
 	padding: 10px;
 	background-color: #0784E3;
@@ -2105,7 +2111,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                          , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                           , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -4282,7 +4288,7 @@ footer a:hover {
 		width: 100%;
 		margin: 0px;
 	}
-	.main-content,.main-content.action.small {
+	.main-content, .main-content.action.small {
 		overflow-x: hidden;
 	}
 

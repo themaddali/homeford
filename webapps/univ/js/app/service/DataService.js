@@ -48,19 +48,19 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 					handlers.error();
 					// var flickrurl = "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json";
 					// $.ajax({
-						// url : flickrurl,
-						// type : 'GET',
-						// async : 'async',
-						// contentType : "application/json",
-						// success : function(data) {
-							// for (var i = 0; i < 10; i++) {
-								// imagelist.push(data.items[i].media.m);
-							// }
-							// handlers.success(imagelist);
-						// },
-						// error : function() {
-							// handlers.error();
-						// }
+					// url : flickrurl,
+					// type : 'GET',
+					// async : 'async',
+					// contentType : "application/json",
+					// success : function(data) {
+					// for (var i = 0; i < 10; i++) {
+					// imagelist.push(data.items[i].media.m);
+					// }
+					// handlers.success(imagelist);
+					// },
+					// error : function() {
+					// handlers.error();
+					// }
 					// });
 				}
 
@@ -100,10 +100,11 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						//Check after 3 seconds. Cooling time
 					}
 				}
-				
+
+
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
 					$.ajax({
-						url : '/homeford/api/addmember/' + domainid +'/'+ userid,
+						url : '/homeford/api/addmember/' + domainid + '/' + userid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -114,10 +115,16 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						success : function(data) {
 							USERPROFILE = null;
 							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Adding Member"
+							}
+							handlers.success(errormsg);
 						}
 					});
 				}
-
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
@@ -171,6 +178,13 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}),
 						success : function(data) {
 							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Sending Invite"
+							}
+							handlers.success(errormsg);
 						}
 					});
 				}
@@ -195,6 +209,13 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Accepting Invite"
+							}
+							handlers.success(errormsg);
 						}
 					});
 				}
@@ -214,6 +235,13 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						success : function(data) {
 							USERPROFILE = null;
 							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Profile"
+							}
+							handlers.success(errormsg);
 						}
 					});
 				}
@@ -235,11 +263,18 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}),
 						success : function(data) {
 							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Creating Profile"
+							}
+							handlers.success(errormsg);
 						}
 					});
 				}
 
-				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate,benefit, url, youtube, handlers) {
+				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$.ajax({
 						url : '/homeford/api/todo/domain/' + domainid,
 						type : 'POST',
@@ -255,7 +290,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							'userIds' : ids,
 							'benefit' : benefit,
 							'helper_url' : url,
-							'helper_youtube': youtube
+							'helper_youtube' : youtube
 						}),
 						success : function(data) {
 							USERPROFILE = null;
@@ -263,8 +298,8 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				};
-				
-				this.DomainToDoList = function(domainid,handlers) {
+
+				this.DomainToDoList = function(domainid, handlers) {
 					$.ajax({
 						url : '/homeford/api/todo/domain/' + domainid,
 						type : 'GET',
@@ -275,10 +310,10 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				};
-				
+
 				this.MemberToDoList = function(domainid, memberid, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/domain/' + domainid+'/'+memberid,
+						url : '/homeford/api/todo/domain/' + domainid + '/' + memberid,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -287,8 +322,8 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						}
 					});
 				}
-				
-				this.updateToDo = function (todoid, progress, date, comments, handlers) {
+
+				this.updateToDo = function(todoid, progress, date, comments, handlers) {
 					$.ajax({
 						url : '/homeford/api/todo/' + todoid,
 						type : 'POST',
@@ -296,7 +331,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						contentType : "application/json",
 						data : JSON.stringify({
 							'percentage' : progress,
-							'comments': comments
+							'comments' : comments
 						}),
 						success : function(data) {
 							USERPROFILE = null;
@@ -329,22 +364,6 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						},
 						error : function(data) {
 							handlers.success('error');
-						}
-					});
-				}
-
-				this.getStudentObject = function(studentid, handlers) {
-					var thisURL;
-					if (studentid !== 'Doug Stamper') {
-						thisURL = "data/studentinfo-four.json;"
-					} else {
-						thisURL = "data/studentinfo-one.json;"
-					}
-					$.getJSON(thisURL, function(json) {
-						if (json) {
-							handlers.success(json);
-						} else {
-							handlers.success('Error');
 						}
 					});
 				}
@@ -394,16 +413,16 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;
 				}
-				
+
 				this.thisuserID = function() {
 					return USERID;
 				}
-				
+
 				this.cleanUserProfile = function() {
 					USERPROFILE = null;
 				}
-				
-				this.knowClenUserProfile = function () {
+
+				this.knowClenUserProfile = function() {
 					return USERPROFILE;
 				}
 

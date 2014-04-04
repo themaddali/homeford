@@ -20,10 +20,12 @@
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					Add New Member
-					<div class="toggle"></div>
+					<div class="toggle-dark formselction">
+						<div class="toggle" data-type="select"></div>
+					</div>
 				</header>
 				<div class="modal-contents">
-					<form id="default" class="edit-form">
+					<form id="regularadd" class="edit-form">
 						<fieldset>
 							<ol id="profile-form">
 								<li class="form-item">
@@ -40,7 +42,7 @@
 										Last Name (Optional)
 									</div>
 								</li>
-								<div class="form-partition">
+								<!-- <div class="form-partition">
 									<span>OR</span>
 								</div>
 								<li class="form-item">
@@ -49,12 +51,12 @@
 									<div class="form-helper">
 										Email will be sent to register.
 									</div>
-								</li>
+								</li> -->
 
 							</ol>
 						</fieldset>
 					</form>
-					<!-- <form id="emailadd" class="edit-form">
+					<form id="emailadd" class="edit-form" style="display: none">
 						<fieldset>
 							<ol id="profile-form">
 								<li class="form-item">
@@ -66,7 +68,7 @@
 								</li>
 							</ol>
 						</fieldset>
-					</form> -->
+					</form>
 				</div>
 				<footer>
 					<div class="edit-controls">
