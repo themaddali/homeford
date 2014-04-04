@@ -21,6 +21,7 @@ require({
 		elychart : "elycharts",
 		knob : "knob",
 		popup : "popup.min",
+		mason : 'mason',
 		Pages : '../../module',
 		},
 	priority : ['modernizr', 'jquery'],

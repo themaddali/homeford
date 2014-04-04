@@ -112,6 +112,7 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 							'lastName' : lname,
 						}),
 						success : function(data) {
+							USERPROFILE = null;
 							handlers.success(data);
 						}
 					});

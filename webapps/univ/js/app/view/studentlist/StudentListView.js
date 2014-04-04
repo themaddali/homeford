@@ -1,4 +1,4 @@
-define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, spin, plugins, cookie, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr', 'spin', 'plugins', 'cookie', 'mason', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, spin, plugins, cookie, Masonry, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -29,6 +29,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							for (var i = 0; i < activedomains.length; i++) {
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
+										if (data.length === 0) {
+											jQuery('#noinfo').fadeIn(1000);
+										} else {
+											jQuery('#noinfo').hide();
+										}
 										for (var j = 0; j < data.length; j++) {
 											var _memberobject = {};
 											var roles = JSON.stringify(data[j].roles);
@@ -48,11 +53,6 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 												jQuery("#preloader").hide();
 												ActivatePanelEvents();
 												if (MEMBEROBJECT.length === 0) {
-													if (COUNT === 0) {
-														jQuery('#noinfo').fadeIn(1000);
-													} else {
-														jQuery('#noinfo').hide();
-													}
 												}
 												displayCards(MEMBEROBJECT);
 											}
@@ -81,6 +81,20 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						jQuery('#card-canvas').append(newboard);
 						if (i == MEMBEROBJECT.length - 1) {
 							var MEMBEROBJECT_instance = MEMBEROBJECT;
+							// var container = document.querySelector('#card-canvas');
+							// var msnry = new Masonry(container, {
+							// // options
+							// columnWidth : 800,
+							// itemSelector : '.studentboard'
+							// });
+
+							// initialize
+							// $container.masonry({
+							// columnWidth: 200,
+							// itemSelector: '.item'
+							// });
+							helperMediaQuiries();
+							// When the page first loads
 							populateTasks(MEMBEROBJECT_instance);
 						}
 					}
@@ -144,6 +158,19 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 					alert('Error in Loading! Please Refresh the page!');
 				}
 
+				function helperMediaQuiries() {
+					var width = $('#card-canvas').width() - 30;
+					var rowholds = Math.floor(width / 304);
+					var fillerspace = width - (rowholds * 304);
+					//var eachfiller = 300+fillerspace/rowholds;
+					var newmargin = fillerspace / rowholds;
+					if (newmargin < 10) {
+						newmargin = 10;
+					}
+					$('.studentboard').css('margin-left', newmargin / 2);
+					$('.studentboard').css('margin-right', newmargin / 2);
+				}
+
 
 				this.pause = function() {
 
@@ -167,6 +194,9 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						showBG();
 						populateStudentList();
 
+						$(window).resize(helperMediaQuiries);
+						// When the browser changes size
+
 						//HTML Event - Actions
 						jQuery('#user-name').on('click', function(e) {
 							banner.ShowUser();
@@ -183,6 +213,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 								}, 500);
 							});
 						});
+
 						jQuery('#alert').on('click', function(e) {
 							banner.ShowAlert();
 							jQuery('.alertflyout').mouseleave(function() {

@@ -2528,6 +2528,7 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .studentboard, .float-left .classboard {
 	float: left;
+	/*position: relative;*/
 	width: 300px;
 	height: 350px;
 	text-align: left;
