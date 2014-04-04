@@ -22,6 +22,7 @@ require({
 		knob : "knob",
 		popup : "popup.min",
 		mason : 'mason',
+		toggles : 'toggles.min',
 		Pages : '../../module',
 		},
 	priority : ['modernizr', 'jquery'],

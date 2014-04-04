@@ -20,20 +20,25 @@
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					Add New Member
+					<div class="toggle"></div>
 				</header>
 				<div class="modal-contents">
-					<form class="edit-form">
+					<form id="default" class="edit-form">
 						<fieldset>
 							<ol id="profile-form">
 								<li class="form-item">
 									<label>First Name</label>
 									<input placeholder="First Name"  id="member-first-name" name="memberfirstname" type="text" autofocus />
-									<div class="form-helper">First Name (Optional)</div>
+									<div class="form-helper">
+										First Name (Optional)
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Last Name</label>
 									<input placeholder="Last Name" id="member-last-name" name="memberlastname" type="text" />
-									<div class="form-helper">Last Name (Optional)</div>
+									<div class="form-helper">
+										Last Name (Optional)
+									</div>
 								</li>
 								<div class="form-partition">
 									<span>OR</span>
@@ -41,12 +46,27 @@
 								<li class="form-item">
 									<label>Email</label>
 									<input placeholder="Invite by Email Address" id="member-email"  name="memberemail" type="email" />
-									<div class="form-helper">Email will be sent to register.</div>
+									<div class="form-helper">
+										Email will be sent to register.
+									</div>
 								</li>
-								
+
 							</ol>
 						</fieldset>
 					</form>
+					<!-- <form id="emailadd" class="edit-form">
+						<fieldset>
+							<ol id="profile-form">
+								<li class="form-item">
+									<label>Email</label>
+									<input placeholder="Invite by Email Address" id="member-email"  name="memberemail" type="email" />
+									<div class="form-helper">
+										Email will be sent to register.
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form> -->
 				</div>
 				<footer>
 					<div class="edit-controls">

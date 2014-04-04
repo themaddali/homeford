@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate','toggles', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate,toggles, router, notify, admin) {"use strict";
 
 	var MembersEditView = ( function() {
 
@@ -14,7 +14,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			function MembersEditView() {
 
 				function populateData() {
-
+					//$(".modal-contents").tabs();
+					$('.toggle').toggles({text:{on:'Default',off:'Email'}});
 				}
 
 				function checkForActiveCookie() {
@@ -77,6 +78,21 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								});
 							}
+						});
+
+						//Adjusting Focus:
+						jQuery('#member-email').focus(function() {
+							$('#member-first-name').val('');
+							$('#member-last-name').val('');
+							jQuery('#member-add').val('Add (Send Email)');
+						});
+						jQuery('#member-first-name').focus(function() {
+							$('#member-email').val('');
+							jQuery('#member-add').val('Add');
+						});
+						jQuery('#member-last-name').focus(function() {
+							$('#member-email').val('');
+							jQuery('#member-add').val('Add');
 						});
 
 						validator = jQuery(".edit-form").validate({
