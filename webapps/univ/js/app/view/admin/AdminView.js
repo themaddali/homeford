@@ -1,4 +1,4 @@
-define(['jqueryui', 'raphael', 'spin', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/members/MembersPickView'], function(jqueryui, raphael, spin, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
+define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/members/MembersPickView'], function(jqueryui, raphael, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
 
 	var AdminView = ( function() {
 

@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Router', '../../service/DataService'], function(spin, cookie, plugin, flatvid, typeahead, bloodhound, router, service) {"use strict";
+define(['cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Router', '../../service/DataService'], function( cookie, plugin, flatvid, typeahead, bloodhound, router, service) {"use strict";
 
 	var HomeView = ( function() {
 
@@ -29,7 +29,7 @@ define(['spin', 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../.
 					left : "auto"
 				};
 				var n = document.getElementById("preloader");
-				var r = (new Spinner(t)).spin(n);
+				//var r = (new Spinner(t)).spin(n);
 				var i = PARAM.Bg;
 
 				function startCoverShow() {

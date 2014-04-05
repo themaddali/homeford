@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, spin, plugins, cookie, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr,plugins, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var QuizView = ( function() {
 
