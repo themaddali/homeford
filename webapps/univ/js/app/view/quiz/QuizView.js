@@ -40,6 +40,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
+						$("#task-desc-data").text(ACTIVEQUIZ.desc);
 						jQuery('#progressslider').slider({
 							animate : true,
 							range : "min",
@@ -49,9 +50,11 @@ define(['modernizr', 'spin', 'plugins', 'cookie', '../../service/DataService', '
 							step : 1,
 							slide : function(event, ui) {
 								$("#progressvalue").html(ui.value + '%');
+								jQuery('.ui-slider-range').removeClass("beginning middle").addClass(ui.value < 31 ? "beginning" : ui.value < 71 ? "middle" : "");
 							}
 						});
 						jQuery('.ui-slider-handle').focus();
+						jQuery('.ui-slider-range').removeClass("beginning middle").addClass(ACTIVEQUIZ.progress < 31 ? "beginning" : ACTIVEQUIZ.progress < 71 ? "middle" : "");
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
 							document.getElementById('task-time').type = 'date';
 						} else {

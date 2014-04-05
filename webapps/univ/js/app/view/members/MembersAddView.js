@@ -110,16 +110,20 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 						});
 
 						//Adjusting Focus:
+						
 						$('.toggle').on('toggle', function(e, active) {
-							if (active) {
-								jQuery('#member-add').val('Add (Send Email)');
-								jQuery('#emailadd').show();
-								jQuery('#regularadd').hide();
-							} else {
-								jQuery('#member-add').val('Add');
-								jQuery('#emailadd').hide();
-								jQuery('#regularadd').show();
-							}
+							setTimeout(function() {
+								if (active) {
+									jQuery('#member-add').val('Add (Send Email)');
+									jQuery('#emailadd').show();
+									jQuery('#regularadd').hide();
+								} else {
+									jQuery('#member-add').val('Add');
+									jQuery('#emailadd').hide();
+									jQuery('#regularadd').show();
+								}
+							}, 200);
+							//to support touch emulation
 						});
 
 						regualarvalidator = jQuery("#regularadd").validate({

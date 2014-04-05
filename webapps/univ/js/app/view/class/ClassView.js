@@ -7,6 +7,8 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 			};
 			var ACTIVESTUDENTNAME;
 			var ACTIVESTUDENTID;
+			var HIGHPRIORITY = '<i class="icon-arrow-circle icon-1x "></i>';
+			var LOWPRIORITY = '<i class="icon-arrow-circle icon-1x "></i>'; 
 
 			/**
 			 * Constructor
@@ -40,6 +42,13 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 									jQuery('.metainfo').text(COUNT + ' Tasks');
 									var newboard = PanelTemplate.clone();
 									jQuery('.class-name', newboard).text(StudentData[i].title);
+									jQuery('.class-desc', newboard).text(StudentData[i].desc);
+									if (StudentData[i].priority === 'High'){
+										jQuery('.class-name', newboard).append(HIGHPRIORITY);
+									}
+									else if (StudentData[i].priority === 'Low'){
+										jQuery('.class-name', newboard).append(LOWPRIORITY);
+									}
 									jQuery('.class-progress', newboard).progressbar();
 									var value = parseInt(StudentData[i].percentage);
 									jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
@@ -69,6 +78,7 @@ define(['modernizr', 'jqueryui', 'spin', 'knob', 'cookie', '../../service/DataSe
 					jQuery('.classboard').on('click', function() {
 						var selectedQuiz = {};
 						selectedQuiz.name = $(this).find('.class-name').text();
+						selectedQuiz.desc = $(this).find('.class-desc').text();
 						selectedQuiz.progress = $(this).find('.class-progress-label').text().split("%")[0];
 						selectedQuiz.id = $(this).attr('name');
 						selectedQuiz.dueby = $(this).find('.due-date').text();

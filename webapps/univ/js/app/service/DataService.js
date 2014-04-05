@@ -1,4 +1,4 @@
-define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
+define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, cookie, router) {"use strict";
 	// "use strict";
 
 	var DataService = ( function() {
@@ -20,19 +20,21 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 					return a.status.toLowerCase() > b.status.toLowerCase() ? 1 : -1;
 				};
 
-				/**
-				 * @public
-				 */
-
-				this.getUnivObject = function(handlers) {
-					$.getJSON("data/loginresponse.json", function(json) {
-						if (json) {
-							handlers.success(json);
-						} else {
-							handlers.success('Error');
+				$.ajaxSetup({
+					statusCode : {
+						401 : function() {
+							jQuery.removeCookie('user', {
+								path : '/'
+							});
+							jQuery.removeCookie('subuser', {
+								path : '/'
+							});
+							router.go('/home');
+							window.setTimeout('location.reload()', 500);
 						}
-					});
-				}
+					}
+				});
+
 				function jsonFlickrFeed(o) {
 					var imagelist = [];
 					for (var i = 0; i < 3; i++) {
@@ -319,6 +321,9 @@ define(['jquery', '../Notify'], function(jquery, notify) {"use strict";
 						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data);
+						},
+						error : function(e) {
+							handlers.success(e);
 						}
 					});
 				}

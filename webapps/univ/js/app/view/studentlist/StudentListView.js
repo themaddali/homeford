@@ -81,20 +81,7 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'mason', '../../service/DataSe
 						jQuery('#card-canvas').append(newboard);
 						if (i == MEMBEROBJECT.length - 1) {
 							var MEMBEROBJECT_instance = MEMBEROBJECT;
-							// var container = document.querySelector('#card-canvas');
-							// var msnry = new Masonry(container, {
-							// // options
-							// columnWidth : 800,
-							// itemSelector : '.studentboard'
-							// });
-
-							// initialize
-							// $container.masonry({
-							// columnWidth: 200,
-							// itemSelector: '.item'
-							// });
 							helperMediaQuiries();
-							// When the page first loads
 							populateTasks(MEMBEROBJECT_instance);
 						}
 					}
@@ -109,7 +96,14 @@ define(['modernizr', 'spin', 'plugins', 'cookie', 'mason', '../../service/DataSe
 							if (tasks.length > 0) {
 								for (var k = 0; k < tasks.length; k++) {
 									if (k < 2) {
-										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+										 jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+										// if (tasks[k].percentage < 31) {
+											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='error'>" + tasks[k].title + "</li>");
+										// } else if (tasks[k].percentage > 31 && tasks[k].percentage < 71) {
+											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='warn'>" + tasks[k].title + "</li>");
+										// } else {
+											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+										// }
 									}
 									if (k == 2 && tasks.length > 3) {
 										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");

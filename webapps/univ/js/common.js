@@ -23,11 +23,12 @@ require({
 		popup : "popup.min",
 		mason : 'mason',
 		toggles : 'toggles.min',
+		touchpunch : 'touchpunch',
 		Pages : '../../module',
 		},
-	priority : ['modernizr', 'jquery'],
+	priority : ['modernizr', 'jquery', 'jqueryui', 'touchpunch'],
 	waitSeconds : 20 // make VPN more resilient
-}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr'], function(application, routes) {"use strict";
+}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr', 'jqueryui', 'touchpunch'], function(application, routes) {"use strict";
 
 	$.ajaxSetup({
 		// Disable caching of AJAX responses for development
