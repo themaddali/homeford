@@ -1,7 +1,7 @@
 define([ '../app/LocationView', '../app/Environment',
         '../app/UrlFragment',
         '../app/Router',
-        'cookie', 'jquery' ], function(locationView, environment, urlFragment, router) {
+        'cookie', 'jquery','touchpunch' ], function(locationView, environment, urlFragment, router) {
     "use strict";
 
     var Application = (function() {
