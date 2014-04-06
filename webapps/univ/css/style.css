@@ -2959,6 +2959,13 @@ dialog-modal::-webkit-scrollbar {
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
 }
+.classboard div.class-name i {
+	float: right;
+	margin-right: 10px;
+	padding-top: 5px;
+}
+
+
 
 /*==================Student Profiles=============*/
 

@@ -7,8 +7,8 @@ define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../se
 			};
 			var ACTIVESTUDENTNAME;
 			var ACTIVESTUDENTID;
-			var HIGHPRIORITY = '<i class="icon-arrow-circle icon-1x "></i>';
-			var LOWPRIORITY = '<i class="icon-arrow-circle icon-1x "></i>'; 
+			var HIGHPRIORITY = '<i name="High" class="icon-circle-arrow-up icon-1x "></i>';
+			var LOWPRIORITY = '<i name="Low" class="icon-circle-arrow-down icon-1x "></i>'; 
 
 			/**
 			 * Constructor
@@ -46,7 +46,7 @@ define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../se
 									if (StudentData[i].priority === 'High'){
 										jQuery('.class-name', newboard).append(HIGHPRIORITY);
 									}
-									else if (StudentData[i].priority === 'Low'){
+									else if (StudentData[i].priority === 'null' || StudentData[i].priority === null){
 										jQuery('.class-name', newboard).append(LOWPRIORITY);
 									}
 									jQuery('.class-progress', newboard).progressbar();
@@ -80,6 +80,11 @@ define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../se
 						selectedQuiz.name = $(this).find('.class-name').text();
 						selectedQuiz.desc = $(this).find('.class-desc').text();
 						selectedQuiz.progress = $(this).find('.class-progress-label').text().split("%")[0];
+						selectedQuiz.priority = $(this).find('.icon-1x').attr('name');
+						if (selectedQuiz.priority !== 'Low' && selectedQuiz.priority !== 'High')
+						{
+							selectedQuiz.priority = 'Normal';
+						}
 						selectedQuiz.id = $(this).attr('name');
 						selectedQuiz.dueby = $(this).find('.due-date').text();
 						selectedQuiz.memberid = ACTIVESTUDENTID;

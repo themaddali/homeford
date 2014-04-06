@@ -41,6 +41,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
 						$("#task-desc-data").text(ACTIVEQUIZ.desc);
+						$("#task-priority").text(ACTIVEQUIZ.priority);
 						jQuery('#progressslider').slider({
 							animate : true,
 							range : "min",

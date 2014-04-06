@@ -39,7 +39,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 					var memberscount = 0;
 					//backuptemplate
 					//jQuery('.div-template').append(template.attr('id', 'member-template'));
-					var activedomains = service.returnDomainList();
+					var activedomains = service.returnDomainIDList();
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
 							success : function(data) {

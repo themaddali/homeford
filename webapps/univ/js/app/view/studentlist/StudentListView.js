@@ -25,7 +25,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 					MEMBEROBJECT = [];
 					service.getUserProfile({
 						success : function(data) {
-							var activedomains = service.returnDomainList();
+							var activedomains = service.returnDomainIDList();
 							for (var i = 0; i < activedomains.length; i++) {
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
