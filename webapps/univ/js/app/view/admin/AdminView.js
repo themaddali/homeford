@@ -111,8 +111,8 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 							if (UserProfile.domains.length === 1) {
 								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
 								ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
-								populateInviteData(ACTIVEDOMAINS);
-								populateMembersData(ACTIVEDOMAINS);
+								populateInviteData(ACTIVEDOMAINIDS);
+								populateMembersData(ACTIVEDOMAINIDS);
 								populateToDoData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
 									updatePanelValues('#user-admin-value', 1);
@@ -142,8 +142,8 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 											return ACTIVEDOMAINS.indexOf(elem) == pos;
 										})
 										updatePanelGraphs('#profile-donut', _profiledata);
-										populateInviteData(ACTIVEDOMAINS);
-										populateMembersData(ACTIVEDOMAINS);
+										populateInviteData(ACTIVEDOMAINIDS);
+										populateMembersData(ACTIVEDOMAINIDS);
 										populateToDoData(ACTIVEDOMAINIDS);
 									}
 								}

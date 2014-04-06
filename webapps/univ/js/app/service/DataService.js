@@ -193,7 +193,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.getInviteStatus = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/inviteeusers?domainname=' + domain,
+						url : '/homeford/api/inviteeusers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
