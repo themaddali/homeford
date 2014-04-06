@@ -339,6 +339,10 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 				this.getActiveDomains = function() {
 					return ACTIVEDOMAINS;
 				}
+				
+				this.getActiveDomainsIDs = function() {
+					return ACTIVEDOMAINIDS;
+				}
 
 				this.reloadData = function() {
 					populateData();
