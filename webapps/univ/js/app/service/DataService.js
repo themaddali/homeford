@@ -23,16 +23,19 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				$.ajaxSetup({
 					statusCode : {
 						401 : function() {
-							jQuery.removeCookie('user', {
-								path : '/'
-							});
-							jQuery.removeCookie('subuser', {
-								path : '/'
-							});
-							router.go('/home');
-							window.setTimeout('location.reload()', 500);
+							if (jQuery.cookie('user')) {
+								jQuery.removeCookie('user', {
+									path : '/'
+								});
+								jQuery.removeCookie('subuser', {
+									path : '/'
+								});
+								router.go('/home');
+								window.setTimeout('location.reload()', 500);
+							}
 						}
 					}
+					
 				});
 
 				function jsonFlickrFeed(o) {
@@ -130,7 +133,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomainsusers/'+domain,
+						url : '/homeford/api/getdomainsusers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",

@@ -32,6 +32,9 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
+								if (username.length > 18) {
+									username = username.split('@')[0];
+								}
 								notify.showNotification('OK', 'Login Success', 'studentlist', '2000');
 								jQuery.cookie('user', username, {
 									expires : 100,

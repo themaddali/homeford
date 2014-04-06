@@ -2175,7 +2175,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                              , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2408,9 +2408,11 @@ html.touch #subnav {
 
 /*INFO*/
 .info {
-	border: 2px solid rgba(114, 114, 114, 0.71);
-	padding: 13px;
-	background-color: #79c3fb;
+	border: 2px solid rgba(114, 114, 114, 0);
+	padding: 11px;
+	background-color: rgba(121, 195, 251, 0.59);
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 	/*border-top-left-radius: 5px;
 	 border-bottom-right-radius: 5px;*/
 }
@@ -2964,8 +2966,6 @@ dialog-modal::-webkit-scrollbar {
 	margin-right: 10px;
 	padding-top: 5px;
 }
-
-
 
 /*==================Student Profiles=============*/
 

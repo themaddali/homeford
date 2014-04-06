@@ -64,6 +64,9 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
 								notify.showNotification('OK', 'Congratulations!!!', 'studentlist', '1000');
+								if (username.length > 18) {
+									username = username.split('@')[0];
+								}
 								jQuery.cookie('user', username, {
 									expires : 100,
 									path : '/'
@@ -82,20 +85,23 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 						query = query.split("?");
 						jQuery('#new-user-name').val(query[0]);
 						jQuery('#new-user-domain').val(query[1].split("domain=")[1].toUpperCase());
-						jQuery('#new-user-name').attr('readonly',true);
-						jQuery('#new-user-doamin').attr('readonly',true);
+						jQuery('#new-user-name').attr('readonly', true);
+						jQuery('#new-user-doamin').attr('readonly', true);
 						jQuery('#new-user-password').focus();
-					}
-					else
-					{
+					} else {
 						jQuery('#new-user-name').val('');
 						jQuery('#new-user-domain').val('');
-						jQuery('#new-user-name').attr('readonly',false);
-						jQuery('#new-user-doamin').attr('readonly',false);
+						jQuery('#new-user-name').attr('readonly', false);
+						jQuery('#new-user-doamin').attr('readonly', false);
 						jQuery('#new-user-name').focus();
 					}
 				}
 
+
+				$.validator.addMethod("passwordvalid", function(value, element, param) {
+					var ValidPwd = (/^[^<>;,"'&\\\/|+:= ]+$/.test(value));
+					return (value.length == 0 || ValidPwd);
+				}, 'Invalid Password Choice');
 
 				this.entity = function(entity) {
 					ENTITY = entity;
@@ -148,15 +154,16 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 					jQuery('#new-user-domain').keyup(function() {
 						//Sanity
 						jQuery('#new-user-domain').css("text-transform", "uppercase");
-						var domainrequest = jQuery('#new-user-domain').val();
+						var domainrequest = jQuery('#new-user-domain').val().toUpperCase();
 						if (domainrequest === "") {
 							jQuery('#new-user-domain').css("text-transform", "none");
 							jQuery('#RInfo').fadeOut();
 						} else {
+							jQuery('#RInfo').fadeIn();
 							if (DOMAINSLIST && DOMAINSLIST.indexOf(domainrequest) !== -1) {
-								jQuery('#domain-info').text('Existing Domain, Adds as Admin');
+								jQuery('.info').text('Existing Domain, Adds as Admin');
 							} else {
-								jQuery('#domain-info').text('New Domain, Adds as Owner');
+								jQuery('.info').text('New Domain, Adds as Owner');
 							}
 						}
 					});
@@ -176,6 +183,7 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 							},
 							Rpassword : {
 								required : true,
+								passwordvalid : '#new-user-password'
 							},
 							Rpasswordrepeat : {
 								required : true,
