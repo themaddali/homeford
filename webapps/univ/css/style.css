@@ -1866,6 +1866,19 @@ div.formselction {
 .edit-form li.form-item a.input-link:hover, .edit-form li.form-item a.input-link:active, .edit-form li.form-item a.input-link:focus {
 	color: #0784E3;
 }
+.edit-form li.form-item input.input-link {
+	font-size: 14px;
+	line-height: 20px;
+	padding: 10px;
+	text-align: left;
+	padding-left: 0px;
+	border: none;
+	cursor: pointer;
+	margin-right: 10px;
+}
+.edit-form li.form-item input.input-link:hover, .edit-form li.form-item input.input-link:active, .edit-form li.form-item input.input-link:focus {
+	color: #0784E3;
+}
 
 .edit-form li.form-item input.input-label:hover {
 	color: #0784E3;

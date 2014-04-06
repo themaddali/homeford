@@ -51,16 +51,26 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 					jQuery('#member-list').css('color', 'black');
 				}
 
-				function validAssignment() {
-					if (jQuery('#member-list').text() == 'None' || jQuery('#member-list').text().indexOf("0 of") !== -1) {
+				// function validAssignment() {
+					// if (jQuery('#member-list').text() == 'None' || jQuery('#member-list').text().indexOf("0 of") !== -1) {
+						// jQuery('#member-list').css('color', 'red');
+						// return false;
+					// } else {
+						// jQuery('#member-list').css('color', 'black');
+						// return true;
+					// }
+				// }
+
+
+				$.validator.addMethod("validAssignment", function(value, element, param) {
+					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {
 						jQuery('#member-list').css('color', 'black');
 						return true;
 					}
-				}
-
+				}, 'Select to whom to assign.');
 
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
@@ -106,12 +116,12 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 							router.go('/memberspick');
 						});
 
-						jQuery('#member-list').change(function() {
-							validAssignment();
-						});
+						// jQuery('#member-list').change(function() {
+							// validAssignment();
+						// });
 
 						jQuery('#task-assign').on('click', function() {
-							if ($(".edit-form").valid() && validAssignment()) {
+							if ($(".edit-form").valid()) {
 								var _tname = jQuery('#task-name').val();
 								var _tdesc = jQuery('#task-desc').val();
 								var _tfrom = jQuery('#task-startdate').val();
@@ -123,7 +133,7 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
 								var _domainids = service.returnDomainIDList();
-								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue,_tbenefit,_thelpurl,_thelpyoutube, {
+								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
@@ -157,6 +167,10 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								},
 								todopriority : {
 									required : true,
+								},
+								assignedto : {
+									required : true,
+									validAssignment : true,
 								},
 							}
 						});
