@@ -369,10 +369,10 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 						jQuery(".scroll-pane").jScrollPane();
 						var progressbar = $("#to-do-progressbar");
 						var progressLabel = $(".to-do-progress-label");
-						jQuery("#to-do-accordion").accordion({
-							collapsible : true,
-							active : false
-						});
+						// jQuery("#to-do-accordion").accordion({
+							// collapsible : true,
+							// active : false
+						// });
 						// Get Privilage
 						setCanvas();
 						getInfoByPrivilage();
