@@ -86,6 +86,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('#profile-edit-modal-close').on('click', function() {
 							router.returnToPrevious();
 						});
+						jQuery('#profile-edit-button').on('click', function() {
+							router.go('/profileedit');
+						});
 
 					} // Cookie Guider
 				};

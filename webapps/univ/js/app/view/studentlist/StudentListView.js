@@ -1,4 +1,4 @@
-define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, plugins, cookie, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -8,7 +8,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>';
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>';
 			var MEMBEROBJECT = [];
-			var template,loadingtemplate;
+			var template, loadingtemplate;
 
 			/**
 			 * Constructor
@@ -86,6 +86,9 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						if (i == MEMBEROBJECT.length - 1) {
 							jQuery('.loading').remove();
 							var MEMBEROBJECT_instance = MEMBEROBJECT;
+							jQuery('.student-name').ellipsis({
+								onlyFullWords : true
+							});
 							helperMediaQuiries();
 							populateTasks(MEMBEROBJECT_instance);
 						}
@@ -101,13 +104,13 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 							if (tasks.length > 0) {
 								for (var k = 0; k < tasks.length; k++) {
 									if (k < 2) {
-										 jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
 										// if (tasks[k].percentage < 31) {
-											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='error'>" + tasks[k].title + "</li>");
+										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='error'>" + tasks[k].title + "</li>");
 										// } else if (tasks[k].percentage > 31 && tasks[k].percentage < 71) {
-											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='warn'>" + tasks[k].title + "</li>");
+										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='warn'>" + tasks[k].title + "</li>");
 										// } else {
-											// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
+										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
 										// }
 									}
 									if (k == 2 && tasks.length > 3) {

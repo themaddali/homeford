@@ -1481,16 +1481,20 @@ a.goback {
 	right: 3%;
 	top: 12px;
 	width: 42px;
-	height: 42px;
+	/*height: 42px;*/
 	text-align: center;
 	vertical-align: middle;
-	background-color: #0784E3;
-	font-size: 1em;
+	/*background-color: #0784E3;*/
+	font-size: 0.8em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: white;
+	color: #0784E3;
 	border: none;
 	cursor: pointer;
-	top: 12px;
+	top: 20px;
+	border-bottom: 2px solid #f3f3f3;
+}
+.modal-body .modal-container header a:hover {
+	border-bottom: 2px solid #0784E3;
 }
 
 #student-edit-modal-close, #overview-edit-modal-close, #login-close {
@@ -2188,7 +2192,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                              , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                       , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -4415,12 +4419,70 @@ footer a:hover {
 	}
 	.float-left .studentboard {
 		float: none;
-		width: 100%;
-		height: 50px;
-		margin: 0px;
+		width: 90%;
+		height: 42px;
+		margin: 10px;
 	}
+
 	.studentboard div.student-name {
-		border-top-left-radius: 10px;
+		border-top-left-radius: 8px;
+		border-bottom-right-radius: 8px;
+		background-color: white;
+		color: black;
+		text-overflow: ellipsis;
+	}
+
+	.float-left .classboard {
+		float: none;
+		width: 90%;
+		height: 110px;
+		margin: 10px;
+	}
+
+	.classboard div.class-progress-label, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
+		display: none;
+	}
+
+	.edit-form li.form-item div.form-helper {
+		display: none;
+	}
+
+	#init-helper {
+		display: none;
+		border: none;
+		color: white;
+	}
+
+	.edit-form li.form-item > * {
+		font-size: 12px;
+		line-height: 14px;
+		width: 90%
+	}
+	.edit-form li.form-item > label {
+		width: 90%;
+	}
+	.edit-form li.form-item {
+		text-align: center;
+	}
+
+	.edit-form li.form-item div.ui-slider {
+		height: 5px;
+	}
+
+	.edit-form li.form-item div.ui-slider a.ui-slider-handle {
+		height: 10px;
+	}
+	.classboard div.class-info div.due-date {
+		font-size: 0.7em
+	}
+
+	.classboard div.footer {
+		margin-top: 4px;
+		padding: 2px;
+	}
+
+	.contentfull div.card-form-container {
+		width: 80%;
 	}
 
 	#user-name-value {
@@ -4485,8 +4547,8 @@ footer a:hover {
 	}
 	.helpers div.item {
 		display: inline;
-		padding-left: 30px;
-		padding-right: 30px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	.modal-body .modal-container {
