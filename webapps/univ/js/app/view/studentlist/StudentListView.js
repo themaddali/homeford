@@ -8,7 +8,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>';
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>';
 			var MEMBEROBJECT = [];
-			var template;
+			var template,loadingtemplate;
 
 			/**
 			 * Constructor
@@ -69,6 +69,8 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						jQuery('.metainfo').text(MEMBEROBJECT.length + ' Members');
 						var newboard = template.clone();
+						var loadingboard = loadingtemplate.clone();
+						loadingboard.addClass('loading');
 						if ((MEMBEROBJECT[i].firstName === 'null' || MEMBEROBJECT[i].firstName == null || MEMBEROBJECT[i].firstName === "" ) && (MEMBEROBJECT[i].lastName === 'null' || MEMBEROBJECT[i].lastName == null || MEMBEROBJECT[i].lastName === "")) {
 							jQuery('.student-name', newboard).text(MEMBEROBJECT[i].email);
 							jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].email);
@@ -78,8 +80,11 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						}
 						jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
 						jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
+						jQuery('.loading').remove();
 						jQuery('#card-canvas').append(newboard);
+						jQuery('#card-canvas').append(loadingboard);
 						if (i == MEMBEROBJECT.length - 1) {
+							jQuery('.loading').remove();
 							var MEMBEROBJECT_instance = MEMBEROBJECT;
 							helperMediaQuiries();
 							populateTasks(MEMBEROBJECT_instance);
@@ -187,6 +192,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						template = jQuery('#student-template').remove().attr('id', '');
+						loadingtemplate = jQuery('#loading-template').remove().attr('id', '');
 						showBG();
 						populateStudentList();
 

@@ -35,7 +35,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							}
 						}
 					}
-					
+
 				});
 
 				function jsonFlickrFeed(o) {
@@ -133,7 +133,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomainsusers/' + domain,
+						// url : '/homeford/api/getdomainsusers/' + domain,
+						url : '/homeford/api/getdomainsusers?domainname=KUBO',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -145,7 +146,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T3 privilage
 				this.getMembersOnly = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomainsusers/' + domain,
+						// url : '/homeford/api/getdomainsusers/' + domain,
+						url : '/homeford/api/getdomainsusers?domainname=KUBO',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
