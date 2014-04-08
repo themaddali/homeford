@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(jqueryui, cookie, router, validate, service, notify) {"use strict";
+define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', 'clear'], function(jqueryui, cookie, router, validate, service, notify, clear) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -105,6 +105,16 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 							}
 						}
 					});
+					
+					// jQuery('.form-item input').addClear();
+					// jQuery('.form-item input').blur(function(){
+						// $(this).parent().find('.input-clear').hide();
+					// });
+					// jQuery('.form-item input').focus(function(){
+						// if ($(this).find('.error')){
+							// $(this).parent().find('.input-clear').hide();
+						// }
+					// });
 
 					jQuery('#register-now').on('click', function() {
 						router.go('/register', '/entry');

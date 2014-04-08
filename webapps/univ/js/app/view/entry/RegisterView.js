@@ -29,7 +29,14 @@ define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataSer
 										source : function(request, response) {
 											var results = $.ui.autocomplete.filter(result, request.term);
 											response(results.slice(0, 5));
-										}
+										},
+										select : function(event, ui) {
+											var origEvent = event;
+											while (origEvent.originalEvent !== undefined)
+											origEvent = origEvent.originalEvent;
+											if (origEvent.type == 'keydown')
+												$("#new-user-domain").keyup();
+										},
 									});
 								}
 							}

@@ -222,6 +222,9 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input:focus {
 	border: 1px solid #0784E3;
 }
+input[type="email"]:focus + input-clear {
+	display : none;
+}
 
 button[disabled], input[disabled] {
 	cursor: default;
@@ -4293,6 +4296,12 @@ footer a:hover {
 	height: 193px;
 	background: transparent repeat-x 0 0;
 }
+
+/*INPUT CLEAR*/
+.edit-form li.form-item a.input-clear{
+	position : relative;
+}
+
 
 /* =================== Media Queries ======================= */
 @media screen and (max-width: 480px) {

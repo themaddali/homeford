@@ -20,6 +20,7 @@ require({
 		toggles : 'toggles.min',
 		touchpunch : 'touchpunch',
 		ellipsis : 'ellipsis',
+		clear : 'clear',
 		Pages : '../../module',
 		},
 	priority : ['modernizr', 'jquery', 'jqueryui', 'touchpunch'],
