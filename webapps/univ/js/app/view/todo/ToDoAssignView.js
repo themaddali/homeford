@@ -47,7 +47,7 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 						jQuery("#task-startdate").val(today);
 						//jQuery("#task-deadline").val(next);
 					}
-					jQuery('#member-list').text(ActiveMembers.text);
+					jQuery('#member-list').val(ActiveMembers.text);
 					jQuery('#member-list').css('color', 'black');
 				}
 
