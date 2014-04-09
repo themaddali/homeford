@@ -105,13 +105,9 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								for (var k = 0; k < tasks.length; k++) {
 									if (k < 2) {
 										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
-										// if (tasks[k].percentage < 31) {
-										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='error'>" + tasks[k].title + "</li>");
-										// } else if (tasks[k].percentage > 31 && tasks[k].percentage < 71) {
-										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li class='warn'>" + tasks[k].title + "</li>");
-										// } else {
-										// jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
-										// }
+									}
+									if (k == 2 && tasks.length === 3) {
+										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title);
 									}
 									if (k == 2 && tasks.length > 3) {
 										jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
@@ -184,8 +180,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					showBG();
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
-					if (!service.knowClenUserProfile && service.knowClenUserProfile == null) {
-						populateStudentList();
+					if (!service.knowClenUserProfile() && service.knowClenUserProfile() == null) {
+						router.reload();
 					}
 				};
 

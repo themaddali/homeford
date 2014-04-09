@@ -225,22 +225,21 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 						service.DomainToDoList(activedomains[i], {
 							success : function(data) {
 								_todototal = _todototal + data.length;
-								updatePanelValues('#todo-total-value', _todototal);
+								_tododata[0] = _todototal;
+								updatePanelValues('#todo-grouptotal-value', _todototal);
+								var _todogross = 0;
+								var _todopercentage = 0;
 								for (var j = 0; j < data.length; j++) {
-									//updatePanelValues('#members-total-value', _memberstotal);
-									//var roles = JSON.stringify(data[j].roles);
-									// if (roles.indexOf('ROLE_TIER3') !== -1) {
-										// _memberst3 = _memberst3 + 1;
-										// updatePanelValues('#members-t3-value', _memberst3);
-										// _membersdata[1] = _memberst3;
-									// } else if (roles.indexOf('ROLE_TIER2') !== -1) {
-										// _memberst2 = _memberst2 + 1;
-										// updatePanelValues('#members-t2-value', _memberst2);
-										// _membersdata[0] = _memberst2;
-									// }
-									// if (j === data.length - 1) {
-										// updatePanelGraphs('#members-donut', _membersdata);
-									// }
+									_todogross = _todogross + data[j].todos.length;
+									_tododata[1] = _todogross;
+									updatePanelValues('#todo-total-value', _todogross);
+									for (var k = 0; k < data[j].todos.length; k++) {
+										_todopercentage = (_todopercentage + data[j].todos[k].percentage) / _todogross;
+										updatePanelValues('#todo-progress-value', _todopercentage + ' %');
+									}
+									if (j === data.length - 1) {
+										updatePanelGraphs('#todo-donut', _tododata);
+									}
 								}
 							}
 						});
@@ -319,7 +318,7 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 					//This should never show up.
 					alert('Error in Loading! Please Refresh the page!');
 				}
-				
+
 				function helperMediaQuiries() {
 					if ($('.adminboard').length > 2) {
 						var width = $('#card-canvas').width() - 30;
@@ -339,7 +338,7 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 				this.getActiveDomains = function() {
 					return ACTIVEDOMAINS;
 				}
-				
+
 				this.getActiveDomainsIDs = function() {
 					return ACTIVEDOMAINIDS;
 				}
@@ -370,13 +369,13 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 						var progressbar = $("#to-do-progressbar");
 						var progressLabel = $(".to-do-progress-label");
 						// jQuery("#to-do-accordion").accordion({
-							// collapsible : true,
-							// active : false
+						// collapsible : true,
+						// active : false
 						// });
 						// Get Privilage
 						setCanvas();
 						getInfoByPrivilage();
-						
+
 						$(window).resize(helperMediaQuiries);
 						// When the browser changes size
 

@@ -306,7 +306,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.DomainToDoList = function(domainid, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/domain/' + domainid,
+						url : '/homeford/api/todogroup/domain/' + domainid,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",

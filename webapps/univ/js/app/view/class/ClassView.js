@@ -7,8 +7,9 @@ define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../se
 			};
 			var ACTIVESTUDENTNAME;
 			var ACTIVESTUDENTID;
-			var HIGHPRIORITY = '<i name="High" class="icon-circle-arrow-up icon-1x "></i>';
-			var LOWPRIORITY = '<i name="Low" class="icon-circle-arrow-down icon-1x "></i>'; 
+			var HIGHPRIORITY = '<i name="High" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i>';
+			var LOWPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i>'; 
+			var NORMALPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="Low" class="icon-exclamation icon-1x "></i>'; 
 
 			/**
 			 * Constructor
@@ -46,8 +47,11 @@ define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../se
 									if (StudentData[i].priority === 'High'){
 										jQuery('.class-name', newboard).append(HIGHPRIORITY);
 									}
-									else if (StudentData[i].priority === 'null' || StudentData[i].priority === null){
+									else if (StudentData[i].priority === 'Low'){
 										jQuery('.class-name', newboard).append(LOWPRIORITY);
+									}
+									else {
+										jQuery('.class-name', newboard).append(NORMALPRIORITY);
 									}
 									jQuery('.class-progress', newboard).progressbar();
 									var value = parseInt(StudentData[i].percentage);

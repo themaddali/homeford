@@ -2993,7 +2993,7 @@ dialog-modal::-webkit-scrollbar {
 }
 .classboard div.class-name i {
 	float: right;
-	margin-right: 10px;
+	margin-right: 0px;
 	padding-top: 5px;
 }
 

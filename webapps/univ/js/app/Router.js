@@ -560,7 +560,6 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
 
             function log(level, message) {
                 if (level <= 0 || level <= developmentSettings.routing.logLevel()) {
-                    //log.//log('ROUTE: ' + message);
                 }
             }
             
@@ -572,21 +571,16 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
                 var tempLocation;
                 initialize();
                 if (previousLocation) {
-                    // in case has change triggers right away
                     tempLocation = previousLocation;
                     previousLocation = null;
-                    //log(0, "return to " + tempLocation + " from " + from);
                     hashManager.setHash(tempLocation);
                 } else {
-                    //log(0, "no previous from " + from);
                     hashManager.setHash('/');
                 }
             }
             
             function processChange(hash) {
                 if (RETURN_TO_PREVIOUS === hash) {
-                    // special route to trigger returning to previous location
-                    // used by Cancel buttons on global action dia//logs
                     returnToPrevious('hash change');
                 } else {
                     location = hash;
@@ -602,14 +596,10 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
                 var hash = hashManager.getHash();
                 if (hash !== location) {
                   
-                    // see if we have any form changes to warn about
                     if (formStateView) {
                         formStateView.canNavigateTo(hash, {
                             proceed: function (withinForm) {
                                 if (! withinForm) {
-                                    // In case we change the hash again before pausing the
-                                    // view that has the form state, unset the form state view
-                                    // here so we don't re-prompt.
                                     formStateView = null;
                                 }
                                 processChange(hash);
@@ -631,19 +621,16 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
                 }
             }
 
-            // Register a map route
             this.map = function (name, pattern, args) {
                 initialize();
                 rootLevel.add('map', name, pattern, args);
             };
 
-            // Register a filter route
             this.filter = function (name, pattern, args) {
                 initialize();
                 rootLevel.add('filter', name, pattern, args);
             };
 
-            // Register a watch route
             this.watch = function (name, pattern, args) {
                 initialize();
                 rootLevel.add('watch', name, pattern, args);
@@ -651,17 +638,13 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
 
             this.go = function (newLocation, from) {
                 initialize();
-                // Don't reset if already there
                 if (location !== newLocation) {
                     if (RETURN_TO_PREVIOUS !== newLocation) {
                         // save previous location for returnToPrevious()
                         previousLocation = location;
                     }
-                    //log(0, "go " + newLocation + " from " + from);
                     abortEvaluation = true;
                     hashManager.setHash(newLocation);
-                    //Might be beacuse of a session doesnt exist.
-                    //Clean up all pager instanses for safe reload.
                     if (newLocation === '/home')
                     {
                     	console.log('Trying to access a page with no cookie.');
@@ -672,28 +655,14 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
 
             this.replaceWith = function (newLocation, from) {
                 initialize();
-                // Don't reset if already there
                 if (location !== newLocation) {
-                    //log(0, "replace with " + newLocation + " from " + from);
                     abortEvaluation = true;
                     hashManager.replaceHash(newLocation);
                 }
             };
             
-            /**
-             * Redirect to previous location.
-             * Used by generic dia//logs like "Create support dump" that should
-             * return to the context they were initiated from when they finish.
-             */
-            this.returnToPrevious = returnToPrevious;
+           this.returnToPrevious = returnToPrevious;
 
-            /**
-             * Used by Banner's //logout() to reset window location
-             * @param url: set window location to this url. If null, use 
-             *             window.location.pathname. Add kiosk param if applicable.
-             * @param option: if option.testMode istrue, return the
-             *                  reload path but do not reset the window.location
-             */
             this.reload = function (url, option) {
                 var reloadPath = url ? url : window.location.pathname;
                 window.location.replace(reloadPath);
@@ -707,10 +676,8 @@ function (EventDispatcher, hashManager, pager, environment, urlFragment,cookie) 
                 return location;
             };
 
-            // used by Application to kickstart
             this.start = function () {
                 initialize();
-                //log(1, "start");
                 hashManager.init();
                 hashManager.on('hashchange', hashChanged);
                 hashChanged();
