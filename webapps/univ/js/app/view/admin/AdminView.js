@@ -73,9 +73,9 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 					service.getUserProfile({
 						success : function(UserProfile) {
 							for (var i = 0; i < UserProfile.domains.length; i++) {
-								if (ROLEMAP[UserProfile.domains[i].roleName] !== 'Owner') {
+								if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 									ADMINLEVEL = ADMINLEVEL + 1;
-								} else {
+								} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
 									OWNERLEVEL = OWNERLEVEL + 1;
 								}
 							}
@@ -107,14 +107,16 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 					ACTIVEDOMAINIDS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
-							updatePanelValues('#user-id-value', 'K-' + UserProfile.id);
+							updatePanelValues('#user-id-value', '# ' + UserProfile.id);
 							if (UserProfile.domains.length === 1) {
-								ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
-								ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
+								if (ACTIVEDOMAINS.indexOf(UserProfile.domains[0].domainName) === -1) {
+									ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
+									ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
+								}
 								populateInviteData(ACTIVEDOMAINIDS);
 								populateMembersData(ACTIVEDOMAINIDS);
 								populateToDoData(ACTIVEDOMAINIDS);
-								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
+								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
 									updatePanelGraphs('#profile-donut', _profiledata);
@@ -125,13 +127,15 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
-									ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
+									if (ACTIVEDOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
+										ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
+										ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
+									}
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 										_adminof = _adminof + 1;
 										updatePanelValues('#user-admin-value', _adminof);
 										_profiledata[1] = _adminof;
-									} else {
+									} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
 										_ownerof = _ownerof + 1;
 										updatePanelValues('#user-owner-value', _ownerof);
 										_profiledata[0] = _ownerof;

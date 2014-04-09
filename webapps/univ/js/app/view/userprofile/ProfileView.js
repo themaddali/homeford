@@ -18,6 +18,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			function ProfileView() {
 
 				function populateData() {
+					var DOMAINS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
 							//OverView Panel Load
@@ -27,22 +28,31 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#profile-email').text(UserProfile.email);
 							jQuery('#profile-phone').text(UserProfile.phoneNumber);
 							jQuery('#profile-pending-invites').text(UserProfile.pendingInvitees.length);
+							jQuery('#profile-form').find('.secondary').remove();
 							var template = jQuery('#profile-domain-template').attr('id', '');
 							//backupagain
-							jQuery('#div-template').append(template.attr('id','profile-domain-template'))
+							jQuery('#div-template').append(template.attr('id', 'profile-domain-template'))
 							if (UserProfile.domains.length === 1) {
-								 jQuery('#profile-domains').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-							 } else {
+								var activetemplate = template.clone();
+								jQuery('.domainlabel', activetemplate).text('Domain');
+								jQuery('.profile-domain-list', activetemplate).text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
+								jQuery('.profile-domain-list', activetemplate).attr('name', UserProfile.domains[0].domainName);
+								jQuery('#profile-form').append(activetemplate);
+								DOMAINS.push(UserProfile.domains[0].domainName);
+							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (i === 0) {
-										jQuery('#profile-domains').text(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-										jQuery('#profile-domains').parent().addClass('hassecondary');
-									} else {
+									if (DOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
+										DOMAINS.push(UserProfile.domains[i].domainName);
 										var activetemplate = template.clone();
-										jQuery('#profile-domain-list', activetemplate).text(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
+										jQuery('.domainlabel', activetemplate).text('Domain #' + DOMAINS.length);
+										jQuery('.profile-domain-list', activetemplate).text(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
+										jQuery('.profile-domain-list', activetemplate).attr('name', UserProfile.domains[i].domainName);
 										jQuery('#profile-form').append(activetemplate);
+									} else {
+										var value = jQuery(".profile-domain-list[name='" + UserProfile.domains[i].domainName + "']").text();
+										value = value + ' , ' + ROLEMAP[UserProfile.domains[i].roleName];
+										jQuery(".profile-domain-list[name='" + UserProfile.domains[i].domainName + "']").text(value);
 									}
-
 								}
 							}
 						}

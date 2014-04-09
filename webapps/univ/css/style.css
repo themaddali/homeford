@@ -223,7 +223,7 @@ input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, inp
 	border: 1px solid #0784E3;
 }
 input[type="email"]:focus + input-clear {
-	display : none;
+	display: none;
 }
 
 button[disabled], input[disabled] {
@@ -1483,7 +1483,6 @@ a.goback {
 	position: absolute;
 	right: 3%;
 	top: 12px;
-	width: 42px;
 	/*height: 42px;*/
 	text-align: center;
 	vertical-align: middle;
@@ -1493,7 +1492,7 @@ a.goback {
 	color: #0784E3;
 	border: none;
 	cursor: pointer;
-	top: 20px;
+	top: 25px;
 	border-bottom: 2px solid #f3f3f3;
 }
 .modal-body .modal-container header a:hover {
@@ -1599,8 +1598,8 @@ div.formselction {
 	font-size: 15px;
 	font-weight: 400;
 	cursor: pointer;
-	background: transparent url("../img/select-down.png") no-repeat right;
-	background-position: 80% 50%;
+	/*background: transparent url("../img/select-down.png") no-repeat right;*/
+	/*background-position: 80% 50%;*/
 	/*border-right: 1px dotted #d9d9d9;*/
 }
 .view-table > tbody tr {
@@ -2060,6 +2059,11 @@ form textarea.error {
 	height: 95%;
 	width: auto;
 }
+.adminboard .dash-info-visual div.dash-info-1key div.admin-donut {
+	width: 400px;
+	height: 230px;
+	margin-top: -30px;
+}
 .adminboard .dash-info-visual div.full {
 	padding: 0px;
 	height: 90%;
@@ -2195,7 +2199,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                       , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                          , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2645,6 +2649,22 @@ dialog-modal::-webkit-scrollbar {
 	border-bottom-right-radius: 10px;
 	overflow: none;
 }
+
+.canvas-partition {
+	/*border-bottom: 1px dotted #7f7f7f;*/
+	float: left;
+	width: 100%;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	text-align: left;
+}
+.canvas-partition span {
+	color: #737373;
+	font-size: 1em;
+	padding: 10px;
+	padding-left: 5px;
+}
+
 .float-left .notifycard {
 	float: left;
 	width: 100%;
@@ -4298,10 +4318,9 @@ footer a:hover {
 }
 
 /*INPUT CLEAR*/
-.edit-form li.form-item a.input-clear{
-	position : relative;
+.edit-form li.form-item a.input-clear {
+	position: relative;
 }
-
 
 /* =================== Media Queries ======================= */
 @media screen and (max-width: 480px) {
@@ -4432,6 +4451,11 @@ footer a:hover {
 		height: 42px;
 		margin: 10px;
 	}
+	.float-left .adminboard {
+		float: none;
+		width: 90%;
+		margin: 10px;
+	}
 
 	.studentboard div.student-name {
 		border-top-left-radius: 8px;
@@ -4453,6 +4477,19 @@ footer a:hover {
 	}
 
 	.edit-form li.form-item div.form-helper {
+		display: none;
+	}
+
+	.adminboard .dash-info-visual div.dash-info-1key div.admin-donut {
+		width: 95%;
+		height: 230px;
+		margin-top: -30px;
+	}
+
+	.classboard div.class-name {
+		font-weight: 500;
+	}
+	.canvas-partition {
 		display: none;
 	}
 

@@ -85,10 +85,10 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {
 									if (ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
-										ACTIVEDOMAINLIST.push(data.domains[i].domainName);
-									}
-									if (ACTIVEDOMAINIDLIST.indexOf(data.domains[i].domainName) === -1) {
-										ACTIVEDOMAINIDLIST.push(data.domains[i].id);
+										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
+											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
+										}
 									}
 								}
 								handlers.success(data);

@@ -1,4 +1,4 @@
-define(['modernizr', 'jqueryui','cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, jqueryui, cookie, service, banner, router, notify, quizview) {"use strict";
+define(['jquery','modernizr', 'jqueryui','cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(jquery, modernizr, jqueryui, cookie, service, banner, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
