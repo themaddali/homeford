@@ -145,6 +145,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 
 						jQuery('#updatetodo').click(function() {
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
+							_newprogress = parseInt(_newprogress);
 							var _timestamp = jQuery('#task-time').val();
 							var _commentstext = [];
 							var comments = {};
