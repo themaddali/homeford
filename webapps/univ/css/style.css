@@ -2199,7 +2199,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                          , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                           , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2964,6 +2964,13 @@ dialog-modal::-webkit-scrollbar {
 	 width: 100%;
 	 color: #0784E3;
 	 border-bottom: 3px dotted #0784E3;*/
+}
+.studentboard span.taskcount {
+	float: right;
+	margin-top: -30px;
+	margin-right: 10px;
+	color: #0784E3;
+	display: none;
 }
 
 .studentboard i {
@@ -4463,6 +4470,9 @@ footer a:hover {
 		background-color: white;
 		color: black;
 		text-overflow: ellipsis;
+	}
+	.studentboard span.taskcount {
+		display: inline;
 	}
 
 	.float-left .classboard {

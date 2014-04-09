@@ -195,6 +195,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							success : function(tasks) {
 								if (tasks.length > 0) {
 									for (var k = 0; k < tasks.length; k++) {
+										jQuery('.studentboard[name="' + members[0].id + '"] .taskcount').text(tasks.length);
 										if (k < 2) {
 											jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
 										}
