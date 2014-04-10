@@ -1,4 +1,4 @@
-define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/members/MembersPickView'], function(jqueryui, raphael, plugins, cookie, elychart, service, banner, router, invite, memberspick) {"use strict";
+define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView'], function(raphael, plugins, cookie, elychart, service, banner, router, invite) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -224,6 +224,7 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 				function populateToDoData(activedomains) {
 					var _todototal = 0;
 					var _tododone = 0;
+					var _todopercentage = 0;
 					var _tododata = [0, 0];
 					for (var i = 0; i < activedomains.length; i++) {
 						service.DomainToDoList(activedomains[i], {
@@ -232,17 +233,18 @@ define(['jqueryui', 'raphael', 'plugins', 'cookie', 'elychart', '../../service/D
 								_tododata[0] = _todototal;
 								updatePanelValues('#todo-grouptotal-value', _todototal);
 								var _todogross = 0;
-								var _todopercentage = 0;
 								for (var j = 0; j < data.length; j++) {
 									_todogross = _todogross + data[j].todos.length;
 									_tododata[1] = _todogross;
 									updatePanelValues('#todo-total-value', _todogross);
 									for (var k = 0; k < data[j].todos.length; k++) {
-										_todopercentage = (_todopercentage + data[j].todos[k].percentage) / _todogross;
+										_todopercentage = (_todopercentage + data[j].todos[k].percentage);
 										updatePanelValues('#todo-progress-value', _todopercentage + ' %');
 									}
 									if (j === data.length - 1) {
 										updatePanelGraphs('#todo-donut', _tododata);
+										var percentage = Math.ceil(_todopercentage/parseInt(jQuery('#todo-total-value').text()));
+										updatePanelValues('#todo-progress-value', _todopercentage + ' %');
 									}
 								}
 							}

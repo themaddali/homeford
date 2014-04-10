@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(jQuery, modernizr, cookie, jqueryui, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
 
 	var ToDoAssignView = ( function() {
 
@@ -95,6 +95,10 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
+						//Rarely due to network latency if not loaded, just reload
+						if (!$.ui) {
+							location.reload();
+						}
 						populateData();
 
 						//HTML Event - Actions
@@ -120,10 +124,6 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 							router.go('/memberspick');
 						});
 
-						// jQuery('#member-list').change(function() {
-						// validAssignment();
-						// });
-
 						jQuery('#task-assign').on('click', function() {
 							if ($(".edit-form").valid()) {
 								var _tname = jQuery('#task-name').val();
@@ -136,7 +136,12 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								var _thelpyoutube = jQuery('#task-helper-youtube').text();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
-								var _domainids = service.returnDomainIDList();
+								var _domainids;
+								service.returnDomainIDList({
+									success : function(data) {
+										_domainids = data;
+									}
+								});
 								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
@@ -152,10 +157,6 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 								});
 							}
 							//Need to update to handler
-						});
-
-						jQuery('#profile-password').change(function() {
-							jQuery('#password-reenter-item').show();
 						});
 
 						validator = jQuery(".edit-form").validate({

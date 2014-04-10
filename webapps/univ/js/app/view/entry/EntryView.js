@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jquery','jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', 'clear'], function(jQuery,jqueryui, cookie, router, validate, service, notify, clear) {"use strict";
+define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', 'clear'], function(cookie, router, validate, service, notify, clear) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -86,6 +86,11 @@ define(['jquery','jqueryui', 'cookie', '../../Router', 'validate', '../../servic
 
 					});
 
+					//Rarely due to network latency if not loaded, just reload
+					if (!$.ui) {
+						location.reload();
+					}
+
 					jQuery('#user-name').on('keyup', function() {
 						jQuery('#login-notification').fadeOut(1000);
 					});
@@ -105,15 +110,15 @@ define(['jquery','jqueryui', 'cookie', '../../Router', 'validate', '../../servic
 							}
 						}
 					});
-					
+
 					// jQuery('.form-item input').addClear();
 					// jQuery('.form-item input').blur(function(){
-						// $(this).parent().find('.input-clear').hide();
+					// $(this).parent().find('.input-clear').hide();
 					// });
 					// jQuery('.form-item input').focus(function(){
-						// if ($(this).find('.error')){
-							// $(this).parent().find('.input-clear').hide();
-						// }
+					// if ($(this).find('.error')){
+					// $(this).parent().find('.input-clear').hide();
+					// }
 					// });
 
 					jQuery('#register-now').on('click', function() {

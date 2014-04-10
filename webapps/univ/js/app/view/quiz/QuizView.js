@@ -1,4 +1,4 @@
-define(['jquery', 'jqueryui', 'modernizr', 'touchpunch', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(jQuery, jqueryui, modernizr, touchpuch, plugins, cookie, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function( modernizr, plugins, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var QuizView = ( function() {
 

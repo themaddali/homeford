@@ -1,8 +1,9 @@
 require({
 	baseUrl : './js/lib',
 	paths : {
+		text : 'text',
 		jquery : 'jquery',
-		jqueryui : 'jquery-ui',
+		jqueryui : 'jquery-ui.min',
 		modernizr : 'modernizr-2.5.3.min',
 		backstrech : 'backstrech',
 		typeahead : 'typeahead.bundle',
@@ -25,7 +26,7 @@ require({
 	},
 	priority : ['modernizr', 'jquery'],
 	waitSeconds : 20 // make VPN more resilient
-}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr', 'jqueryui', 'touchpunch'], function(application, routes, jQuery, modernzr, jqueryui, touchpunch) {"use strict";
+}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'jqueryui', 'modernizr', 'touchpunch'], function(application, routes) {"use strict";
 
 	$.ajaxSetup({
 		// Disable caching of AJAX responses for development

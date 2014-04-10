@@ -1,4 +1,4 @@
-define(['jquery', 'jqueryui','modernizr', 'touchpunch','plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(jQuery, jqueryui, modernizr,touchpunch, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function( modernizr, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -108,7 +108,12 @@ define(['jquery', 'jqueryui','modernizr', 'touchpunch','plugins', 'cookie', 'ell
 				}
 
 				function getindirectReports(data, MEMBEROBJECT) {
-					var activedomains = service.returnDomainIDList();
+					var activedomains;
+					service.returnDomainIDList({
+						success : function(data) {
+							activedomains = data;
+						}
+					});
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
 							success : function(data) {
@@ -187,7 +192,12 @@ define(['jquery', 'jqueryui','modernizr', 'touchpunch','plugins', 'cookie', 'ell
 				}
 
 				function populateTasks(members) {
-					var list = service.returnDomainIDList();
+					var list;
+					service.returnDomainIDList({
+						success : function(data){
+							list = data;
+						}
+					});
 					var activememberid;
 					activememberid = members[0].id;
 					if (activememberid !== 'FILLER') {

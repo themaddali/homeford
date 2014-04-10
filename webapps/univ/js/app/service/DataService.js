@@ -342,7 +342,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'comments' : comments
 						}),
 						success : function(data) {
-							USERPROFILE = null;
+							//USERPROFILE = null;
 							handlers.success(data);
 						}
 					});
@@ -411,12 +411,48 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						});
 					}
 				}
+				function _passiveUserProfile() {
+
+				}
+
 				//Getter and Setters
 				this.returnDomainList = function() {
 					return ACTIVEDOMAINLIST;
 				}
-				this.returnDomainIDList = function() {
-					return ACTIVEDOMAINIDLIST;
+				
+				//To vall a function from a diff view
+				this.ViewCall = function(viewname, functionname, value){
+					viewname.functionname(value);
+				}
+				
+				
+				this.returnDomainIDList = function(handlers) {
+					//To facilite passive loading
+					if (ACTIVEDOMAINIDLIST.length == 0) {
+						$.ajax({
+							url : '/homeford/api/userprofile',
+							type : 'GET',
+							async : 'async',
+							contentType : "application/json",
+							success : function(data) {
+								listenPendingInvites(data.pendingInvitees);
+								USERPROFILE = data;
+								USERID = data.id;
+								for (var i = 0; i < data.domains.length; i++) {
+									if (ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
+										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
+											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
+										}
+									}
+									handlers.success(ACTIVEDOMAINIDLIST);
+								}
+							}
+						});
+					} else {
+						handlers.success(ACTIVEDOMAINIDLIST);
+					}
+
 				}
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;

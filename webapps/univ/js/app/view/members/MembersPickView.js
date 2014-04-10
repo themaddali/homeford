@@ -1,8 +1,8 @@
 //View that will drive the Students list page.
 
-define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/todo/ToDoAssignView'], function(cookie, jqueryui, service, validate, router, notify, admin, todoassign) {"use strict";
+define(['jquery','cookie', '../../service/DataService', '../../Router', '../../view/todo/ToDoAssignView'], function(jquery, cookie, service, router, todoassign) {"use strict";
 
-	var ToDoAssignView = ( function() {
+	var MembersPickView = ( function() {
 
 			/**
 			 * Constructor
@@ -13,7 +13,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 			var membernames = [];
 			var template;
 
-			function ToDoAssignView() {
+			function MembersPickView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -32,14 +32,20 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 				}
 
 				function populateData() {
+					service.returnDomainIDList({
+						success : function(data) {
+							getMembers(data);
+						}
+					});
+
+				}
+
+				function getMembers(activedomains) {
 					jQuery('#invite-domain').empty();
 					jQuery('.edit-card-canvas').empty();
 					jQuery('#checkbox-control').text('Un-Select All');
 					membernames = [];
 					var memberscount = 0;
-					//backuptemplate
-					//jQuery('.div-template').append(template.attr('id', 'member-template'));
-					var activedomains = service.returnDomainIDList();
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
 							success : function(data) {
@@ -185,7 +191,13 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 							var selectedMembers = {};
 							selectedMembers.text = jQuery('.metadata').text();
 							selectedMembers.list = selectedlist;
-							todoassign.selectedMembers(selectedMembers);
+							//service.ViewCall('todoassign','selectedMembers',selectedMembers);
+							if (todoassign) {
+								todoassign.selectedMembers(selectedMembers);
+							}
+							else {
+								
+							}
 							router.returnToPrevious();
 						});
 
@@ -194,8 +206,8 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 
 			}
 
-			return ToDoAssignView;
+			return MembersPickView;
 		}());
 
-	return new ToDoAssignView();
+	return new MembersPickView();
 });

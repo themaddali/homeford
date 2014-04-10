@@ -1,4 +1,4 @@
-define(['jquery', 'jqueryui', 'modernizr', 'touchpunch', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(jquery, jqueryui, modernizr, touchpunch, cookie, service, banner, router, notify, quizview) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, cookie, service, banner, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -27,7 +27,12 @@ define(['jquery', 'jqueryui', 'modernizr', 'touchpunch', 'cookie', '../../servic
 						router.go('/studentlist');
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVESTUDENTNAME);
-						var list = service.returnDomainIDList();
+						var list;
+						service.returnDomainIDList({
+							success : function(data) {
+								list = data;
+							}
+						});
 						service.MemberToDoList(list[0], ACTIVESTUDENTID, {
 							success : function(StudentData) {
 								var PanelTemplate = jQuery('#class-template').remove().attr('id', '');

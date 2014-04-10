@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jquery', 'jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(jQuery, jqueryui, cookie, router, validate, service, notify) {"use strict";
+define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(cookie, router, validate, service, notify) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -145,6 +145,11 @@ define(['jquery', 'jqueryui', 'cookie', '../../Router', 'validate', '../../servi
 							e.preventDefault();
 						}
 					});
+
+					//Rarely die to network latency if not loaded, just reload
+					if (!$.ui) {
+						location.reload();
+					}
 
 					jQuery(function() {
 						$("#user-dob").datepicker();
