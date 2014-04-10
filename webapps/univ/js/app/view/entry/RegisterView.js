@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(jqueryui, cookie, router, validate, service, notify) {"use strict";
+define(['jquery', 'jqueryui', 'cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(jQuery, jqueryui, cookie, router, validate, service, notify) {"use strict";
 
 	var EntryView = ( function() {
 

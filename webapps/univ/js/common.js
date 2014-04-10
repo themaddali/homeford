@@ -23,7 +23,7 @@ require({
 		clear : 'clear',
 		Pages : '../../module',
 		},
-	priority : ['modernizr', 'jquery', 'jqueryui', 'touchpunch'],
+	priority : ['modernizr', 'jquery'],
 	waitSeconds : 20 // make VPN more resilient
 }, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr','jqueryui', 'touchpunch'], function(application, routes) {"use strict";
 
