@@ -22,10 +22,10 @@ require({
 		ellipsis : 'ellipsis',
 		clear : 'clear',
 		Pages : '../../module',
-		},
+	},
 	priority : ['modernizr', 'jquery'],
 	waitSeconds : 20 // make VPN more resilient
-}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr','jqueryui', 'touchpunch'], function(application, routes) {"use strict";
+}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'modernizr', 'jqueryui', 'touchpunch'], function(application, routes, jQuery, modernzr, jqueryui, touchpunch) {"use strict";
 
 	$.ajaxSetup({
 		// Disable caching of AJAX responses for development

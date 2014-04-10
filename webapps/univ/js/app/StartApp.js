@@ -1,4 +1,4 @@
-define(['../app/LocationView', '../app/Environment', '../app/UrlFragment', '../app/Router', 'cookie', 'jquery', 'touchpunch'], function(locationView, environment, urlFragment, router) {"use strict";
+define(['../app/LocationView', '../app/Environment', '../app/UrlFragment', '../app/Router', 'cookie', 'jquery', 'jqueryui','touchpunch'], function(locationView, environment, urlFragment, router) {"use strict";
 
 	var Application = ( function() {
 

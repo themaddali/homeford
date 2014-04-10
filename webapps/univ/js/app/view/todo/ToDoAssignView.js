@@ -49,6 +49,7 @@ define(['jquery', 'modernizr', 'cookie', 'jqueryui', '../../service/DataService'
 					}
 					if (ActiveMembers.text) {
 						jQuery('#member-list').val(ActiveMembers.text);
+						validator.resetForm();
 					} else {
 						jQuery('#member-list').val('None');
 					}

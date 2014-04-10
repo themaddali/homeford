@@ -1,4 +1,4 @@
-define(['jquery','modernizr', 'jqueryui','cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(jquery, modernizr, jqueryui, cookie, service, banner, router, notify, quizview) {"use strict";
+define(['jquery', 'jqueryui', 'modernizr', 'touchpunch', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(jquery, jqueryui, modernizr, touchpunch, cookie, service, banner, router, notify, quizview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -8,8 +8,8 @@ define(['jquery','modernizr', 'jqueryui','cookie', '../../service/DataService', 
 			var ACTIVESTUDENTNAME;
 			var ACTIVESTUDENTID;
 			var HIGHPRIORITY = '<i name="High" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i>';
-			var LOWPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i>'; 
-			var NORMALPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="Low" class="icon-exclamation icon-1x "></i>'; 
+			var LOWPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i>';
+			var NORMALPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="Low" class="icon-exclamation icon-1x "></i>';
 
 			/**
 			 * Constructor
@@ -44,13 +44,11 @@ define(['jquery','modernizr', 'jqueryui','cookie', '../../service/DataService', 
 									var newboard = PanelTemplate.clone();
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
-									if (StudentData[i].priority === 'High'){
+									if (StudentData[i].priority === 'High') {
 										jQuery('.class-name', newboard).append(HIGHPRIORITY);
-									}
-									else if (StudentData[i].priority === 'Low'){
+									} else if (StudentData[i].priority === 'Low') {
 										jQuery('.class-name', newboard).append(LOWPRIORITY);
-									}
-									else {
+									} else {
 										jQuery('.class-name', newboard).append(NORMALPRIORITY);
 									}
 									jQuery('.class-progress', newboard).progressbar();
@@ -85,8 +83,7 @@ define(['jquery','modernizr', 'jqueryui','cookie', '../../service/DataService', 
 						selectedQuiz.desc = $(this).find('.class-desc').text();
 						selectedQuiz.progress = $(this).find('.class-progress-label').text().split("%")[0];
 						selectedQuiz.priority = $(this).find('.icon-1x').attr('name');
-						if (selectedQuiz.priority !== 'Low' && selectedQuiz.priority !== 'High')
-						{
+						if (selectedQuiz.priority !== 'Low' && selectedQuiz.priority !== 'High') {
 							selectedQuiz.priority = 'Normal';
 						}
 						selectedQuiz.id = $(this).attr('name');

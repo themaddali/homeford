@@ -1,6 +1,4 @@
-//View that will drive the Students list page.
-
-define(['jquery','modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup','jqueryui','touchpunch'], function(jQuery,modernizr,plugins, cookie, service, banner, router, notify, popup,jqueryui,touchpunch) {"use strict";
+define(['jquery', 'jqueryui', 'modernizr', 'touchpunch', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(jQuery, jqueryui, modernizr, touchpuch, plugins, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var QuizView = ( function() {
 
@@ -36,7 +34,7 @@ define(['jquery','modernizr', 'plugins', 'cookie', '../../service/DataService', 
 					if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
 						router.go('/class');
 					} else {
-						jQuery('#init-helper').css('display','inline');
+						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
@@ -95,13 +93,11 @@ define(['jquery','modernizr', 'plugins', 'cookie', '../../service/DataService', 
 						jQuery('.help-icon').removeClass('icon-3x').removeClass('icon-1x').addClass('icon-2x');
 						jQuery('.helpers').removeClass('medium').removeClass('small').addClass('medium');
 						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('medium');
-					}
-					else if (width <= 481) {
+					} else if (width <= 481) {
 						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-3x').addClass('icon-2x');
 						jQuery('.helpers').removeClass('medium').removeClass('small').addClass('small');
 						jQuery('.main-content').removeClass('medium').removeClass('small').addClass('small');
-					}
-					else {
+					} else {
 						jQuery('.help-icon').removeClass('icon-2x').removeClass('icon-1x').addClass('icon-3x');
 						jQuery('.helpers').removeClass('medium').removeClass('small');
 						jQuery('.main-content').removeClass('medium');
@@ -159,10 +155,10 @@ define(['jquery','modernizr', 'plugins', 'cookie', '../../service/DataService', 
 								}
 							});
 						});
-						
-						jQuery('#todo-assign-form').mousemove(function(){
+
+						jQuery('#todo-assign-form').mousemove(function() {
 							jQuery('#init-helper').hide();
-							jQuery('#init-helper').css('display','');
+							jQuery('#init-helper').css('display', '');
 						});
 
 						$('.helper-youtube').magnificPopup({
@@ -174,7 +170,7 @@ define(['jquery','modernizr', 'plugins', 'cookie', '../../service/DataService', 
 							type : 'iframe',
 							mainClass : 'mfp-img-mobile',
 						});
-						
+
 						$('.helper-facebook').magnificPopup({
 							type : 'iframe',
 							mainClass : 'mfp-img-mobile',

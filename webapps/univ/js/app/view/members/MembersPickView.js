@@ -171,7 +171,7 @@ define(['cookie', 'jqueryui', '../../service/DataService', 'validate', '../../Ro
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
 						//Preactivate Dependency
-						todoassign.init();
+						//todoassign.init();
 						populateData();
 
 						//HTML Event - Actions

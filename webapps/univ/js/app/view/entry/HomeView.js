@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Router', '../../service/DataService'], function( cookie, plugin, flatvid, typeahead, bloodhound, router, service) {"use strict";
+define(['jquery', 'jqueryui', 'cookie', 'plugins', 'touchpunch', 'flatvid', 'typeahead', 'bloodhound', '../../Router', '../../service/DataService'], function(jQuery, jqueryui, cookie, plugin, touchpunch, flatvid, typeahead, bloodhound, router, service) {"use strict";
 
 	var HomeView = ( function() {
 
