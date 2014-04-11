@@ -177,6 +177,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									required : true,
 									validAssignment : true,
 								},
+								taskhelperurl : {
+									url : true,
+								},
+								taskhelperyoutube : {
+									url : true,
+								},
 							}
 						});
 
