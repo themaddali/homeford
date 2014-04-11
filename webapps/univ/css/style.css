@@ -2208,7 +2208,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                            , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2469,20 +2469,20 @@ html.touch #subnav {
 	float: left;
 	border-left: 10px solid #f3f3f3;
 	/*padding: 5px;*/
-	padding-left:10px;
+	padding-left: 10px;
 	height: 35px;
 	overflow: hidden;
 }
-.main-content-header .subtitleinfo, .main-content-header .subtitleinfo-2,.main-content-header .subtitleinfo-3  {
+.main-content-header .subtitleinfo, .main-content-header .subtitleinfo-2, .main-content-header .subtitleinfo-3 {
 	font-size: 0.9em;
 	font-weight: 600;
 	overflow: hidden;
 	height: 34px;
 	color: #737373;
-	vertical-align:middle;
+	vertical-align: middle;
 	cursor: pointer;
 }
-.main-content-header .subtitleinfo:hover, .main-content-header .subtitleinfo-2:hover,.main-content-header .subtitleinfo-3:hover  {
+.main-content-header .subtitleinfo:hover, .main-content-header .subtitleinfo-2:hover, .main-content-header .subtitleinfo-3:hover {
 	color: #0784E3;
 }
 .main-content-header > a {
@@ -4554,7 +4554,7 @@ footer a:hover {
 		width: 90%;
 	}
 	.edit-form li.form-item {
-		text-align: center;
+		margin-left: 15px;
 	}
 
 	.edit-form li.form-item div.ui-slider {
