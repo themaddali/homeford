@@ -123,7 +123,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								setTimeout(function() {
 									router.returnToPrevious();
 									//admin.reloadData();
-								}, 3000);
+								}, 2000);
 							}
 
 							//Need to update to handler

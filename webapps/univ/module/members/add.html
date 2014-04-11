@@ -21,9 +21,9 @@
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					Add New Member
-					<div class="toggle-dark formselction">
-						<div class="toggle" data-type="select"></div>
-					</div>
+					<!-- <div class="toggle-dark formselction">
+					<div class="toggle" data-type="select"></div>
+					</div> -->
 				</header>
 				<div class="modal-contents">
 					<form id="regularadd" class="edit-form">
@@ -43,23 +43,9 @@
 										Last Name (Required)
 									</div>
 								</li>
-								<!-- <div class="form-partition">
-								<span>OR</span>
+								<div class="form-partition">
+									<span>OR</span>
 								</div>
-								<li class="form-item">
-								<label>Email</label>
-								<input placeholder="Invite by Email Address" id="member-email"  name="memberemail" type="email" />
-								<div class="form-helper">
-								Email will be sent to register.
-								</div>
-								</li> -->
-
-							</ol>
-						</fieldset>
-					</form>
-					<form id="emailadd" class="edit-form" style="display: none">
-						<fieldset>
-							<ol id="profile-form">
 								<li class="form-item">
 									<label>Email</label>
 									<input placeholder="Invite by Email Address" id="member-email"  name="memberemail" type="email" />
@@ -67,13 +53,17 @@
 										Email will be sent to register.
 									</div>
 								</li>
+
 							</ol>
 						</fieldset>
 					</form>
 				</div>
 				<footer>
 					<div class="edit-controls">
+
 						<input id="member-add" type="button" value="Add">
+						<input id="member-addmore" type="button" value="Add +">
+						<input id="form-reset" type="button" class="secondary" value="Reset Form">
 					</div>
 				</footer>
 				<div class="modal_close"></div>

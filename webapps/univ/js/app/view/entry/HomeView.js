@@ -124,7 +124,7 @@ define([ 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Route
 							jQuery('#knownentity').append(EDIT);
 
 						} else {
-							activateSuggestionSearch();
+							//activateSuggestionSearch();
 							//Hack - Must be fixed in CSS
 							//Alignment mismatch :(
 							jQuery('#slogan-input').css('background-color', 'white');

@@ -11,6 +11,9 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 			var NOTIFICATION;
 			var pendingList;
 			var validator;
+			var ERROR = '<i style="padding:0px 10px; color=#e30716; float: left;" class="icon-exclamation icon-1x "></i>';
+			var OK = '<i style="padding:0px 10px; color:#07e366; float: left;" class="icon-check icon-1x "></i>';
+			var INFO = '<i style="padding:0px 10px; float: left;" class="icon-bell-alt icon-1x "></i>';
 
 			function InviteView() {
 
@@ -35,8 +38,10 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 					jQuery('#noinfo').hide();
 					NOTIFICATION = notify.getNotifications();
 					var template = jQuery('#notify-template').attr('id', '');
+					var mintemplate = jQuery('#notify-min-template').attr('id', '');
 					//Backing the template
 					jQuery('.div-template').append(template.attr('id', 'notify-template'));
+					jQuery('.div-template').append(mintemplate.attr('id', 'notify-min-template'));
 					jQuery('.metainfo').text(NOTIFICATION.length + ' Notifications');
 					if (NOTIFICATION.length === 0) {
 						jQuery('#noinfo').fadeIn(1000);
@@ -45,34 +50,31 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 						var thistemplate = template.clone();
 						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
 						jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
-						if (NOTIFICATION[i].domain.length > 1) {
+						if (NOTIFICATION[i].keyword && NOTIFICATION[i].keyword.length > 1) {
+							if (NOTIFICATION[i].status == 'OK') {
+								jQuery('.title', thistemplate).parent().prepend(OK);
+							} else {
+								jQuery('.title', thistemplate).parent().prepend(ERROR);
+							}
 							jQuery('.inviteddomain', thistemplate).text(NOTIFICATION[i].domain);
-						} else {
-							jQuery('.inviteddomain', thistemplate).parent().css('display', 'none');
-						}
-						if (NOTIFICATION[i].by.length > 1) {
 							jQuery('.invitedby', thistemplate).text(NOTIFICATION[i].by);
-						} else {
-							jQuery('.invitedby', thistemplate).parent().css('display', 'none');
-						}
-						if (NOTIFICATION[i].msg.length > 1) {
 							jQuery('.invitedmsg', thistemplate).text(NOTIFICATION[i].msg);
-						} else {
-							jQuery('.invitedmsg', thistemplate).parent().css('display', 'none');
-						}
-						if (NOTIFICATION[i].keyword.length > 1) {
 							jQuery('.action', thistemplate).text(NOTIFICATION[i].keyword);
-							thistemplate.attr('name', i);
-						} else {
-							jQuery('.action', thistemplate).css('display', 'none');
-							jQuery('.foot', thistemplate).css('display', 'none');
-						}
-						if (NOTIFICATION[i].inviteid.length > 1) {
 							jQuery('.inviteid', thistemplate).text(NOTIFICATION[i].inviteid);
+							thistemplate.attr('name', i);
+							jQuery('#card-canvas').append(thistemplate);
 						} else {
-							jQuery('.inviteid', thistemplate).css('display', 'none');
+							var thistemplate = mintemplate.clone();
+							if (NOTIFICATION[i].status == 'OK') {
+								jQuery('.title', thistemplate).parent().prepend(OK);
+							} else {
+								jQuery('.title', thistemplate).parent().prepend(ERROR);
+							}
+							jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
+							jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
+							jQuery('#card-canvas').append(thistemplate);
 						}
-						jQuery('#card-canvas').append(thistemplate);
+
 						if (i === NOTIFICATION.length - 1) {
 							jQuery('.action').click(function() {
 								var id = $(this).parent().parent().find('.inviteid').text();

@@ -194,9 +194,6 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
-						jQuery('.subtitleinfo').click(function() {
-							router.go('/studentlist');
-						});
 						jQuery('.subtitleinfo-3').click(function() {
 							router.go('/studentlist');
 						});

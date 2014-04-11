@@ -418,7 +418,8 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 						});
 
 						jQuery('.subtitleinfo').click(function() {
-							router.returnToPrevious();
+							//router.returnToPrevious();
+							router.go('/studentlist');
 						});
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');

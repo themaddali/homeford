@@ -1469,7 +1469,7 @@ a.goback {
 	border: 2px solid #e6e6e6;
 }
 .modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
-	border: 2px solid #e6e6e6;
+	border: 2px solid #0784E3;
 	cursor: pointer;
 	background-color: #FFFFFF;
 	color: black;
@@ -1674,6 +1674,7 @@ div.formselction {
 	border-bottom: 2px dotted #d9d9d9;
 	margin-right: 25px;
 	padding: 10px;
+	text-align: left;
 }
 
 .view-form li.form-item.hassecondary {
@@ -2687,11 +2688,28 @@ dialog-modal::-webkit-scrollbar {
 	border-bottom-right-radius: 10px;
 	margin-bottom: 10px;
 }
+.float-left .notifycard.min {
+	float: left;
+	width: 100%;
+	height: auto;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-bottom: 10px;
+}
 .float-left .notifycard div.head {
 	padding: 5px;
 	height: 20px;
 	background-color: #f3f3f3;
 	border-bottom: 1px solid #d9d9d9;
+	border-top-left-radius: 10px;
+}
+.float-left .notifycard.min div.head {
+	padding: 5px;
+	height: 20px;
+	background-color: white;
+	border-bottom: 0px;
 	border-top-left-radius: 10px;
 }
 .float-left .notifycard div.head div.title {

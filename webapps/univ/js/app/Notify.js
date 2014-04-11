@@ -18,18 +18,14 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 				function showNotification(status, message, toroute, duration) {
 					var _notification = {};
 					_notification.title = message;
-					_notification.domain = '';
-					_notification.by = '';
-					_notification.msg = '';
 					_notification.status = status;
 					_notification.time = new Date();
 					_notification.keyword = '';
-					_notification.inviteid = '';
 					NOTIFICATIONS.push(_notification);
 					jQuery('div.edit-notify').remove();
 					if (!duration) {
-						duration = 1500;
-						///defaulting to 1.5 seconds
+						duration = 1000;
+						///defaulting to 1 seconds
 					}
 					if (jQuery.find('.modal-body')) {
 						var CLASS = "edit-notify " + status;

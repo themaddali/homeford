@@ -9,19 +9,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 			 *
 			 */
 
-			var regualarvalidator;
-			var emailvalidator;
+			var validator;
 
 			function MembersEditView() {
 
 				function populateData() {
-					//$(".modal-contents").tabs();
-					$('.toggle').toggles({
-						text : {
-							on : 'Email',
-							off : 'Regular'
-						}
-					});
+
 				}
 
 				function checkForActiveCookie() {
@@ -41,9 +34,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 				}
 
 				function clearForm() {
-					jQuery('.form-item input').val("");
-					emailvalidator.resetForm();
-					regualarvalidator.resetForm();
+					jQuery('#member-first-name').val('');
+					jQuery('#member-last-name').val('');
+					jQuery('#member-first-name').removeAttr('readonly');
+					jQuery('#member-last-name').removeAttr('readonly');
+					jQuery('#member-email').removeAttr('readonly');
+					jQuery('#member-email').val('');
+					validator.resetForm();
+					jQuery('#member-first-name').focus();
 				};
 
 				this.pause = function() {
@@ -69,13 +67,17 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 						});
 
 						jQuery('#member-add').on('click', function() {
-							if (jQuery('#member-add').val() == 'Add') {
-								if ($("#regularadd").valid()) {
-									emailvalidator.resetForm();
-									regualarvalidator.resetForm();
+							if (!jQuery('.edit-form').valid()) {
+								console.log(validator.numberOfInvalids());
+							} else {
+								console.log(validator.numberOfInvalids());
+							}
+							if (jQuery('#member-email').val().length == 0) {
+								if (validator.numberOfInvalids() === 1) {
+									validator.resetForm();
 									var _domainid;
 									service.returnDomainIDList({
-										success : function(data){
+										success : function(data) {
 											_domainid = data;
 										}
 									});
@@ -89,14 +91,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 											}
 											setTimeout(function() {
 												router.returnToPrevious();
-											}, 3000);
+											}, 2000);
 										}
 									});
 								}
 							} else {
-								if ($("#emailadd").valid()) {
-									emailvalidator.resetForm();
-									regualarvalidator.resetForm();
+								if (validator.numberOfInvalids() == 2) {
+									validator.resetForm();
 									var domainname = service.returnDomainList();
 									var roles = [{
 										"roleName" : "ROLE_TIER3"
@@ -108,42 +109,119 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 											} else {
 												notify.showNotification('ERROR', response.message);
 											}
+											setTimeout(function() {
+												router.returnToPrevious();
+											}, 2000);
 										}
 									});
 								}
 							}
 						});
+						
+						//Add and wait for more inputs:
+						jQuery('#member-addmore').on('click', function() {
+							if (!jQuery('.edit-form').valid()) {
+								console.log(validator.numberOfInvalids());
+							} else {
+								console.log(validator.numberOfInvalids());
+							}
+							if (jQuery('#member-email').val().length == 0) {
+								if (validator.numberOfInvalids() === 1) {
+									validator.resetForm();
+									var _domainid;
+									service.returnDomainIDList({
+										success : function(data) {
+											_domainid = data;
+										}
+									});
+									var _userid = service.thisuserID();
+									service.addMemberRegular(_domainid[0], _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
+										success : function(data) {
+											if (data.status !== 'error') {
+												notify.showNotification('OK', data.message);
+											} else {
+												notify.showNotification('ERROR', data.message);
+											}
+											setTimeout(function() {
+												clearForm();
+											}, 2000);
+										}
+									});
+								}
+							} else {
+								if (validator.numberOfInvalids() == 2) {
+									validator.resetForm();
+									var domainname = service.returnDomainList();
+									var roles = [{
+										"roleName" : "ROLE_TIER3"
+									}];
+									service.sendInvite(jQuery('#member-email').val(), 'You are added to ' + domainname[0], domainname[0], roles, {
+										success : function(response) {
+											if (response !== 'error' && response.status !== 'error') {
+												notify.showNotification('OK', response.message);
+											} else {
+												notify.showNotification('ERROR', response.message);
+											}
+											setTimeout(function() {
+												clearForm();
+											}, 2000);
+										}
+									});
+								}
+							}
+						});
+						
 
 						//Adjusting Focus:
-						
-						$('.toggle').on('toggle', function(e, active) {
-							setTimeout(function() {
-								if (active) {
-									jQuery('#member-add').val('Add (Send Email)');
-									jQuery('#emailadd').show();
-									jQuery('#regularadd').hide();
-								} else {
-									jQuery('#member-add').val('Add');
-									jQuery('#emailadd').hide();
-									jQuery('#regularadd').show();
-								}
-							}, 200);
-							//to support touch emulation
+						jQuery('#member-first-name').keyup(function() {
+							if (jQuery('#member-first-name').val().length > 0 && jQuery('#member-last-name').val().length > 0) {
+								jQuery('#member-email').attr('readonly', 'readonly');
+							} else {
+								jQuery('#member-email').removeAttr('readonly');
+							}
+						});
+						jQuery('#member-last-name').keyup(function() {
+							if (jQuery('#member-first-name').val().length > 0 && jQuery('#member-last-name').val().length > 0) {
+								jQuery('#member-email').attr('readonly', 'readonly');
+								jQuery('#member-email').val('');
+							} else {
+								jQuery('#member-email').removeAttr('readonly');
+							}
+						});
+						jQuery('#member-email').keyup(function() {
+							if (jQuery('#member-email').val().length > 0) {
+								jQuery('#member-first-name').val('');
+								jQuery('#member-last-name').val('');
+								jQuery('#member-first-name').attr('readonly', 'readonly');
+								jQuery('#member-last-name').attr('readonly', 'readonly');
+							} else {
+								jQuery('#member-first-name').removeAttr('readonly');
+								jQuery('#member-last-name').removeAttr('readonly');
+							}
 						});
 
-						regualarvalidator = jQuery("#regularadd").validate({
+						jQuery('#form-reset').click(function() {
+							jQuery('#member-first-name').val('');
+							jQuery('#member-last-name').val('');
+							jQuery('#member-first-name').removeAttr('readonly');
+							jQuery('#member-last-name').removeAttr('readonly');
+							jQuery('#member-email').removeAttr('readonly');
+							jQuery('#member-email').val('');
+							validator.resetForm();
+						});
+
+						jQuery('#member-addmore').click(function() {
+
+						});
+
+						validator = jQuery(".edit-form").validate({
 							rules : {
 								memberfirstname : {
 									required : true,
 								},
 								memberlastname : {
 									required : true,
-								}
-							}
-						});
-
-						emailvalidator = jQuery("#emailadd").validate({
-							rules : {
+								},
 								memberemail : {
 									required : true,
 									email : true
