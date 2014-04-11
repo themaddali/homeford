@@ -173,9 +173,9 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						} else {
 							jQuery('#RInfo').fadeIn();
 							if (DOMAINSLIST && DOMAINSLIST.indexOf(domainrequest) !== -1) {
-								jQuery('.info').text('Existing Domain, Adds as Admin');
+								jQuery('.info').text('This is an existing Domain');
 							} else {
-								jQuery('.info').text('New Domain, Adds as Owner');
+								jQuery('.info').text('This is a New Domain');
 							}
 						}
 					});

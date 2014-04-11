@@ -96,7 +96,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										setTimeout(function() {
 											router.returnToPrevious();
 											//admin.reloadData();
-										}, 5000);
+										}, 3000);
 									}
 								});
 							}

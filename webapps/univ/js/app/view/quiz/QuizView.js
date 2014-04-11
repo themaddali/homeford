@@ -1,4 +1,4 @@
-define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function( modernizr, plugins, cookie, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, plugins, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var QuizView = ( function() {
 
@@ -36,6 +36,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 					} else {
 						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
+						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
 						$("#task-desc-data").text(ACTIVEQUIZ.desc);
@@ -49,11 +50,11 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 							step : 1,
 							slide : function(event, ui) {
 								$("#progressvalue").html(ui.value + '%');
-								jQuery('.ui-slider-range').removeClass("beginning middle").addClass(ui.value < 31 ? "beginning" : ui.value < 71 ? "middle" : "");
+								jQuery('.ui-slider-range').removeClass("beginning middle end").addClass(ui.value < 31 ? "beginning" : ui.value < 71 ? "middle" : "end");
 							}
 						});
 						jQuery('.ui-slider-handle').focus();
-						jQuery('.ui-slider-range').removeClass("beginning middle").addClass(ACTIVEQUIZ.progress < 31 ? "beginning" : ACTIVEQUIZ.progress < 71 ? "middle" : "");
+						jQuery('.ui-slider-range').removeClass("beginning middle end").addClass(ACTIVEQUIZ.progress < 31 ? "beginning" : ACTIVEQUIZ.progress < 71 ? "middle" : "end");
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
 							document.getElementById('task-time').type = 'date';
 						} else {
@@ -123,6 +124,9 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
 					if (checkForActiveCookie() === true) {
+						if (!$.ui) {
+							location.reload();
+						}
 						populateData();
 						helperMediaQuiries();
 
@@ -204,6 +208,13 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
+						jQuery('.subtitleinfo-2').click(function() {
+							router.go('/class');
+						});
+						jQuery('.subtitleinfo-3').click(function() {
+							router.go('/studentlist');
+						});
+						
 						jQuery('.goback').click(function() {
 							router.returnToPrevious();
 						});

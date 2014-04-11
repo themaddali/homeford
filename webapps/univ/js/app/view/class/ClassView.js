@@ -41,6 +41,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 								var COUNT = StudentData.length;
 								if (COUNT === 0) {
 									jQuery('#noinfo').fadeIn(1000);
+									jQuery('.metainfo').text('0 Tasks');
 								} else {
 									jQuery('#noinfo').hide();
 								}
@@ -94,6 +95,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						selectedQuiz.id = $(this).attr('name');
 						selectedQuiz.dueby = $(this).find('.due-date').text();
 						selectedQuiz.memberid = ACTIVESTUDENTID;
+						selectedQuiz.membername = $('.subtitleinfo').text();
 						quizview.activeTask(selectedQuiz);
 						router.go('/quiz', '/class');
 					});
@@ -153,6 +155,10 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						showBG();
+						//Rarely due to network latency if not loaded, just reload
+						if (!$.ui) {
+							location.reload();
+						}
 						populateClass();
 
 						//HTML Event - Actions
@@ -184,7 +190,10 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
 						});
-						jQuery('.goback').click(function() {
+						jQuery('.subtitleinfo').click(function() {
+							router.go('/studentlist');
+						});
+						jQuery('.subtitleinfo-3').click(function() {
 							router.go('/studentlist');
 						});
 						jQuery('.mainlogo').click(function() {

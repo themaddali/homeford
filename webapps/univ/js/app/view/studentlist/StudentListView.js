@@ -1,4 +1,4 @@
-define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function( modernizr, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -112,45 +112,45 @@ define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService'
 					service.returnDomainIDList({
 						success : function(data) {
 							activedomains = data;
+							for (var i = 0; i < activedomains.length; i++) {
+								service.getMembersOnly(activedomains[i], {
+									success : function(data) {
+										if (data.length == 0) {
+											jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+											if (jQuery('.studentboard').length === 0) {
+												jQuery('#noinfo').fadeIn(1000);
+											} else {
+												jQuery('#noinfo').hide();
+											}
+										} else {
+											var _fillerobject = {};
+											_fillerobject.id = 'FILLER';
+											_fillerobject.firstName = 'Indirect Reports';
+											MEMBEROBJECT.push(_fillerobject);
+										}
+										for (var j = 0; j < data.length; j++) {
+											var _memberobject = {};
+											if (!data[j].profile_url || data[j].profile_url === "") {
+												data[j].image = "img/noimg.png"
+											}
+											_memberobject.image = data[j].image;
+											_memberobject.firstName = data[j].firstName;
+											_memberobject.lastName = data[j].lastName;
+											_memberobject.email = data[j].email;
+											_memberobject.id = data[j].id;
+											if (MEMBERIDS.indexOf(data[j].id) == -1) {
+												MEMBERIDS.push(_memberobject.id);
+												MEMBEROBJECT.push(_memberobject);
+											}
+											if (j == data.length - 1) {
+												displayCards(MEMBEROBJECT);
+											}
+										}
+									}
+								});
+							}
 						}
 					});
-					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembersOnly(activedomains[i], {
-							success : function(data) {
-								if (data.length == 0) {
-									jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
-									if (jQuery('.studentboard').length === 0) {
-										jQuery('#noinfo').fadeIn(1000);
-									} else {
-										jQuery('#noinfo').hide();
-									}
-								} else {
-									var _fillerobject = {};
-									_fillerobject.id = 'FILLER';
-									_fillerobject.firstName = 'In Direct Reports';
-									MEMBEROBJECT.push(_fillerobject);
-								}
-								for (var j = 0; j < data.length; j++) {
-									var _memberobject = {};
-									if (!data[j].profile_url || data[j].profile_url === "") {
-										data[j].image = "img/noimg.png"
-									}
-									_memberobject.image = data[j].image;
-									_memberobject.firstName = data[j].firstName;
-									_memberobject.lastName = data[j].lastName;
-									_memberobject.email = data[j].email;
-									_memberobject.id = data[j].id;
-									if (MEMBERIDS.indexOf(data[j].id) == -1) {
-										MEMBERIDS.push(_memberobject.id);
-										MEMBEROBJECT.push(_memberobject);
-									}
-									if (j == data.length - 1) {
-										displayCards(MEMBEROBJECT);
-									}
-								}
-							}
-						});
-					}
 				}
 
 				function displayCards(MEMBEROBJECT) {
@@ -173,7 +173,8 @@ define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService'
 							jQuery('.loading').remove();
 							jQuery('#card-canvas').append(newboard);
 							jQuery('#card-canvas').append(loadingboard);
-							if (i == MEMBEROBJECT.length - 1) {
+							// Including the Filler Templates
+							if (i == MEMBEROBJECT.length - 2) {
 								jQuery('.loading').remove();
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
@@ -194,7 +195,7 @@ define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService'
 				function populateTasks(members) {
 					var list;
 					service.returnDomainIDList({
-						success : function(data){
+						success : function(data) {
 							list = data;
 						}
 					});
@@ -203,7 +204,18 @@ define(['modernizr','plugins', 'cookie', 'ellipsis', '../../service/DataService'
 					if (activememberid !== 'FILLER') {
 						service.MemberToDoList(list[0], members[0].id, {
 							success : function(tasks) {
-								if (tasks.length > 0) {
+								if (tasks.length == 0 && members[0]) {
+									jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+									if (jQuery('.studentboard').length === 0) {
+										jQuery('#noinfo').fadeIn(1000);
+									} else {
+										jQuery('#noinfo').hide();
+									}
+									if (members[0]) {
+										populateTasks(members);
+									}
+								}
+								if (tasks.length > 0 && members[0]) {
 									for (var k = 0; k < tasks.length; k++) {
 										jQuery('.studentboard[name="' + members[0].id + '"] .taskcount').text(tasks.length);
 										if (k < 2) {

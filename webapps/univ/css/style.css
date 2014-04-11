@@ -6,7 +6,6 @@
 /*COLORS
  /*#fbb913
  Actual #0784E3
- INFO : #79c3fb
  Header : #0784E3;
  Light #2fbcf7*/
 
@@ -224,6 +223,15 @@ input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, inp
 }
 input[type="email"]:focus + input-clear {
 	display: none;
+}
+
+input[readonly="readonly"] {
+	background-color: #f6f6f6;
+	color: #7f7f7f
+}
+input[readonly="readonly"]:focus {
+	border: 1px solid rgba(114, 114, 114, 0.71);
+	cursor: none;
 }
 
 button[disabled], input[disabled] {
@@ -1801,7 +1809,7 @@ div.formselction {
 	font-style: italic;
 	display: none;
 	width: auto;
-	position: absolute;
+	position: relative;
 	font-style: italic;
 	color: #7f7f7f;
 }
@@ -1814,7 +1822,7 @@ div.formselction {
 .edit-form li.form-item > * {
 	vertical-align: center;
 	display: inline-block;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 17px;
 	width: 50%;
 }
@@ -2199,7 +2207,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                           , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                            , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2380,7 +2388,7 @@ html.touch #subnav {
 	background: #e3d407;
 }
 .ui-progressbar.end .ui-progressbar-value {
-	background: #0784e3;
+	background: #07e366;
 }
 
 .classboard div.class-anouncement {
@@ -2456,22 +2464,25 @@ html.touch #subnav {
 }
 .main-content-header .titleinfo {
 	font-size: 1em;
-	font-weight: 700;
+	font-weight: 600;
 	float: left;
-	margin-top: 2px;
-	margin-left: 10px;
-	padding: 5px;
+	border-left: 10px solid #f3f3f3;
+	/*padding: 5px;*/
+	padding-left:10px;
+	height: 35px;
 	overflow: hidden;
 }
-.main-content-header .subtitleinfo {
+.main-content-header .subtitleinfo, .main-content-header .subtitleinfo-2,.main-content-header .subtitleinfo-3  {
 	font-size: 0.9em;
 	font-weight: 600;
-	margin-top: 2px;
-	margin-left: 10px;
-	padding: 5px;
 	overflow: hidden;
 	height: 34px;
 	color: #737373;
+	vertical-align:middle;
+	cursor: pointer;
+}
+.main-content-header .subtitleinfo:hover, .main-content-header .subtitleinfo-2:hover,.main-content-header .subtitleinfo-3:hover  {
+	color: #0784E3;
 }
 .main-content-header > a {
 	float: left;
@@ -3645,7 +3656,8 @@ html.no-touch #gradient-right {
 	background-color: #f3f3f3;
 	color: #666666;
 	text-overflow: ellipsis;
-	border-bottom: 2px solid #d9d9d9;
+	/*border-bottom: 2px solid #d9d9d9;*/
+	border-bottom: 2px solid rgba(217, 217, 217, 0.38);
 }
 
 #project-page-logo {
@@ -3654,6 +3666,7 @@ html.no-touch #gradient-right {
 	height: 23px;
 	background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
 	margin: 18px 12px 0 12px;
+	cursor: pointer;
 }
 
 .user-info {
@@ -3715,6 +3728,7 @@ html.no-touch #gradient-right {
 	display: block;
 	width: 100%;
 	height: 100%;
+	cursor: pointer;
 }
 
 #project-page-logo h1 {
@@ -4027,12 +4041,12 @@ html.no-touch #gradient-right {
 }
 #searchbar.active > input[type="text"]:focus {
 	border: 2px solid #0784E3;
-	font-weight: 600;
+	font-weight: 500;
 	text-align: left;
 }
 #searchbar.active > select:focus {
 	border: 2px solid #0784E3;
-	font-weight: 600;
+	font-weight: 500;
 	text-align: left;
 }
 #searchbar.active button {
@@ -4094,6 +4108,9 @@ html.no-touch #gradient-right {
 }
 .ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min.middle {
 	background: url('../img/middle.png');
+}
+.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min.end {
+	background: url('../img/end.png');
 }
 
 /* =================== Maximage Slideshow ======================= */
@@ -4219,7 +4236,7 @@ div.mc-image {
 
 input:focus, textarea:focus {
 	outline: none;
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .jspCorner {
@@ -4372,6 +4389,7 @@ footer a:hover {
 		width: 181px;
 		height: 18px;
 		background: transparent url("../img/project-page-logo.png") no-repeat center center;
+		cursor: pointer;
 	}
 	#logo a, #static-logo a {
 		display: block;

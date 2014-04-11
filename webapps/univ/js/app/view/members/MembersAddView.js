@@ -73,7 +73,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 								if ($("#regularadd").valid()) {
 									emailvalidator.resetForm();
 									regualarvalidator.resetForm();
-									var _domainid = service.returnDomainIDList();
+									var _domainid;
+									service.returnDomainIDList({
+										success : function(data){
+											_domainid = data;
+										}
+									});
 									var _userid = service.thisuserID();
 									service.addMemberRegular(_domainid[0], _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
 										success : function(data) {
@@ -84,7 +89,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 											}
 											setTimeout(function() {
 												router.returnToPrevious();
-											}, 5000);
+											}, 3000);
 										}
 									});
 								}

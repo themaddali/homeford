@@ -1,4 +1,4 @@
-define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView'], function(raphael, plugins, cookie, elychart, service, banner, router, invite) {"use strict";
+define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView','../../Notify'], function(raphael, plugins, cookie, elychart, service, banner, router, invite, notify) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -243,8 +243,8 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 									}
 									if (j === data.length - 1) {
 										updatePanelGraphs('#todo-donut', _tododata);
-										var percentage = Math.ceil(_todopercentage/parseInt(jQuery('#todo-total-value').text()));
-										updatePanelValues('#todo-progress-value', _todopercentage + ' %');
+										var percentage = Math.ceil(_todopercentage / parseInt(jQuery('#todo-total-value').text()));
+										updatePanelValues('#todo-progress-value', percentage + ' %');
 									}
 								}
 							}
@@ -388,11 +388,36 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 						jQuery('.adminboard').on('click', function() {
 
 						});
+						jQuery('#user-name').on('click', function(e) {
+							banner.ShowUser();
+							jQuery('#signout').on('click', function(e) {
+								banner.logout();
+							});
+							jQuery('#banner-dashboard').on('click', function(e) {
+								banner.HideUser();
+								router.go('/admin');
+							});
+							jQuery('.userflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideUser();
+								}, 500);
+							});
+						});
+
+						jQuery('#alert').on('click', function(e) {
+							banner.ShowAlert();
+							jQuery('.alertflyout').mouseleave(function() {
+								setTimeout(function() {
+									banner.HideAlert();
+								}, 500);
+							});
+							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
+						});
 						jQuery('#admin-done').on('click', function() {
 							router.returnToPrevious();
 						});
 
-						jQuery('.goback').click(function() {
+						jQuery('.subtitleinfo').click(function() {
 							router.returnToPrevious();
 						});
 						jQuery('.mainlogo').click(function() {
