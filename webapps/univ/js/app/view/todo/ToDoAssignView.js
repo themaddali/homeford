@@ -132,8 +132,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _tdue = jQuery('#task-deadline').val();
 								var _tbenefit = jQuery('#task-benefit').val();
 								var _tassignto = jQuery('#member-list').text();
-								var _thelpurl = jQuery('#task-helper-url').text();
-								var _thelpyoutube = jQuery('#task-helper-youtube').text();
+								var _thelpurl = jQuery('#task-helper-url').val();
+								var _thelpyoutube = jQuery('#task-helper-youtube').val();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
 								var _domainids;

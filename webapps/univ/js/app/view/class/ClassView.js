@@ -50,6 +50,8 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									var newboard = PanelTemplate.clone();
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
+									jQuery('.class-url', newboard).text(StudentData[i].helperUrl);
+									jQuery('.class-youtube', newboard).text(StudentData[i].helperYoutube);
 									if (StudentData[i].priority === 'High') {
 										jQuery('.class-name', newboard).append(HIGHPRIORITY);
 									} else if (StudentData[i].priority === 'Low') {
@@ -96,6 +98,8 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						selectedQuiz.dueby = $(this).find('.due-date').text();
 						selectedQuiz.memberid = ACTIVESTUDENTID;
 						selectedQuiz.membername = $('.subtitleinfo').text();
+						selectedQuiz.url = $(this).find('.class-url').text();
+						selectedQuiz.youtube = $(this).find('.class-youtube').text();
 						quizview.activeTask(selectedQuiz);
 						router.go('/quiz', '/class');
 					});
