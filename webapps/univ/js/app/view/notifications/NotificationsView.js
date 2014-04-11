@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', '../../service/BannerService','../../Notify', '../../Router'], function(cookie, service, banner, notify, router) {"use strict";
+define(['cookie', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, service, banner, notify, router) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -45,12 +45,33 @@ define(['cookie', '../../service/DataService', '../../service/BannerService','..
 						var thistemplate = template.clone();
 						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
 						jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
-						jQuery('.inviteddomain', thistemplate).text(NOTIFICATION[i].domain);
-						jQuery('.invitedby', thistemplate).text(NOTIFICATION[i].by);
-						jQuery('.invitedmsg', thistemplate).text(NOTIFICATION[i].msg);
-						jQuery('.action', thistemplate).text(NOTIFICATION[i].keyword);
-						jQuery('.inviteid', thistemplate).text(NOTIFICATION[i].inviteid);
-						thistemplate.attr('name', i);
+						if (NOTIFICATION[i].domain.length > 1) {
+							jQuery('.inviteddomain', thistemplate).text(NOTIFICATION[i].domain);
+						} else {
+							jQuery('.inviteddomain', thistemplate).parent().css('display', 'none');
+						}
+						if (NOTIFICATION[i].by.length > 1) {
+							jQuery('.invitedby', thistemplate).text(NOTIFICATION[i].by);
+						} else {
+							jQuery('.invitedby', thistemplate).parent().css('display', 'none');
+						}
+						if (NOTIFICATION[i].msg.length > 1) {
+							jQuery('.invitedmsg', thistemplate).text(NOTIFICATION[i].msg);
+						} else {
+							jQuery('.invitedmsg', thistemplate).parent().css('display', 'none');
+						}
+						if (NOTIFICATION[i].keyword.length > 1) {
+							jQuery('.action', thistemplate).text(NOTIFICATION[i].keyword);
+							thistemplate.attr('name', i);
+						} else {
+							jQuery('.action', thistemplate).css('display', 'none');
+							jQuery('.foot', thistemplate).css('display', 'none');
+						}
+						if (NOTIFICATION[i].inviteid.length > 1) {
+							jQuery('.inviteid', thistemplate).text(NOTIFICATION[i].inviteid);
+						} else {
+							jQuery('.inviteid', thistemplate).css('display', 'none');
+						}
 						jQuery('#card-canvas').append(thistemplate);
 						if (i === NOTIFICATION.length - 1) {
 							jQuery('.action').click(function() {

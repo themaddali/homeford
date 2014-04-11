@@ -16,6 +16,16 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 			function Notify() {
 
 				function showNotification(status, message, toroute, duration) {
+					var _notification = {};
+					_notification.title = message;
+					_notification.domain = '';
+					_notification.by = '';
+					_notification.msg = '';
+					_notification.status = status;
+					_notification.time = new Date();
+					_notification.keyword = '';
+					_notification.inviteid = '';
+					NOTIFICATIONS.push(_notification);
 					jQuery('div.edit-notify').remove();
 					if (!duration) {
 						duration = 1500;
