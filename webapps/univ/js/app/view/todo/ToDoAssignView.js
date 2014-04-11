@@ -124,6 +124,31 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.go('/memberspick');
 						});
 
+						jQuery.validator.addMethod("youtubeValid", function(value, element) {
+							if (((value.indexOf('/') === -1) && (value.indexOf('.com') === -1) && (value.indexOf('htt') === -1) && (value.indexOf('www.') === -1)) || value.length === 0) {
+								return true;
+							} else
+								return false;
+						}, "Just provide youtubeID");
+
+						jQuery.validator.addMethod("VideoExists", function(value, element) {
+							var isSuccess = false;
+							if (value.length > 0 && value.length < 13) {
+								$.ajax({
+									url : 'https://gdata.youtube.com/feeds/api/videos/' + value,
+									type : 'GET',
+									async : false,
+									contentType : "application/json",
+									success : function(msg) {
+										isSuccess = msg ? true : false
+									}
+								});
+								return isSuccess;
+							} else {
+								return true;
+							}
+						}, "No Video on this ID");
+
 						jQuery('#task-assign').on('click', function() {
 							if ($(".edit-form").valid()) {
 								var _tname = jQuery('#task-name').val();
@@ -181,7 +206,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									url : true,
 								},
 								taskhelperyoutube : {
-									url : true,
+									required : false,
+									youtubeValid : true,
+									VideoExists : true
 								},
 							}
 						});

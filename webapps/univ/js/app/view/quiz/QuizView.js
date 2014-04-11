@@ -35,7 +35,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						router.go('/class');
 					} else {
 						jQuery('.helper').removeAttr("href");
-						jQuery('.helper').attr('disabled',true);
+						jQuery('.helper').attr('disabled', true);
 						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
@@ -57,13 +57,14 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						});
 						jQuery('.ui-slider-handle').focus();
 						jQuery('.ui-slider-range').removeClass("beginning middle end").addClass(ACTIVEQUIZ.progress < 31 ? "beginning" : ACTIVEQUIZ.progress < 71 ? "middle" : "end");
-						if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4){
-							jQuery('.helper-url').attr('href',ACTIVEQUIZ.url);
-							jQuery('.helper-url').attr('disabled',false);
+						if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
+							jQuery('.helper-url').attr('href', ACTIVEQUIZ.url);
+							jQuery('.helper-url').attr('disabled', false);
 						}
-						if (ACTIVEQUIZ.youtube && ACTIVEQUIZ.youtube.length > 4){
-							jQuery('.helper-youtube').attr('href',ACTIVEQUIZ.youtube);
-							jQuery('.helper-youtube').attr('disabled',false);
+						if (ACTIVEQUIZ.youtube && ACTIVEQUIZ.youtube.length > 4) {
+							var fulllink = "http://www.youtube.com/watch?v=" + ACTIVEQUIZ.youtube + "?modestbranding=1&autoplay=1&cc_load_policy=1&controls=0&rel=0";
+							jQuery('.helper-youtube').attr('href', fulllink);
+							jQuery('.helper-youtube').attr('disabled', false);
 						}
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
 							document.getElementById('task-time').type = 'date';
@@ -224,7 +225,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						jQuery('.subtitleinfo-3').click(function() {
 							router.go('/studentlist');
 						});
-						
+
 						jQuery('.goback').click(function() {
 							router.returnToPrevious();
 						});
