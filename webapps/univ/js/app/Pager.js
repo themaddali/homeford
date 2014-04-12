@@ -5,13 +5,9 @@ define(['jquery'], function() {"use strict";
 			function Pager() {
 
 				var elements = {};
-				// [id] = {page and view}
 				var activeElements = {};
-				// [containerId] = {page and view}
 				var spinners = {};
-				// [containerId] = $(spinnerId)
 				var watchers = {};
-				// [containerId] = [{pause: func, resume: func}, ...]
 
 				function pauseWatchers(containerId) {
 					if (watchers[containerId]) {
@@ -53,12 +49,12 @@ define(['jquery'], function() {"use strict";
 					deactivate(containerId);
 				};
 
-				this.makeViewReload = function(id,url) {
-					var id = '/[' + id + ']';
-					var thiselement = elements[id];
-					thiselement.initialized = false;
-					thiselement.seturl = url;
-				}
+				// this.makeViewReload = function(id, url) {
+					// var id = '/[' + id + ']';
+					// var thiselement = elements[id];
+					// thiselement.initialized = false;
+					// thiselement.seturl = url;
+				// }
 
 				this.loadElement = function(containerId, id, page, view) {
 					var element, activeElement, context, viewName;
@@ -89,18 +85,14 @@ define(['jquery'], function() {"use strict";
 					// only if we're changing
 					if (activeElement !== element) {
 
-						//findSpinner(containerId); // in case we load without unloading first
-
 						deactivate(containerId);
-
 						$(containerId).append(element.page);
-
 						if (element.view) {
 							if (element.initialized == false) {
 								var reloadPath = element.seturl;
 								window.location.href = reloadPath;
 								window.location.reload();
-							
+
 							} else if ((!element.initialized)) {
 								if (element.view.init) {
 									element.view.init();
@@ -110,9 +102,7 @@ define(['jquery'], function() {"use strict";
 								element.view.resume();
 							}
 						}
-
 						resumeWatchers(containerId);
-
 						activeElements[containerId] = element;
 					}
 				};

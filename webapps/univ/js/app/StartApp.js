@@ -1,4 +1,4 @@
-define(['../app/LocationView', '../app/Environment', '../app/UrlFragment', '../app/Router', 'cookie', 'jquery'], function(locationView, environment, urlFragment, router) {"use strict";
+define(['../app/LocationView', '../app/UrlFragment', '../app/Router', 'cookie', 'jquery'], function(locationView, urlFragment, router) {"use strict";
 
 	var Application = ( function() {
 
@@ -21,11 +21,7 @@ define(['../app/LocationView', '../app/Environment', '../app/UrlFragment', '../a
 				};
 
 				this.start = function() {
-					if (environment.supportedBrowser()) {
-						router.start();
-					} else {
-						//Have to insert else case logics here or message to dispay for Browser not suported/
-					}
+					router.start();
 				};
 
 			}
