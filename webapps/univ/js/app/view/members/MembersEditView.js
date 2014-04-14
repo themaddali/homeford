@@ -24,11 +24,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
 						jQuery('#member-profile-image').attr('src', ACTIVEMEMBER.image);
 						// jQuery('#member-profile-image').Jcrop({
-							// allowSelect : false,
-							// allowMove : true,
-							// allowResize : true,
-							// setSelect : [0, 0, 300, 150],
-							// aspectRatio : 2,
+						// allowSelect : false,
+						// allowMove : true,
+						// allowResize : true,
+						// setSelect : [0, 0, 300, 150],
+						// aspectRatio : 2,
 						// });
 						jQuery('#new-member-profile-image').attr('data-url', '/homeford/api/profileupload/' + ACTIVEMEMBER.id);
 						ActivateClicks();
@@ -43,14 +43,32 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 				};
 
 				function ActivateClicks() {
-					var formData_input = $('#new-member-profile-image').serializeArray();
 					$('#new-member-profile-image').fileupload({
+						add : function(e, data) {
+							var uploadErrors = [];
+							var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+							if (data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+								uploadErrors.push('Only .jpg, .gif and .png types are allowed');
+							}
+							if (data.originalFiles[0]['size'].length && data.originalFiles[0]['size'] > 5000000) {
+								uploadErrors.push('Filesize is too big');
+							}
+							if (uploadErrors.length > 0) {
+								alert(uploadErrors.join("\n"));
+							} else {
+								data.submit();
+							}
+						},
 						dataType : 'json',
 						formData : formData_input,
+						submit : function(e, data) {
+							jQuery('#member-profile-image').attr('src', 'img/loader.gif');
+						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
 								jQuery('#member-profile-image').attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
+								$('#new-member-profile-image').fileupload('destroy');
 							});
 						}
 					});
@@ -116,6 +134,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 						});
 
 						jQuery('#member-profile-image').click(function() {
+							formData_input = $('#new-member-profile-image').serializeArray();
 							$('input[type=file]').click();
 						});
 
