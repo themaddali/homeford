@@ -58,6 +58,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if (data[j].lastName == 'null' || data[j].lastName == null || !data[j].lastName) {
 										data[j].lastName = "  "
 									}
+									if (data[j].image && data[j].image.name != null) {
+										jQuery('.members-image', row).attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + data[j].image.id);
+									} else {
+										jQuery('.members-image', row).attr('src', 'img/noimg.png');
+									}
 									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName);
 									jQuery('.members-id', row).text(data[j].id);
 									jQuery('.members-email', row).text(data[j].email);
@@ -81,29 +86,6 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							}
 						});
 					}
-					// service.getUnivObject({
-					// success : function(UnivData) {
-					// var rowtemplate = jQuery('#members-template').attr('id', '');
-					// //Backing the template
-					// jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
-					// var COUNT = UnivData[0].students.length;
-					// for (var i = 0; i < COUNT; i++) {
-					// var row = rowtemplate.clone();
-					// if (UnivData[0].students[i].gender === 'female') {
-					// //jQuery('.members-icon', row).empty().append(FEMALEICON);
-					// } else {
-					// //jQuery('.members-icon', row).empty().append(MALEICON);
-					// }
-					// jQuery('.members-name', row).text(UnivData[0].students[i].name);
-					// jQuery('.members-id', row).text(UnivData[0].students[i].id);
-					// jQuery('.members-security', row).text(UnivData[0].students[i].security);
-					// jQuery('.members-courses', row).text(UnivData[0].students[i].courses.length);
-					// jQuery('.view-table  tbody').append(row);
-					// jQuery('.view-table').trigger("update");
-					// activateTableClicks();
-					// }
-					// }
-					// });
 				}
 
 				function activateTableClicks() {
@@ -115,7 +97,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						status : 'none',
 						domain : 'none',
 						courses : 'none',
-						id : 'none'
+						email : '',
+						id : 'none',
+						image : 'img/noimg.png',
 					};
 
 					jQuery('.view-table tbody tr').click(function() {
@@ -127,27 +111,33 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						rowObject.lastname = jQuery(this).find('.members-name').text().split(" ")[1];
 						rowObject.security = jQuery(this).find('.members-security').text();
 						rowObject.id = jQuery(this).find('.members-id').text();
-						rowObject.email = jQuery(this).find('.members-email').text();
+						if (jQuery(this).find('.members-email').text() !== 'null') {
+							rowObject.email = jQuery(this).find('.members-email').text();
+						}
 						rowObject.roles = jQuery(this).find('.members-roles').text();
 						rowObject.domain = jQuery(this).find('.members-domain').text();
+						rowObject.courses = jQuery(this).find('.members-courses').text();
+						if (jQuery(this).find('.members-image').attr('src') !== "img/noimg.png") {
+							rowObject.image = jQuery(this).find('.members-image').attr('src');
+						}
 						rowObject.courses = jQuery(this).find('.members-courses').text();
 						membersedit.setMemberInfo(rowObject);
 						router.go('/memberslistedit');
 					});
 
 					// jQuery('.members-action').click(function(e) {
-						// if (jQuery(this).parent().hasClass('rowactive')) {
-							// rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];
-							// rowObject.lastname = jQuery(this).parent().find('.members-name').text().split(" ")[1];
-							// rowObject.security = jQuery(this).parent().find('.members-security').text();
-							// rowObject.id = jQuery(this).parent().find('.members-id').text();
-							// rowObject.email = jQuery(this).parent().find('.members-email').text();
-							// rowObject.roles = jQuery(this).parent().find('.members-roles').text();
-							// rowObject.domain = jQuery(this).parent().find('.members-domain').text();
-							// rowObject.courses = jQuery(this).parent().find('.members-courses').text();
-							// membersedit.setMemberInfo(rowObject);
-							// router.go('/memberslistedit');
-						// }
+					// if (jQuery(this).parent().hasClass('rowactive')) {
+					// rowObject.firstname = jQuery(this).parent().find('.members-name').text().split(" ")[0];
+					// rowObject.lastname = jQuery(this).parent().find('.members-name').text().split(" ")[1];
+					// rowObject.security = jQuery(this).parent().find('.members-security').text();
+					// rowObject.id = jQuery(this).parent().find('.members-id').text();
+					// rowObject.email = jQuery(this).parent().find('.members-email').text();
+					// rowObject.roles = jQuery(this).parent().find('.members-roles').text();
+					// rowObject.domain = jQuery(this).parent().find('.members-domain').text();
+					// rowObject.courses = jQuery(this).parent().find('.members-courses').text();
+					// membersedit.setMemberInfo(rowObject);
+					// router.go('/memberslistedit');
+					// }
 					// });
 
 					// TWO Step Approact, Click to activate, Gear to edit

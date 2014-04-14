@@ -348,6 +348,22 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				}
 
+				this.updateProfilePhoto = function(userid, handlers) {
+					$.ajax({
+						url : '/homeford/api/profileupload/' + userid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'percentage' : progress,
+							'comments' : comments
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+
 				this.Login = function(username, password, handlers) {
 					$.ajax({
 						url : '/homeford/j_spring_security_check',
@@ -419,13 +435,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.returnDomainList = function() {
 					return ACTIVEDOMAINLIST;
 				}
-				
 				//To vall a function from a diff view
-				this.ViewCall = function(viewname, functionname, value){
+				this.ViewCall = function(viewname, functionname, value) {
 					viewname.functionname(value);
 				}
-				
-				
+
 				this.returnDomainIDList = function(handlers) {
 					//To facilite passive loading
 					if (ACTIVEDOMAINIDLIST.length == 0) {

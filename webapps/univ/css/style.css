@@ -1744,10 +1744,10 @@ div.formselction {
 	border-color: rgba(114, 114, 114, 0.71);
 	vertical-align: top;
 }
-.edit-form li input[type="web"]:focus + .form-helper, .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+.edit-form li input[type="web"]:focus + .form-helper, .edit-form li img:focus + .form-helper,  .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
 	display: inline;
 }
-.edit-form li input[type="web"]:hover + .form-helper, .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
+.edit-form li input[type="web"]:hover + .form-helper, .edit-form li img:hover + .form-helper,  .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
 	display: inline;
 }
 
@@ -1826,6 +1826,16 @@ div.formselction {
 	font-size: 13px;
 	line-height: 17px;
 	width: 50%;
+}
+.edit-form li.form-item img {
+	padding: 10px;
+	border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border: 1px solid rgba(114, 114, 114, 0.71);
+	cursor: pointer;
+}
+.edit-form li.form-item img:focus, .edit-form li.form-item img:hover {
+	border: 1px solid #0784E3;
 }
 .edit-form li.form-item a {
 	vertical-align: center;
@@ -2208,7 +2218,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                                 , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2439,6 +2449,12 @@ html.touch #subnav {
 	border-radius: 0px;
 }
 
+.members-image {
+	width: 45px;
+	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
 /*INFO*/
 .info {
 	border: 2px solid rgba(114, 114, 114, 0);
@@ -2448,6 +2464,13 @@ html.touch #subnav {
 	border-bottom-right-radius: 5px;
 	/*border-top-left-radius: 5px;
 	 border-bottom-right-radius: 5px;*/
+}
+
+/*====PROFILE PIC=====*/
+#cropContainerHeader {
+	width: 200px;
+	height: 150px;
+	position: relative; /* or fixed or absolute */
 }
 
 /*===========Cards Template - Responive==========*/

@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
 
 	var ProfileEditView = ( function() {
 
@@ -14,6 +14,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			}
+			var cropperHeader;
 
 			function ProfileEditView() {
 
@@ -26,21 +27,28 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
-							//var template = jQuery('#profile-domain-template').attr('id', '');
-							// if (UserProfile.domains.length === 1) {
-							// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-							// } else {
-							// for (var i = 0; i < UserProfile.domains.length; i++) {
-							// if (i === 0) {
-							// jQuery('#profile-domains').val(UserProfile.domains[0].domainName + ' : ' + ROLEMAP[UserProfile.domains[0].roleName]);
-							// } else {
-							// var activetemplate = template.clone();
-							// activetemplate.show();
-							// jQuery('#profile-domain-list', activetemplate).val(UserProfile.domains[i].domainName + ' : ' + ROLEMAP[UserProfile.domains[i].roleName]);
-							// jQuery('#profile-form').append(activetemplate);
-							// }
-							// }
-							// }
+							if (UserProfile.image.id){
+								jQuery('#profile-image').attr('src','http://localhost:8080/homeford/api/profileupload/picture/' + UserProfile.image.id);
+							}
+							else {
+								jQuery('#profile-image').attr('src','img/noimg.png');
+							}
+							jQuery('#profile-picture').attr('data-url', '/homeford/api/profileupload/' + UserProfile.id);
+							ActivateClicks();
+						}
+					});
+				}
+
+				function ActivateClicks() {
+					var formData_input = $('#profile-picture').serializeArray();
+					$('#profile-picture').fileupload({
+						dataType : 'json',
+						formData: formData_input,
+						done : function(e, data) {
+							$.each(data.result.files, function(index, file) {
+								jQuery('#profile-image').attr('src',  'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
+								service.cleanUserProfile();
+							});
 						}
 					});
 				}
@@ -75,12 +83,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					//Light weight DOM.
 
 					if (checkForActiveCookie() === true) {
-
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('#profile-edit-modal-close').on('click', function() {
-							//router.go('/admin', '#/profileedit');
 							router.returnToPrevious();
 						});
 
@@ -100,7 +106,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								});
 							}
-							//Need to update to handler
 						});
 
 						jQuery('#profile-password').keyup(function() {
@@ -108,6 +113,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							if (jQuery('#profile-password').val() == "") {
 								jQuery('#password-reenter-item').fadeOut();
 							}
+						});
+						
+						jQuery('#profile-image').click(function() {
+							$('input[type=file]').click();
 						});
 
 						jQuery("#profile-edit-form").validate({

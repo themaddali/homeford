@@ -28,7 +28,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#profile-email').text(UserProfile.email);
 							jQuery('#profile-phone').text(UserProfile.phoneNumber);
 							jQuery('#profile-pending-invites').text(UserProfile.pendingInvitees.length);
-							jQuery('#profile-form').find('.secondary').remove();
+							if (UserProfile.image.id){
+								jQuery('#profile-image').attr('src','http://localhost:8080/homeford/api/profileupload/picture/' + UserProfile.image.id);
+							}
+							else {
+								jQuery('#profile-image').attr('src','img/noimg.png');
+							}
 							var template = jQuery('#profile-domain-template').attr('id', '');
 							//backupagain
 							jQuery('#div-template').append(template.attr('id', 'profile-domain-template'))

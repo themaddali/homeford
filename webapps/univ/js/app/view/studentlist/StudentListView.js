@@ -83,10 +83,11 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							for (var i = 0; i < data.members.length; i++) {
 								var _memberobject = {};
 								//Add Filler Image
-								if (!data.members[i].profile_url || data.members[i].profile_url === "") {
-									data.members[i].image = "img/noimg.png"
+								if (!data.members[i].image || data.members[i].image === null) {
+									_memberobject.image = "img/noimg.png"
+								} else {
+									_memberobject.image = 'http://localhost:8080/homeford/api/profileupload/picture/' + data.members[i].image.id;
 								}
-								_memberobject.image = data.members[i].image;
 								_memberobject.firstName = data.members[i].firstName;
 								_memberobject.lastName = data.members[i].lastName;
 								_memberobject.email = data.members[i].email;
@@ -130,10 +131,11 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 										}
 										for (var j = 0; j < data.length; j++) {
 											var _memberobject = {};
-											if (!data[j].profile_url || data[j].profile_url === "") {
-												data[j].image = "img/noimg.png"
+											if (!data[j].image || data[j].image === null) {
+												_memberobject.image = "img/noimg.png"
+											} else {
+												_memberobject.image = 'http://localhost:8080/homeford/api/profileupload/picture/' + data[j].image.id;
 											}
-											_memberobject.image = data[j].image;
 											_memberobject.firstName = data[j].firstName;
 											_memberobject.lastName = data[j].lastName;
 											_memberobject.email = data[j].email;
@@ -159,8 +161,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
 							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
 							var newboard = template.clone();
-							var loadingboard = loadingtemplate.clone();
-							loadingboard.addClass('loading');
+							//var loadingboard = loadingtemplate.clone();
+							//loadingboard.addClass('loading');
 							if ((MEMBEROBJECT[i].firstName === 'null' || MEMBEROBJECT[i].firstName == null || MEMBEROBJECT[i].firstName === "" ) && (MEMBEROBJECT[i].lastName === 'null' || MEMBEROBJECT[i].lastName == null || MEMBEROBJECT[i].lastName === "")) {
 								jQuery('.student-name', newboard).text(MEMBEROBJECT[i].email);
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].email);
@@ -170,12 +172,12 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							}
 							jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
-							jQuery('.loading').remove();
+							//jQuery('.loading').remove();
 							jQuery('#card-canvas').append(newboard);
-							jQuery('#card-canvas').append(loadingboard);
+							//jQuery('#card-canvas').append(loadingboard);
 							// Including the Filler Templates
-							if (i == MEMBEROBJECT.length - 2) {
-								jQuery('.loading').remove();
+							if (i == MEMBEROBJECT.length - 1) {
+								//jQuery('.loading').remove();
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
 									onlyFullWords : true
@@ -205,7 +207,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						service.MemberToDoList(list[0], members[0].id, {
 							success : function(tasks) {
 								if (tasks.length == 0 && members[0]) {
-									jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+									jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' members');
 									if (jQuery('.studentboard').length === 0) {
 										jQuery('#noinfo').fadeIn(1000);
 									} else {
@@ -319,7 +321,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						template = jQuery('#student-template').remove().attr('id', '');
-						loadingtemplate = jQuery('#loading-template').remove().attr('id', '');
+						//loadingtemplate = jQuery('#loading-template').remove().attr('id', '');
 						partiontemplate = jQuery('.canvas-partition');
 						showBG();
 						populateStudentList();

@@ -22,7 +22,20 @@ require({
 		touchpunch : 'touchpunch',
 		ellipsis : 'ellipsis',
 		clear : 'clear',
+		transport : 'iframe-transport',
+		fileupload : 'fileupload',
+		crop : 'jquery.Jcrop.min',
 		Pages : '../../module',
+	},
+	map : {
+		'*' : {
+			jquerywidget : 'jqueryui'
+		}
+	},
+	shim : {
+		'jqueryui' : {
+			deps : ['jquery']
+		}
 	},
 	priority : ['modernizr', 'jquery'],
 	waitSeconds : 20 // make VPN more resilient
