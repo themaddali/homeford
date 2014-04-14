@@ -455,7 +455,7 @@ a.goback {
 	padding: 5px;
 	border: none;
 	font-weight: 700;
-	width: 100%
+	width: 95%
 }
 
 #register-link:hover {
@@ -1469,7 +1469,7 @@ a.goback {
 	border: 2px solid #e6e6e6;
 }
 .modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
-	border: 2px solid #0784E3;
+	border: 2px solid #e6e6e6;
 	cursor: pointer;
 	background-color: #FFFFFF;
 	color: black;
@@ -1484,7 +1484,7 @@ a.goback {
 .modal-body .modal-container header input:hover, .modal-body .modal-container footer input:hover {
 	/*background-color: #FFFFFF;*/
 	/*color: #0784E3;*/
-	border: 2px solid #999;
+	border: 2px solid #0784E3;;
 }
 
 .modal-body .modal-container header a {
@@ -1719,7 +1719,8 @@ div.formselction {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
-.edit-form li textarea {
+.edit-form li div.form-content input {
+	width: 70%;
 	padding: 10px;
 	border-radius: 0;
 	margin-bottom: 5px;
@@ -1729,6 +1730,22 @@ div.formselction {
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
+}
+.edit-form li div.form-content textarea {
+	width: 70%;
+	padding: 10px;
+	border-radius: 0;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
+}
+
+.edit-form li div.form-content input:focus, .edit-form li div.form-content textarea:focus, .edit-form li div.form-content img:focus {
+	border-color: #0784E3;
 }
 .edit-form li div.input-label {
 	padding: 10px;
@@ -1744,49 +1761,54 @@ div.formselction {
 	border-color: rgba(114, 114, 114, 0.71);
 	vertical-align: top;
 }
-.edit-form li input[type="web"]:focus + .form-helper, .edit-form li img:focus + .form-helper,  .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
-	display: inline;
+.edit-form li div.form-content input[type="web"]:focus + .form-helper, .edit-form li div.form-content img:focus + .form-helper, .edit-form li div.form-content input[type="file"]:focus + .form-helper, .edit-form li div.form-content input[type="date"]:focus + .form-helper, .edit-form li div.form-content input[type="password"]:focus + .form-helper, .edit-form li div.form-content input[type="email"]:focus + .form-helper, .edit-form li div.form-content input[type="text"]:focus + .form-helper {
+	display: inline-block;
 }
-.edit-form li input[type="web"]:hover + .form-helper, .edit-form li img:hover + .form-helper,  .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
-	display: inline;
+.edit-form li div.form-content input[type="web"]:hover + .form-helper, .edit-form li div.form-content img:hover + .form-helper, .edit-form div.form-content li input[type="file"]:hover + .form-helper, .edit-form li div.form-content input[type="date"]:hover + .form-helper, .edit-form li div.form-content input[type="password"]:hover + .form-helper, .edit-form li div.form-content input[type="email"]:hover + .form-helper, .edit-form li div.form-content input[type="text"]:hover + .form-helper {
+	display: inline-block;
 }
 
-.edit-form li textarea.edittextarea:focus + .form-helper {
-	display: inline;
+.edit-form li div.form-content textarea.edittextarea:focus + .form-helper {
+	display: inline-block;
 }
 .edit-form li textarea.edittextarea:focus {
 	border-color: #0784E3;
 }
-.edit-form li textarea.edittextarea:hover + .form-helper {
-	display: inline;
+.edit-form li div.form-content textarea.edittextarea:hover + .form-helper {
+	display: inline-block;
 }
-
-.edit-form li a.input-link:focus + .form-helper {
-	display: inline
+.edit-form li div.form-content a.input-link:focus + .form-helper {
+	display: inline-block;
 }
-.edit-form li a.input-link:hover + .form-helper {
-	display: inline
+.edit-form li div.form-content a.input-link:hover + .form-helper {
+	display: inline-block;
 }
-.edit-form li div#progressslider:hover + .form-helper {
-	display: inline
+.edit-form li div.form-content img:focus + .form-helper {
+	display: inline-block;
 }
-.edit-form li div#progressslider:focus + .form-helper {
-	display: inline
+.edit-form li div.form-content img:hover + .form-helper {
+	display: inline-block;
+}
+.edit-form li div.form-content div#progressslider:hover + .form-helper {
+	display: inline-block;
+}
+.edit-form li div.form-content div#progressslider:focus + .form-helper {
+	display: inline-block;
 }
 .ui-slider-handle:focus + .form-helper {
-	display: inline
+	display: inline-block;
 }
 .ui-slider-handle:hover + .form-helper {
-	display: inline
+	display: inline-block;
 }
-.edit-form li select.edit-select:hover + .form-helper {
-	display: inline
+.edit-form li div.form-content select.edit-select:hover + .form-helper {
+	display: inline-block;
 }
-.edit-form li select.edit-select:focus + .form-helper {
-	display: inline
+.edit-form li div.form-content select.edit-select:focus + .form-helper {
+	display: inline-block;
 }
 
-.edit-form li select.edit-select {
+.edit-form li div.form-content select.edit-select {
 	-webkit-appearance: none;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -1798,21 +1820,26 @@ div.formselction {
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
 	font-size: 14px;
-	width: calc(50% + 22px);
+	width: calc(70% + 22px);
 }
-.edit-form li.form-item div.form-helper {
-	margin-left: 15px;
-	margin-right: 10px;
+.edit-form li.form-item div.form-content div.form-helper {
+	margin-left: 5px;
+	margin-right: 5px;
 	font-size: 13px;
-	padding-left: 10px;
+	padding-left: 5px;
 	border-left: 1px solid #0784E3;
 	/*background: transparent url("../img/next-up.png") no-repeat left;*/
 	font-style: italic;
 	display: none;
-	width: auto;
-	position: relative;
+	width: 22%;
+	vertical-align: top;
+}
+.edit-form li.form-item div.form-content div.form-helper label {
+	display: block;
 	font-style: italic;
 	color: #7f7f7f;
+	font-size: 11px;
+	cursor: default;
 }
 .edit-form li.form-item div.form-helper-message {
 	position: relative;
@@ -1827,14 +1854,15 @@ div.formselction {
 	line-height: 17px;
 	width: 50%;
 }
-.edit-form li.form-item img {
+.edit-form li.form-item div.form-content img {
 	padding: 10px;
+	width: 70%;
 	border-bottom-right-radius: 10px;
 	border-top-left-radius: 10px;
 	border: 1px solid rgba(114, 114, 114, 0.71);
 	cursor: pointer;
 }
-.edit-form li.form-item img:focus, .edit-form li.form-item img:hover {
+.edit-form li.form-item div.form-content img:focus, .edit-form li.form-item div.form-content img:hover {
 	border: 1px solid #0784E3;
 }
 .edit-form li.form-item a {
@@ -1936,7 +1964,7 @@ div.formselction {
 	cursor: default;
 }
 
-form li.form-item > label.error {
+form li.form-item div.form-content > label.error {
 	display: inline;
 	color: red;
 	font-size: 12px;
@@ -1945,7 +1973,7 @@ form li.form-item > label.error {
 	padding: 12px;
 }
 
-form li.form-item  span > label.error {
+form li.form-item div.form-content span > label.error {
 	display: inline;
 	color: red;
 	font-size: 12px;
@@ -1977,11 +2005,11 @@ form textarea.error {
 }
 
 .edit-form li.form-item > .form-content {
-	width: 60%;
+	width: 70%;
 	margin-bottom: 5px;
 	font-size: 14px;
 	border: none;
-	border-bottom: 1px solid;
+	/*border-bottom: 1px solid;*/
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 	color: #000;
 }
@@ -2218,7 +2246,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                                 , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                                    , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2458,12 +2486,10 @@ html.touch #subnav {
 /*INFO*/
 .info {
 	border: 2px solid rgba(114, 114, 114, 0);
-	padding: 11px;
+	padding: 10px 5px;
 	background-color: rgba(121, 195, 251, 0.59);
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	/*border-top-left-radius: 5px;
-	 border-bottom-right-radius: 5px;*/
 }
 
 /*====PROFILE PIC=====*/
@@ -4346,11 +4372,14 @@ footer a:hover {
 
 #forgot-password, #register-now {
 	padding: 5px;
-	border-bottom: 1px solid white;
 }
 
 #forgot-password: hover, #register-now:hover {
-	border-bottom: 1px solid #0784E3;
+	color: #007DBA;
+}
+
+.edit-form li.form-item a:hover {
+	color: #007DBA;
 }
 
 .ss-social {

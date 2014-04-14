@@ -26,34 +26,48 @@
 					<form id="register-form" class="edit-form">
 						<fieldset>
 							<ol>
-								<!-- <li class="form-item">
-									<input placeholder="First Name" name="Rfirstname" id="new-user-firstname" type="text" autofocus/>
-								</li> -->
 								<li class="form-item">
 									<label>Email Id</label>
-									<input placeholder="E-mail Address" name="Rusername" id="new-user-name" type="email" autofocus autocomplete/>
-									<div class="form-helper" for="userpassword">Email ID also acts as User ID</div>
+									<div class="form-content">
+										<input placeholder="E-mail Address" name="Rusername" id="new-user-name" type="email" autofocus autocomplete/>
+										<div class="form-helper">
+											<label>Email ID also acts as User ID</label>
+										</div>
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Password</label>
-									<input placeholder="Password" name="Rpassword" id="new-user-password" type="password" />
-									<div class="form-helper" for="userpassword">Pick a secure password</div>
+									<div class="form-content">
+										<input placeholder="Password" name="Rpassword" id="new-user-password" type="password" />
+										<div class="form-helper">
+											<label> Pick a secure password </label>
+										</div>
+									</div>
+
 								</li>
 								<li class="form-item">
 									<label>ReEnter Password</label>
-									<input placeholder="Re-Enter Password" name="Rpasswordrepeat" id="new-user-password-repeat" type="password" />
-									<div class="form-helper" for="userpassword">Re-Enter the same password</div>
+									<div class="form-content">
+										<input placeholder="Re-Enter Password" name="Rpasswordrepeat" id="new-user-password-repeat" type="password" />
+										<div class="form-helper">
+											<label>Re-Enter the same password</label>
+										</div>
+									</div>
 								</li>
 								<li class="form-item">
 									<label>Domain</label>
-									<input placeholder="Your Domain" name="Rdomain" id="new-user-domain" type="text"/>
-									<div id="domain-info" class="form-helper" for="userpassword">Enter a Domain.</div>
+									<div class="form-content">
+										<input placeholder="Your Domain" name="Rdomain" id="new-user-domain" type="text"/>
+										<div class="form-helper">
+											<label>Enter a Domain</label>
+										</div>
+									</div>
 								</li>
 								<li id="RInfo" class="form-item" style="display: none">
 									<label></label>
 									<p class="info"></p>
 								</li>
-								
+
 							</ol>
 						</fieldset>
 					</form>
@@ -67,7 +81,6 @@
 				<div id="login-close" class="modal_close"></div>
 			</div>
 		</div>
-
 
 		<div id="result"></div>
 	</body>

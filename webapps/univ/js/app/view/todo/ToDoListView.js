@@ -52,6 +52,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.task-name', row).text(data[j].groupName);
 									jQuery('.task-id', row).text(data[j].id);
 									jQuery('.task-count', row).text(data[j].todos.length + ' members');
+									jQuery('.task-date', row).text(data[j].todos[0].todoStartDate.split(" ")[0]);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");
