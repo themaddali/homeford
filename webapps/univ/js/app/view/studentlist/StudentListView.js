@@ -171,6 +171,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
 							}
 							jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
+							jQuery('.student-id', newboard).text('Student ID # '+ MEMBEROBJECT[i].id);
+							jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							//jQuery('.loading').remove();
 							jQuery('#card-canvas').append(newboard);
@@ -183,7 +185,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 									onlyFullWords : true
 								});
 								helperMediaQuiries();
-								populateTasks(MEMBEROBJECT_instance);
+								ActivatePanelEvents();
+								//populateTasks(MEMBEROBJECT_instance);
 							}
 						} else {
 							var partitionboard = partiontemplate.clone();
