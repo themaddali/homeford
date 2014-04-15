@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['jquery','cookie', '../../service/DataService', '../../Router', '../../view/todo/ToDoAssignView'], function(jquery, cookie, service, router, todoassign) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView'], function(jquery, cookie, service, router, ellipsis, todoassign) {"use strict";
 
 	var MembersPickView = ( function() {
 
@@ -72,6 +72,9 @@ define(['jquery','cookie', '../../service/DataService', '../../Router', '../../v
 												var results = $.ui.autocomplete.filter(membernames, request.term);
 												response(results.slice(0, 5));
 											}
+										});
+										jQuery('.membercard-name').ellipsis({
+											onlyFullWords : true
 										});
 										activateEvents();
 									}
@@ -194,9 +197,8 @@ define(['jquery','cookie', '../../service/DataService', '../../Router', '../../v
 							//service.ViewCall('todoassign','selectedMembers',selectedMembers);
 							if (todoassign) {
 								todoassign.selectedMembers(selectedMembers);
-							}
-							else {
-								
+							} else {
+
 							}
 							router.returnToPrevious();
 						});
