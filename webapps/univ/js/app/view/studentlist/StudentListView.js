@@ -159,10 +159,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					jQuery('#card-canvas').empty();
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
-							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
 							var newboard = template.clone();
-							//var loadingboard = loadingtemplate.clone();
-							//loadingboard.addClass('loading');
 							if ((MEMBEROBJECT[i].firstName === 'null' || MEMBEROBJECT[i].firstName == null || MEMBEROBJECT[i].firstName === "" ) && (MEMBEROBJECT[i].lastName === 'null' || MEMBEROBJECT[i].lastName == null || MEMBEROBJECT[i].lastName === "")) {
 								jQuery('.student-name', newboard).text(MEMBEROBJECT[i].email);
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].email);
@@ -171,15 +168,12 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
 							}
 							jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
-							jQuery('.student-id', newboard).text('Student ID # '+ MEMBEROBJECT[i].id);
+							jQuery('.student-id', newboard).text('Student ID # ' + MEMBEROBJECT[i].id);
 							jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
-							//jQuery('.loading').remove();
 							jQuery('#card-canvas').append(newboard);
-							//jQuery('#card-canvas').append(loadingboard);
-							// Including the Filler Templates
-							if (i == MEMBEROBJECT.length - 1) {
-								//jQuery('.loading').remove();
+							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+							if (i == MEMBEROBJECT.length-1 || i == MEMBEROBJECT.length-2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
 									onlyFullWords : true
@@ -189,10 +183,11 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								//populateTasks(MEMBEROBJECT_instance);
 							}
 						} else {
-							var partitionboard = partiontemplate.clone();
-							jQuery('.tag', partitionboard).text(MEMBEROBJECT[i].firstName);
-							jQuery('#card-canvas').append(partitionboard);
-
+							if (i < MEMBEROBJECT.length-1) {
+								var partitionboard = partiontemplate.clone();
+								jQuery('.tag', partitionboard).text(MEMBEROBJECT[i].firstName);
+								jQuery('#card-canvas').append(partitionboard);
+							}
 						}
 					}
 				}
@@ -210,7 +205,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						service.MemberToDoList(list[0], members[0].id, {
 							success : function(tasks) {
 								if (tasks.length == 0 && members[0]) {
-									jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' members');
+									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' members');
 									if (jQuery('.studentboard').length === 0) {
 										jQuery('#noinfo').fadeIn(1000);
 									} else {
