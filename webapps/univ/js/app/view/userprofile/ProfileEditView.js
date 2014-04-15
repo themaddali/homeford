@@ -27,11 +27,10 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
-							if (UserProfile.image.id){
-								jQuery('#profile-image').attr('src','http://localhost:8080/homeford/api/profileupload/picture/' + UserProfile.image.id);
-							}
-							else {
-								jQuery('#profile-image').attr('src','img/noimg.png');
+							if (!UserProfile.image || UserProfile.image == null || UserProfile.image == 'null') {
+								jQuery('#profile-image').attr('src', 'img/noimg.png');
+							} else {
+								jQuery('#profile-image').attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + UserProfile.image.id);
 							}
 							jQuery('#profile-picture').attr('data-url', '/homeford/api/profileupload/' + UserProfile.id);
 							ActivateClicks();
@@ -43,10 +42,10 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					var formData_input = $('#profile-picture').serializeArray();
 					$('#profile-picture').fileupload({
 						dataType : 'json',
-						formData: formData_input,
+						formData : formData_input,
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
-								jQuery('#profile-image').attr('src',  'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
+								jQuery('#profile-image').attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
 							});
 						}
@@ -114,7 +113,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								jQuery('#password-reenter-item').fadeOut();
 							}
 						});
-						
+
 						jQuery('#profile-image').click(function() {
 							$('input[type=file]').click();
 						});
