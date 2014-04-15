@@ -70,9 +70,9 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					//Get User Profile
 					jQuery('#card-canvas').empty();
 					MEMBEROBJECT = [];
+					MEMBERIDS = [];
 					service.getUserProfile({
 						success : function(data) {
-
 							if (data.members.length == 0) {
 								getindirectReports(data, MEMBEROBJECT);
 							} else {
@@ -174,7 +174,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#card-canvas').append(newboard);
 							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
-							if (i == MEMBEROBJECT.length-1 || i == MEMBEROBJECT.length-2) {
+							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
 									onlyFullWords : true
@@ -184,7 +184,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								//populateTasks(MEMBEROBJECT_instance);
 							}
 						} else {
-							if (i < MEMBEROBJECT.length-1) {
+							if (i < MEMBEROBJECT.length - 1) {
 								var partitionboard = partiontemplate.clone();
 								jQuery('.tag', partitionboard).text(MEMBEROBJECT[i].firstName);
 								jQuery('#card-canvas').append(partitionboard);
@@ -299,11 +299,11 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						$('.studentboard').css('margin-right', newmargin / 2);
 					}
 				}
-				
-				this.reload = function(){
+
+
+				this.reload = function() {
 					RELOAD = true;
 				}
-
 
 				this.pause = function() {
 
@@ -315,7 +315,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					banner.HideAlert();
 					if ((!service.knowClenUserProfile() && service.knowClenUserProfile() == null) || RELOAD == true) {
 						RELOAD = false;
-						router.reload();
+						//router.reload();
+						populateStudentList();
 					}
 				};
 

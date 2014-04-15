@@ -41,8 +41,26 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				function ActivateClicks() {
 					var formData_input = $('#profile-picture').serializeArray();
 					$('#profile-picture').fileupload({
+						add : function(e, data) {
+							var uploadErrors = [];
+							var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+							if (data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+								uploadErrors.push('Only .jpg, .gif and .png types are allowed');
+							}
+							if (data.originalFiles[0]['size'].length && data.originalFiles[0]['size'] > 5000000) {
+								uploadErrors.push('Filesize is too big');
+							}
+							if (uploadErrors.length > 0) {
+								alert(uploadErrors.join("\n"));
+							} else {
+								data.submit();
+							}
+						},
 						dataType : 'json',
 						formData : formData_input,
+						submit : function(e, data) {
+							jQuery('#profile-image').attr('src', 'img/loader.gif');
+						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
 								jQuery('#profile-image').attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
