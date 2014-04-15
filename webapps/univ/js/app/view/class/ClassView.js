@@ -122,8 +122,8 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 				}
 
 				function helperMediaQuiries() {
-					if ($('.classboard').length > 4) {
-						var width = $('#class-canvas').width() - 30;
+					if ($('.classboard').length > 2) {
+						var width = $('.main-content').width() - 30;
 						var rowholds = Math.floor(width / 304);
 						var fillerspace = width - (rowholds * 304);
 						//var eachfiller = 300+fillerspace/rowholds;
