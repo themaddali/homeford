@@ -144,6 +144,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 												notify.showNotification('ERROR', data.message);
 											}
 											setTimeout(function() {
+												studentlist.reload();
 												clearForm();
 											}, 2000);
 										}
