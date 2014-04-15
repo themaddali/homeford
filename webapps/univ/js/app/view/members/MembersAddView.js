@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, toggles, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/studentlist/StudentListView'], function(modernizr, cookie, service, validate, toggles, router, notify, admin, studentlist) {"use strict";
 
 	var MembersEditView = ( function() {
 
@@ -90,6 +90,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', 'toggles
 												notify.showNotification('ERROR', data.message);
 											}
 											setTimeout(function() {
+												studentlist.reload();
 												router.returnToPrevious();
 											}, 2000);
 										}

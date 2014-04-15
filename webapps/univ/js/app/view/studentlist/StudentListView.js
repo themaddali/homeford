@@ -9,6 +9,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>';
 			var MEMBEROBJECT = [];
 			var MEMBERIDS = [];
+			var RELOAD = false;
 			var template, loadingtemplate, partiontemplate;
 
 			/**
@@ -298,6 +299,10 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						$('.studentboard').css('margin-right', newmargin / 2);
 					}
 				}
+				
+				this.reload = function(){
+					RELOAD = true;
+				}
 
 
 				this.pause = function() {
@@ -308,7 +313,8 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					showBG();
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
-					if (!service.knowClenUserProfile() && service.knowClenUserProfile() == null) {
+					if ((!service.knowClenUserProfile() && service.knowClenUserProfile() == null) || RELOAD == true) {
+						RELOAD = false;
 						router.reload();
 					}
 				};
