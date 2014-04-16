@@ -2246,7 +2246,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                                    , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                                     , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2447,7 +2447,7 @@ html.touch #subnav {
 
 .classboard div.class-progress-label {
 	font-size: 25px;
-	margin-top: 25px;
+	margin-top: -175px;
 	color: #7f7f7f;
 	text-align: center;
 }
@@ -2709,6 +2709,10 @@ dialog-modal::-webkit-scrollbar {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	overflow: none;
+}
+.float-left .classboard {
+	background-image: url('img/todo.png');
+	background-repeat: no-repeat;
 }
 
 .canvas-partition {
@@ -3093,9 +3097,10 @@ dialog-modal::-webkit-scrollbar {
 	padding-bottom: 10px;
 	text-align: center;
 	color: #FFFFFF;
-	border-top-left-radius: 8px;
+	border-top-left-radius: 0px;
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
+	margin-top: 175px;
 }
 .classboard div.class-name i {
 	float: right;

@@ -66,7 +66,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
-								jQuery('#member-profile-image').attr('src', 'http://localhost:8080/homeford/api/profileupload/picture/' + file.id);
+								jQuery('#member-profile-image').attr('src', '/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
 								$('#new-member-profile-image').fileupload('destroy');
 							});
