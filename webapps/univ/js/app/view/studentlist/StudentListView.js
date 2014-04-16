@@ -115,6 +115,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						success : function(data) {
 							activedomains = data;
 							for (var i = 0; i < activedomains.length; i++) {
+								var _domain = activedomains[i];
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
 										if (data.length == 0) {
@@ -127,7 +128,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 										} else {
 											var _fillerobject = {};
 											_fillerobject.id = 'FILLER';
-											_fillerobject.firstName = 'Indirect Reports';
+											_fillerobject.firstName = 'Indirect Reports [ '+ _domain +' ]';
 											MEMBEROBJECT.push(_fillerobject);
 										}
 										for (var j = 0; j < data.length; j++) {
