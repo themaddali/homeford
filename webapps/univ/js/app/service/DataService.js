@@ -8,6 +8,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 			var DOMAINLIST;
 			var USERPROFILE = null;
 			var USERID;
+			var DOMAINMAP = {};
 
 			/**
 			 * @constructor
@@ -88,6 +89,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
 											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
 											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
+											DOMAINMAP[data.domains[i].id] = data.domains[i].domainName;
 										}
 									}
 								}
@@ -468,6 +470,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					}
 
 				}
+				
+				this.domainIDtoName = function(id) {
+					return DOMAINMAP[id];
+				}
+				
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;
 				}

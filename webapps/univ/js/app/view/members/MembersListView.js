@@ -66,7 +66,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName);
 									jQuery('.members-id', row).text(data[j].id);
 									jQuery('.members-email', row).text(data[j].email);
-									jQuery('.members-domain', row).text(thisdomaininstance);
+									jQuery('.members-domain', row).text(service.domainIDtoName(thisdomaininstance));
 									var roles = JSON.stringify(data[j].roles);
 									if (roles.indexOf('ROLE_TIER1') !== -1) {
 										jQuery('.members-roles', row).text('Owner');
@@ -77,7 +77,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									} else if ((roles.indexOf('ROLE_TIER3') !== -1) && (roles.indexOf('ROLE_TIER2') == -1)) {
 										jQuery('.members-roles', row).text('Member');
 									}
-									jQuery('.view-table  tbody').append(row);
+									if (jQuery('.members-roles', row).text() !== 'Owner') {
+										jQuery('.view-table  tbody').append(row);
+									}
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");
 										activateTableClicks();

@@ -128,7 +128,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 										} else {
 											var _fillerobject = {};
 											_fillerobject.id = 'FILLER';
-											_fillerobject.firstName = 'Indirect Reports [ '+ _domain +' ]';
+											_fillerobject.firstName = 'Indirect Reports [ '+ service.domainIDtoName(_domain) +' ]';
 											MEMBEROBJECT.push(_fillerobject);
 										}
 										for (var j = 0; j < data.length; j++) {
