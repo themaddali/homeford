@@ -2246,7 +2246,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                                     , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                                         , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2415,8 +2415,9 @@ html.touch #subnav {
 	margin: 90px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	margin-left: 130px;
 	color: #d9d9d9;
-	height: 5px;
+	height: 6px;
 	border-color: rgba(170, 170, 170, 0.2);
 }
 
@@ -2446,15 +2447,18 @@ html.touch #subnav {
 }
 
 .classboard div.class-progress-label {
-	font-size: 25px;
-	margin-top: -175px;
+	font-size: 18px;
+	margin-left: 30px;
+	margin-top: -140px;
 	color: #7f7f7f;
 	text-align: center;
 }
 
 .classboard div.class-info {
 	text-align: center;
-	font-weight: 600;
+	font-weight: 500;
+	margin-top: 130px;
+	font-size: 0.9em;
 }
 
 .classboard div.class-info div.label {
@@ -2468,8 +2472,8 @@ html.touch #subnav {
 	text-align: center;
 	font-size: 0.7em;
 	border-top: 1px dotted #d9d9d9;
-	margin-top: 40px;
 	color: #7f7f7f;
+	margin-top: 25px;
 	padding: 4px;
 }
 
@@ -2685,7 +2689,7 @@ dialog-modal::-webkit-scrollbar {
 
 .contentfull div.card-form-container {
 	margin: 10px;
-	width: 100%;
+	width: 95%;
 	text-align: left;
 }
 
@@ -3032,7 +3036,7 @@ dialog-modal::-webkit-scrollbar {
 	background-repeat: no-repeat;
 	position: relative;
 	overflow: hidden;
-	border-top-left-radius: 10px;
+	border-top-left-radius: 8px;
 }
 
 .studentboard div.student-name {
@@ -3100,7 +3104,7 @@ dialog-modal::-webkit-scrollbar {
 	border-top-left-radius: 0px;
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
-	margin-top: 175px;
+	margin-top: 150px;
 }
 .classboard div.class-name i {
 	float: right;
@@ -4548,7 +4552,7 @@ footer a:hover {
 	}
 	.float-left .studentboard {
 		float: none;
-		width: 90%;
+		width: 80%;
 		height: 42px;
 		margin: 10px;
 	}
@@ -4571,7 +4575,7 @@ footer a:hover {
 
 	.float-left .classboard {
 		float: none;
-		width: 90%;
+		width: 80%;
 		height: 110px;
 		margin: 10px;
 	}
@@ -4580,7 +4584,7 @@ footer a:hover {
 		display: none;
 	}
 
-	.edit-form li.form-item div.form-helper {
+	.edit-form li.form-item div.form-content div.form-helper {
 		display: none;
 	}
 
@@ -4602,6 +4606,13 @@ footer a:hover {
 		border: none;
 		color: white;
 	}
+	.edit-form li.form-item > .form-content {
+		width: 100%;
+	}
+
+	.edit-form li div.form-content textarea, .edit-form li div.form-content input, .edit-form li div.form-content select.edit-select, .edit-form li.form-item div.form-content img {
+		width: 90%;
+	}
 
 	.edit-form li.form-item > * {
 		font-size: 12px;
@@ -4610,9 +4621,14 @@ footer a:hover {
 	}
 	.edit-form li.form-item > label {
 		width: 90%;
+		padding-bottom: 10px;
 	}
 	.edit-form li.form-item {
 		margin-left: 15px;
+	}
+
+	.edit-form li.filler {
+		margin-top: -35px;
 	}
 
 	.edit-form li.form-item div.ui-slider {
@@ -4639,30 +4655,30 @@ footer a:hover {
 		display: none;
 	}
 
-	.edit-form li input[type="web"]:focus + .form-helper, .edit-form li input[type="file"]:focus + .form-helper, .edit-form li input[type="date"]:focus + .form-helper, .edit-form li input[type="password"]:focus + .form-helper, .edit-form li input[type="email"]:focus + .form-helper, .edit-form li input[type="text"]:focus + .form-helper {
+	.edit-form li div.form-content input[type="web"]:focus + .form-helper, .edit-form li div.form-content input[type="file"]:focus + .form-helper, .edit-form li div.form-content input[type="date"]:focus + .form-helper, .edit-form li div.form-content input[type="password"]:focus + .form-helper, .edit-form li div.form-content input[type="email"]:focus + .form-helper, .edit-form li div.form-content input[type="text"]:focus + .form-helper {
 		display: none;
 	}
-	.edit-form li input[type="web"]:hover + .form-helper, .edit-form li input[type="file"]:hover + .form-helper, .edit-form li input[type="date"]:hover + .form-helper, .edit-form li input[type="password"]:hover + .form-helper, .edit-form li input[type="email"]:hover + .form-helper, .edit-form li input[type="text"]:hover + .form-helper {
-		display: none;
-	}
-
-	.edit-form li textarea.edittextarea:focus + .form-helper {
-		display: none;
-	}
-	.edit-form li textarea.edittextarea:hover + .form-helper {
+	.edit-form li div.form-content input[type="web"]:hover + .form-helper, .edit-form li div.form-content input[type="file"]:hover + .form-helper, .edit-form li div.form-content input[type="date"]:hover + .form-helper, .edit-form li div.form-content input[type="password"]:hover + .form-helper, .edit-form li div.form-content input[type="email"]:hover + .form-helper, .edit-form li div.form-content input[type="text"]:hover + .form-helper {
 		display: none;
 	}
 
-	.edit-form li a.input-link:focus + .form-helper {
+	.edit-form li div.form-content  textarea.edittextarea:focus + .form-helper {
+		display: none;
+	}
+	.edit-form li div.form-content  textarea.edittextarea:hover + .form-helper {
+		display: none;
+	}
+
+	.edit-form li div.form-content  a.input-link:focus + .form-helper {
 		display: none
 	}
-	.edit-form li a.input-link:hover + .form-helper {
+	.edit-form li div.form-content  a.input-link:hover + .form-helper {
 		display: none
 	}
-	.edit-form li div#progressslider:hover + .form-helper {
+	.edit-form li div.form-content  div#progressslider:hover + .form-helper {
 		display: none
 	}
-	.edit-form li div#progressslider:focus + .form-helper {
+	.edit-form li div.form-content  div#progressslider:focus + .form-helper {
 		display: none
 	}
 	.ui-slider-handle:focus + .form-helper {
@@ -4671,10 +4687,10 @@ footer a:hover {
 	.ui-slider-handle:hover + .form-helper {
 		display: none
 	}
-	.edit-form li select.edit-select:hover + .form-helper {
+	.edit-form li div.form-content  select.edit-select:hover + .form-helper {
 		display: none
 	}
-	.edit-form li select.edit-select:focus + .form-helper {
+	.edit-form li div.form-content  select.edit-select:focus + .form-helper {
 		display: none
 	}
 
