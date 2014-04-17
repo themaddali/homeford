@@ -128,7 +128,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 										} else {
 											var _fillerobject = {};
 											_fillerobject.id = 'FILLER';
-											_fillerobject.firstName = 'Indirect Reports [ '+ service.domainIDtoName(_domain) +' ]';
+											_fillerobject.firstName = 'Indirect Reports - <i> '+ service.domainIDtoName(_domain) +'</i> ';
 											MEMBEROBJECT.push(_fillerobject);
 										}
 										for (var j = 0; j < data.length; j++) {
@@ -187,7 +187,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						} else {
 							if (i < MEMBEROBJECT.length - 1) {
 								var partitionboard = partiontemplate.clone();
-								jQuery('.tag', partitionboard).text(MEMBEROBJECT[i].firstName);
+								jQuery('.tag', partitionboard).html(MEMBEROBJECT[i].firstName);
 								jQuery('#card-canvas').append(partitionboard);
 							}
 						}

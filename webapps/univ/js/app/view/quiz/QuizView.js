@@ -41,7 +41,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
 						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
-						$("#task-desc-data").html(ACTIVEQUIZ.desc.replace(/\r?\n/g,'<br/>'));
+						$("#task-desc-data").html(ACTIVEQUIZ.desc.replace(/\r?\n/g, '<br/>'));
 						$("#task-priority").text(ACTIVEQUIZ.priority);
 						jQuery('#progressslider').slider({
 							animate : true,
@@ -158,6 +158,9 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 							var _newprogress = jQuery('#progressvalue').text().split('%')[0];
 							_newprogress = parseInt(_newprogress);
 							var _timestamp = jQuery('#task-time').val();
+							if (_timestamp === '' || _timestamp === ' ') {
+								var _timestamp = jQuery('#task-time').text();
+							}
 							var _commentstext = [];
 							var comments = {};
 							comments.text = jQuery('#task-desc').val();

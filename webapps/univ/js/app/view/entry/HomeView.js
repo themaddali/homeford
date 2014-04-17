@@ -107,7 +107,8 @@ define([ 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Route
 
 				this.resume = function() {
 					//Forcing to reload all view.
-					location.reload();
+					//location.reload();
+					startCoverShow();
 				};
 
 				this.init = function(args) {

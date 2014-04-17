@@ -155,6 +155,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _tdesc = jQuery('#task-desc').val();
 								var _tfrom = jQuery('#task-startdate').val();
 								var _tdue = jQuery('#task-deadline').val();
+								if (_tfrom === '' || _tfrom===' '){
+									var _tfrom = jQuery('#task-startdate').text();
+									var _tdue = jQuery('#task-deadline').text();
+								}
 								var _tbenefit = jQuery('#task-benefit').val();
 								var _tassignto = jQuery('#member-list').text();
 								var _thelpurl = jQuery('#task-helper-url').val();

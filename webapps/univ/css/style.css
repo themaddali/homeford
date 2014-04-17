@@ -1720,7 +1720,7 @@ div.formselction {
 	border-color: rgba(114, 114, 114, 0.71);
 }
 .edit-form li div.form-content input {
-	width: 70%;
+	width: 60%;
 	padding: 10px;
 	border-radius: 0;
 	margin-bottom: 5px;
@@ -1732,7 +1732,7 @@ div.formselction {
 	border-color: rgba(114, 114, 114, 0.71);
 }
 .edit-form li div.form-content textarea {
-	width: 70%;
+	width: 60%;
 	padding: 10px;
 	border-radius: 0;
 	margin-bottom: 5px;
@@ -1820,7 +1820,7 @@ div.formselction {
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
 	font-size: 14px;
-	width: calc(70% + 22px);
+	width: calc(60% + 22px);
 }
 .edit-form li.form-item div.form-content div.form-helper {
 	margin-left: 5px;
@@ -1832,7 +1832,7 @@ div.formselction {
 	font-style: italic;
 	display: none;
 	width: 22%;
-	vertical-align: top;
+	vertical-align: middle;
 }
 .edit-form li.form-item div.form-content div.form-helper label {
 	display: block;
@@ -1856,7 +1856,7 @@ div.formselction {
 }
 .edit-form li.form-item div.form-content img {
 	padding: 10px;
-	width: 70%;
+	width: 60%;
 	border-bottom-right-radius: 10px;
 	border-top-left-radius: 10px;
 	border: 1px solid rgba(114, 114, 114, 0.71);
@@ -1940,7 +1940,7 @@ div.formselction {
 
 .edit-form li.form-item > label {
 	max-width: 170px;
-	width: 40%;
+	width: 20%;
 	margin-bottom: 5px;
 	color: #7f7f7f;
 	padding-right: 10px;
@@ -2005,13 +2005,14 @@ form textarea.error {
 }
 
 .edit-form li.form-item > .form-content {
-	width: 70%;
+	width: 80%;
 	margin-bottom: 5px;
 	font-size: 14px;
 	border: none;
 	vertical-align: top;
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 	color: #000;
+	vertical-align: middle;
 }
 
 .adminboard p.half-height {
@@ -2412,10 +2413,10 @@ html.touch #subnav {
 
 .classboard div.class-progress {
 	border-radius: 0px;
-	margin: 90px;
+	margin: 100px;
 	margin-top: 10px;
 	margin-bottom: 10px;
-	margin-left: 130px;
+	margin-left: 100px;
 	color: #d9d9d9;
 	height: 6px;
 	border-color: rgba(170, 170, 170, 0.2);
@@ -2448,7 +2449,7 @@ html.touch #subnav {
 
 .classboard div.class-progress-label {
 	font-size: 18px;
-	margin-left: 30px;
+	/*margin-left: 30px;*/
 	margin-top: -140px;
 	color: #7f7f7f;
 	text-align: center;
@@ -2920,7 +2921,7 @@ dialog-modal::-webkit-scrollbar {
 	border-color: rgba(114, 114, 114, 0.71);
 	border-radius: 0px;
 	cursor: pointer;
-	width: 70%;
+	width: 60%;
 }
 
 .ui-slider-range.ui-widget-header {

@@ -75,6 +75,9 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						handlers.success(USERPROFILE);
 					} else {
 						DOMAINLIST = [];
+						ACTIVEDOMAINLIST = [];
+						ACTIVEDOMAINIDLIST = [];
+						DOMAINMAP = {};
 						$.ajax({
 							url : '/homeford/api/userprofile',
 							type : 'GET',
@@ -470,11 +473,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					}
 
 				}
-				
+
 				this.domainIDtoName = function(id) {
 					return DOMAINMAP[id];
 				}
-				
+
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;
 				}
