@@ -181,6 +181,15 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                router.map('questionassign', '^/questionassign(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/quizpool/questionassign.html','../app/view/quizpool/QuestionAssignView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 router.map('quizassign', '^/quizassign(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {

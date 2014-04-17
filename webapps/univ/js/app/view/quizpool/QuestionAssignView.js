@@ -2,7 +2,7 @@
 
 define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
 
-	var QuizAssignView = ( function() {
+	var QuestionAssignView = ( function() {
 
 			/**
 			 * Constructor
@@ -11,7 +11,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 			var validator;
 
-			function QuizAssignView() {
+			function QuestionAssignView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -34,7 +34,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('#quiz-desc').val('');
 				}
 
-
+				
 				this.pause = function() {
 
 				};
@@ -60,6 +60,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.returnToPrevious();
 						});
 
+
 						jQuery('#quiz-assign').on('click', function() {
 							if ($(".edit-form").valid()) {
 								var _qname = jQuery('#quiz-name').val();
@@ -74,12 +75,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
-											setTimeout(function() {
-												router.go('/questionassign');
-											}, 2000);
 										} else {
 											notify.showNotification('ERROR', data.message);
 										}
+										setTimeout(function() {
+											router.returnToPrevious();
+										}, 2000);
 									}
 								});
 							}
@@ -102,8 +103,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 			}
 
-			return QuizAssignView;
+			return QuestionAssignView;
 		}());
 
-	return new QuizAssignView();
+	return new QuestionAssignView();
 });
