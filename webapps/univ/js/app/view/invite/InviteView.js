@@ -42,9 +42,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						success : function(UserProfile) {
 							var activeDomains = [];
 							for (var i = 0; i < UserProfile.domains.length; i++) {
-								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1')
-									activeDomains.push(UserProfile.domains[i].domainName);
-								jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
+								if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1') {
+									if (activeDomains.indexOf(UserProfile.domains[i].domainName) === -1) {
+										activeDomains.push(UserProfile.domains[i].domainName);
+										jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
+									}
+								}
+
 								if (UserProfile.domains.length === 1) {
 									jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
 								}
@@ -60,7 +64,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						}
 					});
 				}
-				
+
 				function clearForm() {
 					jQuery('.form-item > input').val("");
 					jQuery('#member-role').prop('checked', false);

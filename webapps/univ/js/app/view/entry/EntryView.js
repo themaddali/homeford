@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', 'clear'], function(cookie, router, validate, service, notify, clear) {"use strict";
+define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(cookie, router, validate, service, notify) {"use strict";
 
 	var EntryView = ( function() {
 
