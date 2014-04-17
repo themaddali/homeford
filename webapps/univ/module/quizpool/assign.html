@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+		</header>
+
+		<div id="quiz-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					New Quiz
+				</header>
+				<div class="modal-contents">
+					<form id="quiz-assign-form" class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Quiz Name</label>
+									<div class="form-content">
+										<input placeholder="Ex: Maths Addition"  id="quiz-name" name="quizname" type="text" autofocus />
+										<div class="form-helper">
+											<label>Short name describing the quiz</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Description</label>
+									<div class="form-content">
+										<textarea class="edittextarea" placeholder="Ex: Basic operations on numbers" id="quiz-desc" name="quizdesc"></textarea>
+										<div class="form-helper">
+											<label>More detailed descripion of the quiz</label>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<footer>
+					<div class="edit-controls">
+						<input id="quiz-assign" type="button" value="Assign">
+					</div>
+				</footer>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+	</body>
+</html>

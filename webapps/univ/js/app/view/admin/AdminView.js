@@ -1,4 +1,4 @@
-define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView','../../Notify'], function(raphael, plugins, cookie, elychart, service, banner, router, invite, notify) {"use strict";
+define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../Notify'], function(raphael, plugins, cookie, elychart, service, banner, router, invite, notify) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -116,6 +116,7 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 								populateInviteData(ACTIVEDOMAINIDS);
 								populateMembersData(ACTIVEDOMAINIDS);
 								populateToDoData(ACTIVEDOMAINIDS);
+								populateQuizData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -149,6 +150,7 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 										populateInviteData(ACTIVEDOMAINIDS);
 										populateMembersData(ACTIVEDOMAINIDS);
 										populateToDoData(ACTIVEDOMAINIDS);
+										populateQuizData(ACTIVEDOMAINIDS);
 									}
 								}
 							}
@@ -247,6 +249,38 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 										updatePanelValues('#todo-progress-value', percentage + ' %');
 									}
 								}
+							}
+						});
+					}
+				}
+
+				function populateQuizData(activedomains) {
+					var _quiztotal = 0;
+					var _quizdone = 0;
+					var _quizpercentage = 0;
+					var _quizdata = [0, 0];
+					for (var i = 0; i < activedomains.length; i++) {
+						service.DomainQuizList(activedomains[i], {
+							success : function(data) {
+								_quiztotal = _quiztotal + data.length;
+								_quizdata[0] = _quiztotal;
+								updatePanelValues('#quiz-grouptotal-value', _quiztotal);
+								var _quizgross = 0;
+								updatePanelGraphs('#quiz-donut', _quizdata);
+								// for (var j = 0; j < data.length; j++) {
+								// _todogross = _todogross + data[j].todos.length;
+								// _tododata[1] = _todogross;
+								// updatePanelValues('#todo-total-value', _todogross);
+								// for (var k = 0; k < data[j].todos.length; k++) {
+								// _todopercentage = (_todopercentage + data[j].todos[k].percentage);
+								// updatePanelValues('#todo-progress-value', _todopercentage + ' %');
+								// }
+								// if (j === data.length - 1) {
+								// updatePanelGraphs('#todo-donut', _tododata);
+								// var percentage = Math.ceil(_todopercentage / parseInt(jQuery('#todo-total-value').text()));
+								// updatePanelValues('#todo-progress-value', percentage + ' %');
+								// }
+								// }
 							}
 						});
 					}

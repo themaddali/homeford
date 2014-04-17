@@ -309,6 +309,23 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
+				this.AssignQuiz = function(domainid, title, desc, handlers) {
+					$.ajax({
+						url : '/homeford/api/domain/' + domainid + '/quiz',
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'name' : title,
+							'description' : desc,
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							handlers.success(data);
+						}
+					});
+				};
+
 				this.DomainToDoList = function(domainid, handlers) {
 					$.ajax({
 						url : '/homeford/api/todogroup/domain/' + domainid,
@@ -320,6 +337,18 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+
+				this.DomainQuizList = function(domainid, handlers) {
+					$.ajax({
+						url : '/homeford/api/domain/' + domainid+'/quiz',
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
 
 				this.MemberToDoList = function(domainid, memberid, handlers) {
 					$.ajax({
