@@ -190,6 +190,15 @@ function (router, cookie, urlFragment ) { "use strict";
                         });
                     }
                 });
+                 router.map('quizlist', '^/quizlist(/.*|$)', {
+                	container: CONTAINER,
+                    enter: function (location, result) {
+                        require(['text!Pages/quizpool/list.html','../app/view/quizpool/QuizListView'],
+                        function (page, view) {
+                             result.load(page, view);
+                        });
+                    }
+                });
                 router.map('memberspick', '^/memberspick(/.*|$)', {
                 	container: CONTAINER,
                     enter: function (location, result) {
