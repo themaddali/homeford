@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, membersedit) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/quizpool/QuestionAssignView'], function(cookie, service, validate, tablesorter, router, notify, admin, questionassign) {"use strict";
 
 	var QuizListView = ( function() {
 
@@ -64,7 +64,21 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function activateTableClicks() {
-					// No function on table yet!!
+					var rowObject = {
+						name : null,
+						id : null,
+					};
+
+					jQuery('.view-table tbody tr').click(function() {
+						jQuery('.view-table tbody tr').removeClass('rowactive');
+						jQuery('.members-action').css('color', 'white');
+						jQuery(this).addClass('rowactive');
+						jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
+						rowObject.name = jQuery(this).find('.quiz-name').text();
+						rowObject.id = jQuery(this).find('.quiz-id').text();
+						questionassign.activeQuiz(rowObject);
+						router.go('/questionassign');
+					});
 				}
 
 				function clearForm() {

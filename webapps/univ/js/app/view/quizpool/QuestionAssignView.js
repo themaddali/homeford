@@ -32,6 +32,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function populateData() {
+					jQuery('input[type=text]').val('');
+					jQuery('#question-category').prop('checked', true);
+					jQuery('#category-0').fadeOut();
+					jQuery('#category-1').fadeIn();
 					if (ACTIVEQUIZ) {
 						jQuery('#quiz-name').val(ACTIVEQUIZ.name);
 						jQuery('#quiz-name').attr('quizid', ACTIVEQUIZ.id);
@@ -39,10 +43,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('#quiz-name').val('');
 						jQuery('#quiz-name').attr('quizid', '');
 					}
-					jQuery('input[type=text]').val('');
-					jQuery('#question-category').prop('checked', true);
-					jQuery('#category-0').fadeOut();
-					jQuery('#category-1').fadeIn();
 				}
 
 
@@ -55,7 +55,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				};
 
 				this.resume = function() {
-					$(".edit-form").resetForm();
+					validator.resetForm();
 					populateData();
 
 				};
@@ -91,7 +91,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('.inlinebutton-multi').click(function() {
 							if (jQuery(this).hasClass('correct')) {
 								jQuery(this).removeClass('correct').addClass('incorrect').val('false');
-								
+
 							} else {
 								jQuery(this).removeClass('incorrect').removeClass('error').addClass('correct').val('true');
 							}
@@ -198,9 +198,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								if (jQuery('#question-name').hasClass('error')) {
 									visibleErrors = visibleErrors + 1;
 								}
-								if (jQuery('#category-' + _qcategory).find('.inlinebutton-multi.correct').length === 0){
+								if (jQuery('#category-' + _qcategory).find('.correct').length === 0) {
 									visibleErrors = visibleErrors + 1;
-									jQuery('#category-' + _qcategory).find('.inlinebutton-multi.incorrect').addClass('error');
+									jQuery('#category-' + _qcategory).find('.incorrect').addClass('error');
 								}
 								if (visibleErrors === 0) {
 									var _qname = jQuery('#question-name').val();
