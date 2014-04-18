@@ -1731,6 +1731,29 @@ div.formselction {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
+.edit-form div.form-datainput li div.form-content input {
+	width: 50%;
+}
+.edit-form div.form-datainput li div.form-content button {
+	width: 10%;
+	color: #0784E3;
+	background: transparent;
+	height: 38px;
+	vertical-align: top;
+	border-width: 1px;
+	width: 40px;
+	border-radius: 20px;
+	margin-left: 10px;
+}
+.edit-form div.form-datainput li div.form-content button.correct {
+	border-color: green;
+	background: transparent url("../img/correct.png") no-repeat center;
+}
+.edit-form div.form-datainput li div.form-content button.incorrect {
+	border-color: red;
+	background: transparent url("../img/incorrect.png") no-repeat center;
+}
+
 .edit-form li div.form-content textarea {
 	width: 60%;
 	padding: 10px;
@@ -1949,6 +1972,8 @@ div.formselction {
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	cursor: default;
+	text-align: right;
+	padding-right: 30px;
 }
 .view-form li.form-item > label {
 	text-align: left;
@@ -1997,7 +2022,7 @@ form li.form-item div.form-content span > label.error {
 	font-size: 13px
 }
 
-form input.error {
+form div.form-content > input.error {
 	border: 1px solid #e30716;
 }
 form textarea.error {
@@ -2247,7 +2272,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                                         , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset,                                                             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -4524,7 +4549,7 @@ footer a:hover {
 		position: relative;
 		bottom: 20px;
 	}
-	form li.form-item > label.error {
+	form li.form-item div.form-content > label.error {
 		display: none;
 		font-size: 0;
 		padding: 0px

@@ -109,6 +109,7 @@ define([ 'cookie', 'plugins', 'flatvid', 'typeahead', 'bloodhound', '../../Route
 					//Forcing to reload all view.
 					//location.reload();
 					startCoverShow();
+					checkForActiveCookie();
 				};
 
 				this.init = function(args) {

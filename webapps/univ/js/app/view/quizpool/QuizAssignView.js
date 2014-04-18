@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/quizpool/QuestionAssignView'], function(modernizr, cookie, service, validate, router, notify, admin, questionassign) {"use strict";
 
 	var QuizAssignView = ( function() {
 
@@ -75,6 +75,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
 											setTimeout(function() {
+												var active ={};
+												active.name = _qname;
+												active.id = data.id;
+												questionassign.activeQuiz(active);
 												router.go('/questionassign');
 											}, 2000);
 										} else {

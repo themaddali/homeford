@@ -325,6 +325,25 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.setQuestion = function(quizid, category, question, answers, handlers) {
+					var categoryint = parseInt(category);
+					$.ajax({
+						url : '/homeford/api/quiz/' + quizid + '/question',
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'category' : categoryint,
+							'text' : question,
+							'answers' : answers
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							handlers.success(data);
+						}
+					});
+				};
 
 				this.DomainToDoList = function(domainid, handlers) {
 					$.ajax({

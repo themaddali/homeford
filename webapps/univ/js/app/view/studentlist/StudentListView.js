@@ -173,6 +173,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							jQuery('.student-id', newboard).text('Student ID # ' + MEMBEROBJECT[i].id);
 							jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
+							jQuery('#noinfo').hide();
 							jQuery('#card-canvas').append(newboard);
 							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
