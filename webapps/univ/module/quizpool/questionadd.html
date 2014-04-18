@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+		</header>
+
+		<div id="quiz-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Add Questions
+				</header>
+				<div class="modal-contents">
+					<form id="questions-assign-form" class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Quiz Name</label>
+									<div class="form-content">
+										<input placeholder="Maths"  id="quiz-name" name="quizname" type="text" autofocus />
+										<div class="form-helper">
+											<label>The below question will be added into this quiz.</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition">
+									<!-- <span>Info</span> -->
+								</div>
+								<li class="form-item">
+									<label>Question Type</label>
+									<span>
+										<input id="question-category" type="radio" name="category" value="1" checked="checked"/>
+										True or False </span>
+								</li>
+								<li class="form-item filler">
+									<label></label>
+									<span>
+										<input type="radio" name="category" value="0"/>
+										Multiple Choice</span>
+								</li>
+								<li class="form-item">
+									<label>Question</label>
+									<div class="form-content">
+										<input class="option-input" placeholder="What is 2 + 2 = ?"  id="question-name" name="questionname" type="text" />
+										<div class="form-helper">
+											<label>Enter a question</label>
+										</div>
+									</div>
+								</li>
+								<div id="category-1" class="form-datainput">
+									<li class="form-item">
+										<label>Option - 1</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="First Response" name="options"  id="tf-option-0" type="text" />
+											<button class="inlinebutton-or correct" type="button" value="true"></button>
+											<!-- <select><option>True</option><option>False</option></select> -->
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Option - 2</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="Second Response" name="options"  id="tf-option-1" type="text" />
+											<button class="inlinebutton-or incorrect" type="button" value="false"></button>
+										</div>
+									</li>
+								</div>
+								<div id="category-0" class="form-datainput" style="display: none">
+									<li class="form-item">
+										<label>Option - 1</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="Option" name="options"  id="multi-option-0" type="text" />
+											<button class="inlinebutton-multi correct" type="button" value="true"></button>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Option - 2</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="Option" name="options"  id="multi-option-1" type="text" />
+											<button class="inlinebutton-multi correct" type="button" value="true"></button>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Option - 3</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="Option" name="options"  id="multi-option-2" type="text" />
+											<button class="inlinebutton-multi correct" type="button" value="true"></button>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Option - 4</label>
+										<div class="form-content">
+											<input class="option-input" placeholder="Option" name="options"  id="multi-option-3" type="text" />
+											<button class="inlinebutton-multi correct" type="button" value="true"></button>
+										</div>
+									</li>
+								</div>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<div style="display: none">
+					<li class="form-item" id="option-template">
+						<label></label>
+						<div class="form-content">
+							<input placeholder="Option"  id="" type="text" />
+							<button class="inlinebutton-multi correct" type="button" value="true"></button>
+						</div>
+					</li>
+				</div>
+				<footer>
+					<div class="edit-controls">
+						<input id="question-add" type="button" value="Add +">
+						<!-- <input id="question-addmore" type="button" value="Add +"> -->
+						<input id="form-reset" type="button" class="secondary" value="Reset Form">
+					</div>
+				</footer>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+	</body>
+</html>

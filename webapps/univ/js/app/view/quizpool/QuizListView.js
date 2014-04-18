@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/quizpool/QuestionAssignView'], function(cookie, service, validate, tablesorter, router, notify, admin, questionassign) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/quizpool/QuestionAddView'], function(cookie, service, validate, tablesorter, router, notify, admin, questionassign) {"use strict";
 
 	var QuizListView = ( function() {
 
@@ -77,7 +77,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						rowObject.name = jQuery(this).find('.quiz-name').text();
 						rowObject.id = jQuery(this).find('.quiz-id').text();
 						questionassign.activeQuiz(rowObject);
-						router.go('/questionassign');
+						router.go('/questionadd');
 					});
 				}
 

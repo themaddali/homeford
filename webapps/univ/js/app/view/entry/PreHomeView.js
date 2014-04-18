@@ -1,6 +1,6 @@
 //View that will drive the main landing page.
 
-define(['../../Router', 'cookie','plugins', '../../service/DataService','../../view/entry/RegisterView'], function(router, cookie, plugins, service, register) {"use strict";
+define(['../../Router', 'cookie', 'plugins', '../../service/DataService', '../../view/entry/RegisterView'], function(router, cookie, plugins, service, register) {"use strict";
 
 	var PreHomeView = ( function() {
 
@@ -11,9 +11,9 @@ define(['../../Router', 'cookie','plugins', '../../service/DataService','../../v
 				"Bg" : "img\/classbg.png",
 			};
 			var ENTITY;
-			
+
 			function PreHomeView() {
-				
+
 				function showBG() {
 					//jQuery.backstretch(PARMS.Bg);
 				}
@@ -29,33 +29,32 @@ define(['../../Router', 'cookie','plugins', '../../service/DataService','../../v
 				}
 
 				function validateEntity() {
-					if (ENTITY === null || !ENTITY)
-					{
+					if (ENTITY === null || !ENTITY) {
 						var entity = router.location().substring(1);
-					}
-					else
-					{
+					} else {
 						var entity = ENTITY;
 						ENTITY = null;
 					}
-					service.validateEntity(entity,{
-						success : function(response) {
-							if (response === true) {
-								jQuery.cookie('entity', entity, {
-									expires : 100,
-									path : '/'
-								});
-								router.go('/entry', '/pre');
+					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						router.go('/pagenotfound');
+					} else {
+						service.validateEntity(entity, {
+							success : function(response) {
+								if (response === true) {
+									jQuery.cookie('entity', entity, {
+										expires : 100,
+										path : '/'
+									});
+									router.go('/entry', '/pre');
+								} else {
+									jQuery('#entity-response').text(entity);
+									setTimeout(function() {
+										$('#register-link').fadeIn(1500);
+									}, 1000);
+								}
 							}
-							else
-							{
-								jQuery('#entity-response').text(entity);
-								setTimeout(function(){
-									$('#register-link').fadeIn(1500);
-								},1000);
-							}
-						}
-					});
+						});
+					}
 				}
 
 
@@ -67,8 +66,8 @@ define(['../../Router', 'cookie','plugins', '../../service/DataService','../../v
 					//Forcing to reload all view.
 					location.reload();
 				};
-				
-				this.setEntity = function(entity){
+
+				this.setEntity = function(entity) {
 					ENTITY = entity;
 				}
 
@@ -77,12 +76,12 @@ define(['../../Router', 'cookie','plugins', '../../service/DataService','../../v
 					showBG();
 					//Validate the ID.
 					validateEntity();
-					
-					jQuery('#register-link').on('click',function() {
+
+					jQuery('#register-link').on('click', function() {
 						register.entity(jQuery('#entity-response').text());
-						router.go('/register','/entry');
+						router.go('/register', '/entry');
 					});
-					
+
 				};
 			}
 
