@@ -225,6 +225,16 @@ input[type="email"]:focus + input-clear {
 	display: none;
 }
 
+button:focus {
+	outline: none;
+	border: 1px solid #0784E3;
+}
+
+form div.form-content > input:focus {
+	border: 1px solid #0784E3;
+	outline: none;
+}
+
 input[readonly="readonly"] {
 	background-color: #f6f6f6;
 	color: #7f7f7f
@@ -916,179 +926,6 @@ a.goback {
 	font-weight: 700;
 }
 
-/* =================== Work Page Carousel ======================= */
-#wrapper {
-	width: 100%;
-	height: 500px;
-	margin: -230px 0 0 0;
-	overflow: hidden;
-	position: absolute;
-	left: 0;
-	top: 50%;
-	opacity: 0;
-}
-
-#slider-container {
-	position: absolute;
-	width: 100%;
-}
-
-#wrapper-touch {
-	margin: 0;
-	padding: 0;
-	opacity: 0;
-}
-#wrapper-touch ul {
-	padding: 0;
-	margin: 0;
-}
-#wrapper-touch ul li a {
-	position: relative;
-	display: block;
-	width: 370px;
-	height: 490px;
-	background: #000;
-	margin: 0 auto;
-}
-#wrapper-touch ul li a span.heading {
-	display: block;
-	position: absolute;
-	top: 40px;
-	left: 20px;
-	z-index: 20;
-	color: #0784E3;
-	font-size: 2.8em;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 0.8em;
-}
-#wrapper-touch ul li a span.subtitle {
-	display: block;
-	position: absolute;
-	top: 90px;
-	left: 20px;
-	z-index: 20;
-	color: #0784E3;
-	font-size: 1.8em;
-	font-weight: 400;
-	line-height: 0.8em;
-}
-#wrapper-touch ul li a span.gradient-work-img {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-	width: 370px;
-	height: 298px;
-	/*background: transparent url("../img/gradient-work-img.png") repeat-x 0 0;*/
-}
-
-#carousel div {
-	width: 370px;
-	height: 490px;
-	margin: 20px 110px;
-	float: left;
-	position: relative;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-#carousel div.empty {
-	box-shadow: none;
-}
-#carousel div a {
-	display: block;
-	width: 370px;
-	height: 490px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-}
-#carousel div span.heading {
-	display: block;
-	position: absolute;
-	top: 40px;
-	text-shadow: 1px 1px;
-	left: 20px;
-	z-index: -1;
-	color: #0784E3;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 3px;
-	font-size: 2em;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 0.8em;
-}
-#carousel div span.subtitle {
-	display: block;
-	position: absolute;
-	top: 90px;
-	left: 20px;
-	z-index: -1;
-	color: #0784E3;
-	font-size: 1.5em;
-	font-weight: 400;
-	line-height: 0.8em;
-}
-#carousel div span.gradient-work-img {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-	width: 370px;
-	height: 298px;
-	/*background: transparent url("../img/gradient-work-img.png") repeat-x 0 0;*/
-}
-#carousel div.selected a {
-	display: block;
-	width: 370px;
-	height: 490px;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 10;
-	cursor: pointer;
-}
-#carousel div.selected span.heading {
-	display: block;
-	position: absolute;
-	text-shadow: 1px 1px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 3px;
-	top: 40px;
-	left: 20px;
-	z-index: 10;
-	color: #0784E3;
-	font-size: 2.8em;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 0.8em;
-}
-#carousel div.selected span.subtitle {
-	display: block;
-	position: absolute;
-	top: 90px;
-	left: 20px;
-	z-index: 10;
-	color: #0784E3;
-	font-size: 1.8em;
-	font-weight: 400;
-	line-height: 0.8em;
-}
-#carousel div.selected span.gradient-work-img {
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 10;
-	width: 370px;
-	height: 298px;
-	/*background: transparent url("../img/gradient-work-img.png") repeat-x 0 0;*/
-}
-
 #prev, #next {
 	display: block;
 	width: 50px;
@@ -1163,20 +1000,6 @@ a.goback {
 
 /* =================== About Page ======================= */
 .page-template-about-php #prev, .page-template-about-php #next {
-	display: none;
-}
-
-#wrapper-about {
-	position: relative;
-	margin-top: -10px;
-	width: 100%;
-	height: 540px;
-	margin-bottom: 40px;
-	overflow: hidden;
-	opacity: 0;
-}
-
-#wrapper-about-mobile {
 	display: none;
 }
 
@@ -1372,6 +1195,7 @@ a.goback {
 	padding-left: 15px;
 	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
+	/*background: url("../img/header-stripe.png");*/
 }
 
 .modal-body .modal-container footer {
@@ -1559,11 +1383,17 @@ div.formselction {
 	height: 30px;
 }
 
+.view-form-control {
+	text-align: center;
+}
+
 .view-form-control input {
 	padding: 10px;
 	background-color: #0784E3;
 	color: white;
 	border: 2px solid white;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 .view-form-control input:hover {
 	border: 2px solid #999;
@@ -1751,6 +1581,11 @@ div.formselction {
 }
 .edit-form div.form-datainput li div.form-content button.incorrect {
 	border-color: red;
+	background: transparent url("../img/incorrect.png") no-repeat center;
+}
+.edit-form div.form-datainput li div.form-content button.incorrect.error {
+	border-color: red;
+	border-width:3px;
 	background: transparent url("../img/incorrect.png") no-repeat center;
 }
 
@@ -2051,25 +1886,26 @@ form textarea.error {
 /*DASHBOARD THEMING*/
 .adminboard header {
 	background-color: #FFFFFF;
-	font-weight: 700;
+	font-weight: 500;
 	font-size: 1em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
-	color: black;
+	color: white;
 	text-overflow: ellipsis;
 	padding: 10px;
 	padding-left: 15px;
-	border-bottom: 1px solid #d9d9d9;
-	border-top-left-radius: 10px;
+	/*border-bottom: 1px solid #d9d9d9;
+	 border-top-left-radius: 10px;*/
+	background: url("../img/stripe.png");
 }
 .adminboard header a.control {
 	font-weight: 500;
 	float: right;
 	font-size: 0.8em;
-	color: #444;
 	cursor: pointer;
+	color: #E6E7EC;
 }
 .adminboard header a.control:hover {
-	color: #0784E3;
+	color: white;
 }
 
 .adminboard .dash-info-reg {
@@ -2272,7 +2108,7 @@ form textarea.error {
 	width: 100%;
 	margin-bottom: 20px;
 }
-.classboard form.show-form fieldset,                                                             , .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
+.classboard form.show-form fieldset, .adminboard form.show-form fieldset, .modal-contents form.show-form fieldset {
 	margin: 20px 0px;
 	border: none;
 }
@@ -2411,40 +2247,15 @@ html.touch #subnav {
 	display: none;
 }
 
-/*Class Profiles*/
-#carousel .class-binder {
-	width: 370px;
-	height: 490px;
-	background-color: white;
-	text-align: center
-}
-
-#carousel .class-name {
-	display: block;
-	position: absolute;
-	text-shadow: 1px 1px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 3px;
-	top: 60px;
-	left: 75px;
-	z-index: 10;
-	color: #CC6600;
-	font-size: 1.9em;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 1.2em;
-}
-
 .classboard div.class-progress {
 	border-radius: 0px;
-	margin: 100px;
-	margin-top: 10px;
+	margin: 45px;
+	margin-top: 5px;
 	margin-bottom: 10px;
-	margin-left: 100px;
-	color: #d9d9d9;
+	margin-left: 165px;
+	color: #FFFFFF;
 	height: 6px;
-	border-color: rgba(170, 170, 170, 0.2);
+	border-color: rgba(59, 167, 250, 0.58);
 }
 
 .ui-progressbar.beginning .ui-progressbar-value {
@@ -2474,9 +2285,9 @@ html.touch #subnav {
 
 .classboard div.class-progress-label {
 	font-size: 18px;
-	/*margin-left: 30px;*/
+	margin-left: 120px;
 	margin-top: -140px;
-	color: #7f7f7f;
+	color: #3ba7fa;
 	text-align: center;
 }
 
@@ -2731,7 +2542,6 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .studentboard, .float-left .classboard {
 	float: left;
-	/*position: relative;*/
 	width: 300px;
 	height: 350px;
 	text-align: left;
@@ -2741,8 +2551,64 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 }
 .float-left .classboard {
-	background-image: url('img/todo.png');
+	background-image: url('../img/todobg.png');
 	background-repeat: no-repeat;
+}
+
+.float-left .todoactionboard {
+	float: left;
+	width: 80%;
+	min-width: 300px;
+	height: auto;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+.float-left .helperboard {
+	float: left;
+	width: 150px;
+	height: 150px;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
+	margin: 15px;
+}
+.float-left .todoactionboard div.todo-status-name {
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-top-left-radius: 8px;
+	background-color: #0784E3;
+	color: white;
+	text-align: center;
+	background: url("../img/stripe.png");
+}
+.float-left .helperboard div.helpername {
+	float: left;
+	width: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-top-left-radius: 8px;
+	background-color: #0784E3;
+	color: white;
+	font-size: 0.8em;
+	text-align: center;
+	background: url("../img/stripe.png");
+}
+.float-left .helperboard div.item {
+	position: relative;
+	margin-top: 70px;
+	text-align: center;
+	color: #d9d9d9;
+}
+.float-left .helperboard div.item i {
+	color: #d9d9d9;
 }
 
 .canvas-partition {
@@ -2854,6 +2720,13 @@ dialog-modal::-webkit-scrollbar {
 	border-bottom-right-radius: 10px;
 	margin-bottom: 10px;
 }
+
+.shadow {
+	box-shadow: 1px 2px 5px 2px rgba(204, 204, 204, 0.39);
+	-webkit-box-shadow: 1px 2px 5px 2px rgba(204, 204, 204, 0.39);
+	-moz-box-shadow: 1px 2px 5px 2px rgba(204, 204, 204, 0.39);
+}
+
 .float-left div.primaryboard .actionboard {
 	margin-right: 110px;
 	float: left;
@@ -2973,8 +2846,12 @@ dialog-modal::-webkit-scrollbar {
 	cursor: pointer;
 }
 
-.studentboard:hover, .adminboard:hover, .classboard:hover {
+.studentboard:hover, .adminboard:hover, .classboard:hover, .todoactionboard:hover, .helperboard:hover {
 	border: 2px solid #0784E3;
+}
+
+.helperboard div.item i:hover {
+	color: #0784E3;
 }
 
 .membercard:hover {
@@ -3046,7 +2923,7 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 14px;
 	color: black;
 	margin-top: 0px;
-	margin-left: 25px
+	margin-left: 25px background : url("../img/stripe.png");
 }
 .membercard .membercard-checkbox {
 	float: left;
@@ -3072,6 +2949,7 @@ dialog-modal::-webkit-scrollbar {
 	padding-bottom: 10px;
 	text-align: center;
 	color: white;
+	background: url("../img/stripe.png");
 	/*padding : 10px 0px;
 	 text-align: center;
 	 width: 100%;
@@ -3131,205 +3009,12 @@ dialog-modal::-webkit-scrollbar {
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
 	margin-top: 150px;
+	background: url("../img/stripe.png");
 }
 .classboard div.class-name i {
 	float: right;
 	margin-right: 0px;
 	padding-top: 5px;
-}
-
-/*==================Student Profiles=============*/
-
-#carousel .studentboard {
-	background-color: white;
-	text-align: center
-}
-
-#carousel .studentboard.selected  i {
-	display: inline;
-	padding-left: 5px;
-	padding-right: 10px;
-	color: white;
-}
-
-#carousel div.studentboard i {
-	display: none;
-}
-
-#carousel img {
-	width: 370px;
-	height: 183px;
-	background-color: rgba(0, 128, 0, 0.65);
-	text-align: center
-}
-#carousel .student-name {
-	display: inline-block;
-	width: 340px;
-	left: 0;
-	background-color: #0784E3;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 20px;
-	padding-right: 10px;
-	position: absolute;
-	/*top: 70px;*/
-	text-align: center;
-	z-index: 10;
-	color: white;
-	font-size: 1.9em;
-	font-weight: 400;
-	line-height: 1.2em;
-}
-
-#carousel .student-info {
-	display: inline-block;
-	width: 340px;
-	left: 0;
-	background-color: white;
-	padding-top: 100px;
-	/*top: 70px;*/
-	text-align: left;
-	margin-left: 10px;
-	z-index: 10;
-	color: white;
-	font-size: 1.9em;
-	font-weight: 400;
-	line-height: 1.2em;
-}
-
-#carousel .student-info li {
-	color: #493E3E;
-	margin-left: 10px;
-	list-style: none;
-	font-size: 0.9em;
-	border-left: 4px solid #0784E3;
-	padding: 5px;
-	margin-bottom: 5px;
-}
-#carousel .student-select {
-	z-index: 0;
-}
-#carousel div.selected .student-select {
-	z-index: 100;
-}
-
-/* =================== Quiz Styles     ======================= */
-#carousel .quizboard {
-	background-color: white;
-	text-align: center
-}
-#carousel .quizboard .correct {
-	background-color: rgba(0, 128, 0, 0.65);
-	text-align: center
-}
-/* Inactive quiz boards */
-#carousel div.quizboard {
-	background-color: white;
-	color: white;
-}
-#carousel div span.qtnnumber {
-	color: white;
-	font-size: 4em;
-}
-#carousel div span.qtn {
-	background-color: white;
-	color: white;
-	width: 0;
-	display: none;
-}
-#carousel div span input {
-	width: 0;
-	color: white;
-	display: none;
-}
-#carousel div.selected span input.incorrect {
-	width: 49%;
-	color: white;
-	background-color: rgba(255, 0, 0, 0.67);
-}
-#carousel div.selected span input.correct {
-	width: 49%;
-	color: white;
-	background-color: rgba(0, 128, 0, 0.65)
-}
-#carousel div.selected span input.incorrect:hover {
-	width: 49%;
-	color: white;
-	background-color: rgba(255, 0, 0, 0.67);
-}
-#carousel div.selected span input.correct:hover {
-	width: 49%;
-	color: white;
-	background-color: rgba(0, 128, 0, 0.65)
-}
-
-#carousel div.selected span.qtnnumber {
-	display: block;
-	position: absolute;
-	text-shadow: 1px 1px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-right: 3px;
-	top: 20px;
-	left: 20px;
-	z-index: 10;
-	color: #0784E3;
-	font-size: 2.8em;
-	font-weight: 500;
-	text-transform: uppercase;
-	line-height: 1em;
-}
-#carousel div.selected span.qtn {
-	display: inline-block;
-	width: 340px;
-	left: 0;
-	background-color: #0784E3;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 20px;
-	padding-right: 10px;
-	position: absolute;
-	top: 70px;
-	text-align: left;
-	z-index: 10;
-	color: white;
-	font-size: 1.9em;
-	font-weight: 400;
-	line-height: 1.2em;
-}
-#carousel div.selected span input {
-	display: inline;
-	width: 49%;
-	left: 0;
-	background-color: white;
-	border-color: white;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	padding-left: 20px;
-	padding-right: 10px;
-	position: relative;
-	top: 250px;
-	text-align: center;
-	z-index: 999;
-	color: #0784E3;
-	font-size: 1.8em;
-	font-weight: 400;
-	line-height: 1em;
-}
-#carousel div span input {
-	color: white;
-}
-
-#carousel .active {
-	background-color: #0784E3;
-	color: white;
-}
-
-#carousel div.selected span input:hover {
-	width: 49%;
-	left: 0;
-	background-color: #0784E3;
-	color: white;
 }
 
 /*Quiz Progress*/
@@ -3639,112 +3324,8 @@ html.touch #wrapper-about {
 	overflow: scroll;
 }
 
-/* =================== Desktop Only Styles ======================= */
-html.no-touch .single-projects #prev {
-	display: block;
-	position: fixed;
-	right: 0;
-	left: 0;
-	bottom: 47%;
-	margin-left: 0px;
-	width: 50px;
-	height: 50px;
-	background-color: #000;
-	-webkit-box-shadow: 1px 1px 10px #444444;
-	-moz-box-shadow: 1px 1px 10px #444444;
-	box-shadow: 1px 1px 10px #444444;
-}
-html.no-touch .single-projects #next {
-	display: block;
-	position: fixed;
-	right: 0;
-	bottom: 47%;
-	margin-right: 0px;
-	width: 44px;
-	height: 50px;
-	background-color: #000;
-}
-html.no-touch .page-template-about-php #prev {
-	display: block;
-	position: fixed;
-	right: 0;
-	left: 0;
-	bottom: 47%;
-	margin-left: 0px;
-	background-color: #000;
-}
-html.no-touch .page-template-about-php #next {
-	display: block;
-	position: fixed;
-	right: 0;
-	bottom: 47%;
-	margin-right: 0px;
-	background-color: #000;
-}
-#prev.admin-control-prev {
-	display: block;
-	position: fixed;
-	right: 0;
-	left: 0;
-	bottom: 47%;
-	margin-left: 0px;
-	background-color: #000;
-}
-#next.admin-control-next {
-	display: block;
-	position: fixed;
-	right: 0;
-	bottom: 47%;
-	margin-right: 0px;
-	background-color: #000;
-}
-html.no-touch #wrapper-about {
-	overflow: hidden;
-}
-html.no-touch #instruction {
-	display: block;
-}
-html.no-touch #touch-instruction {
-	display: none;
-}
-html.no-touch #gradient-left {
-	opacity: 0.5;
-	width: 110px;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background: transparent url("../img/gradient-left.png") repeat-y 0 0;
-}
-html.no-touch #gradient-right {
-	opacity: 0.5;
-	width: 110px;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	right: 0;
-	background: transparent url("../img/gradient-right.png") repeat-y 0 0;
-}
 
-/* =================== Instructions ======================= */
-#instruction, #touch-instruction {
-	position: absolute;
-	z-index: -999;
-	width: 240px;
-	left: 50%;
-	margin-left: -120px;
-	bottom: 30px;
-}
-#instruction p, #touch-instruction p {
-	color: #eee;
-	text-align: center;
-	font-size: 1.15em;
-	letter-spacing: 0.1em;
-}
 
-#instruction {
-	display: none;
-}
 
 /* =================== Project Page Styles ======================= */
 #project-nav {
@@ -4163,195 +3744,6 @@ html.no-touch #gradient-right {
 	top: 2px;
 }
 
-/* =================== Swipejs Slideshow ======================= */
-#slider {
-	margin: 0px;
-	padding: 0px;
-	opacity: 0;
-}
-#slider ul {
-	padding: 0;
-	margin: 0;
-}
-#slider ul li {
-	position: relative;
-	background-size: cover;
-}
-#slider ul li img {
-	max-width: 100%;
-	max-height: auto;
-}
-#slider ul li span {
-	position: absolute;
-	display: block;
-	font-size: 1.5em;
-	font-weight: 500;
-	color: #fff;
-	padding: 25px;
-	width: 380px;
-	height: 60px;
-	overflow: hidden;
-}
-#slider ul li span.left-bottom {
-	bottom: 20px;
-	left: 20px;
-}
-#slider ul li span.right-bottom {
-	width: 560px;
-	height: 50px;
-	bottom: 20px;
-	right: 20px;
-}
-#slider p {
-	display: none;
-	opacity: 0;
-}
-.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min.beginning {
-	background: url('../img/begining.png');
-}
-.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min.middle {
-	background: url('../img/middle.png');
-}
-.ui-slider-range.ui-widget-header.ui-corner-all.ui-slider-range-min.end {
-	background: url('../img/end.png');
-}
-
-/* =================== Maximage Slideshow ======================= */
-#slider-notouch {
-	opacity: 0;
-}
-#slider-notouch p {
-	display: none;
-	opacity: 0;
-}
-
-.mc-hide-scrolls {
-	overflow: hidden;
-}
-
-body .mc-cycle {
-	height: 100%;
-	left: 0;
-	overflow: hidden;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-div.mc-image {
-	background-position: center center;
-	background-repeat: no-repeat;
-	height: 100%;
-	overflow: hidden;
-	width: 100%;
-}
-
-.mc-old-browser .mc-image {
-	overflow: hidden;
-}
-
-/* =================== jScrollpane CSS ======================= */
-.jspContainer {
-	overflow: hidden;
-	position: relative;
-}
-
-.jspPane {
-	position: absolute;
-}
-
-.jspVerticalBar {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 16px;
-	height: 100%;
-	background: red;
-}
-
-.jspHorizontalBar {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%;
-	height: 16px;
-	background: red;
-}
-
-.jspVerticalBar *, .jspHorizontalBar * {
-	margin: 0;
-	padding: 0;
-}
-
-.jspCap {
-	display: none;
-}
-
-.jspHorizontalBar
-.jspCap {
-	float: left;
-}
-
-.jspTrack {
-	background: #dde;
-	position: relative;
-}
-
-.jspDrag {
-	background: #bbd;
-	position: relative;
-	top: 0;
-	left: 0;
-	cursor: pointer;
-}
-
-.jspHorizontalBar .jspTrack, .jspHorizontalBar .jspDrag {
-	float: left;
-	height: 100%;
-}
-
-.jspArrow {
-	background: #50506d;
-	text-indent: -20000px;
-	display: block;
-	cursor: pointer;
-}
-
-.jspArrow.jspDisabled {
-	cursor: default;
-	background: #80808d;
-}
-
-.jspVerticalBar .jspArrow {
-	height: 16px;
-}
-
-.jspHorizontalBar .jspArrow {
-	width: 16px;
-	float: left;
-	height: 100%;
-}
-
-.jspVerticalBar .jspArrow:focus {
-	outline: none;
-}
-
-input:focus, textarea:focus {
-	outline: none;
-	font-weight: 500;
-}
-
-.jspCorner {
-	background: #eeeef4;
-	float: left;
-	height: 100%;
-}
-
-* html .jspCorner {
-	margin: 0 -3px 0 0;
-}
-
 /* =================== Footer ======================= */
 footer {
 	position: fixed;
@@ -4749,209 +4141,6 @@ footer a:hover {
 		margin: 0px;
 	}
 
-	#wrapper-touch {
-		margin: 0;
-		padding: 0;
-		opacity: 0;
-	}
-	#wrapper-touch ul {
-		padding: 0;
-		margin: 0;
-	}
-	#wrapper-touch li {
-		margin: 0;
-		padding: 0;
-	}
-	#wrapper-touch ul li a {
-		position: relative;
-		display: block;
-		width: 189px;
-		height: 280px;
-		background: transparent;
-		margin: 0 auto;
-	}
-	#wrapper-touch ul li a span.heading {
-		position: absolute;
-		top: 50px;
-		left: 20px;
-		z-index: 20;
-		color: #0784E3;
-		font-size: 1.2em;
-		font-weight: 700;
-	}
-	#wrapper-touch ul li a span.subtitle {
-		display: none;
-	}
-	#wrapper-touch ul li a span.gradient-work-img {
-		display: block;
-		opacity: 0.3;
-		position: absolute;
-		top: 22px;
-		left: 0;
-		z-index: 0;
-		width: 189px;
-		height: 250px;
-	}
-	#wrapper-touch ul li a img {
-		position: static;
-		width: 189px;
-		height: 250px;
-	}
-
-	/*Quiz-Wrapper-Mobile*/
-	#wrapper-touch ul li.quizboard a {
-		position: static;
-		width: 189px;
-		height: 250px;
-	}
-	#wrapper-touch ul li.quizboard a span.qtnnumber {
-	}
-	#wrapper-touch ul li.quizboard a span.qtn {
-		display: inline-block;
-		width: 189px;
-		left: 0;
-		background-color: #0784E3;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		padding-left: 0;
-		padding-right: 5px;
-		position: absolute;
-		top: 50px;
-		text-align: left;
-		z-index: 10;
-		color: white;
-		font-size: 1.9em;
-		font-weight: 400;
-		line-height: 1.2em;
-	}
-	#wrapper-touch ul li.quizboard a span input {
-		display: inline;
-		width: 30%;
-		left: 0;
-		background-color: white;
-		border-color: white;
-		/*padding-top: 10px;
-		 padding-bottom: 10px;
-		 padding-left: 10px;
-		 padding-right: 10px;*/
-		position: relative;
-		top: 120px;
-		text-align: center;
-		z-index: 10;
-		color: #0784E3;
-		font-size: 1.8em;
-		font-weight: 400;
-		line-height: 1em;
-	}
-
-	#next, #prev {
-		display: none;
-	}
-
-	#touch-instruction {
-		display: none;
-	}
-
-	#blog-wrapper {
-		width: 100%;
-		position: relative;
-		margin: 0 auto;
-		background: #e5e5e5;
-	}
-
-	#blog-content {
-		width: 90%;
-		min-height: auto;
-		float: none;
-		padding: 1px 5% 25px 5%;
-		background: #fff;
-	}
-
-	#blog-sidebar {
-		width: 90%;
-		float: none;
-		padding: 25px 5% 25px 5%;
-	}
-
-	#blog-nav {
-		width: 100%;
-	}
-
-	#oops {
-		margin: 50px auto 0 auto;
-		width: 90%;
-		height: 160px;
-		background: none;
-	}
-	#oops h2 {
-		color: #fff;
-		text-align: center;
-		padding-top: 160px;
-		text-shadow: 1px 1px #000;
-	}
-
-	#wrapper-about {
-		display: none;
-	}
-
-	#wrapper-about-mobile {
-		display: block;
-		width: 100%;
-		height: auto;
-		padding: 0;
-		background: #E6E9EB;
-	}
-	#wrapper-about-mobile .yellow {
-		background: #F0E0B7;
-		padding: 20px 0;
-	}
-	#wrapper-about-mobile .white {
-		background: transparent;
-		padding: 20px 0;
-	}
-	#wrapper-about-mobile h2 {
-		margin: 0 0 20px 0;
-		padding-left: 5%;
-		padding-right: 5%;
-	}
-	#wrapper-about-mobile h3 {
-		margin: 10px 0 0 0;
-		padding-left: 5%;
-		padding-right: 5%;
-	}
-	#wrapper-about-mobile p {
-		padding-left: 5%;
-		padding-right: 5%;
-	}
-	#wrapper-about-mobile p.designation {
-		margin: 0 0 20px 0;
-		color: #888;
-		font-size: 0.9em;
-		text-transform: uppercase;
-	}
-	#wrapper-about-mobile img {
-		width: 90%;
-		height: auto;
-		margin-left: 5%;
-		margin-right: 5%;
-	}
-	#wrapper-about-mobile ul {
-		margin: 0 5%;
-		padding: 0;
-	}
-	#wrapper-about-mobile ul li {
-		list-style-type: none;
-		margin: 0;
-		padding: 0 0 10px 0;
-		border-top: 1px solid #aaa;
-	}
-	#wrapper-about-mobile a {
-		color: #555;
-	}
-	#wrapper-about-mobile a:hover {
-		color: #000;
-	}
-
 	#share-project {
 		display: none;
 	}
@@ -4962,34 +4151,6 @@ footer a:hover {
 
 	#project-page-logo {
 		margin-right: 10px;
-	}
-
-	#contact-modal {
-		width: auto;
-		height: auto;
-		padding-top: 5px;
-		padding-bottom: 15px;
-		-webkit-box-shadow: 0px 0px 0px #444444;
-		-moz-box-shadow: 0px 0px 0px #444444;
-		box-shadow: 0px 0px 0px #444444;
-	}
-	#contact-modal #map {
-		display: none;
-	}
-	#contact-modal p {
-		width: 75%;
-		border-bottom: 1px solid #ccc;
-		margin: 0 15px 5px 15px;
-		padding: 0 0 5px 0;
-		font-size: 0.9em;
-		color: #888;
-	}
-	#contact-modal p.contact-heading, #contact-modal p.modal-social-heading {
-		color: #000;
-		border: 0;
-		font-weight: 500;
-		margin: 10px 15px 0 15px;
-		padding: 0;
 	}
 
 	.modal_close {
@@ -5054,35 +4215,6 @@ footer a:hover {
 	#static-nav {
 		width: 92%;
 		margin: 40px auto 60px auto;
-	}
-
-	#blog-wrapper {
-		width: 92%;
-		position: relative;
-		margin: 4% auto;
-		background: #e5e5e5;
-	}
-
-	#blog-content {
-		width: 90%;
-		min-height: auto;
-		float: none;
-		padding: 1px 5% 25px 5%;
-		background: #fff;
-	}
-
-	#blog-sidebar {
-		width: 90%;
-		float: none;
-		padding: 25px 5% 25px 5%;
-	}
-
-	#blog-nav {
-		width: 100%;
-	}
-
-	#wrapper-about {
-		overflow: scroll;
 	}
 
 }

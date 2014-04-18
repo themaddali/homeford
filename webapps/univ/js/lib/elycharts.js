@@ -95,7 +95,7 @@ $.elycharts.templates = {
         offset: [0, 0] /* y, x */,
         // Se frameProps = false non disegna la cornice del tooltip (ad es. per permettere di definire la propria cornice HTML)
         frameProps : { fill: "white", "stroke-width": 0 },
-        contentStyle : { "font-family": "lucida sans, trebuchet MS, Tahoma", "font-size": "25px", "line-height": "30px", color: "#7f7f7f" }
+        contentStyle : { "font-family": "lucida sans, trebuchet MS, Tahoma", "z-index":"99", "font-size": "20px", "line-height": "30px","width":"40px","text-allign":"center", "color": "#7f7f7f" }
       },
       
       // Highlight feature
