@@ -113,6 +113,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery(this).hide();
 						});
 
+						jQuery('.edit-select').change(function() {
+							jQuery('#select-value').val(jQuery('.edit-select').val().toLowerCase());
+						});
+
 						$.validator.prototype.checkForm = function() {
 							//overriden in a specific page
 							this.prepareForm();
@@ -132,48 +136,51 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							if ($(".edit-form").valid()) {
 								var _quizname = jQuery('#quiz-name').val();
 								var _qid = jQuery('#quiz-name').attr('quizid');
-								if (!_qid) {
-									_qid = 4;
-								}
 								var _qcategory = jQuery('input[name=category]:checked').val();
 								var optionprefix;
+								var count;
 								if (_qcategory === '0') {
 									optionprefix = 'multi';
+									count = jQuery('.form-datainput input[type=text]:visible').length;
 								} else if (_qcategory === '1') {
 									optionprefix = 'tf';
+									//count = jQuery('.form-datainput select').length;
+									count = 1;
 								}
-								var _qname = jQuery('#question-name').val();
-								var answersarray = [];
-								for (var i = 0; i < jQuery('.form-datainput input[type=text]:visible').length; i++) {
-									var _answers = {};
-									_answers.text = jQuery('#' + optionprefix + '-option-' + i).val();
-									_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
-									if (_answers.isCorrect == 'true') {
-										_answers.isCorrect = true;
-									}
-									if (_answers.isCorrect == 'false') {
-										_answers.isCorrect = false;
-									}
-									if (_answers.text && _answers.text !== null && _answers.text !== null) {
-										answersarray.push(_answers);
-									}
-									if (i === jQuery('.form-datainput input[type=text]:visible').length - 1) {
-										service.setQuestion(_qid, _qcategory, _qname, answersarray, {
-											success : function(data) {
-												if (data.status !== 'error') {
-													notify.showNotification('OK', data.message);
-													setTimeout(function() {
-														jQuery('.option-input').val('');
-														jQuery('#question-name').focus();
-													}, 2000);
-												} else {
-													notify.showNotification('ERROR', data.message);
-													setTimeout(function() {
-														jQuery('#question-name').focus();
-													}, 2000);
+								if ((count !=1 && jQuery('#category-' + _qcategory).find('.correct').length > 0) || (count ==1)) {
+									var _qname = jQuery('#question-name').val();
+									var answersarray = [];
+									for (var i = 0; i < count; i++) {
+										var _answers = {};
+										_answers.text = jQuery('#' + optionprefix + '-option-' + i).val();
+										_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
+										if (_answers.isCorrect == 'true') {
+											_answers.isCorrect = true;
+										}
+										if (_answers.isCorrect == 'false') {
+											_answers.isCorrect = false;
+										}
+										if (_answers.text && _answers.text !== null && _answers.text !== null) {
+											answersarray.push(_answers);
+										}
+										if (i === count - 1) {
+											service.setQuestion(_qid, _qcategory, _qname, answersarray, {
+												success : function(data) {
+													if (data.status !== 'error') {
+														notify.showNotification('OK', data.message);
+														setTimeout(function() {
+															jQuery('.option-input').val('');
+															jQuery('#question-name').focus();
+														}, 2000);
+													} else {
+														notify.showNotification('ERROR', data.message);
+														setTimeout(function() {
+															jQuery('#question-name').focus();
+														}, 2000);
+													}
 												}
-											}
-										});
+											});
+										}
 									}
 								}
 							} else {

@@ -62,9 +62,14 @@
 									<li class="form-item">
 										<label>Answer</label>
 										<div class="form-content">
-											<!-- <input class="option-input" placeholder="First Response" name="options"  id="tf-option-0" type="text" /> -->
-											<!-- <button class="inlinebutton-or correct" type="button" value="true"></button> -->
-											<select><option>True</option><option>False</option></select>
+											<select class="edit-select" placeholder="True or False" id="tf-option-0" name="tfoption" type="text">
+												<option>True</option>
+												<option>False</option>
+											</select>
+											<input value="true" type="text" style="display:none" id="select-value" />
+											<div class="form-helper">
+												<label>Select the answer to your question, True or False?</label>
+											</div>
 										</div>
 									</li>
 								</div>
