@@ -62,11 +62,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 						dataType : 'json',
 						formData : formData_input,
 						submit : function(e, data) {
-							jQuery('#member-profile-image').attr('src', 'img/loader.gif');
+							jQuery('#member-profile-image').attr('src', 'img/loader.gif').addClass('loading');
 						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
-								jQuery('#member-profile-image').attr('src', '/homeford/api/profileupload/picture/' + file.id);
+								jQuery('#member-profile-image').removeClass('loading').attr('src', '/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
 								$('#new-member-profile-image').fileupload('destroy');
 							});

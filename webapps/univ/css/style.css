@@ -1732,6 +1732,11 @@ div.formselction {
 	border: 1px solid rgba(114, 114, 114, 0.71);
 	cursor: pointer;
 }
+.edit-form li.form-item div.form-content img.loading {
+	padding: 10px;
+	width: 40px;
+	height: 40px;
+}
 .edit-form li.form-item div.form-content img:focus, .edit-form li.form-item div.form-content img:hover {
 	border: 1px solid #0784E3;
 }
@@ -2257,6 +2262,10 @@ html.no-touch #subnav ul li.selected a {
 
 html.touch #subnav {
 	display: none;
+}
+
+#register-li {
+	margin-top: -15px;
 }
 
 .classboard div.class-progress {
@@ -4034,19 +4043,33 @@ footer a:hover {
 		margin-top: -30px;
 		margin-left: 10px;
 	}
-	
+
+	/*LOGIN LINKS*/
+	#forgot-password {
+		text-align: left;
+		margin-top: 30px;
+	}
+
+	#register-li {
+		margin-top: -35px;
+	}
+
+	#register-now {
+		text-align: left;
+	}
+
 	.view-table {
 		margin-top: 5px;
 	}
-	
+
 	.view-table > thead tr {
 		font-size: 14px;
 	}
-	
+
 	.view-table > tbody tr {
-		font-size:  12px;
+		font-size: 12px;
 	}
-	
+
 	.view-table > thead tr th {
 		padding-left: 5px;
 	}

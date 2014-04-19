@@ -28,7 +28,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
 							if (!UserProfile.image || UserProfile.image == null || UserProfile.image == 'null') {
-								jQuery('#profile-image').attr('src', 'img/noimg.png');
+								jQuery('#profile-image').attr('src', 'img/noimg.png')
 							} else {
 								jQuery('#profile-image').attr('src', '/homeford/api/profileupload/picture/' + UserProfile.image.id);
 							}
@@ -59,11 +59,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						dataType : 'json',
 						formData : formData_input,
 						submit : function(e, data) {
-							jQuery('#profile-image').attr('src', 'img/loader.gif');
+							jQuery('#profile-image').attr('src', 'img/loader.gif').addClass('loading');
 						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
-								jQuery('#profile-image').attr('src', '/homeford/api/profileupload/picture/' + file.id);
+								jQuery('#profile-image').removeClass('loading').attr('src', '/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
 							});
 						}
