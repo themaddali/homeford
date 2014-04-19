@@ -46,7 +46,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									jQuery('#noinfo').hide();
 								}
 								for (var i = 0; i < COUNT; i++) {
-									jQuery('.metainfo').text(COUNT + ' Tasks');
+									jQuery('.metainfo').text(COUNT + ' Task(s)');
 									var newboard = PanelTemplate.clone();
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);

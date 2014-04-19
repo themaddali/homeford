@@ -119,7 +119,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
 										if (data.length == 0) {
-											jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
 											if (jQuery('.studentboard').length === 0) {
 												jQuery('#noinfo').fadeIn(1000);
 											} else {
@@ -175,7 +175,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
 							jQuery('#card-canvas').append(newboard);
-							jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+							jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
@@ -208,7 +208,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						service.MemberToDoList(list[0], members[0].id, {
 							success : function(tasks) {
 								if (tasks.length == 0 && members[0]) {
-									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' members');
+									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' member(s)');
 									if (jQuery('.studentboard').length === 0) {
 										jQuery('#noinfo').fadeIn(1000);
 									} else {
@@ -233,7 +233,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 										if (k === tasks.length - 1) {
 											members.splice(0, 1);
 											ActivatePanelEvents();
-											jQuery('.metainfo').text(jQuery('.studentboard').length + ' members');
+											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
 											if (jQuery('.studentboard').length === 0) {
 												jQuery('#noinfo').fadeIn(1000);
 											} else {

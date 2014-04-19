@@ -1298,6 +1298,8 @@ a.goback {
 	float: right;
 	margin-right: 20px;
 	border: 2px solid #e6e6e6;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 .modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
 	border: 2px solid #e6e6e6;
@@ -1315,7 +1317,7 @@ a.goback {
 .modal-body .modal-container header input:hover, .modal-body .modal-container footer input:hover {
 	/*background-color: #FFFFFF;*/
 	/*color: #0784E3;*/
-	border: 2px solid #0784E3;;
+	border: 2px solid #0784E3;
 }
 
 .modal-body .modal-container header a {
@@ -1401,6 +1403,8 @@ div.formselction {
 	border: 2px solid white;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 .view-form-control input:hover {
 	border: 2px solid #999;
@@ -3975,21 +3979,21 @@ footer a:hover {
 	}
 	.float-left .studentboard {
 		float: none;
-		width: 80%;
+		width: 90%;
 		height: 42px;
 		margin: 10px;
 	}
 	.float-left .adminboard {
 		float: none;
-		width: 90%;
+		width: 95%;
 		margin: 10px;
 	}
 
 	.studentboard div.student-name {
 		border-top-left-radius: 8px;
 		border-bottom-right-radius: 8px;
-		background-color: white;
-		color: black;
+		/*background-color: white;*/
+		color: white;
 		text-overflow: ellipsis;
 	}
 	.studentboard span.taskcount {
@@ -3998,13 +4002,26 @@ footer a:hover {
 
 	.float-left .classboard {
 		float: none;
-		width: 80%;
+		width: 90%;
 		height: 110px;
 		margin: 10px;
+		background: none;
+		text-align: center;
+	}
+	.classboard div.class-name {
+		margin-top: 0px;
+		border-top-left-radius: 8px;
 	}
 
-	.classboard div.class-progress-label, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
+	.classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
 		display: none;
+	}
+
+	.classboard div.class-progress-label {
+		margin-left: 0px;
+		margin-top: 5px;
+		color: #0784E3;
+		font-size: 15px;
 	}
 
 	.edit-form li.form-item div.form-content div.form-helper {
@@ -4015,6 +4032,23 @@ footer a:hover {
 		width: 95%;
 		height: 230px;
 		margin-top: -30px;
+		margin-left: 10px;
+	}
+	
+	.view-table {
+		margin-top: 5px;
+	}
+	
+	.view-table > thead tr {
+		font-size: 14px;
+	}
+	
+	.view-table > tbody tr {
+		font-size:  12px;
+	}
+	
+	.view-table > thead tr th {
+		padding-left: 5px;
 	}
 
 	.classboard div.class-name {
@@ -4024,17 +4058,42 @@ footer a:hover {
 		display: none;
 	}
 
+	.float-left .todoactionboard {
+		width: 95%;
+		min-width: 0px;
+		margin-left: 0px;
+	}
+
+	.float-left .helperboard div.item i {
+		margin-left: 100%;
+	}
+
+	.float-left .helperboard {
+		margin-right: 10px;
+		margin-left: 0px;
+		margin-top: 10px;
+		width: 45%;
+	}
+
 	#init-helper {
 		display: none;
 		border: none;
 		color: white;
 	}
+	.main-content-header .subtitleinfo, .main-content-header .subtitleinfo-2, .main-content-header .subtitleinfo-3 {
+		font-size: 0.8em;
+		font-weight: 500;
+	}
+	.main-content-header .metainfo {
+		font-size: 0.7em;
+	}
+
 	.edit-form li.form-item > .form-content {
 		width: 100%;
 	}
 
 	.edit-form li div.form-content textarea, .edit-form li div.form-content input, .edit-form li div.form-content select.edit-select, .edit-form li.form-item div.form-content img {
-		width: 90%;
+		width: 80%;
 	}
 
 	.edit-form li.form-item > * {
@@ -4045,6 +4104,7 @@ footer a:hover {
 	.edit-form li.form-item > label {
 		width: 90%;
 		padding-bottom: 10px;
+		text-align: left;
 	}
 	.edit-form li.form-item {
 		margin-left: 15px;
@@ -4065,13 +4125,18 @@ footer a:hover {
 		font-size: 0.7em
 	}
 
-	.classboard div.footer {
-		margin-top: 4px;
-		padding: 2px;
+	.classboard div.footer, .classboard div.class-info {
+		display: none;
+	}
+
+	.classboard div.class-progress {
+		margin-left: 0px;
+		margin: 80px;
+		margin-top: 10px;
 	}
 
 	.contentfull div.card-form-container {
-		width: 80%;
+		width: 100%;
 	}
 
 	#user-name-value {
@@ -4115,6 +4180,17 @@ footer a:hover {
 	}
 	.edit-form li div.form-content  select.edit-select:focus + .form-helper {
 		display: none
+	}
+
+	.float-left .helperboard div.item {
+		width: 38%;
+		height: 120px;
+	}
+
+	.float-left .helperboard div.helpername {
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 
 	.main-content.action.small {

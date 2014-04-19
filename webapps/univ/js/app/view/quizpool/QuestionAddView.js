@@ -147,7 +147,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									//count = jQuery('.form-datainput select').length;
 									count = 1;
 								}
-								if ((count !=1 && jQuery('#category-' + _qcategory).find('.correct').length > 0) || (count ==1)) {
+								if ((count != 1 && jQuery('#category-' + _qcategory).find('.correct').length > 0) || (count == 1)) {
 									var _qname = jQuery('#question-name').val();
 									var answersarray = [];
 									for (var i = 0; i < count; i++) {
@@ -169,6 +169,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 													if (data.status !== 'error') {
 														notify.showNotification('OK', data.message);
 														setTimeout(function() {
+															jQuery('.inlinebutton-multi').removeClass('error');
 															jQuery('.option-input').val('');
 															jQuery('#question-name').focus();
 														}, 2000);
@@ -182,6 +183,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 											});
 										}
 									}
+								} else {
+									jQuery('#category-' + _qcategory).find('.incorrect').addClass('error');
 								}
 							} else {
 								//In Most cases, we reach here because of the hidden fields. :(

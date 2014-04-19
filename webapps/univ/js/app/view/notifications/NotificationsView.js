@@ -42,7 +42,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 					//Backing the template
 					jQuery('.div-template').append(template.attr('id', 'notify-template'));
 					jQuery('.div-template').append(mintemplate.attr('id', 'notify-min-template'));
-					jQuery('.metainfo').text(NOTIFICATION.length + ' Notifications');
+					jQuery('.metainfo').text(NOTIFICATION.length + ' Notification(s)');
 					if (NOTIFICATION.length === 0) {
 						jQuery('#noinfo').fadeIn(1000);
 					}

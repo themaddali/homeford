@@ -39,7 +39,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
-						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' days to go');
+						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
 						$("#task-desc-data").html(ACTIVEQUIZ.desc.replace(/\r?\n/g, '<br/>'));
 						$("#task-priority").text(ACTIVEQUIZ.priority);
