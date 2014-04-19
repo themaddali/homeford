@@ -87,17 +87,17 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					var requesturl = router.location().substring(1);
 					if (requesturl.indexOf('email=') !== -1 && requesturl.indexOf('domain=') !== -1) {
 						var query = requesturl.split('email=')[1];
-						query = query.split("?");
+						query = query.split("&domain=");
 						jQuery('#new-user-name').val(query[0]);
-						jQuery('#new-user-domain').val(query[1].split("domain=")[1].toUpperCase());
-						jQuery('#new-user-name').attr('readonly', true);
-						jQuery('#new-user-doamin').attr('readonly', true);
+						jQuery('#new-user-domain').val(query[1].toUpperCase());
+						jQuery('#new-user-name').attr('readonly', 'readonly');
+						jQuery('#new-user-domain').attr('readonly', 'readonly');
 						jQuery('#new-user-password').focus();
 					} else {
 						jQuery('#new-user-name').val('');
 						jQuery('#new-user-domain').val('');
 						jQuery('#new-user-name').attr('readonly', false);
-						jQuery('#new-user-doamin').attr('readonly', false);
+						jQuery('#new-user-domain').attr('readonly', false);
 						jQuery('#new-user-name').focus();
 					}
 				}
