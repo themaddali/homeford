@@ -234,6 +234,10 @@ form div.form-content > input:focus {
 	border: 1px solid #0784E3;
 	outline: none;
 }
+form div.form-content > textarea:focus {
+	border: 1px solid #0784E3;
+	outline: none;
+}
 
 input[readonly="readonly"] {
 	background-color: #f6f6f6;

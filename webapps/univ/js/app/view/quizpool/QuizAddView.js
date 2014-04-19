@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/quizpool/QuestionAddView'], function(modernizr, cookie, service, validate, router, notify, admin, questionassign) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/quizpool/QuestionAddView'], function(modernizr, cookie, service, validate, router, notify, admin, questionassign) {"use strict";
 
 	var QuizAddView = ( function() {
 
@@ -57,7 +57,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
+							router.go('/admin');
 						});
 
 						jQuery('#quiz-assign').on('click', function() {
@@ -75,7 +75,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
 											setTimeout(function() {
-												var active ={};
+												var active = {};
 												active.name = _qname;
 												active.id = data.id;
 												questionassign.activeQuiz(active);
@@ -87,17 +87,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								});
 							}
-							//Need to update to handler
 						});
 
 						validator = jQuery(".edit-form").validate({
 							rules : {
 								quizname : {
 									required : true,
-								},
-								quizdesc : {
-									required : true,
-								},
+								}
 							}
 						});
 
