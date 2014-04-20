@@ -60,9 +60,6 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'cropp
 						},
 						dataType : 'json',
 						formData : formData_input,
-						previewMaxWidth : 800,
-						previewMaxHeight : 800,
-						previewCrop : true, // Force cropped images
 						submit : function(e, data) {
 							jQuery('#profile-image').attr('src', 'img/loader.gif').addClass('loading');
 						},
