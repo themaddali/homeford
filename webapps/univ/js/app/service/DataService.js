@@ -407,10 +407,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
-						data : JSON.stringify({
-							'percentage' : progress,
-							'comments' : comments
-						}),
 						success : function(data) {
 							handlers.success(data);
 						}

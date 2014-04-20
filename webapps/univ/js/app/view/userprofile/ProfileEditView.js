@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'croppic', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, croppic, service, validate, router, notify, admin) {"use strict";
 
 	var ProfileEditView = ( function() {
 
@@ -14,7 +14,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			}
-			var cropperHeader;
+			//var Croppic = new croppic;
 
 			function ProfileEditView() {
 
@@ -32,7 +32,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							} else {
 								jQuery('#profile-image').attr('src', '/homeford/api/profileupload/picture/' + UserProfile.image.id);
 							}
-							jQuery('#profile-picture').attr('data-url', '/homeford/api/profileupload/' + UserProfile.id);
+							var imageUploadURL = '/homeford/api/profileupload/' + UserProfile.id;
+							jQuery('#profile-picture').attr('data-url', imageUploadURL);
 							ActivateClicks();
 						}
 					});
@@ -40,6 +41,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				function ActivateClicks() {
 					var formData_input = $('#profile-picture').serializeArray();
+
 					$('#profile-picture').fileupload({
 						add : function(e, data) {
 							var uploadErrors = [];
@@ -58,6 +60,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						},
 						dataType : 'json',
 						formData : formData_input,
+						previewMaxWidth : 800,
+						previewMaxHeight : 800,
+						previewCrop : true, // Force cropped images
 						submit : function(e, data) {
 							jQuery('#profile-image').attr('src', 'img/loader.gif').addClass('loading');
 						},
@@ -67,7 +72,17 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								service.cleanUserProfile();
 							});
 						}
-					});
+					}); 
+
+					
+					// var croppicContaineroutputOptions = {
+					// uploadUrl : jQuery('#profile-picture').attr('data-url'),
+					// outputUrlId : 'cropOutput',
+					// modal : false,
+					// formdatainput : formData_input,
+					// loaderHtml : '<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> '
+					// }
+					// var cropContaineroutput = new Croppic('profile-picture-div', croppicContaineroutputOptions);
 				}
 
 				function checkForActiveCookie() {
@@ -106,6 +121,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#profile-edit-modal-close').on('click', function() {
 							router.returnToPrevious();
 						});
+
+						jQuery('#profile-picture-div').css('height', jQuery('#profile-picture-div').width() / 2);
 
 						jQuery('#profile-edit').on('click', function() {
 							if ($("#profile-edit-form").valid()) {

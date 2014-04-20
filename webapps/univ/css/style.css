@@ -1653,10 +1653,10 @@ div.formselction {
 .edit-form li div.form-content a.input-link:hover + .form-helper {
 	display: inline-block;
 }
-.edit-form li div.form-content img:focus + .form-helper {
+.edit-form li.form-item div.form-content img:focus + .form-helper {
 	display: inline-block;
 }
-.edit-form li div.form-content img:hover + .form-helper {
+.edit-form li.form-item div.form-content img:hover + .form-helper {
 	display: inline-block;
 }
 .edit-form li div.form-content div#progressslider:hover + .form-helper {
@@ -2355,10 +2355,14 @@ html.touch #subnav {
 }
 
 /*====PROFILE PIC=====*/
-#cropContainerHeader {
-	width: 200px;
-	height: 150px;
-	position: relative; /* or fixed or absolute */
+#profile-picture-div {
+	width: 60%;
+	height: 100px;
+	position: relative;
+	border: 1px solid rgba(114, 114, 114, 0.71);
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 10px;
 }
 
 /*===========Cards Template - Responive==========*/
@@ -4184,6 +4188,12 @@ footer a:hover {
 		display: none
 	}
 	.edit-form li div.form-content  a.input-link:hover + .form-helper {
+		display: none
+	}
+	.edit-form li.form-item div.form-content  img:focus + .form-helper {
+		display: none
+	}
+	.edit-form li.form-item div.form-content  img:hover + .form-helper {
 		display: none
 	}
 	.edit-form li div.form-content  div#progressslider:hover + .form-helper {

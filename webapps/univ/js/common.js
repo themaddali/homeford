@@ -23,6 +23,8 @@ require({
 		transport : 'iframe-transport',
 		fileupload : 'fileupload',
 		crop : 'jquery.Jcrop.min',
+		croppic : 'croppic',
+		canvastoblob : 'canvastoblob',
 		Pages : '../../module',
 	},
 	map : {

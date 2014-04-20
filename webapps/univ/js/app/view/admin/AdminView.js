@@ -27,22 +27,6 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 				a : 0,
 				b : 0
 			};
-			var donutdata = [{
-				value : 30,
-				color : "#F7464A"
-			}, {
-				value : 50,
-				color : "#e36607"
-			}, {
-				value : 100,
-				color : "#e30784"
-			}, {
-				value : 40,
-				color : "#07e366"
-			}, {
-				value : 120,
-				color : "#0784e3"
-			}];
 
 			function AdminView() {
 
@@ -205,7 +189,7 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 								for (var j = 0; j < data.length; j++) {
 									updatePanelValues('#members-total-value', _memberstotal);
 									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER3') !== -1) {
+									if (roles.indexOf('ROLE_TIER3') !== -1 && roles.indexOf('ROLE_TIER2') === -1) {
 										_memberst3 = _memberst3 + 1;
 										updatePanelValues('#members-t3-value', _memberst3);
 										_membersdata[1] = _memberst3;
@@ -304,11 +288,11 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 							r : -0.5,
 							values : [{
 								plotProps : {
-									fill : "#0784E3"
+									fill : "green"
 								}
 							}, {
 								plotProps : {
-									fill : "green"
+									fill : "#0784E3"
 								}
 							}]
 						}
