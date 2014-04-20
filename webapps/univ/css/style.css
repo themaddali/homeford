@@ -2685,6 +2685,7 @@ dialog-modal::-webkit-scrollbar {
 	background-color: white;
 	border-bottom: 0px;
 	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 .float-left .notifycard div.head div.title {
 	color: black;
