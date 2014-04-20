@@ -169,6 +169,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 							service.updateToDo(ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
 								success : function(data) {
 									if (data.status == 'success') {
+										notify.showNotification('OK', 'Task #' +ACTIVEQUIZ.id +' Updated');
 										router.go('/class');
 									}
 								}

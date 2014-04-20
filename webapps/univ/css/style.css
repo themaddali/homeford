@@ -2680,8 +2680,8 @@ dialog-modal::-webkit-scrollbar {
 	border-top-left-radius: 10px;
 }
 .float-left .notifycard.min div.head {
-	padding: 5px;
-	height: 20px;
+	padding: 10px;
+	height: 30px;
 	background-color: white;
 	border-bottom: 0px;
 	border-top-left-radius: 10px;
@@ -2689,6 +2689,7 @@ dialog-modal::-webkit-scrollbar {
 .float-left .notifycard div.head div.title {
 	color: black;
 	float: left;
+	padding-top: 5px;
 	margin-left: 10px;
 }
 .float-left .notifycard div.head div.timestamp {
@@ -2697,6 +2698,7 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 12px;
 	float: right;
 	margin-right: 10px;
+	padding-top: 5px;
 }
 .float-left .notifycard div.body {
 	padding: 5px;

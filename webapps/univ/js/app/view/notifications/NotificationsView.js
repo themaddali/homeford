@@ -11,9 +11,9 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 			var NOTIFICATION;
 			var pendingList;
 			var validator;
-			var ERROR = '<i style="padding:0px 10px; color=#e30716; float: left;" class="icon-exclamation icon-1x "></i>';
-			var OK = '<i style="padding:0px 10px; color:#07e366; float: left;" class="icon-check icon-1x "></i>';
-			var INFO = '<i style="padding:0px 10px; float: left;" class="icon-bell-alt icon-1x "></i>';
+			var ERROR = '<i style="padding:0px 15px; color:#e30716; float: left;" class="icon-exclamation icon-2x "></i>';
+			var OK = '<i style="padding:0px 10px; color:#07e366; float: left;" class="icon-check icon-2x "></i>';
+			var INFO = '<i style="padding:0px 10px; float: left;" class="icon-bell-alt icon-2x "></i>';
 
 			function InviteView() {
 
