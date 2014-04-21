@@ -22,7 +22,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					jQuery('.helperboard').hide();
 					for (var i = 1; i < 16; i++) {
 						var quizboard = quizboardtemplate.clone();
-						jQuery('.question-number', quizboard).text('Question# ' + i);
+						jQuery('.question-number-content', quizboard).text('Question# ' + i);
 						if (i % 3 == 0) {
 							jQuery('.question-number', quizboard).append(CORRECT);
 						}
@@ -40,9 +40,11 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
 							jQuery('.question', quizboard).text(newqstn + ' ...');
 						}
-						helperMediaQuiries();
-						activateCardEvents();
 						jQuery('#action-canvas').append(quizboard);
+						if (i == 14) {
+							helperMediaQuiries();
+							activateCardEvents();
+						}
 					}
 					//jQuery('.helper-email').parent().parent().fadeIn();
 					if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
@@ -58,11 +60,46 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 
 				function activateCardEvents() {
 					jQuery('.quizactionboard').click(function() {
-						$(this).animate({
-							width : '80%',
-							height : '400px'
-						}, 1000);
+						if (!jQuery(this).hasClass('cardactive')) {
+							// jQuery('.quizactionboard').width('200px');
+							// jQuery('.quizactionboard').height('200px');
+							jQuery('.quizactionboard').removeClass('cardactive');
+							jQuery('.quizactionboard').addClass('cardinactive');
+							var cardlocation = jQuery(this).offset();
+							// jQuery(this).animate({
+								// width : '100%',
+								// height : '400px',
+								// scroll : 100
+							// }, 1000);
+							$('.main-content').scrollTop(cardlocation.top + 105);
+							jQuery(this).removeClass('cardinactive').addClass('cardactive');
+							//startCounter();
+						}
 					});
+
+					jQuery('.close-activecard').click(function(e) {
+						//e.preventDefault();
+						//jQuery(this).parent().parent().removeClass('cardactive');
+						//jQuery(this).parent().parent().width(200).height(200);
+						jQuery('.quizactionboard').removeClass('cardinactive');
+						jQuery('.quizactionboard').removeClass('cardactive');
+					});
+				}
+
+				function startCounter() {
+					var time = 0;
+					var interval = setInterval(function() {
+						var minutes = time / 60;
+						minutes = Math.floor(minutes);
+						if (minutes < 10)
+							minutes = "0" + minutes;
+						var seconds = time % 60;
+						if (seconds < 10)
+							seconds = "0" + seconds;
+						var text = minutes + ':' + seconds;
+						jQuery('.timeelapsed').text(text);
+						time++;
+					}, 1000);
 				}
 
 				function checkForActiveCookie() {
