@@ -1,5 +1,3 @@
-//View that will drive the Students list page.
-
 define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView'], function(jquery, cookie, service, router, ellipsis, todoassign) {"use strict";
 
 	var MembersPickView = ( function() {
@@ -12,6 +10,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 			var validator;
 			var membernames = [];
 			var template;
+			var TARGETVIEW;
+			var TARGETROUTINE;
 
 			function MembersPickView() {
 
@@ -163,6 +163,10 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				function clearForm() {
 
 				}
+				
+				this.setReturnInfo = function(view){
+					TARGETVIEW = view;
+				}
 
 
 				this.pause = function() {
@@ -194,7 +198,6 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							var selectedMembers = {};
 							selectedMembers.text = jQuery('.metadata').text();
 							selectedMembers.list = selectedlist;
-							//service.ViewCall('todoassign','selectedMembers',selectedMembers);
 							if (todoassign) {
 								todoassign.selectedMembers(selectedMembers);
 							} else {

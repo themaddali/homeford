@@ -56,16 +56,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('#member-list').css('color', 'black');
 				}
 
-				// function validAssignment() {
-				// if (jQuery('#member-list').text() == 'None' || jQuery('#member-list').text().indexOf("0 of") !== -1) {
-				// jQuery('#member-list').css('color', 'red');
-				// return false;
-				// } else {
-				// jQuery('#member-list').css('color', 'black');
-				// return true;
-				// }
-				// }
-
 				$.validator.addMethod("validAssignment", function(value, element, param) {
 					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
 						jQuery('#member-list').css('color', 'red');

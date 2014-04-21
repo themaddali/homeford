@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/quiz/QuizView'], function(modernizr, cookie, service, banner, router, notify, quizview) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView'], function(modernizr, cookie, service, banner, router, notify, todogroundview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -100,8 +100,8 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						selectedQuiz.membername = $('.subtitleinfo').text();
 						selectedQuiz.url = $(this).find('.class-url').text();
 						selectedQuiz.youtube = $(this).find('.class-youtube').text();
-						quizview.activeTask(selectedQuiz);
-						router.go('/quiz', '/class');
+						todogroundview.activeTask(selectedQuiz);
+						router.go('/todoground', '/class');
 					});
 
 				}

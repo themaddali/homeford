@@ -332,7 +332,6 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 						partiontemplate = jQuery('.canvas-partition');
 						showBG();
 						populateStudentList();
-
 						$(window).resize(helperMediaQuiries);
 						// When the browser changes size
 

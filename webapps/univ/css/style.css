@@ -2736,6 +2736,19 @@ dialog-modal::-webkit-scrollbar {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+.float-left .quizactionboard {
+	float: left;
+	width: 200px;
+	height: 200px;
+	cursor: default;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	overflow: hidden;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
 .float-left .primaryboard {
 	float: left;
 	width: 100%;
@@ -2866,7 +2879,7 @@ dialog-modal::-webkit-scrollbar {
 	background-color: white;
 }
 
-.studentboard, .adminboard, .classboard {
+.studentboard, .adminboard, .quizactionboard, .classboard {
 	background: #FFF;
 	padding: 0px;
 	margin: 5px;
@@ -2874,7 +2887,7 @@ dialog-modal::-webkit-scrollbar {
 	cursor: pointer;
 }
 
-.studentboard:hover, .adminboard:hover, .classboard:hover, .todoactionboard:hover, .helperboard:hover {
+.studentboard:hover, .adminboard:hover, .classboard:hover, .todoactionboard:hover, .quizactionboard:hover, .helperboard:hover {
 	border: 2px solid #0784E3;
 }
 
@@ -2951,8 +2964,27 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 14px;
 	color: black;
 	margin-top: 0px;
-	margin-left: 25px background : url("../img/stripe.png");
+	margin-left: 25px;
+	background : url("../img/stripe.png");
 }
+.quizactionboard .question-number {
+	font-size: 14px;
+	color: white;
+	padding: 10px;
+	background : url("../img/stripe.png");
+}
+.quizactionboard .question-number i {
+	float: right;
+	margin-right: 5px;
+}
+
+.quizactionboard .question {
+	font-size: 20px;
+	padding: 10px;
+	color: #7f7f7f;
+}
+
+
 .membercard .membercard-checkbox {
 	float: left;
 	margin-left: 5px;

@@ -61,10 +61,18 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
-					router.map('quiz', '^/quiz(/.*|$)', {
+					router.map('todoground', '^/todoground(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/quiz/index.html', '../app/view/quiz/QuizView'], function(page, view) {
+							require(['text!Pages/ground/todo.html', '../app/view/ground/ToDoGroundView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('quizground', '^/quizground(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/ground/quiz.html', '../app/view/ground/QuizGroundView'], function(page, view) {
 								result.load(page, view);
 							});
 						}

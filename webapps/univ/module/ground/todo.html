@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+		<div id="project-nav">
+			<div id="project-page-logo" class="ir">
+				<a class="mainlogo"></a>
+				<h1>Homeford University</h1>
+			</div>
+			<div></div>
+			<div class="user-info" id="user-name">
+				<i class="icon-user  icon-1x "></i>
+				<span id="user-name-value"></span>
+			</div>
+			<div class="user-info" id="alert">
+				<i class="icon-bell-alt icon-1x "></i>
+				<span id="alert-value"></span>
+			</div>
+		</div>
+
+		<div id="chatnav">
+			<input type="text" id="chat-input" placeholder="Enter your question here!">
+			<input type="button" id="chat-send" value="send" />
+		</div>
+		<div class="main-content-header">
+			<div class="titleinfo">
+				<span class="subtitleinfo-3">Home</span>
+				<img src="img/bread.png" height="35px" />
+				<span class="subtitleinfo-2"></span>
+				<img src="img/bread.png" height="35px" />
+				<span class="subtitleinfo"></span>
+			</div>
+			<div class="metainfo">
+				Due
+			</div>
+		</div>
+		<div class="main-content">
+			<div id="action-canvas" class="contentfull float-left">
+				<div class="todoactionboard shadow">
+					<div class="todo-status-name">
+						Current ToDo State
+					</div>
+					<div class="card-form-container">
+						<form id="todo-assign-form" class="edit-form">
+							<fieldset>
+								<ol>
+									<li class="form-item">
+										<label>Description</label>
+										<div class="form-content">
+											<div class="input-label" id="task-desc-data"></div>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Priority</label>
+										<div class="form-content">
+											<div class="input-label" id="task-priority"></div>
+										</div>
+									</li>
+									<li class="form-item" style="padding-top: 5px;">
+										<label>Progress</label>
+										<div class="form-content">
+											<div id="progressslider"></div>
+										</div>
+									</li>
+									<li class="form-item">
+										<label></label>
+										<label style="font-size: 14px; text-align: left;" id="progressvalue">0%</label>
+									</li>
+									<li class="form-item">
+										<label>Notes</label>
+										<div class="form-content">
+											<textarea class="edittextarea" placeholder="Ex: Few lines of what you have done?" id="task-desc" name="taskdesc"></textarea>
+											<div class="form-helper">
+												<label>Any notes for future reference</label>
+											</div>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>TimeStamp</label>
+										<div class="form-content">
+											<input placeholder="Select a date" id="task-time" name="tasktime" type="text" />
+											<div class="form-helper">
+												<label>Defaults to now</label>
+											</div>
+										</div>
+									</li>
+									<li class="form-item">
+										<label>Attach Files</label>
+										<div class="form-content">
+											<input style="display: none" placeholder="Select a file" id="task-files-actual" name="taskfiles" type="file" />
+											<input  placeholder="Select a file" id="task-files" name="taskfiles" type="text" />
+											<div class="form-helper">
+												<label> Optional attachements </label>
+											</div>
+										</div>
+									</li>
+								</ol>
+							</fieldset>
+						</form>
+					</div>
+					<div class="view-form-control" >
+						<input id="updatetodo" type="button" value="Update Progress" />
+					</div>
+				</div>
+				<div class="helperboard shadow">
+					<div class="helpername">
+						Send Email
+					</div>
+					<div class="item">
+						<a class="helper-email helper" disabled="true"><i class=" help-icon icon-envelope icon-3x "></i></a>
+					</div>
+				</div>
+				<div class="helperboard shadow">
+					<div class="helpername">
+						Reference Website
+					</div>
+					<div class="item">
+						<a class="helper-url helper" disabled="true" href=""><i class="icon-link help-icon  icon-3x "></i> </a>
+					</div>
+				</div>
+				<div class="helperboard shadow">
+					<div class="helpername">
+						Reference Book
+					</div>
+					<div class="item">
+						<a class="helper helper-book" disabled="true"><i class="help-icon icon-book  icon-3x "></i></a>
+					</div>
+				</div>
+				<div class="helperboard shadow">
+					<div class="helpername">
+						Reference Youtube
+					</div>
+					<div class="item">
+						<!-- href="http://www.youtube.com/watch?v=YPqIBIHrHkc?modestbranding=1&autoplay=1&cc_load_policy=1&controls=0&rel=0" -->
+						<a class="helper-youtube helper" disabled="true" href="" frameborder="0"><i  class="icon-youtube help-icon icon-3x "></i></a>
+					</div>
+				</div>
+				<div class="helperboard shadow">
+					<div class="helpername">
+						Share Social
+					</div>
+					<div class="item">
+						<a class="helper-facebook helper" disabled="true" href=""><i class="help-icon icon-facebook  icon-3x "></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="preloader"></div>
+	</body>
+</html>
