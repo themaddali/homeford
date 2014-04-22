@@ -1357,7 +1357,7 @@ a.goback {
 	height: 80%;
 }
 .modal-body .modal-container .modal-contents.cards {
-	height: 65%;
+	/*height: 65%;*/
 }
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
@@ -2906,7 +2906,7 @@ dialog-modal::-webkit-scrollbar {
 }
 
 .quizactionboard.cardinactive:hover {
-	border : 2px solid white;
+	border: 2px solid white;
 }
 
 .helperboard div.item i:hover {
@@ -2983,13 +2983,12 @@ dialog-modal::-webkit-scrollbar {
 	color: black;
 	margin-top: 0px;
 	margin-left: 25px;
-	background : url("../img/stripe.png");
 }
 .quizactionboard .question-number {
 	font-size: 14px;
 	color: white;
 	padding: 10px;
-	background : url("../img/stripe.png");
+	background: url("../img/stripe.png");
 }
 .quizactionboard .question-number i {
 	float: right;
@@ -3010,7 +3009,7 @@ div.quizactionboard div.options {
 div.quizactionboard.cardactive div.question-number > a {
 	display: inline;
 	float: right;
-	color : #FFFFFF;
+	color: #FFFFFF;
 	padding-left: 10px;
 	cursor: pointer;
 	font-size: 0.8em;
@@ -3030,27 +3029,27 @@ div.quizactionboard.cardactive div.options div.row-1 {
 	border-top: 1px dotted grey;
 }
 div.quizactionboard.cardactive div.options div.row-2 {
-	margin-bottom : 20px;
+	margin-bottom: 20px;
 }
-div.quizactionboard.cardactive div.options div.row-1,div.quizactionboard.cardactive div.options div.row-2 {
+div.quizactionboard.cardactive div.options div.row-1, div.quizactionboard.cardactive div.options div.row-2 {
 	text-align: left;
 	padding: 10px;
 	margin-left: 10px;
 	margin-right: 10px;
 }
-div.quizactionboard.cardactive div.options div.row-1 input,div.quizactionboard.cardactive div.options div.row-2 input {
+div.quizactionboard.cardactive div.options div.row-1 input, div.quizactionboard.cardactive div.options div.row-2 input {
 	background-color: #0784E3;
 	color: white;
 	min-width: 100px;
 	max-width: 300px;
 	width: 30%;
-	border : none;
+	border: none;
 	margin-top: 10px;
 	border-radius: 0px;
 	height: 35px;
 	border: 1px solid #ffffff;
 }
-div.quizactionboard.cardactive div.options div.row-1 input:hover,div.quizactionboard.cardactive div.options div.row-2 input:hover {
+div.quizactionboard.cardactive div.options div.row-1 input:hover, div.quizactionboard.cardactive div.options div.row-2 input:hover {
 	border: 1px solid #0784E3;
 }
 
@@ -3067,7 +3066,6 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	padding: 10px;
 	color: #7f7f7f;
 }
-
 
 .membercard .membercard-checkbox {
 	float: left;
@@ -4428,6 +4426,16 @@ footer a:hover {
 		-moz-transition: all 0.1s linear;
 		-o-transition: all 0.1s linear;
 		transition: all 0.1s linear;
+	}
+
+	.canvas-header a {
+		margin-top: -7px;
+	}
+
+	.canvas-header .metadata {
+		margin-top: -15px;
+		font-size: 12px;
+		float: left;
 	}
 
 	footer {

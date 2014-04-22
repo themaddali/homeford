@@ -68,6 +68,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 							$.each(data.result.files, function(index, file) {
 								jQuery('#member-profile-image').removeClass('loading').attr('src', '/homeford/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
+								$('#new-member-profile-image').fileupload('destroy');
 							});
 						}
 					});
