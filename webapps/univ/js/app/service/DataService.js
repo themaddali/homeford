@@ -309,7 +309,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.AssignQuiz = function(domainid, title, desc, handlers) {
+				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$.ajax({
 						url : '/homeford/api/domain/' + domainid + '/quiz',
 						type : 'POST',
@@ -325,7 +325,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.setQuestion = function(quizid, category, question, answers, handlers) {
 					var categoryint = parseInt(category);
 					$.ajax({
@@ -358,8 +358,22 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.DomainQuizList = function(domainid, handlers) {
+					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid+'/quiz',
+						url : '/homeford/api/domain/' + domainid + '/quiz',
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+				
+				this.QuestionsList = function(quizid, handlers) {
+					var QUIZOBJ = [];
+					$.ajax({
+						url : '/homeford/api/quiz/' + quizid + '/question',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",

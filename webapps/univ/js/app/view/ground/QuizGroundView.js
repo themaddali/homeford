@@ -18,34 +18,31 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					// if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
 					// //router.go('/class');
 					// } else {
-					jQuery('.helper').removeAttr("href");
-					jQuery('.helperboard').hide();
-					for (var i = 1; i < 16; i++) {
-						var quizboard = quizboardtemplate.clone();
-						jQuery('.question-number-content', quizboard).text('Question# ' + i);
-						if (i % 3 == 0) {
-							jQuery('.question-number', quizboard).append(CORRECT);
+					service.QuestionsList(4, {
+						success : function(data) {
+							jQuery('.helper').removeAttr("href");
+							jQuery('.helperboard').hide();
+							for (var i = 1; i < data.length; i++) {
+								var quizboard = quizboardtemplate.clone();
+								jQuery('.question-number-content', quizboard).text('Question # '+i);
+								jQuery('.question-number', quizboard).append(UNANSWERED);
+								jQuery('.question', quizboard).text(data[i].text);
+								if (jQuery('.question', quizboard).text().length > 90) {
+									var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
+									jQuery('.question', quizboard).text(newqstn + ' ...');
+								}
+								for (var j=0; j< data[i].answers.length; j++) {
+									jQuery('.option-'+j,quizboard).val(data[i].answers[j].text);
+								}
+								jQuery('#action-canvas').append(quizboard);
+								if (i == data.length-1) {
+									helperMediaQuiries();
+									activateCardEvents();
+								}
+							}
 						}
-						if (i % 3 == 1) {
-							jQuery('.question-number', quizboard).append(INCORRECT);
-						}
-						if (i % 3 == 2) {
-							jQuery('.question-number', quizboard).append(UNANSWERED);
-						}
-						jQuery('.question', quizboard).text('What is the factorial of ' + i + '?');
-						if (i == 9) {
-							jQuery('.question', quizboard).text('Testing a long string to see what will happen id the question is avery long thing alike ramayan :), but should be make it wrap to ellipse or ato adjust the font of card size?, BTW... what the heck is the fatorial of  ' + i);
-						}
-						if (jQuery('.question', quizboard).text().length > 90) {
-							var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
-							jQuery('.question', quizboard).text(newqstn + ' ...');
-						}
-						jQuery('#action-canvas').append(quizboard);
-						if (i == 14) {
-							helperMediaQuiries();
-							activateCardEvents();
-						}
-					}
+					})
+
 					//jQuery('.helper-email').parent().parent().fadeIn();
 					if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
 						jQuery('.helper-url').attr('href', ACTIVEQUIZ.url);
@@ -59,31 +56,32 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 				}
 
 				function activateCardEvents() {
-					jQuery('.quizactionboard').click(function() {
-						if (!jQuery(this).hasClass('cardactive')) {
+					jQuery('.question').click(function() {
+						if (!jQuery(this).parent().hasClass('cardactive')) {
 							// jQuery('.quizactionboard').width('200px');
 							// jQuery('.quizactionboard').height('200px');
 							jQuery('.quizactionboard').removeClass('cardactive');
 							jQuery('.quizactionboard').addClass('cardinactive');
 							var cardlocation = jQuery(this).offset();
 							// jQuery(this).animate({
-								// width : '100%',
-								// height : '400px',
-								// scroll : 100
+							// width : '100%',
+							// height : '400px',
+							// scroll : 100
 							// }, 1000);
 							$('.main-content').scrollTop(cardlocation.top + 105);
-							jQuery(this).removeClass('cardinactive').addClass('cardactive');
+							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
 							//startCounter();
 						}
 					});
 
 					jQuery('.close-activecard').click(function(e) {
-						//e.preventDefault();
-						//jQuery(this).parent().parent().removeClass('cardactive');
-						//jQuery(this).parent().parent().width(200).height(200);
 						jQuery('.quizactionboard').removeClass('cardinactive');
 						jQuery('.quizactionboard').removeClass('cardactive');
 					});
+
+					jQuery('.option-choice').click(function() {
+						alert(jQuery(this).val());
+					})
 				}
 
 				function startCounter() {

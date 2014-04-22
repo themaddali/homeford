@@ -70,7 +70,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										_domainids = data;
 									}
 								});
-								service.AssignQuiz(_domainids[0], _qname, _qdesc, {
+								service.AddQuiz(_domainids[0], _qname, _qdesc, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);

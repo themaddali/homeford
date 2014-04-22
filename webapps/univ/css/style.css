@@ -2751,7 +2751,8 @@ dialog-modal::-webkit-scrollbar {
 .float-left .quizactionboard.cardactive {
 	float: left;
 	width: 100%;
-	height: 400px;
+	height: auto;
+	border: 2px solid #0784E3;
 }
 
 .cardinactive {
@@ -3003,6 +3004,9 @@ div.quizactionboard div.question-number > a {
 div.quizactionboard div.question-number > span.timeelapsed {
 	display: none;
 }
+div.quizactionboard div.options {
+	display: none;
+}
 div.quizactionboard.cardactive div.question-number > a {
 	display: inline;
 	float: right;
@@ -3011,6 +3015,43 @@ div.quizactionboard.cardactive div.question-number > a {
 	cursor: pointer;
 	font-size: 0.8em;
 	padding-top: 2px;
+}
+div.quizactionboard.cardactive div.options {
+	display: inline;
+	width: 80%;
+}
+
+.quizactionboard.cardactive  .question {
+	color: black;
+	padding-left: 30px;
+}
+
+div.quizactionboard.cardactive div.options div.row-1 {
+	border-top: 1px dotted grey;
+}
+div.quizactionboard.cardactive div.options div.row-2 {
+	margin-bottom : 20px;
+}
+div.quizactionboard.cardactive div.options div.row-1,div.quizactionboard.cardactive div.options div.row-2 {
+	text-align: left;
+	padding: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+div.quizactionboard.cardactive div.options div.row-1 input,div.quizactionboard.cardactive div.options div.row-2 input {
+	background-color: #0784E3;
+	color: white;
+	min-width: 100px;
+	max-width: 300px;
+	width: 30%;
+	border : none;
+	margin-top: 10px;
+	border-radius: 0px;
+	height: 35px;
+	border: 1px solid #ffffff;
+}
+div.quizactionboard.cardactive div.options div.row-1 input:hover,div.quizactionboard.cardactive div.options div.row-2 input:hover {
+	border: 1px solid #0784E3;
 }
 
 div.quizactionboard.cardactive div.question-number > a:hover {
