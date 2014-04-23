@@ -9,13 +9,7 @@ define(['../app/LocationView', '../app/UrlFragment', '../app/Router', 'cookie', 
 
 			function Application() {
 
-				this.init = function(optionsArg) {
-					if ( typeof optionsArg === 'string') {
-						optionsArg = {
-							title : optionsArg
-						};
-					}
-
+				this.init = function() {
 					var params = urlFragment.getParameters(window.location.href);
 					locationView.init();
 				};

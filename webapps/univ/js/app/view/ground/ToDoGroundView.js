@@ -71,6 +71,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 							document.getElementById('task-time').type = 'date';
 						} else {
 							jQuery("#task-time").datepicker({
+								dateFormat : 'yy-mm-dd',
 								minDate : -7
 							});
 							var date = new Date();

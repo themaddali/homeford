@@ -6,10 +6,8 @@ require({
 		jqueryui : 'jquery-ui.min',
 		modernizr : 'modernizr-2.5.3.min',
 		backstrech : 'backstrech',
-		typeahead : 'typeahead.bundle',
-		bloodhound : 'bloodhound',
+		// bloodhound : 'bloodhound',
 		cookie : 'jquery.cookie',
-		hashchange : 'jquery.hashchange',
 		plugins : "plugins-min",
 		flatvid : "jquery.fitvids",
 		service : "../app/service/service",
@@ -38,17 +36,16 @@ require({
 		}
 	},
 	priority : ['modernizr', 'jquery'],
-	waitSeconds : 20 // make VPN more resilient
+	waitSeconds : 15 
 }, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'jqueryui', 'modernizr', 'touchpunch'], function(application, routes) {"use strict";
 
 	$.ajaxSetup({
-		// Disable caching of AJAX responses for development
 		cache : false
 	});
 
 	$(document).ready(function() {
 
-		application.init("HomeFord University | Welcome");
+		application.init();
 		routes.load();
 		application.start();
 	});

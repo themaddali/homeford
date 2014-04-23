@@ -2582,7 +2582,7 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .todoactionboard {
 	float: left;
-	width: 80%;
+	width: 95%;
 	min-width: 300px;
 	height: auto;
 	text-align: left;

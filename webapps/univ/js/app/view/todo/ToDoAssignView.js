@@ -40,9 +40,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
 						jQuery("#task-deadline").datepicker({
 							minDate : 0,
+							dateFormat : 'yy-mm-dd',
 						});
 						jQuery("#task-startdate").datepicker({
 							minDate : 0,
+							dateFormat : 'yy-mm-dd',
 						});
 						jQuery("#task-startdate").val(today);
 						//jQuery("#task-deadline").val(next);
@@ -55,6 +57,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					}
 					jQuery('#member-list').css('color', 'black');
 				}
+
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
 					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
@@ -145,7 +148,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _tdesc = jQuery('#task-desc').val();
 								var _tfrom = jQuery('#task-startdate').val();
 								var _tdue = jQuery('#task-deadline').val();
-								if (_tfrom === '' || _tfrom===' '){
+								if (_tfrom === '' || _tfrom === ' ') {
 									var _tfrom = jQuery('#task-startdate').text();
 									var _tdue = jQuery('#task-deadline').text();
 								}

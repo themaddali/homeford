@@ -131,7 +131,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						if (newmargin < 10) {
 							newmargin = 10;
 						}
-						$('.classboard').css('margin-left', newmargin / 2);
+						$('.classboard').css('margin-left', (newmargin / 2)-5);
 						$('.classboard').css('margin-right', newmargin / 2);
 					}
 				}
