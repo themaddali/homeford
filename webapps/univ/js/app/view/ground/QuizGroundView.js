@@ -24,6 +24,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 							jQuery('.helper').removeAttr("href");
 							jQuery('.helperboard').hide();
 							for (var i = 0; i < data.length; i++) {
+								jQuery('.metainfo').text(data.length + ' Questions');
 								var quizboard = quizboardtemplate.clone();
 								jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
 								jQuery('.question-number', quizboard).append(UNANSWERED);
@@ -89,20 +90,23 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					});
 
 					jQuery('.option-choice').click(function() {
+						jQuery(this).parent().parent().find('input').attr('disabled','disabled');
 						if (jQuery(this).attr('isCorrect') === 'true') {
-							jQuery(this).css('background-color', 'green');
-							jQuery(this).parent().parent().parent().addClass('answered-correct');
+							//jQuery(this).css('background-color', 'green');
+							jQuery(this).parent().parent().parent().addClass('answered answered-correct');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
+							jQuery(this).parent().parent().find('.responseinfo').text('You selected: '+ jQuery(this).val() + '. Correct Answer: '+jQuery(this).attr('isCorrect'));
 
 						} else {
-							jQuery(this).css('background-color', 'red');
-							jQuery(this).parent().parent().parent().addClass('answered-incorrect');
+							//jQuery(this).css('background-color', 'red');
+							jQuery(this).parent().parent().parent().addClass('answered answered-incorrect');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
+							jQuery(this).parent().parent().find('.responseinfo').text('You selected: '+ jQuery(this).val() + '. Correct Answer: '+jQuery(this).attr('isCorrect'));
 						}
 						setTimeout(function() {
 							jQuery('.quizactionboard').removeClass('cardinactive');
 							jQuery('.quizactionboard').removeClass('cardactive');
-						}, 1000);
+						}, 2000);
 					})
 				}
 

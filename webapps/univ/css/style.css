@@ -2755,6 +2755,12 @@ dialog-modal::-webkit-scrollbar {
 	height: auto;
 	border: 2px solid #0784E3;
 }
+.float-left .quizactionboard.cardactive.answered-incorrect {
+	border: 2px solid red;
+}
+.float-left .quizactionboard.cardactive.answered-correct {
+	border: 2px solid green;
+}
 
 .cardinactive {
 	opacity: 0.4;
@@ -2998,6 +3004,12 @@ dialog-modal::-webkit-scrollbar {
 .quizactionboard.answered-incorrect .question-number {
 	background: url("../img/stripe-red.png");
 }
+.quizactionboard.answered-incorrect:hover {
+	border : 2px solid red;
+}
+.quizactionboard.answered-correct:hover {
+	border : 2px solid green;
+}
 .quizactionboard .question-number i {
 	float: right;
 	margin-right: 5px;
@@ -3034,7 +3046,7 @@ div.quizactionboard.cardactive div.options {
 }
 
 div.quizactionboard.cardactive div.options div.row-1 {
-	border-top: 1px dotted grey;
+	border-top: 1px dotted #737373;
 	margin-bottom: 20px;
 }
 div.quizactionboard.cardactive div.options div.row-2 {
@@ -3047,7 +3059,7 @@ div.quizactionboard.cardactive div.options div.row-1, div.quizactionboard.cardac
 	margin-left: 10px;
 	margin-right: 10px;
 }
-div.quizactionboard.cardactive div.options div.row-1 input, div.quizactionboard.cardactive div.options div.row-2 input {
+div.quizactionboard.cardactive div.options input {
 	background-color: #0784E3;
 	color: white;
 	min-width: 100px;
@@ -3059,6 +3071,24 @@ div.quizactionboard.cardactive div.options div.row-1 input, div.quizactionboard.
 	height: 35px;
 	border: 1px solid #ffffff;
 }
+div.quizactionboard.cardactive div.options input[disabled] {
+	opacity: 0.5;
+	background-color: #737373;
+	color : white;
+}
+div.quizactionboard.cardactive div.options > input[disabled]:hover {
+	border: 0px solid #737373;
+}
+
+div.quizactionboard.cardactive div.options span.responseinfo{
+	color: #737373;
+	font-size: 12px;
+	display: block;
+	padding: 10px;
+	margin-left: 10px;
+	margin-top: -20px;
+}
+
 div.quizactionboard.cardactive div.options div.row-1 input:hover, div.quizactionboard.cardactive div.options div.row-2 input:hover {
 	border: 1px solid #0784E3;
 }
@@ -3075,6 +3105,8 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	font-size: 20px;
 	padding: 10px;
 	color: #7f7f7f;
+	height: 100%;
+	cursor: pointer;
 }
 
 .membercard .membercard-checkbox {
