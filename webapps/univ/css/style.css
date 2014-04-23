@@ -215,14 +215,20 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	cursor: pointer;
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
-	-webkit-appearance: button;
+	/*-webkit-appearance: button;*/
 	*overflow: visible;
+	-webkit-appearance: none;
 }
 input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input:focus {
 	border: 1px solid #0784E3;
+	-webkit-appearance: none;
 }
 input[type="email"]:focus + input-clear {
 	display: none;
+}
+
+input {
+	-webkit-appearance: none;
 }
 
 button:focus {
@@ -233,10 +239,12 @@ button:focus {
 form div.form-content > input:focus {
 	border: 1px solid #0784E3;
 	outline: none;
+	-webkit-appearance: none;
 }
 form div.form-content > textarea:focus {
 	border: 1px solid #0784E3;
 	outline: none;
+	-webkit-appearance: none;
 }
 
 input[readonly="readonly"] {
@@ -1285,7 +1293,11 @@ a.goback {
 	padding: 7px;
 	text-align: right;
 	width: 100%;
-	height: 60px
+	height: 60px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	outline: none;
+	-webkit-appearance: none;
 }
 
 .modal-body .modal-container header input, .modal-body .modal-container footer input {
@@ -1361,6 +1373,7 @@ a.goback {
 }
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
+	overflow-x: hidden;
 }
 .modal-body .modal-container .modal-contents div.footer {
 	padding: 10px;
@@ -3005,10 +3018,10 @@ dialog-modal::-webkit-scrollbar {
 	background: url("../img/stripe-red.png");
 }
 .quizactionboard.answered-incorrect:hover {
-	border : 2px solid red;
+	border: 2px solid red;
 }
 .quizactionboard.answered-correct:hover {
-	border : 2px solid green;
+	border: 2px solid green;
 }
 .quizactionboard .question-number i {
 	float: right;
@@ -3074,13 +3087,13 @@ div.quizactionboard.cardactive div.options input {
 div.quizactionboard.cardactive div.options input[disabled] {
 	opacity: 0.5;
 	background-color: #737373;
-	color : white;
+	color: white;
 }
 div.quizactionboard.cardactive div.options > input[disabled]:hover {
 	border: 0px solid #737373;
 }
 
-div.quizactionboard.cardactive div.options span.responseinfo{
+div.quizactionboard.cardactive div.options span.responseinfo {
 	color: #737373;
 	font-size: 12px;
 	display: block;

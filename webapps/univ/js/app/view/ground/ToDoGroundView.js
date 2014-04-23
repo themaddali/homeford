@@ -130,6 +130,7 @@ define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../se
 				this.resume = function() {
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
+					banner.HideUser();
 					populateData();
 				};
 

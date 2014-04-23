@@ -71,6 +71,22 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				}
 
 				this.getUserProfile = function(handlers) {
+					if (!Array.prototype.indexOf) {
+						Array.prototype.indexOf = function(elt /*, from*/) {
+							var len = this.length >>> 0;
+
+							var from = Number(arguments[1]) || 0;
+							from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+							if (from < 0)
+								from += len;
+
+							for (; from < len; from++) {
+								if ( from in this && this[from] === elt)
+									return from;
+							}
+							return -1;
+						};
+					}
 					if (USERPROFILE && USERPROFILE !== null) {
 						handlers.success(USERPROFILE);
 					} else {
@@ -88,7 +104,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								USERPROFILE = data;
 								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {
-									if (ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
+									if (ACTIVEDOMAINLIST && ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
 										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
 											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
 											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
@@ -369,7 +385,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				}
-				
+
 				this.QuestionsList = function(quizid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
@@ -561,8 +577,25 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.init = function() {
-					//getUnivData();
-					this.resume();
+					//Support IE8 indesOf Issue:
+					//http://stackoverflow.com/questions/3629183/why-doesnt-indexof-work-on-an-array-ie8
+					if (!Array.prototype.indexOf) {
+						Array.prototype.indexOf = function(elt /*, from*/) {
+							var len = this.length >>> 0;
+
+							var from = Number(arguments[1]) || 0;
+							from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+							if (from < 0)
+								from += len;
+
+							for (; from < len; from++) {
+								if ( from in this && this[from] === elt)
+									return from;
+							}
+							return -1;
+						};
+					}
+					//this.resume();
 				};
 			}
 

@@ -377,6 +377,9 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 
 				this.resume = function() {
 					showBG();
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
+					banner.HideUser();
 					getInfoByPrivilage();
 
 				};

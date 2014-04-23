@@ -96,6 +96,9 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 				};
 
 				this.resume = function() {
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
+					banner.HideUser();
 					populateData();
 				};
 

@@ -172,6 +172,9 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 				};
 
 				this.resume = function() {
+					jQuery('.edit-notify').hide();
+					banner.HideAlert();
+					banner.HideUser();
 					populateData();
 				};
 

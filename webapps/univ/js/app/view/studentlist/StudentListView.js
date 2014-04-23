@@ -315,6 +315,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					showBG();
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
+					banner.HideUser();
 					if ((!service.knowClenUserProfile() && service.knowClenUserProfile() == null) || RELOAD == true) {
 						RELOAD = false;
 						//router.reload();
