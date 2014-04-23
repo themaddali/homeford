@@ -149,6 +149,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 				this.resume = function() {
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
+					banner.HideUser();
 					populateClass();
 				};
 

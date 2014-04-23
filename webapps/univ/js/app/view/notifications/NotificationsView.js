@@ -11,9 +11,9 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 			var NOTIFICATION;
 			var pendingList;
 			var validator;
-			var ERROR = '<i style="padding:0px 15px; color:#e30716; float: left;" class="icon-exclamation icon-2x "></i>';
-			var OK = '<i style="padding:0px 10px; color:#07e366; float: left;" class="icon-check icon-2x "></i>';
-			var INFO = '<i style="padding:0px 10px; float: left;" class="icon-bell-alt icon-2x "></i>';
+			var ERROR = '<i style="padding:7px 20px; color:#e30716; float: left;" class="icon-exclamation icon-1x "></i>';
+			var OK = '<i style="padding:7px 10px; color:#07e366; float: left;" class="icon-check icon-1x "></i>';
+			var INFO = '<i style="padding:7px 10px; color:#0784E3; float: left;" class="icon-bell icon-1x "></i>';
 
 			function InviteView() {
 
@@ -53,7 +53,10 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 						if (NOTIFICATION[i].keyword && NOTIFICATION[i].keyword.length > 1) {
 							if (NOTIFICATION[i].status == 'OK') {
 								jQuery('.title', thistemplate).parent().prepend(OK);
-							} else {
+							} else if (NOTIFICATION[i].status == 'INFO') {
+								jQuery('.title', thistemplate).parent().prepend(INFO);
+							}
+							else{
 								jQuery('.title', thistemplate).parent().prepend(ERROR);
 							}
 							jQuery('.inviteddomain', thistemplate).text(NOTIFICATION[i].domain);
