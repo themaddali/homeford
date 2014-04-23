@@ -2747,17 +2747,19 @@ dialog-modal::-webkit-scrollbar {
 	overflow: hidden;
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+	margin-bottom: 20px;
 }
 .float-left .quizactionboard.cardactive {
 	float: left;
-	width: 100%;
+	width: 95%;
 	height: auto;
 	border: 2px solid #0784E3;
 }
 
 .cardinactive {
-	opacity: 0.5;
+	opacity: 0.4;
 }
+
 .cardinactive:hover {
 	opacity: 0.5;
 	border-color: white;
@@ -2990,6 +2992,12 @@ dialog-modal::-webkit-scrollbar {
 	padding: 10px;
 	background: url("../img/stripe.png");
 }
+.quizactionboard.answered-correct .question-number {
+	background: url("../img/stripe-green.png");
+}
+.quizactionboard.answered-incorrect .question-number {
+	background: url("../img/stripe-red.png");
+}
 .quizactionboard .question-number i {
 	float: right;
 	margin-right: 5px;
@@ -3027,9 +3035,11 @@ div.quizactionboard.cardactive div.options {
 
 div.quizactionboard.cardactive div.options div.row-1 {
 	border-top: 1px dotted grey;
+	margin-bottom: 20px;
 }
 div.quizactionboard.cardactive div.options div.row-2 {
 	margin-bottom: 20px;
+	margin-top: -30px;
 }
 div.quizactionboard.cardactive div.options div.row-1, div.quizactionboard.cardactive div.options div.row-2 {
 	text-align: left;

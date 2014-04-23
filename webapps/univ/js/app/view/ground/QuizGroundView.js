@@ -18,24 +18,37 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					// if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
 					// //router.go('/class');
 					// } else {
-					service.QuestionsList(4, {
+					jQuery('#action-canvas').empty();
+					service.QuestionsList(20, {
 						success : function(data) {
 							jQuery('.helper').removeAttr("href");
 							jQuery('.helperboard').hide();
-							for (var i = 1; i < data.length; i++) {
+							for (var i = 0; i < data.length; i++) {
 								var quizboard = quizboardtemplate.clone();
-								jQuery('.question-number-content', quizboard).text('Question # '+i);
+								jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
 								jQuery('.question-number', quizboard).append(UNANSWERED);
 								jQuery('.question', quizboard).text(data[i].text);
 								if (jQuery('.question', quizboard).text().length > 90) {
 									var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
 									jQuery('.question', quizboard).text(newqstn + ' ...');
 								}
-								for (var j=0; j< data[i].answers.length; j++) {
-									jQuery('.option-'+j,quizboard).val(data[i].answers[j].text);
+								for (var j = 0; j < data[i].answers.length; j++) {
+									if (data[i].answers.length === 1) {
+										jQuery('.row-2', quizboard).hide();
+										if (data[i].answers[j].text === 'True') {
+											jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'false');
+										} else {
+											jQuery('.option-1', quizboard).val('True').attr('isCorrect', 'true');
+										}
+									} else if (data[i].answers.length == 2) {
+										jQuery('.row-2', quizboard).hide();
+									} else {
+										jQuery('.row-2', quizboard).show();
+									}
+									jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect);
 								}
 								jQuery('#action-canvas').append(quizboard);
-								if (i == data.length-1) {
+								if (i == data.length - 1) {
 									helperMediaQuiries();
 									activateCardEvents();
 								}
@@ -58,18 +71,14 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 				function activateCardEvents() {
 					jQuery('.question').click(function() {
 						if (!jQuery(this).parent().hasClass('cardactive')) {
-							// jQuery('.quizactionboard').width('200px');
-							// jQuery('.quizactionboard').height('200px');
 							jQuery('.quizactionboard').removeClass('cardactive');
 							jQuery('.quizactionboard').addClass('cardinactive');
 							var cardlocation = jQuery(this).offset();
-							// jQuery(this).animate({
-							// width : '100%',
-							// height : '400px',
-							// scroll : 100
-							// }, 1000);
-							$('.main-content').scrollTop(cardlocation.top + 105);
+							$('.main-content').animate({
+								scrollTop : cardlocation.top
+							}, 1000);
 							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
+							helperMediaQuiries();
 							//startCounter();
 						}
 					});
@@ -80,8 +89,25 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 					});
 
 					jQuery('.option-choice').click(function() {
-						alert(jQuery(this).val());
+						if (jQuery(this).attr('isCorrect') === 'true') {
+							jQuery(this).css('background-color', 'green');
+							jQuery(this).parent().parent().parent().addClass('answered-correct');
+							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
+
+						} else {
+							jQuery(this).css('background-color', 'red');
+							jQuery(this).parent().parent().parent().addClass('answered-incorrect');
+							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
+						}
+						setTimeout(function() {
+							jQuery('.quizactionboard').removeClass('cardinactive');
+							jQuery('.quizactionboard').removeClass('cardactive');
+						}, 1000);
 					})
+				}
+
+				function processOptionSelect() {
+
 				}
 
 				function startCounter() {
@@ -112,7 +138,6 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 
 				function daystogo(duedate) {
 					var oneDay = 24 * 60 * 60 * 1000;
-					// hours*minutes*seconds*milliseconds
 					var firstDate = new Date();
 					var secondDate = new Date(duedate);
 					var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
