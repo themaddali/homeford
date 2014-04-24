@@ -3,10 +3,10 @@ require({
 	paths : {
 		text : 'text',
 		jquery : 'jquery',
-		jqueryui : 'jquery-ui.min',
+		jqueryui : 'jquery-ui',
 		modernizr : 'modernizr-2.5.3.min',
 		backstrech : 'backstrech',
-		// bloodhound : 'bloodhound',
+		bgv : 'bgv',
 		cookie : 'jquery.cookie',
 		plugins : "plugins-min",
 		flatvid : "jquery.fitvids",
@@ -37,7 +37,7 @@ require({
 	},
 	priority : ['modernizr', 'jquery'],
 	waitSeconds : 15 
-}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'jqueryui', 'modernizr', 'touchpunch'], function(application, routes) {"use strict";
+}, ['../app/StartApp', '../app/PageRoutes', 'jquery', 'jqueryui', 'modernizr'], function(application, routes, jQuery, jQueryUI) {"use strict";
 
 	$.ajaxSetup({
 		cache : false

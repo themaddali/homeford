@@ -1,11 +1,11 @@
 //View that will drive the main landing page.
 
-define([ 'cookie', 'plugins', 'flatvid', 'bloodhound', '../../Router', '../../service/DataService'], function( cookie, plugin, flatvid, bloodhound, router, service) {"use strict";
+define(['cookie', 'plugins', 'flatvid', 'bgv', '../../Router', '../../service/DataService'], function(cookie, plugin, flatvid, bgv, router, service) {"use strict";
 
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"]
+				"Bg" : ["media\/bg1.png","img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"]
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
@@ -33,54 +33,90 @@ define([ 'cookie', 'plugins', 'flatvid', 'bloodhound', '../../Router', '../../se
 				var i = PARAM.Bg;
 
 				function startCoverShow() {
-					service.getFlickList('sfo', {
-						success : function(list) {
-							jQuery.backstretch(list, {
-								duration : 9000,
-								fade : 1000
-							}, function() {
-								r.stop()
-								jQuery("#preloader").hide();
-							});
-						},
-						error : function() {
-							jQuery.backstretch(i, {
-								duration : 9000,
-								fade : 1000
-							}, function() {
-								r.stop()
-								jQuery("#preloader").hide();
-							});
-						}
-					});
+					// service.getFlickList('sfo', {
+					// success : function(list) {
+					// jQuery.backstretch(list, {
+					// duration : 9000,
+					// fade : 1000
+					// }, function() {
+					// r.stop()
+					// jQuery("#preloader").hide();
+					// });
+					// },
+					// error : function() {
+					// jQuery.backstretch(i, {
+					// duration : 9000,
+					// fade : 1000
+					// }, function() {
+					// r.stop()
+					// jQuery("#preloader").hide();
+					// });
+					// }
+					// });
+					if (Modernizr.touch) {
+						service.getFlickList('sfo', {
+							success : function(list) {
+								jQuery.backstretch(list, {
+									duration : 9000,
+									fade : 1000
+								}, function() {
+									r.stop()
+								});
+							},
+							error : function() {
+								jQuery.backstretch(i, {
+									duration : 9000,
+									fade : 200
+								}, function() {
+									r.stop()
+								});
+							}
+						});
+					} else {
+						var videobackground = new $.backgroundVideo($('body'), {
+							"align" : "centerXY",
+							"width" : 1280,
+							"height" : 720,
+							"path" : "media/",
+							"filename" : "bgvideo1",
+							"types" : ["mp4"]
+						});
+					}
+
+					// $('body').videoBG({
+					// position : "fixed",
+					// zIndex : -1,
+					// mp4 : '../media/bgvideo1.mp4',
+					// opacity : 1
+					// });
 				}
 
 				function activateSuggestionSearch() {
 
-					var countries = new Bloodhound({
-						datumTokenizer : function(d) {
-							return Bloodhound.tokenizers.whitespace(d.name);
-						},
-						queryTokenizer : Bloodhound.tokenizers.whitespace,
-						limit : 5,
-						prefetch : {
-							url : '../univ/data/univslist.json',
-							filter : function(list) {
-								return jQuery.map(list, function(country) {
-									return {
-										name : country
-									};
-								});
-							}
-						}
-					});
-					countries.initialize();
-					//activateSuggestionSearch();
-					jQuery('#slogan-input').typeahead(null, {
-						name : 'countries',
-						displayKey : 'name',
-						source : countries.ttAdapter()
-					});
+					// var countries = new Bloodhound({
+					// datumTokenizer : function(d) {
+					// return Bloodhound.tokenizers.whitespace(d.name);
+					// },
+					// queryTokenizer : Bloodhound.tokenizers.whitespace,
+					// limit : 5,
+					// prefetch : {
+					// url : '../univ/data/univslist.json',
+					// filter : function(list) {
+					// return jQuery.map(list, function(country) {
+					// return {
+					// name : country
+					// };
+					// });
+					// }
+					// }
+					// });
+					// countries.initialize();
+					// //activateSuggestionSearch();
+					// jQuery('#slogan-input').typeahead(null, {
+					// name : 'countries',
+					// displayKey : 'name',
+					// source : countries.ttAdapter()
+					// });
 				}
 
 				function checkForActiveCookie() {
