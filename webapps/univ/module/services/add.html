@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="todo-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					New Service Offering
+				</header>
+				<div class="modal-contents">
+					<form id="todo-assign-form" class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Service Name</label>
+									<div class="form-content">
+										<input placeholder="Ex: Half Day"  id="service-name" name="servicename" type="text" autofocus />
+										<div class="form-helper">
+											<label>Short name describing the service</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Description</label>
+									<div class="form-content">
+										<textarea class="edittextarea" placeholder="Ex: Will monitor from 9:00AM to 5:00PM" id="service-desc" name="servicedesc"></textarea>
+										<div class="form-helper">
+											<label>More detailed descripion of the service.</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Base Cost</label>
+									<div class="form-content">
+										<input placeholder="Ex $250.99" id="service-cost" name="servicecost" type="text" />
+										<div class="form-helper">
+											<label>Dollar amount for this service per each billing cycle.</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Tax</label>
+									<div class="form-content">
+										<input placeholder="Ex: 12.5%" id="service-tax" name="servicetax" type="text" />
+										<div class="form-helper">
+											<label>What is the service tax that will be applied.</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Billing Cycle (days)</label>
+									<div class="form-content">
+										<input placeholder="Ex: 30" id="service-frequency" name="servicefrequency" type="text" />
+										<div class="form-helper">
+											<label>What is the frequency of this service. In days.</label>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<footer>
+					<div class="edit-controls">
+						<input id="add-service" type="button" value="Add">
+					</div>
+				</footer>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="tasks-view-modal" class="modal-body view">
+			<div class="modal-container view">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Active Tasks
+				</header>
+				<div class="modal-contents">
+					<table id="tasks-table" class="view-table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>ID</th>
+								<th>Assigned On</th>
+								<th>Assigned To</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+					<div class="noinfo" style="display:none">
+						No Results Available
+					</div>
+				</div>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+
+		<div id="preloader"></div>
+		<table id="div-template" style="display:none">
+			<tr id="tasks-template">
+				<td class="task-name"></td>
+				<td class="task-id"></td>
+				<td class="task-date"></td>
+				<td class="task-count"></td>
+			</tr>
+		</table>
+
+	</body>
+</html>

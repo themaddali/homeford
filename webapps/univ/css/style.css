@@ -1898,7 +1898,7 @@ form li.form-item div.form-content span > label.error {
 form div.form-content > input.error {
 	border: 1px solid #e30716;
 }
-form textarea.error {
+form div.form-content textarea.error {
 	border: 1px solid #e30716;
 }
 

@@ -195,6 +195,22 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('servicesadd', '^/servicesadd(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/services/add.html', '../app/view/services/ServicesAddView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('serviceslist', '^/serviceslist(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/services/list.html', '../app/view/services/ServicesListView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('memberspick', '^/memberspick(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
