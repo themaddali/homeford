@@ -5,7 +5,8 @@ define(['cookie', 'plugins', 'flatvid', 'bgv', '../../Router', '../../service/Da
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["media\/bg1.png","img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"]
+				"Bg" : ["media\/bg1.png", "img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"],
+				"Static" : ["media\/bg1.png"]
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
@@ -33,6 +34,13 @@ define(['cookie', 'plugins', 'flatvid', 'bgv', '../../Router', '../../service/Da
 				var i = PARAM.Bg;
 
 				function startCoverShow() {
+					//No Lag BG
+					jQuery.backstretch(PARAM.Static, {
+						fade : 0
+					}, function() {
+						r.stop()
+					});
+
 					// service.getFlickList('sfo', {
 					// success : function(list) {
 					// jQuery.backstretch(list, {
