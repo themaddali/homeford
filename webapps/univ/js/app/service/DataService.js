@@ -324,6 +324,41 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.AddServices = function(domainid, title, desc, cost, tax, freq, handlers) {
+					var _cost = cost.replace('$','');
+					var _tax = tax.replace('%','');
+					$.ajax({
+						url : '/homeford/api/domain/' + domainid+'/itemservice',
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'name' : title,
+							'description' : desc,
+							'status' : 'Active',
+							'unit_price' : _cost,
+							'minutes' : '0',
+							'days' : freq,
+							'tax' : _tax,
+							'quantity' : '1',
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+				this.ListAllServices = function(domainid, handlers) {
+					$.ajax({
+						url : '/homeford/api/domain/' + domainid+'/itemservice',
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$.ajax({

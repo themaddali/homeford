@@ -56,6 +56,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.quiz-name', row).text(data[j].name);
 									jQuery('.quiz-id', row).text(data[j].id);
 									jQuery('.quiz-desc', row).text(data[j].description);
+									jQuery('.quiz-strength', row).text(data[j].questionCount);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");

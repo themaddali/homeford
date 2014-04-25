@@ -62,27 +62,18 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						jQuery('#add-service').on('click', function() {
 							if ($(".edit-form").valid()) {
-								var _tname = jQuery('#task-name').val();
-								var _tdesc = jQuery('#task-desc').val();
-								var _tfrom = jQuery('#task-startdate').val();
-								var _tdue = jQuery('#task-deadline').val();
-								if (_tfrom === '' || _tfrom === ' ') {
-									var _tfrom = jQuery('#task-startdate').text();
-									var _tdue = jQuery('#task-deadline').text();
-								}
-								var _tbenefit = jQuery('#task-benefit').val();
-								var _tassignto = jQuery('#member-list').text();
-								var _thelpurl = jQuery('#task-helper-url').val();
-								var _thelpyoutube = jQuery('#task-helper-youtube').val();
-								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
-								var _ids = ActiveMembers.list;
+								var _sname = jQuery('#service-name').val();
+								var _sdesc = jQuery('#service-desc').val();
+								var _scost = jQuery('#service-cost').val();
+								var _stax = jQuery('#service-tax').val();
+								var _sfreq = jQuery('#service-frequency').val();
 								var _domainids;
 								service.returnDomainIDList({
 									success : function(data) {
 										_domainids = data;
 									}
 								});
-								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
+								service.AddServices(_domainids[0], _sname, _sdesc, _scost, _stax, _sfreq, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);

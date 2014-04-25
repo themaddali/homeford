@@ -2,14 +2,14 @@
 
 define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, membersedit) {"use strict";
 
-	var ToDoListView = ( function() {
+	var ServicesListView = ( function() {
 
 			/**
 			 * Constructor
 			 *
 			 */
 
-			function ToDoListView() {
+			function ServicesListView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -42,21 +42,23 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function loadTable(activedomains) {
 					jQuery('.noinfo').show();
 					jQuery('.view-table').hide();
-					var rowtemplate = jQuery('#tasks-template').attr('id', '');
+					var rowtemplate = jQuery('#services-template').attr('id', '');
 					//Backing the template
-					jQuery('.div-template').append(rowtemplate.attr('id', 'tasks-template'));
+					jQuery('.div-template').append(rowtemplate.attr('id', 'services-template'));
 					for (var i = 0; i < activedomains.length; i++) {
 						var thisdomaininstance = activedomains[i];
-						service.DomainToDoList(thisdomaininstance, {
+						service.ListAllServices(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
-									jQuery('.task-name', row).text(data[j].groupName);
-									jQuery('.task-id', row).text(data[j].id);
-									jQuery('.task-count', row).text(data[j].todos.length + ' members');
-									jQuery('.task-date', row).text(data[j].todos[0].todoStartDate.split(" ")[0]);
+									jQuery('.service-name', row).text(data[j].name);
+									jQuery('.service-id', row).text(data[j].id);
+									jQuery('.service-desc', row).text(data[j].description);
+									jQuery('.service-cost', row).text('$'+data[j].unit_price);
+									jQuery('.service-tax', row).text(data[j].tax+'%');
+									jQuery('.service-freq', row).text(data[j].days + ' days');
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");
@@ -102,8 +104,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 			}
 
-			return ToDoListView;
+			return ServicesListView;
 		}());
 
-	return new ToDoListView();
+	return new ServicesListView();
 });

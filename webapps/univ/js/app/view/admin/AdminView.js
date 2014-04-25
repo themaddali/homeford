@@ -101,6 +101,7 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 								populateMembersData(ACTIVEDOMAINIDS);
 								populateToDoData(ACTIVEDOMAINIDS);
 								populateQuizData(ACTIVEDOMAINIDS);
+								populateServicesData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -135,6 +136,7 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 										populateMembersData(ACTIVEDOMAINIDS);
 										populateToDoData(ACTIVEDOMAINIDS);
 										populateQuizData(ACTIVEDOMAINIDS);
+										populateServicesData(ACTIVEDOMAINIDS);
 									}
 								}
 							}
@@ -240,15 +242,21 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 
 				function populateQuizData(activedomains) {
 					var _quiztotal = 0;
-					var _quizdone = 0;
+					var _questioncount = 0;
 					var _quizpercentage = 0;
 					var _quizdata = [0, 0];
 					for (var i = 0; i < activedomains.length; i++) {
 						service.DomainQuizList(activedomains[i], {
 							success : function(data) {
 								_quiztotal = _quiztotal + data.length;
+								for (var j = 0; j < data.length; j++) {
+									_questioncount = _questioncount + parseInt(data[j].questionCount);
+								}
 								_quizdata[0] = _quiztotal;
+								_quizdata[1] = _questioncount;
 								updatePanelValues('#quiz-grouptotal-value', _quiztotal);
+								updatePanelValues('#question-total-value', _questioncount);
+								updatePanelValues('#quiz-average-value', Math.ceil(_questioncount / _quiztotal));
 								var _quizgross = 0;
 								updatePanelGraphs('#quiz-donut', _quizdata);
 								// for (var j = 0; j < data.length; j++) {
@@ -265,6 +273,24 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 								// updatePanelValues('#todo-progress-value', percentage + ' %');
 								// }
 								// }
+							}
+						});
+					}
+				}
+
+				function populateServicesData(activedomains) {
+					var _servicestotal = 0;
+					var _servicesdata = [0, 0];
+					for (var i = 0; i < activedomains.length; i++) {
+						service.ListAllServices(activedomains[i], {
+							success : function(data) {
+								_servicestotal = _servicestotal + data.length;
+								// for (var j = 0; j < data.length; j++) {
+									// _questioncount = _questioncount + parseInt(data[j].questionCount);
+								// }
+								_servicesdata[0] = _servicestotal;
+								updatePanelValues('#services-total-value', _servicestotal);
+								updatePanelGraphs('#services-donut', _servicesdata);
 							}
 						});
 					}
