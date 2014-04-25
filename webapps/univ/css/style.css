@@ -9,7 +9,6 @@
  Header : #0784E3;
  Light #2fbcf7*/
 
-
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
 }
@@ -228,7 +227,7 @@ input[type="email"]:focus + input-clear {
 	display: none;
 }
 
-input[type="email"],input[type="text"],input[type="file"],input[type="web"],input[type="password"]{
+input[type="email"], input[type="text"], input[type="file"], input[type="web"], input[type="password"] {
 	-webkit-appearance: none;
 }
 
@@ -270,9 +269,9 @@ input[type="checkbox"], input[type="radio"] {
 
 input[type="search"] {
 	/*-webkit-appearance: textfield;
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;*/
+	 -moz-box-sizing: content-box;
+	 -webkit-box-sizing: content-box;
+	 box-sizing: content-box;*/
 }
 
 input[type="search"]:focus {
@@ -399,7 +398,7 @@ body.error404 {
 	width: 197px;
 	height: 74px;
 	zoom: 1;
-	margin-top:15px;
+	margin-top: 15px;
 }
 
 #main-nav, #static-main-nav {
@@ -1377,6 +1376,12 @@ a.goback {
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
 	overflow-x: hidden;
+}
+.modal-body .modal-container .modal-contents div.noinfo {
+	width: 90%;
+	text-align: center;
+	padding: 40px;
+	font-size: 0.8em;
 }
 .modal-body .modal-container .modal-contents div.footer {
 	padding: 10px;

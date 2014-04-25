@@ -40,6 +40,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function loadTable(activedomains) {
+					jQuery('.noinfo').show();
+					jQuery('.view-table').hide();
 					var rowtemplate = jQuery('#tasks-template').attr('id', '');
 					//Backing the template
 					jQuery('.div-template').append(rowtemplate.attr('id', 'tasks-template'));
@@ -48,6 +50,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						service.DomainToDoList(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
+									jQuery('.noinfo').hide();
+									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
 									jQuery('.task-name', row).text(data[j].groupName);
 									jQuery('.task-id', row).text(data[j].id);

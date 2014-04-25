@@ -43,6 +43,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function loadTable(activedomains) {
+					jQuery('.noinfo').show();
+					jQuery('.view-table').hide();
 					var rowtemplate = jQuery('#members-template').attr('id', '');
 					//Backing the template
 					jQuery('.div-template').append(rowtemplate.attr('id', 'members-template'));
@@ -82,6 +84,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									}
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");
+										if (jQuery('.view-table tbody tr').length > 0) {
+											jQuery('.view-table').show();
+											jQuery('.noinfo').hide();
+										}
 										activateTableClicks();
 									}
 								}

@@ -24,16 +24,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				$.ajaxSetup({
 					statusCode : {
 						401 : function() {
-							if (jQuery.cookie('user')) {
-								jQuery.removeCookie('user', {
-									path : '/'
-								});
-								jQuery.removeCookie('subuser', {
-									path : '/'
-								});
-								router.go('/home');
-								window.setTimeout('location.reload()', 500);
-							}
+							// if (jQuery.cookie('user')) {
+								// jQuery.removeCookie('user', {
+									// path : '/'
+								// });
+								// jQuery.removeCookie('subuser', {
+									// path : '/'
+								// });
+								// router.go('/home');
+								// window.setTimeout('location.reload()', 500);
+							// }
 						}
 					}
 

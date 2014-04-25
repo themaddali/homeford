@@ -40,6 +40,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function loadTable(activedomains) {
+					jQuery('.noinfo').show();
+					jQuery('.view-table').hide();
 					var rowtemplate = jQuery('#quiz-template').attr('id', '');
 					//Backing the template
 					jQuery('.div-template').append(rowtemplate.attr('id', 'quiz-template'));
@@ -48,6 +50,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						service.DomainQuizList(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
+									jQuery('.noinfo').hide();
+									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
 									jQuery('.quiz-name', row).text(data[j].name);
 									jQuery('.quiz-id', row).text(data[j].id);

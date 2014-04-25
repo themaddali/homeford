@@ -1,11 +1,11 @@
 //View that will drive the main landing page.
 
-define(['cookie', 'plugins', 'flatvid', 'bgv', '../../Router', '../../service/DataService'], function(cookie, plugin, flatvid, bgv, router, service) {"use strict";
+define(['cookie', 'plugins', 'flatvid', '../../Router', '../../service/DataService'], function(cookie, plugin, flatvid, router, service) {"use strict";
 
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["media\/bg1.png", "img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"],
+				"Bg" : ["img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"],
 				"Static" : ["media\/bg1.png"]
 			};
 
@@ -30,77 +30,32 @@ define(['cookie', 'plugins', 'flatvid', 'bgv', '../../Router', '../../service/Da
 					left : "auto"
 				};
 				var n = document.getElementById("preloader");
-				//var r = (new Spinner(t)).spin(n);
 				var i = PARAM.Bg;
 
 				function startCoverShow() {
-					//No Lag BG
-					jQuery.backstretch(PARAM.Static, {
-						fade : 0
-					}, function() {
-						r.stop()
+					service.getFlickList('sfo', {
+						success : function(list) {
+							jQuery.backstretch(list, {
+								duration : 9000,
+								fade : 1000
+							}, function() {
+								r.stop()
+								jQuery("#preloader").hide();
+							});
+						},
+						error : function() {
+							jQuery.backstretch(i, {
+								duration : 9000,
+								fade : 1000
+							}, function() {
+								r.stop()
+								jQuery("#preloader").hide();
+							});
+						}
 					});
-
-					// service.getFlickList('sfo', {
-					// success : function(list) {
-					// jQuery.backstretch(list, {
-					// duration : 9000,
-					// fade : 1000
-					// }, function() {
-					// r.stop()
-					// jQuery("#preloader").hide();
-					// });
-					// },
-					// error : function() {
-					// jQuery.backstretch(i, {
-					// duration : 9000,
-					// fade : 1000
-					// }, function() {
-					// r.stop()
-					// jQuery("#preloader").hide();
-					// });
-					// }
-					// });
-					if (Modernizr.touch) {
-						service.getFlickList('sfo', {
-							success : function(list) {
-								jQuery.backstretch(list, {
-									duration : 9000,
-									fade : 1000
-								}, function() {
-									r.stop()
-								});
-							},
-							error : function() {
-								jQuery.backstretch(i, {
-									duration : 9000,
-									fade : 200
-								}, function() {
-									r.stop()
-								});
-							}
-						});
-					} else {
-						var videobackground = new $.backgroundVideo($('body'), {
-							"align" : "centerXY",
-							"width" : 1280,
-							"height" : 720,
-							"path" : "media/",
-							"filename" : "bgvideo1",
-							"types" : ["mp4"]
-						});
-					}
-
-					// $('body').videoBG({
-					// position : "fixed",
-					// zIndex : -1,
-					// mp4 : '../media/bgvideo1.mp4',
-					// opacity : 1
-					// });
 				}
 
 				function activateSuggestionSearch() {
-
 					// var countries = new Bloodhound({
 					// datumTokenizer : function(d) {
 					// return Bloodhound.tokenizers.whitespace(d.name);

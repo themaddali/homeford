@@ -42,6 +42,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (!activedomains || activedomains.length == 0) {
 						router.go('/admin', '/adminslist');
 					} else {
+						jQuery('.noinfo').show();
+						jQuery('.view-table').hide();
 						loadTable(activedomains);
 					}
 
@@ -56,6 +58,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								var ADMINCOUNT = InviteList.length;
 								for (var i = 0; i < ADMINCOUNT; i++) {
+									jQuery('.noinfo').hide();
+									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
 									jQuery('.admin-email', row).text(InviteList[i].email);
 									jQuery('.admin-invitedby', row).text(InviteList[i].sentBy);
