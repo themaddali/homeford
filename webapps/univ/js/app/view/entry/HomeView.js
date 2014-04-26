@@ -5,7 +5,7 @@ define(['cookie', 'plugins', 'flatvid', '../../Router', '../../service/DataServi
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/new2.jpg", "img\/new1.jpg", "img\/new3.jpg"],
+				"Bg" : ["img\/z0.png", "img\/z1.png", "img\/z2.png", "img\/z3.png"],
 				"Static" : ["media\/bg1.png"]
 			};
 
@@ -36,8 +36,8 @@ define(['cookie', 'plugins', 'flatvid', '../../Router', '../../service/DataServi
 					service.getFlickList('sfo', {
 						success : function(list) {
 							jQuery.backstretch(list, {
-								duration : 9000,
-								fade : 1000
+								duration : 5000,
+								fade : 500
 							}, function() {
 								r.stop()
 								jQuery("#preloader").hide();
