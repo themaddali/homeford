@@ -1,4 +1,4 @@
-define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, plugins, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
 
 	var StudentListView = ( function() {
 

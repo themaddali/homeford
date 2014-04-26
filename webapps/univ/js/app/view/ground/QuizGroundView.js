@@ -1,4 +1,4 @@
-define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, plugins, cookie, ellipsis, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, cookie, ellipsis, service, banner, router, notify, popup) {"use strict";
 
 	var QuizGroundVIew = ( function() {
 

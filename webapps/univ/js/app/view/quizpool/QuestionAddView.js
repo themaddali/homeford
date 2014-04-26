@@ -1,5 +1,3 @@
-//View that will drive the Students list page.
-
 define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/quizpool/QuestionEditView'], function(modernizr, cookie, service, validate, router, notify, admin, questionedit) {"use strict";
 
 	var QuestionAddView = ( function() {

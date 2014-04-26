@@ -260,6 +260,30 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('about', '^/about(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/about.html'], function(page) {
+								result.load(page);
+							});
+						}
+					});
+					router.map('license', '^/license(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/license.html'], function(page) {
+								result.load(page);
+							});
+						}
+					});
+					router.map('contact', '^/contact(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/contact.html'], function(page) {
+								result.load(page);
+							});
+						}
+					});
 					router.map('no route', '^.*', {
 						container : CONTAINER,
 						enter : function(location, result) {

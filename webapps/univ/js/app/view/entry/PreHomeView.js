@@ -1,6 +1,4 @@
-//View that will drive the main landing page.
-
-define(['../../Router', 'cookie', 'plugins', '../../service/DataService', '../../view/entry/RegisterView'], function(router, cookie, plugins, service, register) {"use strict";
+define(['../../Router', 'cookie', '../../service/DataService', '../../view/entry/RegisterView'], function(router, cookie, service, register) {"use strict";
 
 	var PreHomeView = ( function() {
 

@@ -1,5 +1,3 @@
-//View that will drive the Students list page.
-
 define(['cookie', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, service, banner, notify, router) {"use strict";
 
 	var InviteView = ( function() {

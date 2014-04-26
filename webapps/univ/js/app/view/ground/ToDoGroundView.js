@@ -1,4 +1,4 @@
-define(['modernizr', 'plugins', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, plugins, cookie, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, cookie, service, banner, router, notify, popup) {"use strict";
 
 	var ToDoGroundView = ( function() {
 

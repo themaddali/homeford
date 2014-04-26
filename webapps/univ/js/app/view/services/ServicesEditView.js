@@ -1,5 +1,3 @@
-//View that will drive the Students list page.
-
 define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, crop, service, validate, router, notify, admin) {"use strict";
 
 	var ServicesEditView = ( function() {

@@ -1,4 +1,4 @@
-define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../Notify'], function(raphael, plugins, cookie, elychart, service, banner, router, invite, notify) {"use strict";
+define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, notify) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -418,7 +418,6 @@ define(['raphael', 'plugins', 'cookie', 'elychart', '../../service/DataService',
 						//Rich Experience First.... Load BG
 						showBG();
 						jQuery('.T1').hide();
-						jQuery(".scroll-pane").jScrollPane();
 						var progressbar = $("#to-do-progressbar");
 						var progressLabel = $(".to-do-progress-label");
 						// jQuery("#to-do-accordion").accordion({

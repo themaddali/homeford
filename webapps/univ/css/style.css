@@ -373,13 +373,11 @@ body.error404 {
 #fluid-nav {
 	height: 77px;
 	position: fixed;
-	/*background: #FFFFFF;
-	 border-bottom : 2px solid grey;*/
 	width: 100%;
 }
 
 #logo, #static-logo {
-	margin: 15px 0 0 40px;
+	margin: 5px 0 0 40px;
 	float: left;
 	width: 197px;
 	height: 74px;
@@ -1325,7 +1323,7 @@ a.goback {
 	-webkit-appearance: none;
 }
 
-.modal-body .modal-container header input, .modal-body .modal-container footer input,.modal-body .modal-container div.inline-controls input  {
+.modal-body .modal-container header input, .modal-body .modal-container footer input, .modal-body .modal-container div.inline-controls input {
 	padding: 10px;
 	background-color: #0784E3;
 	font-size: 0.9em;
@@ -1344,7 +1342,7 @@ a.goback {
 	background-color: #FFFFFF;
 	color: black;
 }
-.modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative , .modal-body .modal-container div.inline-controls input.negative{
+.modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative, .modal-body .modal-container div.inline-controls input.negative {
 	border: 2px solid #e6e6e6;
 	cursor: pointer;
 	background-color: #e30716;
@@ -1481,6 +1479,12 @@ div.formselction {
 	margin-top: 15px;
 	padding: 10px;
 }
+.view-table.pre-home {
+	width: 100%;
+	margin-left: 0px;
+	margin-top: 0px;
+	padding: 5px;
+}
 
 .view-table > thead tr {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
@@ -1510,6 +1514,21 @@ div.formselction {
 	color: black;
 	border-bottom: 2px dotted #d9d9d9;
 	cursor: pointer;
+}
+.view-table.pre-home > tbody tr {
+	height: 10px;
+	padding: 5px;
+	font-size: 9px;
+	line-height: 10px;
+	color: black;
+	border-bottom: 2px dotted #d9d9d9;
+	cursor: default;
+}
+.view-table.pre-home > thead th {
+	padding-left: 10px;
+}
+.view-table.pre-home > tbody td {
+	padding-left: 10px;
 }
 .view-table > tbody tr:hover {
 	border-bottom: 2px dotted #0784E3;
@@ -2483,6 +2502,9 @@ html.touch #subnav {
 	border-bottom-right-radius: 0px;
 	overflow: auto;
 }
+.main-content.pre-home {
+	top: 90px;
+}
 .main-content.action {
 	background: white;
 	position: fixed;
@@ -2701,6 +2723,29 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 1em;
 	padding: 10px;
 	padding-left: 5px;
+}
+
+.float-left .infocard {
+	float: left;
+	width: 100%;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	overflow: none;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+.float-left .infocard div.header {
+	border-bottom: 1px dotted grey;
+	padding: 10px;
+	color: white;
+	background: url("../img/stripe.png");
+	font-size: 14px;
+	border-top-left-radius: 8px;
+}
+.float-left .infocard div.details {
+	padding: 10px;
 }
 
 .float-left .notifycard {
