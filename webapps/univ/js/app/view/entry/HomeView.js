@@ -5,7 +5,7 @@ define(['cookie', 'plugins', 'flatvid', '../../Router', '../../service/DataServi
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/z0.png", "img\/z1.png", "img\/z2.png", "img\/z3.png"],
+				"Bg" : ["img\/z5.png", "img\/z1.png", "img\/z2.png", "img\/z3.png"],
 				"Static" : ["media\/bg1.png"]
 			};
 
@@ -45,8 +45,8 @@ define(['cookie', 'plugins', 'flatvid', '../../Router', '../../service/DataServi
 						},
 						error : function() {
 							jQuery.backstretch(i, {
-								duration : 9000,
-								fade : 1000
+								duration : 3000,
+								fade : 500
 							}, function() {
 								r.stop()
 								jQuery("#preloader").hide();
