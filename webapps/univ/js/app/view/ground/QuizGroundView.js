@@ -55,7 +55,7 @@ define(['modernizr', 'plugins', 'cookie', 'ellipsis', '../../service/DataService
 								}
 							}
 						}
-					})
+					});
 
 					//jQuery('.helper-email').parent().parent().fadeIn();
 					if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {

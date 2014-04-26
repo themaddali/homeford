@@ -28,12 +28,22 @@
 								<li class="form-item">
 									<label>Quiz Name</label>
 									<div class="form-content">
-										<input placeholder="Maths"  id="quiz-name" name="quizname" type="text" autofocus />
+										<input placeholder="Maths"  id="quiz-name" name="quizname" type="text"/>
 										<div class="form-helper">
 											<label>The below question will be added into this quiz.</label>
 										</div>
 									</div>
 								</li>
+								<li class="form-item">
+									<label>Total Questions</label>
+									<div class="form-content">
+										<input style="color: #0784E3;" class="input-link" readonly name="questioncount" id="question-count" type="text" value="No Questions" />
+										<div class="form-helper">
+											<label>All the current questions in this quiz. Edit/Delete questions.</label>
+										</div>
+									</div>
+								</li>
+								
 								<div class="form-partition">
 									<!-- <span>Info</span> -->
 								</div>
@@ -52,7 +62,7 @@
 								<li class="form-item">
 									<label>Question</label>
 									<div class="form-content">
-										<input class="option-input" placeholder="What is 2 + 2 = ?"  id="question-name" name="questionname" type="text" />
+										<input class="option-input" placeholder="What is 2 + 2 = ?"  id="question-name" name="questionname" type="text" autofocus />
 										<div class="form-helper">
 											<label>Enter a question</label>
 										</div>

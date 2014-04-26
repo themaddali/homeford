@@ -1202,6 +1202,18 @@ a.goback {
 	border-bottom-right-radius: 10px;
 }
 
+.modal-ol {
+	padding: 10px;
+	margin: px;
+	width: 100%;
+}
+
+.modal-li {
+	padding: 5px;
+	border-bottom: 1px dotted grey;
+	list-style: none;
+}
+
 .modal-body .modal-container header {
 	background-color: #f3f3f3;
 	font-size: 1.2em;
@@ -1302,7 +1314,18 @@ a.goback {
 	-webkit-appearance: none;
 }
 
-.modal-body .modal-container header input, .modal-body .modal-container footer input {
+.modal-body .modal-container div.inline-controls {
+	padding: 7px;
+	text-align: right;
+	width: 97%;
+	height: 60px;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	outline: none;
+	-webkit-appearance: none;
+}
+
+.modal-body .modal-container header input, .modal-body .modal-container footer input,.modal-body .modal-container div.inline-controls input  {
 	padding: 10px;
 	background-color: #0784E3;
 	font-size: 0.9em;
@@ -1321,7 +1344,7 @@ a.goback {
 	background-color: #FFFFFF;
 	color: black;
 }
-.modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative {
+.modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative , .modal-body .modal-container div.inline-controls input.negative{
 	border: 2px solid #e6e6e6;
 	cursor: pointer;
 	background-color: #e30716;
@@ -1400,6 +1423,13 @@ a.goback {
 	margin-bottom: 20px;
 	overflow: auto;
 }
+
+.edit-form.inline {
+	width: 100%;
+	margin-bottom: -20px;
+	overflow: auto;
+}
+
 .view-form {
 	width: 100%;
 	margin-bottom: 20px;
@@ -2958,6 +2988,10 @@ dialog-modal::-webkit-scrollbar {
 	text-align: center;
 	padding-bottom: 10px;
 }
+.canvas-header.left {
+	text-align: left;
+	height: 25px;
+}
 
 .canvas-header .metadata {
 	display: inline;
@@ -2965,6 +2999,13 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 14px;
 	font-style: italic;
 	color: #444;
+	margin-top: 3px;
+}
+.canvas-header .title {
+	display: inline;
+	float: left;
+	font-size: 15px;
+	color: black;
 	margin-top: 3px;
 }
 

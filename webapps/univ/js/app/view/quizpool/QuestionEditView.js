@@ -1,8 +1,8 @@
 //View that will drive the Students list page.
 
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/quizpool/QuestionEditView'], function(modernizr, cookie, service, validate, router, notify, admin, questionedit) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
 
-	var QuestionAddView = ( function() {
+	var QuestionEditView = ( function() {
 
 			/**
 			 * Constructor
@@ -11,9 +11,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 			var validator;
 			var ACTIVEQUIZ;
-			var optiontemplate;
+			var questiontemplate;
+			var optiontftemplate;
+			var optionmultitemplate;
 
-			function QuestionAddView() {
+			function QuestionEditView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -32,34 +34,73 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function populateData() {
-					jQuery('input[type=text]').val('');
-					jQuery('#question-category').prop('checked', true);
-					jQuery('#category-0').fadeOut();
-					jQuery('#category-1').fadeIn();
+					jQuery('.modal-ol').empty();
 					if (ACTIVEQUIZ) {
-						jQuery('#quiz-name').val(ACTIVEQUIZ.name);
-						jQuery('#quiz-name').attr('quizid', ACTIVEQUIZ.id);
-						if (ACTIVEQUIZ.count === null || ACTIVEQUIZ.count === 0) {
-							jQuery('#question-count').val('No questions in this quiz yet');
-						} else {
-							jQuery('#question-count').val(ACTIVEQUIZ.count + ' Questions available');
-						}
+						service.QuestionsList(ACTIVEQUIZ, {
+							success : function(data) {
+								if (data.length === 0) {
+									jQuery('.noinfo').fadeIn(1000);
+								}
+								for (var i = 0; i < data.length; i++) {
+									jQuery('.noinfo').hide();
+									var rowtemplate = questiontemplate.clone();
+									jQuery('.question-number', rowtemplate).text('Question # ' + (i + 1));
+									jQuery('#question-name', rowtemplate).val(data[i].text);
+									if (data[i].answers.length === 1) {
+										var optiontemplate = optiontftemplate.clone();
+										jQuery('#option-tf', optiontemplate).val(data[i].answers[0].text);
+										jQuery(rowtemplate).find('ol').append(optiontemplate);
+									} else {
+										var optiontemplate = optionmultitemplate.clone();
+										if (!data[i].answers[1].text) {
+											data[i].answers[1].text ="No Question";
+										}
+										if (!data[i].answers[2].text) {
+											data[i].answers[2].text ="No Question";
+										}
+										if (!data[i].answers[3].text) {
+											data[i].answers[3].text ="No Question";
+										}
+										jQuery('#multi-option-0', optiontemplate).val(data[i].answers[0].text);
+										jQuery('#multi-option-1', optiontemplate).val(data[i].answers[1].text);
+										jQuery('#multi-option-2', optiontemplate).val(data[i].answers[2].text);
+										jQuery('#multi-option-3', optiontemplate).val(data[i].answers[3].text);
+										jQuery(rowtemplate).find('ol').append(optiontemplate);
+									}
+									//jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect);
+									jQuery('.modal-ol').append(rowtemplate);
+									if (i == data.length - 1) {
+										activateEvents();
+									}
+								}
+							}
+						});
 					} else {
-						router.go('/admin');
+						router.go('/quizlist');
 					}
 				}
 
+				function activateEvents() {
+					jQuery('.inlinebutton-multi').click(function() {
+						if (jQuery(this).hasClass('correct')) {
+							jQuery(this).removeClass('correct').addClass('incorrect').val('false');
 
-				this.activeQuiz = function(activequiz) {
-					ACTIVEQUIZ = activequiz;
+						} else {
+							jQuery(this).removeClass('incorrect').removeClass('error').addClass('correct').val('true');
+						}
+					});
 				}
+				
+				this.activeQuiz = function(selected) {
+					ACTIVEQUIZ = selected;
+				}
+
 
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
-					validator.resetForm();
 					populateData();
 
 				};
@@ -73,57 +114,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						if (!$.ui) {
 							location.reload();
 						}
-						optiontemplate = jQuery('#option-template').attr('id', '');
+						questiontemplate = jQuery('#question-template').attr('id', '');
+						optiontftemplate = jQuery('#option-tf-template').attr('id', '');
+						optionmultitemplate = jQuery('#option-multi-template').attr('id', '');
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.go('/admin');
-						});
-						
-						jQuery('#question-count').click(function() {
-							questionedit.activeQuiz(ACTIVEQUIZ.id);
-							router.go('/questionedit');
-						});
-
-						jQuery('.inlinebutton-or').click(function() {
-							if (jQuery(this).hasClass('correct')) {
-								jQuery('.inlinebutton-or.incorrect').removeClass('incorrect').addClass('correct');
-								jQuery(this).removeClass('correct').addClass('incorrect');
-								jQuery(this).removeClass('correct').val('false');
-							} else {
-								jQuery('.inlinebutton-or.correct').removeClass('correct').addClass('incorrect');
-								jQuery(this).removeClass('incorrect').addClass('correct');
-								jQuery(this).removeClass('incorrect').val('true');
-							}
-						});
-						jQuery('.inlinebutton-multi').click(function() {
-							if (jQuery(this).hasClass('correct')) {
-								jQuery(this).removeClass('correct').addClass('incorrect').val('false');
-
-							} else {
-								jQuery(this).removeClass('incorrect').removeClass('error').addClass('correct').val('true');
-							}
-						});
-
-						jQuery("input[name=category][type=radio]").change(function() {
-							if (jQuery('input[name=category]:checked').val() === '0') {
-								jQuery('#category-0').fadeIn();
-								jQuery('#category-1').fadeOut();
-							} else {
-								jQuery('#category-0').fadeOut();
-								jQuery('#category-1').fadeIn();
-							}
-						});
-
-						jQuery('.inlinebutton-add').click(function() {
-							jQuery(this).parent().parent().parent().append(optiontemplate);
-							jQuery(this).next().hide();
-							jQuery(this).hide();
-						});
-
-						jQuery('.edit-select').change(function() {
-							jQuery('#select-value').val(jQuery('.edit-select').val().toLowerCase());
+							router.returnToPrevious();
 						});
 
 						$.validator.prototype.checkForm = function() {
@@ -181,9 +179,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 															jQuery('.inlinebutton-multi').removeClass('error');
 															jQuery('.option-input').val('');
 															jQuery('#question-name').focus();
-															var thiscount = parseInt(jQuery('#question-count').val().split(' ')[0]);
-															ACTIVEQUIZ.count = thiscount+1;
-															jQuery('#question-count').val(thiscount+1 + ' Questions available');
 														}, 2000);
 													} else {
 														notify.showNotification('ERROR', data.message);
@@ -248,9 +243,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 														setTimeout(function() {
 															jQuery('.option-input').val('');
 															jQuery('#question-name').focus();
-															var thiscount = parseInt(jQuery('#question-count').val().split(' ')[0]);
-															ACTIVEQUIZ.count = thiscount+1;
-															jQuery('#question-count').val(thiscount+1 + ' Questions available');
 														}, 2000);
 													} else {
 														notify.showNotification('ERROR', data.message);
@@ -289,8 +281,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 			}
 
-			return QuestionAddView;
+			return QuestionEditView;
 		}());
 
-	return new QuestionAddView();
+	return new QuestionEditView();
 });

@@ -72,6 +72,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					var rowObject = {
 						name : null,
 						id : null,
+						count : null,
 					};
 
 					jQuery('.view-table tbody tr').click(function() {
@@ -81,6 +82,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
 						rowObject.name = jQuery(this).find('.quiz-name').text();
 						rowObject.id = jQuery(this).find('.quiz-id').text();
+						rowObject.count = jQuery(this).find('.quiz-strength').text();
 						questionassign.activeQuiz(rowObject);
 						router.go('/questionadd');
 					});

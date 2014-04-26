@@ -179,6 +179,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('questionedit', '^/questionedit(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/quizpool/questionedit.html', '../app/view/quizpool/QuestionEditView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('quizadd', '^/quizadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

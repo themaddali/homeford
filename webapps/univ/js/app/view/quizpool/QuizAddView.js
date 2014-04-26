@@ -78,6 +78,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 												var active = {};
 												active.name = _qname;
 												active.id = data.id;
+												active.count = null;
 												questionassign.activeQuiz(active);
 												router.go('/questionadd');
 											}, 2000);

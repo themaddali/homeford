@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="quiz-view-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Questions List
+				</header>
+				<div class="modal-contents">
+					<ol class="modal-ol">
+						<li class="modal-li" id="question-template">
+							<form class="edit-form inline">
+								<fieldset>
+									<ol>
+										<li class="form-item">
+											<label class="question-number"></label>
+											<div class="form-content">
+												<input placeholder="Ex: Maths Addition"  id="question-name" name="questionname" type="text" />
+												<div class="form-helper">
+													<label>This is the question</label>
+												</div>
+											</div>
+										</li>
+									</ol>
+								</fieldset>
+							</form>
+						</li>
+						<div id="option-tf-template">
+							<li class="form-item" id="option-tf-template">
+								<label></label>
+								<div class="form-content">
+									<select class="edit-select" placeholder="True or False" id="tf-option" name="tfoption" type="text">
+										<option>True</option>
+										<option>False</option>
+									</select>
+									<div class="form-helper">
+										<label>Select the answer to your question, True or False?</label>
+									</div>
+								</div>
+							</li>
+							<div class="inline-controls">
+								<input type="button" value="Update" />
+								<input class="negative" type="button" value="Delete" />
+							</div>
+						</div>
+						<div class="form-datainput" id="option-multi-template">
+							<li class="form-item">
+								<label>Option - 1</label>
+								<div class="form-content">
+									<input class="option-input" placeholder="Option" name="options"  id="multi-option-0" type="text" />
+									<button class="inlinebutton-multi correct" type="button" value="true"></button>
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Option - 2</label>
+								<div class="form-content">
+									<input class="option-input" placeholder="Option" name="options"  id="multi-option-1" type="text" />
+									<button class="inlinebutton-multi correct" type="button" value="true"></button>
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Option - 3</label>
+								<div class="form-content">
+									<input class="option-input" placeholder="Option" name="options"  id="multi-option-2" type="text" />
+									<button class="inlinebutton-multi correct" type="button" value="true"></button>
+								</div>
+							</li>
+							<li class="form-item">
+								<label>Option - 4</label>
+								<div class="form-content">
+									<input class="option-input" placeholder="Option" name="options"  id="multi-option-3" type="text" />
+									<button class="inlinebutton-multi correct" type="button" value="true"></button>
+								</div>
+							</li>
+							<div class="inline-controls">
+								<input type="button" value="Update" />
+								<input class="negative" type="button" value="Delete" />
+							</div>
+						</div>
+					</ol>
+					<div class="noinfo" style="display:none">
+						No Results Available
+					</div>
+				</div>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+	</body>
+</html>
