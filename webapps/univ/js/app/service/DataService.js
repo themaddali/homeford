@@ -359,6 +359,29 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
+					var _cost = cost.replace('$','');
+					var _tax = tax.replace('%','');
+					$.ajax({
+						url : '/homeford/api/itemservice/' + serviceid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'name' : title,
+							'description' : desc,
+							'status' : status,
+							'unit_price' : _cost,
+							'minutes' : '0',
+							'days' : freq,
+							'tax' : _tax,
+							'quantity' : '1',
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$.ajax({

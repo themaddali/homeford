@@ -211,6 +211,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('servicesedit', '^/servicesedit(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/services/edit.html', '../app/view/services/ServicesEditView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('memberspick', '^/memberspick(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

@@ -1,6 +1,6 @@
 //View that will drive the Students list page.
 
-define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, membersedit) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/services/ServicesEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, servicesedit) {"use strict";
 
 	var ServicesListView = ( function() {
 
@@ -56,9 +56,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.service-name', row).text(data[j].name);
 									jQuery('.service-id', row).text(data[j].id);
 									jQuery('.service-desc', row).text(data[j].description);
-									jQuery('.service-cost', row).text('$'+data[j].unit_price);
-									jQuery('.service-tax', row).text(data[j].tax+'%');
+									jQuery('.service-cost', row).text('$' + data[j].unit_price);
+									jQuery('.service-tax', row).text(data[j].tax + '%');
 									jQuery('.service-freq', row).text(data[j].days + ' days');
+									jQuery('.service-status', row).text(data[j].status);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
 										jQuery('.view-table').trigger("update");
@@ -71,7 +72,28 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function activateTableClicks() {
-					// No function on table yet!!
+					var rowObject = {
+						name : "none",
+						desc : "none",
+						id : 'none',
+						cost : 'none',
+						tax : 'none',
+						status : 'none',
+					};
+
+					jQuery('.view-table tbody tr').click(function() {
+						jQuery('.view-table tbody tr').removeClass('rowactive');
+						jQuery(this).addClass('rowactive');
+						rowObject.name = jQuery(this).find('.service-name').text();
+						rowObject.desc = jQuery(this).find('.service-desc').text();
+						rowObject.status = jQuery(this).find('.service-status').text();
+						rowObject.id = jQuery(this).find('.service-id').text();
+						rowObject.cost = jQuery(this).find('.service-cost').text();
+						rowObject.freq = jQuery(this).find('.service-freq').text();
+						rowObject.tax = jQuery(this).find('.service-tax').text();
+						servicesedit.setInfo(rowObject);
+						router.go('/servicesedit');
+					});
 				}
 
 				function clearForm() {

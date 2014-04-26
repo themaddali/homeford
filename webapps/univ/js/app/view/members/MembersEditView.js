@@ -120,7 +120,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop'
 							if ($(".edit-form").valid()) {
 								service.setUserProfile(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", {
 									success : function(response) {
-										if (response !== 'error') {
+										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
 										} else {
 											notify.showNotification('ERROR', response.message);

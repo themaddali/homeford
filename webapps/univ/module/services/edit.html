@@ -16,16 +16,25 @@
 
 		</header>
 
-		<div id="todo-edit-modal" class="modal-body">
+		<div id="service-edit-modal" class="modal-body">
 			<div class="modal-container">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					New Service Offering
+					Services Edit
 				</header>
 				<div class="modal-contents">
-					<form id="todo-assign-form" class="edit-form">
+					<form id="service-edit-form" class="edit-form">
 						<fieldset>
-							<ol>
+							<ol id="service-form">
+								<li class="form-item">
+									<label>ID Number</label>
+									<div class="form-content">
+										<input placeholder="Unique ID (readonly)" readonly="readonly" id="service-id" name="serviceid" type="text" />
+										<div class="form-helper">
+											<label>Auto Generated - Readonly</label>
+										</div>
+									</div>
+								</li>
 								<li class="form-item">
 									<label>Service Name</label>
 									<div class="form-content">
@@ -71,13 +80,26 @@
 										</div>
 									</div>
 								</li>
+								<li class="form-item">
+									<label>Status</label>
+									<div class="form-content">
+										<select class="edit-select" placeholder="True or False" id="service-status" type="text">
+											<option>Active</option>
+											<option>InActive</option>
+										</select>
+										<div class="form-helper">
+											<label>Is this service currently offered?</label>
+										</div>
+									</div>
+								</li>
 							</ol>
 						</fieldset>
 					</form>
 				</div>
 				<footer>
 					<div class="edit-controls">
-						<input id="add-service" type="button" value="Add">
+						<input id="service-edit" type="button" value="Update">
+						<input class="negative" type="button" value="Remove">
 					</div>
 				</footer>
 				<div class="modal_close"></div>
