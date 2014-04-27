@@ -63,6 +63,7 @@ define(['../../Router', 'cookie', '../../service/DataService', '../../view/entry
 				this.resume = function() {
 					//Forcing to reload all view.
 					location.reload();
+					document.title = 'Zingoare | New Domain';
 				};
 
 				this.setEntity = function(entity) {
@@ -71,6 +72,7 @@ define(['../../Router', 'cookie', '../../service/DataService', '../../view/entry
 
 				this.init = function(args) {
 					//Lets create some background for UX
+					document.title = 'Zingoare | New Domain';
 					showBG();
 					//Validate the ID.
 					validateEntity();

@@ -51,13 +51,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									} else {
 										var optiontemplate = optionmultitemplate.clone();
 										if (!data[i].answers[1].text) {
-											data[i].answers[1].text ="No Question";
+											data[i].answers[1].text = "No Question";
 										}
 										if (!data[i].answers[2].text) {
-											data[i].answers[2].text ="No Question";
+											data[i].answers[2].text = "No Question";
 										}
 										if (!data[i].answers[3].text) {
-											data[i].answers[3].text ="No Question";
+											data[i].answers[3].text = "No Question";
 										}
 										jQuery('#multi-option-0', optiontemplate).val(data[i].answers[0].text);
 										jQuery('#multi-option-1', optiontemplate).val(data[i].answers[1].text);
@@ -88,11 +88,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						}
 					});
 				}
-				
+
+
 				this.activeQuiz = function(selected) {
 					ACTIVEQUIZ = selected;
 				}
-
 
 				this.pause = function() {
 
@@ -100,12 +100,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | Questions Edit';
 
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Questions Edit';
 
 					if (checkForActiveCookie() === true) {
 						//Rarely due to network latency if not loaded, just reload

@@ -103,11 +103,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					jQuery('#password-reenter-item').hide();
+					document.title = 'Zingoare | Profile Edit';
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Profile Edit';
 
 					if (checkForActiveCookie() === true) {
 						populateData();

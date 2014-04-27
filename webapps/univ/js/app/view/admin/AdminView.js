@@ -407,12 +407,14 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					banner.HideAlert();
 					banner.HideUser();
 					getInfoByPrivilage();
+					document.title = 'Zingoare | Admin Dashboard';
 
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Admin Dashboard';
 
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG

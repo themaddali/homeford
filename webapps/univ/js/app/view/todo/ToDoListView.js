@@ -81,11 +81,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | ToDo List';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Todo List';
 
 					if (checkForActiveCookie() === true) {
 						populateData();

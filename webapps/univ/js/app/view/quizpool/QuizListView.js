@@ -97,11 +97,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | Quiz List';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Quiz List';
 
 					if (checkForActiveCookie() === true) {
 						populateData();

@@ -99,11 +99,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | Members Edit';
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Members Edit';
 
 					if (checkForActiveCookie() === true) {
 

@@ -83,11 +83,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					clearForm();
 					populateData();
 					validator.resetForm();
+					document.title = 'Zingoare | Admin Invite';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Admin Invite';
 
 					if (checkForActiveCookie() === true) {
 

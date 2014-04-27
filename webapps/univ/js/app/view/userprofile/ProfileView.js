@@ -84,12 +84,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				};
 
 				this.resume = function() {
-					populateData()
+					populateData();
+					document.title = 'Zingoare | Profile Info';
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Profile Info';
 
 					if (checkForActiveCookie() === true) {
 

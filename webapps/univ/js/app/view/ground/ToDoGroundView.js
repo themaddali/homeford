@@ -132,11 +132,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					banner.HideAlert();
 					banner.HideUser();
 					populateData();
+					document.title = 'Zingoare | ToDo Ground';
 				};
 
 				this.init = function() {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | ToDo Ground';
 					if (checkForActiveCookie() === true) {
 						if (!$.ui) {
 							location.reload();

@@ -12,6 +12,7 @@ define(['../app/LocationView', '../app/UrlFragment', '../app/Router', 'cookie', 
 				this.init = function() {
 					var params = urlFragment.getParameters(window.location.href);
 					locationView.init();
+					document.title = 'Zingoare';
 				};
 
 				this.start = function() {

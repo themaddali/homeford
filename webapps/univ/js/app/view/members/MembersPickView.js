@@ -175,11 +175,13 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | Members Select';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Members Select';
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');

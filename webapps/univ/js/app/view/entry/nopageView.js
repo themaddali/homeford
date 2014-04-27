@@ -10,12 +10,14 @@ define([], function() {"use strict";
 				};
 
 				this.resume = function() {
+					document.title = 'Zingoare | Not Found';
 				};
 
 				this.setEntity = function(entity) {
 				}
 
 				this.init = function(args) {
+					document.title = 'Zingoare | Not Found';
 				};
 			}
 

@@ -120,9 +120,11 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					checkForActiveCookie();
 					jQuery('.info').hide();
 					parseQueryURL();
+					document.title = 'Zingoare | Register';
 				};
 
 				this.init = function() {
+					document.title = 'Zingoare | Register';
 					if (!jQuery.cookie('entity')) {
 						jQuery('#user-domain').removeAttr('readonly');
 						jQuery('#user-domain').removeClass('onlyone');

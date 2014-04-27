@@ -53,8 +53,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 								jQuery('.title', thistemplate).parent().prepend(OK);
 							} else if (NOTIFICATION[i].status == 'INFO') {
 								jQuery('.title', thistemplate).parent().prepend(INFO);
-							}
-							else{
+							} else {
 								jQuery('.title', thistemplate).parent().prepend(ERROR);
 							}
 							jQuery('.inviteddomain', thistemplate).text(NOTIFICATION[i].domain);
@@ -101,11 +100,13 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 					banner.HideAlert();
 					banner.HideUser();
 					populateData();
+					document.title = 'Zingoare | Notifcations/Activity';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Notifcations/Activity';
 
 					if (checkForActiveCookie() === true) {
 						populateData();

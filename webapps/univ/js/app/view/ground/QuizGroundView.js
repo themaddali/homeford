@@ -176,11 +176,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					banner.HideAlert();
 					banner.HideUser();
 					populateData();
+					document.title = 'Zingoare | Quiz Ground';
 				};
 
 				this.init = function() {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Quiz Ground';
 					if (checkForActiveCookie() === true) {
 						if (!$.ui) {
 							location.reload();

@@ -49,11 +49,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					populateData();
 					clearForm();
+					document.title = 'Zingoare | Members Add';
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Members Add';
 
 					if (checkForActiveCookie() === true) {
 

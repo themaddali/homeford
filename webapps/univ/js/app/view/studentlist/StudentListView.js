@@ -314,6 +314,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				this.resume = function() {
 					showBG();
+					document.title = 'Zingoare | Members Management';
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
@@ -327,6 +328,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				this.init = function(args) {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Members Management';
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						template = jQuery('#student-template').remove().attr('id', '');

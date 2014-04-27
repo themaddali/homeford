@@ -78,12 +78,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
-
+					document.title = 'Zingoare | ToDo Assign';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | ToDo Assign';
 
 					if (checkForActiveCookie() === true) {
 						//Rarely due to network latency if not loaded, just reload

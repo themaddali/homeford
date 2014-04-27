@@ -60,10 +60,12 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				};
 
 				this.resume = function() {
-					checkForActiveCookie()
+					checkForActiveCookie();
+					document.title = 'Zingoare | Signin/Signup';
 				};
 
 				this.init = function() {
+					document.title = 'Zingoare | Signin/Signup';
 					if (!jQuery.cookie('entity')) {
 						jQuery('#user-domain').removeAttr('disabled');
 						jQuery('#user-domain').removeClass('onlyone');

@@ -51,11 +51,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					document.title = 'Zingoare | Admin Edit';
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Admin Edit';
 
 					if (checkForActiveCookie() === true) {
 

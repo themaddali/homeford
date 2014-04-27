@@ -39,12 +39,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
-
+					document.title = 'Zingoare | Quiz Add';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Quiz Add';
 
 					if (checkForActiveCookie() === true) {
 						//Rarely due to network latency if not loaded, just reload

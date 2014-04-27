@@ -59,12 +59,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					validator.resetForm();
 					populateData();
-
+					document.title = 'Zingoare | Questions Add';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Questions Add';
 
 					if (checkForActiveCookie() === true) {
 						//Rarely due to network latency if not loaded, just reload

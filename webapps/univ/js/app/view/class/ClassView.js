@@ -151,11 +151,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					banner.HideAlert();
 					banner.HideUser();
 					populateClass();
+					document.title = 'Zingoare | Task Management';
 				};
 
 				this.init = function(args) {
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
+					document.title = 'Zingoare | Task Management';
 
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
