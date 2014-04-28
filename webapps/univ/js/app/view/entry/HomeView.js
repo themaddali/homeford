@@ -107,11 +107,11 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService'], fu
 					//location.reload();
 					startCoverShow();
 					checkForActiveCookie();
-					document.title = 'Zingoare';
+					//document.title = 'Zingoare';
 				};
 
 				this.init = function(args) {
-					document.title = 'Zingoare';
+					//document.title = 'Zingoare';
 					//Check for Cookie before doing any thing.
 					//Light weight DOM.
 					if (checkForActiveCookie() === false) {

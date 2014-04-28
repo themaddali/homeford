@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView'], function(modernizr, cookie, service, banner, router, notify, todogroundview) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView'], function(modernizr, cookie, service, banner, router, notify, todogroundview, quizgroundview) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -48,6 +48,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.metainfo').text(COUNT + ' Task(s)');
 									var newboard = PanelTemplate.clone();
+									if (StudentData[i].title.indexOf('@QUIZ') !== -1) {
+										jQuery(newboard).addClass('quiz');
+										newboard.attr('type', 'QUIZ');
+										StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
+									} else {
+										newboard.attr('type', 'TODO');
+									}
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
 									jQuery('.class-url', newboard).text(StudentData[i].helperUrl);
@@ -100,8 +107,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						selectedQuiz.membername = $('.subtitleinfo').text();
 						selectedQuiz.url = $(this).find('.class-url').text();
 						selectedQuiz.youtube = $(this).find('.class-youtube').text();
-						todogroundview.activeTask(selectedQuiz);
-						router.go('/todoground', '/class');
+						if ($(this).attr('type') === 'TODO') {
+							todogroundview.activeTask(selectedQuiz);
+							router.go('/todoground', '/class');
+						} else if ($(this).attr('type') === 'QUIZ') {
+							quizgroundview.activeTask(selectedQuiz);
+							router.go('/quizground', '/class');
+						}
 					});
 
 				}
@@ -131,7 +143,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						if (newmargin < 10) {
 							newmargin = 10;
 						}
-						$('.classboard').css('margin-left', (newmargin / 2)-5);
+						$('.classboard').css('margin-left', (newmargin / 2) - 5);
 						$('.classboard').css('margin-right', newmargin / 2);
 					}
 				}

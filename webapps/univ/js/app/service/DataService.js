@@ -7,6 +7,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 			var ACTIVEDOMAINIDLIST = [];
 			var DOMAINLIST;
 			var USERPROFILE = null;
+			var TODOLIST = null;
 			var USERID;
 			var DOMAINMAP = {};
 
@@ -25,14 +26,14 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					statusCode : {
 						401 : function() {
 							// if (jQuery.cookie('user')) {
-								// jQuery.removeCookie('user', {
-									// path : '/'
-								// });
-								// jQuery.removeCookie('subuser', {
-									// path : '/'
-								// });
-								// router.go('/home');
-								// window.setTimeout('location.reload()', 500);
+							// jQuery.removeCookie('user', {
+							// path : '/'
+							// });
+							// jQuery.removeCookie('subuser', {
+							// path : '/'
+							// });
+							// router.go('/home');
+							// window.setTimeout('location.reload()', 500);
 							// }
 						}
 					}
@@ -320,23 +321,50 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							USERPROFILE = null;
+							TODOLIST = null;
 							handlers.success(data);
 						}
 					});
 				};
-				
-				this.AddServices = function(domainid, title, desc, cost, tax, freq, handlers) {
-					var _cost = cost.replace('$','');
-					var _tax = tax.replace('%','');
+
+				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid+'/itemservice',
+						url : '/homeford/api/todo/domain/' + domainid + '/' + quizid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'title' : '@QUIZ' + title,
+							'desc' : desc,
+							'priority' : priority,
+							'percentage' : 0,
+							'todoStartDate' : startdate,
+							'todoEndDate' : enddate,
+							'userIds' : ids,
+							'benefit' : benefit,
+							'helperUrl' : url,
+							'helperYoutube' : youtube
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							TODOLIST = null;
+							handlers.success(data);
+						}
+					});
+				};
+
+				this.AddServices = function(domainid, title, desc, cost, tax, freq,status, handlers) {
+					var _cost = cost.replace('$', '');
+					var _tax = tax.replace('%', '');
+					$.ajax({
+						url : '/homeford/api/domain/' + domainid + '/itemservice',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
 						data : JSON.stringify({
 							'name' : title,
 							'description' : desc,
-							'status' : 'Active',
+							'status' : status,
 							'unit_price' : _cost,
 							'minutes' : '0',
 							'days' : freq,
@@ -350,7 +378,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 				this.ListAllServices = function(domainid, handlers) {
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid+'/itemservice',
+						url : '/homeford/api/domain/' + domainid + '/itemservice',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -360,8 +388,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
-					var _cost = cost.replace('$','');
-					var _tax = tax.replace('%','');
+					var _cost = cost.replace('$', '');
+					var _tax = tax.replace('%', '');
 					$.ajax({
 						url : '/homeford/api/itemservice/' + serviceid,
 						type : 'POST',
@@ -394,7 +422,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'description' : desc,
 						}),
 						success : function(data) {
-							USERPROFILE = null;
+							//USERPROFILE = null;
 							handlers.success(data);
 						}
 					});
@@ -413,22 +441,26 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'answers' : answers
 						}),
 						success : function(data) {
-							USERPROFILE = null;
+							//USERPROFILE = null;
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.DomainToDoList = function(domainid, handlers) {
-					$.ajax({
-						url : '/homeford/api/todogroup/domain/' + domainid,
-						type : 'GET',
-						async : 'async',
-						contentType : "application/json",
-						success : function(data) {
-							handlers.success(data);
-						}
-					});
+					if (TODOLIST && TODOLIST !== null) {
+						handlers.success(TODOLIST);
+					} else {
+						$.ajax({
+							url : '/homeford/api/todogroup/domain/' + domainid,
+							type : 'GET',
+							async : 'async',
+							contentType : "application/json",
+							success : function(data) {
+								handlers.success(data);
+							}
+						});
+					}
 				};
 
 				this.DomainQuizList = function(domainid, handlers) {
@@ -447,11 +479,25 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.QuestionsList = function(quizid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/' + quizid + '/question',
+						url : '/homeford/api/quiz/todo/question/' + quizid,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
 						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+
+				this.QuizProgressSave = function(todoid, questionid, answerid, handlers) {
+					var QUIZOBJ = [];
+					$.ajax({
+						url : '/homeford/api/quiz/question/' + todoid + '/' + questionid + '/' + answerid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							TODOLIST = null;
 							handlers.success(data);
 						}
 					});
@@ -483,7 +529,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'comments' : comments
 						}),
 						success : function(data) {
-							//USERPROFILE = null;
+							TODOLIST = null;
 							handlers.success(data);
 						}
 					});

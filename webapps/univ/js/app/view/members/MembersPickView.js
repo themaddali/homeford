@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView'], function(jquery, cookie, service, router, ellipsis, todoassign) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView'], function(jquery, cookie, service, router, ellipsis, todoassign, quizassign) {"use strict";
 
 	var MembersPickView = ( function() {
 
@@ -202,8 +202,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							selectedMembers.list = selectedlist;
 							if (todoassign) {
 								todoassign.selectedMembers(selectedMembers);
-							} else {
-
+							}
+							if (quizassign) {
+								quizassign.selectedMembers(selectedMembers);
 							}
 							router.returnToPrevious();
 						});

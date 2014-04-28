@@ -15,57 +15,67 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function populateData() {
-					// if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
-					// //router.go('/class');
-					// } else {
-					jQuery('#action-canvas').empty();
-					service.QuestionsList(20, {
-						success : function(data) {
-							jQuery('.helper').removeAttr("href");
-							jQuery('.helperboard').hide();
-							for (var i = 0; i < data.length; i++) {
-								jQuery('.metainfo').text(data.length + ' Questions');
-								var quizboard = quizboardtemplate.clone();
-								jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
-								jQuery('.question-number', quizboard).append(UNANSWERED);
-								jQuery('.question', quizboard).text(data[i].text);
-								if (jQuery('.question', quizboard).text().length > 90) {
-									var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
-									jQuery('.question', quizboard).text(newqstn + ' ...');
-								}
-								for (var j = 0; j < data[i].answers.length; j++) {
-									if (data[i].answers.length === 1) {
-										jQuery('.row-2', quizboard).hide();
-										if (data[i].answers[j].text === 'True') {
-											jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'false');
-										} else {
-											jQuery('.option-1', quizboard).val('True').attr('isCorrect', 'true');
+					if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
+						router.go('/class');
+					} else {
+						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
+						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
+						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
+						jQuery('#action-canvas').empty();
+						service.QuestionsList(ACTIVEQUIZ.id, {
+							success : function(data) {
+								jQuery('.helper').removeAttr("href");
+								jQuery('.helperboard').hide();
+								for (var i = 0; i < data.length; i++) {
+									console.log('BUG: id=-1 FIX IT');
+									if (data[i].id > 0) {
+										jQuery('.metainfo').text(data.length - 1 + ' Questions');
+										var quizboard = quizboardtemplate.clone();
+										jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
+										jQuery('.question-number', quizboard).append(UNANSWERED);
+										jQuery('.question', quizboard).text(data[i].text);
+										jQuery('.question', quizboard).attr('questionid',data[i].id);
+										if (jQuery('.question', quizboard).text().length > 90) {
+											var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
+											jQuery('.question', quizboard).text(newqstn + ' ...');
 										}
-									} else if (data[i].answers.length == 2) {
-										jQuery('.row-2', quizboard).hide();
-									} else {
-										jQuery('.row-2', quizboard).show();
+										for (var j = 0; j < data[i].answers.length; j++) {
+											if (data[i].answers.length === 1) {
+												jQuery('.row-2', quizboard).hide();
+												if (data[i].answers[j].text === 'True') {
+													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'true').attr('answerid',data[i].answers[j].id);
+													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'false');
+												} else {
+													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'false').attr('answerid',data[i].answers[j].id);
+													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'true');
+												}
+											} else {
+												jQuery('.row-2', quizboard).show();
+												jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect).attr('answerid',data[i].answers[j].id);
+											}
+
+										}
+										jQuery('#action-canvas').append(quizboard);
+										console.log(' length -1 BUG: id=-1 FIX IT');
+										if (i == data.length - 2) {
+											helperMediaQuiries();
+											activateCardEvents();
+										}
 									}
-									jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect);
-								}
-								jQuery('#action-canvas').append(quizboard);
-								if (i == data.length - 1) {
-									helperMediaQuiries();
-									activateCardEvents();
 								}
 							}
-						}
-					});
+						});
 
-					//jQuery('.helper-email').parent().parent().fadeIn();
-					if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
-						jQuery('.helper-url').attr('href', ACTIVEQUIZ.url);
-						jQuery('.helper-url').parent().parent().fadeIn();
-					}
-					if (ACTIVEQUIZ.youtube && ACTIVEQUIZ.youtube.length > 4) {
-						var fulllink = "http://www.youtube.com/watch?v=" + ACTIVEQUIZ.youtube + "?modestbranding=1&autoplay=1&cc_load_policy=1&controls=0&rel=0";
-						jQuery('.helper-youtube').attr('href', fulllink);
-						jQuery('.helper-youtube').parent().parent().fadeIn();
+						//jQuery('.helper-email').parent().parent().fadeIn();
+						if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
+							jQuery('.helper-url').attr('href', ACTIVEQUIZ.url);
+							jQuery('.helper-url').parent().parent().fadeIn();
+						}
+						if (ACTIVEQUIZ.youtube && ACTIVEQUIZ.youtube.length > 4) {
+							var fulllink = "http://www.youtube.com/watch?v=" + ACTIVEQUIZ.youtube + "?modestbranding=1&autoplay=1&cc_load_policy=1&controls=0&rel=0";
+							jQuery('.helper-youtube').attr('href', fulllink);
+							jQuery('.helper-youtube').parent().parent().fadeIn();
+						}
 					}
 				}
 
@@ -90,19 +100,25 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					});
 
 					jQuery('.option-choice').click(function() {
-						jQuery(this).parent().parent().find('input').attr('disabled','disabled');
+						jQuery(this).parent().parent().find('input').attr('disabled', 'disabled');
 						if (jQuery(this).attr('isCorrect') === 'true') {
 							//jQuery(this).css('background-color', 'green');
 							jQuery(this).parent().parent().parent().addClass('answered answered-correct');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
-							jQuery(this).parent().parent().find('.responseinfo').text('You selected: '+ jQuery(this).val() + '. Correct Answer: '+jQuery(this).attr('isCorrect'));
+							jQuery(this).parent().parent().find('.responseinfo').text('You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
 
 						} else {
 							//jQuery(this).css('background-color', 'red');
 							jQuery(this).parent().parent().parent().addClass('answered answered-incorrect');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
-							jQuery(this).parent().parent().find('.responseinfo').text('You selected: '+ jQuery(this).val() + '. Correct Answer: '+jQuery(this).attr('isCorrect'));
+							jQuery(this).parent().parent().find('.responseinfo').text('You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
 						}
+						service.QuizProgressSave(ACTIVEQUIZ.id, jQuery(this).parent().parent().parent().find('.question').attr('questionid'),jQuery(this).attr('answerid'), {
+							success : function(data){
+								//Any action
+								console.log(data);
+							}
+						});
 						setTimeout(function() {
 							jQuery('.quizactionboard').removeClass('cardinactive');
 							jQuery('.quizactionboard').removeClass('cardactive');

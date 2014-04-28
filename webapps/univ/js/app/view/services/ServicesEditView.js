@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', 'crop', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, crop, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
 
 	var ServicesEditView = ( function() {
 

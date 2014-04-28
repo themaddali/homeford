@@ -171,6 +171,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('activequizlist', '^/activequizlist(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/quizpool/activelist.html', '../app/view/quizpool/ActiveQuizListView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('questionadd', '^/questionadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
@@ -191,6 +199,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 						container : CONTAINER,
 						enter : function(location, result) {
 							require(['text!Pages/quizpool/add.html', '../app/view/quizpool/QuizAddView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('quizassign', '^/quizassign(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/quizpool/assign.html', '../app/view/quizpool/QuizAssignView'], function(page, view) {
 								result.load(page, view);
 							});
 						}

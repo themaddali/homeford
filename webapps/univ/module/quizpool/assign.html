@@ -19,7 +19,7 @@
 			<div class="modal-container">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					New Quiz
+					Quiz Assign
 				</header>
 				<div class="modal-contents">
 					<form id="quiz-assign-form" class="edit-form">
@@ -28,18 +28,90 @@
 								<li class="form-item">
 									<label>Quiz Name</label>
 									<div class="form-content">
-										<input placeholder="Ex: Maths Addition"  id="quiz-name" name="quizname" type="text" autofocus />
+										<input placeholder="Ex: Maths Addition" id="quiz-name" name="quizname" type="text" autofocus />
 										<div class="form-helper">
-											<label>Short name describing the quiz</label>
+											<label>Select a quiz you want to assign</label>
 										</div>
 									</div>
 								</li>
 								<li class="form-item">
-									<label>Description</label>
+									<label>Quiz Description</label>
 									<div class="form-content">
-										<textarea class="edittextarea" placeholder="Ex: Basic operations on numbers" id="quiz-desc" name="quizdesc"></textarea>
+										<textarea class="edittextarea" readonly="readonly" placeholder="Description of Quiz" id="quiz-desc" name="quizdesc"></textarea>
 										<div class="form-helper">
 											<label>More detailed descripion of the quiz</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Start Date</label>
+									<div class="form-content">
+										<input placeholder="Select a date" id="task-startdate" name="taskstartdate" type="text" />
+										<div class="form-helper">
+											<label>Selct a future date if needed</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Deadline</label>
+									<div class="form-content">
+										<input placeholder="Select a date" id="task-deadline" name="taskdeadline" type="text" />
+										<div class="form-helper">
+											<label>Deadline for this quiz</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Priority</label>
+									<span>
+										<input id="todo-priority" type="radio" name="todopriority" value="High"/>
+										High - To be concentrated first</span>
+								</li>
+								<li class="form-item filler">
+									<label></label>
+									<span>
+										<input  id="todo-priority" type="radio" name="todopriority" value="Normal" checked="checked"/>
+										Normal - Work with all other tasks</span>
+								</li>
+								<li class="form-item filler">
+									<label></label>
+									<span>
+										<input  id="todo-priority" type="radio" name="todopriority" value="Low"/>
+										Low - To be concentrated last</span>
+								</li>
+								<li class="form-item">
+									<label>Quiz Benefit</label>
+									<div class="form-content">
+										<input placeholder="Ex: You get $5 credit" id="task-benefit" name="taskbenefit" type="text" />
+										<div class="form-helper">
+											<label>Persuading benefit on completion</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Assign To</label>
+									<div class="form-content">
+										<input style="color: #0784E3;" class="input-link" readonly name="assignedto" id="member-list" type="text" value="None" />
+										<div class="form-helper">
+											<label>Select whom to assign</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Reference Website</label>
+									<div class="form-content">
+										<input placeholder="Ex: https://en.wikipedia.org/wiki/Maths" id="task-helper-url" name="taskhelperurl" type="web" />
+										<div class="form-helper">
+											<label> Any external website material with https to be secure (optional) </label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Reference Youtube</label>
+									<div class="form-content">
+										<input placeholder="Only Youtube Video ID.Ex:b8DD28JU for http://www.youtube.com/watch?v=KcXxHZssCh4" id="task-helper-youtube" name="taskhelperyoutube" type="web" />
+										<div class="form-helper">
+											<label> Any youtube reference. Only provide youtube video ID. (optional) </label>
 										</div>
 									</div>
 								</li>

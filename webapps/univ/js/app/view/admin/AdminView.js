@@ -210,33 +210,76 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function populateToDoData(activedomains) {
-					var _todototal = 0;
-					var _tododone = 0;
-					var _todopercentage = 0;
-					var _tododata = [0, 0];
+					var quizdata = [];
+					var tododata = [];
+
 					for (var i = 0; i < activedomains.length; i++) {
 						service.DomainToDoList(activedomains[i], {
 							success : function(data) {
-								_todototal = _todototal + data.length;
-								_tododata[0] = _todototal;
-								updatePanelValues('#todo-grouptotal-value', _todototal);
-								var _todogross = 0;
 								for (var j = 0; j < data.length; j++) {
-									_todogross = _todogross + data[j].todos.length;
-									_tododata[1] = _todogross;
-									updatePanelValues('#todo-total-value', _todogross);
-									for (var k = 0; k < data[j].todos.length; k++) {
-										_todopercentage = (_todopercentage + data[j].todos[k].percentage);
-										updatePanelValues('#todo-progress-value', _todopercentage + ' %');
+									if ((data[j].groupName).indexOf('@QUIZ') !== -1) {
+										quizdata.push(data[j]);
+									} else {
+										tododata.push(data[j]);
 									}
 									if (j === data.length - 1) {
-										updatePanelGraphs('#todo-donut', _tododata);
-										var percentage = Math.ceil(_todopercentage / parseInt(jQuery('#todo-total-value').text()));
-										updatePanelValues('#todo-progress-value', percentage + ' %');
+										activetodos(tododata);
+										activequiz(quizdata);
 									}
 								}
 							}
 						});
+					}
+				}
+
+				function activetodos(data) {
+					var _todototal = 0;
+					var _tododone = 0;
+					var _todopercentage = 0;
+					var _tododata = [0, 0];
+					_todototal = _todototal + data.length;
+					_tododata[0] = _todototal;
+					updatePanelValues('#todo-grouptotal-value', _todototal);
+					var _todogross = 0;
+					for (var j = 0; j < data.length; j++) {
+						_todogross = _todogross + data[j].todos.length;
+						_tododata[1] = _todogross;
+						updatePanelValues('#todo-total-value', _todogross);
+						for (var k = 0; k < data[j].todos.length; k++) {
+							_todopercentage = (_todopercentage + data[j].todos[k].percentage);
+							updatePanelValues('#todo-progress-value', _todopercentage + ' %');
+						}
+						if (j === data.length - 1) {
+							updatePanelGraphs('#todo-donut', _tododata);
+							var percentage = Math.ceil(_todopercentage / parseInt(jQuery('#todo-total-value').text()));
+							updatePanelValues('#todo-progress-value', percentage + ' %');
+						}
+					}
+
+				}
+
+				function activequiz(data) {
+					var _quiztotal = 0;
+					var _quizdone = 0;
+					var _quizpercentage = 0;
+					var _quizdata = [0, 0];
+					_quiztotal = _quiztotal + data.length;
+					_quizdata[0] = _quiztotal;
+					updatePanelValues('#activequiz-grouptotal-value', _quiztotal);
+					var _quizgross = 0;
+					for (var j = 0; j < data.length; j++) {
+						_quizgross = _quizgross + data[j].todos.length;
+						_quizdata[1] = _quizgross;
+						updatePanelValues('#activequiz-total-value', _quizgross);
+						for (var k = 0; k < data[j].todos.length; k++) {
+							_quizpercentage = (_quizpercentage + data[j].todos[k].percentage);
+							updatePanelValues('#activequiz-average-value', _quizpercentage + ' %');
+						}
+						if (j === data.length - 1) {
+							updatePanelGraphs('#activequiz-donut', _quizdata);
+							var percentage = Math.ceil(_quizpercentage / parseInt(jQuery('#activequiz-total-value').text()));
+							updatePanelValues('#activequiz-average-value', percentage + ' %');
+						}
 					}
 				}
 
@@ -280,15 +323,24 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				function populateServicesData(activedomains) {
 					var _servicestotal = 0;
+					var _servicesactive = 0;
+					var _servicesinactive = 0;
 					var _servicesdata = [0, 0];
 					for (var i = 0; i < activedomains.length; i++) {
 						service.ListAllServices(activedomains[i], {
 							success : function(data) {
 								_servicestotal = _servicestotal + data.length;
-								// for (var j = 0; j < data.length; j++) {
-									// _questioncount = _questioncount + parseInt(data[j].questionCount);
-								// }
-								_servicesdata[0] = _servicestotal;
+								for (var j = 0; j < data.length; j++) {
+									if (data[j].status === 'Active') {
+										_servicesactive = _servicesactive + 1;
+										updatePanelValues('#services-active-value', _servicesactive);
+										_servicesdata[0] = _servicesactive;
+									} else {
+										_servicesinactive = _servicesinactive + 1;
+										updatePanelValues('#services-inactive-value', _servicesinactive);
+										_servicesdata[1] = _servicesinactive;
+									}
+								}
 								updatePanelValues('#services-total-value', _servicestotal);
 								updatePanelGraphs('#services-donut', _servicesdata);
 							}

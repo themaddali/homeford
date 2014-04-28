@@ -161,11 +161,16 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									for (var i = 0; i < count; i++) {
 										var _answers = {};
 										_answers.text = jQuery('#' + optionprefix + '-option-' + i).val();
-										_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
-										if (_answers.isCorrect == 'true') {
+										if (jQuery('#' + optionprefix + '-option-' + i).next().attr('type') !== 'button'){
+											_answers.isCorrect = 'True';
+										}
+										else {
+											_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
+										}
+										if (_answers.isCorrect === 'True' || _answers.isCorrect === 'true') {
 											_answers.isCorrect = true;
 										}
-										if (_answers.isCorrect == 'false') {
+										if (_answers.isCorrect == 'False' || _answers.isCorrect == 'false') {
 											_answers.isCorrect = false;
 										}
 										if (_answers.text && _answers.text !== null && _answers.text !== null) {
@@ -181,6 +186,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 															jQuery('.option-input').val('');
 															jQuery('#question-name').focus();
 															var thiscount = parseInt(jQuery('#question-count').val().split(' ')[0]);
+															if (isNaN(thiscount)) {
+																thiscount = 0;
+															}
 															ACTIVEQUIZ.count = thiscount+1;
 															jQuery('#question-count').val(thiscount+1 + ' Questions available');
 														}, 2000);
@@ -229,11 +237,16 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									for (var i = 0; i < jQuery('.form-datainput input[type=text]:visible').length; i++) {
 										var _answers = {};
 										_answers.text = jQuery('#' + optionprefix + '-option-' + i).val();
-										_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
-										if (_answers.isCorrect == 'true') {
+										if (jQuery('#' + optionprefix + '-option-' + i).next().attr('type') !== 'button'){
+											_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).val();
+										}
+										else {
+											_answers.isCorrect = jQuery('#' + optionprefix + '-option-' + i).next().val();
+										}
+										if (_answers.isCorrect === 'True' || _answers.isCorrect === 'true') {
 											_answers.isCorrect = true;
 										}
-										if (_answers.isCorrect == 'false') {
+										if (_answers.isCorrect == 'False' || _answers.isCorrect == 'false') {
 											_answers.isCorrect = false;
 										}
 										if (_answers.text && _answers.text !== null && _answers.text !== null) {
@@ -248,6 +261,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 															jQuery('.option-input').val('');
 															jQuery('#question-name').focus();
 															var thiscount = parseInt(jQuery('#question-count').val().split(' ')[0]);
+															if (isNaN(thiscount)) {
+																thiscount = 0;
+															}
 															ACTIVEQUIZ.count = thiscount+1;
 															jQuery('#question-count').val(thiscount+1 + ' Questions available');
 														}, 2000);

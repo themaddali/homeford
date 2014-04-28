@@ -2653,6 +2653,10 @@ dialog-modal::-webkit-scrollbar {
 	background-image: url('../img/todobg.png');
 	background-repeat: no-repeat;
 }
+.float-left .classboard.quiz {
+	background-image: url('../img/quizbg.png');
+	background-repeat: no-repeat;
+}
 
 .float-left .todoactionboard {
 	float: left;

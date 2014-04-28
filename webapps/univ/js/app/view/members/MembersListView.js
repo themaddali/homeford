@@ -63,7 +63,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									} else {
 										jQuery('.members-image', row).attr('src', 'img/noimg.png');
 									}
-									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName);
+									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName).attr('fn',data[j].firstName).attr('ln',data[j].lastName);
 									jQuery('.members-id', row).text(data[j].id);
 									jQuery('.members-email', row).text(data[j].email);
 									jQuery('.members-domain', row).text(service.domainIDtoName(thisdomaininstance));
@@ -113,8 +113,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('.members-action').css('color', 'white');
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.members-action').css('color', '#007DBA');
-						rowObject.firstname = jQuery(this).find('.members-name').text().split(" ")[0];
-						rowObject.lastname = jQuery(this).find('.members-name').text().split(" ")[1];
+						rowObject.firstname = jQuery(this).find('.members-name').attr('fn');
+						rowObject.lastname = jQuery(this).find('.members-name').attr('ln');
 						rowObject.security = jQuery(this).find('.members-security').text();
 						rowObject.id = jQuery(this).find('.members-id').text();
 						if (jQuery(this).find('.members-email').text() !== 'null') {

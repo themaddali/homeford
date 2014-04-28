@@ -73,7 +73,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										_domainids = data;
 									}
 								});
-								service.AddServices(_domainids[0], _sname, _sdesc, _scost, _stax, _sfreq, {
+								service.AddServices(_domainids[0], _sname, _sdesc, _scost, _stax, _sfreq,jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);

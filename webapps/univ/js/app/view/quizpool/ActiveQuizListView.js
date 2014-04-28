@@ -1,13 +1,13 @@
 define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, membersedit) {"use strict";
 
-	var ToDoListView = ( function() {
+	var ActiveQuizListView = ( function() {
 
 			/**
 			 * Constructor
 			 *
 			 */
 
-			function ToDoListView() {
+			function ActiveQuizListView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -40,19 +40,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function loadTable(activedomains) {
 					jQuery('.noinfo').show();
 					jQuery('.view-table').hide();
-					var rowtemplate = jQuery('#tasks-template').attr('id', '');
+					var rowtemplate = jQuery('#quiz-template').attr('id', '');
 					//Backing the template
-					jQuery('.div-template').append(rowtemplate.attr('id', 'tasks-template'));
+					jQuery('.div-template').append(rowtemplate.attr('id', 'quiz-template'));
 					for (var i = 0; i < activedomains.length; i++) {
 						var thisdomaininstance = activedomains[i];
 						service.DomainToDoList(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									if ((data[j].groupName).indexOf('@QUIZ') === -1) {
+									if ((data[j].groupName).indexOf('@QUIZ') !== -1) {
 										jQuery('.noinfo').hide();
 										jQuery('.view-table').show();
 										var row = rowtemplate.clone();
-										jQuery('.task-name', row).text(data[j].groupName);
+										jQuery('.task-name', row).text(data[j].groupName.split('@QUIZ')[1]);
 										jQuery('.task-id', row).text(data[j].id);
 										jQuery('.task-count', row).text(data[j].todos.length + ' members');
 										if (data[j].todos[0].todoStartDate) {
@@ -87,13 +87,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				this.resume = function() {
 					populateData();
-					document.title = 'Zingoare | ToDo List';
+					document.title = 'Zingoare | Active Quiz List';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
-					document.title = 'Zingoare | Todo List';
+					document.title = 'Zingoare | Active Quiz List';
 
 					if (checkForActiveCookie() === true) {
 						populateData();
@@ -108,8 +108,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 			}
 
-			return ToDoListView;
+			return ActiveQuizListView;
 		}());
 
-	return new ToDoListView();
+	return new ActiveQuizListView();
 });
