@@ -2615,7 +2615,7 @@ dialog-modal::-webkit-scrollbar {
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	position: absolute;
+	position: relative;
 	top: 15px;
 	width: 98%;
 	overflow: none;
@@ -2840,8 +2840,8 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .quizactionboard {
 	float: left;
-	width: 200px;
-	height: 200px;
+	width: 250px;
+	height: 250px;
 	cursor: default;
 	text-align: left;
 	border: 2px solid #d9d9d9;
@@ -2852,7 +2852,7 @@ dialog-modal::-webkit-scrollbar {
 }
 .float-left .quizactionboard.cardactive {
 	float: left;
-	width: 95%;
+	width: 97%;
 	height: auto;
 	border: 2px solid #0784E3;
 }
@@ -2868,7 +2868,7 @@ dialog-modal::-webkit-scrollbar {
 }
 
 .cardinactive:hover {
-	opacity: 0.5;
+	opacity: 0.4;
 	border-color: white;
 }
 
@@ -3027,6 +3027,27 @@ dialog-modal::-webkit-scrollbar {
 }
 .membercard.active {
 	border: 1px solid #0784E3;
+}
+
+.cards-header {
+	height: 40px;
+	text-align: center;
+	font-size: 1em;
+	border-bottom: 5px solid #f3f3f3;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: #737373;
+}
+
+.cards-header-right {
+	float: right;
+	margin-top: 10px;
+	margin-right: 20px;
+}
+.cards-header-left {
+	float: left;
+	margin-top: 10px;
+	margin-left: 20px;
 }
 
 .canvas-header {
@@ -3214,7 +3235,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 }
 
 .quizactionboard .question {
-	font-size: 20px;
+	font-size: 30px;
 	padding: 10px;
 	color: #7f7f7f;
 	height: 100%;
