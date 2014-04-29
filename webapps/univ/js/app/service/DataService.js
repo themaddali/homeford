@@ -476,10 +476,23 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				}
 
-				this.QuestionsList = function(quizid, handlers) {
+				this.QuestionsList = function(todoid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/todo/question/' + quizid,
+						url : '/homeford/api/quiz/todo/question/' + todoid,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				}
+				
+				this.QuestionsListOnly = function(quizid, handlers) {
+					var QUIZOBJ = [];
+					$.ajax({
+						url : '/homeford/api/quiz/'+quizid+'/question',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",

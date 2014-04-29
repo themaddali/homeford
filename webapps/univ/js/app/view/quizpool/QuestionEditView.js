@@ -34,7 +34,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				function populateData() {
 					jQuery('.modal-ol').empty();
 					if (ACTIVEQUIZ) {
-						service.QuestionsList(ACTIVEQUIZ, {
+						service.QuestionsListOnly(ACTIVEQUIZ, {
 							success : function(data) {
 								if (data.length === 0) {
 									jQuery('.noinfo').fadeIn(1000);
