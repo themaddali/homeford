@@ -2350,13 +2350,15 @@ html.touch #subnav {
 }
 
 .ui-progressbar.beginning .ui-progressbar-value {
-	background: #e30716;
+	/*background-image: #e30716;*/
+	background: url("../img/stripe-red.png");
 }
 .ui-progressbar.middle .ui-progressbar-value {
 	background: #e3d407;
 }
 .ui-progressbar.end .ui-progressbar-value {
-	background: #07e366;
+	/*background: #07e366;*/
+	background: url("../img/stripe-green.png");
 }
 
 .classboard div.class-anouncement {
@@ -2614,11 +2616,11 @@ dialog-modal::-webkit-scrollbar {
 .contentfull {
 	text-align: center;
 	margin-left: 10px;
-	margin-right: 10px;
+	/*margin-right: 10px;*/
 	margin-bottom: 10px;
 	position: relative;
 	top: 15px;
-	width: 98%;
+	/*width: 98%;*/
 	overflow: none;
 	-webkit-overflow-scrolling: touch;
 	background-color: #FFFFFF;
@@ -3043,7 +3045,10 @@ dialog-modal::-webkit-scrollbar {
 .cards-header-right {
 	float: right;
 	margin-top: 10px;
-	margin-right: 20px;
+}
+.cards-header-right > span {
+	font-size: 15px;
+	padding-right: 15px;
 }
 .cards-header-left {
 	float: left;
@@ -3072,6 +3077,19 @@ dialog-modal::-webkit-scrollbar {
 	color: #444;
 	margin-top: 3px;
 }
+
+.meta-progress {
+	width: 200px;
+	border-color: #F3F3F3;
+	margin-top: -2px;
+	border-radius: 0px;
+	height: 25px;
+	background-color: #F3F3F3;
+}
+.meta-progress > .ui-corner-left {
+	border-top-left-radius: 0px;
+}
+
 .canvas-header .title {
 	display: inline;
 	float: left;
@@ -4295,6 +4313,12 @@ footer a:hover {
 		margin: 10px;
 	}
 
+	.cards-header-right {
+		display: block;
+		margin-top: 10px;
+		width: 100%;
+	}
+
 	.studentboard div.student-name {
 		border-top-left-radius: 8px;
 		border-bottom-right-radius: 8px;
@@ -4302,11 +4326,25 @@ footer a:hover {
 		color: white;
 		text-overflow: ellipsis;
 	}
+	
+	.float-left .notifycard.min {
+		width: 95%;
+	}
+	.float-left .notifycard.min div.head {
+		padding: 0px;
+	}
+	.float-left .notifycard.min div.head div.title {
+		font-size: 14px;
+	}
+	.float-left .notifycard.min div.head div.timestamp {
+		font-size: 10px;
+	}
+	
 	.studentboard span.taskcount {
 		display: inline;
 	}
 
-	.float-left .classboard {
+	.float-left .classboard, .float-left .classboard.quiz {
 		float: none;
 		width: 90%;
 		height: 110px;

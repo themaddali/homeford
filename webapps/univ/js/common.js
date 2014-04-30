@@ -7,7 +7,6 @@ require({
 		modernizr : 'modernizr-2.5.3.min',
 		backstrech : 'backstrech',
 		cookie : 'jquery.cookie',
-		// plugins : "plugins-min",
 		service : "../app/service/service",
 		validate : "jquery.validate.min",
 		raphael : "raphael",

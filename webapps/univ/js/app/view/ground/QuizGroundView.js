@@ -20,7 +20,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
-						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
+						if (isNaN(daystogo(ACTIVEQUIZ.dueby))){
+							jQuery('.metainfo').text('Due immediately!');
+						}else{
+							jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
+						}
+						//jQuery('.meta-progress').progressbar();
+						//jQuery('.meta-progress').progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
 						jQuery('#action-canvas').empty();
 						service.QuestionsList(ACTIVEQUIZ.id, {
 							success : function(data) {
@@ -29,7 +35,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								for (var i = 0; i < data.length; i++) {
 									console.log('BUG: id=-1 FIX IT');
 									if (data[i].id > 0) {
-										jQuery('.metainfo').text(data.length - 1 + ' Questions');
+										jQuery('.question-span').text(data.length - 1);
 										var quizboard = quizboardtemplate.clone();
 										jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
 										jQuery('.question-number', quizboard).append(UNANSWERED);
@@ -166,9 +172,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function helperMediaQuiries() {
 					if ($('.quizactionboard').length > 4) {
-						var width = $('#action-canvas').width() - 30;
-						var rowholds = Math.floor(width / 204);
-						var fillerspace = width - (rowholds * 204);
+						var width = $('#action-canvas').width() - 40;
+						var rowholds = Math.floor(width / 252);
+						var fillerspace = width - (rowholds * 252);
 						var newmargin = fillerspace / rowholds;
 						if (newmargin < 10) {
 							newmargin = 10;

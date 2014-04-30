@@ -39,7 +39,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
-						jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
+						if (isNaN(daystogo(ACTIVEQUIZ.dueby))){
+							jQuery('.metainfo').text('Due immediately!');
+						}else{
+							jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
+						}
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
 						$("#task-desc-data").html(ACTIVEQUIZ.desc.replace(/\r?\n/g, '<br/>'));
 						$("#task-priority").text(ACTIVEQUIZ.priority);
@@ -173,7 +177,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							service.updateToDo(ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
 								success : function(data) {
 									if (data.status == 'success') {
-										notify.showNotification('OK', 'Task #' +ACTIVEQUIZ.id +' Updated');
+										notify.showNotification('OK', 'Task #' + ACTIVEQUIZ.id + ' Updated');
 										router.go('/class');
 									}
 								}
