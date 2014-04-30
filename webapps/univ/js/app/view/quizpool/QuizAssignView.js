@@ -33,9 +33,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				function populateData() {
 					if (ActiveMembers.text) {
 						jQuery('#member-list').val(ActiveMembers.text);
-						validator.resetForm();
 					} else {
-						validator.resetForm();
 						jQuery('#member-list').val('None');
 						QUIZLIST = [];
 						jQuery('#quiz-name').val('');
@@ -118,6 +116,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				this.resume = function() {
+					validator.resetForm();
 					populateData();
 					$("#quiz-name").autocomplete("destroy");
 					document.title = 'Zingoare | Quiz Assign';
