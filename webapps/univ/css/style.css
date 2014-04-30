@@ -2504,6 +2504,7 @@ html.touch #subnav {
 }
 .main-content.pre-home {
 	top: 90px;
+	margin-bottom: 30px;
 }
 .main-content.action {
 	background: white;
@@ -2660,7 +2661,7 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .todoactionboard {
 	float: left;
-	width: 95%;
+	width: 98%;
 	min-width: 300px;
 	height: auto;
 	text-align: left;
@@ -3235,7 +3236,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 }
 
 .quizactionboard .question {
-	font-size: 30px;
+	font-size: 20px;
 	padding: 10px;
 	color: #7f7f7f;
 	height: 100%;

@@ -116,6 +116,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										}
 									});
 								}
+								else {
+									notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+								}
 							}
 						});
 						

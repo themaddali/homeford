@@ -90,6 +90,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									}
 								});
 							}
+							else {
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
 						});
 
 						jQuery('#service-cost').blur(function() {

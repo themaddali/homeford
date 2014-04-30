@@ -129,6 +129,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									//admin.reloadData();
 								}, 2000);
 							}
+							else{
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
 
 							//Need to update to handler
 						});

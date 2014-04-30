@@ -35,6 +35,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('#member-list').val(ActiveMembers.text);
 						validator.resetForm();
 					} else {
+						validator.resetForm();
 						jQuery('#member-list').val('None');
 						QUIZLIST = [];
 						jQuery('#quiz-name').val('');
@@ -118,6 +119,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					$("#quiz-name").autocomplete("destroy");
 					document.title = 'Zingoare | Quiz Assign';
 				};
 
@@ -169,6 +171,31 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.go('/memberspick');
 						});
 
+						jQuery.validator.addMethod("youtubeValid", function(value, element) {
+							if (((value.indexOf('/') === -1) && (value.indexOf('.com') === -1) && (value.indexOf('htt') === -1) && (value.indexOf('www.') === -1)) || value.length === 0) {
+								return true;
+							} else
+								return false;
+						}, "Just provide youtubeID");
+
+						jQuery.validator.addMethod("VideoExists", function(value, element) {
+							var isSuccess = false;
+							if (value.length > 0 && value.length < 13) {
+								$.ajax({
+									url : 'https://gdata.youtube.com/feeds/api/videos/' + value,
+									type : 'GET',
+									async : false,
+									contentType : "application/json",
+									success : function(msg) {
+										isSuccess = msg ? true : false
+									}
+								});
+								return isSuccess;
+							} else {
+								return true;
+							}
+						}, "No Video on this ID");
+
 						jQuery('#quiz-assign').on('click', function() {
 							if ($(".edit-form").valid()) {
 								var _qname = jQuery('#quiz-name').val();
@@ -206,6 +233,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								});
 							}
+							else{
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
 						});
 
 						validator = jQuery(".edit-form").validate({
@@ -214,27 +244,27 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									required : true,
 									validQuiz : true
 								},
-								// quizdesc : {
-								// required : true,
-								// },
-								// taskdeadline : {
-								// required : true,
-								// },
-								// todopriority : {
-								// required : true,
-								// },
-								// assignedto : {
-								// required : true,
-								// validAssignment : true,
-								// },
-								// taskhelperurl : {
-								// url : true,
-								// },
-								// taskhelperyoutube : {
-								// required : false,
-								// youtubeValid : true,
-								// VideoExists : true
-								// },
+								quizdesc : {
+									required : true,
+								},
+								taskdeadline : {
+									required : true,
+								},
+								todopriority : {
+									required : true,
+								},
+								assignedto : {
+									required : true,
+									validAssignment : true,
+								},
+								taskhelperurl : {
+									url : true,
+								},
+								taskhelperyoutube : {
+									required : false,
+									youtubeValid : true,
+									VideoExists : true
+								},
 							}
 						});
 

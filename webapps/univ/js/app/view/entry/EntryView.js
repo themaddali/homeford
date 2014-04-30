@@ -82,6 +82,8 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							var inputuname = jQuery('#user-name').val();
 							var inputpass = jQuery('#user-password').val();
 							Authenticate(inputuname, inputpass);
+						}else{
+							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
 
 					});

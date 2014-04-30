@@ -77,6 +77,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				};
 
 				this.resume = function() {
+					validator.resetForm();
 					populateData();
 					document.title = 'Zingoare | ToDo Assign';
 				};
@@ -177,7 +178,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								});
 							}
-							//Need to update to handler
+							else{
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
 						});
 
 						validator = jQuery(".edit-form").validate({

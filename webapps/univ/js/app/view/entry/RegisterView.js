@@ -120,6 +120,8 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					checkForActiveCookie();
 					jQuery('.info').hide();
 					parseQueryURL();
+					$("#new-user-domain").autocomplete("destroy");
+					activateSuggestionSearch();
 					document.title = 'Zingoare | Register';
 				};
 
@@ -143,6 +145,8 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
 							RegisterUser(inputuname, inputpass, inputdomain);
 							e.preventDefault();
+						}else {
+							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
 					});
 
