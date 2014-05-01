@@ -37,7 +37,6 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							getMembers(data);
 						}
 					});
-
 				}
 
 				function getMembers(activedomains) {
@@ -174,6 +173,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				};
 
 				this.resume = function() {
+					$(".card-search").autocomplete("destroy");
 					populateData();
 					document.title = 'Zingoare | Members Select';
 				};

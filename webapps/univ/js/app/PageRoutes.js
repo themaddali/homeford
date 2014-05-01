@@ -219,6 +219,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('invoicenew', '^/invoicenew(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/billing/invoicegenerate.html', '../app/view/billing/InvoiceGenerateView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('servicesadd', '^/servicesadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

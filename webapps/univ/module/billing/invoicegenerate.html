@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="invite-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-money icon-1x "></i>
+					New Invoice
+				</header>
+				<div class="modal-contents">
+					<form id="invoice-form" class="edit-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Member</label>
+									<div class="form-content">
+										<input placeholder="Select Member" id="member-name" name="inviteemail" type="email" autofocus autocomplete />
+										<div class="form-helper">
+											<label>Person whom you want to bill</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Contact Info</label>
+									<div class="form-content">
+										<input placeholder="Email Address" id="invite-email" name="inviteemail" type="email" autofocus autocomplete />
+										<div class="form-helper">
+											<label>Email to which the invoice will be sent</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Message</label>
+									<div class="form-content">
+										<input placeholder="Hi, I please find the invoice generated." id="invite-message" name="invitemessage" type="text" />
+										<div class="form-helper">
+											<label> Edit to customise </label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Service</label>
+									<div class="form-content">
+										<select class="edit-select" placeholder="What is the service you want to bill" id="service-select" name="serviceselect" type="text">
+
+										</select>
+										<div class="form-helper">
+											<label>Pick the service you want to bill</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Access Level</label>
+									<span>
+										<input id="admin-role" onclick="return false" type="checkbox" name="roles" value="Admin" checked="checked"/>
+										Admin - Only assign work </span>
+								</li>
+								<li class="form-item filler">
+									<label></label>
+									<span>
+										<input id="member-role" type="checkbox" name="roles" value="Member"/>
+										Member - Accept work to do </span>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<footer>
+					<div class="edit-controls">
+						<input id="invite-send" type="button" value="Send">
+						<input id="invite-send" class="secondary" type="button" value="Preview">
+					</div>
+				</footer>
+				<div id="invite-modal-close" class="modal_close"></div>
+			</div>
+		</div>
+	</body>
+</html>
