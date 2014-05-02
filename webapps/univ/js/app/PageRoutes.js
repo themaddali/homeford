@@ -227,6 +227,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('invoicepreview', '^/invoicepreview(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/billing/invoicepreview.html'], function(page) {
+								result.load(page);
+							});
+						}
+					});
 					router.map('servicesadd', '^/servicesadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

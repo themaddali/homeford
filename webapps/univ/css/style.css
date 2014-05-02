@@ -1186,6 +1186,9 @@ a.goback {
 	z-index: 100;
 	background-color: rgba(0, 0, 0, 0.6); /*dim the background*/
 }
+.modal-body.print {
+	height: 12in;
+}
 
 .modal-body .modal-container {
 	position: absolute;
@@ -1198,6 +1201,14 @@ a.goback {
 	background-color: white;
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
+}
+.modal-container.print {
+	position: absolute;
+	margin-top: 4%;
+	width: 8.5in;
+	height: 11in;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
 }
 
 .modal-ol {
@@ -1223,6 +1234,12 @@ a.goback {
 	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
 	/*background: url("../img/header-stripe.png");*/
+}
+.modal-body .modal-container.print header {
+	color: white;
+	background-color: #0784E3;
+	text-align: center;
+	border-top-left-radius: 0px;
 }
 
 .modal-body .modal-container footer {
@@ -2239,6 +2256,101 @@ form div.form-content textarea.error {
 	margin-bottom: 5px;
 	font-size: 13px;
 	color: #000;
+}
+
+/*INVOICE*/
+.address {
+	float: left;
+	margin-left: 40px;
+	margin-top: 30px;
+}
+.address > p {
+	margin: 0px;
+}
+.inv-logo {
+	margin-top: 60px;
+	float: right;
+	margin-right: 40px;
+	display: flex;
+}
+.inv-logo > p {
+	border-left: 4px solid #0784E3;
+	padding-left: 10px;
+	color: #0784E3
+}
+.inv-logo > img {
+	height: 55px
+}
+.inv-synopsis {
+	position: absolute;
+	top: 270px;
+	width: 97%;
+}
+
+.inv-synopsis > table {
+	float: right;
+	margin-right: 40px;
+	text-align: left;
+}
+.inv-synopsis > table tbody tr th,.inv-summary > table tbody tr th {
+	padding-right: 20px;
+}
+
+.inv-synopsis > table > tbody {
+	padding: 10px;
+}
+.inv-synopsis > table > tbody tr {
+	border-bottom: 1px dotted grey;
+}
+
+.inv-body {
+	position: relative;
+	top: 250px;
+	text-align: left;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+.inv-body table {
+	width: 100%;
+	padding: 10px;
+}
+
+.inv-body table thead {
+	margin-top: 10px;
+	border-bottom: 1px solid grey;
+}
+
+.inventory > thead tr th {
+	padding: 20px;
+}
+
+.inv-body .invoice-summary {
+	margin-top: 50px;
+	float: right;
+	border-top: 1px solid grey;
+}
+
+.invoice-summary {
+	font-weight: 600;
+}
+.invoice-summary > tbody tr th {
+	padding: 20px;
+}
+
+.thanks {
+	text-align: center;
+	font-size: 30px;
+	font-style: italic;
+	color: #7f7f7f;
+}
+
+.modal-container.print > .footer {
+	text-align: center;
+	font-size: 12px;
+	margin-top: 20px;
+}
+.modal-container.print > .footer > p {
+	margin: 0px
 }
 
 .press {
@@ -4326,7 +4438,7 @@ footer a:hover {
 		color: white;
 		text-overflow: ellipsis;
 	}
-	
+
 	.float-left .notifycard.min {
 		width: 95%;
 	}
@@ -4339,7 +4451,7 @@ footer a:hover {
 	.float-left .notifycard.min div.head div.timestamp {
 		font-size: 10px;
 	}
-	
+
 	.studentboard span.taskcount {
 		display: inline;
 	}

@@ -8,6 +8,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 			var DOMAINLIST;
 			var USERPROFILE = null;
 			var TODOLIST = null;
+			var SERVICESLIST = null;
 			var USERID;
 			var DOMAINMAP = {};
 
@@ -353,7 +354,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.AddServices = function(domainid, title, desc, cost, tax, freq,status, handlers) {
+				this.AddServices = function(domainid, title, desc, cost, tax, freq, status, handlers) {
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
@@ -372,20 +373,26 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'quantity' : '1',
 						}),
 						success : function(data) {
+							SERVICESLIST = null;
 							handlers.success(data);
 						}
 					});
 				};
 				this.ListAllServices = function(domainid, handlers) {
-					$.ajax({
-						url : '/homeford/api/domain/' + domainid + '/itemservice',
-						type : 'GET',
-						async : 'async',
-						contentType : "application/json",
-						success : function(data) {
-							handlers.success(data);
-						}
-					});
+					if (SERVICESLIST && SERVICESLIST !== null) {
+						handlers.success(SERVICESLIST);
+					} else {
+						$.ajax({
+							url : '/homeford/api/domain/' + domainid + '/itemservice',
+							type : 'GET',
+							async : 'async',
+							contentType : "application/json",
+							success : function(data) {
+								SERVICESLIST = data;
+								handlers.success(data);
+							}
+						});
+					}
 				};
 				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
 					var _cost = cost.replace('$', '');
@@ -406,6 +413,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'quantity' : '1',
 						}),
 						success : function(data) {
+							SERVICESLIST = null;
 							handlers.success(data);
 						}
 					});
@@ -488,11 +496,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				}
-				
+
 				this.QuestionsListOnly = function(quizid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/'+quizid+'/question',
+						url : '/homeford/api/quiz/' + quizid + '/question',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",

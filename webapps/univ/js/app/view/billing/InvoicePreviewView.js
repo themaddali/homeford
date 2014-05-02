@@ -159,14 +159,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					clearForm();
 					$("#member-name").autocomplete("destroy");
 					populateData();
-					validator.resetForm();
-					document.title = 'Zingoare | Invoice Generate';
+					//validator.resetForm();
+					document.title = 'Zingoare | Invoice Preview';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
-					document.title = 'Zingoare | Invoice Generate';
+					document.title = 'Zingoare | Invoice Preview';
 
 					if (checkForActiveCookie() === true) {
 
@@ -184,10 +184,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								return true;
 							}
 						}, 'Member Not Found!');
-						
-						jQuery('#invoice-preview').click(function(){
-							router.go('/invoicepreview');
-						});
 
 						jQuery('#invite-send').on('click', function() {
 							var roles = [{
