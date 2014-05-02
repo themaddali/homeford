@@ -230,8 +230,8 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('invoicepreview', '^/invoicepreview(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/billing/invoicepreview.html'], function(page) {
-								result.load(page);
+							require(['text!Pages/billing/invoicepreview.html', '../app/view/billing/InvoicePreviewView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});

@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(cookie, service, validate, router, notify, admin) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/billing/InvoicePreviewView'], function(cookie, service, validate, router, notify, admin, invoicepreview) {"use strict";
 
 	var InvoiceGenerateView = ( function() {
 
@@ -16,6 +16,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var pendingList;
 			var validator;
 			var membernames = [];
+			var MEMEBERS;
 			var servicenames = [];
 
 			function InvoiceGenerateView() {
@@ -49,11 +50,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('#invite-domain').empty();
 					jQuery('#checkbox-control').text('Un-Select All');
 					membernames = [];
+					MEMEBERS = [];
 					var memberscount = 0;
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
 							success : function(data) {
-								//var thisitem = template.clone();
+								MEMEBERS.push(data);
 								for (var j = 0; j < data.length; j++) {
 									var roles = JSON.stringify(data[j].roles);
 									if (roles.indexOf('ROLE_TIER3') !== -1) {
@@ -62,7 +64,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 											data[j].lastName = '';
 										}
 										membernames.push(data[j].firstName + ' ' + data[j].lastName);
-										//jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
 									}
 									if (j === data.length - 1) {
 										$("#member-name").autocomplete({
@@ -159,7 +160,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					clearForm();
 					$("#member-name").autocomplete("destroy");
 					populateData();
-					validator.resetForm();
 					document.title = 'Zingoare | Invoice Generate';
 				};
 
@@ -186,6 +186,18 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						}, 'Member Not Found!');
 						
 						jQuery('#invoice-preview').click(function(){
+							var databoject = {
+								'toname' : 'None Assigned' ,
+								'toemail' : 'Not Avaiable' ,
+								'tomessage' : 'Happuy To Help!!!!' ,
+								'sname' : 'None Assigned' ,
+								'domain' : 'None Assigned' ,
+							};
+							databoject.toname = jQuery('#member-name').val();
+							databoject.toemail = jQuery('#member-email').val();
+							databoject.tomessage = jQuery('#member-message').val();
+							databoject.sname = jQuery('#service-select').val();
+							invoicepreview.setData(databoject);
 							router.go('/invoicepreview');
 						});
 

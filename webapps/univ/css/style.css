@@ -2292,7 +2292,7 @@ form div.form-content textarea.error {
 	margin-right: 40px;
 	text-align: left;
 }
-.inv-synopsis > table tbody tr th,.inv-summary > table tbody tr th {
+.inv-synopsis > table tbody tr th, .inv-summary > table tbody tr th {
 	padding-right: 20px;
 }
 
@@ -2300,7 +2300,7 @@ form div.form-content textarea.error {
 	padding: 10px;
 }
 .inv-synopsis > table > tbody tr {
-	border-bottom: 1px dotted grey;
+	/*border-bottom: 1px dotted grey;*/
 }
 
 .inv-body {
@@ -2317,24 +2317,23 @@ form div.form-content textarea.error {
 
 .inv-body table thead {
 	margin-top: 10px;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px dotted grey;
 }
 
-.inventory > thead tr th {
-	padding: 20px;
+.inventory > thead tr th, .inventory > tbody tr td {
+	padding-left: 20px;
+	padding-bottom: 5px;
 }
 
-.inv-body .invoice-summary {
+.inv-body > .invoice-summary {
 	margin-top: 50px;
 	float: right;
 	border-top: 1px solid grey;
 }
 
-.invoice-summary {
-	font-weight: 600;
-}
-.invoice-summary > tbody tr th {
-	padding: 20px;
+table.summary > tbody tr th,table.summary > tbody tr td {
+	padding-left: 20px;
+	padding-bottom: 5px;
 }
 
 .thanks {
@@ -2350,7 +2349,8 @@ form div.form-content textarea.error {
 	margin-top: 20px;
 }
 .modal-container.print > .footer > p {
-	margin: 0px
+	margin: 0px;
+	padding-bottom: 10px;
 }
 
 .press {
