@@ -9,6 +9,11 @@
  Header : #0784E3;
  Light #2fbcf7*/
 
+@font-face {
+	font-family: 'scriptin';
+	src: url('../fonts/scriptin.ttf') format('truetype');
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
 }
@@ -2331,26 +2336,36 @@ form div.form-content textarea.error {
 	border-top: 1px solid grey;
 }
 
-table.summary > tbody tr th,table.summary > tbody tr td {
+.formlink {
+	float: right;
+	margin-right: 30%;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+table.summary > tbody tr th, table.summary > tbody tr td {
 	padding-left: 20px;
 	padding-bottom: 5px;
 }
 
 .thanks {
 	text-align: center;
-	font-size: 30px;
+	font-size: 35px;
 	font-style: italic;
-	color: #7f7f7f;
+	color: black;
+	padding-bottom: 20px;
+	font-family: 'scriptin' 'trebuchet MS', 'Tahoma';
 }
 
 .modal-container.print > .footer {
 	text-align: center;
 	font-size: 12px;
-	margin-top: 20px;
+	margin-top: 10px;
+	color: #737373;
 }
 .modal-container.print > .footer > p {
 	margin: 0px;
-	padding-bottom: 10px;
+	padding-bottom: 5px;
 }
 
 .press {

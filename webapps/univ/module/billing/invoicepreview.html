@@ -19,7 +19,7 @@
 		<div id="invite-edit-modal" class="modal-body print">
 			<div class="modal-container print">
 				<header>
-					INVOICE (incomplete)
+					INVOICE
 				</header>
 				<div class="modal-contents">
 					<div class="inv-header">
@@ -52,7 +52,7 @@
 							</tr>
 							<tr>
 								<th><span >Date</span></th>
-								<td><span id="inv-date" >January 1, 2012</span></td>
+								<td><span id="inv-date" >Today</span></td>
 							</tr>
 						</table>
 					</div>
@@ -63,40 +63,25 @@
 									<th><span >Service</span></th>
 									<th><span >Description</span></th>
 									<th><span >Rate</span></th>
-									<th><span >Quantity</span></th>
+									<th><span >Tax</span></th>
 									<th><span >Price</span></th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td><span >Front End Consultation</span></td>
-									<td><span >Experience Review</span></td>
-									<td><span data-prefix>$</span><span >150.00</span></td>
-									<td><span >4</span></td>
-									<td><span data-prefix>$</span><span>600.00</span></td>
-								</tr>
-								<tr>
-									<td><span>Front End Consultation</span></td>
-									<td><span >Experience Review</span></td>
-									<td><span data-prefix>$</span><span >150.00</span></td>
-									<td><span >4</span></td>
-									<td><span data-prefix>$</span><span>600.00</span></td>
+							<tbody id="inv-tbody">
+								<tr id="inv-tbody-row">
+									<td class="sname"></td>
+									<td class="sdesc"></td>
+									<td class="scost"></td>
+									<td class="stax"></td>
+									<td class="sprice"></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="invoice-summary">
 							<table class="summary">
 								<tr>
-									<th><span>Sub Total</span></th>
-									<td><span>101138</span></td>
-								</tr>
-								<tr>
-									<th><span>Tax</span></th>
-									<td><span>January 1, 2012</span></td>
-								</tr>
-								<tr>
-									<th><span>Total</span></th>
-									<td><span>January 1, 2012</span></td>
+									<th>Total</th>
+									<td class="grand-total">January 1, 2012</td>
 								</tr>
 							</table>
 						</div>

@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/billing/InvoicePreviewView'], function(cookie, service, validate, router, notify, admin, invoicepreview) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/billing/InvoicePreviewView'], function(cookie, service, validate, router, notify, admin, invoicepreview) {"use strict";
 
 	var InvoiceGenerateView = ( function() {
 
@@ -15,9 +15,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var activeDomains = [];
 			var pendingList;
 			var validator;
-			var membernames = [];
-			var MEMEBERS;
-			var servicenames = [];
+			var ActiveMembers = 'All Members';
+			var SERVICESALL = [];
 
 			function InvoiceGenerateView() {
 
@@ -40,7 +39,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function populateData() {
 					service.returnDomainIDList({
 						success : function(data) {
-							getMembers(data);
+							//getMembers(data);
 							getServices(data);
 						}
 					});
@@ -55,8 +54,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getMembersOnly(activedomains[i], {
 							success : function(data) {
-								MEMEBERS.push(data);
 								for (var j = 0; j < data.length; j++) {
+									MEMEBERS.push(data);
 									var roles = JSON.stringify(data[j].roles);
 									if (roles.indexOf('ROLE_TIER3') !== -1) {
 										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
@@ -81,64 +80,28 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}
 
 				function getServices(activedomains) {
+					SERVICESALL = [];
+					jQuery('.edit-select').empty();
+					if (ActiveMembers.text) {
+						jQuery('#member-list').val(ActiveMembers.text);
+					} else {
+						jQuery('#member-list').val('None');
+					}
+					jQuery('#member-list').css('color', 'black');
 					for (var i = 0; i < activedomains.length; i++) {
 						var thisdomaininstance = activedomains[i];
 						service.ListAllServices(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									//servicenames.push(data[j].name);
+									SERVICESALL.push(data[j]);
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
-										jQuery('#service-select').append('<option>' + data[j].name + '</option>');
+										jQuery('.edit-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
 									}
-									//jQuery('.service-id', row).text(data[j].id);
-									//jQuery('.service-desc', row).text(data[j].description);
-									//jQuery('.service-cost', row).text('$' + data[j].unit_price);
-									//jQuery('.service-tax', row).text(data[j].tax + '%');
-									//juery('.service-freq', row).text(data[j].days + ' days');
-									//jQuery('.service-status', row).text(data[j].status);
-									// if (j === data.length - 1) {
-									// $("#member-name").autocomplete({
-									// source : function(request, response) {
-									// var results = $.ui.autocomplete.filter(membernames, request.term);
-									// response(results.slice(0, 5));
-									// }
-									// });
-									// //activateEvents();
-									// }
 								}
 							}
 						});
 					}
 				}
-
-				// function populateData() {
-				// jQuery('#invite-domain').empty();
-				// service.getUserProfile({
-				// success : function(UserProfile) {
-				// var activeDomains = [];
-				// for (var i = 0; i < UserProfile.domains.length; i++) {
-				// if (UserProfile.domains[i].roleName === 'ROLE_TIER2' || UserProfile.domains[i].roleName === 'ROLE_TIER1') {
-				// if (activeDomains.indexOf(UserProfile.domains[i].domainName) === -1) {
-				// activeDomains.push(UserProfile.domains[i].domainName);
-				// jQuery('#invite-domain').append('<option>' + UserProfile.domains[i].domainName + '</option>');
-				// }
-				// }
-				//
-				// if (UserProfile.domains.length === 1) {
-				// jQuery('#invite-domain').val(UserProfile.domains[i].domainName);
-				// }
-				// if (i == UserProfile.domains.length - 1) {
-				// jQuery.validator.addMethod("domainValidation", function(value, element) {
-				// if (activeDomains.indexOf(value) === -1) {
-				// return false;
-				// } else
-				// return true;
-				// }, "Oops! You canot send invite to this domain!");
-				// }
-				// }
-				// }
-				// });
-				// }
 
 				function clearForm() {
 					jQuery('.form-item > input').val("");
@@ -147,9 +110,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('.modal_close').show();
 				}
 
+				function getSelectedText(elementId) {
+					var elt = document.getElementById(elementId);
+					if (elt.selectedIndex == -1)
+						return null;
+					return elt.options[elt.selectedIndex].text;
+				}
 
-				this.pendingList = function(pendinglist) {
-					pendingList = pendinglist;
+
+				this.selectedMembers = function(selection) {
+					ActiveMembers = selection;
+					jQuery('#member-list').css('color', 'black');
 				}
 
 				this.pause = function() {
@@ -158,7 +129,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.resume = function() {
 					clearForm();
-					$("#member-name").autocomplete("destroy");
+					//$("#member-name").autocomplete("destroy");
 					populateData();
 					document.title = 'Zingoare | Invoice Generate';
 				};
@@ -177,29 +148,62 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
-						$.validator.addMethod("validMember", function(value, element, param) {
-							if (membernames.indexOf(jQuery('#member-name').val()) === -1) {
-								return false;
-							} else {
-								return true;
+						var template = jQuery('#service-template').remove().attr('id', '');
+
+						$(".formlink").click(function() {
+							var thisservice = template.clone();
+							jQuery(thisservice).find('select').attr('id', 'service-select-' + jQuery('select').length);
+							for (var j = 0; j < SERVICESALL.length; j++) {
+								if (SERVICESALL[j].status === 'Active' || SERVICESALL[j].status === 'ACTIVE') {
+									jQuery('.edit-select', thisservice).append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
+								}
 							}
-						}, 'Member Not Found!');
-						
-						jQuery('#invoice-preview').click(function(){
+							jQuery('.service-ol').append(thisservice);
+						});
+
+						jQuery('#invoice-preview').click(function() {
 							var databoject = {
-								'toname' : 'None Assigned' ,
-								'toemail' : 'Not Avaiable' ,
-								'tomessage' : 'Happuy To Help!!!!' ,
-								'sname' : 'None Assigned' ,
-								'domain' : 'None Assigned' ,
+								'toname' : 'None Assigned',
+								'toemail' : 'Not Avaiable',
+								'tomessage' : 'Happy To Help!!!!',
+								'sname' : 'None Assigned',
+								'cost' : '$-',
+								'tax' : '-%' ,
 							};
-							databoject.toname = jQuery('#member-name').val();
+
+							databoject.toname = ActiveMembers.list;
 							databoject.toemail = jQuery('#member-email').val();
 							databoject.tomessage = jQuery('#member-message').val();
-							databoject.sname = jQuery('#service-select').val();
+							if (databoject.tomessage == "") {
+								databoject.tomessage = 'Happy to help!!!'
+							}
+							var _services = [];
+							for (var i = 0; i < jQuery('select').length; i++) {
+								var _servicesentries = {};
+								_servicesentries.name = $('#service-select-' + i).find(":selected").text();
+								_servicesentries.cost = $('#service-select-' + i).find(":selected").attr('cost');
+								_servicesentries.desc = $('#service-select-' + i).find(":selected").attr('desc');
+								_servicesentries.tax = $('#service-select-' + i).find(":selected").attr('tax');
+								_services.push(_servicesentries);
+							}
+							databoject.services = _services;
 							invoicepreview.setData(databoject);
 							router.go('/invoicepreview');
 						});
+
+						jQuery('#member-list').click(function() {
+							router.go('/memberspick');
+						});
+
+						$.validator.addMethod("validAssignment", function(value, element, param) {
+							if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
+								jQuery('#member-list').css('color', 'red');
+								return false;
+							} else {
+								jQuery('#member-list').css('color', 'black');
+								return true;
+							}
+						}, 'Select to whom to assign.');
 
 						jQuery('#invite-send').on('click', function() {
 							var roles = [{
@@ -235,21 +239,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 							//Need to update to handler
 						});
-
-						jQuery('#profile-password').change(function() {
-							jQuery('#password-reenter-item').show();
-						});
-
-						jQuery.validator.addMethod("notRepeated", function(value, element) {
-							if (pendingList) {
-								if (pendingList.indexOf(value) === -1) {
-									return true;
-								} else
-									return false;
-							} else
-								return true;
-
-						}, "This email already has a request pending.");
 
 						validator = jQuery("#invite-form").validate({
 							rules : {

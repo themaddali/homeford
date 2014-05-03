@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView'], function(jquery, cookie, service, router, ellipsis, todoassign, quizassign) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView', '../../view/billing/InvoiceGenerateView'], function(jquery, cookie, service, router, ellipsis, todoassign, quizassign, invoicegenerate) {"use strict";
 
 	var MembersPickView = ( function() {
 
@@ -162,11 +162,11 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				function clearForm() {
 
 				}
-				
-				this.setReturnInfo = function(view){
+
+
+				this.setReturnInfo = function(view) {
 					TARGETVIEW = view;
 				}
-
 
 				this.pause = function() {
 
@@ -205,6 +205,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							}
 							if (quizassign) {
 								quizassign.selectedMembers(selectedMembers);
+							}
+							if (invoicegenerate) {
+								invoicegenerate.selectedMembers(selectedMembers);
 							}
 							router.returnToPrevious();
 						});
