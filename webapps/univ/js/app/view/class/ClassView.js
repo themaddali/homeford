@@ -35,6 +35,8 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						});
 						service.MemberToDoList(list[0], ACTIVESTUDENTID, {
 							success : function(StudentData) {
+								var _taskcount = 0;
+								var _quizcount = 0;
 								var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
 								//BackingUp
 								jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
@@ -44,16 +46,21 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									jQuery('.metainfo').text('0 Tasks');
 								} else {
 									jQuery('#noinfo').hide();
+									
 								}
 								for (var i = 0; i < COUNT; i++) {
-									jQuery('.metainfo').text(COUNT + ' Task(s)');
 									var newboard = PanelTemplate.clone();
 									if (StudentData[i].title.indexOf('@QUIZ') !== -1) {
 										jQuery(newboard).addClass('quiz');
 										newboard.attr('type', 'QUIZ');
+										_quizcount = _quizcount + 1;
+										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / '+ _quizcount +' Quiz(s)');
 										StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
+										jQuery('.class-header img',newboard).attr('src','img/quiztag.png');
 									} else {
 										newboard.attr('type', 'TODO');
+										_taskcount = _taskcount+1;
+										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / '+ _quizcount +' Quiz(s)');
 									}
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
@@ -79,6 +86,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									}
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
 									newboard.attr('name', StudentData[i].id);
+									jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
 									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {

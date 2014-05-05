@@ -2534,19 +2534,30 @@ html.touch #subnav {
 	margin-left: 165px;
 	color: #FFFFFF;
 	height: 6px;
-	border-color: rgba(59, 167, 250, 0.58);
+	/*border-color: rgba(59, 167, 250, 0.58);*/
 }
 
 .ui-progressbar.beginning .ui-progressbar-value {
-	/*background-image: #e30716;*/
-	background: url("../img/stripe-red.png");
+	background: #e30716;
+	/*background: url("../img/stripe-red.png");*/
 }
 .ui-progressbar.middle .ui-progressbar-value {
 	background: #e3d407;
 }
 .ui-progressbar.end .ui-progressbar-value {
-	/*background: #07e366;*/
-	background: url("../img/stripe-green.png");
+	background: #07e366;
+	/*background: url("../img/stripe-green.png");*/
+}
+.ui-widget-header.beginning {
+	background: #e30716;
+	/*background: url("../img/stripe-red.png");*/
+}
+.ui-widget-header.middle {
+	background: #e3d407;
+}
+.ui-widget-header.end {
+	background: #07e366;
+	/*background: url("../img/stripe-green.png");*/
 }
 
 .classboard div.class-anouncement {
@@ -2568,7 +2579,7 @@ html.touch #subnav {
 	font-size: 18px;
 	margin-left: 120px;
 	margin-top: -140px;
-	color: #3ba7fa;
+	color: white;
 	text-align: center;
 }
 
@@ -2841,11 +2852,11 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 }
 .float-left .classboard {
-	background-image: url('../img/todobg.png');
+	/*background-image: url('../img/todobg.png');*/
 	background-repeat: no-repeat;
 }
 .float-left .classboard.quiz {
-	background-image: url('../img/quizbg.png');
+	/*background-image: url('../img/quizbg.png');*/
 	background-repeat: no-repeat;
 }
 
@@ -3522,6 +3533,14 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	border-left: 3px solid #e30716;
 }
 
+.classboard div.class-header {
+	height: 150px;
+	border-top-left-radius: 9px;
+}
+.classboard div.class-header > img {
+	margin: 40px;
+}
+
 .classboard div.class-name {
 	font-weight: 400;
 	width: 100%;
@@ -3532,7 +3551,6 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	border-top-left-radius: 0px;
 	background-color: #0784E3;
 	border-bottom: 1px solid #d9d9d9;
-	margin-top: 150px;
 	background: url("../img/stripe.png");
 }
 .classboard div.class-name i {
@@ -4545,7 +4563,7 @@ footer a:hover {
 		border-top-left-radius: 8px;
 	}
 
-	.classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
+	.classboard div.class-header,.classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
 		display: none;
 	}
 
