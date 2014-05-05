@@ -13,6 +13,10 @@
 	font-family: 'scriptin';
 	src: url('../fonts/scriptin.ttf') format('truetype');
 }
+@font-face {
+	font-family: 'canterbury';
+	src: url('../fonts/canterbury.ttf') format('truetype');
+}
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section {
 	display: block;
@@ -822,10 +826,15 @@ a.goback {
 	width: 42px;
 	height: 42px;
 	background: transparent url("../img/modal-close.png") no-repeat 0 0;
-	/*-webkit-box-shadow: 2px 3px 4px #444444;
-	 -moz-box-shadow: 2px 3px 4px #444444;
-	 box-shadow: 2px 3px 4px #444444;*/
 	cursor: pointer;
+}
+.modal_close.print {
+	top: 65px;
+	background: transparent url("../img/modal-print.png") no-repeat 0 0;
+}
+.modal_close.fb {
+	top: 115px;
+	background: transparent url("../img/modal-fb.png") no-repeat 0 0;
 }
 
 #lean_overlay {
@@ -1215,6 +1224,14 @@ a.goback {
 	border-top-left-radius: 0px;
 	border-bottom-right-radius: 0px;
 }
+.modal-container.print-landscape {
+	position: absolute;
+	margin-top: 4%;
+	width: 11in;
+	height: 8.5in;
+	border-top-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
 
 .modal-ol {
 	padding: 10px;
@@ -1240,7 +1257,7 @@ a.goback {
 	border-top-left-radius: 10px;
 	/*background: url("../img/header-stripe.png");*/
 }
-.modal-body .modal-container.print header {
+.modal-body .modal-container.print header, .modal-body .modal-container.print-landscape header {
 	color: white;
 	background-color: #0784E3;
 	text-align: center;
@@ -1419,6 +1436,11 @@ a.goback {
 .modal-body .modal-container .modal-contents {
 	padding: 0px;
 	overflow-x: hidden;
+}
+.modal-body .modal-container .modal-contents.print {
+	padding: 0px;
+	overflow: hidden;
+	height: 100%;
 }
 .modal-body .modal-container .modal-contents div.noinfo {
 	width: 90%;
@@ -2341,11 +2363,42 @@ form div.form-content textarea.error {
 	margin-right: 30%;
 	font-size: 13px;
 	cursor: pointer;
+	color: #0784E3;
 }
 
 table.summary > tbody tr th, table.summary > tbody tr td {
 	padding-left: 20px;
 	padding-bottom: 5px;
+}
+.cert-border-1 {
+	border: 10px solid grey;
+	margin: 10px;
+	height: 7.4in;
+}
+.cert-border-2 {
+	border: 6px solid grey;
+	margin: 20px;
+	height: 6.9in;
+}
+.cert-border-3 {
+	border: 2px solid grey;
+	margin: 20px;
+	height: 6.4in;
+}
+
+.certify {
+	text-align: center;
+	font-size: 65px;
+	color: black;
+	padding: 70px;
+	font-family: 'canterbury' 'trebuchet MS', 'Tahoma';
+}
+
+.certify-body {
+	text-align: center;
+	font-size: 30px;
+	color: black;
+	padding: 20px;
 }
 
 .thanks {
@@ -2353,6 +2406,14 @@ table.summary > tbody tr th, table.summary > tbody tr td {
 	font-size: 35px;
 	font-style: italic;
 	color: black;
+	padding-bottom: 20px;
+	font-family: 'scriptin' 'trebuchet MS', 'Tahoma';
+}
+.writing {
+	text-align: center;
+	font-size: 35px;
+	font-style: italic;
+	color: #0784E3;
 	padding-bottom: 20px;
 	font-family: 'scriptin' 'trebuchet MS', 'Tahoma';
 }
@@ -2861,7 +2922,7 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .infocard {
 	float: left;
-	width: 100%;
+	width: 99%;
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: none;
@@ -4992,12 +5053,44 @@ footer a:hover {
 
 @media print {
 	* {
-		background: transparent !important;
-		color: black !important;
+		/*background: transparent !important;*/
+		/*color: black !important;*/
 		box-shadow: none !important;
-		text-shadow: none !important;
+		/*text-shadow: none !important;*/
 		filter: none !important;
 		-ms-filter: none !important;
+		-webkit-print-color-adjust: exact;
+	}
+
+	.modal_close, #fluid-nav, .modal-body .modal-container.print header, .modal-body .modal-container.print-landscape header {
+		display: none;
+	}
+
+	.modal-container.print, .modal-container.print-landscape {
+		margin: 0px;
+	}
+
+	.modal-body .modal-container {
+		border: none;
+	}
+
+	.modal-body.print, .modal-container.print-landscape {
+		width: 8.5in;
+		height: 11in;
+	}
+
+	.certify {
+		line-height: 65px;
+	}
+
+	.cert-border-1 {
+		height: 10.6in;
+	}
+	.cert-border-2 {
+		height: 10.1in;
+	}
+	.cert-border-3 {
+		height: 9.6in;
 	}
 
 	a, a:visited {

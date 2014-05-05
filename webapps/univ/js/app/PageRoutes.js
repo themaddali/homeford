@@ -292,6 +292,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('certificate', '^/certificate(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/certificate/view.html'], function(page) {
+								result.load(page);
+							});
+						}
+					});
 					router.map('about', '^/about(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
