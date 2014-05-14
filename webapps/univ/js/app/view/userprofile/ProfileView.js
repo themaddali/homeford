@@ -30,7 +30,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery('#profile-image').attr('src','img/noimg.png');
 							}
 							else{
-								jQuery('#profile-image').attr('src','/homeford/api/profileupload/picture/' + UserProfile.image.id);
+								jQuery('#profile-image').attr('src','/zingoare/api/profileupload/picture/' + UserProfile.image.id);
 							}
 							var template = jQuery('#profile-domain-template').attr('id', '');
 							//backupagain

@@ -28,7 +28,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						// setSelect : [0, 0, 300, 150],
 						// aspectRatio : 2,
 						// });
-						jQuery('#new-member-profile-image').attr('data-url', '/homeford/api/profileupload/' + ACTIVEMEMBER.id);
+						jQuery('#new-member-profile-image').attr('data-url', '/zingoare/api/profileupload/' + ACTIVEMEMBER.id);
 						ActivateClicks();
 					} else {
 						router.go('/memberslist')
@@ -64,7 +64,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						},
 						done : function(e, data) {
 							$.each(data.result.files, function(index, file) {
-								jQuery('#member-profile-image').removeClass('loading').attr('src', '/homeford/api/profileupload/picture/' + file.id);
+								jQuery('#member-profile-image').removeClass('loading').attr('src', '/zingoare/api/profileupload/picture/' + file.id);
 								service.cleanUserProfile();
 								$('#new-member-profile-image').fileupload('destroy');
 							});

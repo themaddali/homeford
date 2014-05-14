@@ -79,7 +79,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 								minDate : -7
 							});
 							var date = new Date();
-							var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+							var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
 							jQuery("#task-time").val(today);
 						}
 					}

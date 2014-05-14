@@ -97,7 +97,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						ACTIVEDOMAINIDLIST = [];
 						DOMAINMAP = {};
 						$.ajax({
-							url : '/homeford/api/userprofile',
+							url : '/zingoare/api/userprofile',
 							type : 'GET',
 							async : 'async',
 							contentType : "application/json",
@@ -132,7 +132,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
 					$.ajax({
-						url : '/homeford/api/addmember/' + domainid + '/' + userid,
+						url : '/zingoare/api/addmember/' + domainid + '/' + userid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -156,7 +156,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomainsusers/' + domain,
+						url : '/zingoare/api/getdomainsusers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -168,7 +168,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T3 privilage
 				this.getMembersOnly = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomainsusers/' + domain,
+						url : '/zingoare/api/getdomainsusers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -194,7 +194,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.sendInvite = function(email, message, domain, roles, handlers) {
 					$.ajax({
-						url : '/homeford/api/invitee',
+						url : '/zingoare/api/invitee',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -219,7 +219,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.getInviteStatus = function(domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/inviteeusers/' + domain,
+						url : '/zingoare/api/inviteeusers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -231,7 +231,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.acceptInvite = function(id, handlers) {
 					$.ajax({
-						url : '/homeford/api/acceptinvitee?id=' + id,
+						url : '/zingoare/api/acceptinvitee?id=' + id,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -250,7 +250,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.setUserProfile = function(id, firstname, lastname, email, phone, handlers) {
 					$.ajax({
-						url : '/homeford/api/userprofile/' + id,
+						url : '/zingoare/api/userprofile/' + id,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -276,7 +276,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$.ajax({
-						url : '/homeford/api/signup',
+						url : '/zingoare/api/signup',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -304,7 +304,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/domain/' + domainid,
+						url : '/zingoare/api/todo/domain/' + domainid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -330,7 +330,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/domain/' + domainid + '/' + quizid,
+						url : '/zingoare/api/todo/domain/' + domainid + '/' + quizid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -358,7 +358,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid + '/itemservice',
+						url : '/zingoare/api/domain/' + domainid + '/itemservice',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -383,7 +383,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						handlers.success(SERVICESLIST);
 					} else {
 						$.ajax({
-							url : '/homeford/api/domain/' + domainid + '/itemservice',
+							url : '/zingoare/api/domain/' + domainid + '/itemservice',
 							type : 'GET',
 							async : 'async',
 							contentType : "application/json",
@@ -398,7 +398,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
-						url : '/homeford/api/itemservice/' + serviceid,
+						url : '/zingoare/api/itemservice/' + serviceid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -421,7 +421,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid + '/quiz',
+						url : '/zingoare/api/domain/' + domainid + '/quiz',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -439,7 +439,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.setQuestion = function(quizid, category, question, answers, handlers) {
 					var categoryint = parseInt(category);
 					$.ajax({
-						url : '/homeford/api/quiz/' + quizid + '/question',
+						url : '/zingoare/api/quiz/' + quizid + '/question',
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -460,7 +460,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						handlers.success(TODOLIST);
 					} else {
 						$.ajax({
-							url : '/homeford/api/todogroup/domain/' + domainid,
+							url : '/zingoare/api/todogroup/domain/' + domainid,
 							type : 'GET',
 							async : 'async',
 							contentType : "application/json",
@@ -474,7 +474,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.DomainQuizList = function(domainid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/domain/' + domainid + '/quiz',
+						url : '/zingoare/api/domain/' + domainid + '/quiz',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -487,7 +487,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.QuestionsList = function(todoid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/todo/question/' + todoid,
+						url : '/zingoare/api/quiz/todo/question/' + todoid,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -500,7 +500,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.QuestionsListOnly = function(quizid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/' + quizid + '/question',
+						url : '/zingoare/api/quiz/' + quizid + '/question',
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -513,7 +513,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.QuizProgressSave = function(todoid, questionid, answerid, handlers) {
 					var QUIZOBJ = [];
 					$.ajax({
-						url : '/homeford/api/quiz/question/' + todoid + '/' + questionid + '/' + answerid,
+						url : '/zingoare/api/quiz/question/' + todoid + '/' + questionid + '/' + answerid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -526,7 +526,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.MemberToDoList = function(domainid, memberid, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/domain/' + domainid + '/' + memberid,
+						url : '/zingoare/api/todo/domain/' + domainid + '/' + memberid,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -541,7 +541,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.updateToDo = function(todoid, progress, date, comments, handlers) {
 					$.ajax({
-						url : '/homeford/api/todo/' + todoid,
+						url : '/zingoare/api/todo/' + todoid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -558,7 +558,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.updateProfilePhoto = function(userid, handlers) {
 					$.ajax({
-						url : '/homeford/api/profileupload/' + userid,
+						url : '/zingoare/api/profileupload/' + userid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -570,7 +570,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.Login = function(username, password, handlers) {
 					$.ajax({
-						url : '/homeford/j_spring_security_check',
+						url : '/zingoare/j_spring_security_check',
 						type : 'POST',
 						async : 'async',
 						data : 'j_username=' + username + '&j_password=' + password,
@@ -584,7 +584,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				}
 				this.Logout = function(handlers) {
 					$.ajax({
-						url : '/homeford/j_spring_security_logout',
+						url : '/zingoare/j_spring_security_logout',
 						type : 'POST',
 						async : 'async',
 						success : function(data) {
@@ -598,7 +598,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.validateEntity = function(entity, handlers) {
 					$.ajax({
-						url : '/homeford/api/getdomain?domainname=' + entity,
+						url : '/zingoare/api/getdomain?domainname=' + entity,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -613,7 +613,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						handlers.success(DOMAINLIST);
 					} else {
 						$.ajax({
-							url : '/homeford/api/getpublicdomains',
+							url : '/zingoare/api/getpublicdomains',
 							type : 'GET',
 							async : 'async',
 							contentType : "application/json",
@@ -648,7 +648,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					//To facilite passive loading
 					if (ACTIVEDOMAINIDLIST.length == 0) {
 						$.ajax({
-							url : '/homeford/api/userprofile',
+							url : '/zingoare/api/userprofile',
 							type : 'GET',
 							async : 'async',
 							contentType : "application/json",

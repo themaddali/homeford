@@ -43,8 +43,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							document.getElementById('task-startdate').type = 'date';
 						} else {
 							var date = new Date();
-							var today = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-							var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
+							var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
+							//var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
 							jQuery("#task-deadline").datepicker({
 								minDate : 0,
 								dateFormat : 'yy-mm-dd',

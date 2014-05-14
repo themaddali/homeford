@@ -87,7 +87,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								if (!data.members[i].image || data.members[i].image === null) {
 									_memberobject.image = "img/noimg.png"
 								} else {
-									_memberobject.image = '/homeford/api/profileupload/picture/' + data.members[i].image.id;
+									_memberobject.image = '/zingoare/api/profileupload/picture/' + data.members[i].image.id;
 								}
 								_memberobject.firstName = data.members[i].firstName;
 								_memberobject.lastName = data.members[i].lastName;
@@ -137,7 +137,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 											if (!data[j].image || data[j].image === null) {
 												_memberobject.image = "img/noimg.png"
 											} else {
-												_memberobject.image = '/homeford/api/profileupload/picture/' + data[j].image.id;
+												_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
 											}
 											_memberobject.firstName = data[j].firstName;
 											_memberobject.lastName = data[j].lastName;

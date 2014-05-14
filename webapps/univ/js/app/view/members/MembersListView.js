@@ -59,7 +59,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										data[j].lastName = "  "
 									}
 									if (data[j].image && data[j].image.name != null) {
-										jQuery('.members-image', row).attr('src', '/homeford/api/profileupload/picture/' + data[j].image.id);
+										jQuery('.members-image', row).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
 									} else {
 										jQuery('.members-image', row).attr('src', 'img/noimg.png');
 									}
