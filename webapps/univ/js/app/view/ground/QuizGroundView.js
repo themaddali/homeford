@@ -80,14 +80,14 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().addClass('answered answered-correct');
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options input').attr('disabled', 'disabled');
-													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : '+jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : '+ jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : ' + jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : ' + jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
 													//'You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
 													scoreCardUpdate('pass');
 												} else {
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().addClass('answered answered-incorrect');
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
 													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options input').attr('disabled', 'disabled');
-													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : '+jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : '+ jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : ' + jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : ' + jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
 													scoreCardUpdate('fail');
 												}
 											}
@@ -193,8 +193,18 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						}
 						service.QuizProgressSave(ACTIVEQUIZ.id, jQuery(this).parent().parent().parent().find('.question').attr('questionid'), jQuery(this).attr('answerid'), {
 							success : function(data) {
-								//Any action
-								//console.log(data);
+								var _commentstext = [];
+								var comments = {};
+								comments.text = jQuery('.cards-header-right').text();
+								_commentstext.push(comments);
+								service.updateToDo(ACTIVEQUIZ.id, Math.ceil(((_TOTALQ-_TOTALPENDING)/_TOTALQ)*100), 'Time Now', _commentstext, {
+									success : function(data) {
+										if (data.status == 'success') {
+											//notify.showNotification('OK', 'Task #' + ACTIVEQUIZ.id + ' Updated');
+											//router.go('/class');
+										}
+									}
+								});
 							}
 						});
 						setTimeout(function() {
