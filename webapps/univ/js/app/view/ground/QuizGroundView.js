@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup'], function(modernizr, cookie, ellipsis, service, banner, router, notify, popup) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', 'popup', '../../view/certificate/CertificateView'], function(modernizr, cookie, ellipsis, service, banner, router, notify, popup, certificate) {"use strict";
 
 	var QuizGroundVIew = ( function() {
 
@@ -6,6 +6,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 			var INCORRECT = '<i class="icon-remove-sign  icon-1x "></i>';
 			var UNANSWERED = '<i class="icon-question-sign  icon-1x "></i>';
 			var ACTIVEQUIZ = {};
+			var _TOTALQ = 0;
+			var _TOTALPENDING = 0;
+			var _TOTALFAIL = 0;
+			var _TOTALPASS = 0;
+			var _TOTALPERCENTAGE = 0;
 			var quizboardtemplate;
 
 			function QuizGroundVIew() {
@@ -18,54 +23,74 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					if (!ACTIVEQUIZ.name || ACTIVEQUIZ.name === null || ACTIVEQUIZ.name === "") {
 						router.go('/class');
 					} else {
+						_TOTALQ = 0;
+						_TOTALFAIL = 0;
+						_TOTALPASS = 0;
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
-						if (isNaN(daystogo(ACTIVEQUIZ.dueby))){
+						if (isNaN(daystogo(ACTIVEQUIZ.dueby))) {
 							jQuery('.metainfo').text('Due immediately!');
-						}else{
+						} else {
 							jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
 						}
-						//jQuery('.meta-progress').progressbar();
-						//jQuery('.meta-progress').progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
 						jQuery('#action-canvas').empty();
 						service.QuestionsList(ACTIVEQUIZ.id, {
 							success : function(data) {
 								jQuery('.helper').removeAttr("href");
 								jQuery('.helperboard').hide();
 								for (var i = 0; i < data.length; i++) {
-									console.log('BUG: id=-1 FIX IT');
 									if (data[i].id > 0) {
-										jQuery('.question-span').text(data.length - 1);
+										_TOTALQ = data.length - 1;
+										_TOTALPENDING = data.length - 1;
+										scoreCardUpdate('total');
 										var quizboard = quizboardtemplate.clone();
 										jQuery('.question-number-content', quizboard).text('Question # ' + (i + 1));
 										jQuery('.question-number', quizboard).append(UNANSWERED);
 										jQuery('.question', quizboard).text(data[i].text);
-										jQuery('.question', quizboard).attr('questionid',data[i].id);
+										jQuery('.question', quizboard).attr('questionid', data[i].id);
 										if (jQuery('.question', quizboard).text().length > 90) {
 											var newqstn = jQuery('.question', quizboard).text().substring(0, 87);
 											jQuery('.question', quizboard).text(newqstn + ' ...');
 										}
 										for (var j = 0; j < data[i].answers.length; j++) {
-											if (data[i].answers.length === 1) {
+											if (data[i].answers.length === 2) {
 												jQuery('.row-2', quizboard).hide();
-												if (data[i].answers[j].text === 'True') {
-													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'true').attr('answerid',data[i].answers[j].id);
-													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'false');
+												if (data[i].answers[0].text === 'True') {
+													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'true').attr('answerid', data[i].answers[0].id);
+													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'false').attr('answerid', data[i].answers[1].id);
 												} else {
-													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'false').attr('answerid',data[i].answers[j].id);
-													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'true');
+													jQuery('.option-0', quizboard).val('True').attr('isCorrect', 'false').attr('answerid', data[i].answers[1].id);
+													jQuery('.option-1', quizboard).val('False').attr('isCorrect', 'true').attr('answerid', data[i].answers[0].id);
 												}
 											} else {
 												jQuery('.row-2', quizboard).show();
-												jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect).attr('answerid',data[i].answers[j].id);
+												jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect).attr('answerid', data[i].answers[j].id);
 											}
-
 										}
 										jQuery('#action-canvas').append(quizboard);
-										console.log(' length -1 BUG: id=-1 FIX IT');
 										if (i == data.length - 2) {
 											helperMediaQuiries();
 											activateCardEvents();
+										}
+									} else {
+										//These are the selected answers from DB
+										if (data[i].questionresults.length > 0) {
+											for (var k = 0; k < data[i].questionresults.length; k++) {
+												if ("true" === jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').attr('iscorrect')) {
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().addClass('answered answered-correct');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options input').attr('disabled', 'disabled');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : '+jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : '+ jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
+													//'You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
+													scoreCardUpdate('pass');
+												} else {
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().addClass('answered answered-incorrect');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options input').attr('disabled', 'disabled');
+													jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.responseinfo').text('You selected : '+jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('.option-choice[answerid="' + data[i].questionresults[k].answerId + '"]').val() + '. Correct Answer : '+ jQuery('.quizactionboard .question[questionid="' + data[i].questionresults[k].questionId + '"]').parent().find('.options > div').find('input[iscorrect="true"]').val());
+													scoreCardUpdate('fail');
+												}
+											}
 										}
 									}
 								}
@@ -82,6 +107,51 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.helper-youtube').attr('href', fulllink);
 							jQuery('.helper-youtube').parent().parent().fadeIn();
 						}
+					}
+				}
+
+				function scoreCardUpdate(resulttype) {
+					if (resulttype == 'total') {
+						jQuery('.question-span').text(_TOTALQ);
+						jQuery('.percentage-span').text('0%');
+						jQuery('.ok-span').text('0');
+						jQuery('.error-span').text('0');
+					}
+					if (resulttype == 'pass') {
+						_TOTALPASS = _TOTALPASS + 1;
+						jQuery('.ok-span').text(_TOTALPASS);
+						_TOTALPENDING = _TOTALPENDING - 1;
+						jQuery('.question-span').text(_TOTALPENDING);
+						_TOTALPERCENTAGE = Math.ceil(_TOTALPASS / (_TOTALQ - _TOTALPENDING) * 100) + '%';
+						jQuery('.percentage-span').text(_TOTALPERCENTAGE);
+					}
+					if (resulttype == 'fail') {
+						_TOTALFAIL = _TOTALFAIL + 1;
+						jQuery('.error-span').text(_TOTALFAIL);
+						_TOTALPENDING = _TOTALPENDING - 1;
+						jQuery('.question-span').text(_TOTALPENDING);
+						_TOTALPERCENTAGE = Math.ceil(_TOTALPASS / (_TOTALQ - _TOTALPENDING) * 100) + '%';
+						jQuery('.percentage-span').text(_TOTALPERCENTAGE);
+					}
+					if (_TOTALPENDING === 0) {
+						//jQuery('.cards-header-right').html('<i style="color:#0784E3" class="icon-trophy icon-1x ">  ' + _TOTALPERCENTAGE + ' - Certificate</i>')
+					}
+				}
+
+				function showCertificate() {
+					if (_TOTALPENDING === 0) {
+						var databoject = {
+							'toname' : 'Your Name Here',
+							'quizname' : 'This',
+							'percentage' : '100%',
+						};
+						databoject.toname = ACTIVEQUIZ.membername;
+						databoject.quizname = ACTIVEQUIZ.name;
+						databoject.percentage = _TOTALPERCENTAGE
+						certificate.setData(databoject);
+						router.go('/certificate');
+					} else {
+						alert('Certificate is available only after you complete the Quiz!');
 					}
 				}
 
@@ -112,17 +182,19 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery(this).parent().parent().parent().addClass('answered answered-correct');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-ok-sign');
 							jQuery(this).parent().parent().find('.responseinfo').text('You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
+							scoreCardUpdate('pass');
 
 						} else {
 							//jQuery(this).css('background-color', 'red');
 							jQuery(this).parent().parent().parent().addClass('answered answered-incorrect');
 							jQuery(this).parent().parent().parent().find('.icon-1x').removeClass('icon-question-sign').addClass('icon-remove-sign');
 							jQuery(this).parent().parent().find('.responseinfo').text('You selected: ' + jQuery(this).val() + '. Correct Answer: ' + jQuery(this).parent().parent().find('input[iscorrect="true"]').val());
+							scoreCardUpdate('fail');
 						}
-						service.QuizProgressSave(ACTIVEQUIZ.id, jQuery(this).parent().parent().parent().find('.question').attr('questionid'),jQuery(this).attr('answerid'), {
-							success : function(data){
+						service.QuizProgressSave(ACTIVEQUIZ.id, jQuery(this).parent().parent().parent().find('.question').attr('questionid'), jQuery(this).attr('answerid'), {
+							success : function(data) {
 								//Any action
-								console.log(data);
+								//console.log(data);
 							}
 						});
 						setTimeout(function() {
@@ -130,10 +202,6 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.quizactionboard').removeClass('cardactive');
 						}, 2000);
 					})
-				}
-
-				function processOptionSelect() {
-
 				}
 
 				function startCounter() {
@@ -220,6 +288,10 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								jQuery('#ui-datepicker-div').css('background-color', 'white');
 								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
+						});
+
+						jQuery('.cards-header-right').click(function() {
+							showCertificate();
 						});
 
 						jQuery('#updatetodo').click(function() {

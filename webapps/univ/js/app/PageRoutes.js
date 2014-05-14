@@ -295,8 +295,8 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('certificate', '^/certificate(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/certificate/view.html'], function(page) {
-								result.load(page);
+							require(['text!Pages/certificate/view.html', '../app/view/certificate/CertificateView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});

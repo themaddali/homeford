@@ -255,6 +255,9 @@ form div.form-content > textarea:focus {
 	outline: none;
 	-webkit-appearance: none;
 }
+form div.form-content > textarea {
+	-webkit-appearance: none;
+}
 
 input[readonly="readonly"] {
 	background-color: #f6f6f6;
@@ -3244,6 +3247,7 @@ dialog-modal::-webkit-scrollbar {
 .cards-header-right {
 	float: right;
 	margin-top: 10px;
+	cursor: pointer;
 }
 .cards-header-right > span {
 	font-size: 15px;
