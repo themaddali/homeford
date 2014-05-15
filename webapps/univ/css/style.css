@@ -4529,6 +4529,25 @@ footer a:hover {
 		width: 100%;
 	}
 
+	#certificate-link {
+		display: none;
+	}
+
+	.cert-border-1, .cert-border-2, .cert-border-3 {
+		border: 0px;
+		margin: 0px;
+		border: none;
+	}
+	#signedby, #todaydate {
+		display: none
+	}
+	.certify {
+		font-size: 30px;
+	}
+	.certify-body {
+		font-size: 20px
+	}
+
 	.studentboard div.student-name {
 		border-top-left-radius: 8px;
 		border-bottom-right-radius: 8px;
@@ -4567,7 +4586,7 @@ footer a:hover {
 		border-top-left-radius: 8px;
 	}
 
-	.classboard div.class-header,.classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
+	.classboard div.class-header, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
 		display: none;
 	}
 

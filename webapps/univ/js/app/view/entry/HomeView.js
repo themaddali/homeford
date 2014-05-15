@@ -1,4 +1,4 @@
-define(['cookie', 'backstrech', '../../Router', '../../service/DataService'], function(cookie, backstrech, router, service) {"use strict";
+define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '../../Notify'], function(cookie, backstrech, router, service, notify) {"use strict";
 
 	var HomeView = ( function() {
 
@@ -137,6 +137,21 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService'], fu
 						//HTML Event - Actions
 						jQuery('#login-modal-link').click(function() {
 							router.go('/entry', '/home');
+						});
+						jQuery('#trial-modal-link').click(function() {
+							service.Login('tour@zingoare.com', 'tourzingoare', {
+								success : function(LoginData) {
+									if (LoginData !== 'error') {
+										notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+										jQuery.cookie('user', 'tour@zingoare.com', {
+											expires : 100,
+											path : '/'
+										});
+									} else {
+										notify.showNotification('ERROR', 'Username/Password Combination Invalid');
+									}
+								}
+							});
 						});
 
 						jQuery('#slogan-input').keypress(function() {

@@ -26,6 +26,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						_TOTALQ = 0;
 						_TOTALFAIL = 0;
 						_TOTALPASS = 0;
+						jQuery('#certificate-link').hide();
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
 						if (isNaN(daystogo(ACTIVEQUIZ.dueby))) {
@@ -134,7 +135,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						jQuery('.percentage-span').text(_TOTALPERCENTAGE);
 					}
 					if (_TOTALPENDING === 0) {
-						//jQuery('.cards-header-right').html('<i style="color:#0784E3" class="icon-trophy icon-1x ">  ' + _TOTALPERCENTAGE + ' - Certificate</i>')
+						if ($('#action-canvas').width() > 500) {
+							jQuery('#certificate-link').show();
+						}
 					}
 				}
 
@@ -197,11 +200,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								var comments = {};
 								comments.text = jQuery('.cards-header-right').text();
 								_commentstext.push(comments);
-								service.updateToDo(ACTIVEQUIZ.id, Math.ceil(((_TOTALQ-_TOTALPENDING)/_TOTALQ)*100), 'Time Now', _commentstext, {
+								service.updateToDo(ACTIVEQUIZ.id, Math.ceil(((_TOTALQ - _TOTALPENDING) / _TOTALQ) * 100), 'Time Now', _commentstext, {
 									success : function(data) {
 										if (data.status == 'success') {
-											//notify.showNotification('OK', 'Task #' + ACTIVEQUIZ.id + ' Updated');
-											//router.go('/class');
+											//Progress saving as and when needed!
+											notify.showNotification('OK', 'Quiz #' + ACTIVEQUIZ.id + ' Updated');
 										}
 									}
 								});

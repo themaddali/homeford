@@ -10,6 +10,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 			var HIGHPRIORITY = '<i name="High" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i><i name="High" class="icon-exclamation icon-1x "></i>';
 			var LOWPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i>';
 			var NORMALPRIORITY = '<i name="Low" style="margin-right:5px" class="icon-exclamation icon-1x "></i><i name="Low" class="icon-exclamation icon-1x "></i>';
+			var COLORBLOCKS = ['#4c8bff', '#ffcb05', '#5ca028', '#d2047d', '#c88562', '#09b1c1', '#b609c1', '#092fc1', '#abd838', '#49dd54'];
 
 			/**
 			 * Constructor
@@ -46,7 +47,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									jQuery('.metainfo').text('0 Tasks');
 								} else {
 									jQuery('#noinfo').hide();
-									
+
 								}
 								for (var i = 0; i < COUNT; i++) {
 									var newboard = PanelTemplate.clone();
@@ -54,13 +55,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 										jQuery(newboard).addClass('quiz');
 										newboard.attr('type', 'QUIZ');
 										_quizcount = _quizcount + 1;
-										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / '+ _quizcount +' Quiz(s)');
+										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
 										StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
-										jQuery('.class-header img',newboard).attr('src','img/quiztag.png');
+										jQuery('.class-header img', newboard).attr('src', 'img/quiztag.png');
 									} else {
 										newboard.attr('type', 'TODO');
-										_taskcount = _taskcount+1;
-										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / '+ _quizcount +' Quiz(s)');
+										_taskcount = _taskcount + 1;
+										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
 									}
 									jQuery('.class-name', newboard).text(StudentData[i].title);
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
@@ -86,7 +87,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									}
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
 									newboard.attr('name', StudentData[i].id);
-									jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
+									//jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
+									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i+1]);
+									if (i > 8) {
+										jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i%8]);
+									}
 									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {
