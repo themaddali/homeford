@@ -278,12 +278,12 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('pagenotfound', '^/pagenotfound(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/home/no-page.html','../app/view/entry/nopageView'], function(page,view) {
-								result.load(page,view);
+							require(['text!Pages/home/no-page.html', '../app/view/entry/nopageView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});
-					
+
 					router.map('prehome', '^/prehome(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
@@ -303,24 +303,24 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('about', '^/about(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/about.html'], function(page) {
-								result.load(page);
+							require(['text!Pages/about.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});
 					router.map('license', '^/license(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/license.html'], function(page) {
-								result.load(page);
+							require(['text!Pages/license.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});
 					router.map('contact', '^/contact(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/contact.html','../app/view/footer/ContactView'], function(page,view) {
-								result.load(page,view);
+							require(['text!Pages/contact.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
 							});
 						}
 					});

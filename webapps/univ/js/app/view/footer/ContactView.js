@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', 'validate', '../../Router'], function(cookie, service, validate, router) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router','../../Notify'], function(cookie, service, validate, router, notify) {"use strict";
 
 	var ContactView = ( function() {
 
@@ -56,13 +56,29 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router'], func
 							service.sendInvite('zingoare@gmail.com', 'Email To: ' + jQuery('#contact-email').val() + ' , Message: ' + jQuery('#contact-message').val(), 'ZINGOARE', roles, {
 								success : function(response) {
 									if (response !== 'error') {
-										//notify.showNotification('OK', response.message);
+										notify.showNotification('OK', response.message);
 									} else {
-										//notify.showNotification('ERROR', response.message);
+										notify.showNotification('ERROR', response.message);
 									}
 								}
 							});
 						}
+					});
+
+					jQuery('#trial-modal-link').click(function() {
+						service.Login('tour@zingoare.com', 'tourzingoare', {
+							success : function(LoginData) {
+								if (LoginData !== 'error') {
+									notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+									jQuery.cookie('user', 'tour@zingoare.com', {
+										expires : 100,
+										path : '/'
+									});
+								} else {
+									notify.showNotification('ERROR', 'Username/Password Combination Invalid');
+								}
+							}
+						});
 					});
 
 					jQuery("#contact-form").validate({

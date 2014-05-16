@@ -3,7 +3,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 	var HomeView = ( function() {
 
 			var PARAM = {
-				"Bg" : ["img\/z5.png", "img\/z1.png", "img\/z2.png", "img\/z3.png"],
+				"Bg" : ["img\/z5.png","img\/z2.png", "img\/z3.png"],
 				"Static" : ["media\/bg1.png"]
 			};
 
@@ -107,7 +107,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 					//location.reload();
 					startCoverShow();
 					checkForActiveCookie();
-					//document.title = 'Zingoare';
+					document.title = 'Zingoare';
 				};
 
 				this.init = function(args) {
