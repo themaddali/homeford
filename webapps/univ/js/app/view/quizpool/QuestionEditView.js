@@ -44,9 +44,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									var rowtemplate = questiontemplate.clone();
 									jQuery('.question-number', rowtemplate).text('Question # ' + (i + 1));
 									jQuery('#question-name', rowtemplate).val(data[i].text);
-									if (data[i].answers.length === 1) {
+									if (data[i].answers.length === 2) {
 										var optiontemplate = optiontftemplate.clone();
-										jQuery('#option-tf', optiontemplate).val(data[i].answers[0].text);
+										for (var k = 0; k < 2; k++) {
+											if (data[i].answers[k].isCorrect === true) {
+												$("select option[value='" + data[i].answers[k].text + "']", optiontemplate).attr("selected", "selected");
+											}
+										}
 										jQuery(rowtemplate).find('ol').append(optiontemplate);
 									} else {
 										var optiontemplate = optionmultitemplate.clone();
@@ -59,13 +63,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										if (!data[i].answers[3].text) {
 											data[i].answers[3].text = "No Question";
 										}
-										jQuery('#multi-option-0', optiontemplate).val(data[i].answers[0].text);
-										jQuery('#multi-option-1', optiontemplate).val(data[i].answers[1].text);
-										jQuery('#multi-option-2', optiontemplate).val(data[i].answers[2].text);
-										jQuery('#multi-option-3', optiontemplate).val(data[i].answers[3].text);
+										for (var k = 0; k < 4; k++) {
+											jQuery('#multi-option-' + k, optiontemplate).val(data[i].answers[k].text);
+											if (data[i].answers[k].isCorrect === true) {
+												jQuery('#multi-option-' + k, optiontemplate).next().removeClass('incorrect').addClass('correct');
+											}
+										}
 										jQuery(rowtemplate).find('ol').append(optiontemplate);
 									}
-									//jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect);
 									jQuery('.modal-ol').append(rowtemplate);
 									if (i == data.length - 1) {
 										activateEvents();

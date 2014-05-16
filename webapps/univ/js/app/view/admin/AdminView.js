@@ -299,7 +299,11 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								_quizdata[1] = _questioncount;
 								updatePanelValues('#quiz-grouptotal-value', _quiztotal);
 								updatePanelValues('#question-total-value', _questioncount);
-								updatePanelValues('#quiz-average-value', Math.ceil(_questioncount / _quiztotal));
+								if (_quiztotal > 0) {
+									updatePanelValues('#quiz-average-value', Math.ceil(_questioncount / _quiztotal));
+								} else {
+									updatePanelValues('#quiz-average-value', 0);
+								}
 								var _quizgross = 0;
 								updatePanelGraphs('#quiz-donut', _quizdata);
 								// for (var j = 0; j < data.length; j++) {

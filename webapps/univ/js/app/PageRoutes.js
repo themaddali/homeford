@@ -319,8 +319,8 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('contact', '^/contact(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/contact.html'], function(page) {
-								result.load(page);
+							require(['text!Pages/contact.html','../app/view/footer/ContactView'], function(page,view) {
+								result.load(page,view);
 							});
 						}
 					});
