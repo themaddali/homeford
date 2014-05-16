@@ -41,6 +41,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							success : function(UserProfile) {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
 									jQuery('#inv-domain').text(UserProfile.domains[i].domainName);
+									if (UserProfile.lastName === null && UserProfile.firstName === null) {
+										UserProfile.lastName = "Billing Team";
+									}
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}
 							}
@@ -54,11 +57,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							jQuery('.scost', thisrow).text('$' + DATAOBJECT.services[j].cost);
 							jQuery('.stax', thisrow).text(DATAOBJECT.services[j].tax + '%');
 							jQuery('.sdesc', thisrow).text(DATAOBJECT.services[j].desc);
-							var total =  parseInt(DATAOBJECT.services[j].cost) +  parseInt((DATAOBJECT.services[j].cost)*(DATAOBJECT.services[j].tax)/100);
+							var total = parseInt(DATAOBJECT.services[j].cost) + parseInt((DATAOBJECT.services[j].cost) * (DATAOBJECT.services[j].tax) / 100);
 							grandtotal = grandtotal + total;
-							jQuery('.sprice', thisrow).text('$'+total);
+							jQuery('.sprice', thisrow).text('$' + total);
 							jQuery('#inv-tbody').append(thisrow);
-							jQuery('.grand-total').text('$' +grandtotal);
+							jQuery('.grand-total').text('$' + grandtotal);
 						}
 						var currentDate = new Date();
 						var day = currentDate.getDate();

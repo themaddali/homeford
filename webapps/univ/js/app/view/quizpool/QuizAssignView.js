@@ -32,6 +32,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				function populateData() {
 					if (ActiveMembers.text) {
+						jQuery('#member-list').css('color', 'black');
 						jQuery('#member-list').val(ActiveMembers.text);
 					} else {
 						jQuery('#member-list').val('None');
