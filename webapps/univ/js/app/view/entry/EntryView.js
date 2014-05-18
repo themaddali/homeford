@@ -12,7 +12,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					if (checkForActiveCookie() === false) {
 						service.entityList({
 							success : function(result) {
-								console.log('Entity List' + result);
+								//console.log('Entity List' + result);
 								if (result !== 'error') {
 									$("#user-domain").autocomplete({
 										source : function(request, response) {

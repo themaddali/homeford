@@ -71,17 +71,17 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							jQuery('.helper-youtube').attr('href', fulllink);
 							jQuery('.helper-youtube').parent().parent().fadeIn();
 						}
-						if (Modernizr.touch && Modernizr.inputtypes.date) {
-							document.getElementById('task-time').type = 'date';
-						} else {
-							jQuery("#task-time").datepicker({
-								dateFormat : 'yy-mm-dd',
-								minDate : -7
-							});
-							var date = new Date();
-							var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
-							jQuery("#task-time").val(today);
-						}
+						// if (Modernizr.touch && Modernizr.inputtypes.date) {
+							// document.getElementById('task-time').type = 'date';
+						// } else {
+							// jQuery("#task-time").datepicker({
+								// dateFormat : 'yy-mm-dd',
+								// minDate : -7
+							// });
+							// var date = new Date();
+							// var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
+							// jQuery("#task-time").val(today);
+						// }
 					}
 				}
 

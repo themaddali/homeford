@@ -43,6 +43,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									jQuery('#inv-domain').text(UserProfile.domains[i].domainName);
 									if (UserProfile.lastName === null && UserProfile.firstName === null) {
 										UserProfile.lastName = "Billing Team";
+										UserProfile.firstName = '';
 									}
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}

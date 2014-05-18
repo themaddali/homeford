@@ -2400,8 +2400,16 @@ table.summary > tbody tr th, table.summary > tbody tr td {
 .certify-body {
 	text-align: center;
 	font-size: 30px;
+	line-height: 32px;
 	color: black;
 	padding: 20px;
+}
+
+.certify-footer {
+	text-align: center;
+	position: absolute;
+	top: 650px;
+	width: 85%;
 }
 
 .thanks {

@@ -37,6 +37,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					} else {
 						jQuery('#member-list').val('None');
 						QUIZLIST = [];
+						jQuery('#quiz-name').empty().append('<option>None Selected</option>');
 						jQuery('#quiz-name').val('');
 						jQuery('#quiz-desc').val('');
 						if (Modernizr.touch && Modernizr.inputtypes.date) {
@@ -44,7 +45,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							document.getElementById('task-startdate').type = 'date';
 						} else {
 							var date = new Date();
-							var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
+							var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 							//var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
 							jQuery("#task-deadline").datepicker({
 								minDate : 0,
@@ -56,34 +57,44 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							});
 							jQuery("#task-startdate").val(today);
 							//jQuery("#task-deadline").val(next);
-							jQuery('#member-list').css('color', 'black');
-							var activedomains = admin.getActiveDomainsIDs();
-							for (var i = 0; i < activedomains.length; i++) {
-								var thisdomaininstance = activedomains[i];
-								service.DomainQuizList(thisdomaininstance, {
-									success : function(data) {
-										allQUIZ = data;
-										for (var k = 0; k < data.length; k++) {
-											QUIZLIST.push(data[k].name);
-										}
-										if (data !== 'error') {
-											$("#quiz-name").autocomplete({
-												source : function(request, response) {
-													var results = $.ui.autocomplete.filter(QUIZLIST, request.term);
-													response(results.slice(0, 5));
-												},
-												select : function(event, ui) {
-													var origEvent = event;
-													while (origEvent.originalEvent !== undefined)
-													origEvent = origEvent.originalEvent;
-													if (origEvent.type == 'keydown')
-														$("#quiz-name").keyup();
-												},
+						}
+						jQuery('#member-list').css('color', 'black');
+						var activedomains = admin.getActiveDomainsIDs();
+						if (activedomains.length === 0) {
+							router.go('/admin');
+						}
+						for (var i = 0; i < activedomains.length; i++) {
+							var thisdomaininstance = activedomains[i];
+							service.DomainQuizList(thisdomaininstance, {
+								success : function(data) {
+									allQUIZ = data;
+									for (var k = 0; k < data.length; k++) {
+										QUIZLIST.push(data[k].name);
+										if (k === data.length - 1) {
+											QUIZLIST.sort();
+											$.each(QUIZLIST, function(index, quiz) {
+												jQuery('#quiz-name').append('<option>' + quiz + '</option>');
 											});
 										}
 									}
-								});
-							}
+									//Commenting out the autoFill to go with select
+									// if (data !== 'error') {
+									// $("#quiz-name").autocomplete({
+									// source : function(request, response) {
+									// var results = $.ui.autocomplete.filter(QUIZLIST, request.term);
+									// response(results.slice(0, 5));
+									// },
+									// select : function(event, ui) {
+									// var origEvent = event;
+									// while (origEvent.originalEvent !== undefined)
+									// origEvent = origEvent.originalEvent;
+									// if (origEvent.type == 'keydown')
+									// $("#quiz-name").keyup();
+									// },
+									// });
+									// }
+								}
+							});
 						}
 					}
 				}
@@ -100,7 +111,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}, 'Select to whom to assign.');
 
 				$.validator.addMethod("validQuiz", function(value, element, param) {
-					if (QUIZLIST.indexOf(jQuery('#quiz-name').val()) === -1) {
+					// if (QUIZLIST.indexOf(jQuery('#quiz-name').val()) === -1) {
+					// return false;
+					// } else {
+					// return true;
+					// }
+					if (jQuery('#quiz-name').val() === 'None Selected') {
 						return false;
 					} else {
 						return true;
@@ -119,7 +135,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					validator.resetForm();
 					populateData();
-					$("#quiz-name").autocomplete("destroy");
+					//$("#quiz-name").autocomplete("destroy");
 					document.title = 'Zingoare | Quiz Assign';
 				};
 
@@ -140,7 +156,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.go('/admin');
 						});
 
-						jQuery("#quiz-name").keyup(function() {
+						jQuery("#quiz-name").change(function() {
 							var _name = jQuery("#quiz-name").val();
 							var _index = QUIZLIST.indexOf(_name);
 							if (allQUIZ[_index]) {
@@ -232,8 +248,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										}
 									}
 								});
-							}
-							else{
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});

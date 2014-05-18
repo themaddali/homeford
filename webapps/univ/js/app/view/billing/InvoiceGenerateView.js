@@ -81,6 +81,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function getServices(activedomains) {
 					SERVICESALL = [];
+					jQuery('#service-template select').empty();
 					jQuery('.edit-select').empty();
 					if (ActiveMembers.text) {
 						jQuery('#member-list').val(ActiveMembers.text);
@@ -94,6 +95,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
 									SERVICESALL.push(data[j]);
+									jQuery('#service-template select').append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('.edit-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
 									}
@@ -148,16 +150,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
-						var template = jQuery('#service-template').remove().attr('id', '');
+						var template = jQuery('#service-template').attr('id', '');
 
 						$(".formlink").click(function() {
 							var thisservice = template.clone();
+							jQuery(thisservice).show();
 							jQuery(thisservice).find('select').attr('id', 'service-select-' + jQuery('select').length);
-							for (var j = 0; j < SERVICESALL.length; j++) {
-								if (SERVICESALL[j].status === 'Active' || SERVICESALL[j].status === 'ACTIVE') {
-									jQuery('.edit-select', thisservice).append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
-								}
-							}
+							// for (var j = 0; j < SERVICESALL.length; j++) {
+							// if (SERVICESALL[j].status === 'Active' || SERVICESALL[j].status === 'ACTIVE') {
+							// jQuery('.edit-select', thisservice).append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
+							// }
+							// }
 							jQuery('.service-ol').append(thisservice);
 						});
 
@@ -179,12 +182,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}
 							var _services = [];
 							for (var i = 0; i < jQuery('select').length; i++) {
-								var _servicesentries = {};
-								_servicesentries.name = $('#service-select-' + i).find(":selected").text();
-								_servicesentries.cost = $('#service-select-' + i).find(":selected").attr('cost');
-								_servicesentries.desc = $('#service-select-' + i).find(":selected").attr('desc');
-								_servicesentries.tax = $('#service-select-' + i).find(":selected").attr('tax');
-								_services.push(_servicesentries);
+								if (($('#service-select-' + i).find(":selected").attr('cost'))) {
+									var _servicesentries = {};
+									_servicesentries.name = $('#service-select-' + i).find(":selected").text();
+									_servicesentries.cost = $('#service-select-' + i).find(":selected").attr('cost');
+									_servicesentries.desc = $('#service-select-' + i).find(":selected").attr('desc');
+									_servicesentries.tax = $('#service-select-' + i).find(":selected").attr('tax');
+									_services.push(_servicesentries);
+								}
 							}
 							databoject.services = _services;
 							invoicepreview.setData(databoject);
