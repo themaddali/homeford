@@ -65,10 +65,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 							if (OWNERLEVEL !== UserProfile.domains.length) {
 								//User is not owner. Filter stuff.
-								//jQuery('.T1').hide();
-								jQuery('.T1').show();
+								jQuery('.T1').hide();
 								populateUserData();
-								populateInviteData();
+								//populateInviteData();
 								//Should clean memebr list out
 								//Testing All Now
 								// jQuery('.T1').show();

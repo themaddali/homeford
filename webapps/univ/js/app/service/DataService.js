@@ -96,6 +96,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						DOMAINLIST = [];
 						ACTIVEDOMAINLIST = [];
 						ACTIVEDOMAINIDLIST = [];
+						ACTIVEOWNDOMAINSIDLIST = [];
 						DOMAINMAP = {};
 						$.ajax({
 							url : '/zingoare/api/userprofile',
