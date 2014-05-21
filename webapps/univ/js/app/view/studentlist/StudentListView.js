@@ -111,9 +111,16 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function getindirectReports(data, MEMBEROBJECT) {
 					var activedomains;
-					service.returnDomainIDList({
+					service.returnOwnerDomainIDList({
 						success : function(data) {
 							activedomains = data;
+							if (data.length === 0) {
+								if (jQuery('.studentboard').length === 0) {
+									jQuery('#noinfo').fadeIn(1000);
+								} else {
+									jQuery('#noinfo').hide();
+								}
+							}
 							for (var i = 0; i < activedomains.length; i++) {
 								var _domain = activedomains[i];
 								service.getMembersOnly(activedomains[i], {
@@ -276,10 +283,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						if ( jQuery.cookie('user') ==='tour@zingoare.com'){
+						if (jQuery.cookie('user') === 'tour@zingoare.com') {
 							jQuery('.brandname').text('Demo Tour').addClass('show');
-						}
-						else {
+						} else {
 							jQuery('.brandname').text('').removeClass('show');
 						}
 						return true;

@@ -5,6 +5,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 			var ACTIVEDOMAINLIST = [];
 			var ACTIVEDOMAINIDLIST = [];
+			var ACTIVEOWNDOMAINSIDLIST = [];
 			var DOMAINLIST;
 			var USERPROFILE = null;
 			var TODOLIST = null;
@@ -107,7 +108,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {
 									if (ACTIVEDOMAINLIST && ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
-										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+										//if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+										if (data.domains[i].roleName == 'ROLE_TIER1') {
 											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
 											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
 											DOMAINMAP[data.domains[i].id] = data.domains[i].domainName;
@@ -659,6 +661,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								for (var i = 0; i < data.domains.length; i++) {
 									if (ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
 										if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+											// if (data.domains[i].roleName == 'ROLE_TIER1') {
 											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
 											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
 										}
@@ -670,7 +673,32 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					} else {
 						handlers.success(ACTIVEDOMAINIDLIST);
 					}
+				}
 
+				this.returnOwnerDomainIDList = function(handlers) {
+					//To facilite passive loading
+					if (ACTIVEOWNDOMAINSIDLIST.length == 0) {
+						$.ajax({
+							url : '/zingoare/api/userprofile',
+							type : 'GET',
+							async : 'async',
+							contentType : "application/json",
+							success : function(data) {
+								USERPROFILE = data;
+								USERID = data.id;
+								for (var i = 0; i < data.domains.length; i++) {
+									if (data.domains[i].roleName == 'ROLE_TIER1') {
+										ACTIVEOWNDOMAINSIDLIST.push(data.domains[i].id);
+									}
+									if (i === data.domains.length - 1) {
+										handlers.success(ACTIVEOWNDOMAINSIDLIST);
+									}
+								}
+							}
+						});
+					} else {
+						handlers.success(ACTIVEOWNDOMAINSIDLIST);
+					}
 				}
 
 				this.domainIDtoName = function(id) {
