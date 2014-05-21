@@ -276,6 +276,12 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
+						if ( jQuery.cookie('user') ==='tour@zingoare.com'){
+							jQuery('.brandname').text('Demo Tour').addClass('show');
+						}
+						else {
+							jQuery('.brandname').text('').removeClass('show');
+						}
 						return true;
 					} else {
 						router.go('/home', '/studentlist');

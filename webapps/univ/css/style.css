@@ -2389,6 +2389,16 @@ table.summary > tbody tr th, table.summary > tbody tr td {
 	height: 6.4in;
 }
 
+.brandname {
+	line-height: 57px;
+	font-size: 14px;
+	font-weight: 500;
+	padding-left: 10px;
+}
+.brandname.show {
+	border-left: 3px solid #0784E3;
+}
+
 .certify {
 	text-align: center;
 	font-size: 65px;
@@ -3897,7 +3907,7 @@ html.touch #wrapper-about {
 
 #project-page-logo {
 	float: left;
-	width: 181px;
+	width: 100px;
 	height: 23px;
 	background: transparent url("../img/project-page-logo.png") no-repeat 0 0;
 	margin: 18px 12px 0 12px;
