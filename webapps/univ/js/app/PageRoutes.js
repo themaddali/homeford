@@ -316,6 +316,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('cookie', '^/cookie(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/cookie-policy.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('contact', '^/contact(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

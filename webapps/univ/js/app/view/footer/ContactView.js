@@ -36,13 +36,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router','../..
 
 				this.resume = function() {
 					populateData();
-					document.title = 'Zingoare | Contact';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
-					document.title = 'Zingoare | Contact';
 
 					// if (checkForActiveCookie() === true) {
 					// populateData();
