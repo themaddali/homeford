@@ -32,6 +32,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						var notification = '<div class="' + CLASS + '">' + OK + '<span class="notify-message">' + message + '</span></div>';
 						if (status === 'ERROR') {
 							var notification = '<div class="' + CLASS + '">' + ERROR + '<span class="notify-message">' + message + '</span></div>';
+							duration = 100000; //100 seconds
 						}
 						jQuery('.modal-container').append(notification);
 						jQuery('.modal_close').fadeOut();
