@@ -77,14 +77,19 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						//HTML Event - Actions
 
-						jQuery('.modal_close').on('click', function() {
+						jQuery('.modal_close.close').on('click', function() {
 							router.go('/quizground');
 						});
+						jQuery('.modal_close.print').on('click', function() {
+							// router.go('/quizground');
+						});
 
-						jQuery('.fb').bind('click', function() {
+						jQuery('.modal_close.fb').bind('click', function() {
 							window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436');
 							return false;
-							router.go('/quizground');
+							setTimeout(function() {
+								router.go('/quizground');
+							}, 1000);
 						});
 
 					} // Cookie Guider
