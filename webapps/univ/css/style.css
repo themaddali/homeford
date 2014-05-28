@@ -1221,8 +1221,7 @@ a.goback {
 }
 .modal-container.print {
 	position: absolute;
-	margin-top: 20px;
-	margin-left: 20px;
+	margin-top: 4%;
 	width: 8.5in;
 	height: 11in;
 	border-top-left-radius: 0px;
@@ -1230,7 +1229,8 @@ a.goback {
 }
 .modal-container.print-landscape {
 	position: absolute;
-	margin-top: 4%;
+	margin-top: 20px;
+	margin-left: 20px;
 	width: 11in;
 	height: 8.5in;
 	border-top-left-radius: 0px;
