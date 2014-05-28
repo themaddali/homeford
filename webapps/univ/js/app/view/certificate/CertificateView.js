@@ -80,6 +80,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						jQuery('.modal_close').on('click', function() {
 							router.go('/quizground');
 						});
+
+						jQuery('.fb').bind('click', function() {
+							window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436');
+							return false;
+							router.go('/quizground');
+						});
+
 					} // Cookie Guider
 				};
 
