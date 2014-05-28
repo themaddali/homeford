@@ -1221,7 +1221,8 @@ a.goback {
 }
 .modal-container.print {
 	position: absolute;
-	margin-top: 4%;
+	margin-top: 20px;
+	margin-left: 20px;
 	width: 8.5in;
 	height: 11in;
 	border-top-left-radius: 0px;
