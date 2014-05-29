@@ -332,6 +332,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('social', '^/social(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/social.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('no route', '^.*', {
 						container : CONTAINER,
 						enter : function(location, result) {

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<script type="text/javascript">document.title = 'Zingoare | Social';</script>
+<html class="no-js" lang="en">
+	<div id="fb-root"></div>
+	<script>
+		( function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id))
+					return;
+				js = d.createElement(s);
+				var container_width = $('.infocard').width() - 20;
+				js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1449454238633686&version=v2.0";
+				fjs.parentNode.insertBefore(js, fjs);
+				$('.fb-details').html('<div class="fb-like-box" ' + 'data-href="https://www.facebook.com/zingoare"' + ' data-width="' + container_width + '" data-height="600" data-show-faces="true" ' + 'data-stream="true" data-header="false" data-show-border="false"></div>');
+			}(document, 'script', 'facebook-jssdk'));
+
+		$(window).bind("load resize", function() {
+			var container_width = $('.infocard').width() - 20;
+			$('.fb-details').html('<div class="fb-like-box" ' + 'data-href="https://www.facebook.com/zingoare"' + ' data-width="' + container_width + '" data-height="600" data-show-faces="true" ' + 'data-stream="true" data-header="false" data-show-border="false"></div>');
+			FB.XFBML.parse();
+		});
+
+	</script>
+	<script src="https://apis.google.com/js/platform.js"></script>
+
+	<script>
+		function onYtEvent(payload) {
+			if (payload.eventType == 'subscribe') {
+				// Add code to handle subscribe event.
+			} else if (payload.eventType == 'unsubscribe') {
+				// Add code to handle unsubscribe event.
+			}
+			if (window.console) {// for debugging only
+				window.console.log('YT event: ', payload);
+			}
+		}
+	</script>
+	<style type="text/css">
+		.twtr-doc {
+			width: 95%
+		}
+		#twitter-widget-0 {
+			width: 90% !important;
+		}
+	</style>
+	<body class="page">
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+		<header id="fluid-nav" style="background-color: white;">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+			<nav id="main-nav">
+				<ul>
+					<li>
+						<a href="#/entry" id="login-modal-link">Enter</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div class="main-content pre-home">
+			<div id="card-canvas" class="contentfull float-left">
+				<div class="infocard shadow">
+					<div class="header">
+						<i class="icon-facebook  icon-1x " style="padding-left: 5px; padding-right: 10px"></i>Facebook
+					</div>
+					<div class="details fb-details">
+						<div class="fb-like-box" data-href="https://www.facebook.com/zingoare" data-width="750px" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="true" data-show-border="false"></div>
+					</div>
+				</div>
+				<div class="infocard shadow">
+					<div class="header">
+						<i class="icon-twitter  icon-1x " style="padding-left: 5px; padding-right: 10px"></i>Twitter
+					</div>
+					<div class="details twitter-details">
+						<div style="padding: 10px">
+							<a style="padding: 5px;" href="https://twitter.com/intent/tweet?button_hashtag=Zingoare&text=This%20is%20cool%20!!!" class="twitter-hashtag-button" data-size="large" data-related="zingoare">Tweet #Zingoare</a>
+							<div></div>
+							<a style="padding: 5px;"  href="https://twitter.com/zingoare" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @zingoare</a>
+						</div>
+
+						<script>
+							! function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+								if (!d.getElementById(id)) {
+									js = d.createElement(s);
+									js.id = id;
+									js.src = p + '://platform.twitter.com/widgets.js';
+									fjs.parentNode.insertBefore(js, fjs);
+								}
+							}(document, 'script', 'twitter-wjs');
+						</script>
+
+						<script>
+							! function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+								if (!d.getElementById(id)) {
+									js = d.createElement(s);
+									js.id = id;
+									js.src = p + '://platform.twitter.com/widgets.js';
+									fjs.parentNode.insertBefore(js, fjs);
+								}
+							}(document, 'script', 'twitter-wjs');
+						</script>
+						<a class="twitter-timeline" href="https://twitter.com/Zingoare" data-widget-id="471768368018489344" width="100%">Tweets by @Zingoare</a>
+						<script>
+							! function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+								if (!d.getElementById(id)) {
+									js = d.createElement(s);
+									js.id = id;
+									js.src = p + "://platform.twitter.com/widgets.js";
+									fjs.parentNode.insertBefore(js, fjs);
+								}
+							}(document, "script", "twitter-wjs");
+						</script>
+					</div>
+				</div>
+				<div class="infocard shadow">
+					<div class="header">
+						<i class="icon-youtube  icon-1x " style="padding-left: 5px; padding-right: 10px"></i>Youtube
+					</div>
+					<div class="details">
+						<div class="g-ytsubscribe" data-channel="Zingoare" data-layout="full" data-count="default" data-onytevent="onYtEvent"></div>
+					</div>
+				</div>
+				<div style="height: 20px">
+
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div id="contact-info">
+				<a href="#/about">About</a> &nbsp;&nbsp; <a href="#/contact">Contact</a>&nbsp;&nbsp; <a href="#/license">License</a> &nbsp;&nbsp;<a style="cursor: pointer" id="trial-modal-link">Tour</a>
+			</div>
+		</footer>
+	</body>
+
+</html>
