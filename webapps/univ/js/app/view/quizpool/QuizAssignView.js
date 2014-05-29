@@ -10,6 +10,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			var validator;
 			var allQUIZ;
 			var QUIZLIST = [];
+			var QUIZLIST_sorted = [];
 			var ActiveMembers = 'All Members';
 
 			function QuizAssignView() {
@@ -31,12 +32,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function populateData() {
-					if (ActiveMembers.text) {
+					if (ActiveMembers.text && ActiveMembers.text !== null) {
 						jQuery('#member-list').css('color', 'black');
 						jQuery('#member-list').val(ActiveMembers.text);
 					} else {
 						jQuery('#member-list').val('None');
 						QUIZLIST = [];
+						QUIZLIST_sorted = [];
 						jQuery('#quiz-name').empty().append('<option>None Selected</option>');
 						jQuery('#quiz-name').val('');
 						jQuery('#quiz-desc').val('');
@@ -70,9 +72,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									allQUIZ = data;
 									for (var k = 0; k < data.length; k++) {
 										QUIZLIST.push(data[k].name);
+										QUIZLIST_sorted.push(data[k].name);
 										if (k === data.length - 1) {
-											QUIZLIST.sort();
-											$.each(QUIZLIST, function(index, quiz) {
+											QUIZLIST_sorted.sort();
+											$.each(QUIZLIST_sorted, function(index, quiz) {
 												jQuery('#quiz-name').append('<option>' + quiz + '</option>');
 											});
 										}
@@ -166,7 +169,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery("#quiz-desc").val('');
 								jQuery("#quiz-name").attr('quizid', '');
 							}
-
 						});
 
 						//JQ UI Bug of -Index.
@@ -240,6 +242,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
 											var ActiveMembers = 'All Members';
+											ActiveMembers.text = null;
 											setTimeout(function() {
 												router.go('/admin');
 											}, 2000);
