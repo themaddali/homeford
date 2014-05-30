@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', 'validate', '../../Router','../../Notify'], function(cookie, service, validate, router, notify) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify'], function(cookie, service, validate, router, notify) {"use strict";
 
 	var ContactView = ( function() {
 
@@ -29,6 +29,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router','../..
 
 				}
 
+				function clearForm() {
+					jQuery('#contact-email').val('');
+					jQuery('#contact-message').val('');
+					jQuery('#contact-send').val('Submit Query').attr('disabled', 'none').css('background-color','#0784E3');
+				}
+
 
 				this.pause = function() {
 
@@ -51,16 +57,44 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router','../..
 							var roles = [{
 								"roleName" : "ROLE_TIER2"
 							}];
-							service.sendInvite('zingoare@gmail.com', 'Email To: ' + jQuery('#contact-email').val() + ' , Message: ' + jQuery('#contact-message').val(), 'ZINGOARE', roles, {
-								success : function(response) {
-									if (response !== 'error') {
-										notify.showNotification('OK', response.message);
+							jQuery('#contact-send').val('Sending...').attr('disabled', 'disabled');
+							service.Login('tour@zingoare.com', 'tourzingoare', {
+								success : function(LoginData) {
+									if (LoginData !== 'error') {
+										service.sendInvite('zingoare@gmail.com', 'Email To: ' + jQuery('#contact-email').val() + ' , Message: ' + jQuery('#contact-message').val(), 'ZINGOARE', roles, {
+											success : function(response) {
+												if (response !== 'error') {
+													notify.showNotification('OK', response.message);
+													setTimeout(function() {
+														jQuery('#contact-send').val('SENT success!').css('background-color','green');
+													}, 2000);
+													setTimeout(function() {
+														clearForm();
+														service.Logout({
+															success : function() {
+																jQuery.removeCookie('user', {
+																	path : '/'
+																});
+																jQuery.removeCookie('subuser', {
+																	path : '/'
+																});
+															},
+														});
+													}, 4000);
+												} else {
+													notify.showNotification('ERROR', response.message);
+												}
+											}
+										});
+
 									} else {
-										notify.showNotification('ERROR', response.message);
+										notify.showNotification('ERROR', 'Username/Password Combination Invalid');
 									}
 								}
 							});
+
 						}
+
 					});
 
 					jQuery('#trial-modal-link').click(function() {

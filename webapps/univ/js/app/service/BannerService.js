@@ -25,7 +25,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 
 				this.setBrand = function() {
 					if (jQuery.cookie('user') === 'tour@zingoare.com') {
-						jQuery('.brandname').text('Demo Tour').addClass('show');
+						jQuery('.brandname').text('Demo Tour in Progress').addClass('show');
 					} else {
 						service.getUserProfile({
 							success : function(UserProfile) {
