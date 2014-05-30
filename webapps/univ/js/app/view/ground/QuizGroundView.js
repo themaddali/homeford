@@ -236,6 +236,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
 						jQuery('#loggedin-user').text(jQuery.cookie('user'));
+						banner.setBrand();
 						return true;
 					} else {
 						router.go('/home');

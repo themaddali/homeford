@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView'], function(modernizr, cookie, service, banner, router, notify, todogroundview, quizgroundview) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, service, banner, router, notify, todogroundview, quizgroundview, todoassign) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -44,7 +44,12 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 								var COUNT = StudentData.length;
 								if (COUNT === 0) {
 									jQuery('#noinfo').fadeIn(1000);
+									var selectedMembers = {};
+									selectedMembers.text = 'User: '+ jQuery('.subtitleinfo').text();
+									selectedMembers.list = [ACTIVESTUDENTID];
+									todoassign.selectedMembers(selectedMembers);
 									jQuery('.metainfo').text('0 Tasks');
+
 								} else {
 									jQuery('#noinfo').hide();
 
@@ -88,9 +93,9 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
 									newboard.attr('name', StudentData[i].id);
 									//jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
-									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i+1]);
+									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i + 1]);
 									if (i > 8) {
-										jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i%8]);
+										jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i % 8]);
 									}
 									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
 									jQuery('#class-canvas').append(newboard);
@@ -134,6 +139,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
 						jQuery('#loggedin-user').text(jQuery.cookie('user'));
+						banner.setBrand();
 						return true;
 					} else {
 						router.go('/home', '/class');

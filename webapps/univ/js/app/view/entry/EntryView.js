@@ -6,6 +6,12 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 			 * Constructor
 			 */
 
+			var ROLEMAP = {
+				'ROLE_TIER1' : 'Owner',
+				'ROLE_TIER2' : 'Admin',
+				'ROLE_TIER3' : 'Member'
+			};
+
 			function EntryView() {
 
 				function activateSuggestionSearch() {
@@ -27,17 +33,41 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				}
 
 				function Authenticate(username, password, domain) {
+					var OWNERLEVEL = 0;
+					var ADMINLEVEL = 0;
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
 								if (username.length > 18) {
 									username = username.split('@')[0];
 								}
-								notify.showNotification('OK', 'Login Success', 'studentlist', '0');
-								jQuery.cookie('user', username, {
-									expires : 100,
-									path : '/'
+								service.getUserProfile({
+									success : function(UserProfile) {
+										for (var i = 0; i < UserProfile.domains.length; i++) {
+											if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
+												ADMINLEVEL = ADMINLEVEL + 1;
+											} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
+												OWNERLEVEL = OWNERLEVEL + 1;
+											}
+										}
+										if (OWNERLEVEL !== UserProfile.domains.length) {
+											//User is not owner. Filter stuff.a and take to studentlist
+											notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+											jQuery.cookie('user', username, {
+												expires : 100,
+												path : '/'
+											});
+										} else {
+											//User is owner. take to admin dashboard
+											notify.showNotification('OK', 'Login Success', 'admin', '0');
+											jQuery.cookie('user', username, {
+												expires : 100,
+												path : '/'
+											});
+										}
+									}
 								});
+
 							} else {
 								notify.showNotification('ERROR', 'Username/Password Combination Invalid');
 							}
@@ -82,7 +112,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							var inputuname = jQuery('#user-name').val();
 							var inputpass = jQuery('#user-password').val();
 							Authenticate(inputuname, inputpass);
-						}else{
+						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
 

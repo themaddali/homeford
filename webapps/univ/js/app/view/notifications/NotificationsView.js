@@ -17,6 +17,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						banner.setBrand();
 						return true;
 					} else {
 						//Paranoid Cookie Clearing

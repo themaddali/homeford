@@ -68,7 +68,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
-								notify.showNotification('OK', 'Congratulations!!!', 'studentlist', '1000');
+								notify.showNotification('OK', 'Congratulations!!!', 'admin', '1000');
 								if (username.length > 18) {
 									username = username.split('@')[0];
 								}
@@ -145,7 +145,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
 							RegisterUser(inputuname, inputpass, inputdomain);
 							e.preventDefault();
-						}else {
+						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
 					});

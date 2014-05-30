@@ -88,6 +88,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
 						jQuery('#loggedin-user').text(jQuery.cookie('user'));
+						banner.setBrand();
 						return true;
 					} else {
 						router.go('/home', '/quiz');

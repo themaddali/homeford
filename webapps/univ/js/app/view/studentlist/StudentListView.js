@@ -74,13 +74,38 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					service.getUserProfile({
 						success : function(data) {
 							if (data.members.length == 0) {
+								var _memberobjectself = {};
+								_memberobjectself.firstName = data.firstName;
+								_memberobjectself.lastName = data.lastName;
+								_memberobjectself.email = data.email;
+								_memberobjectself.id = data.id;
+								if (!data.image || data.image === null) {
+									_memberobjectself.image = "img/noimg.png"
+								} else {
+									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
+								}
+								MEMBEROBJECT.push(_memberobjectself);
 								getindirectReports(data, MEMBEROBJECT);
 							} else {
-								var _fillerobject = {};
-								_fillerobject.id = 'FILLER';
-								_fillerobject.firstName = 'Direct Reports';
-								MEMBEROBJECT.push(_fillerobject);
+								var _memberobjectself = {};
+								_memberobjectself.firstName = data.firstName;
+								_memberobjectself.lastName = data.lastName;
+								_memberobjectself.email = data.email;
+								_memberobjectself.id = data.id;
+								if (!data.image || data.image === null) {
+									_memberobjectself.image = "img/noimg.png"
+								} else {
+									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
+								}
+								MEMBEROBJECT.push(_memberobjectself);
 							}
+
+							// else {
+							// var _fillerobject = {};
+							// _fillerobject.id = 'FILLER';
+							// _fillerobject.firstName = 'Direct Reports';
+							// MEMBEROBJECT.push(_fillerobject);
+							// }
 							for (var i = 0; i < data.members.length; i++) {
 								var _memberobject = {};
 								//Add Filler Image
@@ -115,6 +140,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						success : function(data) {
 							activedomains = data;
 							if (data.length === 0) {
+								displayCards(MEMBEROBJECT);
 								if (jQuery('.studentboard').length === 0) {
 									jQuery('#noinfo').fadeIn(1000);
 								} else {
@@ -126,19 +152,26 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								service.getMembersOnly(activedomains[i], {
 									success : function(data) {
 										if (data.length == 0) {
+											displayCards(MEMBEROBJECT);
 											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
+											if (jQuery('.studentboard').length === 1) {
+												var selectedUserName = $('.student-name').text();
+												var selectedUserId = $('.student-name').parent().attr('name');
+												classview.activeStudent(selectedUserName, selectedUserId);
+												router.go('/class', '/studentlist');
+											}
 											if (jQuery('.studentboard').length === 0) {
 												jQuery('#noinfo').fadeIn(1000);
 											} else {
 												jQuery('#noinfo').hide();
 											}
-										} else {
-											var _fillerobject = {};
-											_fillerobject.id = 'FILLER';
-											// _fillerobject.firstName = 'Indirect Reports - <i> '+ service.domainIDtoName(_domain) +'</i> ';
-											_fillerobject.firstName = 'Indirect Reports';
-											MEMBEROBJECT.push(_fillerobject);
 										}
+										// else {
+										// var _fillerobject = {};
+										// _fillerobject.id = 'FILLER';
+										// _fillerobject.firstName = 'Indirect Reports';
+										// MEMBEROBJECT.push(_fillerobject);
+										// }
 										for (var j = 0; j < data.length; j++) {
 											var _memberobject = {};
 											if (!data[j].image || data[j].image === null) {
@@ -219,6 +252,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' member(s)');
 									if (jQuery('.studentboard').length === 0) {
 										jQuery('#noinfo').fadeIn(1000);
+									} else if (jQuery('.studentboard').length === 1) {
+										var selectedUserName = $('.student-name').text();
+										var selectedUserId = $('.student-name').parent().attr('name');
+										classview.activeStudent(selectedUserName, selectedUserId);
+										router.go('/class', '/studentlist');
 									} else {
 										jQuery('#noinfo').hide();
 									}
@@ -244,6 +282,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
 											if (jQuery('.studentboard').length === 0) {
 												jQuery('#noinfo').fadeIn(1000);
+											} else if (jQuery('.studentboard').length === 1) {
+												var selectedUserName = $('.student-name').text();
+												var selectedUserId = $('.student-name').parent().attr('name');
+												classview.activeStudent(selectedUserName, selectedUserId);
+												router.go('/class', '/studentlist');
 											} else {
 												jQuery('#noinfo').hide();
 											}
@@ -283,11 +326,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
-						if (jQuery.cookie('user') === 'tour@zingoare.com') {
-							jQuery('.brandname').text('Demo Tour').addClass('show');
-						} else {
-							jQuery('.brandname').text('').removeClass('show');
-						}
+						banner.setBrand();
+
+						// if (jQuery.cookie('user') === 'tour@zingoare.com') {
+						// jQuery('.brandname').text('Demo Tour').addClass('show');
+						// } else {
+						// jQuery('.brandname').text('').removeClass('show');
+						// }
 						return true;
 					} else {
 						router.go('/home', '/studentlist');

@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/studentlist/StudentListView'], function(modernizr, cookie, service, validate, router, notify, admin, studentlist) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/studentlist/StudentListView'], function(modernizr, cookie, service, validate, router, notify, admin, studentlist) {"use strict";
 
 	var MembersEditView = ( function() {
 
@@ -68,9 +68,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						jQuery('#member-add').on('click', function() {
 							if (!jQuery('.edit-form').valid()) {
-								console.log(validator.numberOfInvalids());
+								//console.log(validator.numberOfInvalids());
 							} else {
-								console.log(validator.numberOfInvalids());
+								//console.log(validator.numberOfInvalids());
 							}
 							if (jQuery('#member-email').val().length == 0) {
 								if (validator.numberOfInvalids() === 1) {
@@ -115,19 +115,18 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 											}, 2000);
 										}
 									});
-								}
-								else {
+								} else {
 									notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 								}
 							}
 						});
-						
+
 						//Add and wait for more inputs:
 						jQuery('#member-addmore').on('click', function() {
 							if (!jQuery('.edit-form').valid()) {
-								console.log(validator.numberOfInvalids());
+								//console.log(validator.numberOfInvalids());
 							} else {
-								console.log(validator.numberOfInvalids());
+								//console.log(validator.numberOfInvalids());
 							}
 							if (jQuery('#member-email').val().length == 0) {
 								if (validator.numberOfInvalids() === 1) {
@@ -175,7 +174,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								}
 							}
 						});
-						
 
 						//Adjusting Focus:
 						jQuery('#member-first-name').keyup(function() {

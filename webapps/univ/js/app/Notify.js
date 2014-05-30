@@ -30,12 +30,13 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 					if (jQuery.find('.modal-body')) {
 						var CLASS = "edit-notify " + status;
 						var notification = '<div class="' + CLASS + '">' + OK + '<span class="notify-message">' + message + '</span></div>';
+						jQuery('.modal_close').fadeOut();
 						if (status === 'ERROR') {
 							var notification = '<div class="' + CLASS + '">' + ERROR + '<span class="notify-message">' + message + '</span></div>';
 							duration = 100000; //100 seconds
+							jQuery('.modal_close').fadeIn();
 						}
 						jQuery('.modal-container').append(notification);
-						jQuery('.modal_close').fadeOut();
 						jQuery('.edit-notify').slideDown(1000);
 						setTimeout(function() {
 							jQuery('.edit-notify').slideUp(1000);

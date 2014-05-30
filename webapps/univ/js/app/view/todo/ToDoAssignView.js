@@ -34,7 +34,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						document.getElementById('task-startdate').type = 'date';
 					} else {
 						var date = new Date();
-						var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
+						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 						//var next = (date.getMonth() + 2) + '/' + date.getDate() + '/' + date.getFullYear();
 						jQuery("#task-deadline").datepicker({
 							minDate : 0,
@@ -49,7 +49,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					}
 					if (ActiveMembers.text) {
 						jQuery('#member-list').val(ActiveMembers.text);
-						validator.resetForm();
+						if ($('.error:visible').length > 0) {
+							validator.resetForm();
+						}
 					} else {
 						jQuery('#member-list').val('None');
 					}
@@ -177,8 +179,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										}, 2000);
 									}
 								});
-							}
-							else{
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});

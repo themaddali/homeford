@@ -36,6 +36,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						banner.setBrand();
 						return true;
 					} else {
 						//Paranoid Cookie Clearing
