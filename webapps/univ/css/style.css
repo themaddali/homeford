@@ -3810,6 +3810,7 @@ input#searchsubmit:hover {
 	color: #888;
 	font-size: 1.125em;
 }
+
 #social-links ul {
 	margin: 0;
 	padding: 0;
@@ -4572,6 +4573,10 @@ footer a:hover {
 	}
 	.certify-body {
 		font-size: 20px
+	}
+
+	#alert-value {
+		position: absolute;
 	}
 
 	.studentboard div.student-name {
