@@ -380,6 +380,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						//router.reload();
 						populateStudentList();
 					}
+					if (notify.getNewNotificationsCount() > 0) {
+						jQuery('#alert-value').text(notify.getNewNotificationsCount());
+					}else {
+						jQuery('#alert-value').text('');
+					}
 				};
 
 				this.init = function(args) {
@@ -393,6 +398,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						partiontemplate = jQuery('.canvas-partition');
 						showBG();
 						populateStudentList();
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						}
 						$(window).resize(helperMediaQuiries);
 						// When the browser changes size
 

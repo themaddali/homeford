@@ -45,7 +45,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 								if (COUNT === 0) {
 									jQuery('#noinfo').fadeIn(1000);
 									var selectedMembers = {};
-									selectedMembers.text = 'User: '+ jQuery('.subtitleinfo').text();
+									selectedMembers.text = 'User: ' + jQuery('.subtitleinfo').text();
 									selectedMembers.list = [ACTIVESTUDENTID];
 									todoassign.selectedMembers(selectedMembers);
 									jQuery('.metainfo').text('0 Tasks');
@@ -183,6 +183,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					banner.HideUser();
 					populateClass();
 					document.title = 'Zingoare | Task Management';
+					if (notify.getNewNotificationsCount() > 0) {
+						jQuery('#alert-value').text(notify.getNewNotificationsCount());
+					} else {
+						jQuery('#alert-value').text('');
+					}
 				};
 
 				this.init = function(args) {
@@ -198,7 +203,9 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							location.reload();
 						}
 						populateClass();
-
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						}
 						//HTML Event - Actions
 						jQuery('#user-name').on('click', function(e) {
 							banner.ShowUser();

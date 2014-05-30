@@ -39,9 +39,9 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						jQuery('#init-helper').css('display', 'inline');
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
-						if (isNaN(daystogo(ACTIVEQUIZ.dueby))){
+						if (isNaN(daystogo(ACTIVEQUIZ.dueby))) {
 							jQuery('.metainfo').text('Due immediately!');
-						}else{
+						} else {
 							jQuery('.metainfo').text(daystogo(ACTIVEQUIZ.dueby) + ' day(s) to go');
 						}
 						$("#progressvalue").html(ACTIVEQUIZ.progress + '%');
@@ -72,15 +72,15 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							jQuery('.helper-youtube').parent().parent().fadeIn();
 						}
 						// if (Modernizr.touch && Modernizr.inputtypes.date) {
-							// document.getElementById('task-time').type = 'date';
+						// document.getElementById('task-time').type = 'date';
 						// } else {
-							// jQuery("#task-time").datepicker({
-								// dateFormat : 'yy-mm-dd',
-								// minDate : -7
-							// });
-							// var date = new Date();
-							// var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
-							// jQuery("#task-time").val(today);
+						// jQuery("#task-time").datepicker({
+						// dateFormat : 'yy-mm-dd',
+						// minDate : -7
+						// });
+						// var date = new Date();
+						// var today = date.getFullYear()+'-'+(date.getMonth() + 1)+'-'+date.getDate();
+						// jQuery("#task-time").val(today);
 						// }
 					}
 				}
@@ -138,6 +138,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					banner.HideUser();
 					populateData();
 					document.title = 'Zingoare | ToDo Ground';
+					if (notify.getNewNotificationsCount() > 0) {
+						jQuery('#alert-value').text(notify.getNewNotificationsCount());
+					} else {
+						jQuery('#alert-value').text('');
+					}
 				};
 
 				this.init = function() {
@@ -150,7 +155,9 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						}
 						populateData();
 						helperMediaQuiries();
-
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						}
 						//JQ UI Bug of -Index.
 						jQuery('#task-time').focus(function() {
 							setTimeout(function() {

@@ -102,6 +102,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 					banner.HideUser();
 					populateData();
 					document.title = 'Zingoare | Notifcations/Activity';
+					notify.resetNewNotification();
 				};
 
 				this.init = function(args) {
@@ -111,6 +112,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 
 					if (checkForActiveCookie() === true) {
 						populateData();
+						notify.resetNewNotification();
 						//HTML Event - Actions
 
 						jQuery('#notification-done').click(function() {

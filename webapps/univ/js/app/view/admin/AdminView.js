@@ -464,6 +464,11 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					banner.HideUser();
 					getInfoByPrivilage();
 					document.title = 'Zingoare | Admin Dashboard';
+					if (notify.getNewNotificationsCount() > 0) {
+						jQuery('#alert-value').text(notify.getNewNotificationsCount());
+					} else {
+						jQuery('#alert-value').text('');
+					}
 
 				};
 
@@ -478,6 +483,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						jQuery('.T1').hide();
 						var progressbar = $("#to-do-progressbar");
 						var progressLabel = $(".to-do-progress-label");
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						}
 						// jQuery("#to-do-accordion").accordion({
 						// collapsible : true,
 						// active : false

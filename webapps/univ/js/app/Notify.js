@@ -11,6 +11,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
 			var INFO = '<i style="padding:0px 10px" class="icon-bell-alt icon-1x "></i>';
+			var NOTIFICATION_new = 0;
 			var NOTIFICATIONS = [];
 
 			function Notify() {
@@ -21,6 +22,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 					_notification.status = status;
 					_notification.time = new Date();
 					_notification.keyword = '';
+					NOTIFICATION_new = NOTIFICATION_new + 1;
 					NOTIFICATIONS.push(_notification);
 					jQuery('div.edit-notify').remove();
 					if (!duration) {
@@ -33,7 +35,8 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 						jQuery('.modal_close').fadeOut();
 						if (status === 'ERROR') {
 							var notification = '<div class="' + CLASS + '">' + ERROR + '<span class="notify-message">' + message + '</span></div>';
-							duration = 100000; //100 seconds
+							duration = 100000;
+							//100 seconds
 							jQuery('.modal_close').fadeIn();
 						}
 						jQuery('.modal-container').append(notification);
@@ -103,6 +106,14 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 
 				this.getNotifications = function() {
 					return NOTIFICATIONS;
+				}
+
+				this.getNewNotificationsCount = function() {
+					return NOTIFICATION_new;
+				}
+
+				this.resetNewNotification = function() {
+					NOTIFICATION_new = 0;
 				}
 
 				this.removeNotifications = function(indexnum) {

@@ -910,6 +910,13 @@ a.goback {
 	color: #0784E3;
 }
 
+#alert-value {
+	color: #0784E3;
+	font-weight: 900;
+	vertical-align: super;
+	font-size: 10px;
+}
+
 .userflyout {
 	font-size: 14px;
 	background: #FFFFFF;

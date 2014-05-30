@@ -281,6 +281,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					banner.HideUser();
 					populateData();
 					document.title = 'Zingoare | Quiz Ground';
+					if (notify.getNewNotificationsCount() > 0) {
+						jQuery('#alert-value').text(notify.getNewNotificationsCount());
+					} else {
+						jQuery('#alert-value').text('');
+					}
 				};
 
 				this.init = function() {
@@ -293,6 +298,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						}
 						quizboardtemplate = jQuery('#quizboard-template').remove().attr('id', '');
 						populateData();
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						}
 
 						$(window).resize(helperMediaQuiries);
 
