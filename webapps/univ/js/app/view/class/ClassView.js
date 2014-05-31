@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, service, banner, router, notify, todogroundview, quizgroundview, todoassign) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, ellipsis, service, banner, router, notify, todogroundview, quizgroundview, todoassign) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -68,7 +68,13 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 										_taskcount = _taskcount + 1;
 										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
 									}
-									jQuery('.class-name', newboard).text(StudentData[i].title);
+									if (StudentData[i].title.length > 30) {
+										var elipsisname = StudentData[i].title.substring(0, 30);
+										elipsisname = elipsisname + '...';
+										jQuery('.class-name', newboard).text(elipsisname);
+									} else {
+										jQuery('.class-name', newboard).text(StudentData[i].title);
+									}
 									jQuery('.class-desc', newboard).text(StudentData[i].desc);
 									jQuery('.class-url', newboard).text(StudentData[i].helperUrl);
 									jQuery('.class-youtube', newboard).text(StudentData[i].helperYoutube);
@@ -101,7 +107,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 									jQuery('#class-canvas').append(newboard);
 									if (i === COUNT - 1) {
 										helperMediaQuiries();
-										ActivatePanelEvents()
+										ActivatePanelEvents();
 									}
 								}
 							}

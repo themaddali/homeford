@@ -260,7 +260,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							rules : {
 								quizname : {
 									required : true,
-									validQuiz : true
+									validQuiz : true,
+									maxlength: 30,
 								},
 								quizdesc : {
 									required : false,

@@ -188,6 +188,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							rules : {
 								taskname : {
 									required : true,
+									maxlength: 30,
 								},
 								taskdesc : {
 									required : true,

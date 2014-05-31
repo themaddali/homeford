@@ -4577,6 +4577,7 @@ footer a:hover {
 
 	#alert-value {
 		position: absolute;
+		margin-left: 3px;
 	}
 
 	.studentboard div.student-name {
