@@ -81,9 +81,9 @@ a:hover, a:active {
 	outline: 0;
 }
 
-abbr[title] {
+/*abbr[title] {
 	border-bottom: 1px dotted;
-}
+}*/
 
 b, strong {
 	font-weight: bold;
@@ -2985,7 +2985,7 @@ dialog-modal::-webkit-scrollbar {
 
 .float-left .notifycard {
 	float: left;
-	width: 100%;
+	width: 99%;
 	height: 215px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
@@ -2996,7 +2996,7 @@ dialog-modal::-webkit-scrollbar {
 }
 .float-left .notifycard.min {
 	float: left;
-	width: 100%;
+	width: 99%;
 	height: auto;
 	text-align: left;
 	border: 2px solid #d9d9d9;

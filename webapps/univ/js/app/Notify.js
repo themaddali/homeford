@@ -1,4 +1,4 @@
-define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], function(router, cookie, service, jqueryui) {"use strict";
+define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqueryui'], function(router, cookie, timeago, service, jqueryui) {"use strict";
 
 	var Notify = ( function() {
 
@@ -20,7 +20,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 					var _notification = {};
 					_notification.title = message;
 					_notification.status = status;
-					_notification.time = new Date();
+					_notification.timestamp = new Date().toISOString();
 					_notification.keyword = '';
 					NOTIFICATION_new = NOTIFICATION_new + 1;
 					NOTIFICATIONS.push(_notification);
@@ -72,7 +72,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 							_notification.title = message;
 							_notification.description = fullmessage;
 							_notification.status = status;
-							_notification.time = new Date();
+							_notification.timestamp = new Date().toISOString();;
 							_notification.keyword = keyword;
 							NOTIFICATIONS.push(_notification);
 						} else {
@@ -85,7 +85,7 @@ define(['../app/Router', 'cookie', '../app/service/DataService', 'jqueryui'], fu
 								_notification.by = sentinfo;
 								_notification.msg = fullmessage[i].text;
 								_notification.status = status;
-								_notification.time = new Date();
+								_notification.timestamp = new Date().toISOString();;
 								_notification.keyword = keyword;
 								_notification.inviteid = fullmessage[i].id;
 								NOTIFICATIONS.push(_notification);

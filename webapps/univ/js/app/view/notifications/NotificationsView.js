@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, service, banner, notify, router) {"use strict";
+define(['cookie','timeago', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, timeago, service, banner, notify, router) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -45,10 +45,10 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 					if (NOTIFICATION.length === 0) {
 						jQuery('#noinfo').fadeIn(1000);
 					}
-					for (var i = 0; i < NOTIFICATION.length; i++) {
+					for (var i = NOTIFICATION.length-1; i >=0 ; i--) {
 						var thistemplate = template.clone();
 						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
-						jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
+						jQuery('.timeago', thistemplate).attr('title',NOTIFICATION[i].timestamp);
 						if (NOTIFICATION[i].keyword && NOTIFICATION[i].keyword.length > 1) {
 							if (NOTIFICATION[i].status == 'OK') {
 								jQuery('.title', thistemplate).parent().prepend(OK);
@@ -63,6 +63,7 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 							jQuery('.action', thistemplate).text(NOTIFICATION[i].keyword);
 							jQuery('.inviteid', thistemplate).text(NOTIFICATION[i].inviteid);
 							thistemplate.attr('name', i);
+							jQuery("abbr.timeago").timeago();
 							jQuery('#card-canvas').append(thistemplate);
 						} else {
 							var thistemplate = mintemplate.clone();
@@ -72,11 +73,14 @@ define(['cookie', '../../service/DataService', '../../service/BannerService', '.
 								jQuery('.title', thistemplate).parent().prepend(ERROR);
 							}
 							jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
-							jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].time);
+							//jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].timestamp);
+							jQuery('.timeago', thistemplate).attr('title',NOTIFICATION[i].timestamp);
+							jQuery("abbr.timeago").timeago();
 							jQuery('#card-canvas').append(thistemplate);
 						}
 
-						if (i === NOTIFICATION.length - 1) {
+						if (i === 0) {
+							jQuery("abbr.timeago").timeago();
 							jQuery('.action').click(function() {
 								var id = $(this).parent().parent().find('.inviteid').text();
 								var indexof = $(this).parent().parent().attr('name');

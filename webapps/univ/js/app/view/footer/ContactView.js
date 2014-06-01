@@ -1,4 +1,4 @@
-define(['cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify'], function(cookie, service, validate, router, notify) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify'], function(modernizr, cookie, service, validate, router, notify) {"use strict";
 
 	var ContactView = ( function() {
 
@@ -32,7 +32,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function clearForm() {
 					jQuery('#contact-email').val('');
 					jQuery('#contact-message').val('');
-					jQuery('#contact-send').val('Submit Query').attr('disabled', 'none').css('background-color','#0784E3');
+					jQuery('#contact-send').val('Submit Query').attr('disabled', 'none').css('background-color', '#0784E3');
 				}
 
 
@@ -66,7 +66,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 												if (response !== 'error') {
 													notify.showNotification('OK', response.message);
 													setTimeout(function() {
-														jQuery('#contact-send').val('SENT success!').css('background-color','green');
+														jQuery('#contact-send').val('SENT success!').css('background-color', 'green');
 													}, 2000);
 													setTimeout(function() {
 														clearForm();
@@ -112,6 +112,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}
 						});
 					});
+
+					if (Modernizr.touch) {
+						var panelwidth = $('.infocard').width();
+						var panelheight = .56 * panelwidth;
+						jQuery('.about-video').attr("width", panelwidth);
+						jQuery('.about-video').attr("width", panelheight);
+					} else {
+						var panelwidth = $('.infocard').width();
+						jQuery('.about-video').attr("width", "640");
+						jQuery('.about-video').attr("width", "360");
+					}
 
 					jQuery("#contact-form").validate({
 						rules : {

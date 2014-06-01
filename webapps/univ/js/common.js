@@ -9,6 +9,7 @@ require({
 		cookie : 'jquery.cookie',
 		service : "../app/service/service",
 		validate : "jquery.validate.min",
+		timeago : "timeago",
 		raphael : "raphael",
 		tablesorter : "jquery.tablesorter.min",
 		elychart : "elycharts",
