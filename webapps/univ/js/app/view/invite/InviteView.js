@@ -115,7 +115,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										"roleName" : "ROLE_TIER3"
 									}];
 								}
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
+								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery.cookie('subuser'), roles, {
 									success : function(response) {
 										if (response !== 'error') {
 											notify.showNotification('OK', response.message);

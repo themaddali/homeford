@@ -31,7 +31,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
-					var activedomains = admin.getActiveDomainsIDs();
+					//var activedomains = admin.getActiveDomainsIDs();
+					var activedomains = [];
+					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 					if (!activedomains || activedomains.length == 0) {
 						router.go('/admin', '/memberslist');
 					} else {
@@ -66,7 +68,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.members-name', row).text(data[j].firstName + ' ' + data[j].lastName).attr('fn',data[j].firstName).attr('ln',data[j].lastName);
 									jQuery('.members-id', row).text(data[j].id);
 									jQuery('.members-email', row).text(data[j].email);
-									jQuery('.members-domain', row).text(service.domainIDtoName(thisdomaininstance));
+									//jQuery('.members-domain', row).text(service.domainIDtoName(thisdomaininstance));
 									var roles = JSON.stringify(data[j].roles);
 									if (roles.indexOf('ROLE_TIER1') !== -1) {
 										jQuery('.members-roles', row).text('Owner');

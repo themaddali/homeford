@@ -267,83 +267,6 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					}
 				}
 
-				function populateTasks(members) {
-					var list;
-					service.returnDomainIDList({
-						success : function(data) {
-							list = data;
-						}
-					});
-					var activememberid;
-					activememberid = members[0].id;
-					if (activememberid !== 'FILLER') {
-						service.MemberToDoList(list[0], members[0].id, {
-							success : function(tasks) {
-								if (tasks.length == 0 && members[0]) {
-									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' member(s)');
-									if (jQuery('.studentboard').length === 0) {
-										jQuery('#noinfo').fadeIn(1000);
-									} else if (jQuery('.studentboard').length === 1) {
-										var selectedUserName = $('.student-name').text();
-										var selectedUserId = $('.student-name').parent().attr('name');
-										classview.activeStudent(selectedUserName, selectedUserId);
-										router.go('/class', '/studentlist');
-									} else {
-										jQuery('#noinfo').hide();
-									}
-									if (members[0]) {
-										populateTasks(members);
-									}
-								}
-								if (tasks.length > 0 && members[0]) {
-									for (var k = 0; k < tasks.length; k++) {
-										jQuery('.studentboard[name="' + members[0].id + '"] .taskcount').text(tasks.length);
-										if (k < 2) {
-											jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + "</li>");
-										}
-										if (k == 2 && tasks.length === 3) {
-											jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title);
-										}
-										if (k == 2 && tasks.length > 3) {
-											jQuery('.studentboard[name="' + members[0].id + '"] .student-info').append("<li>" + tasks[k].title + " ..... and " + (tasks.length - 3) + " more</li>");
-										}
-										if (k === tasks.length - 1) {
-											members.splice(0, 1);
-											ActivatePanelEvents();
-											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
-											if (jQuery('.studentboard').length === 0) {
-												jQuery('#noinfo').fadeIn(1000);
-											} else if (jQuery('.studentboard').length === 1) {
-												var selectedUserName = $('.student-name').text();
-												var selectedUserId = $('.student-name').parent().attr('name');
-												classview.activeStudent(selectedUserName, selectedUserId);
-												router.go('/class', '/studentlist');
-											} else {
-												jQuery('#noinfo').hide();
-											}
-											if (members[0]) {
-												populateTasks(members);
-											}
-										}
-									}
-								} else {
-									members.splice(0, 1);
-									ActivatePanelEvents();
-									if (members[0]) {
-										populateTasks(members);
-									}
-								}
-							}
-						});
-					} else {
-						members.splice(0, 1);
-						ActivatePanelEvents();
-						if (members[0]) {
-							populateTasks(members);
-						}
-					}
-				}
-
 				function ActivatePanelEvents() {
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
@@ -358,12 +281,6 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user')) {
 						banner.setBrand();
-
-						// if (jQuery.cookie('user') === 'tour@zingoare.com') {
-						// jQuery('.brandname').text('Demo Tour').addClass('show');
-						// } else {
-						// jQuery('.brandname').text('').removeClass('show');
-						// }
 						return true;
 					} else {
 						router.go('/home', '/studentlist');
@@ -426,15 +343,14 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					if (checkForActiveCookie() === true) {
 						//Rich Experience First.... Load BG
 						template = jQuery('#student-template').remove().attr('id', '');
-						//loadingtemplate = jQuery('#loading-template').remove().attr('id', '');
 						partiontemplate = jQuery('.canvas-partition');
 						showBG();
 						populateStudentList();
 						if (notify.getNewNotificationsCount() > 0) {
 							jQuery('#alert-value').text(notify.getNewNotificationsCount());
 						}
-						$(window).resize(helperMediaQuiries);
 						// When the browser changes size
+						$(window).resize(helperMediaQuiries);
 
 						//HTML Event - Actions
 						jQuery('#user-name').on('click', function(e) {

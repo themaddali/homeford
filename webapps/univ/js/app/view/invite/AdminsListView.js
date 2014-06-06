@@ -36,7 +36,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
-					var activedomains = admin.getActiveDomainsIDs();
+					//var activedomains = admin.getActiveDomainsIDs();
+					var activedomains = [];
+					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 					if (!activedomains || activedomains.length == 0) {
 						router.go('/admin', '/adminslist');
 					} else {

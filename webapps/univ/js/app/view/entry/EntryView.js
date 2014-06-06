@@ -44,7 +44,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 								service.getUserProfile({
 									success : function(UserProfile) {
 										for (var i = 0; i < UserProfile.domains.length; i++) {
-											jQuery.cookie('subuser', UserProfile.domains[0], {
+											jQuery.cookie('subuser', UserProfile.domains[0].domainName, {
 												expires : 100,
 												path : '/'
 											});

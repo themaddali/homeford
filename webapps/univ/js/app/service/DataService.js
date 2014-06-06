@@ -12,6 +12,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 			var SERVICESLIST = null;
 			var USERID;
 			var DOMAINMAP = {};
+			var DOMAINIDNAME = [];
 
 			/**
 			 * @constructor
@@ -94,6 +95,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						handlers.success(USERPROFILE);
 					} else {
 						DOMAINLIST = [];
+						DOMAINIDNAME = [];
 						ACTIVEDOMAINLIST = [];
 						ACTIVEDOMAINIDLIST = [];
 						ACTIVEOWNDOMAINSIDLIST = [];
@@ -110,6 +112,10 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								for (var i = 0; i < data.domains.length; i++) {
 									if (ACTIVEDOMAINLIST && ACTIVEDOMAINLIST.indexOf(data.domains[i].domainName) === -1) {
 										//if (data.domains[i].roleName == 'ROLE_TIER2' || data.domains[i].roleName == 'ROLE_TIER1') {
+											var domaininfo = {};
+											domaininfo.id = data.domains[i].id;
+											domaininfo.name = data.domains[i].domainName;
+											DOMAINIDNAME.push(domaininfo);
 										if (data.domains[i].roleName == 'ROLE_TIER1') {
 											ACTIVEDOMAINLIST.push(data.domains[i].domainName);
 											ACTIVEDOMAINIDLIST.push(data.domains[i].id);
@@ -706,9 +712,9 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					return DOMAINMAP[id];
 				}
 				this.domainNametoID = function(name) {
-					for (var i=0; i< DOMAINMAP.length; i++) {
-						if (name === DOMAINMAP[id]) {
-							return id;
+					for (var i=0; i< DOMAINIDNAME.length; i++) {
+						if (name === DOMAINIDNAME[i].name) {
+							return DOMAINIDNAME[i].id;
 						}
 					}
 				}
