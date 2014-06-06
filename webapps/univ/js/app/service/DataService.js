@@ -705,6 +705,13 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.domainIDtoName = function(id) {
 					return DOMAINMAP[id];
 				}
+				this.domainNametoID = function(name) {
+					for (var i=0; i< DOMAINMAP.length; i++) {
+						if (name === DOMAINMAP[id]) {
+							return id;
+						}
+					}
+				}
 
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;

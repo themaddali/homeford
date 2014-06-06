@@ -26,21 +26,33 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 				this.setBrand = function() {
 					if (jQuery.cookie('user') === 'tour@zingoare.com') {
 						jQuery('.brandname').text('Demo Tour').addClass('show');
+						jQuery('.brandnames').removeClass('show');
+						jQuery('.brandnamesicon').hide();
 					} else {
 						service.getUserProfile({
 							success : function(UserProfile) {
 								if (UserProfile.domains.length === 1) {
+									jQuery('.brandnames').removeClass('show');
 									jQuery('.brandname').text(UserProfile.domains[0].domainName).addClass('show');
+									jQuery('.brandnamesicon').hide();
 								} else {
+									jQuery('.brandnames').empty();
 									for (var i = 0; i < UserProfile.domains.length; i++) {
-										var string = string + ' | ' + UserProfile.domains[i].domainName;
-										jQuery('.brandname').text(string).addClass('show');
+										jQuery('.brandname').removeClass('show');
+										jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
 									}
+									jQuery('.brandnames').val(jQuery.cookie('subuser'));
 								}
 							}
 						});
 					}
+				}
 
+				this.updateBrand = function(newchoice) {
+					jQuery.cookie('subuser', newchoice, {
+						expires : 100,
+						path : '/'
+					});
 				}
 
 				this.ShowAlert = function() {
@@ -69,7 +81,6 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 							// refresh after 1/2 sec
 						},
 					});
-
 				};
 
 				this.newNotify = function(status, message, link, details) {

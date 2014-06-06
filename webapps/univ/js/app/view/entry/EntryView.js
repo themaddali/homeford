@@ -44,6 +44,10 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 								service.getUserProfile({
 									success : function(UserProfile) {
 										for (var i = 0; i < UserProfile.domains.length; i++) {
+											jQuery.cookie('subuser', UserProfile.domains[0], {
+												expires : 100,
+												path : '/'
+											});
 											if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 												ADMINLEVEL = ADMINLEVEL + 1;
 											} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {

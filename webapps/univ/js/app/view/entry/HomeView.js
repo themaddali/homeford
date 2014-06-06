@@ -147,6 +147,10 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 											expires : 100,
 											path : '/'
 										});
+										jQuery.cookie('subuser', 'Demo Tour', {
+											expires : 100,
+											path : '/'
+										});
 									} else {
 										notify.showNotification('ERROR', 'Username/Password Combination Invalid');
 									}

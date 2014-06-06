@@ -100,6 +100,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				this.resume = function() {
 					populateData();
 					document.title = 'Zingoare | Members Edit';
+					//$('#new-member-profile-image').fileupload('destroy');
 				};
 
 				this.init = function(args) {

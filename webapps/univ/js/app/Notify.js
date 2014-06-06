@@ -10,6 +10,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 			var PAGE;
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-check icon-1x "></i>';
+			var WARN = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var INFO = '<i style="padding:0px 10px" class="icon-bell-alt icon-1x "></i>';
 			var NOTIFICATION_new = 0;
 			var NOTIFICATIONS = [];
@@ -37,6 +38,12 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 							var notification = '<div class="' + CLASS + '">' + ERROR + '<span class="notify-message">' + message + '</span></div>';
 							duration = 100000;
 							//100 seconds
+							jQuery('.modal_close').fadeIn();
+						}
+						else if (status === 'WARN') {
+							var notification = '<div class="' + CLASS + '">' + WARN + '<span class="notify-message">' + message + '</span></div>';
+							duration = 20000;
+							//20 seconds
 							jQuery('.modal_close').fadeIn();
 						}
 						jQuery('.modal-container').append(notification);

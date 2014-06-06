@@ -79,6 +79,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.lastName = data.lastName;
 								_memberobjectself.email = data.email;
 								_memberobjectself.id = data.id;
+								_memberobjectself.taskcount = data.tasks.length;
+								for (var p = 0; p < data.tasks.length; p++) {
+									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
+									if (p === data.tasks.length - 1) {
+										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
+									}
+								}
 								if (!data.image || data.image === null) {
 									_memberobjectself.image = "img/noimg.png"
 								} else {
@@ -92,6 +99,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.lastName = data.lastName;
 								_memberobjectself.email = data.email;
 								_memberobjectself.id = data.id;
+								_memberobjectself.taskcount = data.tasks.length;
+								for (var p = 0; p < data.tasks.length; p++) {
+									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
+									if (p === data.tasks.length - 1) {
+										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
+									}
+								}
 								if (!data.image || data.image === null) {
 									_memberobjectself.image = "img/noimg.png"
 								} else {
@@ -118,6 +132,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobject.lastName = data.members[i].lastName;
 								_memberobject.email = data.members[i].email;
 								_memberobject.id = data.members[i].id;
+								_memberobject.taskcount = data.members[i].tasks.length;
+								for (var p = 0; p < data.tasks.length; p++) {
+									_memberobject.taskprogress = _memberobject.progress + data.members[i].tasks[p].percentage;
+									if (p === data.members[i].tasks.length - 1) {
+										_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data.members[i].tasks.length);
+									}
+								}
 								if (MEMBERIDS.indexOf(data.members[i].id) == -1) {
 									MEMBERIDS.push(_memberobject.id);
 									MEMBEROBJECT.push(_memberobject);
@@ -183,6 +204,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 											_memberobject.lastName = data[j].lastName;
 											_memberobject.email = data[j].email;
 											_memberobject.id = data[j].id;
+											_memberobject.taskcount = data[j].tasks.length;
+											for (var p = 0; p < data[j].tasks.length; p++) {
+												_memberobject.taskprogress = _memberobject.progress + data[j].tasks[p].percentage;
+												if (p === data[j].tasks.length - 1) {
+													_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
+												}
+											}
 											if (MEMBERIDS.indexOf(data[j].id) == -1) {
 												MEMBERIDS.push(_memberobject.id);
 												MEMBEROBJECT.push(_memberobject);
@@ -199,6 +227,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function displayCards(MEMBEROBJECT) {
+					console.log(service.domainNametoID(jQuery.cookie('subuser')));
 					jQuery('#card-canvas').empty();
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
@@ -211,8 +240,10 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].firstName + ' ' + MEMBEROBJECT[i].lastName);
 							}
 							jQuery('.student-headshot', newboard).attr('src', MEMBEROBJECT[i].image);
-							jQuery('.student-id', newboard).text('Student ID # ' + MEMBEROBJECT[i].id);
-							jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
+							jQuery('.student-id', newboard).text(MEMBEROBJECT[i].taskcount + ' task(s) todo');
+							jQuery('.taskcount', newboard).text(MEMBEROBJECT[i].taskcount);
+							jQuery('.member-from', newboard).text(MEMBEROBJECT[i].taskprogress + ' % completed');
+							//jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
 							jQuery('#card-canvas').append(newboard);
@@ -371,6 +402,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				this.resume = function() {
 					showBG();
+					banner.setBrand();
 					document.title = 'Zingoare | Members Management';
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
@@ -382,7 +414,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					}
 					if (notify.getNewNotificationsCount() > 0) {
 						jQuery('#alert-value').text(notify.getNewNotificationsCount());
-					}else {
+					} else {
 						jQuery('#alert-value').text('');
 					}
 				};
@@ -421,6 +453,10 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							});
 						});
 
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
+						});
+						
 						jQuery('#alert').on('click', function(e) {
 							banner.ShowAlert();
 							jQuery('.alertflyout').mouseleave(function() {

@@ -186,6 +186,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				this.resume = function() {
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
+					banner.setBrand();
 					banner.HideUser();
 					populateClass();
 					document.title = 'Zingoare | Task Management';
@@ -243,6 +244,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						});
 						jQuery('.subtitleinfo-3').click(function() {
 							router.go('/studentlist');
+						});
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
 						});
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');

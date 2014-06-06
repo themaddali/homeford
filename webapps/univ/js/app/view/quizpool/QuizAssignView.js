@@ -73,6 +73,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									for (var k = 0; k < data.length; k++) {
 										QUIZLIST.push(data[k].name);
 										QUIZLIST_sorted.push(data[k].name);
+										if (QUIZLIST.length === 1) {
+											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quiz'z and Questions.",'quizadd');
+										}
 										if (k === data.length - 1) {
 											QUIZLIST_sorted.sort();
 											$.each(QUIZLIST_sorted, function(index, quiz) {
