@@ -80,6 +80,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.email = data.email;
 								_memberobjectself.id = data.id;
 								_memberobjectself.taskcount = data.tasks.length;
+								_memberobjectself.taskprogress = 0;
 								for (var p = 0; p < data.tasks.length; p++) {
 									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
 									if (p === data.tasks.length - 1) {
@@ -100,6 +101,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.email = data.email;
 								_memberobjectself.id = data.id;
 								_memberobjectself.taskcount = data.tasks.length;
+								_memberobjectself.taskprogress = 0;
 								for (var p = 0; p < data.tasks.length; p++) {
 									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
 									if (p === data.tasks.length - 1) {
@@ -133,6 +135,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobject.email = data.members[i].email;
 								_memberobject.id = data.members[i].id;
 								_memberobject.taskcount = data.members[i].tasks.length;
+								_memberobject.taskprogress = 0;
 								for (var p = 0; p < data.tasks.length; p++) {
 									_memberobject.taskprogress = _memberobject.progress + data.members[i].tasks[p].percentage;
 									if (p === data.members[i].tasks.length - 1) {
@@ -156,74 +159,73 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function getindirectReports(data, MEMBEROBJECT) {
-					var activedomains;
-					service.returnOwnerDomainIDList({
-						success : function(data) {
-							activedomains = data;
-							if (data.length === 0) {
-								displayCards(MEMBEROBJECT);
-								if (jQuery('.studentboard').length === 0) {
-									jQuery('#noinfo').fadeIn(1000);
-								} else {
-									jQuery('#noinfo').hide();
+					//var activedomains = admin.getActiveDomainsIDs();
+					var activedomains = [];
+					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
+					data = activedomains;
+					if (data.length === 0) {
+						displayCards(MEMBEROBJECT);
+						if (jQuery('.studentboard').length === 0) {
+							jQuery('#noinfo').fadeIn(1000);
+						} else {
+							jQuery('#noinfo').hide();
+						}
+					}
+					for (var i = 0; i < activedomains.length; i++) {
+						var _domain = activedomains[i];
+						service.getMembersOnly(activedomains[i], {
+							success : function(data) {
+								if (data.length == 0) {
+									displayCards(MEMBEROBJECT);
+									jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
+									if (jQuery('.studentboard').length === 1) {
+										var selectedUserName = $('.student-name').text();
+										var selectedUserId = $('.student-name').parent().attr('name');
+										classview.activeStudent(selectedUserName, selectedUserId);
+										router.go('/class', '/studentlist');
+									}
+									if (jQuery('.studentboard').length === 0) {
+										jQuery('#noinfo').fadeIn(1000);
+									} else {
+										jQuery('#noinfo').hide();
+									}
 								}
-							}
-							for (var i = 0; i < activedomains.length; i++) {
-								var _domain = activedomains[i];
-								service.getMembersOnly(activedomains[i], {
-									success : function(data) {
-										if (data.length == 0) {
-											displayCards(MEMBEROBJECT);
-											jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
-											if (jQuery('.studentboard').length === 1) {
-												var selectedUserName = $('.student-name').text();
-												var selectedUserId = $('.student-name').parent().attr('name');
-												classview.activeStudent(selectedUserName, selectedUserId);
-												router.go('/class', '/studentlist');
-											}
-											if (jQuery('.studentboard').length === 0) {
-												jQuery('#noinfo').fadeIn(1000);
-											} else {
-												jQuery('#noinfo').hide();
-											}
-										}
-										// else {
-										// var _fillerobject = {};
-										// _fillerobject.id = 'FILLER';
-										// _fillerobject.firstName = 'Indirect Reports';
-										// MEMBEROBJECT.push(_fillerobject);
-										// }
-										for (var j = 0; j < data.length; j++) {
-											var _memberobject = {};
-											if (!data[j].image || data[j].image === null) {
-												_memberobject.image = "img/noimg.png"
-											} else {
-												_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
-											}
-											_memberobject.firstName = data[j].firstName;
-											_memberobject.lastName = data[j].lastName;
-											_memberobject.email = data[j].email;
-											_memberobject.id = data[j].id;
-											_memberobject.taskcount = data[j].tasks.length;
-											for (var p = 0; p < data[j].tasks.length; p++) {
-												_memberobject.taskprogress = _memberobject.progress + data[j].tasks[p].percentage;
-												if (p === data[j].tasks.length - 1) {
-													_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
-												}
-											}
-											if (MEMBERIDS.indexOf(data[j].id) == -1) {
-												MEMBERIDS.push(_memberobject.id);
-												MEMBEROBJECT.push(_memberobject);
-											}
-											if (j == data.length - 1) {
-												displayCards(MEMBEROBJECT);
-											}
+								// else {
+								// var _fillerobject = {};
+								// _fillerobject.id = 'FILLER';
+								// _fillerobject.firstName = 'Indirect Reports';
+								// MEMBEROBJECT.push(_fillerobject);
+								// }
+								for (var j = 0; j < data.length; j++) {
+									var _memberobject = {};
+									if (!data[j].image || data[j].image === null) {
+										_memberobject.image = "img/noimg.png"
+									} else {
+										_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
+									}
+									_memberobject.firstName = data[j].firstName;
+									_memberobject.lastName = data[j].lastName;
+									_memberobject.email = data[j].email;
+									_memberobject.id = data[j].id;
+									_memberobject.taskcount = data[j].tasks.length;
+									_memberobject.taskprogress = 0;
+									for (var p = 0; p < data[j].tasks.length; p++) {
+										_memberobject.taskprogress = _memberobject.taskprogress + data[j].tasks[p].percentage;
+										if (p === data[j].tasks.length - 1) {
+											_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
 										}
 									}
-								});
+									if (MEMBERIDS.indexOf(data[j].id) == -1) {
+										MEMBERIDS.push(_memberobject.id);
+										MEMBEROBJECT.push(_memberobject);
+									}
+									if (j == data.length - 1) {
+										displayCards(MEMBEROBJECT);
+									}
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 
 				function displayCards(MEMBEROBJECT) {
@@ -372,7 +374,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						jQuery('.brandnames').change(function() {
 							banner.updateBrand(jQuery('.brandnames').val());
 						});
-						
+
 						jQuery('#alert').on('click', function(e) {
 							banner.ShowAlert();
 							jQuery('.alertflyout').mouseleave(function() {

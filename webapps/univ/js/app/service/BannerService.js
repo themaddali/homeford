@@ -53,6 +53,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 						expires : 100,
 						path : '/'
 					});
+					location.reload(false);
 				}
 
 				this.ShowAlert = function() {

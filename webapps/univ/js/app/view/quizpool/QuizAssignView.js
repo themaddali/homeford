@@ -61,7 +61,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							//jQuery("#task-deadline").val(next);
 						}
 						jQuery('#member-list').css('color', 'black');
-						var activedomains = admin.getActiveDomainsIDs();
+						//var activedomains = admin.getActiveDomainsIDs();
+					var activedomains = [];
+					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 						if (activedomains.length === 0) {
 							router.go('/admin');
 						}
@@ -73,7 +75,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									for (var k = 0; k < data.length; k++) {
 										QUIZLIST.push(data[k].name);
 										QUIZLIST_sorted.push(data[k].name);
-										if (QUIZLIST.length === 1) {
+										if (QUIZLIST.length === 0) {
 											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quiz'z and Questions.",'quizadd');
 										}
 										if (k === data.length - 1) {

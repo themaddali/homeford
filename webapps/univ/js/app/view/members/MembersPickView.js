@@ -32,11 +32,15 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				}
 
 				function populateData() {
-					service.returnDomainIDList({
-						success : function(data) {
-							getMembers(data);
-						}
-					});
+					// service.returnDomainIDList({
+						// success : function(data) {
+							// getMembers(data);
+						// }
+					// });
+					//var activedomains = admin.getActiveDomainsIDs();
+					var activedomains = [];
+					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
+					getMembers(activedomains);
 				}
 
 				function getMembers(activedomains) {

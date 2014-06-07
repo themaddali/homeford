@@ -136,6 +136,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
+					banner.setBrand();
 					populateData();
 					document.title = 'Zingoare | ToDo Ground';
 					if (notify.getNewNotificationsCount() > 0) {
@@ -240,6 +241,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
+						
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
+						});
+						
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/class');
 						});

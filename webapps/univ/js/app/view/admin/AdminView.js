@@ -57,11 +57,20 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					var ADMINLEVEL = 0;
 					service.getUserProfile({
 						success : function(UserProfile) {
+							// for (var i = 0; i < UserProfile.domains.length; i++) {
+							// if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
+							// ADMINLEVEL = ADMINLEVEL + 1;
+							// } else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
+							// OWNERLEVEL = OWNERLEVEL + 1;
+							// }
+							// }
 							for (var i = 0; i < UserProfile.domains.length; i++) {
-								if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
-									ADMINLEVEL = ADMINLEVEL + 1;
-								} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
-									OWNERLEVEL = OWNERLEVEL + 1;
+								if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
+									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
+										OWNERLEVEL = UserProfile.domains.length;
+									} else {
+										OWNERLEVEL = UserProfile.domains.length + 1;
+									}
 								}
 							}
 							if (OWNERLEVEL !== UserProfile.domains.length) {
@@ -92,11 +101,14 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					service.getUserProfile({
 						success : function(UserProfile) {
 							updatePanelValues('#user-id-value', '# ' + UserProfile.id);
-							if (UserProfile.domains.length === 1) {
-								if (ACTIVEDOMAINS.indexOf(UserProfile.domains[0].domainName) === -1) {
-									ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
-									ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
-								}
+							if (UserProfile.domains.length > 0) {
+								// if (ACTIVEDOMAINS.indexOf(UserProfile.domains[0].domainName) === -1) {
+								// ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
+								// ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
+								// }
+								var activedomains = [];
+								activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
+								ACTIVEDOMAINIDS = activedomains;
 								populateInviteData(ACTIVEDOMAINIDS);
 								populateMembersData(ACTIVEDOMAINIDS);
 								populateToDoData(ACTIVEDOMAINIDS);
@@ -111,35 +123,36 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 									_profiledata[0] = 1;
 									updatePanelGraphs('#profile-donut', _profiledata);
 								}
-							} else {
-								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (ACTIVEDOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
-										ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
-										ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
-									}
-									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
-										_adminof = _adminof + 1;
-										updatePanelValues('#user-admin-value', _adminof);
-										_profiledata[1] = _adminof;
-									} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
-										_ownerof = _ownerof + 1;
-										updatePanelValues('#user-owner-value', _ownerof);
-										_profiledata[0] = _ownerof;
-									}
-									if (i === UserProfile.domains.length - 1) {
-										//Remove duplicates
-										ACTIVEDOMAINS = ACTIVEDOMAINS.filter(function(elem, pos) {
-											return ACTIVEDOMAINS.indexOf(elem) == pos;
-										})
-										updatePanelGraphs('#profile-donut', _profiledata);
-										populateInviteData(ACTIVEDOMAINIDS);
-										populateMembersData(ACTIVEDOMAINIDS);
-										populateToDoData(ACTIVEDOMAINIDS);
-										populateQuizData(ACTIVEDOMAINIDS);
-										populateServicesData(ACTIVEDOMAINIDS);
-									}
-								}
 							}
+							// else {
+							// for (var i = 0; i < UserProfile.domains.length; i++) {
+							// if (ACTIVEDOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
+							// ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
+							// ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
+							// }
+							// if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
+							// _adminof = _adminof + 1;
+							// updatePanelValues('#user-admin-value', _adminof);
+							// _profiledata[1] = _adminof;
+							// } else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
+							// _ownerof = _ownerof + 1;
+							// updatePanelValues('#user-owner-value', _ownerof);
+							// _profiledata[0] = _ownerof;
+							// }
+							// if (i === UserProfile.domains.length - 1) {
+							// //Remove duplicates
+							// ACTIVEDOMAINS = ACTIVEDOMAINS.filter(function(elem, pos) {
+							// return ACTIVEDOMAINS.indexOf(elem) == pos;
+							// })
+							// updatePanelGraphs('#profile-donut', _profiledata);
+							// populateInviteData(ACTIVEDOMAINIDS);
+							// populateMembersData(ACTIVEDOMAINIDS);
+							// populateToDoData(ACTIVEDOMAINIDS);
+							// populateQuizData(ACTIVEDOMAINIDS);
+							// populateServicesData(ACTIVEDOMAINIDS);
+							// }
+							// }
+							// }
 						}
 					});
 				}
@@ -382,6 +395,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function setCanvas() {
+					if (!jQuery.elycharts.templates || jQuery.elycharts.templates == undefined) {
+						location.reload(false);
+					}
 					jQuery.elycharts.templates['pie_basic_2'] = {
 						type : "pie",
 						style : {
@@ -459,6 +475,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				this.resume = function() {
 					showBG();
+					banner.setBrand();
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
@@ -527,6 +544,10 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						});
 						jQuery('#admin-done').on('click', function() {
 							router.returnToPrevious();
+						});
+						
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
 						});
 
 						jQuery('.subtitleinfo').click(function() {

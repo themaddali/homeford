@@ -47,7 +47,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						success : function(RegisterData) {
 							if (RegisterData.status === 'success') {
 								notify.showNotification('OK', 'Congratulations!!!', null, '1000');
-								Login(username, password);
+								Login(username, password, domain);
 							} else {
 								notify.showNotification('ERROR', RegisterData.message);
 							}
@@ -64,7 +64,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					}
 				}
 
-				function Login(username, password) {
+				function Login(username, password, domain) {
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
@@ -72,6 +72,10 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 								if (username.length > 18) {
 									username = username.split('@')[0];
 								}
+								jQuery.cookie('subuser', domain, {
+									expires : 100,
+									path : '/'
+								});
 								jQuery.cookie('user', username, {
 									expires : 100,
 									path : '/'

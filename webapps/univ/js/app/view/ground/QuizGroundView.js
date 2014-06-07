@@ -279,6 +279,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
+					banner.setBrand();
 					populateData();
 					document.title = 'Zingoare | Quiz Ground';
 					if (notify.getNewNotificationsCount() > 0) {
@@ -387,6 +388,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						});
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/class');
+						});
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
 						});
 						jQuery('.subtitleinfo-3').click(function() {
 							router.go('/studentlist');

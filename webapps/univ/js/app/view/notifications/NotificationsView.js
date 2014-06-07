@@ -104,6 +104,7 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
+					banner.setBrand();
 					populateData();
 					document.title = 'Zingoare | Notifcations/Activity';
 					notify.resetNewNotification();
@@ -147,6 +148,9 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 								}, 500);
 							});
 							jQuery('.flyout-label').text(notify.getNotifications().length + ' Notifications');
+						});
+						jQuery('.brandnames').change(function() {
+							banner.updateBrand(jQuery('.brandnames').val());
 						});
 
 						jQuery('.subtitleinfo').click(function() {
