@@ -11,6 +11,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 			var MEMBERIDS = [];
 			var RELOAD = false;
 			var template, loadingtemplate, partiontemplate;
+			var ROLEMAP = {
+				'ROLE_TIER1' : 'Owner',
+				'ROLE_TIER2' : 'Admin',
+				'ROLE_TIER3' : 'Member'
+			};
 
 			/**
 			 * Constructor
@@ -21,138 +26,75 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					//jQuery.backstretch(PARMS.workBg);
 				}
 
-				// function populateStudentList() {
-				// //Get User Profile
-				// jQuery('#card-canvas').empty();
-				// MEMBEROBJECT = [];
-				// service.getUserProfile({
-				// success : function(data) {
-				// var activedomains = service.returnDomainIDList();
-				// for (var i = 0; i < activedomains.length; i++) {
-				// service.getMembersOnly(activedomains[i], {
-				// success : function(data) {
-				// if (data.length === 0) {
-				// jQuery('#noinfo').fadeIn(1000);
-				// } else {
-				// jQuery('#noinfo').hide();
-				// }
-				// for (var j = 0; j < data.length; j++) {
-				// var _memberobject = {};
-				// var roles = JSON.stringify(data[j].roles);
-				// if (roles.indexOf('ROLE_TIER3') !== -1) {
-				// //Add Filler Image
-				// if (!data[j].profile_url || data[j].profile_url === "") {
-				// data[j].image = "img/noimg.png"
-				// }
-				// _memberobject.image = data[j].image;
-				// _memberobject.firstName = data[j].firstName;
-				// _memberobject.lastName = data[j].lastName;
-				// _memberobject.email = data[j].email;
-				// _memberobject.id = data[j].id;
-				// MEMBEROBJECT.push(_memberobject);
-				// }
-				// if (j === data.length - 1) {
-				// jQuery("#preloader").hide();
-				// ActivatePanelEvents();
-				// if (MEMBEROBJECT.length === 0) {
-				// }
-				// displayCards(MEMBEROBJECT);
-				// }
-				// }
-				// }
-				// });
-				// }
-				// }
-				// });
-				// }
-
 				function populateStudentList() {
 					//Get User Profile
 					jQuery('#card-canvas').empty();
 					MEMBEROBJECT = [];
 					MEMBERIDS = [];
+					var OWNERLEVEL = 0;
 					service.getUserProfile({
 						success : function(data) {
-							if (data.members.length == 0) {
-								var _memberobjectself = {};
-								_memberobjectself.firstName = data.firstName;
-								_memberobjectself.lastName = data.lastName;
-								_memberobjectself.email = data.email;
-								_memberobjectself.id = data.id;
-								_memberobjectself.taskcount = data.tasks.length;
-								_memberobjectself.taskprogress = 0;
-								for (var p = 0; p < data.tasks.length; p++) {
-									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
-									if (p === data.tasks.length - 1) {
-										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
+							for (var i = 0; i < data.domains.length; i++) {
+								if (data.domains[i].domainName === jQuery.cookie('subuser')) {
+									if (ROLEMAP[data.domains[i].roleName] === 'Owner') {
+										OWNERLEVEL = data.domains.length;
+									} else {
+										OWNERLEVEL = data.domains.length + 1;
 									}
 								}
-								if (!data.image || data.image === null) {
-									_memberobjectself.image = "img/noimg.png"
-								} else {
-									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
-								}
-								MEMBEROBJECT.push(_memberobjectself);
-								getindirectReports(data, MEMBEROBJECT);
-							} else {
-								var _memberobjectself = {};
-								_memberobjectself.firstName = data.firstName;
-								_memberobjectself.lastName = data.lastName;
-								_memberobjectself.email = data.email;
-								_memberobjectself.id = data.id;
-								_memberobjectself.taskcount = data.tasks.length;
-								_memberobjectself.taskprogress = 0;
-								for (var p = 0; p < data.tasks.length; p++) {
-									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
-									if (p === data.tasks.length - 1) {
-										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
-									}
-								}
-								if (!data.image || data.image === null) {
-									_memberobjectself.image = "img/noimg.png"
-								} else {
-									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
-								}
-								MEMBEROBJECT.push(_memberobjectself);
 							}
-
-							// else {
-							// var _fillerobject = {};
-							// _fillerobject.id = 'FILLER';
-							// _fillerobject.firstName = 'Direct Reports';
-							// MEMBEROBJECT.push(_fillerobject);
-							// }
-							for (var i = 0; i < data.members.length; i++) {
-								var _memberobject = {};
-								//Add Filler Image
-								if (!data.members[i].image || data.members[i].image === null) {
-									_memberobject.image = "img/noimg.png"
+							if (OWNERLEVEL !== data.domains.length) {
+								//User is NOT owner of this domain. Filter stuff.
+								var _memberobjectself = {};
+								if (!data.image || data.image === null) {
+									_memberobjectself.image = "img/noimg.png"
 								} else {
-									_memberobject.image = '/zingoare/api/profileupload/picture/' + data.members[i].image.id;
+									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
 								}
-								_memberobject.firstName = data.members[i].firstName;
-								_memberobject.lastName = data.members[i].lastName;
-								_memberobject.email = data.members[i].email;
-								_memberobject.id = data.members[i].id;
-								_memberobject.taskcount = data.members[i].tasks.length;
-								_memberobject.taskprogress = 0;
+								_memberobjectself.firstName = data.firstName;
+								_memberobjectself.lastName = data.lastName;
+								_memberobjectself.email = data.email;
+								_memberobjectself.id = data.id;
+								_memberobjectself.taskcount = data.tasks.length;
+								_memberobjectself.taskprogress = 0;
 								for (var p = 0; p < data.tasks.length; p++) {
-									_memberobject.taskprogress = _memberobject.progress + data.members[i].tasks[p].percentage;
-									if (p === data.members[i].tasks.length - 1) {
-										_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data.members[i].tasks.length);
+									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
+									if (p === data.tasks.length - 1) {
+										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
 									}
 								}
-								if (MEMBERIDS.indexOf(data.members[i].id) == -1) {
-									MEMBERIDS.push(_memberobject.id);
+								MEMBEROBJECT.push(_memberobjectself);
+								for (var j = 0; j < data.members.length; j++) {
+									var _memberobject = {};
+									if (!data.members[j].image || data.members[j].image === null) {
+										_memberobject.image = "img/noimg.png"
+									} else {
+										_memberobject.image = '/zingoare/api/profileupload/picture/' + data.members[j].image.id;
+									}
+									_memberobject.firstName = data.members[j].firstName;
+									_memberobject.lastName = data.members[j].lastName;
+									_memberobject.email = data.members[j].email;
+									_memberobject.id = data.members[j].id;
+									_memberobject.taskcount = data.members[j].tasks.length;
+									_memberobject.taskprogress = 0;
+									for (var p = 0; p < data.members[j].tasks.length; p++) {
+										_memberobject.taskprogress = _memberobject.taskprogress + data.members[j].tasks[p].percentage;
+										if (p === data.members[j].tasks.length - 1) {
+											_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data.members[j].tasks.length);
+										}
+									}
 									MEMBEROBJECT.push(_memberobject);
-								}
-								if (i === data.members.length - 1) {
-									jQuery("#preloader").hide();
-									ActivatePanelEvents();
-									if (MEMBEROBJECT.length === 0) {
+									if (j == data.members.length - 1) {
+										displayCards(MEMBEROBJECT);
 									}
-									getindirectReports(data, MEMBEROBJECT);
+									// if (MEMBERIDS.indexOf(data.members[j].id) == -1) {
+									// MEMBERIDS.push(_memberobject.id);
+									// MEMBEROBJECT.push(_memberobject);
+									// }
 								}
+							} else {
+								//User is OWNER of this domain
+								getindirectReports(data, MEMBEROBJECT);
 							}
 						}
 					});
@@ -163,6 +105,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					var activedomains = [];
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 					data = activedomains;
+					//Its only one domain throught. Having a for loop for futurustinc use
+					//Its only 1 iterarion and shouldnt cost any performace load.
 					if (data.length === 0) {
 						displayCards(MEMBEROBJECT);
 						if (jQuery('.studentboard').length === 0) {
@@ -171,6 +115,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('#noinfo').hide();
 						}
 					}
+
 					for (var i = 0; i < activedomains.length; i++) {
 						var _domain = activedomains[i];
 						service.getMembersOnly(activedomains[i], {
@@ -190,12 +135,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 										jQuery('#noinfo').hide();
 									}
 								}
-								// else {
-								// var _fillerobject = {};
-								// _fillerobject.id = 'FILLER';
-								// _fillerobject.firstName = 'Indirect Reports';
-								// MEMBEROBJECT.push(_fillerobject);
-								// }
+
 								for (var j = 0; j < data.length; j++) {
 									var _memberobject = {};
 									if (!data[j].image || data[j].image === null) {
@@ -229,7 +169,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function displayCards(MEMBEROBJECT) {
-					console.log(service.domainNametoID(jQuery.cookie('subuser')));
+					//console.log(service.domainNametoID(jQuery.cookie('subuser')));
 					jQuery('#card-canvas').empty();
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
