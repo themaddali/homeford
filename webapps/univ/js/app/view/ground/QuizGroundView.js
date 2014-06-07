@@ -204,7 +204,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									success : function(data) {
 										if (data.status == 'success') {
 											//Progress saving as and when needed!
-											notify.showNotification('OK', 'Quiz #' + ACTIVEQUIZ.id + ' Updated');
+											notify.showNotification('OK',  ' Answered Question in Quiz: '+ ACTIVEQUIZ.name);
+											jQuery('#alert-value').text(notify.getNewNotificationsCount());
 										}
 									}
 								});
@@ -332,6 +333,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								success : function(data) {
 									if (data.status == 'success') {
 										notify.showNotification('OK', 'Task #' + ACTIVEQUIZ.id + ' Updated');
+										jQuery('#alert-value').text(notify.getNewNotificationsCount());
 										router.go('/class');
 									}
 								}

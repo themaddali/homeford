@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/studentlist/StudentListView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin, studentlist) {"use strict";
 
 	var ProfileEditView = ( function() {
 
@@ -127,6 +127,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									success : function(response) {
 										if (response !== 'error') {
 											notify.showNotification('OK', response.message);
+											studentlist.reload();
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}

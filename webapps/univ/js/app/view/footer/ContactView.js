@@ -106,6 +106,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										expires : 100,
 										path : '/'
 									});
+									jQuery.cookie('subuser', 'ZINGOARE', {
+										expires : 100,
+										path : '/'
+									});
 								} else {
 									notify.showNotification('ERROR', 'Username/Password Combination Invalid');
 								}

@@ -147,7 +147,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 											expires : 100,
 											path : '/'
 										});
-										jQuery.cookie('subuser', 'Demo Tour', {
+										jQuery.cookie('subuser', 'ZINGOARE', {
 											expires : 100,
 											path : '/'
 										});

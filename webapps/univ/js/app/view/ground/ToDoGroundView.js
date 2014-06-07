@@ -186,7 +186,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 							service.updateToDo(ACTIVEQUIZ.id, _newprogress, _timestamp, _commentstext, {
 								success : function(data) {
 									if (data.status == 'success') {
-										notify.showNotification('OK', 'Task #' + ACTIVEQUIZ.id + ' Updated');
+										notify.showNotification('OK', ' Updated Task: ' + ACTIVEQUIZ.name + ' to ' + _newprogress + ' %');
 										router.go('/class');
 									}
 								}
@@ -241,11 +241,11 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
-						
+
 						jQuery('.brandnames').change(function() {
 							banner.updateBrand(jQuery('.brandnames').val());
 						});
-						
+
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/class');
 						});

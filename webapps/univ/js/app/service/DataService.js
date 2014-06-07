@@ -573,6 +573,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						contentType : "application/json",
 						success : function(data) {
 							handlers.success(data);
+							USERPROFILE = null;
 						}
 					});
 				}
