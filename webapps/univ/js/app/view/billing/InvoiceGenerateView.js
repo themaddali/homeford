@@ -37,12 +37,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}
 
 				function populateData() {
-					service.returnDomainIDList({
-						success : function(data) {
-							//getMembers(data);
-							getServices(data);
-						}
-					});
+					// service.returnDomainIDList({
+					// success : function(data) {
+					// //getMembers(data);
+					//
+					// }
+					// });
+					getServices(service.domainNametoID(jQuery.cookie('subuser')));
 				}
 
 				function getMembers(activedomains) {

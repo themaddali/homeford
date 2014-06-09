@@ -529,6 +529,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						contentType : "application/json",
 						success : function(data) {
 							TODOLIST = null;
+							USERPROFILE = null;
 							handlers.success(data);
 						}
 					});
@@ -561,6 +562,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							TODOLIST = null;
+							USERPROFILE = null;
 							handlers.success(data);
 						}
 					});

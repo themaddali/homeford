@@ -160,13 +160,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _thelpyoutube = jQuery('#task-helper-youtube').val();
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
-								var _domainids;
-								service.returnDomainIDList({
-									success : function(data) {
-										_domainids = data;
-									}
-								});
-								service.AssignToDo(_domainids[0], _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
+								//var _domainids;
+								// service.returnDomainIDList({
+								// success : function(data) {
+								// _domainids = data;
+								// }
+								// });
+								service.AssignToDo(service.domainNametoID(jQuery.cookie('subuser')), _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
@@ -188,7 +188,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							rules : {
 								taskname : {
 									required : true,
-									maxlength: 30,
+									maxlength : 30,
 								},
 								taskdesc : {
 									required : true,

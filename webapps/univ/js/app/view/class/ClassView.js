@@ -28,13 +28,13 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						router.go('/studentlist');
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVESTUDENTNAME);
-						var list;
-						service.returnDomainIDList({
-							success : function(data) {
-								list = data;
-							}
-						});
-						service.MemberToDoList(list[0], ACTIVESTUDENTID, {
+						// var list;
+						// service.returnDomainIDList({
+							// success : function(data) {
+								// list = data;
+							// }
+						// });
+						service.MemberToDoList(service.domainNametoID(jQuery.cookie('subuser')), ACTIVESTUDENTID, {
 							success : function(StudentData) {
 								var _taskcount = 0;
 								var _quizcount = 0;

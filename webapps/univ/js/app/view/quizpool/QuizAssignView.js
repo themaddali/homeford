@@ -237,12 +237,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _priority = jQuery('input[name=todopriority]:checked', '.edit-form').val();
 								var _ids = ActiveMembers.list;
 								var _domainids;
-								service.returnDomainIDList({
-									success : function(data) {
-										_domainids = data;
-									}
-								});
-								service.AssignQuiz(_domainids[0], _qid, _ids, _qname, _qdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
+								// service.returnDomainIDList({
+									// success : function(data) {
+										// _domainids = data;
+									// }
+								// });
+								service.AssignQuiz(service.domainNametoID(jQuery.cookie('subuser')), _qid, _ids, _qname, _qdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);

@@ -63,13 +63,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							if ($(".edit-form").valid()) {
 								var _qname = jQuery('#quiz-name').val();
 								var _qdesc = jQuery('#quiz-desc').val();
-								var _domainids;
-								service.returnDomainIDList({
-									success : function(data) {
-										_domainids = data;
-									}
-								});
-								service.AddQuiz(_domainids[0], _qname, _qdesc, {
+								// var _domainids;
+								// service.returnDomainIDList({
+									// success : function(data) {
+										// _domainids = data;
+									// }
+								// });
+								service.AddQuiz(service.domainNametoID(jQuery.cookie('subuser')), _qname, _qdesc, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);

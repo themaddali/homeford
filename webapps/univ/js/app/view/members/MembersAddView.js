@@ -75,14 +75,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							if (jQuery('#member-email').val().length == 0) {
 								if (validator.numberOfInvalids() === 1) {
 									validator.resetForm();
-									var _domainid;
-									service.returnDomainIDList({
-										success : function(data) {
-											_domainid = data;
-										}
-									});
+									// var _domainid;
+									// service.returnDomainIDList({
+										// success : function(data) {
+											// _domainid = data;
+										// }
+									// });
 									var _userid = service.thisuserID();
-									service.addMemberRegular(_domainid[0], _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
+									service.addMemberRegular(service.domainNametoID(jQuery.cookie('subuser')), _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
 										success : function(data) {
 											if (data.status !== 'error') {
 												notify.showNotification('OK', data.message);
@@ -131,14 +131,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							if (jQuery('#member-email').val().length == 0) {
 								if (validator.numberOfInvalids() === 1) {
 									validator.resetForm();
-									var _domainid;
-									service.returnDomainIDList({
-										success : function(data) {
-											_domainid = data;
-										}
-									});
+									// var _domainid;
+									// service.returnDomainIDList({
+										// success : function(data) {
+											// _domainid = data;
+										// }
+									// });
 									var _userid = service.thisuserID();
-									service.addMemberRegular(_domainid[0], _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
+									service.addMemberRegular(service.domainNametoID(jQuery.cookie('subuser')), _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
 										success : function(data) {
 											if (data.status !== 'error') {
 												notify.showNotification('OK', data.message);

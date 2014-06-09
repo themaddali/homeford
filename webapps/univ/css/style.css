@@ -226,8 +226,14 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
 	border-bottom-right-radius: 5px;
 	/*-webkit-appearance: button;*/
 	*overflow: visible;
+	outline: none;
 	-webkit-appearance: none;
 }
+
+select {
+	outline: none;
+}
+
 input[type="date"]:focus, input[type="web"]:focus, input[type="file"]:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="search"]:focus {
 	border: 1px solid #0784E3;
 	-webkit-appearance: none;
@@ -3580,6 +3586,19 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	color: white;
 	font-size: 0.9em;
 	font-weight: 400;
+}
+.studentboard div.student-info > div.you {
+	width: 30px;
+	height: 30px;
+	position: relative;
+	top: -310px;
+	right: -270px;
+	z-index: 1000;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.studentboard div.student-info > div.you > i {
+	color: #0784E3;
 }
 
 .studentboard div.student-info li {

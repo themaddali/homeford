@@ -33,9 +33,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 				function populateData() {
 					// service.returnDomainIDList({
-						// success : function(data) {
-							// getMembers(data);
-						// }
+					// success : function(data) {
+					// getMembers(data);
+					// }
 					// });
 					//var activedomains = admin.getActiveDomainsIDs();
 					var activedomains = [];

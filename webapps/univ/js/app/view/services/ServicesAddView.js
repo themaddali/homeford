@@ -67,13 +67,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _scost = jQuery('#service-cost').val();
 								var _stax = jQuery('#service-tax').val();
 								var _sfreq = jQuery('#service-frequency').val();
-								var _domainids;
-								service.returnDomainIDList({
-									success : function(data) {
-										_domainids = data;
-									}
-								});
-								service.AddServices(_domainids[0], _sname, _sdesc, _scost, _stax, _sfreq,jQuery('#service-status').val(), {
+								// var _domainids;
+								// service.returnDomainIDList({
+								// success : function(data) {
+								// _domainids = data;
+								// }
+								// });
+								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
@@ -86,29 +86,28 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										}, 2000);
 									}
 								});
-							}
-							else {
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});
-						
-						jQuery('#service-cost').blur(function(){
-							if (jQuery('#service-cost').val().charAt(0) !== '$'){
-								jQuery('#service-cost').val('$'+jQuery('#service-cost').val());
+
+						jQuery('#service-cost').blur(function() {
+							if (jQuery('#service-cost').val().charAt(0) !== '$') {
+								jQuery('#service-cost').val('$' + jQuery('#service-cost').val());
 							}
 						});
-						jQuery('#service-tax').blur(function(){
-							if (jQuery('#service-tax').val().charAt(0) === '$'){
-								jQuery('#service-tax').val().replace('$','');
+						jQuery('#service-tax').blur(function() {
+							if (jQuery('#service-tax').val().charAt(0) === '$') {
+								jQuery('#service-tax').val().replace('$', '');
 							}
-							if (jQuery('#service-tax').val().charAt(jQuery('#service-tax').val().length-1) !== '%'){
-								jQuery('#service-tax').val(jQuery('#service-tax').val()+'%');
+							if (jQuery('#service-tax').val().charAt(jQuery('#service-tax').val().length - 1) !== '%') {
+								jQuery('#service-tax').val(jQuery('#service-tax').val() + '%');
 							}
 						});
 
 						jQuery.validator.addMethod("money", function(value, element) {
-							value = value.replace('$','');
-							value = value.replace('%','');
+							value = value.replace('$', '');
+							value = value.replace('%', '');
 							var isValidMoney = /^\d{0,4}(\.\d{0,2})?$/.test(value);
 							return this.optional(element) || isValidMoney;
 						}, "Enter valid dollar amount ");
@@ -127,7 +126,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								},
 								servicetax : {
 									required : true,
-									money: true
+									money : true
 								},
 								servicefrequency : {
 									required : true,
