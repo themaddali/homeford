@@ -30,89 +30,105 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						jQuery('.subtitleinfo').text(ACTIVESTUDENTNAME);
 						// var list;
 						// service.returnDomainIDList({
-							// success : function(data) {
-								// list = data;
-							// }
+						// success : function(data) {
+						// list = data;
+						// }
 						// });
-						service.MemberToDoList(service.domainNametoID(jQuery.cookie('subuser')), ACTIVESTUDENTID, {
-							success : function(StudentData) {
-								var _taskcount = 0;
-								var _quizcount = 0;
-								var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
-								//BackingUp
-								jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
-								var COUNT = StudentData.length;
-								if (COUNT === 0) {
-									jQuery('#noinfo').fadeIn(1000);
-									var selectedMembers = {};
-									selectedMembers.text = 'User: ' + jQuery('.subtitleinfo').text();
-									selectedMembers.list = [ACTIVESTUDENTID];
-									todoassign.selectedMembers(selectedMembers);
-									jQuery('.metainfo').text('0 Tasks');
-
+						if (service.domainNametoID(jQuery.cookie('subuser'))) {
+							CardsData();
+						} else {
+							setTimeout(function() {
+								if (service.domainNametoID(jQuery.cookie('subuser'))) {
+									CardsData();
 								} else {
-									jQuery('#noinfo').hide();
-
+									setTimeout(function() {
+										CardsData();
+									}, 1000);
 								}
-								for (var i = 0; i < COUNT; i++) {
-									var newboard = PanelTemplate.clone();
-									if (StudentData[i].title.indexOf('@QUIZ') !== -1) {
-										jQuery(newboard).addClass('quiz');
-										newboard.attr('type', 'QUIZ');
-										_quizcount = _quizcount + 1;
-										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
-										StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
-										jQuery('.class-header img', newboard).attr('src', 'img/quiztag.png');
-									} else {
-										newboard.attr('type', 'TODO');
-										_taskcount = _taskcount + 1;
-										jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
-									}
-									if (StudentData[i].title.length > 30) {
-										var elipsisname = StudentData[i].title.substring(0, 30);
-										elipsisname = elipsisname + '...';
-										jQuery('.class-name', newboard).text(elipsisname);
-									} else {
-										jQuery('.class-name', newboard).text(StudentData[i].title);
-									}
-									jQuery('.class-desc', newboard).text(StudentData[i].desc);
-									jQuery('.class-url', newboard).text(StudentData[i].helperUrl);
-									jQuery('.class-youtube', newboard).text(StudentData[i].helperYoutube);
-									if (StudentData[i].priority === 'High') {
-										jQuery('.class-name', newboard).append(HIGHPRIORITY);
-									} else if (StudentData[i].priority === 'Low') {
-										jQuery('.class-name', newboard).append(LOWPRIORITY);
-									} else {
-										jQuery('.class-name', newboard).append(NORMALPRIORITY);
-									}
-									jQuery('.class-progress', newboard).progressbar();
-									var value = parseInt(StudentData[i].percentage);
-									jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
-									jQuery('.class-progress-label', newboard).text(StudentData[i].percentage + '% Done');
-									jQuery('.class-select', newboard).attr('name', StudentData[i].title);
-									if (StudentData[i].todoEndDate) {
-										jQuery('.due-date', newboard).text(StudentData[i].todoEndDate.split(' ')[0]);
-									}
-									if (StudentData[i].todoStartDate) {
-										jQuery('.start-date', newboard).text(StudentData[i].todoStartDate.split(' ')[0]);
-									}
-									//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
-									newboard.attr('name', StudentData[i].id);
-									//jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
-									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i + 1]);
-									if (i > 8) {
-										jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i % 8]);
-									}
-									jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
-									jQuery('#class-canvas').append(newboard);
-									if (i === COUNT - 1) {
-										helperMediaQuiries();
-										ActivatePanelEvents();
-									}
+							}, 500);
+						}
+					}
+				}
+
+				function CardsData() {
+					service.MemberToDoList(service.domainNametoID(jQuery.cookie('subuser')), ACTIVESTUDENTID, {
+						success : function(StudentData) {
+							var _taskcount = 0;
+							var _quizcount = 0;
+							var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
+							//BackingUp
+							jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
+							var COUNT = StudentData.length;
+							if (COUNT === 0) {
+								jQuery('#noinfo').fadeIn(1000);
+								var selectedMembers = {};
+								selectedMembers.text = 'User: ' + jQuery('.subtitleinfo').text();
+								selectedMembers.list = [ACTIVESTUDENTID];
+								todoassign.selectedMembers(selectedMembers);
+								jQuery('.metainfo').text('0 Tasks');
+
+							} else {
+								jQuery('#noinfo').hide();
+
+							}
+							for (var i = 0; i < COUNT; i++) {
+								var newboard = PanelTemplate.clone();
+								if (StudentData[i].title.indexOf('@QUIZ') !== -1) {
+									jQuery(newboard).addClass('quiz');
+									newboard.attr('type', 'QUIZ');
+									_quizcount = _quizcount + 1;
+									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
+									StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
+									jQuery('.class-header img', newboard).attr('src', 'img/quiztag.png');
+								} else {
+									newboard.attr('type', 'TODO');
+									_taskcount = _taskcount + 1;
+									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
+								}
+								if (StudentData[i].title.length > 30) {
+									var elipsisname = StudentData[i].title.substring(0, 30);
+									elipsisname = elipsisname + '...';
+									jQuery('.class-name', newboard).text(elipsisname);
+								} else {
+									jQuery('.class-name', newboard).text(StudentData[i].title);
+								}
+								jQuery('.class-desc', newboard).text(StudentData[i].desc);
+								jQuery('.class-url', newboard).text(StudentData[i].helperUrl);
+								jQuery('.class-youtube', newboard).text(StudentData[i].helperYoutube);
+								if (StudentData[i].priority === 'High') {
+									jQuery('.class-name', newboard).append(HIGHPRIORITY);
+								} else if (StudentData[i].priority === 'Low') {
+									jQuery('.class-name', newboard).append(LOWPRIORITY);
+								} else {
+									jQuery('.class-name', newboard).append(NORMALPRIORITY);
+								}
+								jQuery('.class-progress', newboard).progressbar();
+								var value = parseInt(StudentData[i].percentage);
+								jQuery('.class-progress', newboard).progressbar("value", value).removeClass("beginning middle end").addClass(value < 31 ? "beginning" : value < 71 ? "middle" : "end");
+								jQuery('.class-progress-label', newboard).text(StudentData[i].percentage + '% Done');
+								jQuery('.class-select', newboard).attr('name', StudentData[i].title);
+								if (StudentData[i].todoEndDate) {
+									jQuery('.due-date', newboard).text(StudentData[i].todoEndDate.split(' ')[0]);
+								}
+								if (StudentData[i].todoStartDate) {
+									jQuery('.start-date', newboard).text(StudentData[i].todoStartDate.split(' ')[0]);
+								}
+								//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
+								newboard.attr('name', StudentData[i].id);
+								//jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
+								jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i + 1]);
+								if (i > 8) {
+									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i % 8]);
+								}
+								jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
+								jQuery('#class-canvas').append(newboard);
+								if (i === COUNT - 1) {
+									helperMediaQuiries();
+									ActivatePanelEvents();
 								}
 							}
-						});
-					}
+						}
+					});
 				}
 
 				function ActivatePanelEvents() {

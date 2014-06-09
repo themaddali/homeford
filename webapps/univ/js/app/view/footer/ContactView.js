@@ -106,7 +106,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										expires : 100,
 										path : '/'
 									});
-									jQuery.cookie('subuser', 'ZINGOARE', {
+									jQuery.cookie('subuser', 'TOUR', {
 										expires : 100,
 										path : '/'
 									});

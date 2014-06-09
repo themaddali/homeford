@@ -50,7 +50,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 
 				this.updateBrand = function(newchoice) {
 					if (newchoice === "Demo Tour"){
-						newchoice = 'ZINGOARE';
+						newchoice = 'TOUR';
 					}
 					jQuery.cookie('subuser', newchoice, {
 						expires : 100,
