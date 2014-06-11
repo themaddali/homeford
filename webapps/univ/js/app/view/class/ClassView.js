@@ -24,6 +24,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				//For Panels
 				function populateClass() {
 					jQuery('#class-canvas').empty();
+					jQuery('.cardsloading').fadeIn(200);
 					if (!ACTIVESTUDENTNAME || ACTIVESTUDENTNAME === "" || ACTIVESTUDENTNAME === null) {
 						router.go('/studentlist');
 					} else {
@@ -72,6 +73,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 							}
 							for (var i = 0; i < COUNT; i++) {
+								jQuery('.cardsloading').fadeOut(200);
 								var newboard = PanelTemplate.clone();
 								if (StudentData[i].title.indexOf('@QUIZ') !== -1) {
 									jQuery(newboard).addClass('quiz');

@@ -1885,6 +1885,19 @@ div.formselction {
 	width: 40px;
 	height: 40px;
 }
+
+.cardsloading {
+	text-align: center;
+	font-size: 13px;
+	color: grey;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 50%;
+	width: 50%;
+	margin: -15% 0 0 -25%;
+}
+
 .edit-form li.form-item div.form-content img:focus, .edit-form li.form-item div.form-content img:hover {
 	border: 1px solid #0784E3;
 }

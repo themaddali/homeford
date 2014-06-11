@@ -27,6 +27,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						_TOTALFAIL = 0;
 						_TOTALPASS = 0;
 						jQuery('#certificate-link').hide();
+						jQuery('.cardsloading').fadeIn(200);
 						jQuery('.subtitleinfo').text(ACTIVEQUIZ.name);
 						jQuery('.subtitleinfo-2').text(ACTIVEQUIZ.membername);
 						if (isNaN(daystogo(ACTIVEQUIZ.dueby))) {
@@ -68,6 +69,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 												jQuery('.option-' + j, quizboard).val(data[i].answers[j].text).attr('isCorrect', data[i].answers[j].isCorrect).attr('answerid', data[i].answers[j].id);
 											}
 										}
+										jQuery('.cardsloading').fadeOut(200);
 										jQuery('#action-canvas').append(quizboard);
 										if (i == data.length - 2) {
 											helperMediaQuiries();

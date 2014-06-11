@@ -34,6 +34,7 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 
 				function populateData() {
 					jQuery('#card-canvas').empty();
+					jQuery('.cardsloading').fadeOut(200);
 					jQuery('#noinfo').hide();
 					NOTIFICATION = notify.getNotifications();
 					var template = jQuery('#notify-template').attr('id', '');
@@ -45,6 +46,7 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 					if (NOTIFICATION.length === 0) {
 						jQuery('#noinfo').fadeIn(1000);
 					}
+					jQuery('.cardsloading').fadeOut(200);
 					for (var i = NOTIFICATION.length-1; i >=0 ; i--) {
 						var thistemplate = template.clone();
 						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);

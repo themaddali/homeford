@@ -30,6 +30,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				function populateStudentList() {
 					//Get User Profile
 					jQuery('#card-canvas').empty();
+					jQuery('.cardsloading').fadeIn(200);
 					MEMBEROBJECT = [];
 					MEMBERIDS = [];
 					var OWNERLEVEL = 0;
@@ -175,6 +176,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
 							var newboard = template.clone();
+							jQuery('.cardsloading').fadeOut(200);
 							if ((MEMBEROBJECT[i].firstName === 'null' || MEMBEROBJECT[i].firstName == null || MEMBEROBJECT[i].firstName === "" ) && (MEMBEROBJECT[i].lastName === 'null' || MEMBEROBJECT[i].lastName == null || MEMBEROBJECT[i].lastName === "")) {
 								jQuery('.student-name', newboard).text(MEMBEROBJECT[i].email);
 								jQuery('.student-select', newboard).attr('name', MEMBEROBJECT[i].email);
