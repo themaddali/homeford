@@ -45,6 +45,7 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 					jQuery('.metainfo').text(NOTIFICATION.length + ' Notification(s)');
 					if (NOTIFICATION.length === 0) {
 						jQuery('#noinfo').fadeIn(1000);
+						jQuery('.cardsloading').fadeOut(200);
 					}
 					jQuery('.cardsloading').fadeOut(200);
 					for (var i = NOTIFICATION.length-1; i >=0 ; i--) {

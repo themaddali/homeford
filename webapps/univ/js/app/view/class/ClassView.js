@@ -62,6 +62,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							var COUNT = StudentData.length;
 							if (COUNT === 0) {
 								jQuery('#noinfo').fadeIn(1000);
+								jQuery('.cardsloading').fadeOut(200);
 								var selectedMembers = {};
 								selectedMembers.text = 'User: ' + jQuery('.subtitleinfo').text();
 								selectedMembers.list = [ACTIVESTUDENTID];

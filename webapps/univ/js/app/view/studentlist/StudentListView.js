@@ -113,6 +113,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						displayCards(MEMBEROBJECT);
 						if (jQuery('.studentboard').length === 0) {
 							jQuery('#noinfo').fadeIn(1000);
+							jQuery('.cardsloading').fadeOut(200);
 						} else {
 							jQuery('#noinfo').hide();
 						}
@@ -133,6 +134,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									}
 									if (jQuery('.studentboard').length === 0) {
 										jQuery('#noinfo').fadeIn(1000);
+										jQuery('.cardsloading').fadeOut(200);
 									} else {
 										jQuery('#noinfo').hide();
 									}
