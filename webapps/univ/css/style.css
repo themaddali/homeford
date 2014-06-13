@@ -3148,7 +3148,8 @@ dialog-modal::-webkit-scrollbar {
 }
 
 .cardinactive {
-	opacity: 0.4;
+	/*opacity: 0.4;*/
+	display: none;
 }
 
 .cardinactive:hover {

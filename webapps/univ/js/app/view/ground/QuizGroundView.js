@@ -166,9 +166,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.quizactionboard').removeClass('cardactive');
 							jQuery('.quizactionboard').addClass('cardinactive');
 							var cardlocation = jQuery(this).offset();
-							$('.main-content').animate({
-								scrollTop : cardlocation.top
-							}, 1000);
+							// $('.main-content').animate({
+								// scrollTop : cardlocation.top
+							// }, 1000);
 							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
 							helperMediaQuiries();
 							//startCounter();

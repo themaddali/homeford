@@ -179,7 +179,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function helperMediaQuiries() {
 					if ($('.classboard').length > 2) {
-						var width = $('.main-content').width() - 30;
+						var width = $('.main-content').width() - 60;
 						var rowholds = Math.floor(width / 304);
 						var fillerspace = width - (rowholds * 304);
 						//var eachfiller = 300+fillerspace/rowholds;
@@ -187,7 +187,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						if (newmargin < 10) {
 							newmargin = 10;
 						}
-						$('.classboard').css('margin-left', (newmargin / 2) - 5);
+						$('.classboard').css('margin-left', (newmargin / 2));
 						$('.classboard').css('margin-right', newmargin / 2);
 					}
 				}

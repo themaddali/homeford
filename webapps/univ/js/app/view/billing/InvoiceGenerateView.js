@@ -43,7 +43,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					//
 					// }
 					// });
-					getServices(service.domainNametoID(jQuery.cookie('subuser')));
+					var domainIDs = [];
+					domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')))
+					getServices(domainIDs);
 				}
 
 				function getMembers(activedomains) {
@@ -98,7 +100,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									SERVICESALL.push(data[j]);
 									jQuery('#service-template select').append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
-										jQuery('.edit-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
+										jQuery('#default-service-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
 									}
 								}
 							}
@@ -157,6 +159,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							var thisservice = template.clone();
 							jQuery(thisservice).show();
 							jQuery(thisservice).find('select').attr('id', 'service-select-' + jQuery('select').length);
+							jQuery(thisservice).addClass('extraservice');
 							// for (var j = 0; j < SERVICESALL.length; j++) {
 							// if (SERVICESALL[j].status === 'Active' || SERVICESALL[j].status === 'ACTIVE') {
 							// jQuery('.edit-select', thisservice).append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');

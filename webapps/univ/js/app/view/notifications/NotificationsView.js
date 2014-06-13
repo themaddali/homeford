@@ -34,7 +34,7 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 
 				function populateData() {
 					jQuery('#card-canvas').empty();
-					jQuery('.cardsloading').fadeOut(200);
+					//jQuery('.cardsloading').fadeOut(200);
 					jQuery('#noinfo').hide();
 					NOTIFICATION = notify.getNotifications();
 					var template = jQuery('#notify-template').attr('id', '');
