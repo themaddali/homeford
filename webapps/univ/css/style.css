@@ -3234,6 +3234,38 @@ dialog-modal::-webkit-scrollbar {
 	overflow: hidden;
 }
 
+.kioskcard {
+	float: left;
+	width: 150px;
+	height: 200px;
+	text-align: left;
+	border: 1px solid #d9d9d9;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
+	margin: 5px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.kioskcard.cardactive {
+	float: left;
+	width: 98%;
+	height: 400px;
+	text-align: center;
+	border: 1px solid #0784E3;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
+	margin: 5px;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.kioskcard:hover,.kioskcard:active {
+	border-color:  #0784E3;
+}
+
 .float-left .adminboard.active {
 	float: left;
 	width: 830px;
@@ -3382,7 +3414,7 @@ dialog-modal::-webkit-scrollbar {
 	margin-top: 3px;
 }
 
-.canvas-header input {
+.canvas-header input, .cards-header input {
 	width: 50%;
 	margin-top: -15px;
 	padding: 10px;
@@ -3396,14 +3428,24 @@ dialog-modal::-webkit-scrollbar {
 	border-color: rgba(114, 114, 114, 0.71);
 	background: url("../img/search.png") no-repeat right;
 	background-position-x: 99%;
+	outline: none;
 }
+
+.cards-header input {
+	margin-top: 0px;
+	border: 3px solid;
+	border-color: #f3f3f3;
+}
+
 .canvas-header input:active {
 	border-color: #0784E3;
 	background: none;
+	outline: none;
 }
 .canvas-header input:focus {
 	border-color: #0784E3;
 	background: none;
+	outline: none;
 }
 .canvas-header a {
 	float: left;
@@ -3428,6 +3470,34 @@ dialog-modal::-webkit-scrollbar {
 	margin-top: 0px;
 	margin-left: 25px;
 }
+
+.kioskcard .kioskcard-id {
+	font-size: 12px;
+	color: #7f7f7f;
+	margin-left: 10px;
+	margin-top: 5px;
+}
+.kioskcard .kioskcard-name {
+	font-size: 14px;
+	color: white;
+	padding: 10px;
+	background: url("../img/stripe.png");
+}
+.kioskflag {
+	text-align: center;
+	padding: 20px;
+	color: #737373;
+	margin-top: 15px;
+}
+
+.kiosk-flag-text {
+	font-size: 14px;
+}
+
+.contentfull  .membercard .membercard-name,.contentfull  .membercard .membercard-id {
+	margin: 10px
+}
+
 .quizactionboard .question-number {
 	font-size: 14px;
 	color: white;

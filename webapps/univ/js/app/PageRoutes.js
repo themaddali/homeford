@@ -340,6 +340,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('attendancekiosk', '^/attendancekiosk(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/kiosk/attendance.html', '../app/view/kiosk/Attendance'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('no route', '^.*', {
 						container : CONTAINER,
 						enter : function(location, result) {
