@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView', '../../view/billing/InvoiceGenerateView'], function(jquery, cookie, service, router, ellipsis, todoassign, quizassign, invoicegenerate) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView', '../../view/billing/InvoiceGenerateView'], function(jquery, cookie, service, banner, router, ellipsis, todoassign, quizassign, invoicegenerate) {"use strict";
 
 	var Attendance = ( function() {
 
@@ -17,6 +17,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
+						banner.setBrand();
 						return true;
 					} else {
 						//Paranoid Cookie Clearing
@@ -32,16 +33,53 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				}
 
 				function populateData() {
-					// service.returnDomainIDList({
-					// success : function(data) {
-					// getMembers(data);
-					// }
-					// });
-					//var activedomains = admin.getActiveDomainsIDs();
 					var activedomains = [];
 					jQuery('.metadata').text(Date.now());
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 					getMembers(activedomains);
+					setInterval(function() {
+						GetClock();
+					}, 1000);
+				}
+
+				//Thanks to http://www.ricocheting.com/code/javascript/html-generator/date-time-clock
+				function GetClock() {
+					var tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+					var tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+					var d = new Date();
+					var nday = d.getDay();
+					var nmonth = d.getMonth();
+					var ndate = d.getDate();
+					var nyear = d.getYear();
+					var nhour = d.getHours();
+					var nmin = d.getMinutes();
+					var nsec = d.getSeconds();
+					var ap;
+
+					if (nyear < 1000)
+						nyear = nyear + 1900;
+
+					if (nhour == 0) {
+						ap = " AM";
+						nhour = 12;
+					} else if (nhour <= 11) {
+						ap = " AM";
+					} else if (nhour == 12) {
+						ap = " PM";
+					} else if (nhour >= 13) {
+						ap = " PM";
+						nhour -= 12;
+					}
+
+					if (nmin <= 9) {
+						nmin = "0" + nmin;
+					}
+					if (nsec <= 9) {
+						nsec = "0" + nsec;
+					}
+
+					jQuery('#currenttime').text("" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "");
 				}
 
 				function getMembers(activedomains) {
@@ -89,7 +127,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				}
 
 				function activateEvents() {
-					
+
 					jQuery('.card-search').change(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
 						var cardlist = jQuery('.contentfull .kioskcard-name');
@@ -103,7 +141,29 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							}
 						}
 					});
-					
+
+					jQuery('.kioskcancel').click(function() {
+						jQuery('.kioskcard').removeClass('cardinactive');
+						jQuery('.kioskcard').removeClass('cardactive');
+					});
+
+					jQuery('.kioskok').click(function() {
+						$(".kioskcard.cardactive  i").fadeOut(800);
+						setTimeout(function() {
+							$(".kioskcard.cardactive  i").removeClass('icon-thumbs-down').addClass('icon-thumbs-up').css('color', '#007DBA');
+							$(".kioskcard.cardactive  i").fadeIn(700);
+							$(this).attr('disabled', 'disabled');
+							$('.kioskcard.cardactive').find('.kiosk-flag-text').text('Checked In');
+							jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
+								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
+								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color','#007DBA');
+							setTimeout(function() {
+								jQuery('.kioskcard').removeClass('cardinactive');
+								jQuery('.kioskcard').removeClass('cardactive');
+							}, 2000);
+						}, 700);
+					});
+
 					jQuery('.ui-menu-item').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
 						;
@@ -132,19 +192,27 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 							}
 						}
 					});
-					
-					jQuery('.kioskcard').click(function(){
-						if (!jQuery(this).hasClass('cardactive')) {
+
+					jQuery('.kioskflag').click(function() {
+						if (!jQuery(this).parent().hasClass('cardactive')) {
 							jQuery('.kioskcard').removeClass('cardactive');
 							jQuery('.kioskcard').addClass('cardinactive');
-							jQuery(this).removeClass('cardinactive').addClass('cardactive');
-							//helperMediaQuiries();
-							//startCounter();
+							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
+							if (jQuery(this).find('i').hasClass('icon-thumbs-up')) {
+								jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
+								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
+								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Check Out').css('background-color','#e36607');
+
+							} else {
+								jQuery('.kioskcard.cardactive input[type="text"]').removeAttr("disabled");
+								jQuery('.kioskcard.cardactive textarea').removeAttr("disabled");
+								jQuery('.kioskcard.cardactive.kioskok').val("Check In").css('background-color', 'green');
+							}
 						}
 					});
 				}
 
-				function clearForm() {
+				function validateSubmit() {
 
 				}
 
@@ -155,7 +223,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 				this.resume = function() {
 					$(".card-search").autocomplete("destroy");
+					GetClock();
 					populateData();
+					banner.setBrand();
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -168,14 +238,11 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 						template = jQuery('#member-template').remove().attr('id', '');
 						//Preactivate Dependency
 						//todoassign.init();
+						GetClock();
 						populateData();
 
 						//HTML Event - Actions
-						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
-						});
 
-						
 					} // Cookie Guider
 				};
 

@@ -1988,6 +1988,10 @@ div.formselction {
 	text-align: right;
 	padding-right: 30px;
 }
+.edit-form.kiosk-form li.form-item > label {
+	width: 35%;
+	max-width: 500px;
+}
 .view-form li.form-item > label {
 	text-align: left;
 	max-width: 170px;
@@ -2051,6 +2055,10 @@ form div.form-content textarea.error {
 	border-bottom-color: rgba(114, 114, 114, 0.71);
 	color: #000;
 	vertical-align: middle;
+}
+
+.edit-form.kiosk-form li.form-item > .form-content {
+	width: 65%;
 }
 
 .adminboard p.half-height {
@@ -3245,13 +3253,12 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 	margin: 5px;
 	overflow: hidden;
-	cursor: pointer;
 }
 
 .kioskcard.cardactive {
 	float: left;
 	width: 98%;
-	height: 400px;
+	height: 100%;
 	text-align: center;
 	border: 1px solid #0784E3;
 	border-top-left-radius: 10px;
@@ -3259,11 +3266,10 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 	margin: 5px;
 	overflow: hidden;
-	cursor: pointer;
 }
 
-.kioskcard:hover,.kioskcard:active {
-	border-color:  #0784E3;
+.kioskcard:hover, .kioskcard:active {
+	border-color: #0784E3;
 }
 
 .float-left .adminboard.active {
@@ -3488,13 +3494,40 @@ dialog-modal::-webkit-scrollbar {
 	padding: 20px;
 	color: #737373;
 	margin-top: 15px;
+	cursor: pointer;
+}
+
+.kioskaction {
+	text-align: center;
+	padding: 20px;
+	color: #737373;
+	margin-top: -35px;
+}
+
+.kioskaction > input[type=button] {
+	background-color: green;
+	width: 200px;
+	height: 50px;
+	color: white;
+	border-color: white;
+	border: 2px solid;
+}
+
+#currenttime {
+	color: black;
+	vertical-align: middle;
+	padding: 10px;
+}
+
+.kioskaction > input[type=button]:hover, .kioskaction > input[type=button]:active {
+	border-color: #007DBA;
 }
 
 .kiosk-flag-text {
 	font-size: 14px;
 }
 
-.contentfull  .membercard .membercard-name,.contentfull  .membercard .membercard-id {
+.contentfull  .membercard .membercard-name, .contentfull  .membercard .membercard-id {
 	margin: 10px
 }
 

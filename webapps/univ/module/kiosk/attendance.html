@@ -7,7 +7,6 @@
 				This website works best with JavaScript enabled
 			</div>
 		</noscript>
-
 		<div id="project-nav">
 			<div id="project-page-logo" class="ir">
 				<a class="mainlogo"></a>
@@ -27,19 +26,22 @@
 				<img alt="flow" src="img/bread.png" height="35" />
 			</div>
 			<div class="metainfo">
-				Show Time here
+				0 members checked In
 			</div>
 		</div>
 		<div class="main-content">
 			<!-- <div class="cardsloading">
-				<img width="70px" height="70px" src="img/loading-cofee.gif" />
-				<p>
-					Getting members info!!
-				</p>
+			<img width="70px" height="70px" src="img/loading-cofee.gif" />
+			<p>
+			Getting members info!!
+			</p>
 			</div> -->
 			<div class="cards-header">
 				<div class="cards-header">
-					<input class="card-search" type="search" placeholder="search by name" />
+					<!-- <input class="card-search" type="search" placeholder="search by name" /> -->
+					<div id="currenttime">
+						Current Time!
+					</div>
 				</div>
 			</div>
 			<div id="action-canvas" class="contentfull float-left">
@@ -55,16 +57,54 @@
 					Name
 				</div>
 				<!-- <div class="kioskcard-id">
-					ID
+				ID
 				</div> -->
 				<div class="kioskflag">
 					<i class="icon-thumbs-down  icon-3x "></i>
-					<p class="kiosk-flag-text">No Show Yet!</p>
+					<p class="kiosk-flag-text">
+						No Show Yet!
+					</p>
+				</div>
+				<div class="card-form-container">
+					<form id="attendance-signin-form" class="edit-form kiosk-form">
+						<fieldset>
+							<ol>
+								<li class="form-item">
+									<label>Your Name</label>
+									<div class="form-content">
+										<input placeholder="Ex: John Summers"  class="attendance-dropoff-name" name="dropoffname" type="text" autofocus />
+										<!-- <div class="form-helper">
+										<label>Provide your full name</label>
+										</div> -->
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Relation</label>
+									<div class="form-content">
+										<input placeholder="Ex: Father / Mother / Uncle @650 867 1234 etc."  class="attendance-dropoff-rel" name="dropoffrel" type="text" />
+										<!-- <div class="form-helper">
+										<label>Select how are you related</label>
+										</div> -->
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Notes</label>
+									<div class="form-content">
+										<textarea class="edittextarea attendance-dropoff-notes" placeholder="Ex: Will pick up late / He is suffering from slight cold / Can you not give him any assignment today? etc." id="attendance-desc" name="attendancedesc"></textarea>
+										<!-- <div class="form-helper">
+										<label>Any special message! (Optional)</label>
+										</div> -->
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
 				</div>
 				<div class="kioskaction">
-					<input type="button" value="Check-In" />
-					<input type="button" value="Cancel" />
-					
+					<input class="kioskok" type="button" value="Check-In" />
+					<div style="height: 15px"></div>
+					<input class="kioskcancel" type="button" value="Cancel" style="background-color: white; color: grey" />
+
 				</div>
 			</div>
 		</div>

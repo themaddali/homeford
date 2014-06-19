@@ -167,7 +167,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.quizactionboard').addClass('cardinactive');
 							var cardlocation = jQuery(this).offset();
 							// $('.main-content').animate({
-								// scrollTop : cardlocation.top
+							// scrollTop : cardlocation.top
 							// }, 1000);
 							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
 							helperMediaQuiries();
@@ -206,7 +206,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									success : function(data) {
 										if (data.status == 'success') {
 											//Progress saving as and when needed!
-											notify.showNotification('OK',  ' Answered Question in Quiz: '+ ACTIVEQUIZ.name);
+											notify.showNotification('OK', ' Answered Question in Quiz: ' + ACTIVEQUIZ.name);
 											jQuery('#alert-value').text(notify.getNewNotificationsCount());
 										}
 									}
@@ -217,7 +217,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.quizactionboard').removeClass('cardinactive');
 							jQuery('.quizactionboard').removeClass('cardactive');
 						}, 2000);
-					})
+					});
 				}
 
 				function startCounter() {
