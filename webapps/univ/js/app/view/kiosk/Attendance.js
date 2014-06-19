@@ -11,7 +11,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 			var membernames = [];
 			var template;
 			var TARGETVIEW;
-			var TARGETROUTINE;
+			var KIOSKMODE = false;
 
 			function Attendance() {
 
@@ -40,6 +40,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					setInterval(function() {
 						GetClock();
 					}, 1000);
+
 				}
 
 				//Thanks to http://www.ricocheting.com/code/javascript/html-generator/date-time-clock
@@ -155,8 +156,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							$(this).attr('disabled', 'disabled');
 							$('.kioskcard.cardactive').find('.kiosk-flag-text').text('Checked In');
 							jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color','#007DBA');
+							jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
+							jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color', '#007DBA');
 							setTimeout(function() {
 								jQuery('.kioskcard').removeClass('cardinactive');
 								jQuery('.kioskcard').removeClass('cardactive');
@@ -201,7 +202,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							if (jQuery(this).find('i').hasClass('icon-thumbs-up')) {
 								jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
 								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Check Out').css('background-color','#e36607');
+								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Check Out').css('background-color', '#e36607');
 
 							} else {
 								jQuery('.kioskcard.cardactive input[type="text"]').removeAttr("disabled");
@@ -233,15 +234,25 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Attendance Kiosk';
+					if (KIOSKMODE == false && $('#nopage-warning').is(':visible') == false) {
+						router.go('/admin');
+					}
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
 						//Preactivate Dependency
 						//todoassign.init();
 						GetClock();
-						populateData();
+						//populateData();
 
 						//HTML Event - Actions
+						jQuery('.launchkiosk').click(function() {
+							KIOSKMODE = true;
+							jQuery('#nopage-warning').fadeOut(500);
+							jQuery('.main-content-header').fadeIn(400);
+							jQuery('.main-content').fadeIn(400);
+							populateData();
+						});
 
 					} // Cookie Guider
 				};
