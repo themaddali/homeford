@@ -11,7 +11,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 
 			function ProfileView() {
 
@@ -34,7 +34,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							}
 							var template = jQuery('#profile-domain-template').attr('id', '');
 							//backupagain
-							jQuery('#div-template').append(template.attr('id', 'profile-domain-template'))
+							jQuery('#div-template').append(template.attr('id', 'profile-domain-template'));
 							if (UserProfile.domains.length === 1) {
 								var activetemplate = template.clone();
 								jQuery('.domainlabel', activetemplate).text('Domain');

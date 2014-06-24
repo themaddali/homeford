@@ -5,7 +5,7 @@ define(['../app/LocationView', '../app/UrlFragment', '../app/Router', 'cookie', 
 			var DEFAULT_OPTIONS = {
 				title : 'Welcome',
 				subTitle : null,
-			}
+			};
 
 			function Application() {
 

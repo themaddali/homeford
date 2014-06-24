@@ -196,7 +196,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				this.activeStudent = function(activename, activeid) {
 					ACTIVESTUDENTNAME = activename;
 					ACTIVESTUDENTID = activeid;
-				}
+				};
 
 				this.pause = function() {
 

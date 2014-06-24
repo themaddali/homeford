@@ -11,7 +11,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 			var activeDomains = [];
 			var pendingList;
 			var validator;
@@ -44,7 +44,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					// }
 					// });
 					var domainIDs = [];
-					domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')))
+					domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
 					getServices(domainIDs);
 				}
 
@@ -126,7 +126,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
 					jQuery('#member-list').css('color', 'black');
-				}
+				};
 
 				this.pause = function() {
 
@@ -182,7 +182,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							databoject.toemail = jQuery('#member-email').val();
 							databoject.tomessage = jQuery('#member-message').val();
 							if (databoject.tomessage == "") {
-								databoject.tomessage = 'Happy to help!!!'
+								databoject.tomessage = 'Happy to help!!!';
 							}
 							var _services = [];
 							for (var i = 0; i < jQuery('select').length; i++) {

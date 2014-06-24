@@ -11,7 +11,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 			var activeDomains = [];
 			var DATAOBJECT = null;
 			var template;
@@ -78,7 +78,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.setData = function(databject) {
 					DATAOBJECT = databject;
-				}
+				};
 
 				this.pause = function() {
 

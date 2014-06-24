@@ -7,18 +7,18 @@
 				This website works best with JavaScript enabled
 			</div>
 		</noscript>
-		<div id="project-nav">
-			<div id="project-page-logo" class="ir">
-				<a class="mainlogo"></a>
+		<div id="project-nav" style="display: none; cursor: default">
+			<div id="project-page-logo" style="cursor: default" class="ir">
+				<a class="mainlogo" style="cursor: default"></a>
 				<h1>Zingoare</h1>
 			</div>
 			<div></div>
 			<div class="user-info" id="user-name">
 				<i class="icon-bullseye  icon-1x "></i>
 			</div>
-			<span class="brandname"> </span>
-			<select class="brandnames"></select>
-			<i class="icon-angle-down icon-1x brandnamesicon"></i>
+			<span class="brandname" style="cursor: default"> </span>
+			<select class="brandnames" style="cursor: default"></select>
+
 		</div>
 		<div id="nopage-warning">
 			<i class="icon-exclamation-sign icon-1x " style="color: rgb(227, 102, 7)"></i>You are about to set up a kiosk mode. This mode is usually set at places where there is no guidance and users will feed in their response. Some of the use cases are for feedback, ordering, sign in sheet etc.
@@ -32,7 +32,7 @@
 		</div>
 		<div class="main-content-header" style="display: none">
 			<div class="titleinfo">
-				<span class="subtitleinfo">Attendance Kiosk</span>
+				<span class="subtitleinfo" style="cursor: default">Attendance Kiosk</span>
 				<img alt="flow" src="img/bread.png" height="35" />
 			</div>
 			<div class="metainfo">
@@ -75,8 +75,8 @@
 						No Show Yet!
 					</p>
 				</div>
-				<div class="card-form-container">
-					<form id="attendance-signin-form" class="edit-form kiosk-form">
+				<div class="card-form-container kiosk-form-container" style="display:none">
+					<form class="edit-form kiosk-form">
 						<fieldset>
 							<ol>
 								<li class="form-item">
@@ -100,7 +100,7 @@
 								<li class="form-item">
 									<label>Notes</label>
 									<div class="form-content">
-										<textarea class="edittextarea attendance-dropoff-notes" placeholder="Ex: Will pick up late / He is suffering from slight cold / Can you not give him any assignment today? etc." id="attendance-desc" name="attendancedesc"></textarea>
+										<textarea class="edittextarea attendance-dropoff-notes" placeholder="Ex: Will pick up late / He is suffering from slight cold / Can you not give him any assignment today? etc." name="attendancedesc"></textarea>
 										<!-- <div class="form-helper">
 										<label>Any special message! (Optional)</label>
 										</div> -->
@@ -110,10 +110,25 @@
 						</fieldset>
 					</form>
 				</div>
-				<div class="kioskaction">
+
+				<div class="kioskaction" style="display:none">
+					<div class="kiosk-response">
+						Howdy Howdy!!
+					</div>
 					<input class="kioskok" type="button" value="Check-In" />
 					<div style="height: 15px"></div>
 					<input class="kioskcancel" type="button" value="Cancel" style="background-color: white; color: grey" />
+				</div>
+				<div class="kiosk-info-zone">
+					<div class="kiosk-info-subvalue kiosk-info-title">
+						Checked In from
+					</div>
+					<div  class="kiosk-info-mainvalue kiosk-info-value">
+						Now
+					</div>
+					<div class="kiosk-info-subvalue kiosk-info-footer">
+						 hours more
+					</div>
 
 				</div>
 			</div>

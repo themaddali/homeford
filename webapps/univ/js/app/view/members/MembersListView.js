@@ -55,10 +55,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								for (var j = 0; j < data.length; j++) {
 									var row = rowtemplate.clone();
 									if (!data[j].firstName || data[j].firstName === 'null' || data[j].firstName === null) {
-										data[j].firstName = "  "
+										data[j].firstName = "  ";
 									}
 									if (data[j].lastName == 'null' || data[j].lastName == null || !data[j].lastName) {
-										data[j].lastName = "  "
+										data[j].lastName = "  ";
 									}
 									if (data[j].image && data[j].image.name != null) {
 										jQuery('.members-image', row).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);

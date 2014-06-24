@@ -68,7 +68,7 @@ define(['../../Router', 'cookie', '../../service/DataService', '../../view/entry
 
 				this.setEntity = function(entity) {
 					ENTITY = entity;
-				}
+				};
 
 				this.init = function(args) {
 					//Lets create some background for UX

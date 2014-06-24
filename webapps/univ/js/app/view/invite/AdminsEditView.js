@@ -20,7 +20,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('#invite-sender').val(ACTIVEINVITE.invitedby);
 					}
 					else{
-						router.go('/adminslist')
+						router.go('/adminslist');
 					}
 				}
 
@@ -42,7 +42,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				
 				this.setInviteInfo = function(Info){
 					ACTIVEINVITE = Info;
-				}
+				};
 
 
 				this.pause = function() {

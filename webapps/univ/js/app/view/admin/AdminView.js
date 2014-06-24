@@ -459,15 +459,15 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				this.getActiveDomains = function() {
 					return ACTIVEDOMAINS;
-				}
+				};
 
 				this.getActiveDomainsIDs = function() {
 					return ACTIVEDOMAINIDS;
-				}
+				};
 
 				this.reloadData = function() {
 					populateData();
-				}
+				};
 
 				this.pause = function() {
 

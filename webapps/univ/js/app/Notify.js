@@ -113,19 +113,19 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 
 				this.getNotifications = function() {
 					return NOTIFICATIONS;
-				}
+				};
 
 				this.getNewNotificationsCount = function() {
 					return NOTIFICATION_new;
-				}
+				};
 
 				this.resetNewNotification = function() {
 					NOTIFICATION_new = 0;
-				}
+				};
 
 				this.removeNotifications = function(indexnum) {
 					NOTIFICATIONS.splice(indexnum, 1);
-				}
+				};
 
 				this.pause = function() {
 
@@ -137,11 +137,11 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 
 				this.showNotification = function(status, message, toroute, duration) {
 					showNotification(status, message, toroute, duration);
-				}
+				};
 
 				this.showMessage = function(status, message, fullmessage, keyword, toroute, duration) {
 					showMessage(status, message, fullmessage, keyword, toroute, duration);
-				}
+				};
 
 				this.init = function(args) {
 					//Get the context from DOM

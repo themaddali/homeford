@@ -50,7 +50,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.activeQuiz = function(activequiz) {
 					ACTIVEQUIZ = activequiz;
-				}
+				};
 
 				this.pause = function() {
 
@@ -138,7 +138,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								}
 							}
 							return this.valid();
-						}
+						};
 
 						jQuery('#question-add').on('click', function() {
 							if ($(".edit-form").valid()) {

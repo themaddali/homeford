@@ -23,7 +23,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#service-frequency').val(ACTIVESERVICE.freq);
 						ActivateClicks();
 					} else {
-						router.go('/serviceslist')
+						router.go('/serviceslist');
 					}
 				}
 
@@ -50,7 +50,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.setInfo = function(ServiceInfo) {
 					ACTIVESERVICE = ServiceInfo;
-				}
+				};
 
 				this.pause = function() {
 

@@ -114,7 +114,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 				this.entity = function(entity) {
 					ENTITY = entity;
-				}
+				};
 
 				this.pause = function() {
 

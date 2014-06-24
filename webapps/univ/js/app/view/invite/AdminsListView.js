@@ -11,7 +11,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 

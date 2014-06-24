@@ -11,7 +11,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 			//var Croppic = new croppic;
 
 			function ProfileEditView() {
@@ -26,7 +26,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
 							if (!UserProfile.image || UserProfile.image == null || UserProfile.image == 'null') {
-								jQuery('#profile-image').attr('src', 'img/noimg.png')
+								jQuery('#profile-image').attr('src', 'img/noimg.png');
 							} else {
 								jQuery('#profile-image').attr('src', '/zingoare/api/profileupload/picture/' + UserProfile.image.id);
 							}

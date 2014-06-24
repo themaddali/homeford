@@ -170,7 +170,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 				this.setReturnInfo = function(view) {
 					TARGETVIEW = view;
-				}
+				};
 
 				this.pause = function() {
 

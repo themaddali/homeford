@@ -2921,6 +2921,12 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 }
 
+.contentfull div.card-form-container.kiosk-form-container {
+	margin: 10px;
+	width: 65%;
+	text-align: left;
+}
+
 .studentboard.loading div {
 	width: 100%;
 	margin-top: 55%;
@@ -3245,7 +3251,7 @@ dialog-modal::-webkit-scrollbar {
 .kioskcard {
 	float: left;
 	width: 150px;
-	height: 200px;
+	height: 175px;
 	text-align: left;
 	border: 1px solid #d9d9d9;
 	border-top-left-radius: 10px;
@@ -3266,6 +3272,18 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 	margin: 5px;
 	overflow: hidden;
+}
+
+.kioskcard.cardactive > .kioskflag {
+	width: 70%;
+}
+
+.kiosk-info-zone {
+	display: none;
+}
+
+.kioskcard.cardactive > .kiosk-info-zone {
+	display: inline;
 }
 
 .kioskcard:hover, .kioskcard:active {
@@ -3491,10 +3509,11 @@ dialog-modal::-webkit-scrollbar {
 }
 .kioskflag {
 	text-align: center;
-	padding: 20px;
+	/*padding: 20px;*/
 	color: #737373;
 	margin-top: 15px;
 	cursor: pointer;
+	width: 100%;
 }
 
 .kioskaction {
@@ -3502,6 +3521,16 @@ dialog-modal::-webkit-scrollbar {
 	padding: 20px;
 	color: #737373;
 	margin-top: -35px;
+	width: 70%;
+}
+
+.kiosk-info-zone {
+	width: 25%;
+	float: right;
+	height: 250px;
+	margin-right: 20px;
+	margin-top: -300px;
+	color: grey;
 }
 
 .kioskaction > input[type=button] {
@@ -3511,6 +3540,19 @@ dialog-modal::-webkit-scrollbar {
 	color: white;
 	border-color: white;
 	border: 2px solid;
+}
+
+.kiosk-info-mainvalue {
+	font-size: 35px;
+	padding: 5px;
+	letter-spacing: -2px;
+	color: grey;
+}
+
+.kiosk-info-subvalue {
+	font-size: 14px;
+	padding: 0px;
+	color: grey;
 }
 
 #currenttime {
@@ -3525,6 +3567,16 @@ dialog-modal::-webkit-scrollbar {
 
 .kiosk-flag-text {
 	font-size: 14px;
+}
+
+.kiosk-response {
+	padding-bottom: 20px;
+	font-size: 14px;
+}
+
+.kiosk-activity {
+	width: 70%;
+	border-right: 1px solid #007DBA;
 }
 
 .contentfull  .membercard .membercard-name, .contentfull  .membercard .membercard-id {

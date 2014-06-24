@@ -144,30 +144,41 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					});
 
 					jQuery('.kioskcancel').click(function() {
+						jQuery('.kioskcard.cardactive').find('.card-form-container').hide();
+						jQuery('.kioskcard.cardactive').find('.kioskaction').hide();
 						jQuery('.kioskcard').removeClass('cardinactive');
 						jQuery('.kioskcard').removeClass('cardactive');
 					});
 
 					jQuery('.kioskok').click(function() {
-						$(".kioskcard.cardactive  i").fadeOut(800);
-						setTimeout(function() {
-							$(".kioskcard.cardactive  i").removeClass('icon-thumbs-down').addClass('icon-thumbs-up').css('color', '#007DBA');
-							$(".kioskcard.cardactive  i").fadeIn(700);
-							$(this).attr('disabled', 'disabled');
-							$('.kioskcard.cardactive').find('.kiosk-flag-text').text('Checked In');
-							jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
-							jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
-							jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color', '#007DBA');
-							setTimeout(function() {
-								jQuery('.kioskcard').removeClass('cardinactive');
-								jQuery('.kioskcard').removeClass('cardactive');
-							}, 2000);
-						}, 700);
+						if ($(this).val() === 'Check-In') {
+							if (validateSubmit() == true) {
+								$(".kioskcard.cardactive  i").fadeOut(800);
+								setTimeout(function() {
+									$(".kioskcard.cardactive  i").removeClass('icon-thumbs-down').addClass('icon-thumbs-up').css('color', '#007DBA');
+									$(".kioskcard.cardactive  i").fadeIn(700);
+									$(this).attr('disabled', 'true');
+									$('.kioskcard.cardactive').find('.kiosk-flag-text').text('Checked In');
+									jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
+									jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
+									jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color', '#007DBA');
+
+									setTimeout(function() {
+										jQuery('.kioskcard.cardactive').find('.card-form-container').hide();
+										jQuery('.kioskcard.cardactive').find('.kioskaction').hide();
+										jQuery('.kioskcard').removeClass('cardinactive');
+										jQuery('.kioskcard').removeClass('cardactive');
+									}, 2000);
+								}, 700);
+							}
+
+						} else {
+
+						}
 					});
 
 					jQuery('.ui-menu-item').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
 						var cardlist = jQuery('.contentfull .kioskcard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
@@ -181,7 +192,6 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					});
 					jQuery('.card-search').keyup(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
 						var cardlist = jQuery('.contentfull .kioskcard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
@@ -198,22 +208,65 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						if (!jQuery(this).parent().hasClass('cardactive')) {
 							jQuery('.kioskcard').removeClass('cardactive');
 							jQuery('.kioskcard').addClass('cardinactive');
+							jQuery(this).parent().find('.card-form-container').show();
+							jQuery(this).parent().find('.kioskaction').show();
 							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
 							if (jQuery(this).find('i').hasClass('icon-thumbs-up')) {
 								jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
 								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
 								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Check Out').css('background-color', '#e36607');
+								setInfo('checkout');
 
 							} else {
 								jQuery('.kioskcard.cardactive input[type="text"]').removeAttr("disabled");
 								jQuery('.kioskcard.cardactive textarea').removeAttr("disabled");
 								jQuery('.kioskcard.cardactive.kioskok').val("Check In").css('background-color', 'green');
+								setInfo('checkin');
 							}
 						}
 					});
 				}
 
+				function setInfo(action) {
+					if (action === 'checkin') {
+						jQuery('.kiosk-info-title').html('Checked In From');
+						jQuery('.kiosk-info-value').html('7 hours');
+						jQuery('.kiosk-info-footer').html('+1 more hours');
+					} else {
+						jQuery('.kiosk-info-title').html('Checkout Time');
+						jQuery('.kiosk-info-value').html('5:00pm');
+						jQuery('.kiosk-info-footer').html('7:34 hours');
+					}
+				}
+
 				function validateSubmit() {
+					//Validate Name
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').val().length == 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').addClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').val().length > 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').removeClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').val().length == 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').addClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').val().length > 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').removeClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').val().length == 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').addClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').val().length > 0) {
+						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').removeClass('error');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.error').length > 0) {
+						return false;
+						console.log('errors');
+					}
+					if (jQuery('.kioskcard.cardactive').find('.error').length == 0) {
+						return true;
+						console.log('All Good');
+					}
 
 				}
 
@@ -251,6 +304,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							jQuery('#nopage-warning').fadeOut(500);
 							jQuery('.main-content-header').fadeIn(400);
 							jQuery('.main-content').fadeIn(400);
+							jQuery('#project-nav').fadeIn(400);
 							populateData();
 						});
 

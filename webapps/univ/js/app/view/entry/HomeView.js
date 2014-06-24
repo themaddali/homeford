@@ -37,7 +37,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 								duration : 5000,
 								fade : 500
 							}, function() {
-								r.stop()
+								r.stop();
 								jQuery("#preloader").hide();
 							});
 						},
@@ -46,7 +46,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 								duration : 3000,
 								fade : 500
 							}, function() {
-								r.stop()
+								r.stop();
 								jQuery("#preloader").hide();
 							});
 						}

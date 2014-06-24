@@ -11,7 +11,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				'ROLE_TIER1' : 'Owner',
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
-			}
+			};
 			var activeDomains = [];
 			var pendingList;
 			var validator;
@@ -73,7 +73,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.pendingList = function(pendinglist) {
 					pendingList = pendinglist;
-				}
+				};
 
 				this.pause = function() {
 

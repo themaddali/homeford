@@ -55,7 +55,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.setData = function(databject) {
 					DATAOBJECT = databject;
-				}
+				};
 
 				this.pause = function() {
 

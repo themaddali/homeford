@@ -72,7 +72,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
 					jQuery('#member-list').css('color', 'black');
-				}
+				};
 
 				this.pause = function() {
 
@@ -135,7 +135,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									async : false,
 									contentType : "application/json",
 									success : function(msg) {
-										isSuccess = msg ? true : false
+										isSuccess = msg ? true : false;
 									}
 								});
 								return isSuccess;

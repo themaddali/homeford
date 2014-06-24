@@ -7,7 +7,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 			};
 			var LOCKPANEL = '<i class="icon-lock  icon-1x "></i>';
 			var UNLOCKPANEL = '<i class="icon-unlock  icon-1x "></i>';
-			var YOU = '<div class="you"><i class="icon-star  icon-1x "></i></div>'
+			var YOU = '<div class="you"><i class="icon-star  icon-1x "></i></div>';
 			var MEMBEROBJECT = [];
 			var MEMBERIDS = [];
 			var RELOAD = false;
@@ -49,7 +49,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								//User is NOT owner of this domain. Filter stuff.
 								var _memberobjectself = {};
 								if (!data.image || data.image === null) {
-									_memberobjectself.image = "img/noimg.png"
+									_memberobjectself.image = "img/noimg.png";
 								} else {
 									_memberobjectself.image = '/zingoare/api/profileupload/picture/' + data.image.id;
 								}
@@ -69,7 +69,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								for (var j = 0; j < data.members.length; j++) {
 									var _memberobject = {};
 									if (!data.members[j].image || data.members[j].image === null) {
-										_memberobject.image = "img/noimg.png"
+										_memberobject.image = "img/noimg.png";
 									} else {
 										_memberobject.image = '/zingoare/api/profileupload/picture/' + data.members[j].image.id;
 									}
@@ -143,7 +143,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								for (var j = 0; j < data.length; j++) {
 									var _memberobject = {};
 									if (!data[j].image || data[j].image === null) {
-										_memberobject.image = "img/noimg.png"
+										_memberobject.image = "img/noimg.png";
 									} else {
 										_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
 									}
@@ -264,7 +264,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				this.reload = function() {
 					RELOAD = true;
-				}
+				};
 
 				this.pause = function() {
 

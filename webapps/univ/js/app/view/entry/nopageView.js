@@ -14,7 +14,8 @@ define([], function() {"use strict";
 				};
 
 				this.setEntity = function(entity) {
-				}
+					//Content comes here
+				};
 
 				this.init = function(args) {
 					document.title = 'Zingoare | Not Found';

@@ -126,7 +126,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 
 				this.activeTask = function(selectedinput) {
 					ACTIVEQUIZ = selectedinput;
-				}
+				};
 
 				this.pause = function() {
 					populateData();

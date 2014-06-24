@@ -357,7 +357,7 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 						}
 					});
 
-				}
+				};
 			}
 
 			return new PageRoutes();

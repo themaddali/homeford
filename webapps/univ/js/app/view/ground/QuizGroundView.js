@@ -152,7 +152,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						};
 						databoject.toname = ACTIVEQUIZ.membername;
 						databoject.quizname = ACTIVEQUIZ.name;
-						databoject.percentage = _TOTALPERCENTAGE
+						databoject.percentage = _TOTALPERCENTAGE;
 						certificate.setData(databoject);
 						router.go('/certificate');
 					} else {
@@ -272,7 +272,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				this.activeTask = function(selectedinput) {
 					ACTIVEQUIZ = selectedinput;
-				}
+				};
 
 				this.pause = function() {
 					populateData();
