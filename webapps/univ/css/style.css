@@ -1772,7 +1772,7 @@ div.formselction {
 }
 
 .edit-form li div.form-content button > i {
-	color : #0784E3;
+	color: #0784E3;
 }
 
 .edit-form li div.form-content input[disabled], .edit-form li div.form-content textarea {
@@ -1890,7 +1890,6 @@ div.formselction {
 .edit-form li div.form-content button:focus + .form-helper {
 	display: inline-block;
 }
-
 
 .edit-form li div.form-content select.edit-select {
 	-webkit-appearance: none;
@@ -3040,6 +3039,10 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 }
 
+.float-left .faceboard.fade {
+	opacity: 0.5;
+}
+
 .float-left .todoactionboard {
 	float: left;
 	width: 98%;
@@ -3659,7 +3662,7 @@ dialog-modal::-webkit-scrollbar {
 	color: #0784E3;
 	vertical-align: middle;
 	padding: 10px;
-	font-weight: 700;
+	font-weight: 600;
 }
 
 .kioskaction > input[type=button]:hover, .kioskaction > input[type=button]:active {

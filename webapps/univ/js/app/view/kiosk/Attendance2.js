@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis'], function(jquery, cookie, service, banner, router, ellipsis) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis','../../view/kiosk/Attendance3'], function(jquery, cookie, service, banner, router, ellipsis, attendance3) {"use strict";
 
 	var Attendance2 = ( function() {
 
@@ -9,7 +9,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 			var validator;
 			var membernames = [];
-			var template;
+			var template, templateself;
 			var TARGETVIEW;
 			var ACTIVESTUDENT = {};
 			var KIOSKMODE = false;
@@ -87,8 +87,11 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				function getMembers(activedomains) {
 					jQuery('#invite-domain').empty();
 					jQuery('.contentfull').empty();
-					jQuery('#checkbox-control').text('Un-Select All');
-					membernames = [];
+					//Draw student
+					var selfitem = templateself.clone();
+					jQuery('.student-name', selfitem).text(ACTIVESTUDENT.name);
+					jQuery('.kiosk-headshot', selfitem).attr('src', ACTIVESTUDENT.img);
+					jQuery('.contentfull').append(selfitem);
 					jQuery('.metainfo').text('2 identified guardians');
 					var memberscount = 0;
 					for (var i = 0; i < activedomains.length; i++) {
@@ -133,53 +136,23 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							router.go('/attendancekioskadd', '/attendancekioskidentify');
 						} else {
 							var selectedUserName = $(this).find('.student-name').text();
-							//var selectedUserId = $(this).attr('name');
-							//attendance2.activeStudent(selectedUserName, selectedUserId);
+							var selectedUserId = $(this).attr('name');
+							var selectedUserimg = $(this).find('.kiosk-headshot').attr('src');
+							attendance3.activeStudent(selectedUserName, selectedUserId, selectedUserimg, ACTIVESTUDENT);
 							router.go('/attendancekioskaction', '/attendancekioskidentify');
 						}
 					});
-				}
 
-				function setInfo(action) {
-					if (action === 'checkin') {
-						jQuery('.kiosk-info-title').html('Checked In From');
-						jQuery('.kiosk-info-value').html('7 hours');
-						jQuery('.kiosk-info-footer').html('+1 more hours');
-					} else {
-						jQuery('.kiosk-info-title').html('Checkout Time');
-						jQuery('.kiosk-info-value').html('5:00pm');
-						jQuery('.kiosk-info-footer').html('7:34 hours');
-					}
-				}
-
-				function validateSubmit() {
-					//Validate Name
-					if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-name').val().length == 0) {
-						jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-name').addClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-name').val().length > 0) {
-						jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-name').removeClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-rel').val() == 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-rel').addClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-rel').val() != 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-rel').removeClass('error');
-					}
-					// if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-notes').val().length == 0) {
-					// jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-notes').addClass('error');
-					// }
-					// if (jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-notes').val().length > 0) {
-					// jQuery('.kioskcard.cardactive').find('.Attendance2-dropoff-notes').removeClass('error');
-					// }
-					if (jQuery('.kioskcard.cardactive').find('.error').length > 0) {
-						return false;
-						console.log('errors');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.error').length == 0) {
-						return true;
-						console.log('All Good');
-					}
+					jQuery('.faceboard').hover(function() {
+						if ($(this).find('.student-name').text() !== ACTIVESTUDENT.name) {
+							$(this).removeClass('fade');
+						}
+					});
+					jQuery('.faceboard').mouseout(function() {
+						if ($(this).find('.student-name').text() !== ACTIVESTUDENT.name) {
+							$(this).addClass('fade');
+						}
+					});
 				}
 
 				function Identify(indentificationcode) {
@@ -198,9 +171,10 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 
-				this.activeStudent = function(studentname, studentid) {
+				this.activeStudent = function(studentname, studentid, studentimg) {
 					ACTIVESTUDENT.name = studentname;
 					ACTIVESTUDENT.id = studentid;
+					ACTIVESTUDENT.img = studentimg;
 				};
 
 				this.pause = function() {
@@ -221,7 +195,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					//Set Focus
 					setTimeout(function() {
 						jQuery('.identify-code').focus();
-					}, 500);
+					}, 300);
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -232,6 +206,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
+						templateself = jQuery('#member-template-self').remove().attr('id', '');
 						GetClock();
 						if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 							router.go('/attendancekiosk');

@@ -135,7 +135,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();
 						var selectedUserId = $(this).attr('name');
-						attendance2.activeStudent(selectedUserName, selectedUserId);
+						var selectedUserimg = $(this).find('.kiosk-headshot').attr('src');
+						attendance2.activeStudent(selectedUserName, selectedUserId, selectedUserimg);
 						router.go('/attendancekioskidentify', '/attendancekiosk');
 					});
 

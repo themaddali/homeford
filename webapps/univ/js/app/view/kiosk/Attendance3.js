@@ -11,7 +11,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 			var membernames = [];
 			var template;
 			var TARGETVIEW;
-			var ACTIVESTUDENT = {};
+			var ACTIVEINFO = {};
 			var KIOSKMODE = false;
 
 			function Attendance3() {
@@ -34,14 +34,18 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 				function populateData() {
-					var activedomains = [];
-					jQuery('.metadata').text(Date.now());
-					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
-					getMembers(activedomains);
-					setInterval(function() {
-						GetClock();
-					}, 1000);
-
+					if (ACTIVEINFO.sname && ACTIVEINFO.sname !== null) {
+						jQuery('#s-name').val(ACTIVEINFO.sname);
+						//jQuery('#s-img').attr('src', ACTIVEINFO.simg);
+						jQuery('#g-name').val(ACTIVEINFO.gname);
+						//jQuery('#g-img').attr('src', ACTIVEINFO.gimg);
+						jQuery('#checkin-notes').val('');
+						setInterval(function() {
+							GetClock();
+						}, 1000);
+					} else {
+						router.go('/attendancekiosk');
+					}
 				}
 
 				//Thanks to http://www.ricocheting.com/code/javascript/html-generator/date-time-clock
@@ -289,9 +293,13 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 
-				this.activeStudent = function(studentname, studentid) {
-					ACTIVESTUDENT.name = studentname;
-					ACTIVESTUDENT.id = studentid;
+				this.activeStudent = function(gname, gid, gimg, Studentobj) {
+					ACTIVEINFO.gname = gname;
+					ACTIVEINFO.gid = gid;
+					ACTIVEINFO.gimg = gimg;
+					ACTIVEINFO.sname = Studentobj.name;
+					ACTIVEINFO.sid = Studentobj.sid;
+					ACTIVEINFO.simg = Studentobj.img;
 				};
 
 				this.pause = function() {
@@ -300,7 +308,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				this.resume = function() {
 					GetClock();
-//					populateData();
+					populateData();
 					banner.setBrand();
 					//Set Focus
 					setTimeout(function() {
@@ -317,11 +325,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
 						GetClock();
-						// if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
-							// router.go('/attendancekiosk');
-						// } else {
-							// jQuery('.no-page-message').text('Please keyin your 4 digit identification code for ' + ACTIVESTUDENT.name + '!');
-						// }
+						populateData();
 
 						//HTML Event - Actions
 						jQuery('.subtitleinfo').click(function() {
@@ -330,11 +334,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/attendancekioskidentify');
 						});
-						//Setfocus
-						setTimeout(function() {
-							jQuery('.identify-code').focus();
-						}, 500);
-						
+
 					} // Cookie Guider
 				};
 
