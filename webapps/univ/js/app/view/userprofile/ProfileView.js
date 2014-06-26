@@ -22,7 +22,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							//OverView Panel Load
 							jQuery('#profile-first-name').text(UserProfile.firstName);
 							jQuery('#profile-last-name').text(UserProfile.lastName);
-							jQuery('#profile-id').text(UserProfile.id);
+							//jQuery('#profile-id').text(UserProfile.id);
 							jQuery('#profile-email').text(UserProfile.email);
 							jQuery('#profile-phone').text(UserProfile.phoneNumber);
 							jQuery('#profile-pending-invites').text(UserProfile.pendingInvitees.length);

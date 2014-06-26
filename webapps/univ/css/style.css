@@ -269,6 +269,12 @@ input[readonly="readonly"] {
 	background-color: #f6f6f6;
 	color: #7f7f7f
 }
+
+select[disabled] {
+	background-color: #f6f6f6;
+	cursor: default;
+}
+
 input[readonly="readonly"]:focus {
 	border: 1px solid rgba(114, 114, 114, 0.71);
 	cursor: none;
@@ -1042,6 +1048,34 @@ a.goback {
 	font-size: 1em;
 	color: #0784E3;
 }
+#nopage-warning p > a.negative {
+	font-size: 1em;
+	color: rgb(227, 102, 7);
+}
+#nopage-warning input:focus {
+	border-color: #0784E3;
+}
+
+#nopage-warning input {
+	padding: 10px 30px 10px 30px;
+	border-radius: 0;
+	margin-bottom: 5px;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
+	font-size: 1em;
+	outline: none;
+}
+
+#nopage-warning input.error {
+	border: 2px solid red;
+}
+
+#nopage-warning input[type=button] {
+	background-color: green;
+	color: white;
+}
 
 /* =================== About Page ======================= */
 .page-template-about-php #prev, .page-template-about-php #next {
@@ -1709,6 +1743,7 @@ div.formselction {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
+
 .edit-form li div.form-content input {
 	width: 60%;
 	padding: 10px;
@@ -1721,6 +1756,30 @@ div.formselction {
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
 }
+
+.edit-form li div.form-content button {
+	width: 60%;
+	padding: 10px;
+	border-radius: 0;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: #0784E3;
+	background-color: white;
+}
+
+.edit-form li div.form-content button > i {
+	color : #0784E3;
+}
+
+.edit-form li div.form-content input[disabled], .edit-form li div.form-content textarea {
+	background-color: #f6f6f6;
+	background: none;
+}
+
 .edit-form div.form-datainput li div.form-content input {
 	width: 50%;
 }
@@ -1825,6 +1884,13 @@ div.formselction {
 .edit-form li div.form-content select.edit-select:focus + .form-helper {
 	display: inline-block;
 }
+.edit-form li div.form-content button:hover + .form-helper {
+	display: inline-block;
+}
+.edit-form li div.form-content button:focus + .form-helper {
+	display: inline-block;
+}
+
 
 .edit-form li div.form-content select.edit-select {
 	-webkit-appearance: none;
@@ -1840,6 +1906,16 @@ div.formselction {
 	font-size: 14px;
 	width: calc(60% + 22px);
 }
+
+.edit-form li div.form-content select.edit-select[disabled] {
+	background-color: #f6f6f6;
+	background: none;
+}
+
+.edit-form li div.form-content select.edit-select.error {
+	border-color: red;
+}
+
 .edit-form li.form-item div.form-content div.form-helper {
 	margin-left: 5px;
 	margin-right: 5px;
@@ -2937,7 +3013,7 @@ dialog-modal::-webkit-scrollbar {
 	height: 40px;
 }
 
-.float-left .studentboard, .float-left .classboard {
+.float-left .studentboard, .float-left .classboard, .float-left .kioskboard {
 	float: left;
 	width: 300px;
 	height: 350px;
@@ -2948,12 +3024,20 @@ dialog-modal::-webkit-scrollbar {
 	overflow: none;
 }
 .float-left .classboard {
-	/*background-image: url('../img/todobg.png');*/
 	background-repeat: no-repeat;
 }
 .float-left .classboard.quiz {
-	/*background-image: url('../img/quizbg.png');*/
 	background-repeat: no-repeat;
+}
+.float-left .faceboard {
+	float: left;
+	width: 300px;
+	height: 216px;
+	text-align: left;
+	border: 2px solid #d9d9d9;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	overflow: none;
 }
 
 .float-left .todoactionboard {
@@ -3344,7 +3428,7 @@ dialog-modal::-webkit-scrollbar {
 	background-color: white;
 }
 
-.studentboard, .adminboard, .quizactionboard, .classboard {
+.studentboard, .adminboard, .quizactionboard, .classboard, .kioskboard, .faceboard {
 	background: #FFF;
 	padding: 0px;
 	margin: 5px;
@@ -3352,8 +3436,24 @@ dialog-modal::-webkit-scrollbar {
 	cursor: pointer;
 }
 
-.studentboard:hover, .adminboard:hover, .classboard:hover, .todoactionboard:hover, .quizactionboard:hover, .helperboard:hover {
+.studentboard:hover, .adminboard:hover, .classboard:hover, .todoactionboard:hover, .quizactionboard:hover, .kioskboard:hover, .helperboard:hover, .faceboard:hover {
 	border: 2px solid #0784E3;
+}
+
+/*CAMERA ACCESS*/
+#video-container {
+	padding: 10px;
+	background: white;
+	border-radius: 0;
+	margin-bottom: 5px;
+	font-size: 1em;
+	border: none;
+	border: 1px solid;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-color: rgba(114, 114, 114, 0.71);
+	width: 60%;
+	text-align: center;
 }
 
 .quizactionboard.cardinactive:hover {
@@ -3511,9 +3611,9 @@ dialog-modal::-webkit-scrollbar {
 	text-align: center;
 	/*padding: 20px;*/
 	color: #737373;
-	margin-top: 15px;
-	cursor: pointer;
-	width: 100%;
+	margin-top: 20px;
+	/*cursor: pointer;
+	 width: 100%;*/
 }
 
 .kioskaction {
@@ -3556,9 +3656,10 @@ dialog-modal::-webkit-scrollbar {
 }
 
 #currenttime {
-	color: black;
+	color: #0784E3;
 	vertical-align: middle;
 	padding: 10px;
+	font-weight: 700;
 }
 
 .kioskaction > input[type=button]:hover, .kioskaction > input[type=button]:active {
@@ -3705,7 +3806,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	margin-left: 5px;
 	margin-top: 7px;
 }
-.studentboard img {
+.studentboard img, .kioskboard img {
 	width: 100%;
 	height: 50%;
 	padding: 0px;
@@ -3717,7 +3818,19 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	border-top-left-radius: 8px;
 }
 
-.studentboard div.student-name {
+.faceboard img {
+	width: 100%;
+	height: 175px;
+	padding: 0px;
+	margin: 0px;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
+	border-top-left-radius: 8px;
+}
+
+.studentboard div.student-name, .kioskboard div.student-name {
 	width: 100%;
 	background-color: #0784E3;
 	padding-top: 10px;
@@ -3725,12 +3838,19 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	text-align: center;
 	color: white;
 	background: url("../img/stripe.png");
-	/*padding : 10px 0px;
-	 text-align: center;
-	 width: 100%;
-	 color: #0784E3;
-	 border-bottom: 3px dotted #0784E3;*/
 }
+
+.faceboard div.student-name {
+	width: 100%;
+	background-color: #0784E3;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	color: white;
+	background: url("../img/stripe.png");
+	border-bottom-right-radius: 8px;
+}
+
 .studentboard span.taskcount {
 	float: right;
 	margin-top: -30px;
@@ -3749,7 +3869,6 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	display: inline-block;
 	background-color: white;
 	padding-top: 30px;
-	/*top: 70px;*/
 	text-align: left;
 	margin-left: 10px;
 	color: white;

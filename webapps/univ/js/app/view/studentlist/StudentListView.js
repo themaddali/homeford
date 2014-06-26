@@ -227,7 +227,6 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						var selectedUserId = $(this).attr('name');
 						classview.activeStudent(selectedUserName, selectedUserId);
 						router.go('/class', '/studentlist');
-
 					});
 				};
 

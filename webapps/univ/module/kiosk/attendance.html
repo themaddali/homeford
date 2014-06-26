@@ -12,10 +12,9 @@
 				<a class="mainlogo" style="cursor: default"></a>
 				<h1>Zingoare</h1>
 			</div>
-			<div></div>
-			<div class="user-info" id="user-name">
+			<!-- <div class="user-info" id="user-name">
 				<i class="icon-bullseye  icon-1x "></i>
-			</div>
+			</div> -->
 			<span class="brandname" style="cursor: default"> </span>
 			<select class="brandnames" style="cursor: default"></select>
 
@@ -24,10 +23,10 @@
 			<i class="icon-exclamation-sign icon-1x " style="color: rgb(227, 102, 7)"></i>You are about to set up a kiosk mode. This mode is usually set at places where there is no guidance and users will feed in their response. Some of the use cases are for feedback, ordering, sign in sheet etc.
 			Are you sure you want to proceed in this mode?
 			<p>
-				<a href="#/admin">No, Go Back</a>
+				<input type="button"class="launchkiosk" value="Yes, Launch Kiosk"></>
 			</p>
 			<p>
-				<a style="cursor: pointer" class="launchkiosk">Yes, Launch Kiosk</a>
+				<a class="negative" href="#/admin">No, Go Back</a>
 			</p>
 		</div>
 		<div class="main-content-header" style="display: none">
@@ -40,12 +39,12 @@
 			</div>
 		</div>
 		<div class="main-content" style="display: none">
-			<!-- <div class="cardsloading">
-			<img width="70px" height="70px" src="img/loading-cofee.gif" />
-			<p>
-			Getting members info!!
-			</p>
-			</div> -->
+			<div class="cardsloading">
+				<img width="70px" height="70px" src="img/loading-cofee.gif" />
+				<p>
+					Getting members info!!
+				</p>
+			</div>
 			<div class="cards-header">
 				<div class="cards-header">
 					<!-- <input class="card-search" type="search" placeholder="search by name" /> -->
@@ -57,81 +56,102 @@
 			<div id="action-canvas" class="contentfull float-left">
 
 			</div>
-			<div id="noinfo" style="text-align: center; padding-top: 30px; display: none">
-				No Members Availabe. <a style="color: #0784E3" href='#/memberslistadd'>Add New</a>
-			</div>
 		</div>
 		<div class="div-template" style="display:none">
-			<div class="kioskcard" id="member-template">
-				<div class="kioskcard-name">
+			<div class="kioskboard shadow" id="member-template">
+				<img alt="profile-headshot" src="img/student1.jpg" class="kiosk-headshot">
+				<div class="student-name">
 					Name
 				</div>
-				<!-- <div class="kioskcard-id">
-				ID
-				</div> -->
 				<div class="kioskflag">
-					<i class="icon-thumbs-down  icon-3x "></i>
+					<i class="icon-question-sign  icon-3x "></i>
 					<p class="kiosk-flag-text">
 						No Show Yet!
 					</p>
 				</div>
-				<div class="card-form-container kiosk-form-container" style="display:none">
-					<form class="edit-form kiosk-form">
-						<fieldset>
-							<ol>
-								<li class="form-item">
-									<label>Your Name</label>
-									<div class="form-content">
-										<input placeholder="Ex: John Summers"  class="attendance-dropoff-name" name="dropoffname" type="text" autofocus />
-										<!-- <div class="form-helper">
-										<label>Provide your full name</label>
-										</div> -->
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Relation</label>
-									<div class="form-content">
-										<input placeholder="Ex: Father / Mother / Uncle @650 867 1234 etc."  class="attendance-dropoff-rel" name="dropoffrel" type="text" />
-										<!-- <div class="form-helper">
-										<label>Select how are you related</label>
-										</div> -->
-									</div>
-								</li>
-								<li class="form-item">
-									<label>Notes</label>
-									<div class="form-content">
-										<textarea class="edittextarea attendance-dropoff-notes" placeholder="Ex: Will pick up late / He is suffering from slight cold / Can you not give him any assignment today? etc." name="attendancedesc"></textarea>
-										<!-- <div class="form-helper">
-										<label>Any special message! (Optional)</label>
-										</div> -->
-									</div>
-								</li>
-							</ol>
-						</fieldset>
-					</form>
-				</div>
-
-				<div class="kioskaction" style="display:none">
-					<div class="kiosk-response">
-						Howdy Howdy!!
-					</div>
-					<input class="kioskok" type="button" value="Check-In" />
-					<div style="height: 15px"></div>
-					<input class="kioskcancel" type="button" value="Cancel" style="background-color: white; color: grey" />
-				</div>
-				<div class="kiosk-info-zone">
-					<div class="kiosk-info-subvalue kiosk-info-title">
-						Checked In from
-					</div>
-					<div  class="kiosk-info-mainvalue kiosk-info-value">
-						Now
-					</div>
-					<div class="kiosk-info-subvalue kiosk-info-footer">
-						 hours more
-					</div>
-
-				</div>
+				<a class="student-select"  style="background: transparent no-repeat 0 0;"></a>
 			</div>
 		</div>
+		<!-- <div class="div-template" style="display:none">
+		<div class="kioskcard" id="member-template">
+		<div class="kioskcard-name">
+		Name
+		</div>
+		<!-- <div class="kioskcard-id">
+		ID
+		</div>
+		<div class="kioskflag">
+		<i class="icon-thumbs-down  icon-3x "></i>
+		<p class="kiosk-flag-text">
+		No Show Yet!
+		</p>
+		</div>
+		<div class="card-form-container kiosk-form-container" style="display:none">
+		<form class="edit-form kiosk-form">
+		<fieldset>
+		<ol>
+		<li class="form-item">
+		<label>Your Name</label>
+		<div class="form-content">
+		<input placeholder="Ex: John Summers"  class="attendance-dropoff-name" name="dropoffname" type="text" autofocus />
+		<!-- <div class="form-helper">
+		<label>Provide your full name</label>
+		</div>
+		</div>
+		</li>
+		<li class="form-item">
+		<label>Relation</label>
+		<div class="form-content">
+		<!-- <input placeholder="Ex: Father / Mother / Uncle @650 867 1234 etc."  class="attendance-dropoff-rel" name="dropoffrel" type="text" />
+		<select class="attendance-dropoff-rel edit-select">
+		<option>Please Select</option>
+		<option>Father</option>
+		<option>Mother</option>
+		<option>Granny</option>
+		<option>Uncle</option>
+		<option>Neighbor</option>
+		<option>Nanny</option>
+		</select>
+		<!-- <div class="form-helper">
+		<label>Select how are you related</label>
+		</div> -
+		</div>
+		</li>
+		<li class="form-item">
+		<label>Notes</label>
+		<div class="form-content">
+		<textarea class="edittextarea attendance-dropoff-notes" placeholder=" (Optional)  Ex: Will pick up late / He is suffering from slight cold / Can you not give him any assignment today? etc." name="attendancedesc"></textarea>
+		<!-- <div class="form-helper">
+		<label>Any special message! (Optional)</label>
+		</div>
+		</div>
+		</li>
+		</ol>
+		</fieldset>
+		</form>
+		</div>
+
+		<div class="kioskaction" style="display:none">
+		<div class="kiosk-response">
+		Howdy Howdy!!
+		</div>
+		<input class="kioskok" type="button" value="Check-In" />
+		<div style="height: 15px"></div>
+		<input class="kioskcancel" type="button" value="Cancel" style="background-color: white; color: grey" />
+		</div>
+		<div class="kiosk-info-zone">
+		<div class="kiosk-info-subvalue kiosk-info-title">
+		Checked In from
+		</div>
+		<div  class="kiosk-info-mainvalue kiosk-info-value">
+		Now
+		</div>
+		<div class="kiosk-info-subvalue kiosk-info-footer">
+		hours more
+		</div>
+
+		</div>
+		</div>
+		</div> -->
 	</body>
 </html>

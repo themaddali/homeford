@@ -76,9 +76,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 												response(results.slice(0, 5));
 											}
 										});
-										jQuery('.membercard-name').ellipsis({
-											onlyFullWords : true
-										});
+										// jQuery('.membercard-name').ellipsis({
+											// onlyFullWords : true
+										// });
 										activateEvents();
 									}
 								}

@@ -100,7 +100,8 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					ACTIVEDOMAINIDS = [];
 					service.getUserProfile({
 						success : function(UserProfile) {
-							updatePanelValues('#user-id-value', '# ' + UserProfile.id);
+							//updatePanelValues('#user-id-value', '# ' + UserProfile.id);
+							updatePanelValues('#user-pendinginvites-value', UserProfile.pendingInvitees.length);
 							if (UserProfile.domains.length > 0) {
 								// if (ACTIVEDOMAINS.indexOf(UserProfile.domains[0].domainName) === -1) {
 								// ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);

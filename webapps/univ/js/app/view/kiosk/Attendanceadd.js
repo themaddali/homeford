@@ -1,6 +1,6 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis', '../../view/kiosk/Attendance2'], function(jquery, cookie, service, banner, router, ellipsis, attendance2) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis'], function(jquery, cookie, service, banner, router, ellipsis) {"use strict";
 
-	var Attendance = ( function() {
+	var Attendanceadd = ( function() {
 
 			/**
 			 * Constructor
@@ -13,7 +13,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 			var TARGETVIEW;
 			var KIOSKMODE = false;
 
-			function Attendance() {
+			function Attendanceadd() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -135,8 +135,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();
 						var selectedUserId = $(this).attr('name');
-						attendance2.activeStudent(selectedUserName, selectedUserId);
-						router.go('/attendancekioskidentify', '/attendancekiosk');
+						//Attendanceadd2.activeStudent(selectedUserName, selectedUserId);
+						router.go('/Attendanceaddkioskidentify', '/Attendanceaddkiosk');
 					});
 
 					jQuery('.kioskok').click(function() {
@@ -233,23 +233,23 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				function validateSubmit() {
 					//Validate Name
-					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').val().length == 0) {
-						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').addClass('error');
+					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').val().length == 0) {
+						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').addClass('error');
 					}
-					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').val().length > 0) {
-						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-name').removeClass('error');
+					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').val().length > 0) {
+						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').removeClass('error');
 					}
-					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').val() == 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').addClass('error');
+					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').val() == 'Please Select') {
+						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').addClass('error');
 					}
-					if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').val() != 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.attendance-dropoff-rel').removeClass('error');
+					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').val() != 'Please Select') {
+						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').removeClass('error');
 					}
-					// if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').val().length == 0) {
-					// jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').addClass('error');
+					// if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').val().length == 0) {
+					// jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').addClass('error');
 					// }
-					// if (jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').val().length > 0) {
-					// jQuery('.kioskcard.cardactive').find('.attendance-dropoff-notes').removeClass('error');
+					// if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').val().length > 0) {
+					// jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').removeClass('error');
 					// }
 					if (jQuery('.kioskcard.cardactive').find('.error').length > 0) {
 						return false;
@@ -259,7 +259,60 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						return true;
 						console.log('All Good');
 					}
+				}
 
+				function snapshot(localMediaStream) {
+					if (localMediaStream) {
+						jQuery('#video-container').fadeOut(100);
+						jQuery('#capture-img').fadeIn(100);
+						jQuery('#capture-image-button').fadeOut(100);
+						jQuery('#capture-image-button-refresh').fadeIn(100);
+						var video = document.querySelector('video');
+						var canvas = document.querySelector('canvas');
+						var ctx = canvas.getContext('2d');
+						var localMediaStream = null;
+						ctx.drawImage(video, 0, 0);
+						// "image/webp" works in Chrome.
+						// Other browsers will fall back to image/png.
+						document.getElementById('capture-img').src = canvas.toDataURL('image/webp');
+					}
+				}
+
+				function setCamera() {
+					//Special Thanks: http://blog.teamtreehouse.com/accessing-the-device-camera-with-getusermedia
+					// Normalize the various vendor prefixed versions of getUserMedia.
+					navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+					// Check that the browser supports getUserMedia.
+					// If it doesn't show an alert, otherwise continue.
+					if (navigator.getUserMedia) {
+						// Request the camera.
+						navigator.getUserMedia(
+						// Constraints
+						{
+							video : true
+						},
+
+						// Success Callback
+						function(localMediaStream) {
+							// Get a reference to the video element on the page.
+							var vid = document.getElementById('camera-stream');
+							// Create an object URL for the video stream and use this
+							// to set the video source.
+							vid.src = window.URL.createObjectURL(localMediaStream);
+							jQuery('#capture-image-button').click(function() {
+								snapshot(localMediaStream);
+							});
+						},
+
+						// Error Callback
+						function(err) {
+							// Log the error to the console.
+							alert('Sorry, You are not authorised to represent this kid. Please see admin.');
+						});
+
+					} else {
+						alert('Sorry, You are not authorised to represent this kid. Please see admin.');
+					}
 				}
 
 
@@ -268,40 +321,29 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
-					$(".card-search").autocomplete("destroy");
-					GetClock();
-					jQuery('#nopage-warning').fadeOut(500);
-					jQuery('.main-content-header').fadeIn(400);
-					jQuery('.main-content').fadeIn(400);
-					jQuery('#project-nav').fadeIn(400);
-					populateData();
-					banner.setBrand();
-					document.title = 'Zingoare | Attendance Kiosk';
+					document.title = 'Zingoare | Attendance';
 				};
 
-				this.init = function(args) {
+				this.init = function() {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Attendance Kiosk';
-					if (KIOSKMODE == false && $('#nopage-warning').is(':visible') == false) {
-						router.go('/admin');
-					}
 
 					if (checkForActiveCookie() === true) {
-						template = jQuery('#member-template').remove().attr('id', '');
+						//template = jQuery('#member-template').remove().attr('id', '');
 						//Preactivate Dependency
-						//todoassign.init();
-						GetClock();
-						//populateData();
+						setCamera();
 
 						//HTML Event - Actions
-						jQuery('.launchkiosk').click(function() {
-							KIOSKMODE = true;
-							jQuery('#nopage-warning').fadeOut(500);
-							jQuery('.main-content-header').fadeIn(400);
-							jQuery('.main-content').fadeIn(400);
-							jQuery('#project-nav').fadeIn(400);
-							populateData();
+						jQuery('#capture-image-button-refresh').click(function() {
+							jQuery('#video-container').fadeIn(100);
+							jQuery('#capture-img').fadeOut(100);
+							jQuery('#capture-image-button').fadeIn(100);
+							jQuery('#capture-image-button-refresh').fadeOut(100);
+						});
+						
+						jQuery('.modal_close').on('click', function() {
+							router.returnToPrevious();
 						});
 
 					} // Cookie Guider
@@ -309,8 +351,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 			}
 
-			return Attendance;
+			return Attendanceadd;
 		}());
 
-	return new Attendance();
+	return new Attendanceadd();
 });

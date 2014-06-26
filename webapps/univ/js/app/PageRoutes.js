@@ -348,6 +348,30 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('attendancekioskidentify', '^/attendancekioskidentify(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/kiosk/attendance2.html', '../app/view/kiosk/Attendance2'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('attendancekioskaction', '^/attendancekioskaction(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/kiosk/attendance3.html', '../app/view/kiosk/Attendance3'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('attendancekioskadd', '^/attendancekioskadd(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/kiosk/attendanceadd.html', '../app/view/kiosk/Attendanceadd'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('no route', '^.*', {
 						container : CONTAINER,
 						enter : function(location, result) {
