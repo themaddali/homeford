@@ -36,6 +36,15 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					
+					router.map('resetpassword', '^/resetpassword(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/entry/passwordreset.html', '../app/view/entry/ResetPasswordView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 
 					router.map('register', '^/register(/.*|$)', {
 						container : CONTAINER,
