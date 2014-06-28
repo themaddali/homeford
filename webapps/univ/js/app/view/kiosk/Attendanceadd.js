@@ -83,184 +83,6 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					jQuery('#currenttime').text("" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "");
 				}
 
-				function getMembers(activedomains) {
-					jQuery('.contentfull').empty();
-					membernames = [];
-					var memberscount = 0;
-					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembersOnly(activedomains[i], {
-							success : function(data) {
-								var thisitem = template.clone();
-								jQuery('.cardsloading').fadeOut(200);
-								for (var j = 0; j < data.length; j++) {
-									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER3') !== -1) {
-										memberscount = memberscount + 1;
-										jQuery('.metainfo').text(memberscount + ' members');
-										var thisitem = template.clone();
-										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
-											jQuery('.student-name', thisitem).text(data[j].email);
-											jQuery('.student-select', thisitem).attr('name', data[j].email);
-										} else {
-											jQuery('.student-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
-											jQuery('.student-select', thisitem).attr('name', data[j].email);
-										}
-										membernames.push(jQuery('.kioskcard-name', thisitem).text());
-										if (!data[j].image || data[j].image === null) {
-											var _image = "img/noimg.png";
-											jQuery('.kiosk-headshot', thisitem).attr('src', _image);
-										} else {
-											_image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
-											jQuery('.kiosk-headshot', thisitem).attr('src', _image);
-										}
-										jQuery(thisitem).attr('name', data[j].id);
-										//jQuery('.kioskcard-id', thisitem).text('Id# ' + data[j].id);
-										jQuery('.contentfull').append(thisitem);
-									}
-									if (j === data.length - 1) {
-										jQuery('.student-name').ellipsis({
-											onlyFullWords : true
-										});
-										activateEvents();
-									}
-								}
-							}
-						});
-					}
-				}
-
-				function activateEvents() {
-
-					jQuery('.kioskboard').on('click', function() {
-						// successful selection of user for context, and create cookie
-						var selectedUserName = $(this).find('.student-name').text();
-						var selectedUserId = $(this).attr('name');
-						//Attendanceadd2.activeStudent(selectedUserName, selectedUserId);
-						router.go('/Attendanceaddkioskidentify', '/Attendanceaddkiosk');
-					});
-
-					jQuery('.kioskok').click(function() {
-						if ($(this).val() === 'Check-In') {
-							if (validateSubmit() == true) {
-								$(".kioskcard.cardactive  i").fadeOut(800);
-								setTimeout(function() {
-									$(".kioskcard.cardactive  i").removeClass('icon-thumbs-down').addClass('icon-thumbs-up').css('color', '#007DBA');
-									$(".kioskcard.cardactive  i").fadeIn(700);
-									$(this).attr('disabled', 'true');
-									$('.kioskcard.cardactive').find('.kiosk-flag-text').text('Checked In');
-									jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
-									jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
-									jQuery('.kioskcard.cardactive select').attr("disabled", "disabled");
-									jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Checked In').css('background-color', '#007DBA');
-
-									setTimeout(function() {
-										jQuery('.kioskcard.cardactive').find('.card-form-container').hide();
-										jQuery('.kioskcard.cardactive').find('.kioskaction').hide();
-										jQuery('.kioskcard').removeClass('cardinactive');
-										jQuery('.kioskcard').removeClass('cardactive');
-									}, 2000);
-								}, 700);
-							}
-
-						} else {
-
-						}
-					});
-
-					jQuery('.ui-menu-item').click(function(event) {
-						var searchword = jQuery('.card-search').val().toUpperCase();
-						var cardlist = jQuery('.contentfull .kioskcard-name');
-						for (var i = 0; i < cardlist.length; i++) {
-							var thiscard = cardlist[i];
-							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
-								//thiscard.parentElement.stlye.display = '';
-							} else {
-								thiscard.parentElement.style.display = 'none';
-							}
-						}
-					});
-					jQuery('.card-search').keyup(function(event) {
-						var searchword = jQuery('.card-search').val().toUpperCase();
-						var cardlist = jQuery('.contentfull .kioskcard-name');
-						for (var i = 0; i < cardlist.length; i++) {
-							var thiscard = cardlist[i];
-							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
-								//thiscard.parentElement.stlye.display = '';
-							} else {
-								thiscard.parentElement.style.display = 'none';
-							}
-						}
-					});
-
-					jQuery('.kioskflag').click(function() {
-						if (!jQuery(this).parent().hasClass('cardactive')) {
-							jQuery('.kioskcard').removeClass('cardactive');
-							jQuery('.kioskcard').addClass('cardinactive');
-							jQuery(this).parent().find('.card-form-container').show();
-							jQuery(this).parent().find('.kioskaction').show();
-							jQuery(this).parent().removeClass('cardinactive').addClass('cardactive');
-							if (jQuery(this).find('i').hasClass('icon-thumbs-up')) {
-								jQuery('.kioskcard.cardactive input[type="text"]').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive textarea').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive select').attr("disabled", "disabled");
-								jQuery('.kioskcard.cardactive > .kioskaction').find('.kioskok').val('Check Out').css('background-color', '#e36607');
-								setInfo('checkout');
-
-							} else {
-								jQuery('.kioskcard.cardactive input[type="text"]').removeAttr("disabled");
-								jQuery('.kioskcard.cardactive textarea').removeAttr("disabled");
-								jQuery('.kioskcard.cardactive select').removeAttr("disabled");
-								jQuery('.kioskcard.cardactive.kioskok').val("Check In").css('background-color', 'green');
-								setInfo('checkin');
-							}
-						}
-					});
-				}
-
-				function setInfo(action) {
-					if (action === 'checkin') {
-						jQuery('.kiosk-info-title').html('Checked In From');
-						jQuery('.kiosk-info-value').html('7 hours');
-						jQuery('.kiosk-info-footer').html('+1 more hours');
-					} else {
-						jQuery('.kiosk-info-title').html('Checkout Time');
-						jQuery('.kiosk-info-value').html('5:00pm');
-						jQuery('.kiosk-info-footer').html('7:34 hours');
-					}
-				}
-
-				function validateSubmit() {
-					//Validate Name
-					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').val().length == 0) {
-						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').addClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').val().length > 0) {
-						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-name').removeClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').val() == 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').addClass('error');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').val() != 'Please Select') {
-						jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-rel').removeClass('error');
-					}
-					// if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').val().length == 0) {
-					// jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').addClass('error');
-					// }
-					// if (jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').val().length > 0) {
-					// jQuery('.kioskcard.cardactive').find('.Attendanceadd-dropoff-notes').removeClass('error');
-					// }
-					if (jQuery('.kioskcard.cardactive').find('.error').length > 0) {
-						return false;
-						console.log('errors');
-					}
-					if (jQuery('.kioskcard.cardactive').find('.error').length == 0) {
-						return true;
-						console.log('All Good');
-					}
-				}
-
 				function snapshot(localMediaStream) {
 					if (localMediaStream) {
 						jQuery('#video-container').fadeOut(100);
@@ -307,12 +129,25 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						// Error Callback
 						function(err) {
 							// Log the error to the console.
-							alert('Sorry, You are not authorised to represent this kid. Please see admin.');
+							console.log('Sorry, You are not authorised to represent this kid. Please see admin.');
+							jQuery('#video-container').hide();
+							jQuery('#camera-controls').hide();
+							jQuery('#capture-img').show();
+							activateFileUpload();
 						});
 
 					} else {
-						alert('Sorry, You are not authorised to represent this kid. Please see admin.');
+						jQuery('#video-container').hide();
+						jQuery('#camera-controls').hide();
+						jQuery('#capture-img').show();
+						activateFileUpload();
 					}
+				}
+
+				function activateFileUpload() {
+					jQuery('#capture-img').click(function() {
+						$('input[type=file]').click();
+					});
 				}
 
 
@@ -341,7 +176,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							jQuery('#capture-image-button').fadeIn(100);
 							jQuery('#capture-image-button-refresh').fadeOut(100);
 						});
-						
+
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});

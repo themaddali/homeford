@@ -30,6 +30,12 @@
 			</div>
 		</div>
 		<div class="main-content">
+			<div class="cardsloading">
+				<img width="70px" height="70px" src="img/loading-cofee.gif" />
+				<p>
+					Thank You. Have a great day!!
+				</p>
+			</div>
 			<div class="cards-header">
 				<div class="cards-header">
 					<div id="currenttime">
@@ -38,7 +44,7 @@
 				</div>
 			</div>
 			<div id="action-canvas" class="contentfull float-left">
-				<div class="todoactionboard shadow">
+				<div class="todoactionboard shadow" style="background-color: white">
 					<div class="todo-status-name">
 						Summary
 					</div>
@@ -56,13 +62,13 @@
 										</div>
 									</li>
 									<!-- <li class="form-item">
-										<label>Student Image</label>
-										<div class="form-content">
-											<img src="" id="s-img">
-											<div class="form-helper">
-												<label>Student Picture</label>
-											</div>
-										</div>
+									<label>Student Image</label>
+									<div class="form-content">
+									<img src="" id="s-img">
+									<div class="form-helper">
+									<label>Student Picture</label>
+									</div>
+									</div>
 									</li> -->
 									<li class="form-item" style="padding-top: 5px;">
 										<label>Guardian Name</label>
@@ -101,13 +107,13 @@
 										</div>
 									</li>
 									<!-- <li class="form-item">
-										<label>Guardian Image</label>
-										<div class="form-content">
-											<img src="" id="g-img">
-											<div class="form-helper">
-												<label>Guardian Picture</label>
-											</div>
-										</div>
+									<label>Guardian Image</label>
+									<div class="form-content">
+									<img src="" id="g-img">
+									<div class="form-helper">
+									<label>Guardian Picture</label>
+									</div>
+									</div>
 									</li> -->
 									<li class="form-item">
 										<label>Notes</label>
@@ -123,7 +129,8 @@
 						</form>
 					</div>
 					<div class="view-form-control" >
-						<input id="attendanceaction" type="button" value="Check In" />
+						<input class="big" id="attendanceaction" type="button" value="Check In" />
+						<input class="big" id="attendancecancel" type="button" value="Cancel" style="background-color: grey; " />
 					</div>
 				</div>
 			</div>

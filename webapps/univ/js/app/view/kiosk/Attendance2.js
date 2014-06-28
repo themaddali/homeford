@@ -128,6 +128,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					jQuery('.main-content-header').fadeOut(400);
 					jQuery('.main-content').fadeOut(400);
 					jQuery('#project-nav').fadeOut(400);
+					jQuery('.identify-code').val('').focus();
 				}
 
 				function activateEvents() {

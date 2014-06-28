@@ -18,6 +18,7 @@ require({
 		transport : 'iframe-transport',
 		fileupload : 'fileupload',
 		canvastoblob : 'canvastoblob',
+		getusermedia : 'getUserMedia',
 		Pages : '../../module',
 	},
 	map : {

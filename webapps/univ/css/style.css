@@ -1567,6 +1567,11 @@ div.formselction {
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+
+.view-form-control input.big {
+	padding: 20px;
+}
+
 .view-form-control input:hover {
 	border: 2px solid #999;
 }

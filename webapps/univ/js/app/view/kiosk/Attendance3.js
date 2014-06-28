@@ -40,6 +40,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('#g-name').val(ACTIVEINFO.gname);
 						//jQuery('#g-img').attr('src', ACTIVEINFO.gimg);
 						jQuery('#checkin-notes').val('');
+						jQuery('.edittextarea').focus();
 						setInterval(function() {
 							GetClock();
 						}, 1000);
@@ -310,10 +311,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					GetClock();
 					populateData();
 					banner.setBrand();
-					//Set Focus
-					setTimeout(function() {
-						jQuery('.identify-code').focus();
-					}, 500);
+					jQuery('#action-canvas').show();
+					jQuery('#attendanceaction').val('Check In');
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -333,6 +332,19 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						});
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/attendancekioskidentify');
+						});
+						
+						jQuery('#attendanceaction').click(function(){
+							if (jQuery('#attendanceaction').val() === 'Check In') {
+								jQuery('#attendanceaction').val('Checked In');
+								setTimeout(function(){
+									jQuery('#action-canvas').slideUp(1000);
+								}, 500);
+							}
+						});
+						
+						jQuery('#attendancecancel').click(function(){
+							router.go('/attendancekiosk');
 						});
 
 					} // Cookie Guider
