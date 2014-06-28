@@ -68,6 +68,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('#member-role').prop('checked', false);
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
+					jQuery('#invite-message').val('');
+					jQuery('#invite-email').val('');
 				}
 
 
@@ -104,6 +106,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							var roles = [{
 								"roleName" : "ROLE_TIER2"
 							}];
+							//Defaulting to T2 and T3.
+							roles = [{
+								"roleName" : "ROLE_TIER2"
+							}, {
+								"roleName" : "ROLE_TIER3"
+							}];
 							if ($("#invite-form").valid()) {
 								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
 									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
@@ -128,8 +136,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									router.returnToPrevious();
 									//admin.reloadData();
 								}, 2000);
-							}
-							else{
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 
