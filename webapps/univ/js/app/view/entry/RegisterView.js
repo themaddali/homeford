@@ -8,6 +8,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 			var ENTITY;
 			var DOMAINSLIST;
+			var validator;
 			var ERROR = '<i style="padding:0px 10px" class="icon-exclamation icon-1x "></i>';
 			var OK = '<i style="padding:0px 10px" class="icon-magic icon-1x "></i>';
 			var INFO = '<i style="padding:0px 10px" class="icon-info icon-1x "></i>';
@@ -126,6 +127,11 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					parseQueryURL();
 					$("#new-user-domain").autocomplete("destroy");
 					activateSuggestionSearch();
+					jQuery('.edit-notify').hide();
+					jQuery('#new-user-password').val('');
+					jQuery('#new-user-password-repeat').val('');
+					jQuery('#register-agree').prop('checked', false);
+					validator.resetForm();
 					document.title = 'Zingoare | Register';
 				};
 
@@ -144,11 +150,16 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 					jQuery('#register').on('click', function(e) {
 						if ($("#register-form").valid()) {
-							var inputuname = jQuery('#new-user-name').val();
-							var inputpass = jQuery('#new-user-password').val();
-							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
-							RegisterUser(inputuname, inputpass, inputdomain);
-							e.preventDefault();
+							if (jQuery('#register-agree').is(":checked")) {
+								var inputuname = jQuery('#new-user-name').val();
+								var inputpass = jQuery('#new-user-password').val();
+								var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
+								RegisterUser(inputuname, inputpass, inputdomain);
+								e.preventDefault();
+							} else {
+								notify.showNotification('WARN', 'Terms of service has to be accepted!');
+							}
+
 						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
@@ -192,7 +203,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						router.returnToPrevious();
 					});
 
-					jQuery("#register-form").validate({
+					validator = jQuery("#register-form").validate({
 						rules : {
 							Rfirstname : {
 								required : false,

@@ -324,6 +324,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('termsofservice', '^/termsofservice(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/termsofservice.html', '../app/view/footer/ContactView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('contact', '^/contact(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
