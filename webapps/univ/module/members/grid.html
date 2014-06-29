@@ -20,39 +20,33 @@
 			<div class="modal-container">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					Select Members
+					Members / Students Info
 				</header>
 				<div class="canvas-header">
 					<input class="card-search" type="search" placeholder="search by name" />
-					<a id="checkbox-control" >Un-Select All</a>
-					<div class="metadata">
-						selected
-					</div>
 				</div>
 				<div class="modal-contents cards">
 					<div class="edit-card-canvas">
 
 					</div>
 				</div>
-				<footer>
-					<div class="edit-controls">
-						<input id="members-pick" type="button" value="OK">
-					</div>
-				</footer>
 				<div class="modal_close"></div>
 			</div>
 		</div>
 
 		<div id="preloader"></div>
 		<div class="div-template" style="display:none">
-			<div class="membercard active" id="member-template">
-				<input class="membercard-checkbox" type="checkbox"/>
-				<img alt="profile-image" class="members-image" style="margin-left: -25px;" />
+			<div class="membercard clickable" id="member-template">
+				<i class="icon-gear icon-1x membercard-editicon "></i>
+				<img alt="profile-image" class="members-image" />
 				<div class="membercard-name">
 					Name
 				</div>
-				<div class="membercard-id" style="display: none">
-					ID
+				<div class="membercard-category">
+					Member
+				</div>
+				<div class="membercard-rel">
+					Relation
 				</div>
 			</div>
 		</div>

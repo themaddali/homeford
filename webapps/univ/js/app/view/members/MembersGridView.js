@@ -1,19 +1,18 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellipsis', '../../view/todo/ToDoAssignView', '../../view/quizpool/QuizAssignView', '../../view/billing/InvoiceGenerateView'], function(jquery, cookie, service, router, ellipsis, todoassign, quizassign, invoicegenerate) {"use strict";
+define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersEditView'], function(cookie, service, validate, tablesorter, router, notify, admin, membersedit) {"use strict";
 
-	var MembersPickView = ( function() {
+	var MembersGridView = ( function() {
 
 			/**
 			 * Constructor
 			 *
 			 */
 
-			var validator;
+			var MALEICON = '<i class="icon-male  icon-1x "></i>';
+			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
 			var membernames = [];
 			var template;
-			var TARGETVIEW;
-			var TARGETROUTINE;
 
-			function MembersPickView() {
+			function MembersGridView() {
 
 				function checkForActiveCookie() {
 					if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
@@ -44,29 +43,39 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 					membernames = [];
 					var memberscount = 0;
 					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembersOnly(activedomains[i], {
+						service.getMembers(activedomains[i], {
 							success : function(data) {
 								var thisitem = template.clone();
 								for (var j = 0; j < data.length; j++) {
 									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER3') !== -1) {
-										memberscount = memberscount + 1;
-										jQuery('.metadata').text(memberscount + ' of ' + memberscount + ' selected');
+									if (roles.indexOf('ROLE_TIER1') == -1) {
 										var thisitem = template.clone();
 										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
 											jQuery('.membercard-name', thisitem).text(data[j].email);
 										} else {
-											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
+											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email);
 										}
+										membernames.push(jQuery('.membercard-name', thisitem).text());
 										if (data[j].image && data[j].image.name != null) {
 											jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
 										} else {
 											jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
 										}
-										jQuery('.membercard-checkbox', thisitem).attr('checked', 'checked');
-										membernames.push(jQuery('.membercard-name', thisitem).text());
-										jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
+										if (data[j].roles[0].roleName === 'ROLE_TIER3') {
+											jQuery('.membercard-category', thisitem).text('Student');
+											jQuery('.membercard-rel', thisitem).text('');
+										} else {
+											jQuery('.membercard-category', thisitem).text('Parent');
+											jQuery('.membercard-rel', thisitem).text('Guardian');
+										}
 										jQuery('.edit-card-canvas').append(thisitem);
+										//to test
+										console.log('delete this');
+										if (j < 5) {
+											jQuery(thisitem).addClass('grp1').attr('group', 'grp1');
+										} else {
+											jQuery(thisitem).addClass('grp2').attr('group', 'grp2');
+										}
 									}
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
@@ -76,7 +85,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 											}
 										});
 										// jQuery('.membercard-name').ellipsis({
-											// onlyFullWords : true
+										// onlyFullWords : true
 										// });
 										activateEvents();
 									}
@@ -87,36 +96,39 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				}
 
 				function activateEvents() {
-					jQuery('#checkbox-control').click(function() {
-						var numberOfChecked = $('input:checkbox:checked').length;
-						var totalCheckboxes = $('input:checkbox').length;
-						if (numberOfChecked === totalCheckboxes && numberOfChecked !== 0) {
-							jQuery('#checkbox-control').text('Select All');
-							$(".membercard-checkbox").prop('checked', false);
-							jQuery('.membercard').removeClass('active');
-							jQuery('.metadata').text('0 of ' + totalCheckboxes + ' selected');
-						} else {
-							jQuery('#checkbox-control').text('Un-Select All');
-							$(".membercard-checkbox").prop('checked', true);
-							jQuery('.membercard').addClass('active');
-							jQuery('.metadata').text(totalCheckboxes + ' of ' + totalCheckboxes + ' selected');
-						}
-					});
+					var rowObject = {
+						firstname : "none",
+						lastname : "none",
+						security : 'none',
+						invitedby : 'none',
+						status : 'none',
+						domain : 'none',
+						courses : 'none',
+						email : '',
+						id : 'none',
+						image : 'img/noimg.png',
+					};
 
-					jQuery('.membercard-checkbox').change(function() {
-						if (!$(this).is(':checked')) {
-							jQuery(this).parent().removeClass('active');
+					jQuery('.membercard').click(function() {
+						if ($(this).hasClass('active')) {
+							//$(this).removeClass('active');
+							rowObject.firstname = jQuery(this).find('.membercard-name').attr('fn');
+							rowObject.lastname = jQuery(this).find('.membercard-name').attr('ln');
+							rowObject.id = jQuery(this).find('.membercard-name').attr('memberid');
+							if (jQuery(this).find('.membercard-name').attr('email') !== 'null') {
+								rowObject.email = jQuery(this).find('.membercard-name').attr('email');
+							}
+							if (jQuery(this).find('.members-image').attr('src') !== "img/noimg.png") {
+								rowObject.image = jQuery(this).find('.members-image').attr('src');
+							}
+							membersedit.setMemberInfo(rowObject);
+							router.go('/memberslistedit');
 						} else {
-							jQuery(this).parent().addClass('active');
+							jQuery('.membercard').removeClass('active');
+							var group = $(this).attr('group');
+							var groupclass = '.'+group;
+							$(groupclass).addClass('active');
 						}
-						var numberOfChecked = $('input:checkbox:checked').length;
-						var totalCheckboxes = $('input:checkbox').length;
-						if (numberOfChecked !== totalCheckboxes) {
-							jQuery('#checkbox-control').text('Select All');
-						} else {
-							jQuery('#checkbox-control').text('Un-Select All');
-						}
-						jQuery('.metadata').text(numberOfChecked + ' of ' + totalCheckboxes + ' selected');
 					});
 
 					jQuery('.card-search').change(function(event) {
@@ -167,51 +179,26 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 				}
 
 
-				this.setReturnInfo = function(view) {
-					TARGETVIEW = view;
-				};
-
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
-					$(".card-search").autocomplete("destroy");
 					populateData();
-					document.title = 'Zingoare | Members Select';
+					document.title = 'Zingoare | Members Grid';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
-					document.title = 'Zingoare | Members Select';
+					document.title = 'Zingoare | Members Grid';
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
-						//Preactivate Dependency
-						//todoassign.init();
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
-						});
-
-						jQuery('#members-pick').click(function() {
-							var selectedlist = $('input:checkbox:checked').parent().find('.membercard-id').text().replace(/\n/g, '').split('Id# ');
-							selectedlist.shift();
-							var selectedMembers = {};
-							selectedMembers.text = jQuery('.metadata').text();
-							selectedMembers.list = selectedlist;
-							if (todoassign) {
-								todoassign.selectedMembers(selectedMembers);
-							}
-							if (quizassign) {
-								quizassign.selectedMembers(selectedMembers);
-							}
-							if (invoicegenerate) {
-								invoicegenerate.selectedMembers(selectedMembers);
-							}
 							router.returnToPrevious();
 						});
 
@@ -220,8 +207,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 			}
 
-			return MembersPickView;
+			return MembersGridView;
 		}());
 
-	return new MembersPickView();
+	return new MembersGridView();
 });

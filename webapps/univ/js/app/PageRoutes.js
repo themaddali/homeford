@@ -148,6 +148,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('membersgrid', '^/membersgrid(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/members/grid.html', '../app/view/members/MembersGridView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('memberslistedit', '^/memberslistedit(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

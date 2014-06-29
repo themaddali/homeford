@@ -31,7 +31,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#new-member-profile-image').attr('data-url', '/zingoare/api/profileupload/' + ACTIVEMEMBER.id);
 						ActivateClicks();
 					} else {
-						router.go('/memberslist');
+						router.go('/membersgrid');
 					}
 				}
 
