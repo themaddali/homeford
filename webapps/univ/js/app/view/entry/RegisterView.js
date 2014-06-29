@@ -132,6 +132,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					jQuery('#new-user-password-repeat').val('');
 					jQuery('#register-agree').prop('checked', false);
 					validator.resetForm();
+					jQuery('#new-user-name').focus();
 					document.title = 'Zingoare | Register';
 				};
 
@@ -141,6 +142,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						jQuery('#user-domain').removeAttr('readonly');
 						jQuery('#user-domain').removeClass('onlyone');
 						activateSuggestionSearch();
+						jQuery('#new-user-name').focus();
 					} else {
 						jQuery('#user-domain').addClass('onlyone');
 						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
@@ -150,15 +152,15 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 					jQuery('#register').on('click', function(e) {
 						if ($("#register-form").valid()) {
-							if (jQuery('#register-agree').is(":checked")) {
-								var inputuname = jQuery('#new-user-name').val();
-								var inputpass = jQuery('#new-user-password').val();
-								var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
-								RegisterUser(inputuname, inputpass, inputdomain);
-								e.preventDefault();
-							} else {
-								notify.showNotification('WARN', 'Terms of service has to be accepted!');
-							}
+							//if (jQuery('#register-agree').is(":checked")) {
+							var inputuname = jQuery('#new-user-name').val();
+							var inputpass = jQuery('#new-user-password').val();
+							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
+							RegisterUser(inputuname, inputpass, inputdomain);
+							e.preventDefault();
+							// } else {
+							// notify.showNotification('WARN', 'Terms of service has to be accepted!');
+							// }
 
 						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');

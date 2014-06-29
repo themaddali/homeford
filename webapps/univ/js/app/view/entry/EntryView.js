@@ -96,6 +96,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				this.resume = function() {
 					checkForActiveCookie();
 					document.title = 'Zingoare | Signin/Signup';
+					jQuery('#user-name').focus();
 				};
 
 				this.init = function() {
@@ -104,6 +105,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						jQuery('#user-domain').removeAttr('disabled');
 						jQuery('#user-domain').removeClass('onlyone');
 						activateSuggestionSearch();
+						jQuery('#user-name').focus();
 					} else {
 						jQuery('#user-domain').addClass('onlyone');
 						jQuery('#user-domain').val('Active Domain: ' + jQuery.cookie('entity').toUpperCase());
