@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="profile-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Add New Member / Student
+					<!-- <div class="toggle-dark formselction">
+					<div class="toggle" data-type="select"></div>
+					</div> -->
+				</header>
+				<div class="modal-contents">
+					<form id="regularadd" class="edit-form">
+						<fieldset>
+							<ol id="profile-form">
+								<li class="form-item">
+									<label>Member First Name</label>
+									<div class="form-content">
+										<input placeholder="First Name"  id="member-first-name" name="memberfirstname" type="text" autofocus />
+										<div class="form-helper">
+											<label>First Name (Required)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Memeber Last Name</label>
+									<div class="form-content">
+										<input placeholder="Last Name" id="member-last-name" name="memberlastname" type="text" />
+										<div class="form-helper">
+											<label>Last Name (Required)</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition"></div>
+								<li class="form-item">
+									<label>Father Name</label>
+									<div class="form-content">
+										<input placeholder="Father Full Name" id="father-name" name="fathername" type="text" />
+										<div class="form-helper">
+											<label>Father Name (Required)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Father Email</label>
+									<div class="form-content">
+										<input placeholder="father@family.com" id="father-email"  name="fatheremail" type="email" />
+										<div class="form-helper">
+											<label>Email address of father</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition"></div>
+								<li class="form-item">
+									<label>Mother Name</label>
+									<div class="form-content">
+										<input placeholder="Mother Full Name" id="mother-name" name="mothername" type="text" />
+										<div class="form-helper">
+											<label>Mother Name (Required)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Mother Email</label>
+									<div class="form-content">
+										<input placeholder="mother@family.com" id="mother-email"  name="motheremail" type="email" />
+										<div class="form-helper">
+											<label>Email address of mother</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition"></div>
+								<li class="form-item">
+									<label>Guardian-1 Name</label>
+									<div class="form-content">
+										<input placeholder="Guardian-1 Full Name" id="g1-name" name="g1name" type="text" />
+										<div class="form-helper">
+											<label>Full name of Guardian-1 (optional)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Guardian-1 Email</label>
+									<div class="form-content">
+										<input placeholder="guardian1@family.com" id="g1-email"  name="g1email" type="email" />
+										<div class="form-helper">
+											<label>Email address of guardian</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition g2"></div>
+								<li class="form-item g2">
+									<label>Guardian-2 Name</label>
+									<div class="form-content">
+										<input placeholder="Guardian-2 Full Name" id="g2-name" name="g2name" type="text" />
+										<div class="form-helper">
+											<label>Full name of Guardian-2 (optional)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item g2">
+									<label>Guardian-2 Email</label>
+									<div class="form-content">
+										<input placeholder="guardian2@family.com" id="g2-email"  name="g2email" type="email" />
+										<div class="form-helper">
+											<label>Email address of guardian 2</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition g3"></div>
+								<li class="form-item g3">
+									<label>Guardian-3 Name</label>
+									<div class="form-content">
+										<input placeholder="Guardian-3 Full Name" id="g3-name" name="g3name" type="text" />
+										<div class="form-helper">
+											<label>Full name of Guardian-3 (optional)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item g3">
+									<label>Guardian-3 Email</label>
+									<div class="form-content">
+										<input placeholder="guardian3@family.com" id="g3-email"  name="g3email" type="email" />
+										<div class="form-helper">
+											<label>Email address of guardian 3</label>
+										</div>
+									</div>
+								</li>
+							</ol>
+							<a class="formlink">Add one more guardian</a>
+						</fieldset>
+					</form>
+				</div>
+				<footer>
+					<div class="edit-controls">
+
+						<input id="member-add" type="button" value="Add">
+						<!-- <input id="member-addmore" type="button" value="Add +"> -->
+						<input id="form-reset" type="button" class="secondary" value="Reset Form">
+					</div>
+				</footer>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+
+		<div id="preloader"></div>
+
+	</body>
+</html>

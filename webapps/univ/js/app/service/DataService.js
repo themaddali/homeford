@@ -157,11 +157,34 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Adding Member"
-							}
+							};
 							handlers.success(errormsg);
 						}
 					});
-				}
+				};
+				
+				this.registerKids = function(domainid, memberobj, handlers) {
+					$.ajax({
+						url : '/zingoare/api/registerkids/' + domainid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify(memberobj),
+						success : function(data) {
+							USERPROFILE = null;
+							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Adding Member"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
+				
+				
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
@@ -173,7 +196,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 				//Get T3 privilage
 				this.getMembersOnly = function(domain, handlers) {
 					$.ajax({
@@ -186,7 +209,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 				function getmembersonly(data) {
 					var membersdata = [];
 					for (var i = 0; i < data.length; i++) {
@@ -221,11 +244,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Sending Invite"
-							}
+							};
 							handlers.success(errormsg);
 						}
 					});
-				}
+				};
 
 				this.getInviteStatus = function(domain, handlers) {
 					$.ajax({
@@ -237,7 +260,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data.sort(sortJsonByStatus));
 						}
 					});
-				}
+				};
 
 				this.acceptInvite = function(id, handlers) {
 					$.ajax({
@@ -252,11 +275,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Accepting Invite"
-							}
+							};
 							handlers.success(errormsg);
 						}
 					});
-				}
+				};
 
 				this.setUserProfile = function(id, firstname, lastname, email, phone, handlers) {
 					$.ajax({
@@ -278,11 +301,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Updating Profile"
-							}
+							};
 							handlers.success(errormsg);
 						}
 					});
-				}
+				};
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$.ajax({
@@ -306,11 +329,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Creating Profile"
-							}
+							};
 							handlers.success(errormsg);
 						}
 					});
-				}
+				};
 
 				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$.ajax({

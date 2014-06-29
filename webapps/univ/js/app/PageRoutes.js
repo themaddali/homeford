@@ -159,7 +159,7 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 					router.map('memberslistadd', '^/memberslistadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {
-							require(['text!Pages/members/add.html', '../app/view/members/MembersAddView'], function(page, view) {
+							require(['text!Pages/members/addadv.html', '../app/view/members/MembersAddAdvView'], function(page, view) {
 								result.load(page, view);
 							});
 						}
