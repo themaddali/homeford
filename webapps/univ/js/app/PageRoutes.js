@@ -45,6 +45,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('newpassword', '^/newpassword(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/entry/newpassword.html', '../app/view/entry/NewPasswordView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 
 					router.map('register', '^/register(/.*|$)', {
 						container : CONTAINER,

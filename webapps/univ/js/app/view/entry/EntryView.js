@@ -1,4 +1,4 @@
-define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify'], function(cookie, router, validate, service, notify) {"use strict";
+define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', '../../view/entry/NewPasswordView'], function(cookie, router, validate, service, notify, newpassword) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -54,20 +54,25 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 												OWNERLEVEL = OWNERLEVEL + 1;
 											}
 										}
-										if (OWNERLEVEL !== UserProfile.domains.length) {
-											//User is not owner. Filter stuff.a and take to studentlist
-											notify.showNotification('OK', 'Login Success', 'studentlist', '0');
-											jQuery.cookie('user', username, {
-												expires : 100,
-												path : '/'
-											});
+										if (password === 'test1') {
+											newpassword.resetinfo(username);
+											router.go('/newpassword');
 										} else {
-											//User is owner. take to admin dashboard
-											notify.showNotification('OK', 'Login Success', 'admin', '0');
-											jQuery.cookie('user', username, {
-												expires : 100,
-												path : '/'
-											});
+											if (OWNERLEVEL !== UserProfile.domains.length) {
+												//User is not owner. Filter stuff.a and take to studentlist
+												notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+												jQuery.cookie('user', username, {
+													expires : 100,
+													path : '/'
+												});
+											} else {
+												//User is owner. take to admin dashboard
+												notify.showNotification('OK', 'Login Success', 'admin', '0');
+												jQuery.cookie('user', username, {
+													expires : 100,
+													path : '/'
+												});
+											}
 										}
 									}
 								});

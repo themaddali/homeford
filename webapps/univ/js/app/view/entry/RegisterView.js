@@ -152,22 +152,17 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 					jQuery('#register').on('click', function(e) {
 						if ($("#register-form").valid()) {
-							//if (jQuery('#register-agree').is(":checked")) {
 							var inputuname = jQuery('#new-user-name').val();
 							var inputpass = jQuery('#new-user-password').val();
 							var inputdomain = jQuery('#new-user-domain').val().toUpperCase();
 							RegisterUser(inputuname, inputpass, inputdomain);
 							e.preventDefault();
-							// } else {
-							// notify.showNotification('WARN', 'Terms of service has to be accepted!');
-							// }
-
 						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}
 					});
 
-					//Rarely die to network latency if not loaded, just reload
+					//Rarely due to network latency if not loaded, just reload
 					if (!$.ui) {
 						location.reload();
 					}

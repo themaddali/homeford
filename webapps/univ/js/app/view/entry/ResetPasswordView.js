@@ -13,28 +13,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function checkForActiveCookie() {
 					return true;
-					// if (jQuery.cookie('user') && jQuery.cookie('user') !== 'home') {
-					//
-					// } else {
-					// //Paranoid Cookie Clearing
-					// jQuery.removeCookie('user', {
-					// path : '/univ'
-					// });
-					// jQuery.removeCookie('subuser', {
-					// path : '/univ'
-					// });
-					// router.go('/home', '/admin');
-					// return false;
-					// }
 				}
 
 				function clearForm() {
-					jQuery('.form-item > input').val("");
-					jQuery('#member-role').prop('checked', false);
-					jQuery('.edit-notify').hide();
-					jQuery('.modal_close').show();
-					jQuery('#invite-message').val('');
-					jQuery('#invite-email').val('');
+					jQuery('#invite-email').val('').focus();
 				}
 
 
@@ -44,7 +26,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.resume = function() {
 					clearForm();
-					//populateData();
 					validator.resetForm();
 					document.title = 'Zingoare | Password Reset';
 				};
@@ -63,40 +44,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
-						jQuery('#invite-send').on('click', function() {
-							var roles = [{
-								"roleName" : "ROLE_TIER2"
-							}];
-							//Defaulting to T2 and T3.
-							roles = [{
-								"roleName" : "ROLE_TIER2"
-							}, {
-								"roleName" : "ROLE_TIER3"
-							}];
+						jQuery('#reset-send').click(function() {
 							if ($("#invite-form").valid()) {
-								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
-									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
-								}
-								if ($('#member-role').is(":checked")) {
-									roles = [{
-										"roleName" : "ROLE_TIER2"
-									}, {
-										"roleName" : "ROLE_TIER3"
-									}];
-								}
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery.cookie('subuser'), roles, {
-									success : function(response) {
-										if (response !== 'error') {
-											notify.showNotification('OK', response.message);
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-								setTimeout(function() {
-									router.returnToPrevious();
-									//admin.reloadData();
-								}, 2000);
+								var email = jQuery('#invite-email').val();
+								alert(email + ' action');
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
@@ -104,18 +55,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						validator = jQuery("#invite-form").validate({
 							rules : {
-								invitedomain : {
-									required : true,
-									domainValidation : true
-								},
 								inviteemail : {
 									required : true,
-									email : true,
-									notRepeated : true
+									email : true
 								},
-								roles : {
-									required : true
-								}
 							}
 						});
 
