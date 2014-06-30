@@ -54,6 +54,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 												OWNERLEVEL = OWNERLEVEL + 1;
 											}
 										}
+										console.log('Fix Logic');
 										if (password === 'test1') {
 											newpassword.resetinfo(username);
 											router.go('/newpassword');
