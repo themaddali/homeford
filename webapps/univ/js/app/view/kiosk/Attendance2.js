@@ -120,6 +120,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 												jQuery('.kiosk-headshot', thisitemknown).attr('src', 'img/noimg.png');
 											}
 											jQuery(thisitemknown).attr('memberid', data[j].parents[k].id);
+											jQuery(thisitemknown).attr('relation', data[j].parents[k].userType);
 											jQuery('.contentfull').append(thisitemknown);
 										}
 									}
@@ -165,6 +166,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							jQuery('.identify-code').val('');
 							ACTIVEPARENT.name = $(this).find('.student-name').text();
 							ACTIVEPARENT.id = $(this).attr('memberid');
+							ACTIVEPARENT.relation = $(this).attr('relation');
 							ACTIVEPARENT.img = $(this).find('.kiosk-headshot').attr('src');
 							jQuery('.no-page-message').text(ACTIVEPARENT.name + ', Please keyin your 4 digit kiosk identification code!');
 						}
@@ -191,7 +193,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('.main-content').fadeIn(400);
 						jQuery('#project-nav').fadeIn(400);
 						console.log('Add Validation logic here');
-						attendance3.activeStudent(ACTIVEPARENT.name, ACTIVEPARENT.id, ACTIVEPARENT.img, ACTIVESTUDENT);
+						attendance3.activeStudent(ACTIVEPARENT.name, ACTIVEPARENT.id, ACTIVEPARENT.img, ACTIVEPARENT.relation, ACTIVESTUDENT);
 						router.go('/attendancekioskaction', '/attendancekioskidentify');
 					} else {
 						//Invalid Case

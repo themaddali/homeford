@@ -30,6 +30,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					}
 				}
 
+				//http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+				function toTitleCase(str) {
+					return str.replace(/\w\S*/g, function(txt) {
+						return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+					});
+				}
+
 				function populateData() {
 					var activedomains = [];
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
@@ -52,6 +59,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									} else {
 										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email);
 									}
+									var kidsalutation = data[j].firstName;
 									membernames.push(jQuery('.membercard-name', thisitem).text());
 									if (data[j].image && data[j].image.name != null) {
 										jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
@@ -76,8 +84,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										} else {
 											jQuery('.members-image', thisitemparent).attr('src', 'img/noimg.png');
 										}
-										jQuery('.membercard-category', thisitemparent).text('Parent');
-										jQuery('.membercard-rel', thisitemparent).text(data[j].parents[k].relationType);
+										//jQuery('.membercard-category', thisitemparent).text(kidsalutation + "'s "+toTitleCase(data[j].parents[k].userType));
+										jQuery('.membercard-category', thisitemparent).text(toTitleCase(data[j].parents[k].userType));
+										jQuery('.membercard-rel', thisitemparent).text('');
 										var grpname = 'grp' + j;
 										jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
 										jQuery('.edit-card-canvas').append(thisitemparent);
@@ -105,6 +114,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						firstname : "none",
 						lastname : "none",
 						security : 'none',
+						relation : 'Related',
 						invitedby : 'none',
 						status : 'none',
 						domain : 'none',
@@ -119,6 +129,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							//$(this).removeClass('active');
 							rowObject.firstname = jQuery(this).find('.membercard-name').attr('fn');
 							rowObject.lastname = jQuery(this).find('.membercard-name').attr('ln');
+							rowObject.relation = jQuery(this).find('.membercard-category').text();
 							rowObject.id = jQuery(this).find('.membercard-name').attr('memberid');
 							if (jQuery(this).find('.membercard-name').attr('email') !== 'null') {
 								rowObject.email = jQuery(this).find('.membercard-name').attr('email');

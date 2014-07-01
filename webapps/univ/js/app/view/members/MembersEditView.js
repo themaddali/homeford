@@ -17,6 +17,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
 						jQuery('#member-id').val(ACTIVEMEMBER.id);
+						jQuery('#member-rel').val(ACTIVEMEMBER.relation);
 						jQuery('#member-email').val(ACTIVEMEMBER.email);
 						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
 						jQuery('#member-roles').val(ACTIVEMEMBER.roles);

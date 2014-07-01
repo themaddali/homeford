@@ -38,7 +38,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('#s-name').val(ACTIVEINFO.sname);
 						//jQuery('#s-img').attr('src', ACTIVEINFO.simg);
 						jQuery('#g-name').val(ACTIVEINFO.gname);
-						//jQuery('#g-img').attr('src', ACTIVEINFO.gimg);
+						jQuery('#g-rel').val(toTitleCase(ACTIVEINFO.relation));
 						jQuery('#checkin-notes').val('');
 						jQuery('.edittextarea').focus();
 						setInterval(function() {
@@ -87,6 +87,13 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					}
 
 					jQuery('#currenttime').text("" + tday[nday] + ", " + tmonth[nmonth] + " " + ndate + ", " + nyear + " " + nhour + ":" + nmin + ":" + nsec + ap + "");
+				}
+
+				//http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+				function toTitleCase(str) {
+					return str.replace(/\w\S*/g, function(txt) {
+						return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+					});
 				}
 
 				function getMembers(activedomains) {
@@ -294,13 +301,14 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 
-				this.activeStudent = function(gname, gid, gimg, Studentobj) {
+				this.activeStudent = function(gname, gid, gimg, grel, Studentobj) {
 					ACTIVEINFO.gname = gname;
 					ACTIVEINFO.gid = gid;
 					ACTIVEINFO.gimg = gimg;
 					ACTIVEINFO.sname = Studentobj.name;
 					ACTIVEINFO.sid = Studentobj.sid;
 					ACTIVEINFO.simg = Studentobj.img;
+					ACTIVEINFO.relation = grel;
 				};
 
 				this.pause = function() {
@@ -333,17 +341,17 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('.subtitleinfo-2').click(function() {
 							router.go('/attendancekioskidentify');
 						});
-						
-						jQuery('#attendanceaction').click(function(){
+
+						jQuery('#attendanceaction').click(function() {
 							if (jQuery('#attendanceaction').val() === 'Check In') {
 								jQuery('#attendanceaction').val('Checked In');
-								setTimeout(function(){
+								setTimeout(function() {
 									jQuery('#action-canvas').slideUp(1000);
 								}, 500);
 							}
 						});
-						
-						jQuery('#attendancecancel').click(function(){
+
+						jQuery('#attendancecancel').click(function() {
 							router.go('/attendancekiosk');
 						});
 

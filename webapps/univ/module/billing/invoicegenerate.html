@@ -53,30 +53,30 @@
 										</div>
 									</div>
 								</li>
-								<li class="form-item">
-									<label>Service</label>
-									<div class="form-content">
-										<select class="edit-select" id="default-service-select" placeholder="What is the service you want to bill" id="service-select-0" name="serviceselect" type="text">
+								<!-- <li class="form-item">
+								<label>Service</label>
+								<div class="form-content">
+								<select class="edit-select" id="default-service-select" placeholder="What is the service you want to bill" id="service-select-0" name="serviceselect" type="text">
 
-										</select>
-										<div class="form-helper">
-											<label>Pick the service you want to bill</label>
-										</div>
-									</div>
+								</select>
+								<div class="form-helper">
+								<label>Pick the service you want to bill</label>
+								</div>
+								</div>
 								</li>
 								<li class="form-item" id="service-template" style="display: none">
-									<label></label>
-									<div class="form-content">
-										<select class="edit-select" placeholder="What is the service you want to bill"  name="serviceselect" type="text">
+								<label></label>
+								<div class="form-content">
+								<select class="edit-select" placeholder="What is the service you want to bill"  name="serviceselect" type="text">
 
-										</select>
-										<div class="form-helper">
-											<label>Pick the service you want to bill</label>
-										</div>
-									</div>
-								</li>
+								</select>
+								<div class="form-helper">
+								<label>Pick the service you want to bill</label>
+								</div>
+								</div>
+								</li> -->
 							</ol>
-							<a class="formlink">Additional Service</a>
+							<!-- <a class="formlink">Additional Service</a> -->
 						</fieldset>
 					</form>
 				</div>
@@ -87,6 +87,20 @@
 					</div>
 				</footer>
 				<div id="invite-modal-close" class="modal_close"></div>
+				<div class="div-template" style="display:none">
+					<li class="form-item servicetemplate" id="service-lead">
+						<label>Select Services</label>
+						<span>
+							<input class="services-list" type="checkbox" name="services" value=""/>
+						</span>
+					</li>
+					<li class="form-item filler servicetemplate" id="service-follow">
+						<label></label>
+						<span>
+							<input class="services-list" type="checkbox" name="services" value=""/>
+						</span>
+					</li>
+				</div>
 			</div>
 		</div>
 	</body>
