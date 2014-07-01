@@ -48,7 +48,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 							jQuery.backstretch("destroy");
 							var fulllist = i.concat(list);
 							jQuery.backstretch(fulllist, {
-								duration : 5000,
+								duration : 3000,
 								fade : 500
 							}, function() {
 								r.stop();
