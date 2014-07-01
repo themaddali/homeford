@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis','../../view/kiosk/Attendance3'], function(jquery, cookie, service, banner, router, ellipsis, attendance3) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis', '../../view/kiosk/Attendance3'], function(jquery, cookie, service, banner, router, ellipsis, attendance3) {"use strict";
 
 	var Attendance2 = ( function() {
 
@@ -12,7 +12,10 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 			var template, templateself;
 			var TARGETVIEW;
 			var ACTIVESTUDENT = {};
+			var ACTIVEPARENT = {};
 			var KIOSKMODE = false;
+			var kidheader = '<div class="canvas-partition"><i style="color:#737373;padding-left: 10px;" class="icon-user  icon-1x "></i><span class="tag">Student</span></div>';
+			var parentheader = '<div class="canvas-partition"><i style="color:#737373;padding-left: 10px;" class="icon-group  icon-1x "></i><span class="tag">Identify Yourself:</span></div>';
 
 			function Attendance2() {
 
@@ -89,23 +92,38 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					jQuery('.contentfull').empty();
 					//Draw student
 					var selfitem = templateself.clone();
+					jQuery('.contentfull').append(kidheader);
 					jQuery('.student-name', selfitem).text(ACTIVESTUDENT.name);
 					jQuery('.kiosk-headshot', selfitem).attr('src', ACTIVESTUDENT.img);
+					jQuery(selfitem).attr('memberid', ACTIVESTUDENT.id);
 					jQuery('.contentfull').append(selfitem);
-					jQuery('.metainfo').text('2 identified guardians');
 					var memberscount = 0;
 					for (var i = 0; i < activedomains.length; i++) {
-						console.log('Fix This part');
-						service.getMembersOnly(activedomains[i], {
+						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								var thisitem = template.clone();
 								jQuery('.cardsloading').fadeOut(200);
-								for (var j = 0; j < 2; j++) {
-									var thisitem = template.clone();
-									jQuery('.student-name', thisitem).text('Parent ' + j);
-									jQuery('.student-select', thisitem).attr('name', 'Parent ' + j);
-									jQuery('.contentfull').append(thisitem);
-									if (j === 1) {
+								jQuery('.contentfull').append(parentheader);
+								for (var j = 0; j < data.length; j++) {
+									if (data[j].id == ACTIVESTUDENT.id) {
+										jQuery('.metainfo').text(data[j].parents.length + ' identified guardians');
+										for (var k = 0; k < data[j].parents.length; k++) {
+											var thisitemknown = template.clone();
+											if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
+												jQuery('.student-name', thisitemknown).text(data[j].parents[k].email);
+											} else {
+												jQuery('.student-name', thisitemknown).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email);
+											}
+											if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
+												jQuery('.kiosk-headshot', thisitemknown).attr('src', '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id);
+											} else {
+												jQuery('.kiosk-headshot', thisitemknown).attr('src', 'img/noimg.png');
+											}
+											jQuery(thisitemknown).attr('memberid', data[j].parents[k].id);
+											jQuery('.contentfull').append(thisitemknown);
+										}
+									}
+									if (j === data.length - 1) {
 										var thisitem = template.clone();
 										jQuery('.student-name', thisitem).text('New Person');
 										var _image = "img/addguardian.png";
@@ -124,23 +142,31 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				function resetView() {
 					jQuery('.contentfull').empty();
-					jQuery('#nopage-warning').fadeIn(500);
-					jQuery('.main-content-header').fadeOut(400);
-					jQuery('.main-content').fadeOut(400);
-					jQuery('#project-nav').fadeOut(400);
-					jQuery('.identify-code').val('').focus();
+					jQuery('#nopage-warning').fadeOut(500);
+					jQuery('.main-content-header').fadeIn(400);
+					jQuery('.main-content').fadeIn(400);
+					jQuery('#project-nav').fadeIn(400);
+					jQuery('.identify-code').val('');
+					jQuery('#new-kiosk-code').val('');
+					jQuery('#new-kiosk-code-repeat').val('');
+					jQuery('.newcode').hide();
 				}
 
 				function activateEvents() {
 					jQuery('.faceboard').on('click', function() {
 						if ($(this).find('.student-name').text() === 'New Person') {
 							router.go('/attendancekioskadd', '/attendancekioskidentify');
-						} else {
-							var selectedUserName = $(this).find('.student-name').text();
-							var selectedUserId = $(this).attr('name');
-							var selectedUserimg = $(this).find('.kiosk-headshot').attr('src');
-							attendance3.activeStudent(selectedUserName, selectedUserId, selectedUserimg, ACTIVESTUDENT);
-							router.go('/attendancekioskaction', '/attendancekioskidentify');
+						} else if ($(this).find('.student-name').text() !== ACTIVESTUDENT.name) {
+							//Bring up validation screen.
+							jQuery('#nopage-warning').fadeIn(500);
+							jQuery('.main-content-header').fadeOut(400);
+							jQuery('.main-content').fadeOut(400);
+							jQuery('#project-nav').fadeOut(400);
+							jQuery('.identify-code').val('');
+							ACTIVEPARENT.name = $(this).find('.student-name').text();
+							ACTIVEPARENT.id = $(this).attr('memberid');
+							ACTIVEPARENT.img = $(this).find('.kiosk-headshot').attr('src');
+							jQuery('.no-page-message').text(ACTIVEPARENT.name + ', Please keyin your 4 digit kiosk identification code!');
 						}
 					});
 
@@ -164,7 +190,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('.main-content-header').fadeIn(400);
 						jQuery('.main-content').fadeIn(400);
 						jQuery('#project-nav').fadeIn(400);
-						populateData();
+						console.log('Add Validation logic here');
+						attendance3.activeStudent(ACTIVEPARENT.name, ACTIVEPARENT.id, ACTIVEPARENT.img, ACTIVESTUDENT);
+						router.go('/attendancekioskaction', '/attendancekioskidentify');
 					} else {
 						//Invalid Case
 						jQuery('.identify-code').addClass('error');
@@ -184,19 +212,26 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				this.resume = function() {
 					$(".card-search").autocomplete("destroy");
+					resetView();
 					GetClock();
 					populateData();
 					banner.setBrand();
-					resetView();
 					if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 						router.go('/attendancekiosk');
 					} else {
-						jQuery('.no-page-message').text('Please keyin your 4 digit identification code for ' + ACTIVESTUDENT.name + '!');
+						jQuery('.no-page-message').text('Please keyin your 4 digit kiosk identification code for ' + ACTIVESTUDENT.name + '!');
 					}
 					//Set Focus
 					setTimeout(function() {
 						jQuery('.identify-code').focus();
 					}, 300);
+					var timeout;
+					document.onmousemove = function() {
+						clearTimeout(timeout);
+						timeout = setTimeout(function() {
+							router.go('/attendancekiosk');
+						}, 60000);
+					};
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -209,10 +244,18 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						template = jQuery('#member-template').remove().attr('id', '');
 						templateself = jQuery('#member-template-self').remove().attr('id', '');
 						GetClock();
+						var timeout;
+						document.onmousemove = function() {
+							clearTimeout(timeout);
+							timeout = setTimeout(function() {
+								router.go('/attendancekiosk');
+							}, 60000);
+						};
 						if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 							router.go('/attendancekiosk');
 						} else {
 							jQuery('.no-page-message').text('Please keyin your 4 digit identification code for ' + ACTIVESTUDENT.name + '!');
+							populateData();
 						}
 
 						//HTML Event - Actions

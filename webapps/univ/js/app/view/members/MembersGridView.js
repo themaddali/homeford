@@ -33,49 +33,54 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					var activedomains = [];
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
-					getMembers(activedomains);
+					getDomainMembers(activedomains);
 				}
 
-				function getMembers(activedomains) {
+				function getDomainMembers(activedomains) {
 					jQuery('#invite-domain').empty();
 					jQuery('.edit-card-canvas').empty();
-					jQuery('#checkbox-control').text('Un-Select All');
 					membernames = [];
 					var memberscount = 0;
 					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembers(activedomains[i], {
+						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								var thisitem = template.clone();
 								for (var j = 0; j < data.length; j++) {
-									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER1') == -1) {
-										var thisitem = template.clone();
-										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
-											jQuery('.membercard-name', thisitem).text(data[j].email);
+									var thisitem = template.clone();
+									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
+										jQuery('.membercard-name', thisitem).text(data[j].email);
+									} else {
+										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email);
+									}
+									membernames.push(jQuery('.membercard-name', thisitem).text());
+									if (data[j].image && data[j].image.name != null) {
+										jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
+									} else {
+										jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
+									}
+									jQuery('.membercard-category', thisitem).text('Student');
+									jQuery('.membercard-rel', thisitem).text('');
+									var grpname = 'grp' + j;
+									jQuery(thisitem).addClass(grpname).attr('group', grpname);
+									jQuery('.edit-card-canvas').append(thisitem);
+									for (var k = 0; k < data[j].parents.length; k++) {
+										var thisitemparent = template.clone();
+										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
+											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].email);
 										} else {
-											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email);
+											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email);
 										}
-										membernames.push(jQuery('.membercard-name', thisitem).text());
-										if (data[j].image && data[j].image.name != null) {
-											jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
+										membernames.push(jQuery('.membercard-name', thisitemparent).text());
+										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
+											jQuery('.members-image', thisitemparent).attr('src', '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id);
 										} else {
-											jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
+											jQuery('.members-image', thisitemparent).attr('src', 'img/noimg.png');
 										}
-										if (data[j].roles[0].roleName === 'ROLE_TIER3') {
-											jQuery('.membercard-category', thisitem).text('Student');
-											jQuery('.membercard-rel', thisitem).text('');
-										} else {
-											jQuery('.membercard-category', thisitem).text('Parent');
-											jQuery('.membercard-rel', thisitem).text('Guardian');
-										}
-										jQuery('.edit-card-canvas').append(thisitem);
-										//to test
-										console.log('delete this');
-										if (j < 5) {
-											jQuery(thisitem).addClass('grp1').attr('group', 'grp1');
-										} else {
-											jQuery(thisitem).addClass('grp2').attr('group', 'grp2');
-										}
+										jQuery('.membercard-category', thisitemparent).text('Parent');
+										jQuery('.membercard-rel', thisitemparent).text(data[j].parents[k].relationType);
+										var grpname = 'grp' + j;
+										jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
+										jQuery('.edit-card-canvas').append(thisitemparent);
 									}
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
@@ -126,7 +131,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						} else {
 							jQuery('.membercard').removeClass('active');
 							var group = $(this).attr('group');
-							var groupclass = '.'+group;
+							var groupclass = '.' + group;
 							$(groupclass).addClass('active');
 						}
 					});

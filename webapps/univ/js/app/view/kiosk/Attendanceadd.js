@@ -129,7 +129,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						// Error Callback
 						function(err) {
 							// Log the error to the console.
-							console.log('Sorry, You are not authorised to represent this kid. Please see admin.');
+							console.log('Sorry, You are not authorised to represent this kid. If you are not able to create profile identification for yourself, Please see admin.');
 							jQuery('#video-container').hide();
 							jQuery('#camera-controls').hide();
 							jQuery('#capture-img').show();

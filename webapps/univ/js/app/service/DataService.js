@@ -56,7 +56,21 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.getFlickList = function(keyword, handlers) {
 					handlers.error();
-					// var flickrurl = "http://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json";
+					var imagelist = [];
+					var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
+					$.getJSON(flickrurl, function(data) {
+						$.each(data.items, function(i, item) {
+
+							//$("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
+							for (var i = 0; i < 5; i++) {
+								var imageurl = data.items[i].media.m;
+								imageurl = imageurl.replace('_m.jpg', '_b.jpg');
+								imagelist.push(imageurl);
+							}
+							handlers.success(imagelist);
+
+						});
+					});
 					// $.ajax({
 					// url : flickrurl,
 					// type : 'GET',
@@ -72,7 +86,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					// handlers.error();
 					// }
 					// });
-				}
+				};
 
 				this.getUserProfile = function(handlers) {
 					if (!Array.prototype.indexOf) {
@@ -127,7 +141,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							}
 						});
 					}
-				}
+				};
 				//ListenPending Invites
 				function listenPendingInvites(invitesarray) {
 					if (invitesarray.length > 0) {
@@ -162,7 +176,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.registerKids = function(domainid, memberobj, handlers) {
 					$.ajax({
 						url : '/zingoare/api/registerkids/' + domainid,
@@ -183,8 +197,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
-				
+
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
@@ -197,6 +210,20 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+
+				//Get members will relations
+				this.getDomainMembers = function(domain, handlers) {
+					$.ajax({
+						url : '/zingoare/api/getdomainmembers/' + domain,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+
 				//Get T3 privilage
 				this.getMembersOnly = function(domain, handlers) {
 					$.ajax({

@@ -32,12 +32,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function clearForm() {
-					jQuery('#member-first-name').val('');
-					jQuery('#member-last-name').val('');
-					jQuery('#member-first-name').removeAttr('readonly');
-					jQuery('#member-last-name').removeAttr('readonly');
-					jQuery('#member-email').removeAttr('readonly');
-					jQuery('#member-email').val('');
+					jQuery(input[type='text']).val();
 					validator.resetForm();
 					jQuery('#member-first-name').focus();
 				};

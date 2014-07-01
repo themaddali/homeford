@@ -199,21 +199,16 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					var _memberstotal = 0;
 					var _membersdata = [0, 0];
 					for (var i = 0; i < activedomains.length; i++) {
-						service.getMembers(activedomains[i], {
+						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
-								_memberstotal = _memberstotal + data.length - 1;
 								for (var j = 0; j < data.length; j++) {
+									_memberst3 = _memberst3 + 1;
+									_memberst2 = _memberst2 + data[j].parents.length;
+									_memberstotal = _memberst2+ _memberst3;
+									updatePanelValues('#members-t3-value', _memberst3);
+									updatePanelValues('#members-t2-value', _memberst2);
 									updatePanelValues('#members-total-value', _memberstotal);
-									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER3') !== -1 && roles.indexOf('ROLE_TIER2') === -1) {
-										_memberst3 = _memberst3 + 1;
-										updatePanelValues('#members-t3-value', _memberst3);
-										_membersdata[1] = _memberst3;
-									} else if (roles.indexOf('ROLE_TIER2') !== -1) {
-										_memberst2 = _memberst2 + 1;
-										updatePanelValues('#members-t2-value', _memberst2);
-										_membersdata[0] = _memberst2;
-									}
+									_membersdata[1] = _memberst3;
 									if (j === data.length - 1) {
 										updatePanelGraphs('#members-donut', _membersdata);
 									}
@@ -546,7 +541,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						jQuery('#admin-done').on('click', function() {
 							router.returnToPrevious();
 						});
-						
+
 						jQuery('.brandnames').change(function() {
 							banner.updateBrand(jQuery('.brandnames').val());
 						});

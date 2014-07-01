@@ -32,6 +32,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function clearForm() {
+					jQuery('input[type="text"]').val('');
+					jQuery('input[type="email"]').val('');
+					//Fall Back					
 					jQuery('#member-first-name').val('');
 					jQuery('#member-last-name').val('');
 					jQuery('#mother-name').val('');
@@ -66,7 +69,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				};
 
 				this.init = function(args) {
-					//Check for Cookoverview-manageie before doing any thing.
+					//Check for Cookie before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Member / Student Add';
 					jQuery('.g2').hide();
@@ -95,75 +98,79 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						});
 
 						jQuery('#member-add').on('click', function() {
-							var kidobject = [];
-							if (jQuery('#member-first-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#member-first-name').val();
-								person.lastName = jQuery('#member-last-name').val();
-								person.userType = 'KID';
-								kidobject.push(person);
-							}
-							if (jQuery('#father-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#father-name').val().split(' ')[0];
-								person.lastName = jQuery('#father-name').val().split(' ')[1];
-								person.email = jQuery('#father-email').val();
-								person.userType = 'FATHER';
-								kidobject.push(person);
-							}
-							if (jQuery('#mother-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#mother-name').val().split(' ')[0];
-								person.lastName = jQuery('#mother-name').val().split(' ')[1];
-								person.email = jQuery('#mother-email').val();
-								person.userType = 'MOTHER';
-								kidobject.push(person);
-							}
-							if (jQuery('#g1-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#g1-name').val().split(' ')[0];
-								person.lastName = jQuery('#g1-name').val().split(' ')[1];
-								person.email = jQuery('#g1-email').val();
-								person.userType = 'GAURDIAN1';
-								kidobject.push(person);
-							}
-							if (jQuery('#g2-name').length > 0 && jQuery('#g2-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#g2-name').val().split(' ')[0];
-								person.lastName = jQuery('#g2-name').val().split(' ')[1];
-								person.email = jQuery('#g2-email').val();
-								person.userType = 'GAURDIAN2';
-								kidobject.push(person);
-							}
-							if (jQuery('#g3-name').length > 0 && jQuery('#g3-name').val().length > 0) {
-								var person = {};
-								person.firstName = jQuery('#g3-name').val().split(' ')[0];
-								person.lastName = jQuery('#g3-name').val().split(' ')[1];
-								person.email = jQuery('#g3-email').val();
-								person.userType = 'GAURDIAN3';
-								kidobject.push(person);
-							}
-							console.log(kidobject);
-							service.registerKids(service.domainNametoID(jQuery.cookie('subuser')), kidobject, {
-								success : function(data) {
-									if (data.status !== 'error') {
-										notify.showNotification('OK', data.message);
-									} else {
-										notify.showNotification('ERROR', data.message);
-									}
-									setTimeout(function() {
-										studentlist.reload();
-										router.returnToPrevious();
-									}, 2000);
+							if ($('#regularadd').valid()) {
+								var kidobject = [];
+								if (jQuery('#member-first-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#member-first-name').val();
+									person.lastName = jQuery('#member-last-name').val();
+									person.userType = 'KID';
+									kidobject.push(person);
 								}
-							});
+								if (jQuery('#father-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#father-name').val();
+									person.lastName = '';
+									person.email = jQuery('#father-email').val();
+									person.userType = 'FATHER';
+									kidobject.push(person);
+								}
+								if (jQuery('#mother-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#mother-name').val();
+									person.lastName = '';
+									person.email = jQuery('#mother-email').val();
+									person.userType = 'MOTHER';
+									kidobject.push(person);
+								}
+								if (jQuery('#g1-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#g1-name').val();
+									person.lastName = '';
+									person.email = jQuery('#g1-email').val();
+									person.userType = 'GAURDIAN1';
+									kidobject.push(person);
+								}
+								if (jQuery('#g2-name').length > 0 && jQuery('#g2-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#g2-name').val();
+									person.lastName = '';
+									person.email = jQuery('#g2-email').val();
+									person.userType = 'GAURDIAN2';
+									kidobject.push(person);
+								}
+								if (jQuery('#g3-name').length > 0 && jQuery('#g3-name').val().length > 0) {
+									var person = {};
+									person.firstName = jQuery('#g3-name').val();
+									person.lastName = '';
+									person.email = jQuery('#g3-email').val();
+									person.userType = 'GAURDIAN3';
+									kidobject.push(person);
+								}
+								service.registerKids(service.domainNametoID(jQuery.cookie('subuser')), kidobject, {
+									success : function(data) {
+										if (data.status !== 'error') {
+											notify.showNotification('OK', data.message);
+										} else {
+											notify.showNotification('ERROR', data.message);
+										}
+										setTimeout(function() {
+											studentlist.reload();
+											router.returnToPrevious();
+										}, 2000);
+									}
+								});
+							} else {
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
+
 						});
 
 						jQuery('#form-reset').click(function() {
 							clearForm();
 						});
 
-						validator = jQuery(".edit-form").validate({
+						validator = jQuery("#regularadd").validate({
 							rules : {
 								memberfirstname : {
 									required : true,
@@ -171,10 +178,29 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								memberlastname : {
 									required : true,
 								},
-								memberemail : {
+								fathername : {
+									required : true,
+								},
+								mothername : {
+									required : true,
+								},
+								fatheremail : {
 									required : true,
 									email : true
-								}
+								},
+								motheremail : {
+									required : true,
+									email : true
+								},
+								g1email : {
+									email : true
+								},
+								g2email : {
+									email : true
+								},
+								g3email : {
+									email : true
+								},
 							}
 						});
 

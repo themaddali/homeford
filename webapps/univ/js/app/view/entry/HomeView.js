@@ -31,8 +31,9 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 				var i = PARAM.Bg;
 
 				function startCoverShow() {
-					service.getFlickList('sfo', {
+					service.getFlickList('golden gate', {
 						success : function(list) {
+							jQuery.backstretch("destroy");
 							jQuery.backstretch(list, {
 								duration : 5000,
 								fade : 500
@@ -42,6 +43,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 							});
 						},
 						error : function() {
+							jQuery.backstretch("destroy");
 							jQuery.backstretch(i, {
 								duration : 3000,
 								fade : 500

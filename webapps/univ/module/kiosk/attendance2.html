@@ -7,7 +7,7 @@
 				This website works best with JavaScript enabled
 			</div>
 		</noscript>
-		<div id="project-nav" style="display: none; cursor: default">
+		<div id="project-nav" style="cursor: default">
 			<div id="project-page-logo" style="cursor: default" class="ir">
 				<a class="mainlogo" style="cursor: default"></a>
 				<h1>Zingoare</h1>
@@ -17,10 +17,16 @@
 			<select class="brandnames" style="cursor: default"></select>
 
 		</div>
-		<div id="nopage-warning">
+		<div id="nopage-warning" style="display: none">
 			<i class="icon-exclamation-sign icon-1x " style="color: rgb(227, 102, 7)"></i><span class="no-page-message">Please keyin your 4 digit identification code!</span>
 			<p>
 				<input class="identify-code" autofocus type="password" pattern="[0-9]*" maxlength="4" size="4" placeholder="" />
+			</p>
+			<p>
+				<input class="newcode"  style="display: none" id="new-kiosk-code" autofocus type="password" pattern="[0-9]*" maxlength="4" size="4" placeholder="" />
+			</p>
+			<p>
+				<input class="newcode" style="display: none" id="new-kiosk-code-repeat" autofocus type="password" pattern="[0-9]*" maxlength="4" size="4" placeholder="" />
 			</p>
 			<p>
 				<input class="identify-code-button" type="button" value="Go In" />
@@ -32,7 +38,7 @@
 				<a class="negative" href="#/attendancekiosk">Don't Know, Go Back</a>
 			</p>
 		</div>
-		<div class="main-content-header" style="display: none">
+		<div class="main-content-header">
 			<div class="titleinfo">
 				<span class="subtitleinfo">Attendance Kiosk</span>
 				<img alt="flow" src="img/bread.png" height="35" />
@@ -43,7 +49,7 @@
 				0 identified guardians
 			</div>
 		</div>
-		<div class="main-content" style="display: none">
+		<div class="main-content">
 			<div class="cardsloading">
 				<img width="70px" height="70px" src="img/loading-cofee.gif" />
 				<p>
