@@ -13,6 +13,25 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 			var USERID;
 			var DOMAINMAP = {};
 			var DOMAINIDNAME = [];
+			var FLICKRMAP = {
+				'California' : 'Golden Gate',
+				'Washnigton' : 'Sky Needle',
+				'Alabama' : 'Space and Rocket Center',
+				'Alaska' : 'Klondike Gold Rush',
+				'Arizona' : 'Grand Canyon',
+				'Arkansas' : 'Hot Springs',
+				'Colorado' : 'Rocky Mountain',
+				'Florida' : 'Disney World',
+				'Georgia' : 'Stone Mountain Park',
+				'Illinois' : 'Chicago Navy Pier',
+				'Minnesota' : 'Mall of America',
+				'Montana' : 'Yellow Stone',
+				'Nevada' : 'Las Vegas Strip',
+				'New York' : 'Times Square',
+				'North Carolina' : 'Blue Ridge Parkway',
+				'Oregon' : 'Crater Lake',
+				'Texas' : 'Dallas Sky Line',
+			};
 
 			/**
 			 * @constructor
@@ -56,21 +75,27 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.getFlickList = function(keyword, handlers) {
 					handlers.error();
-					var imagelist = [];
-					var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
-					$.getJSON(flickrurl, function(data) {
-						$.each(data.items, function(i, item) {
+					$.getJSON('https://freegeoip.net/json/', function(location) {
+						keyword = FLICKRMAP[location.region_name];
+						if (!keyword) {
+							keyword = location.country_name;
+						}
+						var imagelist = [];
+						var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
+						$.getJSON(flickrurl, function(data) {
+							$.each(data.items, function(i, item) {
 
-							//$("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
-							for (var i = 0; i < 5; i++) {
-								var imageurl = data.items[i].media.m;
-								imageurl = imageurl.replace('_m.jpg', '_b.jpg');
-								imagelist.push(imageurl);
-							}
-							handlers.success(imagelist);
-
+								//$("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
+								for (var i = 0; i < 3; i++) {
+									var imageurl = data.items[i].media.m;
+									imageurl = imageurl.replace('_m.jpg', '_b.jpg');
+									imagelist.push(imageurl);
+								}
+								handlers.success(imagelist);
+							});
 						});
 					});
+
 					// $.ajax({
 					// url : flickrurl,
 					// type : 'GET',
