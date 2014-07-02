@@ -48,6 +48,10 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 												expires : 100,
 												path : '/'
 											});
+											jQuery.cookie('_did', UserProfile.domains[0].id, {
+												expires : 100,
+												path : '/'
+											});
 											if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
 												ADMINLEVEL = ADMINLEVEL + 1;
 											} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {

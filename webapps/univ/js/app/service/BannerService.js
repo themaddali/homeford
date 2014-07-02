@@ -18,10 +18,10 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 					var useroption = '<div class="userflyout"><div class="flyout-label">' + 'Logged In' + '</div><a id="banner-dashboard" href="#/admin" class="flyout-link">' + 'Administration' + '</a><a class="flyout-link" id="signout">' + 'SignOut' + '</a></div>';
 					jQuery('#project-nav').append(useroption);
 					jQuery('.flyout-label').text(jQuery.cookie('user'));
-				}
+				};
 				this.HideUser = function() {
 					jQuery('.userflyout').remove();
-				}
+				};
 
 				this.setBrand = function() {
 					if (jQuery.cookie('user') === 'tour@zingoare.com') {
@@ -46,18 +46,22 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 							}
 						});
 					}
-				}
+				};
 
 				this.updateBrand = function(newchoice) {
-					if (newchoice === "Demo Tour"){
+					if (newchoice === "Demo Tour") {
 						newchoice = 'TOUR';
 					}
 					jQuery.cookie('subuser', newchoice, {
 						expires : 100,
 						path : '/'
 					});
+					jQuery.cookie('_did', service.domainNametoID(newchoice), {
+						expires : 100,
+						path : '/'
+					});
 					location.reload(false);
-				}
+				};
 
 				this.ShowAlert = function() {
 					jQuery('#alert').removeClass('active');
@@ -80,6 +84,9 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 							jQuery.removeCookie('subuser', {
 								path : '/'
 							});
+							jQuery.removeCookie('_did', {
+								path : '/'
+							});
 							router.go('/home');
 							window.setTimeout('location.reload()', 500);
 							// refresh after 1/2 sec
@@ -89,7 +96,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 
 				this.newNotify = function(status, message, link, details) {
 
-				}
+				};
 
 				this.pause = function() {
 					// No implementation needed for this here.

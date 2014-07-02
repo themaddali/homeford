@@ -146,6 +146,12 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							contentType : "application/json",
 							success : function(data) {
 								listenPendingInvites(data.pendingInvitees);
+								if (!jQuery.cookie('_did')) {
+									jQuery.cookie('_did', data.domains[0].id, {
+										expires : 100,
+										path : '/'
+									});
+								}
 								USERPROFILE = data;
 								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {
@@ -759,7 +765,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					} else {
 						handlers.success(ACTIVEDOMAINIDLIST);
 					}
-				}
+				};
 
 				this.returnOwnerDomainIDList = function(handlers) {
 					//To facilite passive loading
@@ -785,34 +791,37 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					} else {
 						handlers.success(ACTIVEOWNDOMAINSIDLIST);
 					}
-				}
+				};
 
 				this.domainIDtoName = function(id) {
 					return DOMAINMAP[id];
-				}
+				};
 				this.domainNametoID = function(name) {
 					for (var i = 0; i < DOMAINIDNAME.length; i++) {
 						if (name === DOMAINIDNAME[i].name) {
 							return DOMAINIDNAME[i].id;
 						}
 					}
-				}
+					if (DOMAINIDNAME.length === 0) {
+						return jQuery.cookie('_did');
+					}
+				};
 
 				this.returnEntitiesList = function() {
 					return DOMAINLIST;
-				}
+				};
 
 				this.thisuserID = function() {
 					return USERID;
-				}
+				};
 
 				this.cleanUserProfile = function() {
 					USERPROFILE = null;
-				}
+				};
 
 				this.knowClenUserProfile = function() {
 					return USERPROFILE;
-				}
+				};
 
 				this.pause = function() {
 					// No implementation needed for this here.
