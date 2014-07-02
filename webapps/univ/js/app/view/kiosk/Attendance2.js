@@ -120,6 +120,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 												jQuery('.kiosk-headshot', thisitemknown).attr('src', 'img/noimg.png');
 											}
 											jQuery(thisitemknown).attr('memberid', data[j].parents[k].id);
+											jQuery(thisitemknown).attr('kioskpin', data[j].parents[k].kioskPassword);
 											jQuery(thisitemknown).attr('relation', data[j].parents[k].userType);
 											jQuery('.contentfull').append(thisitemknown);
 										}
@@ -168,6 +169,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							ACTIVEPARENT.id = $(this).attr('memberid');
 							ACTIVEPARENT.relation = $(this).attr('relation');
 							ACTIVEPARENT.img = $(this).find('.kiosk-headshot').attr('src');
+							ACTIVEPARENT.pin = $(this).attr('kioskpin');
 							jQuery('.no-page-message').text(ACTIVEPARENT.name + ', Please keyin your 4 digit kiosk identification code!');
 							jQuery('.identify-code').focus();
 						}
@@ -187,13 +189,13 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				function Identify(indentificationcode) {
 					jQuery('.identify-code').removeClass('error');
-					if (indentificationcode.length === 4 && indentificationcode.indexOf(' ') === -1 && jQuery.isNumeric(indentificationcode)) {
-						//Valid case
+					console.log('Validation to be added + trip pin to 4 digits');
+					// if (indentificationcode === ACTIVEPARENT.pin && indentificationcode.length === 4 && indentificationcode.indexOf(' ') === -1 && jQuery.isNumeric(indentificationcode)) {
+					if (jQuery.isNumeric(indentificationcode)) {
 						jQuery('#nopage-warning').fadeOut(500);
 						jQuery('.main-content-header').fadeIn(400);
 						jQuery('.main-content').fadeIn(400);
 						jQuery('#project-nav').fadeIn(400);
-						console.log('Add Validation logic here');
 						attendance3.activeStudent(ACTIVEPARENT.name, ACTIVEPARENT.id, ACTIVEPARENT.img, ACTIVEPARENT.relation, ACTIVESTUDENT);
 						router.go('/attendancekioskaction', '/attendancekioskidentify');
 					} else {
@@ -203,10 +205,11 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 
-				this.activeStudent = function(studentname, studentid, studentimg) {
+				this.activeStudent = function(studentname, studentid, studentimg, studentstate) {
 					ACTIVESTUDENT.name = studentname;
 					ACTIVESTUDENT.id = studentid;
 					ACTIVESTUDENT.img = studentimg;
+					ACTIVESTUDENT.state = studentstate;
 				};
 
 				this.pause = function() {
@@ -214,7 +217,6 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
-					$(".card-search").autocomplete("destroy");
 					resetView();
 					GetClock();
 					populateData();
@@ -229,12 +231,12 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						jQuery('.identify-code').focus();
 					}, 300);
 					var timeout;
-					document.onmousemove = function() {
-						clearTimeout(timeout);
-						timeout = setTimeout(function() {
-							router.go('/attendancekiosk');
-						}, 60000);
-					};
+					// document.onmousemove = function() {
+					// clearTimeout(timeout);
+					// timeout = setTimeout(function() {
+					// router.go('/attendancekiosk');
+					// }, 60000);
+					// };
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -248,12 +250,12 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						templateself = jQuery('#member-template-self').remove().attr('id', '');
 						GetClock();
 						var timeout;
-						document.onmousemove = function() {
-							clearTimeout(timeout);
-							timeout = setTimeout(function() {
-								router.go('/attendancekiosk');
-							}, 60000);
-						};
+						// document.onmousemove = function() {
+						// clearTimeout(timeout);
+						// timeout = setTimeout(function() {
+						// router.go('/attendancekiosk');
+						// }, 60000);
+						// };
 						if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 							router.go('/attendancekiosk');
 						} else {

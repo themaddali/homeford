@@ -103,10 +103,6 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							//updatePanelValues('#user-id-value', '# ' + UserProfile.id);
 							updatePanelValues('#user-pendinginvites-value', UserProfile.pendingInvitees.length);
 							if (UserProfile.domains.length > 0) {
-								// if (ACTIVEDOMAINS.indexOf(UserProfile.domains[0].domainName) === -1) {
-								// ACTIVEDOMAINS.push(UserProfile.domains[0].domainName);
-								// ACTIVEDOMAINIDS.push(UserProfile.domains[0].id);
-								// }
 								var activedomains = [];
 								activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 								ACTIVEDOMAINIDS = activedomains;
@@ -115,6 +111,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								populateToDoData(ACTIVEDOMAINIDS);
 								populateQuizData(ACTIVEDOMAINIDS);
 								populateServicesData(ACTIVEDOMAINIDS);
+								populateAttendanceKioskData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -125,35 +122,6 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 									updatePanelGraphs('#profile-donut', _profiledata);
 								}
 							}
-							// else {
-							// for (var i = 0; i < UserProfile.domains.length; i++) {
-							// if (ACTIVEDOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
-							// ACTIVEDOMAINS.push(UserProfile.domains[i].domainName);
-							// ACTIVEDOMAINIDS.push(UserProfile.domains[i].id);
-							// }
-							// if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
-							// _adminof = _adminof + 1;
-							// updatePanelValues('#user-admin-value', _adminof);
-							// _profiledata[1] = _adminof;
-							// } else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
-							// _ownerof = _ownerof + 1;
-							// updatePanelValues('#user-owner-value', _ownerof);
-							// _profiledata[0] = _ownerof;
-							// }
-							// if (i === UserProfile.domains.length - 1) {
-							// //Remove duplicates
-							// ACTIVEDOMAINS = ACTIVEDOMAINS.filter(function(elem, pos) {
-							// return ACTIVEDOMAINS.indexOf(elem) == pos;
-							// })
-							// updatePanelGraphs('#profile-donut', _profiledata);
-							// populateInviteData(ACTIVEDOMAINIDS);
-							// populateMembersData(ACTIVEDOMAINIDS);
-							// populateToDoData(ACTIVEDOMAINIDS);
-							// populateQuizData(ACTIVEDOMAINIDS);
-							// populateServicesData(ACTIVEDOMAINIDS);
-							// }
-							// }
-							// }
 						}
 					});
 				}
@@ -204,7 +172,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								for (var j = 0; j < data.length; j++) {
 									_memberst3 = _memberst3 + 1;
 									_memberst2 = _memberst2 + data[j].parents.length;
-									_memberstotal = _memberst2+ _memberst3;
+									_memberstotal = _memberst2 + _memberst3;
 									updatePanelValues('#members-t3-value', _memberst3);
 									updatePanelValues('#members-t2-value', _memberst2);
 									updatePanelValues('#members-total-value', _memberstotal);
@@ -359,6 +327,38 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 						});
 					}
+				}
+
+				function populateAttendanceKioskData(activedomains) {
+					//defaulting to 0th index
+					service.getDomainMembers(activedomains[0], {
+						success : function(data) {
+							var _noshow = data.length;
+							var _checkin = 0;
+							var _checkout = 0;
+							var _checkindata = [0, 0];
+							for (var i = 0; i < activedomains.length; i++) {
+								service.checkInStats(activedomains[0], {
+									success : function(data) {
+										for (var j = 0; j < data.length; j++) {
+											if (data[j].type === 'CHECKIN') {
+												_checkin = _checkin + 1;
+												updatePanelValues('#attendance-in-value', _checkin);
+												_checkindata[0] = _checkin;
+											} else {
+												_checkout = _checkout + 1;
+												updatePanelValues('#attendance-out-value', _checkout);
+												_checkindata[1] = _checkout;
+											}
+										}
+										updatePanelValues('#attendance-noshow-value', _noshow - (_checkin + _checkout));
+										updatePanelGraphs('#attendance-donut', _checkindata);
+									}
+								});
+							}
+						}
+					});
+
 				}
 
 				function updatePanelValues(name, value) {

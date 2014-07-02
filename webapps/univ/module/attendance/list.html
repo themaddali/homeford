@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="profile-view-modal" class="modal-body view">
+			<div class="modal-container view">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Attendance Summary
+				</header>
+				<div class="modal-contents">
+					<table id="adminslist-table" class="view-table">
+						<thead>
+							<tr>
+								<!-- <th style="background: none"></th> -->
+								<th>Student Name</th>
+								<th>Check In Time</th>
+								<th>Checked In by</th>
+								<th>Check Out Time</th>
+								<th>Checked Out by</th>
+								<th>Notes</th>
+								<th style="background: none"></th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+						<div class="noinfo" style="display:none">
+							No Results Available
+						</div>
+					</table>
+				</div>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+
+		<div id="preloader"></div>
+		<table id="div-template" style="display:none">
+			<tr id="admin-template">
+				<!-- <td class="admin-icon"></td> -->
+				<td class="s-name"></td>
+				<td class="checkin-time"></td>
+				<td class="checkin-by"></td>
+				<td class="checout-time"></td>
+				<td class="checkout-by"></td>
+				<td class="notes"></td>
+				<!-- <td class="admin-action" style="color:white"><i class="icon-cog  icon-1x "></i></td> -->
+			</tr>
+		</table>
+
+	</body>
+</html>

@@ -405,6 +405,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('attendancesummary', '^/attendancesummary(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/attendance/list.html', '../app/view/attendance/AttendanceListView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('no route', '^.*', {
 						container : CONTAINER,
 						enter : function(location, result) {

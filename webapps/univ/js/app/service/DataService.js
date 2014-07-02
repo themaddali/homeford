@@ -229,6 +229,35 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
+				this.checkIn = function(domainid, parentid, kidid, notes, action, handlers) {
+					$.ajax({
+						url : '/zingoare/api/addkiosk/' + domainid + '/' + parentid + '/' + kidid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'notes' : notes,
+							'type' : action,
+						}),
+						success : function(data) {
+							//handlers.success(getmembersonly(data));
+							handlers.success(data);
+						}
+					});
+				};
+
+				this.checkInStats = function(domainid, handlers) {
+					$.ajax({
+						url : '/zingoare/api/getkiosk/' + domainid,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
 					$.ajax({
@@ -339,7 +368,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.setUserProfile = function(id, firstname, lastname, email, phone, handlers) {
+				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
 					$.ajax({
 						url : '/zingoare/api/userprofile/' + id,
 						type : 'POST',
@@ -349,7 +378,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'firstName' : firstname,
 							'lastName' : lastname,
 							'phoneNumber' : phone,
-							'email' : email
+							'email' : email,
+							'kioskPassword' : kioskpin,
 						}),
 						success : function(data) {
 							USERPROFILE = null;
@@ -573,7 +603,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.QuestionsList = function(todoid, handlers) {
 					var QUIZOBJ = [];
@@ -586,7 +616,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.QuestionsListOnly = function(quizid, handlers) {
 					var QUIZOBJ = [];
@@ -599,7 +629,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.QuizProgressSave = function(todoid, questionid, answerid, handlers) {
 					var QUIZOBJ = [];
@@ -614,7 +644,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.MemberToDoList = function(domainid, memberid, handlers) {
 					$.ajax({
@@ -629,7 +659,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(e);
 						}
 					});
-				}
+				};
 
 				this.updateToDo = function(todoid, progress, date, comments, handlers) {
 					$.ajax({
@@ -647,7 +677,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.updateProfilePhoto = function(userid, handlers) {
 					$.ajax({
@@ -660,7 +690,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							USERPROFILE = null;
 						}
 					});
-				}
+				};
 
 				this.Login = function(username, password, handlers) {
 					$.ajax({
@@ -675,7 +705,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success('error');
 						}
 					});
-				}
+				};
 				this.Logout = function(handlers) {
 					$.ajax({
 						url : '/zingoare/j_spring_security_logout',
@@ -688,7 +718,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success('error');
 						}
 					});
-				}
+				};
 
 				this.validateEntity = function(entity, handlers) {
 					$.ajax({
@@ -700,7 +730,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						}
 					});
-				}
+				};
 
 				this.entityList = function(handlers) {
 					if (DOMAINLIST) {
@@ -724,19 +754,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							}
 						});
 					}
-				}
-				function _passiveUserProfile() {
-
-				}
+				};
 
 				//Getter and Setters
 				this.returnDomainList = function() {
 					return ACTIVEDOMAINLIST;
-				}
+				};
 				//To vall a function from a diff view
 				this.ViewCall = function(viewname, functionname, value) {
 					viewname.functionname(value);
-				}
+				};
 
 				this.returnDomainIDList = function(handlers) {
 					//To facilite passive loading

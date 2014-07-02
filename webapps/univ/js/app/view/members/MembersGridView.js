@@ -9,6 +9,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 			var MALEICON = '<i class="icon-male  icon-1x "></i>';
 			var FEMALEICON = '<i class="icon-female  icon-1x "></i>';
+			var KEYICON = '<i class="icon-key  icon-1x "></i>';
 			var membernames = [];
 			var template;
 
@@ -57,7 +58,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
 										jQuery('.membercard-name', thisitem).text(data[j].email);
 									} else {
-										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email);
+										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email).attr('kioskpin', data[j].kioskPassword);
 									}
 									var kidsalutation = data[j].firstName;
 									membernames.push(jQuery('.membercard-name', thisitem).text());
@@ -76,7 +77,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
 											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].email);
 										} else {
-											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email);
+											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
+											;
 										}
 										membernames.push(jQuery('.membercard-name', thisitemparent).text());
 										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
@@ -85,7 +87,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('.members-image', thisitemparent).attr('src', 'img/noimg.png');
 										}
 										//jQuery('.membercard-category', thisitemparent).text(kidsalutation + "'s "+toTitleCase(data[j].parents[k].userType));
-										jQuery('.membercard-category', thisitemparent).text(toTitleCase(data[j].parents[k].userType));
+										jQuery('.membercard-category', thisitemparent).html(toTitleCase(data[j].parents[k].userType) + ' ' + KEYICON + ' ' + data[j].parents[k].kioskPassword);
 										jQuery('.membercard-rel', thisitemparent).text('');
 										var grpname = 'grp' + j;
 										jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
@@ -121,6 +123,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						courses : 'none',
 						email : '',
 						id : 'none',
+						kioskpin : 'No Pin Available - Go to profile and set one.',
 						image : 'img/noimg.png',
 					};
 
@@ -129,7 +132,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							//$(this).removeClass('active');
 							rowObject.firstname = jQuery(this).find('.membercard-name').attr('fn');
 							rowObject.lastname = jQuery(this).find('.membercard-name').attr('ln');
-							rowObject.relation = jQuery(this).find('.membercard-category').text();
+							rowObject.relation = jQuery(this).find('.membercard-category').text().split(' ')[0];
+							rowObject.kioskpin = jQuery(this).find('.membercard-name').attr('kioskpin');
 							rowObject.id = jQuery(this).find('.membercard-name').attr('memberid');
 							if (jQuery(this).find('.membercard-name').attr('email') !== 'null') {
 								rowObject.email = jQuery(this).find('.membercard-name').attr('email');

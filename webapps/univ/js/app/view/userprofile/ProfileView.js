@@ -25,12 +25,15 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							//jQuery('#profile-id').text(UserProfile.id);
 							jQuery('#profile-email').text(UserProfile.email);
 							jQuery('#profile-phone').text(UserProfile.phoneNumber);
+							if (UserProfile.kioskPassword === null) {
+								UserProfile.kioskPassword = 'Not Set - Update Now!';
+							}
+							jQuery('#profile-kiosk-pin').text(UserProfile.kioskPassword);
 							jQuery('#profile-pending-invites').text(UserProfile.pendingInvitees.length);
 							if (!UserProfile.image || UserProfile.image == null) {
-								jQuery('#profile-image').attr('src','img/noimg.png');
-							}
-							else{
-								jQuery('#profile-image').attr('src','/zingoare/api/profileupload/picture/' + UserProfile.image.id);
+								jQuery('#profile-image').attr('src', 'img/noimg.png');
+							} else {
+								jQuery('#profile-image').attr('src', '/zingoare/api/profileupload/picture/' + UserProfile.image.id);
 							}
 							var template = jQuery('#profile-domain-template').attr('id', '');
 							//backupagain

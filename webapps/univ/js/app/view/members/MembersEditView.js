@@ -22,6 +22,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
 						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
 						jQuery('#member-profile-image').attr('src', ACTIVEMEMBER.image);
+						jQuery('#member-pin').val(ACTIVEMEMBER.kioskpin);
 						// jQuery('#member-profile-image').Jcrop({
 						// allowSelect : false,
 						// allowMove : true,
@@ -120,7 +121,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#member-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								service.setUserProfile(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", {
+								service.setUserProfile(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", jQuery('#member-pin').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
@@ -132,8 +133,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										}, 2000);
 									}
 								});
-							}
-							else {
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});

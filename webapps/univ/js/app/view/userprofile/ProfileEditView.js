@@ -25,6 +25,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
+							if (UserProfile.kioskPassword === null) {
+								UserProfile.kioskPassword = 'Not Set - Update Now!';
+							}
+							jQuery('#profile-kiosk-pin').val(UserProfile.kioskPassword);
+
 							if (!UserProfile.image || UserProfile.image == null || UserProfile.image == 'null') {
 								jQuery('#profile-image').attr('src', 'img/noimg.png');
 							} else {
@@ -67,9 +72,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								service.cleanUserProfile();
 							});
 						}
-					}); 
+					});
 
-					
 					// var croppicContaineroutputOptions = {
 					// uploadUrl : jQuery('#profile-picture').attr('data-url'),
 					// outputUrlId : 'cropOutput',
@@ -123,7 +127,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#profile-edit').on('click', function() {
 							if ($("#profile-edit-form").valid()) {
-								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), {
+								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
 									success : function(response) {
 										if (response !== 'error') {
 											notify.showNotification('OK', response.message);
@@ -137,8 +141,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										}, 2000);
 									}
 								});
-							}
-							else {
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});
@@ -168,7 +171,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								profileemail : {
 									required : true,
 									email : true
-								}
+								},
+								profilekioskpin : {
+									required : true,
+									digits : true,
+									maxlength : 4,
+									minlength : 4
+								},
 							}
 						});
 

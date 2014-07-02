@@ -270,7 +270,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				};
 
 				this.resume = function() {
-					showBG();
+					//showBG();
 					banner.setBrand();
 					document.title = 'Zingoare | Members Management';
 					jQuery('.edit-notify').hide();
@@ -296,7 +296,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						//Rich Experience First.... Load BG
 						template = jQuery('#student-template').remove().attr('id', '');
 						partiontemplate = jQuery('.canvas-partition');
-						showBG();
+						//showBG();
 						populateStudentList();
 						if (notify.getNewNotificationsCount() > 0) {
 							jQuery('#alert-value').text(notify.getNewNotificationsCount());
