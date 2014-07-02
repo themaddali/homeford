@@ -54,7 +54,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 												OWNERLEVEL = OWNERLEVEL + 1;
 											}
 										}
-										if (UserProfile.passowrdReset === true || UserProfile.passowrdReset === 'true') {
+										if (UserProfile.passwordReset === true || UserProfile.passwordReset === 'true') {
 											newpassword.resetinfo(username);
 											router.go('/newpassword');
 										} else {

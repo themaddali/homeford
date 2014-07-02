@@ -169,6 +169,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 							ACTIVEPARENT.relation = $(this).attr('relation');
 							ACTIVEPARENT.img = $(this).find('.kiosk-headshot').attr('src');
 							jQuery('.no-page-message').text(ACTIVEPARENT.name + ', Please keyin your 4 digit kiosk identification code!');
+							jQuery('.identify-code').focus();
 						}
 					});
 
