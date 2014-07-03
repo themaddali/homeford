@@ -153,6 +153,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								},
 								memberemail : {
 									email : true
+								},
+								memberpin : {
+									required : true,
+									digits : true,
+									maxlength : 4,
+									minlength : 4
 								}
 							}
 						});

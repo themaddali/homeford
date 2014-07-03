@@ -189,9 +189,6 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 								required : false,
 							},
 						},
-						messages : {
-							username : "Valid Email Needed",
-						},
 					});
 
 				};

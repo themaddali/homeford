@@ -225,9 +225,6 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 								date : true
 							},
 						},
-						messages : {
-							Rusername : "Valid Email Needed",
-						},
 					});
 
 				};
