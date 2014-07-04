@@ -1266,6 +1266,44 @@ a.goback {
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 }
+
+.modal-container.login {
+	position: absolute;
+	margin-top: 4%;
+	margin-left: 30%;
+	width: 550px;
+	height: 400px;
+	z-index: 20;
+	border: solid 2px #0784E3;
+	background-color: white;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.form-inline-control {
+	width: 550px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.form-inline-control > input {
+	padding: 10px;
+	background-color: #0784E3;
+	font-size: 0.9em;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border: 2px solid #e6e6e6;
+	border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	width: 150px;
+	margin-left: 120px;
+}
+
+#login-form {
+	overflow: hidden;
+}
+
 .modal-container.print {
 	position: absolute;
 	margin-top: 4%;
@@ -1724,7 +1762,7 @@ div.formselction {
 }
 .edit-form li.filler {
 	padding-bottom: 10px;
-	margin-top: -5px;
+	margin-top: 15px;
 }
 
 .edit-form li.form-item:last-of-type {
@@ -1985,7 +2023,7 @@ div.formselction {
 	vertical-align: center;
 	display: inline-block;
 	font-size: 12px;
-	line-height: 12px;
+	line-height: 20px;
 	width: 50%;
 	padding: 20px;
 	padding-top: 0px;
@@ -2008,6 +2046,7 @@ div.formselction {
 .edit-form li.form-item span {
 	color: #7f7f7f;
 	font-size: 13px;
+	line-height: 20px;
 }
 .view-form li.form-item span {
 	color: black;
@@ -5017,20 +5056,46 @@ footer a:hover {
 		height: 230px;
 		margin-top: -30px;
 		margin-left: 10px;
+		display: none;
+	}
+	
+	.float-left .adminboard {
+		height: 240px;
+	}
+	
+	.adminboard .dash-info-visual {
+		display: none;
+	}
+	
+	.adminboard footer {
+		margin-top: 65px;
+	}
+	
+	#nopage-warning {
+		margin: 15px;
+		margin-top : 30px;
+		width: auto;
 	}
 
 	/*LOGIN LINKS*/
 	#forgot-password {
-		text-align: left;
-		margin-top: 30px;
-	}
-
-	#register-li {
-		margin-top: -35px;
+		margin-top: 50px;
+		text-align: center;
 	}
 
 	#register-now {
-		text-align: left;
+		text-align: center;
+	}
+	.form-inline-control {
+		width: 80%;
+	}
+
+	.form-inline-control > input {
+		width: 150px;
+		text-align: center;
+		margin: 0px;
+		padding: 10px;
+		margin-left: 25px;
 	}
 
 	.view-table {
@@ -5053,7 +5118,7 @@ footer a:hover {
 		font-weight: 500;
 	}
 	.canvas-partition {
-		display: none;
+		/*display: none;*/
 	}
 
 	.float-left .todoactionboard {
