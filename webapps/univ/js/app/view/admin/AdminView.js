@@ -93,6 +93,10 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function populateUserData() {
+					//5 minutes
+					setInterval(function() {
+						timelyReloadAttendance();
+					}, 60000);
 					var _adminof = 0;
 					var _ownerof = 0;
 					var _profiledata = [0, 0];
@@ -124,6 +128,54 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 						}
 					});
+				}
+
+				//Reload the attendance info during peak hours daily.
+				//Morning 7-9 and evening 2-5 on weekdays.
+				//every 5 mins
+				function timelyReloadAttendance() {
+					var tday = new Array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+					var tmonth = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+					var d = new Date();
+					var nday = d.getDay();
+					var nmonth = d.getMonth();
+					var ndate = d.getDate();
+					var nyear = d.getYear();
+					var nhour = d.getHours();
+					var nmin = d.getMinutes();
+					var nsec = d.getSeconds();
+					var ap;
+
+					if (nyear < 1000)
+						nyear = nyear + 1900;
+
+					if (nhour == 0) {
+						ap = " AM";
+						nhour = 12;
+					} else if (nhour <= 11) {
+						ap = " AM";
+					} else if (nhour == 12) {
+						ap = " PM";
+					} else if (nhour >= 13) {
+						ap = " PM";
+						nhour -= 12;
+					}
+
+					if (nmin <= 9) {
+						nmin = "0" + nmin;
+					}
+					if (nsec <= 9) {
+						nsec = "0" + nsec;
+					}
+
+					if (ap == " AM" && nhour >= 7 && nhour <= 9 && nday !== 'Saturday' && nday !== 'Sunday') {
+						populateAttendanceKioskData();
+					}
+					if (ap == " PM" && nhour >= 2 && nhour <= 4 && nday !== 'Saturday' && nday !== 'Sunday') {
+						populateAttendanceKioskData();
+					}
+
 				}
 
 				function populateInviteData(activedomains) {
@@ -330,6 +382,17 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function populateAttendanceKioskData(activedomains) {
+					//To support autorefresh
+					if (!activedomains || activedomains == null) {
+						var activedomains = [];
+						activedomains.push(jQuery.cookie('_did'));
+						//Update alert counter
+						if (notify.getNewNotificationsCount() > 0) {
+							jQuery('#alert-value').text(notify.getNewNotificationsCount());
+						} else {
+							jQuery('#alert-value').text('');
+						}
+					}
 					//defaulting to 0th index
 					service.getDomainMembers(activedomains[0], {
 						success : function(data) {

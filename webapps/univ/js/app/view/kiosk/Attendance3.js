@@ -1,4 +1,4 @@
-define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', 'ellipsis'], function(jquery, cookie, service, banner, router, ellipsis) {"use strict";
+define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify'], function(jquery, cookie, service, banner, router, notify) {"use strict";
 
 	var Attendance3 = ( function() {
 
@@ -150,6 +150,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 									success : function(data) {
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked In');
+											notify.showNotification('OK', ' Checked In:  ' + ACTIVEINFO.gname);
 											setTimeout(function() {
 												jQuery('#action-canvas').slideUp(1000);
 											}, 500);
@@ -166,6 +167,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 									success : function(data) {
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked Out');
+											notify.showNotification('OK', ' Checked Out:  ' + ACTIVEINFO.gname);
 											setTimeout(function() {
 												jQuery('#action-canvas').slideUp(1000);
 											}, 500);

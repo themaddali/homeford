@@ -97,6 +97,14 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					}
 				}
 
+				function positionModal() {
+					var freewidth = $('.modal-body').width() - 550;
+					var freeheight = $('.modal-body').height() - 400;
+					if ($('.modal-body').width() > 480) {
+						jQuery('.modal-container.login').css('margin-left', freewidth / 2).css('margin-top', freeheight / 3);
+					}
+				}
+
 
 				this.pause = function() {
 
@@ -104,12 +112,20 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 				this.resume = function() {
 					checkForActiveCookie();
+					jQuery('.edit-notify').hide();
+					validator.resetForm();
+					positionModal();
 					document.title = 'Zingoare | Signin/Signup';
 					jQuery('#user-name').focus();
 				};
 
 				this.init = function() {
 					document.title = 'Zingoare | Signin/Signup';
+					positionModal();
+
+					// When the browser changes size
+					$(window).resize(positionModal);
+
 					if (!jQuery.cookie('entity')) {
 						jQuery('#user-domain').removeAttr('disabled');
 						jQuery('#user-domain').removeClass('onlyone');
