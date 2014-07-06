@@ -355,10 +355,13 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 												}
 												_checkout = _checkout + 1;
 												updatePanelValues('#attendance-out-value', _checkout);
-												_checkindata[1] = _checkout;
+												_checkindata[1] = (_checkout);
 											}
 										}
-										updatePanelValues('#attendance-noshow-value', _noshow - (_checkin + _checkout));
+										updatePanelValues('#attendance-in-value', _checkin);
+										updatePanelValues('#attendance-out-value', (studentids.length - _checkin));
+										_checkindata[1] = (studentids.length - _checkin);
+										updatePanelValues('#attendance-noshow-value', _noshow - (studentids.length));
 										updatePanelGraphs('#attendance-donut', _checkindata);
 									}
 								});

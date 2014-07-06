@@ -15,6 +15,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
+			var DIALOGBODY = '<div id="note-dialog" title="Note"><p id="note-message"></p></div>';
 
 			function AdminsListView() {
 
@@ -66,9 +67,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
 									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
 									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
-									jQuery('.checkout-by', row).text(stats[i].parent.firstName);
-									if (stats[i].notes.length > 0) {
-										jQuery('.notes', row).attr('note', stats[i].notes).html(COMMENTICON);
+									if (stats[i].checkout_parent) {
+										jQuery('.checkout-by', row).text(stats[i].checkout_parent.firstName);
+									} else {
+										jQuery('.checkout-by', row).text('-');
+									}
+									if (!stats[i].notes || stats[i].notes.length == 0) {
+										stats[i].notes = 'No Message';
+									}
+									if (!stats[i].checkedout_notes || stats[i].checkedout_notes.length == 0) {
+										stats[i].checkedout_notes = 'No Message';
+									}
+									if (stats[i].notes !== 'No Message' || stats[i].checkedout_notes !== 'No Message') {
+										jQuery('.notes', row).attr('note', 'CheckIn:' + stats[i].notes + '<br />CheckOut Note:' + stats[i].checkedout_notes).html(COMMENTICON);
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
@@ -92,7 +103,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
 						var note = jQuery(this).find('.notes').attr('note');
-						jQuery('#note-message').text(note);
+						jQuery('#note-message').html(note);
 						jQuery("#note-dialog").dialog("open");
 					});
 				}
@@ -118,20 +129,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				}
 
-
-				this.pause = function() {
-
-				};
-
-				this.resume = function() {
-					populateData();
-					document.title = 'Zingoare | Attendance Summary';
-				};
-
-				this.init = function(args) {
-					//Check for Cooke before doing any thing.
-					//Light weight DOM.
-					document.title = 'Zingoare | Attendance Summary';
+				function initDialog() {
+					jQuery('body').append(DIALOGBODY);
 					$("#note-dialog").dialog({
 						autoOpen : false,
 						show : {
@@ -143,7 +142,25 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							duration : 300
 						}
 					});
+				}
 
+
+				this.pause = function() {
+
+				};
+
+				this.resume = function() {
+					//$('#note-dialog').dialog('destroy');
+					initDialog();
+					populateData();
+					document.title = 'Zingoare | Attendance Summary';
+				};
+
+				this.init = function(args) {
+					//Check for Cooke before doing any thing.
+					//Light weight DOM.
+					document.title = 'Zingoare | Attendance Summary';
+					initDialog();
 					if (checkForActiveCookie() === true) {
 						populateData();
 
