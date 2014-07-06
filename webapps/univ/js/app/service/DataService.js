@@ -229,7 +229,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.checkIn = function(domainid, parentid, kidid, notes, action, handlers) {
+				this.checkIn = function(domainid, parentid, kidid, notes, handlers) {
 					$.ajax({
 						url : '/zingoare/api/addkiosk/' + domainid + '/' + parentid + '/' + kidid,
 						type : 'POST',
@@ -237,7 +237,25 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						contentType : "application/json",
 						data : JSON.stringify({
 							'notes' : notes,
-							'type' : action,
+							'type' : 'CHECKIN',
+						}),
+						success : function(data) {
+							//handlers.success(getmembersonly(data));
+							handlers.success(data);
+						}
+					});
+				};
+				
+				this.checkOut = function(domainid, parentid, kidid, actionid, notes, handlers) {
+					$.ajax({
+						url : '/zingoare/api/addkiosk/' + domainid + '/' + parentid + '/' + kidid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'notes' : notes,
+							'type' : 'CHECKOUT',
+							'id' :actionid
 						}),
 						success : function(data) {
 							//handlers.success(getmembersonly(data));

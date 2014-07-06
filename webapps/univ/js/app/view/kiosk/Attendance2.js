@@ -205,11 +205,12 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 
-				this.activeStudent = function(studentname, studentid, studentimg, studentstate) {
+				this.activeStudent = function(studentname, studentid, studentimg, studentstate, studentstateid) {
 					ACTIVESTUDENT.name = studentname;
 					ACTIVESTUDENT.id = studentid;
 					ACTIVESTUDENT.img = studentimg;
 					ACTIVESTUDENT.state = studentstate;
+					ACTIVESTUDENT.stateid = studentstateid;
 				};
 
 				this.pause = function() {

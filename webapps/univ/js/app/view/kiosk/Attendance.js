@@ -128,19 +128,32 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					//defaulting to 0th index
 					service.checkInStats(activedomains[0], {
 						success : function(data) {
+							var activestudentids = [];
 							for (var j = 0; j < data.length; j++) {
-								if (data[j].type === 'CHECKIN') {
-									updatePanelIcons(data[j].kid.id, 'CHECKIN');
+								if (activestudentids.indexOf(data[j].kid.id) === -1) {
+									activestudentids.push(data[j].kid.id);
+									if (data[j].type === 'CHECKIN') {
+										updatePanelIcons(data[j].kid.id, 'CHECKIN', data[j].id);
+									} else {
+										updatePanelIcons(data[j].kid.id, 'CHECKOUT', data[j].id);
+									}
 								} else {
-									updatePanelIcons(data[j].kid.id, 'CHECKOUT');
+									jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.icon-3x').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-question-sign').css('color', 'grey');
+									jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.kiosk-flag-text').text('No Show Yet');
+									if (data[j].type === 'CHECKIN') {
+										updatePanelIcons(data[j].kid.id, 'CHECKIN', data[j].id);
+									} else {
+										updatePanelIcons(data[j].kid.id, 'CHECKOUT', data[j].id);
+									}
 								}
 							}
 						}
 					});
 				}
 
-				function updatePanelIcons(memberid, type) {
-					if ( type === 'CHECKIN') {
+				function updatePanelIcons(memberid, type, kioskactionid) {
+					jQuery('.kioskboard[name=' + memberid + ']').attr('kioskactionid', kioskactionid);
+					if (type === 'CHECKIN') {
 						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').addClass('icon-ok-sign').css('color', 'green');
 						jQuery('.kioskboard[name=' + memberid + ']').find('.kiosk-flag-text').text('Checked In');
 					} else {
@@ -157,7 +170,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						var selectedUserId = $(this).attr('name');
 						var selectedUserimg = $(this).find('.kiosk-headshot').attr('src');
 						var selectedUserState = $(this).find('.kiosk-flag-text').text();
-						attendance2.activeStudent(selectedUserName, selectedUserId, selectedUserimg, selectedUserState);
+						var selectedUserStateid = $(this).attr('kioskactionid');
+						attendance2.activeStudent(selectedUserName, selectedUserId, selectedUserimg, selectedUserState, selectedUserStateid);
 						router.go('/attendancekioskidentify', '/attendancekiosk');
 					});
 				}

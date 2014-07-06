@@ -111,6 +111,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					ACTIVEINFO.simg = Studentobj.img;
 					ACTIVEINFO.relation = grel;
 					ACTIVEINFO.state = Studentobj.state;
+					ACTIVEINFO.stateid = Studentobj.stateid;
 				};
 
 				this.pause = function() {
@@ -145,7 +146,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 						jQuery('#attendanceaction').click(function() {
 							if (jQuery('#attendanceaction').val() === 'Check In') {
-								service.checkIn(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid, jQuery('#checkin-notes').val(), 'CHECKIN', {
+								service.checkIn(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid,  jQuery('#checkin-notes').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked In');
@@ -161,7 +162,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 									}
 								});
 							} else {
-								service.checkIn(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid, jQuery('#checkin-notes').val(), 'CHECKOUT', {
+								service.checkOut(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid, ACTIVEINFO.stateid, jQuery('#checkin-notes').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked Out');

@@ -717,7 +717,7 @@ body .ui-tooltip {
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 	border-color: #007DBA;
 }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
@@ -745,9 +745,11 @@ body .ui-tooltip {
 	/*background: #fff  50% 50% repeat-x;*/
 	font-weight: bold;
 	color: #555;
-	height: 15px;
+	/*height: 15px;*/
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
+	border: none;
+	background: url("../img/select-close.png") no-repeat;
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
 	color: #555;

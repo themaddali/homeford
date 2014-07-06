@@ -337,15 +337,22 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							var _checkin = 0;
 							var _checkout = 0;
 							var _checkindata = [0, 0];
+							var studentids = [];
 							for (var i = 0; i < activedomains.length; i++) {
 								service.checkInStats(activedomains[0], {
 									success : function(data) {
 										for (var j = 0; j < data.length; j++) {
 											if (data[j].type === 'CHECKIN') {
+												if (studentids.indexOf(data[j].kid.id) === -1) {
+													studentids.push(data[j].kid.id);
+												}
 												_checkin = _checkin + 1;
 												updatePanelValues('#attendance-in-value', _checkin);
 												_checkindata[0] = _checkin;
 											} else {
+												if (studentids.indexOf(data[j].kid.id) === -1) {
+													studentids.push(data[j].kid.id);
+												}
 												_checkout = _checkout + 1;
 												updatePanelValues('#attendance-out-value', _checkout);
 												_checkindata[1] = _checkout;

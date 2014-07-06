@@ -14,6 +14,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			};
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
+			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
 
 			function AdminsListView() {
 
@@ -51,33 +52,28 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function loadTable(activedomains) {
 					if (activedomains[0]) {
-						service.getInviteStatus(activedomains[0], {
-							success : function(InviteList) {
+						service.checkInStats(activedomains[0], {
+							success : function(stats) {
 								var rowtemplate = jQuery('#admin-template').attr('id', '');
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
-								var ADMINCOUNT = InviteList.length;
-								for (var i = 0; i < ADMINCOUNT; i++) {
+								var COUNT = stats.length;
+								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
-									jQuery('.admin-email', row).text(InviteList[i].email);
-									jQuery('.admin-invitedby', row).text(InviteList[i].sentBy);
-									jQuery('.admin-domain', row).text(InviteList[i].domainName);
-									jQuery('.admin-roles', row).text('');
-									for (var j = 0; j < InviteList[i].roles.length; j++) {
-										jQuery('.admin-roles', row).text(jQuery('.admin-roles', row).text() + ROLEMAP[InviteList[i].roles[j].roleName] + ' ');
-									}
-									if (InviteList[i].status == 'ACCEPTED') {
-										//jQuery('.admin-icon', row).empty().append(ACCEPTEDICON);
-										jQuery('.admin-status', row).text((InviteList[i].status).toLowerCase());
+									jQuery('.s-name', row).text(stats[i].kid.firstName);
+									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
+									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
+									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
+									jQuery('.checkout-by', row).text(stats[i].parent.firstName);
+									if (stats[i].notes.length > 0) {
+										jQuery('.notes', row).attr('note', stats[i].notes).html(COMMENTICON);
 									} else {
-										//jQuery('.admin-icon', row).empty().append(PENDINGICON);
-										jQuery('.admin-status', row).text((InviteList[i].status).toLowerCase());
+										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
-
 									jQuery('.view-table  tbody').append(row);
-									if (i === ADMINCOUNT - 1 && activedomains.length > 0) {
+									if (i === COUNT - 1 && activedomains.length > 0) {
 										activedomains.splice(0, 1);
 										jQuery('.view-table').trigger("update");
 										loadTable(activedomains);
@@ -90,46 +86,32 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function activateTableClicks() {
-					var rowObject = {
-						email : 'none',
-						invitedby : 'none',
-						status : 'none',
-						domain : 'none',
-						roles : 'none'
-					};
-
 					jQuery('.view-table tbody tr').click(function() {
 						jQuery('.view-table tbody tr').removeClass('rowactive');
 						jQuery('.admin-action').css('color', 'white');
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
-						rowObject.email = jQuery(this).find('.admin-email').text();
-						rowObject.invitedby = jQuery(this).find('.admin-invitedby').text();
-						rowObject.status = jQuery(this).find('.admin-status').text();
-						rowObject.domain = jQuery(this).find('.admin-domain').text();
-						rowObject.roles = jQuery(this).find('.admin-roles').text();
-						adminsedit.setInviteInfo(rowObject);
-						router.go('/adminslistedit');
+						var note = jQuery(this).find('.notes').attr('note');
+						jQuery('#note-message').text(note);
+						jQuery("#note-dialog").dialog("open");
 					});
+				}
 
-					// jQuery('.view-table tbody tr').click(function() {
-					// jQuery('.view-table tbody tr').removeClass('rowactive');
-					// jQuery('.admin-action').css('color', 'white');
-					// jQuery(this).addClass('rowactive');
-					// jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
-					// });
-					//
-					// jQuery('.admin-action').click(function(e) {
-					// if (jQuery(this).parent().hasClass('rowactive')) {
-					// rowObject.email = jQuery(this).parent().find('.admin-email').text();
-					// rowObject.invitedby = jQuery(this).parent().find('.admin-invitedby').text();
-					// rowObject.status = jQuery(this).parent().find('.admin-status').text();
-					// rowObject.domain = jQuery(this).parent().find('.admin-domain').text();
-					// rowObject.roles = jQuery(this).parent().find('.admin-roles').text();
-					// adminsedit.setInviteInfo(rowObject);
-					// router.go('/adminslistedit');
-					// }
-					// });
+				function msToTime(s) {
+					if (!s || s === null) {
+						return '-';
+					} else {
+						var dateformat = new Date(s);
+						var h = dateformat.getHours();
+						var m = dateformat.getMinutes();
+						var s = dateformat.getSeconds();
+						if (h < 13) {
+							return (h + ':' + m + ' am');
+						} else {
+							return ((h - 12) + ':' + m + ' pm');
+						}
+						//return (((h * 60) + m) + ":" + s);
+					}
 				}
 
 				function clearForm() {
@@ -143,13 +125,24 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				this.resume = function() {
 					populateData();
-					document.title = 'Zingoare | Admin List';
+					document.title = 'Zingoare | Attendance Summary';
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
-					document.title = 'Zingoare | Admin List';
+					document.title = 'Zingoare | Attendance Summary';
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						}
+					});
 
 					if (checkForActiveCookie() === true) {
 						populateData();
