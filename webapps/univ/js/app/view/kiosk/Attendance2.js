@@ -189,9 +189,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 				function Identify(indentificationcode) {
 					jQuery('.identify-code').removeClass('error');
-					console.log('Validation to be added + trip pin to 4 digits');
-					// if (indentificationcode === ACTIVEPARENT.pin && indentificationcode.length === 4 && indentificationcode.indexOf(' ') === -1 && jQuery.isNumeric(indentificationcode)) {
-					if (jQuery.isNumeric(indentificationcode)) {
+					//console.log('Validation to be added + trip pin to 4 digits');
+					if (indentificationcode === ACTIVEPARENT.pin && indentificationcode.length === 4 && indentificationcode.indexOf(' ') === -1 && jQuery.isNumeric(indentificationcode)) {
 						jQuery('#nopage-warning').fadeOut(500);
 						jQuery('.main-content-header').fadeIn(400);
 						jQuery('.main-content').fadeIn(400);
