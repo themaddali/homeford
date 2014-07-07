@@ -1510,11 +1510,31 @@ a.goback {
 	background-color: #FFFFFF;
 	color: black;
 }
+.modal-body .modal-container header input.negative.processing, .modal-body .modal-container footer input.negative.processing, .modal-body .modal-container div.inline-controls input.negative.processing {
+	background-color: #ffffff;
+	color: #ffffff;;
+	cursor: none;
+	border: none;
+	background-image: url("../img/loader.gif");
+	background-repeat: no-repeat;
+	background-position: 50% center;
+}
+
 .modal-body .modal-container header input.negative, .modal-body .modal-container footer input.negative, .modal-body .modal-container div.inline-controls input.negative {
 	border: 2px solid #e6e6e6;
 	cursor: pointer;
 	background-color: #e30716;
 	color: white;
+}
+
+.modal-body .modal-container header input.secondary.processing, .modal-body .modal-container footer input.secondary.processing {
+	background-color: #ffffff;
+	color: #ffffff;;
+	cursor: none;
+	border: none;
+	background-image: url("../img/loader.gif");
+	background-repeat: no-repeat;
+	background-position: 50% center;
 }
 
 .modal-body .modal-container header input:hover, .modal-body .modal-container footer input:hover {
