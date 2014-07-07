@@ -126,11 +126,12 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 										}
 									}
 									if (j === data.length - 1) {
-										var thisitem = template.clone();
-										jQuery('.student-name', thisitem).text('New Person');
-										var _image = "img/addguardian.png";
-										jQuery('.kiosk-headshot', thisitem).attr('src', _image);
-										jQuery('.contentfull').append(thisitem);
+										//Adding additional
+										// var thisitem = template.clone();
+										// jQuery('.student-name', thisitem).text('New Person');
+										// var _image = "img/addguardian.png";
+										// jQuery('.kiosk-headshot', thisitem).attr('src', _image);
+										// jQuery('.contentfull').append(thisitem);
 										jQuery('.student-name').ellipsis({
 											onlyFullWords : true
 										});
