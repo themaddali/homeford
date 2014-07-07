@@ -50,6 +50,17 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									}
 								}
 							}
+							setTimeout(function() {
+								if (jQuery('#profile-domainDesc1').val() == 'null' || jQuery('#profile-domainDesc1').val() == null || jQuery('#profile-domainDesc1').val().length < 2) {
+									jQuery('#profile-domainDesc1').val('In continuous effort to provide best and quality care to your kid, we here, have decided to empower ourselves with Zingoare platform. I personally invite you to take a moment (less than a minute) to register yourself and add your kid thru the link provided below.');
+								}
+								if (jQuery('#profile-domainDesc2').val() == 'null' || jQuery('#profile-domainDesc2').val() == null || jQuery('#profile-domainDesc2').val().length < 2) {
+									jQuery('#profile-domainDesc2').val('We are happy that you chose us to be a part of your kids exciting journey for a great future. A big thank you!! ');
+								}
+								if (jQuery('#profile-domainThanksMessage').val() == 'null' || jQuery('#profile-domainThanksMessage').val() == null || jQuery('#profile-domainThanksMessage').val().length < 2) {
+									jQuery('#profile-domainThanksMessage').val('Myself and the whole team');
+								}
+							}, 500);
 							ActivateClicks();
 						}
 					});
@@ -120,6 +131,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					jQuery('#password-reenter-item').hide();
+					populateData();
 					document.title = 'Zingoare | Profile Edit';
 				};
 
@@ -182,6 +194,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								},
 								profilepassword : {
 									required : false,
+								},
+								profilefirstname : {
+									required : true,
+								},
+								profilelastname : {
+									required : true,
 								},
 								profilepasswordrepeat : {
 									equalTo : "#profile-password"

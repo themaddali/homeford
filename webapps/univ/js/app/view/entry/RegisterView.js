@@ -69,7 +69,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
-								notify.showNotification('OK', 'Congratulations!!!', 'admin', '1000');
+								notify.showNotification('OK', 'Congratulations!!!', 'profileedit', '1000');
 								if (username.length > 18) {
 									username = username.split('@')[0];
 								}

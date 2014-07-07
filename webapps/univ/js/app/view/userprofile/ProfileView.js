@@ -69,6 +69,18 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}
 								}
 							}
+							setTimeout(function() {
+								if (jQuery('#profile-domainDesc1').text() == 'null' || jQuery('#profile-domainDesc1').text() == null || jQuery('#profile-domainDesc1').text().length < 2) {
+									jQuery('#profile-domainDesc1').text('In continuous effort to provide best and quality care to your kid, we here, have decided to empower ourselves with Zingoare platform. I personally invite you to take a moment (less than a minute) to register yourself and add your kid thru the link provided below.');
+								}
+								if (jQuery('#profile-domainDesc2').text() == 'null' || jQuery('#profile-domainDesc2').text() == null || jQuery('#profile-domainDesc2').text().length < 2) {
+									jQuery('#profile-domainDesc2').text('We are happy that you chose us to be a part of your kids exciting journey for a great future. A big thank you!! ');
+								}
+								if (jQuery('#profile-domainThanksMessage').text() == 'null' || jQuery('#profile-domainThanksMessage').text() == null || jQuery('#profile-domainThanksMessage').text().length < 2) {
+									jQuery('#profile-domainThanksMessage').text('Myself and the whole team');
+								}
+							}, 500);
+
 						}
 					});
 				}
