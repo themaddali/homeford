@@ -56,7 +56,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								for (var j = 0; j < data.length; j++) {
 									var thisitem = template.clone();
 									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
-										jQuery('.membercard-name', thisitem).text(data[j].email);
+										jQuery('.membercard-name', thisitem).text((data[j].email));
 									} else {
 										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email).attr('kioskpin', data[j].kioskPassword);
 									}
@@ -75,10 +75,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									for (var k = 0; k < data[j].parents.length; k++) {
 										var thisitemparent = template.clone();
 										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
-											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].email);
+											jQuery('.membercard-name', thisitemparent).text((data[j].parents[k].email).split('@')[0]).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
 										} else {
 											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
-											;
 										}
 										membernames.push(jQuery('.membercard-name', thisitemparent).text());
 										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
