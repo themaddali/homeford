@@ -45,8 +45,16 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery('.profile-domain-list', activetemplate).attr('name', UserProfile.domains[0].domainName);
 								jQuery('#profile-form').append(activetemplate);
 								DOMAINS.push(UserProfile.domains[0].domainName);
+								jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
+								jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
+								jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
+									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
+										jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
+										jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
+										jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
+									}
 									if (DOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
 										DOMAINS.push(UserProfile.domains[i].domainName);
 										var activetemplate = template.clone();

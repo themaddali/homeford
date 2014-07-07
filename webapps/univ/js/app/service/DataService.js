@@ -171,6 +171,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/addmember/' + domainid + '/' + userid,
 						type : 'POST',
@@ -181,10 +183,14 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'lastName' : lname,
 						}),
 						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							USERPROFILE = null;
 							handlers.success(data);
 						},
 						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Adding Member"
@@ -195,6 +201,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.registerKids = function(domainid, memberobj, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/registerkids/' + domainid,
 						type : 'POST',
@@ -206,6 +214,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						},
 						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Adding Member"
@@ -317,6 +327,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 
 				this.sendInvite = function(email, message, domain, roles, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/invitee',
 						type : 'POST',
@@ -329,9 +341,13 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'roles' : roles
 						}),
 						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						},
 						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Sending Invite"
@@ -372,7 +388,43 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
+				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, domainobj, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
+					$.ajax({
+						url : '/zingoare/api/userprofile/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'firstName' : firstname,
+							'lastName' : lastname,
+							'phoneNumber' : phone,
+							'email' : email,
+							'kioskPassword' : kioskpin,
+							'domain' : domainobj,
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Profile"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
+
+				this.setUserProfileOnly = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/userprofile/' + id,
 						type : 'POST',
@@ -387,6 +439,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						},
 						error : function(e) {
@@ -394,12 +448,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								"status" : "error",
 								"message" : e.statusText + " - Error Updating Profile"
 							};
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(errormsg);
 						}
 					});
 				};
 
 				this.registerNewUser = function(username, password, domain, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/signup',
 						type : 'POST',
@@ -415,9 +473,13 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							}
 						}),
 						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						},
 						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
 								"message" : e.statusText + " - Error Creating Profile"
@@ -428,6 +490,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/todo/domain/' + domainid,
 						type : 'POST',
@@ -448,12 +512,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						success : function(data) {
 							USERPROFILE = null;
 							TODOLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/todo/domain/' + domainid + '/' + quizid,
 						type : 'POST',
@@ -474,12 +542,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						success : function(data) {
 							USERPROFILE = null;
 							TODOLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.AddServices = function(domainid, title, desc, cost, tax, freq, status, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
@@ -499,6 +571,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							SERVICESLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
@@ -520,6 +594,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					}
 				};
 				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
@@ -539,12 +615,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							SERVICESLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					$.ajax({
 						url : '/zingoare/api/domain/' + domainid + '/quiz',
 						type : 'POST',
@@ -556,12 +636,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							//USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.setQuestion = function(quizid, category, question, answers, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled','disabled');
 					var categoryint = parseInt(category);
 					$.ajax({
 						url : '/zingoare/api/quiz/' + quizid + '/question',
@@ -575,6 +659,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							//USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});

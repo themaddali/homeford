@@ -37,6 +37,19 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							}
 							var imageUploadURL = '/zingoare/api/profileupload/' + UserProfile.id;
 							jQuery('#profile-picture').attr('data-url', imageUploadURL);
+							if (UserProfile.domains.length === 1) {
+								jQuery('#profile-domainDesc1').text(UserProfile.domains[0].domainDesc1);
+								jQuery('#profile-domainDesc2').text(UserProfile.domains[0].domainDesc2);
+								jQuery('#profile-domainThanksMessage').text(UserProfile.domains[0].domainThanksMessage);
+							} else {
+								for (var i = 0; i < UserProfile.domains.length; i++) {
+									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
+										jQuery('#profile-domainDesc1').text(UserProfile.domains[0].domainDesc1);
+										jQuery('#profile-domainDesc2').text(UserProfile.domains[0].domainDesc2);
+										jQuery('#profile-domainThanksMessage').text(UserProfile.domains[0].domainThanksMessage);
+									}
+								}
+							}
 							ActivateClicks();
 						}
 					});
@@ -127,7 +140,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#profile-edit').on('click', function() {
 							if ($("#profile-edit-form").valid()) {
-								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
+								var domainobj = {};
+								domainobj.id = jQuery.cookie('_did');
+								domainobj.domainDesc1 = jQuery('#profile-domainDesc1').val();
+								domainobj.domainDesc2 = jQuery('#profile-domainDesc2').val();
+								domainobj.domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
+								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
 									success : function(response) {
 										if (response !== 'error') {
 											notify.showNotification('OK', response.message);

@@ -121,7 +121,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#member-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								service.setUserProfile(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", jQuery('#member-pin').val(), {
+								service.setUserProfileOnly(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", jQuery('#member-pin').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);

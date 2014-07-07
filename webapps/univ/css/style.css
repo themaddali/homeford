@@ -270,8 +270,20 @@ input[readonly="readonly"] {
 	color: #7f7f7f
 }
 
+input[disbaled="disabled"] {
+	background-color: #f6f6f6;
+	color: #7f7f7f;
+	cursor: default;
+}
+
 select[disabled] {
 	background-color: #f6f6f6;
+	cursor: default;
+}
+
+.processing {
+	background-color: #f6f6f6;
+	color: #7f7f7f;
 	cursor: default;
 }
 
@@ -1481,6 +1493,14 @@ a.goback {
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
+
+.modal-body .modal-container header input.processing , .modal-body .modal-container footer input.processing , .modal-body .modal-container div.inline-controls input.processing {
+	background-color: #f6f6f6;
+	color: #7f7f7f;
+	cursor: none;
+	border : none;
+}
+
 .modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
 	border: 2px solid #e6e6e6;
 	cursor: pointer;
@@ -5058,22 +5078,22 @@ footer a:hover {
 		margin-left: 10px;
 		display: none;
 	}
-	
+
 	.float-left .adminboard {
 		height: 240px;
 	}
-	
+
 	.adminboard .dash-info-visual {
 		display: none;
 	}
-	
+
 	.adminboard footer {
 		margin-top: 65px;
 	}
-	
+
 	#nopage-warning {
 		margin: 15px;
-		margin-top : 30px;
+		margin-top: 30px;
 		width: auto;
 	}
 
