@@ -210,6 +210,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						contentType : "application/json",
 						data : JSON.stringify(memberobj),
 						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							USERPROFILE = null;
 							handlers.success(data);
 						},

@@ -1494,11 +1494,14 @@ a.goback {
 	border-bottom-right-radius: 5px;
 }
 
-.modal-body .modal-container header input.processing , .modal-body .modal-container footer input.processing , .modal-body .modal-container div.inline-controls input.processing {
-	background-color: #f6f6f6;
-	color: #7f7f7f;
+.modal-body .modal-container header input.processing, .modal-body .modal-container footer input.processing, .modal-body .modal-container div.inline-controls input.processing {
+	background-color: #ffffff;
+	color: #ffffff;;
 	cursor: none;
-	border : none;
+	border: none;
+	background-image: url("../img/loader.gif");
+	background-repeat: no-repeat;
+	background-position: 50% center;
 }
 
 .modal-body .modal-container header input.secondary, .modal-body .modal-container footer input.secondary {
