@@ -115,6 +115,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						var dateformat = new Date(s);
 						var h = dateformat.getHours();
 						var m = dateformat.getMinutes();
+						if (m < 10) {
+							m ='0'+m;
+						}
 						var s = dateformat.getSeconds();
 						if (h < 13) {
 							return (h + ':' + m + ' am');
