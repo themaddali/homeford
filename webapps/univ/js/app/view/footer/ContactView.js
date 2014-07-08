@@ -61,7 +61,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							service.Login('tour@zingoare.com', 'tourzingoare', {
 								success : function(LoginData) {
 									if (LoginData !== 'error') {
-										service.sendInvite('zingoare@gmail.com', 'Email To: ' + jQuery('#contact-email').val() + ' , Message: ' + jQuery('#contact-message').val(), 'read CONTACT FORM', roles, {
+										service.sendInvite('contact@zingoare.com', 'Email To: ' + jQuery('#contact-email').val() + ' , Message: ' + jQuery('#contact-message').val(), 'read CONTACT FORM', roles, {
 											success : function(response) {
 												if (response !== 'error') {
 													notify.showNotification('OK', response.message);
