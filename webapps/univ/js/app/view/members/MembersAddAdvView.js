@@ -55,6 +55,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('#member-email').removeAttr('readonly');
 					jQuery('#member-email').val('');
 					validator.resetForm();
+					jQuery('.edit-notify').hide();
 					jQuery('#member-first-name').focus();
 				};
 
