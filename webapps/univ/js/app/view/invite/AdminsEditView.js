@@ -12,14 +12,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			function AdminsEditView() {
 
 				function populateData() {
-					if (ACTIVEINVITE){
+					if (ACTIVEINVITE) {
 						jQuery('#invite-email').val(ACTIVEINVITE.email);
 						jQuery('#invite-status').val(ACTIVEINVITE.status);
 						jQuery('#invite-domain').val(ACTIVEINVITE.domain);
 						jQuery('#invite-roles').val(ACTIVEINVITE.roles);
 						jQuery('#invite-sender').val(ACTIVEINVITE.invitedby);
-					}
-					else{
+					} else {
 						router.go('/adminslist');
 					}
 				}
@@ -39,11 +38,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						return false;
 					}
 				}
-				
-				this.setInviteInfo = function(Info){
+
+
+				this.setInviteInfo = function(Info) {
 					ACTIVEINVITE = Info;
 				};
-
 
 				this.pause = function() {
 
@@ -70,11 +69,18 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						jQuery('#invite-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								alert('action needed');
-								setTimeout ( function(){
+								alert('Feature Not Available yet!!!');
+								setTimeout(function() {
 									router.returnToPrevious();
-								},1000);
+								}, 1000);
 							}
+						});
+
+						jQuery('.negative').click(function() {
+							alert('Feature Not Available yet!!!');
+							setTimeout(function() {
+								router.returnToPrevious();
+							}, 1000);
 						});
 
 					} // Cookie Guider
