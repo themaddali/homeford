@@ -780,12 +780,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.updateProfilePhoto = function(userid, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/profileupload/' + userid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
 						success : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
 							handlers.success(data);
 							USERPROFILE = null;
 						}
@@ -806,6 +810,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						},
 						error : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
 							handlers.success('error');
 						}
 					});
