@@ -172,7 +172,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/addmember/' + domainid + '/' + userid,
 						type : 'POST',
@@ -202,7 +202,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.registerKids = function(domainid, memberobj, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/registerkids/' + domainid,
 						type : 'POST',
@@ -228,6 +228,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.checkIn = function(domainid, parentid, kidid, notes, handlers) {
+					//$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/addkiosk/' + domainid + '/' + parentid + '/' + kidid,
 						type : 'POST',
@@ -239,12 +241,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							//handlers.success(getmembersonly(data));
+							$('input[type="button"]').removeAttr('disabled');
+							//$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
 				};
 
 				this.checkOut = function(domainid, parentid, kidid, actionid, notes, handlers) {
+					//$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/addkiosk/' + domainid + '/' + parentid + '/' + kidid,
 						type : 'POST',
@@ -257,6 +263,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}),
 						success : function(data) {
 							//handlers.success(getmembersonly(data));
+							$('input[type="button"]').removeAttr('disabled');
+							//$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
@@ -330,7 +338,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.sendInvite = function(email, message, domain, roles, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/invitee',
 						type : 'POST',
@@ -392,7 +400,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, domainobj, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/userprofile/' + id,
 						type : 'POST',
@@ -426,7 +434,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.setUserProfileOnly = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/userprofile/' + id,
 						type : 'POST',
@@ -459,7 +467,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/signup',
 						type : 'POST',
@@ -493,7 +501,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AssignToDo = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/todo/domain/' + domainid,
 						type : 'POST',
@@ -523,7 +531,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/todo/domain/' + domainid + '/' + quizid,
 						type : 'POST',
@@ -553,7 +561,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AddServices = function(domainid, title, desc, cost, tax, freq, status, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
@@ -597,7 +605,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					var _cost = cost.replace('$', '');
 					var _tax = tax.replace('%', '');
 					$.ajax({
@@ -626,7 +634,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/domain/' + domainid + '/quiz',
 						type : 'POST',
@@ -647,7 +655,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.setQuestion = function(quizid, category, question, answers, handlers) {
 					$('input[type="button"]').addClass('processing');
-					$('input[type="button"]').attr('disabled','disabled');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					var categoryint = parseInt(category);
 					$.ajax({
 						url : '/zingoare/api/quiz/' + quizid + '/question',
@@ -785,12 +793,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.Login = function(username, password, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/j_spring_security_check',
 						type : 'POST',
 						async : 'async',
 						data : 'j_username=' + username + '&j_password=' + password,
 						success : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
 							handlers.success(data);
 						},
 						error : function(data) {
