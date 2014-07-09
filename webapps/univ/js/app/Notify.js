@@ -39,8 +39,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 							duration = 100000;
 							//100 seconds
 							jQuery('.modal_close').fadeIn();
-						}
-						else if (status === 'WARN') {
+						} else if (status === 'WARN') {
 							var notification = '<div class="' + CLASS + '">' + WARN + '<span class="notify-message">' + message + '</span></div>';
 							duration = 20000;
 							//20 seconds
@@ -74,15 +73,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 						} else if (status === 'INFO') {
 							var notification = '<div style="padding: 11px; text-align: center" class="' + CLASS + '"><a href="#/notifications">' + INFO + '<span style="cursor: pointer" class="notify-message">' + message + '</span></a></div>';
 						}
-						if (!fullmessage[0]) {
-							var _notification = {};
-							_notification.title = message;
-							_notification.description = fullmessage;
-							_notification.status = status;
-							_notification.timestamp = new Date().toISOString();;
-							_notification.keyword = keyword;
-							NOTIFICATIONS.push(_notification);
-						} else {
+						if (NOTIFICATIONS.length === 0) {
 							for (var i = 0; i < fullmessage.length; i++) {
 								var _notification = {};
 								_notification.title = message;
@@ -92,20 +83,63 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 								_notification.by = sentinfo;
 								_notification.msg = fullmessage[i].text;
 								_notification.status = status;
-								_notification.timestamp = new Date().toISOString();;
+								_notification.timestamp = new Date().toISOString();
+								;
 								_notification.keyword = keyword;
 								_notification.inviteid = fullmessage[i].id;
 								NOTIFICATIONS.push(_notification);
+								NOTIFICATION_new = NOTIFICATION_new +1;
+								jQuery('#alert-value').text(NOTIFICATION_new);
+								$('#notifyAudio')[0].play();
 							}
 						}
-						jQuery('#project-nav').append(notification);
-						jQuery('.edit-notify').slideDown(1000);
-						$('#notifyAudio')[0].play();
-						setTimeout(function() {
-							//jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
-							jQuery('#alert').addClass('active');
-							jQuery('.edit-notify').slideUp(1000);
-						}, 5000);
+						for (var s = 0; s < NOTIFICATIONS.length; s++) {
+							if (NOTIFICATIONS[s].keyword !== keyword) {
+								if (NOTIFICATIONS[s].inviteid && NOTIFICATIONS[s].inviteid !== fullmessage[i].id && !fullmessage[0]) {
+									if (!fullmessage[0]) {
+										var _notification = {};
+										_notification.title = message;
+										_notification.description = fullmessage;
+										_notification.status = status;
+										_notification.timestamp = new Date().toISOString();
+										;
+										_notification.keyword = keyword;
+										NOTIFICATION_new = NOTIFICATION_new +1;
+										NOTIFICATIONS.push(_notification);
+										jQuery('#alert-value').text(NOTIFICATION_new);
+										$('#notifyAudio')[0].play();
+									} else {
+										for (var i = 0; i < fullmessage.length; i++) {
+											var _notification = {};
+											_notification.title = message;
+											_notification.domain = fullmessage[i].domainName;
+											var sentinfo = fullmessage[i].sentBy.split('email=')[1];
+											sentinfo = sentinfo.split(',')[0];
+											_notification.by = sentinfo;
+											_notification.msg = fullmessage[i].text;
+											_notification.status = status;
+											_notification.timestamp = new Date().toISOString();
+											;
+											_notification.keyword = keyword;
+											_notification.inviteid = fullmessage[i].id;
+											NOTIFICATION_new = NOTIFICATION_new +1;
+											NOTIFICATIONS.push(_notification);
+											jQuery('#alert-value').text(NOTIFICATION_new);
+											$('#notifyAudio')[0].play();
+										}
+									}
+								}
+							}
+						}
+
+						//jQuery('#project-nav').append(notification);
+						//jQuery('.edit-notify').slideDown(1000);
+						// $('#notifyAudio')[0].play();
+						// setTimeout(function() {
+						// //jQuery('.edit-notify').effect('slide', { direction: 'right', mode: 'hide' }, 1000);
+						// //jQuery('#alert').addClass('active');
+						// jQuery('.edit-notify').slideUp(1000);
+						// }, 5000);
 						//5 Seconds is enough to catch attention
 					}
 				}
