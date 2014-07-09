@@ -16,11 +16,11 @@
 
 		</header>
 
-		<div id="profile-view-modal" class="modal-body view">
-			<div class="modal-container view">
+		<div id="profile-view-modal" class="modal-body print">
+			<div class="modal-container print showheader">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					Attendance Summary - Today
+					<span id="header-label">Attendance Summary - Today</span>
 				</header>
 				<div class="modal-contents">
 					<table id="adminslist-table" class="view-table">
@@ -44,7 +44,8 @@
 						</div>
 					</table>
 				</div>
-				<div class="modal_close"></div>
+				<div id="closethis" class="modal_close"></div>
+				<div id="printbutton" class="modal_close print" onclick="window.print();"></div>
 			</div>
 		</div>
 

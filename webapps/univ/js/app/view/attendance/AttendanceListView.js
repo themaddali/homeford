@@ -38,6 +38,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
+					var d = new Date();
+					d = d.toString().split(" ");
+					jQuery('#header-label').text('Attendance Summary - ' + d[1]+' '+ d[2] +' '+ d[3]);
 					//var activedomains = admin.getActiveDomainsIDs();
 					var activedomains = [];
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
@@ -116,7 +119,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						var h = dateformat.getHours();
 						var m = dateformat.getMinutes();
 						if (m < 10) {
-							m ='0'+m;
+							m = '0' + m;
 						}
 						var s = dateformat.getSeconds();
 						if (h < 13) {
@@ -156,6 +159,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					//$('#note-dialog').dialog('destroy');
 					initDialog();
 					populateData();
+					//jQuery('.modal-container').removeClass('print');
 					document.title = 'Zingoare | Attendance Summary';
 				};
 
@@ -168,8 +172,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						populateData();
 
 						//HTML Event - Actions
-						jQuery('.modal_close').on('click', function() {
+						jQuery('#closethis').on('click', function() {
 							router.returnToPrevious();
+						});
+
+						jQuery('#printbutton').on('click', function() {
+							//jQuery('.modal-container').addClass('print');
+							// window.print();
 						});
 
 					} // Cookie Guider

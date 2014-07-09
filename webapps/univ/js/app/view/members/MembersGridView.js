@@ -12,6 +12,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var KEYICON = '<i class="icon-key  icon-1x "></i>';
 			var membernames = [];
 			var template;
+			var gridbreaktemplate;
 
 			function MembersGridView() {
 
@@ -55,6 +56,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								var thisitem = template.clone();
 								for (var j = 0; j < data.length; j++) {
 									var thisitem = template.clone();
+									var thispartition = gridbreaktemplate.clone();
+									jQuery('.tag', thispartition).text('Family-' + (j + 1));
+									jQuery('.edit-card-canvas').append(thispartition);
 									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
 										jQuery('.membercard-name', thisitem).text((data[j].email));
 									} else {
@@ -126,6 +130,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						image : 'img/noimg.png',
 					};
 
+					jQuery('.membercard').hover(function() {
+						jQuery('.membercard').removeClass('active');
+						var group = $(this).attr('group');
+						var groupclass = '.' + group;
+						$(groupclass).addClass('active');
+					});
+
 					jQuery('.membercard').click(function() {
 						if ($(this).hasClass('active')) {
 							//$(this).removeClass('active');
@@ -179,7 +190,6 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					});
 					jQuery('.card-search').keyup(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
@@ -214,6 +224,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 					if (checkForActiveCookie() === true) {
 						template = jQuery('#member-template').remove().attr('id', '');
+						gridbreaktemplate = jQuery('#canvas-partition').remove().attr('id', '');
 						populateData();
 
 						//HTML Event - Actions

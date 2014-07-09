@@ -34,7 +34,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				function clearForm() {
 					jQuery('input[type="text"]').val('');
 					jQuery('input[type="email"]').val('');
-					//Fall Back					
+					//Fall Back
 					jQuery('#member-first-name').val('');
 					jQuery('#member-last-name').val('');
 					jQuery('#mother-name').val('');
@@ -58,6 +58,25 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('.edit-notify').hide();
 					jQuery('#member-first-name').focus();
 				};
+
+				function getFirstName(val) {
+					var fname = val.split(" ")[0];
+					return fname;
+				}
+
+				function getLastName(val) {
+					var lname = val.split(" ");
+					var newlname = '';
+					for (var i = 1; i < lname.length; i++) {
+						if (i == 1) {
+							newlname = lname[i];
+						} else {
+							newlname = newlname + " " + lname[i];
+						}
+					}
+					return newlname;
+				}
+
 
 				this.pause = function() {
 
@@ -110,40 +129,40 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								}
 								if (jQuery('#father-name').val().length > 0) {
 									var person = {};
-									person.firstName = jQuery('#father-name').val();
-									person.lastName = '';
+									person.firstName = getFirstName(jQuery('#father-name').val());
+									person.lastName = getLastName(jQuery('#father-name').val());
 									person.email = jQuery('#father-email').val();
 									person.userType = 'FATHER';
 									kidobject.push(person);
 								}
 								if (jQuery('#mother-name').val().length > 0) {
 									var person = {};
-									person.firstName = jQuery('#mother-name').val();
-									person.lastName = '';
+									person.firstName = getFirstName(jQuery('#mother-name').val());
+									person.lastName = getLastName(jQuery('#mother-name').val());
 									person.email = jQuery('#mother-email').val();
 									person.userType = 'MOTHER';
 									kidobject.push(person);
 								}
 								if (jQuery('#g1-name').val().length > 0) {
 									var person = {};
-									person.firstName = jQuery('#g1-name').val();
-									person.lastName = '';
+									person.firstName = getFirstName(jQuery('#g1-name').val());
+									person.lastName = getLastName(jQuery('#g1-name').val());
 									person.email = jQuery('#g1-email').val();
 									person.userType = 'GAURDIAN1';
 									kidobject.push(person);
 								}
 								if (jQuery('#g2-name').length > 0 && jQuery('#g2-name').val().length > 0) {
 									var person = {};
-									person.firstName = jQuery('#g2-name').val();
-									person.lastName = '';
+									person.firstName = getFirstName(jQuery('#g2-name').val());
+									person.lastName = getLastName(jQuery('#g2-name').val());
 									person.email = jQuery('#g2-email').val();
 									person.userType = 'GAURDIAN2';
 									kidobject.push(person);
 								}
 								if (jQuery('#g3-name').length > 0 && jQuery('#g3-name').val().length > 0) {
 									var person = {};
-									person.firstName = jQuery('#g3-name').val();
-									person.lastName = '';
+									person.firstName = getFirstName(jQuery('#g3-name').val());
+									person.lastName = getLastName(jQuery('#g3-name').val());
 									person.email = jQuery('#g3-email').val();
 									person.userType = 'GAURDIAN3';
 									kidobject.push(person);

@@ -3565,6 +3565,10 @@ dialog-modal::-webkit-scrollbar {
 	border: 1px solid #0784E3;
 }
 .membercard.active {
+	border: 1px dotted #0784E3;
+}
+
+.membercard.active:hover {
 	border: 1px solid #0784E3;
 }
 
@@ -3786,11 +3790,12 @@ dialog-modal::-webkit-scrollbar {
 }
 
 .membercard.clickable.active > .membercard-editicon {
-	float: right;
-	margin-right: -2px;
-	margin-top: 69px;
-	color: #0784E3;
-	display: inline;
+	/*float: right;
+	 margin-right: -2px;
+	 margin-top: 69px;
+	 color: #0784E3;
+	 display: inline;*/
+	display: none;
 }
 
 .quizactionboard .question-number {
@@ -5627,12 +5632,20 @@ footer a:hover {
 		display: none;
 	}
 
+	.modal-body .modal-container.print.showheader header, .modal-body .modal-container.print-landscape.showheader header {
+		display: block;
+	}
+
 	.modal-container.print, .modal-container.print-landscape {
 		margin: 0px;
 	}
 
 	.modal-body .modal-container {
 		border: none;
+	}
+
+	.view-table > tbody tr {
+		border-bottom: 1px dotted #d9d9d9;
 	}
 
 	.modal-body.print, .modal-container.print-landscape {
