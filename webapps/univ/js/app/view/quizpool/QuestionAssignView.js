@@ -56,6 +56,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					validator.resetForm();
+					jQuery('.edit-notify').hide();
 					populateData();
 
 				};

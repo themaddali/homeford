@@ -105,6 +105,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Questions Edit';
 
 				};

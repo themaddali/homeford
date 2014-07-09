@@ -58,6 +58,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					populateData();
+					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Services Edit';
 				};
 

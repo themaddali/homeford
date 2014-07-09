@@ -143,6 +143,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					validator.resetForm();
 					populateData();
+					jQuery('.edit-notify').hide();
 					//$("#quiz-name").autocomplete("destroy");
 					document.title = 'Zingoare | Quiz Assign';
 				};

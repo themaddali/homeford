@@ -59,6 +59,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					validator.resetForm();
 					populateData();
+					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Questions Add';
 				};
 
