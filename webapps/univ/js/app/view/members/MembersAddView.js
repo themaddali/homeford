@@ -32,7 +32,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}
 
 				function clearForm() {
-					jQuery(input[type='text']).val();
+					jQuery(input[ type = 'text']).val();
 					validator.resetForm();
 					jQuery('#member-first-name').focus();
 				};
@@ -72,9 +72,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									validator.resetForm();
 									// var _domainid;
 									// service.returnDomainIDList({
-										// success : function(data) {
-											// _domainid = data;
-										// }
+									// success : function(data) {
+									// _domainid = data;
+									// }
 									// });
 									var _userid = service.thisuserID();
 									service.addMemberRegular(service.domainNametoID(jQuery.cookie('subuser')), _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
@@ -100,14 +100,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}];
 									service.sendInvite(jQuery('#member-email').val(), 'You are added to ' + domainname[0], domainname[0], roles, {
 										success : function(response) {
-											if (response !== 'error' && response.status !== 'error') {
+											if (response !== 'error' || response.status !== 'error') {
 												notify.showNotification('OK', response.message);
+												setTimeout(function() {
+													router.returnToPrevious();
+												}, 2000);
 											} else {
 												notify.showNotification('ERROR', response.message);
 											}
-											setTimeout(function() {
-												router.returnToPrevious();
-											}, 2000);
 										}
 									});
 								} else {
@@ -128,9 +128,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									validator.resetForm();
 									// var _domainid;
 									// service.returnDomainIDList({
-										// success : function(data) {
-											// _domainid = data;
-										// }
+									// success : function(data) {
+									// _domainid = data;
+									// }
 									// });
 									var _userid = service.thisuserID();
 									service.addMemberRegular(service.domainNametoID(jQuery.cookie('subuser')), _userid, $('#member-first-name').val(), $('#member-last-name').val(), {
@@ -156,7 +156,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									}];
 									service.sendInvite(jQuery('#member-email').val(), 'You are added to ' + domainname[0], domainname[0], roles, {
 										success : function(response) {
-											if (response !== 'error' && response.status !== 'error') {
+											if (response !== 'error' || response.status !== 'error') {
 												notify.showNotification('OK', response.message);
 											} else {
 												notify.showNotification('ERROR', response.message);

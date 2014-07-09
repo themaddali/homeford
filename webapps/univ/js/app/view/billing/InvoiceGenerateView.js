@@ -200,7 +200,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								}
 								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
 									success : function(response) {
-										if (response !== 'error') {
+										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
 										} else {
 											notify.showNotification('ERROR', response.message);

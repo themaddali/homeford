@@ -101,6 +101,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					populateData();
+					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Members Edit';
 					//$('#new-member-profile-image').fileupload('destroy');
 				};
@@ -125,12 +126,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
+											setTimeout(function() {
+												router.returnToPrevious();
+											}, 2000);
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}
-										setTimeout(function() {
-											router.returnToPrevious();
-										}, 2000);
 									}
 								});
 							} else {

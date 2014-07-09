@@ -77,20 +77,20 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#service-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), jQuery('#service-cost').val(),jQuery('#service-tax').val(),jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
+								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
+											setTimeout(function() {
+												router.returnToPrevious();
+											}, 2000);
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}
-										setTimeout(function() {
-											router.returnToPrevious();
-										}, 2000);
+
 									}
 								});
-							}
-							else {
+							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});

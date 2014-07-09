@@ -131,6 +131,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				this.resume = function() {
 					jQuery('#password-reenter-item').hide();
+					jQuery('.edit-notify').hide();
 					populateData();
 					document.title = 'Zingoare | Profile Edit';
 				};
@@ -159,16 +160,17 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
 								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
 									success : function(response) {
-										if (response !== 'error') {
+										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
 											studentlist.reload();
+											setTimeout(function() {
+												router.returnToPrevious();
+												//admin.reloadData();
+											}, 2000);
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}
-										setTimeout(function() {
-											router.returnToPrevious();
-											//admin.reloadData();
-										}, 2000);
+
 									}
 								});
 							} else {
