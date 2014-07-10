@@ -225,8 +225,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						});
 
 						jQuery('#printbutton').on('click', function() {
-							//jQuery('.modal-container').addClass('print');
-							// window.print();
+							jQuery('.modal-container.print.showheader').css('margin-left', 0);
 						});
 
 					} // Cookie Guider
