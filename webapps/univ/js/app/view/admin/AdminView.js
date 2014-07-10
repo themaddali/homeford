@@ -172,7 +172,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					if (ap == " AM" && nhour >= 7 && nhour <= 9 && nday !== 'Saturday' && nday !== 'Sunday') {
 						populateAttendanceKioskData();
 					}
-					if (ap == " PM" && nhour >= 2 && nhour <= 4 && nday !== 'Saturday' && nday !== 'Sunday') {
+					if (ap == " PM" && nhour >= 4 && nhour <= 6 && nday !== 'Saturday' && nday !== 'Sunday') {
 						populateAttendanceKioskData();
 					}
 
