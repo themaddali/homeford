@@ -158,6 +158,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					});
 				}
 
+				function positionModal() {
+					var freewidth = $('.modal-body').width() - 815;
+					if ($('.modal-body').width() > 480) {
+						jQuery('.modal-container.print.showheader').css('margin-left', freewidth / 2);
+					}
+				}
+
 
 				this.pause = function() {
 
@@ -167,6 +174,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					//$('#note-dialog').dialog('destroy');
 					initDialog();
 					populateData();
+					positionModal();
 					//jQuery('.modal-container').removeClass('print');
 					document.title = 'Zingoare | Attendance Summary';
 				};
@@ -181,6 +189,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						if (!$.ui) {
 							location.reload();
 						}
+						positionModal();
+						// When the browser changes size
+						$(window).resize(positionModal);
 						populateData();
 
 						//jQuery UI Bug - Hot Fix
