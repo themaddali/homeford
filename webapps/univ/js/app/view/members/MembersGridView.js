@@ -163,6 +163,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 					jQuery('.card-search').change(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
+						if (searchword.length > 0) {
+							jQuery('.canvas-partition').hide();
+						} else {
+							jQuery('.canvas-partition').show();
+						}
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
@@ -176,7 +181,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					});
 					jQuery('.ui-menu-item').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
+						if (searchword.length > 0) {
+							jQuery('.canvas-partition').hide();
+						} else {
+							jQuery('.canvas-partition').show();
+						}
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];
@@ -190,6 +199,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					});
 					jQuery('.card-search').keyup(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
+						if (searchword.length > 0) {
+							jQuery('.canvas-partition').hide();
+						} else {
+							jQuery('.canvas-partition').show();
+						}
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];

@@ -94,6 +94,18 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						servicesedit.setInfo(rowObject);
 						router.go('/servicesedit');
 					});
+					
+					jQuery('.view-table thead > tr > th').click(function() {
+						if (jQuery(this).find('i').hasClass('icon-sort-by-attributes')) {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes-alt ').removeClass('icon-sort-by-attributes ');
+						} else {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes ').removeClass('icon-sort-by-attributes-alt ');
+						}
+					});
 				}
 
 				function clearForm() {

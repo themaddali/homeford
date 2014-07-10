@@ -65,7 +65,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 										_memberobjectself.taskprogress = Math.ceil(_memberobjectself.taskprogress / data.tasks.length);
 									}
 								}
-								MEMBEROBJECT.push(_memberobjectself);
+								//Commenting Self
+								//MEMBEROBJECT.push(_memberobjectself);
 								for (var j = 0; j < data.members.length; j++) {
 									var _memberobject = {};
 									if (!data.members[j].image || data.members[j].image === null) {
@@ -125,7 +126,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							success : function(data) {
 								if (data.length == 0) {
 									displayCards(MEMBEROBJECT);
-									jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
+									jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' member(s)');
 									if (jQuery('.studentboard').length === 1) {
 										var selectedUserName = $('.student-name').text();
 										var selectedUserId = $('.student-name').parent().attr('name');
@@ -193,13 +194,14 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							if (MEMBEROBJECT[i].email) {
 								if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
 									jQuery('.student-info', newboard).append(YOU);
+									jQuery(newboard).css('display', 'none');
 								}
 							}
 							//jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
 							jQuery('#card-canvas').append(newboard);
-							jQuery('.metainfo').text(jQuery('.studentboard').length + ' member(s)');
+							jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' member(s)');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
@@ -221,6 +223,10 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function ActivatePanelEvents() {
+					if (jQuery('.studentboard:visible').length === 0) {
+						jQuery('#noinfo').fadeIn(500);
+					}
+					
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();

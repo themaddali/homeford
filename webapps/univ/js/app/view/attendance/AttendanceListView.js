@@ -15,7 +15,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
-			var DIALOGBODY = '<div id="note-dialog" title="Note"><p id="note-message"></p></div>';
+			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message"></span></p></div>';
 
 			function AdminsListView() {
 
@@ -37,7 +37,6 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
-					jQuery('.view-table').tablesorter();
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('header-label').type = 'date';
 					} else {
@@ -117,6 +116,18 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('#note-message').html(note);
 						jQuery("#note-dialog").dialog("open");
 					});
+					jQuery('.view-table thead > tr > th').click(function() {
+						if (jQuery(this).find('i').hasClass('icon-sort-by-attributes')) {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes-alt ').removeClass('icon-sort-by-attributes ');
+						} else {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes ').removeClass('icon-sort-by-attributes-alt ');
+						}
+					});
+
 				}
 
 				function msToTime(s) {
@@ -154,15 +165,16 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						hide : {
 							effect : "explode",
 							duration : 300
-						}
+						},
+						modal : true,
 					});
 				}
 
 				function positionModal() {
-					var freewidth = $('.modal-body').width() - 815;
-					if ($('.modal-body').width() > 480) {
-						jQuery('.modal-container.print.showheader').css('margin-left', freewidth / 2);
-					}
+					// var freewidth = $('.modal-body').width() - 815;
+					// if ($('.modal-body').width() > 480) {
+					// jQuery('.modal-container.print.showheader').css('margin-left', freewidth / 2);
+					// }
 				}
 
 
@@ -225,7 +237,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						});
 
 						jQuery('#printbutton').on('click', function() {
-							jQuery('.modal-container.print.showheader').css('margin-left', 0);
+							//jQuery('.modal-container.print.showheader').css('margin-left', 0);
 						});
 
 					} // Cookie Guider

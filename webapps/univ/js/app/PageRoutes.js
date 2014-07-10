@@ -180,6 +180,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('membersrecordadd', '^/membersrecordadd(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/members/recordadd.html', '../app/view/members/MembersRecordAddView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('todoassign', '^/todoassign(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

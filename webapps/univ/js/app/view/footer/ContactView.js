@@ -6,6 +6,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			 * Constructor
 			 *
 			 */
+			var DIALOGBODY = '<div id="note-dialog" title="Note"><p id="note-message"></p></div>';
 
 			function ContactView() {
 
@@ -34,6 +35,21 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('#contact-message').val('');
 					jQuery('#contact-send').val('Submit Query').attr('disabled', 'none').css('background-color', '#0784E3');
 				}
+				
+				function initDialog() {
+					jQuery('body').append(DIALOGBODY);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						}
+					});
+				}
 
 
 				this.pause = function() {
@@ -42,6 +58,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					populateData();
+					initDialog();
 				};
 
 				this.init = function(args) {
@@ -51,6 +68,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					// if (checkForActiveCookie() === true) {
 					// populateData();
 					// }// Cookie Guider
+					
+					initDialog();
+					
+					jQuery('#trial-modal-link').click(function(){
+						jQuery("#note-dialog").dialog("open");
+					});
 
 					jQuery('#contact-send').click(function() {
 						if ($("#contact-form").valid()) {
@@ -98,23 +121,23 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					});
 
 					jQuery('#trial-modal-link').click(function() {
-						service.Login('tour@zingoare.com', 'tourzingoare', {
-							success : function(LoginData) {
-								if (LoginData !== 'error') {
-									notify.showNotification('OK', 'Login Success', 'studentlist', '0');
-									jQuery.cookie('user', 'tour@zingoare.com', {
-										expires : 100,
-										path : '/'
-									});
-									jQuery.cookie('subuser', 'TOUR', {
-										expires : 100,
-										path : '/'
-									});
-								} else {
-									notify.showNotification('ERROR', 'Username/Password Combination Invalid');
-								}
-							}
-						});
+						// service.Login('tour@zingoare.com', 'tourzingoare', {
+							// success : function(LoginData) {
+								// if (LoginData !== 'error') {
+									// notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+									// jQuery.cookie('user', 'tour@zingoare.com', {
+										// expires : 100,
+										// path : '/'
+									// });
+									// jQuery.cookie('subuser', 'TOUR', {
+										// expires : 100,
+										// path : '/'
+									// });
+								// } else {
+									// notify.showNotification('ERROR', 'Username/Password Combination Invalid');
+								// }
+							// }
+						// });
 					});
 
 					if (Modernizr.touch) {

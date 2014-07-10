@@ -79,6 +79,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								if (jQuery('#profile-domainThanksMessage').text() == 'null' || jQuery('#profile-domainThanksMessage').text() == null || jQuery('#profile-domainThanksMessage').text().length < 2) {
 									jQuery('#profile-domainThanksMessage').text('Myself and the whole team');
 								}
+								if (jQuery('#profile-first-name').text() == null || jQuery('#profile-first-name').text() == 'null' || jQuery('#profile-first-name').text.length < 1) {
+									jQuery('#profile-first-name').text('Not On File. Please Update!');
+								}
+								if (jQuery('#profile-last-name').text() == null || jQuery('#profile-last-name').text() == 'null' || jQuery('#profile-last-name').text.length < 1) {
+									jQuery('#profile-last-name').text('Not On File. Please Update!');
+								}
 							}, 500);
 
 						}
@@ -109,6 +115,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				this.resume = function() {
 					populateData();
 					document.title = 'Zingoare | Profile Info';
+					if (jQuery('#profile-first-name').text() == null || jQuery('#profile-first-name').text() == 'null' || jQuery('#profile-first-name').text.length < 1) {
+						jQuery('#profile-first-name').text('Not On File. Please Update!');
+					}
+					if (jQuery('#profile-last-name').text() == null || jQuery('#profile-last-name').text() == 'null' || jQuery('#profile-last-name').text.length < 1) {
+						jQuery('#profile-last-name').text('Not On File. Please Update!');
+					}
 				};
 
 				this.init = function(args) {

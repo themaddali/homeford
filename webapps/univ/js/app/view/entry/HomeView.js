@@ -8,6 +8,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 			};
 
 			var EDIT = '<i id="entity-edit" style="padding-left:10px;font-size:10px; display:none; vertical-align:super;" class="icon-gear  icon-1x ">Change</i>';
+			var DIALOGBODY = '<div id="note-dialog" title="Welcome!"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please select the kind of experience you want to tour?</p></div>';
 			/**
 			 * Constructor
 			 */
@@ -41,7 +42,6 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 					});
 					//Get geo location
 					//http://freegeoip.net/json/
-
 
 					service.getFlickList('zingoare', {
 						success : function(list) {
@@ -104,6 +104,30 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 					}
 				}
 
+				function initDialog() {
+					jQuery('body').append(DIALOGBODY);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						modal : true,
+						buttons : {
+							"Administrator " : function() {
+								$(this).dialog("close");
+							},
+							"Parent" : function() {
+								$(this).dialog("close");
+							}
+						}
+					});
+				}
+
 				function checkForActiveEntityCookie() {
 					if (jQuery.cookie('entity')) {
 						return true;
@@ -120,6 +144,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 				this.resume = function() {
 					//Forcing to reload all view.
 					//location.reload();
+					initDialog();
 					startCoverShow();
 					checkForActiveCookie();
 					document.title = 'Zingoare';
@@ -132,6 +157,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 					if (checkForActiveCookie() === false) {
 						//Rich Experience First.. Load BG
 						startCoverShow();
+						initDialog();
 						//Get the suggestions to search connected.
 						if (checkForActiveEntityCookie()) {
 							jQuery('#slogan-input').hide();
@@ -153,25 +179,30 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 						jQuery('#login-modal-link').click(function() {
 							router.go('/entry', '/home');
 						});
+
 						jQuery('#trial-modal-link').click(function() {
-							service.Login('tour@zingoare.com', 'tourzingoare', {
-								success : function(LoginData) {
-									if (LoginData !== 'error') {
-										notify.showNotification('OK', 'Login Success', 'studentlist', '0');
-										jQuery.cookie('user', 'tour@zingoare.com', {
-											expires : 100,
-											path : '/'
-										});
-										jQuery.cookie('subuser', 'TOUR', {
-											expires : 100,
-											path : '/'
-										});
-									} else {
-										notify.showNotification('ERROR', 'Username/Password Combination Invalid');
-									}
-								}
-							});
+							jQuery("#note-dialog").dialog("open");
 						});
+
+						// jQuery('#trial-modal-link').click(function() {
+						// service.Login('tour@zingoare.com', 'tourzingoare', {
+						// success : function(LoginData) {
+						// if (LoginData !== 'error') {
+						// notify.showNotification('OK', 'Login Success', 'studentlist', '0');
+						// jQuery.cookie('user', 'tour@zingoare.com', {
+						// expires : 100,
+						// path : '/'
+						// });
+						// jQuery.cookie('subuser', 'TOUR', {
+						// expires : 100,
+						// path : '/'
+						// });
+						// } else {
+						// notify.showNotification('ERROR', 'Username/Password Combination Invalid');
+						// }
+						// }
+						// });
+						// });
 
 						jQuery('#slogan-input').keypress(function() {
 							var keycode = (event.keyCode ? event.keyCode : event.which);

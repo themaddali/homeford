@@ -117,7 +117,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						});
 
 						jQuery('#member-list').click(function() {
-							router.go('/memberspick');
+							if (jQuery('#member-list').val().indexOf('User: ') === -1) {
+								router.go('/memberspick');
+							}
 						});
 
 						jQuery.validator.addMethod("youtubeValid", function(value, element) {

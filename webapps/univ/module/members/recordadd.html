@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+
+		</header>
+
+		<div id="profile-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Student Record
+					<!-- <div class="toggle-dark formselction">
+					<div class="toggle" data-type="select"></div>
+					</div> -->
+				</header>
+				<div class="modal-contents">
+					<form id="regularadd" class="edit-form">
+						<fieldset>
+							<ol id="profile-form">
+								<div class="form-partition">
+									<span>1 .Student Details</span>
+								</div>
+								<li class="form-item">
+									<label>Student Name</label>
+									<div class="form-content">
+										<input placeholder="Students Name"  id="member-name" name="membername" type="text" readonly="readonly" />
+										<div class="form-helper">
+											<label>Student Name (Cannot edit here)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Student Date Of Birth</label>
+									<div class="form-content">
+										<input placeholder="7/6/2006"  id="member-dob" name="memberdob" type="text" autofocus />
+										<div class="form-helper">
+											<label>Select date of birth</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Student Place Of Birth</label>
+									<div class="form-content">
+										<input placeholder="Mountain View, CA" id="member-last-name" name="memberpob" type="text" />
+										<div class="form-helper">
+											<label>Students place of birth</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Emergency Contact Name</label>
+									<div class="form-content">
+										<input placeholder="Peter Sandros" id="emergency-contact-name"  name="emergencycontactname" type="text" />
+										<div class="form-helper">
+											<label>Emergency Contact Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Emergency Conatct Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="emergency-phone" name="emergencyphone" type="text" />
+										<div class="form-helper">
+											<label>Emergency contact's phone number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition">
+									<span>2. Contact Details</span>
+								</div>
+								<li class="form-item">
+									<label>Home Phone Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="family-home" name="familyhome" type="text" />
+										<div class="form-helper">
+											<label>Family home phone number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Father Mobile Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="father-mobile" name="fathermobile" type="text" />
+										<div class="form-helper">
+											<label>Fathers mobile number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Father Work Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="father-work" name="fatherwork" type="text" />
+										<div class="form-helper">
+											<label>Fathers work place number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Mothers Mobile Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="mother-mobile" name="mothermobile" type="text" />
+										<div class="form-helper">
+											<label>Mothers mobile number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Mothers Work Number</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="mother-work" name="motherwork" type="text" />
+										<div class="form-helper">
+											<label>Mothers work place number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition"><span>3. Health Details</span></div>
+								<li class="form-item">
+									<label>Students Allergies</label>
+									<div class="form-content">
+										<textarea class="edittextarea" placeholder="Peanuts, Pista etc." id="member-allergies" name="memberallergies"></textarea>
+										<div class="form-helper">
+											<label>List all the allergies you are aware to take proper care</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Primary Care Physician Name</label>
+									<div class="form-content">
+										<input placeholder="Dr. James Sun" id="pcp-contact-name"  name="pcpcontactname" type="text" />
+										<div class="form-helper">
+											<label>Primary care physician name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Primary Care Physician Conatct</label>
+									<div class="form-content">
+										<input placeholder="1234567890" id="pcp-phone" name="pcpphone" type="text" />
+										<div class="form-helper">
+											<label>Physicians contact's number (Just digits)</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition"><span>4. Miscellaneous</span></div>
+								<li class="form-item">
+									<label>Notes</label>
+									<div class="form-content">
+										<textarea class="edittextarea" placeholder="Potty training - partial, Scared of bugs erc." id="member-note" name="membernotes"></textarea>
+										<div class="form-helper">
+											<label>List any information you think can be helpful in future</label>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<footer>
+					<div class="edit-controls">
+
+						<input id="member-add" type="button" value="Add">
+						<!-- <input id="member-addmore" type="button" value="Add +"> -->
+						<input id="form-reset" type="button" class="secondary" value="Reset Form">
+					</div>
+				</footer>
+				<div class="modal_close"></div>
+			</div>
+		</div>
+
+		<div id="preloader"></div>
+
+	</body>
+</html>

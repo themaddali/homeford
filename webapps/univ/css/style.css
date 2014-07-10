@@ -1793,9 +1793,11 @@ div.formselction {
 	color: #0784E3;
 	background-color: #FFFFFF;
 	border-radius: 15px;
-	padding: 5px;
+	padding: 7px;
 	border: 1px solid #0784E3;
 }
+
+
 .view-form li.form-item {
 	font-size: 0px;
 	border-bottom: 2px dotted #d9d9d9;
@@ -4089,6 +4091,29 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 
 .ui-datepicker-prev.ui-corner-all {
 	cursor: pointer;
+}
+
+.ui-datepicker-month {
+	border: none;
+	padding: 2px;
+}
+
+.ui-datepicker-year {
+	border: none;
+	padding: 2px;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	padding: 2px;
+}
+
+.tablesortcontrol  {
+	font-size: 11px; 
+	padding-left: 7px;
+}
+
+.tablesortcontrol.active {
+	color: #007DBA;
 }
 
 #progressBar {
