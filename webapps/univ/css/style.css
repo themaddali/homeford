@@ -1494,6 +1494,23 @@ a.goback {
 	border-bottom-right-radius: 5px;
 }
 
+.modal-body .modal-container header input.header-input {
+	padding: 0px;
+	border: none;
+	color: white;
+	margin: 0px;
+	float: none;
+	width: 120px;
+	background: url("../img/pointer-bottom.png") no-repeat right;
+}
+
+.modal-body .modal-container header input.header-input:hover {
+	padding: 0px;
+	border: none;
+	color: white;
+	margin: 0px;
+}
+
 .modal-body .modal-container header input.processing, .modal-body .modal-container footer input.processing, .modal-body .modal-container div.inline-controls input.processing {
 	background-color: #ffffff;
 	color: #ffffff;;

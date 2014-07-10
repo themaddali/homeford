@@ -38,10 +38,18 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
-					var d = new Date();
-					d = d.toString().split(" ");
-					jQuery('#header-label').text('Attendance Summary - ' + d[1]+' '+ d[2] +' '+ d[3]);
-					//var activedomains = admin.getActiveDomainsIDs();
+					if (Modernizr.touch && Modernizr.inputtypes.date) {
+						document.getElementById('header-label').type = 'date';
+					} else {
+						var date = new Date();
+						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+						jQuery("#header-label").datepicker({
+							dateFormat : 'yy-mm-dd',
+							minDate : -90,
+							maxDate : 0,
+						});
+						jQuery("#header-label").val(today);
+					}
 					var activedomains = [];
 					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 					if (!activedomains || activedomains.length == 0) {
@@ -169,7 +177,36 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					document.title = 'Zingoare | Attendance Summary';
 					initDialog();
 					if (checkForActiveCookie() === true) {
+						//Rarely due to network latency if not loaded, just reload
+						if (!$.ui) {
+							location.reload();
+						}
 						populateData();
+
+						//jQuery UI Bug - Hot Fix
+						jQuery('#header-label').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
+							}, 100);
+						});
+
+						jQuery('#header-label').change(function() {
+							var date = new Date();
+							var todaydate = date.getDate();
+							var todaymonth = date.getMonth() + 1;
+							if (todaydate < 10) {
+								todaydate = '0' + todaydate;
+							}
+							if (todaymonth < 10) {
+								todaymonth = '0' + todaymonth;
+							}
+							if (jQuery('#header-label').val().split("-")[2] !== todaydate) {
+								alert('Only Todays reports are availabe in zingoare. Upgrade to Zingoare + or Zingoare ++ to access historic reports and a lot more.');
+								var today = date.getFullYear() + '-' + (todaymonth) + '-' + todaydate;
+								jQuery('#header-label').val(today);
+							}
+						});
 
 						//HTML Event - Actions
 						jQuery('#closethis').on('click', function() {
