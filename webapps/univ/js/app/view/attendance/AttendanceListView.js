@@ -37,6 +37,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
+					jQuery('.view-table').tablesorter();
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('header-label').type = 'date';
 					} else {
