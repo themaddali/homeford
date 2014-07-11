@@ -33,8 +33,8 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				}
 
 				function Authenticate(username, password, domain) {
-					var OWNERLEVEL = 0;
-					var ADMINLEVEL = 0;
+					var OWNERLEVEL = false;
+					var ADMINLEVEL = false;
 					service.Login(username, password, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
@@ -52,17 +52,17 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 												expires : 100,
 												path : '/'
 											});
-											if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
-												ADMINLEVEL = ADMINLEVEL + 1;
-											} else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
-												OWNERLEVEL = OWNERLEVEL + 1;
+											if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin') {
+												ADMINLEVEL = true;
+											} else if (ROLEMAP[UserProfile.domains[0].roleName] === 'Owner') {
+												OWNERLEVEL = true;
 											}
 										}
 										if (UserProfile.passwordReset === true || UserProfile.passwordReset === 'true') {
 											newpassword.resetinfo(username);
 											router.go('/newpassword');
 										} else {
-											if (OWNERLEVEL !== UserProfile.domains.length) {
+											if (ADMINLEVEL == true) {
 												//User is not owner. Filter stuff.a and take to studentlist
 												notify.showNotification('OK', 'Login Success', 'studentlist', '0');
 												jQuery.cookie('user', username, {
