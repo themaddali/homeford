@@ -119,10 +119,15 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
-					GetClock();
-					populateData();
-					banner.setBrand();
-					jQuery('#action-canvas').show();
+
+					if (ACTIVEINFO.state === null) {
+						router.go('/attendancekiosk');
+					} else {
+						GetClock();
+						populateData();
+						banner.setBrand();
+						jQuery('#action-canvas').show();
+					}
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
 
@@ -146,10 +151,11 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 						jQuery('#attendanceaction').click(function() {
 							if (jQuery('#attendanceaction').val() === 'Check In') {
-								service.checkIn(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid,  jQuery('#checkin-notes').val(), {
+								service.checkIn(service.domainNametoID(jQuery.cookie('subuser')), ACTIVEINFO.gid, ACTIVEINFO.sid, jQuery('#checkin-notes').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked In');
+											ACTIVEINFO.state = null;
 											notify.showNotification('OK', ' Checked In:  ' + ACTIVEINFO.gname);
 											setTimeout(function() {
 												jQuery('#action-canvas').slideUp(1000);
@@ -168,6 +174,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 										if (data.status !== 'error') {
 											jQuery('#attendanceaction').val('Checked Out');
 											notify.showNotification('OK', ' Checked Out:  ' + ACTIVEINFO.gname);
+											ACTIVEINFO.state = null;
 											setTimeout(function() {
 												jQuery('#action-canvas').slideUp(1000);
 											}, 500);

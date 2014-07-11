@@ -218,14 +218,14 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
-					resetView();
-					GetClock();
-					populateData();
-					banner.setBrand();
 					if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 						router.go('/attendancekiosk');
 					} else {
 						jQuery('.no-page-message').text('Please keyin your 4 digit kiosk identification code for ' + ACTIVESTUDENT.name + '!');
+						resetView();
+						GetClock();
+						populateData();
+						banner.setBrand();
 					}
 					//Set Focus
 					setTimeout(function() {

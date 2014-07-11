@@ -129,6 +129,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					service.checkInStats(activedomains[0], {
 						success : function(data) {
 							var activestudentids = [];
+							helperMediaQuiries();
 							for (var j = 0; j < data.length; j++) {
 								if (activestudentids.indexOf(data[j].kid.id) === -1) {
 									activestudentids.push(data[j].kid.id);
@@ -176,6 +177,21 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					});
 				}
 
+				function helperMediaQuiries() {
+					if ($('.kioskboard').length > 2) {
+						var width = $('#action-canvas').width() - 30;
+						var rowholds = Math.floor(width / 304);
+						var fillerspace = width - (rowholds * 304);
+						//var eachfiller = 300+fillerspace/rowholds;
+						var newmargin = fillerspace / rowholds;
+						if (newmargin < 10) {
+							newmargin = 10;
+						}
+						$('.kioskboard').css('margin-left', newmargin / 2);
+						$('.kioskboard').css('margin-right', newmargin / 2);
+					}
+				}
+
 
 				this.pause = function() {
 
@@ -208,6 +224,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						GetClock();
 						//populateData();
 
+						$(window).resize(helperMediaQuiries);
+						// When the browser changes size
+						
 						//HTML Event - Actions
 						jQuery('.launchkiosk').click(function() {
 							KIOSKMODE = true;

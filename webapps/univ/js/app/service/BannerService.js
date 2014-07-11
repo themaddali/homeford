@@ -39,7 +39,9 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 									jQuery('.brandnames').empty();
 									for (var i = 0; i < UserProfile.domains.length; i++) {
 										jQuery('.brandname').removeClass('show');
-										jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
+										if (UserProfile.domains[i].roleName !== "ROLE_TIER3"){
+											jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
+										}
 									}
 									jQuery('.brandnames').val(jQuery.cookie('subuser'));
 								}

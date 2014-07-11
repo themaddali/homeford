@@ -63,10 +63,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('.task-date', row).text('-');
 										}
 										jQuery('.view-table  tbody').append(row);
-										if (j === data.length - 1) {
-											jQuery('.view-table').trigger("update");
-											activateTableClicks();
-										}
+									}
+									if (j === data.length - 1) {
+										jQuery('.view-table').trigger("update");
+										activateTableClicks();
 									}
 								}
 							}
@@ -75,7 +75,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function activateTableClicks() {
-					// No function on table yet!!
+					jQuery('.view-table thead > tr > th').click(function() {
+						if (jQuery(this).find('i').hasClass('icon-sort-by-attributes')) {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes-alt ').removeClass('icon-sort-by-attributes ');
+						} else {
+							jQuery('.tablesortcontrol').removeClass('active');
+							jQuery(this).find('i').addClass('active');
+							jQuery('.tablesortcontrol').addClass('icon-sort-by-attributes ').removeClass('icon-sort-by-attributes-alt ');
+						}
+					});
 				}
 
 				function clearForm() {

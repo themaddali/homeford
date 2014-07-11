@@ -5129,6 +5129,20 @@ footer a:hover {
 	.classboard div.class-header, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
 		display: none;
 	}
+	
+	.brandnames.show {
+		font-size: 11px;
+		width: 90px;
+	}
+	
+	.brandname.show {
+		font-size: 11px;
+		width: 90px;
+	}
+	
+	#currenttime {
+		font-size: 12px;
+	}
 
 	.classboard div.class-progress-label {
 		margin-left: 0px;
