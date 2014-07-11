@@ -111,7 +111,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				$.validator.addMethod("passwordvalid", function(value, element, param) {
 					var ValidPwd = (/^[^<>;,"'&\\\/|+:= ]+$/.test(value));
 					return (value.length == 0 || ValidPwd);
-				}, 'Invalid Password Choice');
+				}, 'Invalid password choice');
 
 				this.entity = function(entity) {
 					ENTITY = entity;

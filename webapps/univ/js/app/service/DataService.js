@@ -432,6 +432,41 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
+				this.setUserProfileWithPassword = function(id, firstname, lastname, email, password, phone, kioskpin, domainobj, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/userprofile/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'firstName' : firstname,
+							'lastName' : lastname,
+							'phoneNumber' : phone,
+							'email' : email,
+							'password' : password,
+							'kioskPassword' : kioskpin,
+							'domain' : domainobj,
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Profile"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
+
 				this.setUserProfileOnly = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');

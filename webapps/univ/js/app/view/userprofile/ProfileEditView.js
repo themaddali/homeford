@@ -60,11 +60,6 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								if (jQuery('#profile-domainThanksMessage').val() == 'null' || jQuery('#profile-domainThanksMessage').val() == null || jQuery('#profile-domainThanksMessage').val().length < 2) {
 									jQuery('#profile-domainThanksMessage').val('Myself and the whole team');
 								}
-								if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
-									jQuery('.modal_close').hide();
-								} else {
-									jQuery('.modal_close').show();
-								}
 							}, 500);
 							ActivateClicks();
 						}
@@ -130,30 +125,26 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				}
 
 
+				$.validator.addMethod("passwordvalid", function(value, element, param) {
+					var ValidPwd = (/^[^<>;,"'&\\\/|+:= ]+$/.test(value));
+					return (value.length == 0 || ValidPwd);
+				}, 'Invalid password choice');
+
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
-					jQuery('#password-reenter-item').hide();
+					//jQuery('#password-reenter-item').hide();
 					jQuery('.edit-notify').hide();
 					populateData();
 					document.title = 'Zingoare | Profile Edit';
-					if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
-						jQuery('.modal_close').hide();
-					} else {
-						jQuery('.modal_close').show();
-					}
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Profile Edit';
-
-					if (!$("#profile-edit-form").valid()) {
-						jQuery('.modal_close').hide();
-					}
 
 					if (checkForActiveCookie() === true) {
 						populateData();
@@ -172,34 +163,49 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.domainDesc1 = jQuery('#profile-domainDesc1').val();
 								domainobj.domainDesc2 = jQuery('#profile-domainDesc2').val();
 								domainobj.domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
-								service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
-									success : function(response) {
-										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-											studentlist.reload();
-											setTimeout(function() {
-												router.returnToPrevious();
-												//admin.reloadData();
-											}, 2000);
-										} else {
-											notify.showNotification('ERROR', response.message);
-											jQuery('.modal_close').hide();
+								if (jQuery('#profile-password').val().length > 0) {
+									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
+										success : function(response) {
+											if (response.status !== 'error') {
+												notify.showNotification('OK', response.message);
+												studentlist.reload();
+												setTimeout(function() {
+													router.returnToPrevious();
+													//admin.reloadData();
+												}, 2000);
+											} else {
+												notify.showNotification('ERROR', response.message);
+											}
 										}
+									});
+								} else {
+									service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
+										success : function(response) {
+											if (response.status !== 'error') {
+												notify.showNotification('OK', response.message);
+												studentlist.reload();
+												setTimeout(function() {
+													router.returnToPrevious();
+													//admin.reloadData();
+												}, 2000);
+											} else {
+												notify.showNotification('ERROR', response.message);
+											}
+										}
+									});
+								}
 
-									}
-								});
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
-								jQuery('.modal_close').hide();
 							}
 						});
 
-						jQuery('#profile-password').keyup(function() {
-							jQuery('#password-reenter-item').fadeIn();
-							if (jQuery('#profile-password').val() == "") {
-								jQuery('#password-reenter-item').fadeOut();
-							}
-						});
+						// jQuery('#profile-password').keyup(function() {
+						// jQuery('#password-reenter-item').fadeIn();
+						// if (jQuery('#profile-password').val() == "") {
+						// jQuery('#password-reenter-item').fadeOut();
+						// }
+						// });
 
 						jQuery('#profile-image').click(function() {
 							$('input[type=file]').click();
@@ -212,6 +218,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								},
 								profilepassword : {
 									required : false,
+									passwordvalid : '#profile-password'
 								},
 								profilefirstname : {
 									required : true,
