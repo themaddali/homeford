@@ -211,6 +211,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							},
 							Rpassword : {
 								required : true,
+								minlength : 4,
 								passwordvalid : '#new-user-password'
 							},
 							Rpasswordrepeat : {

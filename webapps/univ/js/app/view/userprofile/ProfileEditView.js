@@ -218,6 +218,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								},
 								profilepassword : {
 									required : false,
+									minlength : 4,
 									passwordvalid : '#profile-password'
 								},
 								profilefirstname : {
