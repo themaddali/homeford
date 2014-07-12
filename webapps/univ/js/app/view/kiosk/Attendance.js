@@ -180,12 +180,12 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				function helperMediaQuiries() {
 					if ($('.kioskboard').length > 2) {
 						var width = $('#action-canvas').width() - 30;
-						var rowholds = Math.floor(width / 304);
-						var fillerspace = width - (rowholds * 304);
+						var rowholds = Math.floor(width / 254);
+						var fillerspace = width - (rowholds * 254);
 						//var eachfiller = 300+fillerspace/rowholds;
 						var newmargin = fillerspace / rowholds;
-						if (newmargin < 10) {
-							newmargin = 10;
+						if (newmargin < 20) {
+							newmargin = 20;
 						}
 						$('.kioskboard').css('margin-left', newmargin / 2);
 						$('.kioskboard').css('margin-right', newmargin / 2);

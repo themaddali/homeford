@@ -254,12 +254,12 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				function helperMediaQuiries() {
 					if ($('.studentboard').length > 4) {
 						var width = $('#card-canvas').width() - 30;
-						var rowholds = Math.floor(width / 304);
-						var fillerspace = width - (rowholds * 304);
+						var rowholds = Math.floor(width / 254);
+						var fillerspace = width - (rowholds * 254);
 						//var eachfiller = 300+fillerspace/rowholds;
 						var newmargin = fillerspace / rowholds;
-						if (newmargin < 10) {
-							newmargin = 10;
+						if (newmargin < 20) {
+							newmargin = 20;
 						}
 						$('.studentboard').css('margin-left', newmargin / 2);
 						$('.studentboard').css('margin-right', newmargin / 2);

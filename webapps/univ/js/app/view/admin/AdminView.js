@@ -24,7 +24,6 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 			var PENDINGLIST = [];
 			var DOMAINSTRENGTHDATA = {
 				y : 0,
-				a : 0,
 				b : 0
 			};
 
@@ -439,28 +438,55 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function updatePanelGraphs(name, data) {
-					$(name).chart({
-						template : "pie_basic_2",
-						values : {
-							serie1 : data
-						},
-						labels : [],
-						tooltips : {
-							serie1 : data
-						},
-						defaultSeries : {
-							r : -0.5,
-							values : [{
-								plotProps : {
-									fill : "green"
-								}
-							}, {
-								plotProps : {
-									fill : "#0784E3"
-								}
-							}]
-						}
-					});
+					if (data[0]==0 && data[1]==0) {
+						// data[0]=100;
+						// $(name).chart({
+							// template : "novalue_chart",
+							// values : {
+								// serie1 : data
+							// },
+							// labels : [],
+							// tooltips : {
+								// serie1 : data
+							// },
+							// defaultSeries : {
+								// r : -0.5,
+								// values : [{
+									// plotProps : {
+										// fill : "#7f7f7f"
+									// }
+								// }, {
+									// plotProps : {
+										// fill : "#7f7f7f"
+									// }
+								// }]
+							// }
+						// });
+					}
+					else {
+						$(name).chart({
+							template : "pie_basic_2",
+							values : {
+								serie1 : data
+							},
+							labels : [],
+							tooltips : {
+								serie1 : data
+							},
+							defaultSeries : {
+								r : -0.5,
+								values : [{
+									plotProps : {
+										fill : "green"
+									}
+								}, {
+									plotProps : {
+										fill : "#0784E3"
+									}
+								}]
+							}
+						});
+					}
 				}
 
 				function setCanvas() {
@@ -503,6 +529,43 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 						}
 					};
+					
+					jQuery.elycharts.templates['novalue_chart'] = {
+						type : "pie",
+						style : {
+							"background-color" : "white"
+						},
+						defaultSeries : {
+							plotProps : {
+								stroke : "#f3f3f3",
+								"stroke-width" : 3, //upto 3
+								opacity : 1
+							},
+							highlight : {
+								newProps : {
+									opacity : 1
+								}
+							},
+							tooltip : {
+								active : false,
+								frameProps : {
+									opacity : 1,
+									roundedCorners : 10,
+									fill : "white",
+								}
+							},
+							label : {
+								active : false,
+								props : {
+									fill : "#0784E3"
+								}
+							},
+							startAnimation : {
+								active : true,
+								type : "avg"
+							}
+						}
+					};
 				}
 
 				function displayAlert() {
@@ -511,14 +574,14 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function helperMediaQuiries() {
-					if ($('.adminboard').length > 2) {
+					if ($('.adminboard').length > 3) {
 						var width = $('#card-canvas').width() - 30;
-						var rowholds = Math.floor(width / 404);
-						var fillerspace = width - (rowholds * 404);
+						var rowholds = Math.floor(width / 254);
+						var fillerspace = width - (rowholds * 254);
 						//var eachfiller = 300+fillerspace/rowholds;
 						var newmargin = fillerspace / rowholds;
-						if (newmargin < 10) {
-							newmargin = 10;
+						if (newmargin < 20) {
+							newmargin = 20;
 						}
 						$('.adminboard').css('margin-left', newmargin / 2);
 						$('.adminboard').css('margin-right', newmargin / 2);

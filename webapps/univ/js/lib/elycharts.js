@@ -95,7 +95,7 @@ $.elycharts.templates = {
         offset: [0, 0] /* y, x */,
         // Se frameProps = false non disegna la cornice del tooltip (ad es. per permettere di definire la propria cornice HTML)
         frameProps : { fill: "white", "stroke-width": 0 },
-        contentStyle : { "font-family": "lucida sans, trebuchet MS, Tahoma", "z-index":"99", "font-size": "20px", "line-height": "30px","width":"40px","text-allign":"center", "color": "#7f7f7f" }
+        contentStyle : { "font-family": "lucida sans, trebuchet MS, Tahoma", "z-index":"99", "font-size": "12px","line-height": "15px","width":"80px","text-allign":"center", "color": "#7f7f7f" }
       },
       
       // Highlight feature
@@ -3015,7 +3015,7 @@ $.elycharts.tooltipmanager = {
     $.elycharts.tooltipid ++;
     
     // Preparo il tooltip
-    env.tooltipContainer = $('<div id="elycharts_tooltip_' + $.elycharts.tooltipid + '" style="position: absolute; top: 100; left: 100; z-index: 10; overflow: hidden; white-space: nowrap; display: none"><div id="elycharts_tooltip_' + $.elycharts.tooltipid + '_frame" style="position: absolute; top: 0; left: 0; z-index: -1"></div><div id="elycharts_tooltip_' + $.elycharts.tooltipid + '_content" style="cursor: default"></div></div>').appendTo(document.body);
+    env.tooltipContainer = $('<div id="elycharts_tooltip_' + $.elycharts.tooltipid + '" style="position: absolute; top: 385; left: 260; z-index: 10; overflow: hidden; white-space: nowrap; display: none"><div id="elycharts_tooltip_' + $.elycharts.tooltipid + '_frame" style="position: absolute; top: 0; left: 0; z-index: -1"></div><div id="elycharts_tooltip_' + $.elycharts.tooltipid + '_content" style="cursor: default"></div></div>').appendTo(document.body);
     env.tooltipFrame = common._RaphaelInstance('elycharts_tooltip_' + $.elycharts.tooltipid + '_frame', 500, 500);
     env.tooltipContent = $('#elycharts_tooltip_' + $.elycharts.tooltipid + '_content');
   },
@@ -3028,8 +3028,8 @@ $.elycharts.tooltipmanager = {
       env.tooltipContainer.width(props.width + delta + 1).height(props.height + delta + 1);
       if (!env.tooltipFrameElement && props.frameProps) {
     	var framePath = [ [ 'RECT', delta / 2, delta / 2, props.width, props.height, props.roundedCorners ] ];
-    	env.tooltipFrameElement = common.showPath(env, framePath, env.tooltipFrame).attr(props.frameProps);
-        // env.tooltipFrameElement = env.tooltipFrame.rect(delta / 2, delta / 2, props.width, props.height, props.roundedCorners);
+    	// env.tooltipFrameElement = common.showPath(env, framePath, env.tooltipFrame).attr(props.frameProps);
+        env.tooltipFrameElement = env.tooltipFrame.rect(delta / 2, delta / 2, props.width, props.height, props.roundedCorners);
       }
     }
 
@@ -3065,7 +3065,7 @@ $.elycharts.tooltipmanager = {
       }
     }
     
-    return { top : offset.top, left : offset.left };
+    return { top : offset.top-35, left : offset.left+25 };
   },
   
   /**
