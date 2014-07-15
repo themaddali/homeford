@@ -228,6 +228,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				this.resume = function() {
 					populateData();
+					jQuery('.card-search').val('');
 					document.title = 'Zingoare | Members Grid';
 				};
 

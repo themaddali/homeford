@@ -139,13 +139,14 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 										updatePanelIcons(data[j].kid.id, 'CHECKOUT', data[j].id);
 									}
 								} else {
-									jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.icon-3x').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-question-sign').css('color', 'grey');
-									jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.kiosk-flag-text').text('No Show Yet');
 									if (data[j].type === 'CHECKIN') {
+										jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.icon-3x').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-question-sign').css('color', 'grey');
+										jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.kiosk-flag-text').text('No Show Yet');
 										updatePanelIcons(data[j].kid.id, 'CHECKIN', data[j].id);
-									} else {
-										updatePanelIcons(data[j].kid.id, 'CHECKOUT', data[j].id);
 									}
+									// else {
+									// updatePanelIcons(data[j].kid.id, 'CHECKOUT', data[j].id);
+									// }
 								}
 							}
 						}
@@ -226,7 +227,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 
 						$(window).resize(helperMediaQuiries);
 						// When the browser changes size
-						
+
 						//HTML Event - Actions
 						jQuery('.launchkiosk').click(function() {
 							KIOSKMODE = true;

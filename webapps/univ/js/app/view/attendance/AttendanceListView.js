@@ -16,6 +16,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message"></span></p></div>';
+			var ACTIVEDOMAINS = [];
 
 			function AdminsListView() {
 
@@ -40,6 +41,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					jQuery('.view-table').tablesorter();
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('header-label').type = 'date';
+						document.getElementById('header-label-to').type = 'date';
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -49,15 +51,21 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							maxDate : 0,
 						});
 						jQuery("#header-label").val(today);
+						jQuery("#header-label-to").datepicker({
+							dateFormat : 'yy-mm-dd',
+							minDate : -90,
+							maxDate : 0,
+						});
+						jQuery("#header-label-to").val(today);
 					}
-					var activedomains = [];
-					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
-					if (!activedomains || activedomains.length == 0) {
+					ACTIVEDOMAINS = [];
+					ACTIVEDOMAINS.push(service.domainNametoID(jQuery.cookie('subuser')));
+					if (!ACTIVEDOMAINS || ACTIVEDOMAINS.length == 0) {
 						router.go('/admin', '/adminslist');
 					} else {
 						jQuery('.noinfo').show();
 						jQuery('.view-table').hide();
-						loadTable(activedomains);
+						loadTable(ACTIVEDOMAINS);
 					}
 
 				}
@@ -96,9 +104,55 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
-										activedomains.splice(0, 1);
+										//activedomains.splice(0, 1);
 										jQuery('.view-table').trigger("update");
-										loadTable(activedomains);
+										//loadTable(activedomains);
+										activateTableClicks();
+									}
+								}
+							}
+						});
+					}
+				}
+
+				function reLoadTable(activedomains) {
+					jQuery('.view-table  tbody').empty();
+					if (activedomains[0]) {
+						service.checkInStatsbyDate(activedomains[0], jQuery('#header-label').val(), jQuery('#header-label-to').val(), {
+							success : function(stats) {
+								var rowtemplate = jQuery('#admin-template').attr('id', '');
+								//Backing the template
+								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
+								var COUNT = stats.length;
+								for (var i = 0; i < COUNT; i++) {
+									jQuery('.noinfo').hide();
+									jQuery('.view-table').show();
+									var row = rowtemplate.clone();
+									jQuery('.s-name', row).text(stats[i].kid.firstName);
+									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
+									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
+									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
+									if (stats[i].checkout_parent) {
+										jQuery('.checkout-by', row).text(stats[i].checkout_parent.firstName);
+									} else {
+										jQuery('.checkout-by', row).text('-');
+									}
+									if (!stats[i].notes || stats[i].notes.length == 0) {
+										stats[i].notes = 'No Message';
+									}
+									if (!stats[i].checkedout_notes || stats[i].checkedout_notes.length == 0) {
+										stats[i].checkedout_notes = 'No Message';
+									}
+									if (stats[i].notes !== 'No Message' || stats[i].checkedout_notes !== 'No Message') {
+										jQuery('.notes', row).attr('note', 'CheckIn:' + stats[i].notes + '<br />CheckOut Note:' + stats[i].checkedout_notes).html(COMMENTICON);
+									} else {
+										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
+									}
+									jQuery('.view-table  tbody').append(row);
+									if (i === COUNT - 1 && activedomains.length > 0) {
+										//activedomains.splice(0, 1);
+										jQuery('.view-table').trigger("update");
+										//loadTable(activedomains);
 										activateTableClicks();
 									}
 								}
@@ -214,22 +268,39 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
 						});
+						jQuery('#header-label-to').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
+							}, 100);
+						});
 
 						jQuery('#header-label').change(function() {
-							var date = new Date();
-							var todaydate = date.getDate();
-							var todaymonth = date.getMonth() + 1;
-							if (todaydate < 10) {
-								todaydate = '0' + todaydate;
+							// var date = new Date();
+							// var todaydate = date.getDate();
+							// var todaymonth = date.getMonth() + 1;
+							// if (todaydate < 10) {
+							// todaydate = '0' + todaydate;
+							// }
+							// if (todaymonth < 10) {
+							// todaymonth = '0' + todaymonth;
+							// }
+							// if (jQuery('#header-label').val().split("-")[2] !== todaydate) {
+							// alert('Only Todays reports are availabe in zingoare. Upgrade to Zingoare + or Zingoare ++ to access historic reports and a lot more.');
+							// var today = date.getFullYear() + '-' + (todaymonth) + '-' + todaydate;
+							// jQuery('#header-label').val(today);
+							// }
+							var fromdate = $('#header-label').datepicker('getDate');
+							$('#header-label-to').datepicker('option', 'minDate', fromdate);
+							var todate = $('#header-label-to').datepicker('getDate');
+							if (fromdate > todate) {
+								$('#header-label-to').val(fromdate);
 							}
-							if (todaymonth < 10) {
-								todaymonth = '0' + todaymonth;
-							}
-							if (jQuery('#header-label').val().split("-")[2] !== todaydate) {
-								alert('Only Todays reports are availabe in zingoare. Upgrade to Zingoare + or Zingoare ++ to access historic reports and a lot more.');
-								var today = date.getFullYear() + '-' + (todaymonth) + '-' + todaydate;
-								jQuery('#header-label').val(today);
-							}
+							reLoadTable(ACTIVEDOMAINS);
+						});
+
+						jQuery('#header-label-to').change(function() {
+							reLoadTable(ACTIVEDOMAINS);
 						});
 
 						//HTML Event - Actions

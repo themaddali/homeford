@@ -144,6 +144,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				}
 
 				function resetView() {
+					jQuery('.identify-code').removeClass('error');
 					jQuery('.contentfull').empty();
 					jQuery('#nopage-warning').fadeOut(500);
 					jQuery('.main-content-header').fadeIn(400);

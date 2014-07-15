@@ -20,7 +20,8 @@
 			<div class="modal-container">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					Invite Edit
+					<!-- Invite Edit -->
+					Invite Info
 				</header>
 				<div class="modal-contents">
 					<form id="invite-edit-form" class="edit-form">
@@ -29,7 +30,7 @@
 								<li class="form-item">
 									<label>Email</label>
 									<div class="form-content">
-										<input placeholder="Registered Email ID" id="invite-email" readonly name="inviteemail" type="email" />
+										<input placeholder="Registered Email ID" id="invite-email" readonly name="inviteemail" type="email" readonly="readonly" />
 										<div class="form-helper">
 											<label> Invited Email - Cant Edit </label>
 										</div>
@@ -38,7 +39,7 @@
 								<li class="form-item">
 									<label>Status</label>
 									<div class="form-content">
-										<input placeholder="Invite Status" id="invite-status" readonly name="invitestatus" type="text" />
+										<input placeholder="Invite Status" id="invite-status" readonly name="invitestatus" type="text" readonly="readonly" />
 										<div class="form-helper">
 											<label>Accepted / Pending</label>
 										</div>
@@ -47,13 +48,13 @@
 								<li class="form-item">
 									<label>Domain</label>
 									<div class="form-content">
-										<input placeholder="Invited Domain" id="invite-domain" name="invitedomain" type="text" />
+										<input placeholder="Invited Domain" id="invite-domain" name="invitedomain" type="text" readonly="readonly" />
 										<div class="form-helper">
-											<label>Select Domains</label>
+											<label>This is the domain to which invite has been sent</label>
 										</div>
 									</div>
 								</li>
-								<li class="form-item">
+								<!-- <li class="form-item">
 									<label>Roles</label>
 									<div class="form-content">
 										<input placeholder="Invited Roles" id="invite-roles" name="inviteroles" type="text" />
@@ -63,11 +64,11 @@
 										</div>
 									</div>
 
-								</li>
+								</li> -->
 								<li class="form-item">
 									<label>Invited By</label>
 									<div class="form-content">
-										<input placeholder="Invited By" id="invite-sender" readonly name="invitesender" type="text" />
+										<input placeholder="Invited By" id="invite-sender" readonly name="invitesender" type="text" readonly="readonly" />
 										<div class="form-helper">
 											<label>Invitation sent by</label>
 										</div>
@@ -77,12 +78,12 @@
 						</fieldset>
 					</form>
 				</div>
-				<footer>
+				<!-- <footer>
 					<div class="edit-controls">
 						<input id="invite-edit" type="button" value="Re-Send">
 						<input class="negative" type="button" value="Recall Invite">
 					</div>
-				</footer>
+				</footer> -->
 				<div class="modal_close"></div>
 			</div>
 		</div>

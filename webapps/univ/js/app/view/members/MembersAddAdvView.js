@@ -77,6 +77,34 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					return newlname;
 				}
 
+				// jQuery.validator.addMethod("mandatoryset", function(value, element, options) {
+				// var selector = options[1];
+				// var validOrNot = $(selector, element.form).filter(function() {
+				// return $(this).val();
+				// }).length >= options[0];
+				//
+				// if (!$(element).data('being_validated')) {
+				// var fields = $(selector, element.form);
+				// fields.data('being_validated', true);
+				// fields.valid();
+				// fields.data('being_validated', false);
+				// }
+				// return validOrNot;
+				// // }, jQuery.format("Please fill at least {0} of these fields."));
+				// }, 'Please provide info of atleast one parent');
+
+				jQuery.validator.addMethod("mandatoryset", function(value, element) {
+					var momname = jQuery('#mother-name').val();
+					var dadname = jQuery('#father-name').val();
+					var dademail = jQuery('#father-email').val();
+					var momemail = jQuery('#mother-email').val();
+					if ((momname.length > 0 && momemail.length > 0) || (dadname.length > 0 && dademail.length > 0)) {
+						return true;
+					}
+					else {
+						return false;
+					}
+				}, "Atleast one parent info is mandatory");
 
 				this.pause = function() {
 
@@ -199,18 +227,22 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									required : true,
 								},
 								fathername : {
-									required : true,
+									required : false,
+									mandatoryset : true,
 								},
 								mothername : {
-									required : true,
+									required : false,
+									mandatoryset : true,
 								},
 								fatheremail : {
-									required : true,
-									email : true
+									required : false,
+									email : true,
+									mandatoryset : true,
 								},
 								motheremail : {
-									required : true,
-									email : true
+									required : false,
+									email : true,
+									mandatoryset : true,
 								},
 								g1email : {
 									email : true

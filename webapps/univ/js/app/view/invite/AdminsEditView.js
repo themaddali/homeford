@@ -15,7 +15,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					if (ACTIVEINVITE) {
 						jQuery('#invite-email').val(ACTIVEINVITE.email);
 						jQuery('#invite-status').val(ACTIVEINVITE.status);
-						jQuery('#invite-domain').val(ACTIVEINVITE.domain);
+						jQuery('#invite-domain').val(jQuery.cookie('subuser'));
 						jQuery('#invite-roles').val(ACTIVEINVITE.roles);
 						jQuery('#invite-sender').val(ACTIVEINVITE.invitedby);
 					} else {

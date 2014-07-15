@@ -167,12 +167,22 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
 										success : function(response) {
 											if (response.status !== 'error') {
-												notify.showNotification('OK', response.message);
-												studentlist.reload();
+												jQuery.removeCookie('user', {
+													path : '/'
+												});
+												jQuery.removeCookie('subuser', {
+													path : '/'
+												});
+												jQuery.removeCookie('_did', {
+													path : '/'
+												});
+												notify.showNotification('OK', response.message, 'entry', 10000);
 												setTimeout(function() {
-													router.returnToPrevious();
-													//admin.reloadData();
-												}, 2000);
+													notify.showNotification('WARN', 'You will now be logged out, login back with new credentials');
+												}, 1500);
+												setTimeout(function() {
+													router.go('/entry');
+												}, 4500);
 											} else {
 												notify.showNotification('ERROR', response.message);
 											}

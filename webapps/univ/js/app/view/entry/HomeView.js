@@ -116,7 +116,7 @@ define(['cookie', 'backstrech', '../../Router', '../../service/DataService', '..
 							effect : "explode",
 							duration : 300
 						},
-						modal : true,
+						modal : false,
 						buttons : {
 							"Administrator " : function() {
 								$(this).dialog("close");

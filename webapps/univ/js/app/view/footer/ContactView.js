@@ -6,7 +6,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			 * Constructor
 			 *
 			 */
-			var DIALOGBODY = '<div id="note-dialog" title="Note"><p id="note-message"></p></div>';
+			var DIALOGBODY = '<div id="note-dialog" title="Welcome!"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please select the kind of experience you want to tour?</p></div>';
 
 			function ContactView() {
 
@@ -47,6 +47,15 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						hide : {
 							effect : "explode",
 							duration : 300
+						},
+						modal : false,
+						buttons : {
+							"Administrator " : function() {
+								$(this).dialog("close");
+							},
+							"Parent" : function() {
+								$(this).dialog("close");
+							}
 						}
 					});
 				}

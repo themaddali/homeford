@@ -281,6 +281,19 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				//For a range - Reporting
+				this.checkInStatsbyDate = function(domainid,fromdate,todate, handlers) {
+					$.ajax({
+						url : '/zingoare/api/getkioskbydate/' + domainid+'?fromDate='+fromdate+'&toDate='+todate,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {

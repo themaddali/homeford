@@ -47,7 +47,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						jQuery('#reset-send').click(function() {
 							if ($("#invite-form").valid()) {
 								var email = jQuery('#invite-email').val();
-								alert(email + ' action');
+								alert('Apologies!!- This functionality currently unavailable. Please contact support@zingoare.com');
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
