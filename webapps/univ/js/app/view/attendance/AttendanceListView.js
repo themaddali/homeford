@@ -84,6 +84,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									var row = rowtemplate.clone();
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
+									jQuery('.checkin-date', row).text((stats[i].checkinTime).split('T')[0]);
 									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
 									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
 									if (stats[i].checkout_parent) {
@@ -130,6 +131,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									var row = rowtemplate.clone();
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
+									jQuery('.checkin-date', row).text((stats[i].checkinTime).split('T')[0]);
 									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
 									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
 									if (stats[i].checkout_parent) {

@@ -26,6 +26,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				y : 0,
 				b : 0
 			};
+			var POSITIONMAP = [];
 
 			function AdminView() {
 
@@ -54,6 +55,90 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					helperMediaQuiries();
 					var OWNERLEVEL = 0;
 					var ADMINLEVEL = 0;
+					$(".adminboard").each(function(i) {
+						var item = $(this).find('.admin-donut').attr('name');
+						POSITIONMAP.push(item);
+					});
+					// $(".adminboard").draggable({
+					// scroll : true,
+					// cursor : "move",
+					// cursorAt : {
+					// top : 150,
+					// left : 125
+					// },
+					// snap : ".content",
+					// snapMode : "outer",
+					// });
+
+					//Snap Feature
+					// $(".adminboard").each(function(i) {
+					// var item = $(this);
+					// var item_clone = item.clone();
+					// item.data("clone", item_clone);
+					// var position = item.position();
+					// if (position.left === 0) {
+					// position.left = 55;
+					// }
+					// if (position.top === 0) {
+					// position.top = 25;
+					// }
+					// item_clone.css({
+					// left : position.left,
+					// top : position.top,
+					// visibility : "hidden"
+					// }).attr("data-pos", i + 1);
+					//
+					// $("#cloned-slides").append(item_clone);
+					// });
+					//
+					// $(".content").sortable({
+					// revert : true,
+					// scroll : false,
+					// placeholder : "sortable-placeholder",
+					// cursor : "move",
+					// axis : 'x, y',
+					//
+					// start : function(e, ui) {
+					// ui.helper.addClass("exclude-me");
+					// $(".content .adminboard:not(.exclude-me)").css("visibility", "hidden");
+					// ui.helper.data("clone").hide();
+					// $(".cloned-slides .adminboard").css("visibility", "visible");
+					// },
+					//
+					// stop : function(e, ui) {
+					// $(".content .adminboard.exclude-me").each(function() {
+					// var item = $(this);
+					// var clone = item.data("clone");
+					// var position = item.position();
+					// clone.css("left", position.left);
+					// clone.css("top", position.top);
+					// clone.show();
+					// item.removeClass("exclude-me");
+					// });
+					//
+					// $(".content .adminboard").each(function() {
+					// var item = $(this);
+					// var clone = item.data("clone");
+					// clone.attr("data-pos", item.index());
+					// });
+					// $(".content .adminboard").css("visibility", "visible");
+					// $(".cloned-slides .adminboard").css("visibility", "hidden");
+					// },
+					//
+					// change : function(e, ui) {
+					// $(".content .adminboard:not(.exclude-me)").each(function() {
+					// var item = $(this);
+					// var clone = item.data("clone");
+					// clone.stop(true, false);
+					// var position = item.position();
+					// clone.animate({
+					// left : position.left,
+					// top : position.top
+					// }, 200);
+					// });
+					// }
+					// });
+
 					service.getUserProfile({
 						success : function(UserProfile) {
 							// for (var i = 0; i < UserProfile.domains.length; i++) {
@@ -115,6 +200,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								populateQuizData(ACTIVEDOMAINIDS);
 								populateServicesData(ACTIVEDOMAINIDS);
 								populateAttendanceKioskData(ACTIVEDOMAINIDS);
+								setTimeout(function(){
+									activateDonutClicks();
+								}, 1000);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -227,6 +315,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 									updatePanelValues('#members-t3-value', _memberst3);
 									updatePanelValues('#members-t2-value', _memberst2);
 									updatePanelValues('#members-total-value', _memberstotal);
+									_membersdata[0] = _memberst2;
 									_membersdata[1] = _memberst3;
 									if (j === data.length - 1) {
 										updatePanelGraphs('#members-donut', _membersdata);
@@ -424,7 +513,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 										updatePanelValues('#attendance-out-value', (studentids.length - _checkin));
 										_checkindata[1] = (studentids.length - _checkin);
 										updatePanelValues('#attendance-noshow-value', _noshow - (studentids.length));
-										updatePanelGraphs('#attendance-donut', _checkindata);
+										
 									}
 								});
 							}
@@ -438,32 +527,31 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function updatePanelGraphs(name, data) {
-					if (data[0]==0 && data[1]==0) {
+					if (data[0] == 0 && data[1] == 0) {
 						// data[0]=100;
 						// $(name).chart({
-							// template : "novalue_chart",
-							// values : {
-								// serie1 : data
-							// },
-							// labels : [],
-							// tooltips : {
-								// serie1 : data
-							// },
-							// defaultSeries : {
-								// r : -0.5,
-								// values : [{
-									// plotProps : {
-										// fill : "#7f7f7f"
-									// }
-								// }, {
-									// plotProps : {
-										// fill : "#7f7f7f"
-									// }
-								// }]
-							// }
+						// template : "novalue_chart",
+						// values : {
+						// serie1 : data
+						// },
+						// labels : [],
+						// tooltips : {
+						// serie1 : data
+						// },
+						// defaultSeries : {
+						// r : -0.5,
+						// values : [{
+						// plotProps : {
+						// fill : "#7f7f7f"
+						// }
+						// }, {
+						// plotProps : {
+						// fill : "#7f7f7f"
+						// }
+						// }]
+						// }
 						// });
-					}
-					else {
+					} else {
 						$(name).chart({
 							template : "pie_basic_2",
 							values : {
@@ -529,7 +617,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 						}
 					};
-					
+
 					jQuery.elycharts.templates['novalue_chart'] = {
 						type : "pie",
 						style : {
@@ -586,6 +674,13 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						$('.adminboard').css('margin-left', newmargin / 2);
 						$('.adminboard').css('margin-right', newmargin / 2);
 					}
+				}
+				
+				function activateDonutClicks() {
+					jQuery('path').click(function(){
+						var gotopage = $(this).parent().parent().parent().parent().parent().next().find('a').attr('href');
+						router.go(gotopage.split('#')[1]);
+					});
 				}
 
 
@@ -689,6 +784,13 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						jQuery('.mainlogo').click(function() {
 							router.go('/studentlist');
 						});
+						// jQuery('.admin-donut').click(function(){
+							// var idname = $(this).attr('name');
+							// var posi = POSITIONMAP.indexOf(idname);
+							// var toolti = '#elycharts_tooltip_'+(posi+1)+'_content';
+							// console.log(jQuery(toolti).text());
+							// //alert(idname + '  ' + (posi+1));
+						// });
 
 					} // Cookie Guider
 				};

@@ -1797,7 +1797,6 @@ div.formselction {
 	border: 1px solid #0784E3;
 }
 
-
 .view-form li.form-item {
 	font-size: 0px;
 	border-bottom: 2px dotted #d9d9d9;
@@ -2255,7 +2254,7 @@ form div.form-content textarea.error {
 	background-color: #FFFFFF;
 	font-weight: 500;
 	/*font-size: 1em;*/
-	font-size:0.9em;
+	font-size: 0.9em;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: white;
 	text-overflow: ellipsis;
@@ -2297,7 +2296,7 @@ form div.form-content textarea.error {
 }
 .adminboard div.value {
 	/*font-size: 30px;*/
-	font-size : 20px;
+	font-size: 20px;
 	padding: 5px;
 	margin-top: 40%;
 	letter-spacing: -2px;
@@ -2340,8 +2339,8 @@ form div.form-content textarea.error {
 }
 .adminboard .dash-info-visual div.dash-info-1key div.admin-donut {
 	/*width: 400px;
-	height: 230px;*/
-	width : 250px;
+	 height: 230px;*/
+	width: 250px;
 	height: 150px;
 	margin-top: -30px;
 }
@@ -2381,6 +2380,35 @@ form div.form-content textarea.error {
 	border-top: 1px dotted #d9d9d9;
 	border-bottom-right-radius: 10px;
 	cursor: pointer;
+	z-index: 21;
+}
+
+.sortable-placeholder {
+	height: 300px;
+	width: 50px;
+	margin: 0 0 0.75 rem 0;
+	position: relative;
+	z-index: 6;
+}
+
+.cloned-slides .adminboard {
+	position: absolute;
+	z-index: 1;
+}
+.cloned-slides {
+	text-align: center;
+	margin-left: 15px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	position: absolute;
+	top: 15px;
+	overflow: none;
+	-webkit-overflow-scrolling: touch;
+	background-color: #FFFFFF;
+}
+
+.cloned-slides .adminboard:before {
+	/*content: attr(data-pos);*/
 }
 
 .adminboard footer:hover {
@@ -2754,6 +2782,13 @@ table.summary > tbody tr th, table.summary > tbody tr td {
 }
 .press p.title a:hover {
 	color: #888;
+}
+
+i > span {
+	font-size: 12px;
+	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma ';
+	padding-left: 10px;
+	vertical-align: middle
 }
 
 #about-mgh, .press {
@@ -3255,6 +3290,13 @@ dialog-modal::-webkit-scrollbar {
 	padding: 10px;
 }
 
+.filter-selection-header {
+	padding: 15px;
+	text-align: center;
+	font-weight: 700;
+	color: #0784E3;
+}
+
 .float-left .notifycard {
 	float: left;
 	width: 99%;
@@ -3330,16 +3372,16 @@ dialog-modal::-webkit-scrollbar {
 }
 
 /*.float-left .adminboard {
-	float: left;
-	width: 400px;
-	height: 450px;
-	cursor: default;
-	text-align: left;
-	border: 2px solid #d9d9d9;
-	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-}*/
+ float: left;
+ width: 400px;
+ height: 450px;
+ cursor: default;
+ text-align: left;
+ border: 2px solid #d9d9d9;
+ overflow: hidden;
+ border-top-left-radius: 10px;
+ border-bottom-right-radius: 10px;
+ }*/
 .float-left .adminboard {
 	float: left;
 	width: 250px;
@@ -4123,8 +4165,8 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	padding: 2px;
 }
 
-.tablesortcontrol  {
-	font-size: 11px; 
+.tablesortcontrol {
+	font-size: 11px;
 	padding-left: 7px;
 }
 
@@ -5145,17 +5187,17 @@ footer a:hover {
 	.classboard div.class-header, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
 		display: none;
 	}
-	
+
 	.brandnames.show {
 		font-size: 11px;
 		width: 90px;
 	}
-	
+
 	.brandname.show {
 		font-size: 11px;
 		width: 90px;
 	}
-	
+
 	#currenttime {
 		font-size: 12px;
 	}

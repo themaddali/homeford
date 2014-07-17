@@ -21,6 +21,9 @@
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
 					Invite List
+					<!-- <a class="filter-selection-icon"> <i class="icon-pushpin  icon-1x "></i><i class="icon-check  icon-1x " style="display: none"></i></a> -->
+					<a class="filter-selection-icon"> <i class="icon-pushpin  icon-1x "><span class="filter-selection-count">Filters</span></i><i class="icon-check  icon-1x " style="display: none"><span >Done</span></i></a>
+
 				</header>
 				<div class="modal-contents">
 					<table id="adminslist-table" class="view-table">
@@ -36,12 +39,47 @@
 							</tr>
 						</thead>
 						<tbody>
-							
+
 						</tbody>
 						<div class="noinfo" style="display:none">
-						No Results Available
-					</div>
+							No Results Available
+						</div>
 					</table>
+				</div>
+				<div class="filter-selection" style="display: none">
+					<div class="filter-selection-header">
+						Select Filters
+					</div>
+					<form id="invite-edit-form" class="edit-form">
+						<fieldset>
+							<ol id="invite-form">
+								<li class="form-item">
+									<label>Invitation Status</label>
+									<span>
+										<input type="checkbox" name="status" value="pending" checked="checked"/>
+										Pending </span>
+								</li>
+								<li class="form-item filler" style="margin-top: 0px">
+									<label></label>
+									<span>
+										<input type="checkbox" name="status" value="accepted" checked="checked"/>
+										Accepted</span>
+								</li>
+								<li class="form-item" style="margin-top: 5px">
+									<label>Invitation From</label>
+									<span>
+										<input type="checkbox" name="f" value="ds" checked="checked"/>
+										Venkat </span>
+								</li>
+								<li class="form-item filler" style="margin-top: 0px">
+									<label></label>
+									<span>
+										<input type="checkbox" name="f" value="ds" checked="checked"/>
+										John</span>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
 				</div>
 				<div class="modal_close"></div>
 			</div>

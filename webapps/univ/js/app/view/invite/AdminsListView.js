@@ -111,7 +111,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						adminsedit.setInviteInfo(rowObject);
 						router.go('/adminslistedit');
 					});
-					
+
 					jQuery('.view-table thead > tr > th').click(function() {
 						if (jQuery(this).find('i').hasClass('icon-sort-by-attributes')) {
 							jQuery('.tablesortcontrol').removeClass('active');
@@ -148,6 +148,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				}
 
+				function updateFiltercounter() {
+					var count = jQuery('input[type="checkbox"]:unchecked').length;
+					jQuery('.filter-selection-count').text(count + ' filters');
+					if (count === 0) {
+						jQuery('.filter-selection-count').text('Filter');
+					}
+				}
+
 
 				this.pause = function() {
 
@@ -169,6 +177,24 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
+						});
+
+						jQuery('.filter-selection-icon').click(function() {
+							jQuery('.modal-contents').toggle();
+							jQuery('.filter-selection').toggle();
+							jQuery('.icon-pushpin').toggle();
+							jQuery('.icon-check').toggle();
+							jQuery('.modal_close').toggle();
+						});
+
+						jQuery('input[type="checkbox"]').change(function() {
+							updateFiltercounter();
+							if (! $(this).is(":checked")) {
+								//alert('Add Filter' + $(this).val());
+								$('td:contains(' + $(this).val() + ')').parents('tr').hide(0);
+							} else {
+								$('td:contains(' + $(this).val() + ')').parents('tr').show(0);
+							}
 						});
 
 					} // Cookie Guider
