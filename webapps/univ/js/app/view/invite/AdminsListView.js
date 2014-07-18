@@ -164,6 +164,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				this.resume = function() {
 					populateData();
 					document.title = 'Zingoare | Admin List';
+					jQuery('.filter-selection-count').text('Filter');
 				};
 
 				this.init = function(args) {

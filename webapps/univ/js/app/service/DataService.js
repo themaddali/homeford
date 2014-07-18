@@ -281,11 +281,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				//For a range - Reporting
-				this.checkInStatsbyDate = function(domainid,fromdate,todate, handlers) {
+				this.checkInStatsbyDate = function(domainid, fromdate, todate, handlers) {
 					$.ajax({
-						url : '/zingoare/api/getkioskbydate/' + domainid+'?fromDate='+fromdate+'&toDate='+todate,
+						url : '/zingoare/api/getkioskbydate/' + domainid + '?fromDate=' + fromdate + '&toDate=' + todate,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -607,7 +607,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.AddServices = function(domainid, title, desc, cost, tax, freq, status, handlers) {
+				this.AddServices = function(domainid, title, desc, cost, tax, freq, sstart, send, status, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					var _cost = cost.replace('$', '');
@@ -623,9 +623,12 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'status' : status,
 							'unit_price' : _cost,
 							'minutes' : '0',
-							'days' : freq,
+							// 'days' : freq,
+							'days' : 0,
 							'tax' : _tax,
 							'quantity' : '1',
+							"startTime" : sstart,
+							"endTime" : send,
 						}),
 						success : function(data) {
 							SERVICESLIST = null;
@@ -670,6 +673,26 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'days' : freq,
 							'tax' : _tax,
 							'quantity' : '1',
+						}),
+						success : function(data) {
+							SERVICESLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						}
+					});
+				};
+				this.AssignService = function(domainid, kidsids, serviceids, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/domain/' + domainid + '/additemservices',
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'kidsIds' : kidsids,
+							'itemServicesIds' : serviceids,
 						}),
 						success : function(data) {
 							SERVICESLIST = null;

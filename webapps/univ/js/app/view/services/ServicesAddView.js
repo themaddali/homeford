@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', 'timepicker'], function(modernizr, cookie, service, validate, router, notify, admin, timepicker) {"use strict";
 
 	var ServicesAddView = ( function() {
 
@@ -30,6 +30,19 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				function populateData() {
 					jQuery('.form-content input').val();
+					if (Modernizr.touch && Modernizr.inputtypes.date) {
+						document.getElementById('service-starttime').type = 'time';
+						document.getElementById('task-endtime').type = 'time';
+					} else {
+						jQuery("#service-starttime").timepicker({
+							timeSeparator : ':',
+							showPeriod : false,
+						});
+						jQuery("#service-endtime").timepicker({
+							timeSeparator : ':',
+							showPeriod : false,
+						});
+					}
 				}
 
 
@@ -61,30 +74,48 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							router.returnToPrevious();
 						});
 
+						//JQ UI Bug of -Index.
+						jQuery('#service-starttime').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-timepicker-div').css('background-color', 'white');
+								jQuery('#ui-timepicker-div').css('z-index', '200');
+							}, 100);
+						});
+						jQuery('#service-endtime').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-timepicker-div').css('background-color', 'white');
+								jQuery('#ui-timepicker-div').css('z-index', '200');
+							}, 100);
+						});
+
 						jQuery('#add-service').on('click', function() {
 							if ($(".edit-form").valid()) {
 								var _sname = jQuery('#service-name').val();
 								var _sdesc = jQuery('#service-desc').val();
 								var _scost = jQuery('#service-cost').val();
 								var _stax = jQuery('#service-tax').val();
-								var _sfreq = jQuery('#service-frequency').val();
+								//var _sfreq = jQuery('#service-frequency').val();
+								var _sfreq = 0;
+								var _sstarttime = jQuery('#service-starttime').val() + ':00';
+								var _sendtime = jQuery('#service-endtime').val() + ':00';
 								// var _domainids;
 								// service.returnDomainIDList({
 								// success : function(data) {
 								// _domainids = data;
 								// }
 								// });
-								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, jQuery('#service-status').val(), {
+								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
+											setTimeout(function() {
+												router.returnToPrevious();
+												//admin.reloadData();
+											}, 2000);
 										} else {
 											notify.showNotification('ERROR', data.message);
 										}
-										setTimeout(function() {
-											router.returnToPrevious();
-											//admin.reloadData();
-										}, 2000);
+
 									}
 								});
 							} else {
@@ -132,6 +163,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								servicefrequency : {
 									required : true,
 								},
+								servicestarttime : {
+									required : true,
+								},
+								serviceendtime : {
+									required : true,
+								}
 							}
 						});
 

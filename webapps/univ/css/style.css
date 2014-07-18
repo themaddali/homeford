@@ -2195,6 +2195,15 @@ form li.form-item div.form-content > label.error {
 	padding: 12px;
 }
 
+form div.form-checkboxs span > label.error {
+	display: inline;
+	color: red;
+	font-size: 12px;
+	padding-left: 10px;
+	vertical-align: bottom;
+	float: right;
+}
+
 form li.form-item div.form-content span > label.error {
 	display: inline;
 	color: red;
@@ -2788,7 +2797,7 @@ i > span {
 	font-size: 12px;
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma ';
 	padding-left: 10px;
-	vertical-align: middle
+	vertical-align: middle;
 }
 
 #about-mgh, .press {
@@ -4159,6 +4168,19 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 .ui-datepicker-year {
 	border: none;
 	padding: 2px;
+}
+
+.ui-timepicker-title {
+	color:  white;
+	padding: 5px;
+}
+
+.ui-timepicker-hours {
+	padding-right: 10px;
+}
+
+.ui-timepicker-hour-cell,.ui-timepicker-minute-cell {
+	padding: 5px;
 }
 
 .ui-dialog .ui-dialog-buttonpane {

@@ -4,6 +4,7 @@ require({
 		text : 'text',
 		jquery : 'jquery',
 		jqueryui : 'jquery-ui',
+		timepicker : 'jquery.ui.timepicker',
 		modernizr : 'modernizr-2.5.3.min',
 		backstrech : 'backstrech',
 		cookie : 'jquery.cookie',

@@ -8,11 +8,45 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			 */
 
 			var validator;
+			var SERVICESALL = [];
+			var leadtemplate;
+			var followtemplate;
+			var serviceIDs = [];
 
 			function MembersAddAdvView() {
 
 				function populateData() {
+					var domainIDs = [];
+					domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
+					getServices(domainIDs);
+				}
 
+				function getServices(activedomains) {
+					SERVICESALL = [];
+					jQuery('.servicetemplate').remove();
+					//jQuery('.edit-select').empty();
+					jQuery('#member-list').css('color', 'black');
+					for (var i = 0; i < activedomains.length; i++) {
+						var thisdomaininstance = activedomains[i];
+						service.ListAllServices(thisdomaininstance, {
+							success : function(data) {
+								for (var j = 0; j < data.length; j++) {
+									if (j === 0) {
+										var thisservice = leadtemplate.clone();
+										jQuery('.services-list', thisservice).parent().append(data[j].name);
+										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										// jQuery(thisservice)
+										jQuery('#services-grid').append(thisservice);
+									} else {
+										var thisservice = followtemplate.clone();
+										jQuery('.services-list', thisservice).parent().append(data[j].name);
+										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										jQuery('#services-grid').append(thisservice);
+									}
+								}
+							}
+						});
+					}
 				}
 
 				function checkForActiveCookie() {
@@ -29,6 +63,15 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						router.go('/home', '/admin');
 						return false;
 					}
+				}
+
+				function generateServiceArray() {
+					serviceIDs = [];
+					$('input[type=checkbox]').each(function() {
+						if (this.checked) {
+							serviceIDs.push(jQuery(this).attr('serviceid'));
+						}
+					});
 				}
 
 				function clearForm() {
@@ -100,8 +143,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					var momemail = jQuery('#mother-email').val();
 					if ((momname.length > 0 && momemail.length > 0) || (dadname.length > 0 && dademail.length > 0)) {
 						return true;
-					}
-					else {
+					} else {
 						return false;
 					}
 				}, "Atleast one parent info is mandatory");
@@ -125,7 +167,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('.formlink').show();
 
 					if (checkForActiveCookie() === true) {
-
+						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
+						followtemplate = jQuery('#service-follow').remove().attr('id', '');
 						populateData();
 
 						//HTML Event - Actions
@@ -147,6 +190,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 						jQuery('#member-add').on('click', function() {
 							if ($('#regularadd').valid()) {
+								generateServiceArray();
 								var kidobject = [];
 								if (jQuery('#member-first-name').val().length > 0) {
 									var person = {};
@@ -195,17 +239,35 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									person.userType = 'GAURDIAN3';
 									kidobject.push(person);
 								}
+
 								service.registerKids(service.domainNametoID(jQuery.cookie('subuser')), kidobject, {
 									success : function(data) {
 										if (data.status !== 'error') {
-											notify.showNotification('OK', data.message);
+											//notify.showNotification('OK', data.message);
+											for (var j = 0; j < data.length; j++) {
+												if ((kidobject[0].firstName === data[j].firstName) && (kidobject[0].lastName === data[j].lastName)) {
+													var kidid=[];
+													kidid.push(data[j].id);
+													service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, {
+														success : function(data) {
+															if (data.status !== 'error') {
+																notify.showNotification('OK', data.message);
+																setTimeout(function() {
+																	studentlist.reload();
+																	router.returnToPrevious();
+																}, 2000);
+															} else {
+																notify.showNotification('ERROR', data.message);
+															}
+														}
+													});
+												}
+											}
+
 										} else {
 											notify.showNotification('ERROR', data.message);
 										}
-										setTimeout(function() {
-											studentlist.reload();
-											router.returnToPrevious();
-										}, 2000);
+
 									}
 								});
 							} else {
@@ -253,6 +315,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								g3email : {
 									email : true
 								},
+								services : {
+									required : true
+								}
+							},
+							messages : {
+								services : "You must check at least 1 service"
 							}
 						});
 
