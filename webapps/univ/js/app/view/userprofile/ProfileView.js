@@ -24,6 +24,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#profile-last-name').text(UserProfile.lastName);
 							//jQuery('#profile-id').text(UserProfile.id);
 							jQuery('#profile-email').text(UserProfile.email);
+							if (UserProfile.phoneNumber === null) {
+								UserProfile.phoneNumber = '';
+							}
 							jQuery('#profile-phone').text(UserProfile.phoneNumber);
 							if (UserProfile.kioskPassword === null) {
 								UserProfile.kioskPassword = 'Not Set - Update Now!';

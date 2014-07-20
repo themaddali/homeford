@@ -24,6 +24,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							jQuery('#profile-last-name').val(UserProfile.lastName);
 							jQuery('#profile-id').val(UserProfile.id);
 							jQuery('#profile-email').val(UserProfile.email);
+							if (UserProfile.phoneNumber === null) {
+								UserProfile.phoneNumber = '';
+							}
 							jQuery('#profile-phone').val(UserProfile.phoneNumber);
 							if (UserProfile.kioskPassword === null) {
 								UserProfile.kioskPassword = 'Not Set - Update Now!';
