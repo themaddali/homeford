@@ -36,8 +36,8 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 						jQuery('.modal_close').fadeOut();
 						if (status === 'ERROR') {
 							var notification = '<div class="' + CLASS + '">' + ERROR + '<span class="notify-message">' + message + '</span></div>';
-							duration = 100000;
-							//100 seconds
+							duration = 1000000;
+							//1000 seconds
 							jQuery('.modal_close').fadeIn();
 						} else if (status === 'WARN') {
 							var notification = '<div class="' + CLASS + '">' + WARN + '<span class="notify-message">' + message + '</span></div>';
