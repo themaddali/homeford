@@ -1080,6 +1080,18 @@ a.goback {
 	outline: none;
 }
 
+.search-button {
+	padding: 10px;
+	margin-left: 5px;
+	outline: none;
+	-webkit-appearance: none;
+	background-color: #0784E3;
+	color: white;
+	border: 2px solid #ffffff;
+	border-radius: 10px;
+	width: 40px;
+}
+
 #nopage-warning input.error {
 	border: 2px solid red;
 }
@@ -3737,7 +3749,7 @@ dialog-modal::-webkit-scrollbar {
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	border-color: rgba(114, 114, 114, 0.71);
-	background: url("../img/search.png") no-repeat right;
+	/*background: url("../img/search.png") no-repeat right;*/
 	background-position-x: 99%;
 	outline: none;
 }
@@ -4171,7 +4183,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 }
 
 .ui-timepicker-title {
-	color:  white;
+	color: white;
 	padding: 5px;
 }
 
@@ -4179,7 +4191,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	padding-right: 10px;
 }
 
-.ui-timepicker-hour-cell,.ui-timepicker-minute-cell {
+.ui-timepicker-hour-cell, .ui-timepicker-minute-cell {
 	padding: 5px;
 }
 

@@ -76,7 +76,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 											}
 										});
 										// jQuery('.membercard-name').ellipsis({
-											// onlyFullWords : true
+										// onlyFullWords : true
 										// });
 										activateEvents();
 									}
@@ -134,7 +134,19 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 					});
 					jQuery('.ui-menu-item').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
+						var cardlist = jQuery('.edit-card-canvas .membercard-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+								//thiscard.parentElement.stlye.display = '';
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
+					jQuery('.search-button').click(function(event) {
+						var searchword = jQuery('.card-search').val().toUpperCase();
 						var cardlist = jQuery('.edit-card-canvas .membercard-name');
 						for (var i = 0; i < cardlist.length; i++) {
 							var thiscard = cardlist[i];

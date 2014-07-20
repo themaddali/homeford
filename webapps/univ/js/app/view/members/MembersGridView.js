@@ -201,6 +201,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					});
 					jQuery('.ui-menu-item').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
+						var cardlist = jQuery('.edit-card-canvas .membercard-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+								//thiscard.parentElement.stlye.display = '';
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
+					jQuery('.ui-menu-item').click(function(event) {
+						var searchword = jQuery('.card-search').val().toUpperCase();
 						if (searchword.length > 0) {
 							jQuery('.canvas-partition').hide();
 						} else {
