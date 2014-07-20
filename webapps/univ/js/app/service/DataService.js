@@ -168,6 +168,10 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						//Check after 3 seconds. Cooling time
 					}
 				}
+				
+				this.knowServices = function(memberid, handlers) {
+					
+				};
 
 
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {

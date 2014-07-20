@@ -246,12 +246,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 											//notify.showNotification('OK', data.message);
 											for (var j = 0; j < data.length; j++) {
 												if ((kidobject[0].firstName === data[j].firstName) && (kidobject[0].lastName === data[j].lastName)) {
-													var kidid=[];
+													var kidid = [];
 													kidid.push(data[j].id);
 													service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, {
 														success : function(data) {
 															if (data.status !== 'error') {
-																notify.showNotification('OK', data.message);
+																notify.showNotification('OK', kidobject[0].firstName + ' and group added!');
 																setTimeout(function() {
 																	studentlist.reload();
 																	router.returnToPrevious();

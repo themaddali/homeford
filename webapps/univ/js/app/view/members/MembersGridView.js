@@ -13,6 +13,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var membernames = [];
 			var template;
 			var gridbreaktemplate;
+			var serviceIDs = [];
+			var serviceMAP = new Object();
 
 			function MembersGridView() {
 
@@ -72,7 +74,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
 									}
 									jQuery('.membercard-category', thisitem).text('Student');
-									jQuery('.membercard-rel', thisitem).text('');
+									jQuery('.membercard-rel', thisitem).text(data[j].itemServiceDetails.length + ' plan(s) active');
+									var serviceslist = '';
+									for (var m = 0; m < data[j].itemServiceDetails.length; m++) {
+										serviceslist = serviceslist + data[j].itemServiceDetails[m].itemService.id + ':';
+										if (m === data[j].itemServiceDetails.length - 1) {
+											serviceMAP[data[j].id] = serviceslist;
+										}
+									}
 									var grpname = 'grp' + j;
 									jQuery(thisitem).addClass(grpname).attr('group', grpname);
 									jQuery('.edit-card-canvas').append(thisitem);
@@ -114,6 +123,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					}
 				}
 
+				function generateServiceArray(items) {
+					serviceIDs = [];
+					for (var i = 0; i < items.length; i++) {
+						serviceIDs.push(items[i].itemService.id);
+					}
+				}
+
 				function activateEvents() {
 					var rowObject = {
 						firstname : "none",
@@ -124,6 +140,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						status : 'none',
 						domain : 'none',
 						courses : 'none',
+						services : [],
 						email : '',
 						id : 'none',
 						kioskpin : 'No Pin Available - Go to profile and set one.',
@@ -145,6 +162,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							rowObject.relation = jQuery(this).find('.membercard-category').text().split(' ')[0];
 							rowObject.kioskpin = jQuery(this).find('.membercard-name').attr('kioskpin');
 							rowObject.id = jQuery(this).find('.membercard-name').attr('memberid');
+							if (serviceMAP[rowObject.id] && serviceMAP[rowObject.id] !== null) {
+								rowObject.services = serviceMAP[rowObject.id].split(":");
+							}
 							if (jQuery(this).find('.membercard-name').attr('email') !== 'null') {
 								rowObject.email = jQuery(this).find('.membercard-name').attr('email');
 							}

@@ -53,12 +53,13 @@
 										</div>
 									</div>
 								</li>
+								<div id="services-grid" class="form-checkboxs"></div>
 								<li class="form-item">
 									<label>Kiosk Pin</label>
 									<div class="form-content">
 										<input placeholder="None Available" id="member-pin" name="memberpin" type="text"  />
 										<div class="form-helper">
-											<label>4 Didgit Kiosk Pin</label>
+											<label>4 Digit Kiosk Pin</label>
 										</div>
 									</div>
 								</li>
@@ -119,6 +120,20 @@
 					</div>
 				</footer>
 				<div class="modal_close"></div>
+				<div class="div-template" style="display:none">
+					<li class="form-item servicetemplate" id="service-lead">
+						<label>Plans</label>
+						<span>
+							<input class="services-list" type="checkbox" name="services" value=""/>
+						</span>
+					</li>
+					<li class="form-item filler servicetemplate" style="margin-top: 0px" id="service-follow">
+						<label></label>
+						<span>
+							<input class="services-list" type="checkbox" name="services" value=""/>
+						</span>
+					</li>
+				</div>
 			</div>
 		</div>
 
@@ -127,7 +142,6 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 
 		<div id="preloader"></div>
-		
 
 	</body>
 </html>

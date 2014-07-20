@@ -9,11 +9,23 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 			var ACTIVEMEMBER;
 			var formData_input;
+			var leadtemplate;
+			var followtemplate;
+			var serviceIDs = [];
 
 			function MembersEditView() {
 
 				function populateData() {
 					if (ACTIVEMEMBER) {
+						$('input[type="checkbox"]').removeAttr('checked');
+						if (ACTIVEMEMBER.relation === 'Student') {
+							jQuery('.form-checkboxs').show();
+							var domainIDs = [];
+							domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
+							getServices(domainIDs);
+						} else {
+							jQuery('.form-checkboxs').hide();
+						}
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
 						jQuery('#member-id').val(ACTIVEMEMBER.id);
@@ -23,17 +35,55 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
 						jQuery('#member-profile-image').attr('src', ACTIVEMEMBER.image);
 						jQuery('#member-pin').val(ACTIVEMEMBER.kioskpin);
-						// jQuery('#member-profile-image').Jcrop({
-						// allowSelect : false,
-						// allowMove : true,
-						// allowResize : true,
-						// setSelect : [0, 0, 300, 150],
-						// aspectRatio : 2,
-						// });
 						jQuery('#new-member-profile-image').attr('data-url', '/zingoare/api/profileupload/' + ACTIVEMEMBER.id);
+						setTimeout(function() {
+							if (ACTIVEMEMBER.services.length === 0) {
+								jQuery('#services-grid').hide();
+							}
+							for (var j = 0; j < ACTIVEMEMBER.services.length; j++) {
+								$('input[serviceid="' + ACTIVEMEMBER.services[j] + '"]').attr('checked', 'checked');
+								generateServiceArray();
+							}
+						}, 250);
 						ActivateClicks();
 					} else {
 						router.go('/membersgrid');
+					}
+				}
+
+				function generateServiceArray() {
+					serviceIDs = [];
+					$('input[type=checkbox]').each(function() {
+						if (this.checked) {
+							serviceIDs.push(jQuery(this).attr('serviceid'));
+						}
+					});
+				}
+
+				function getServices(activedomains) {
+					jQuery('.servicetemplate').remove();
+					//jQuery('.edit-select').empty();
+					jQuery('#member-list').css('color', 'black');
+					for (var i = 0; i < activedomains.length; i++) {
+						var thisdomaininstance = activedomains[i];
+						service.ListAllServices(thisdomaininstance, {
+							success : function(data) {
+								for (var j = 0; j < data.length; j++) {
+									if (j === 0) {
+										var thisservice = leadtemplate.clone();
+										jQuery('.services-list', thisservice).parent().append(data[j].name);
+										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										// jQuery(thisservice)
+										jQuery('#services-grid').append(thisservice);
+									} else {
+										var thisservice = followtemplate.clone();
+										jQuery('.services-list', thisservice).parent().append(data[j].name);
+										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										jQuery('#services-grid').append(thisservice);
+									}
+								}
+							}
+						});
 					}
 				}
 
@@ -112,7 +162,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					document.title = 'Zingoare | Members Edit';
 
 					if (checkForActiveCookie() === true) {
-
+						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
+						followtemplate = jQuery('#service-follow').remove().attr('id', '');
 						populateData();
 
 						//HTML Event - Actions
@@ -121,14 +172,25 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						});
 
 						jQuery('#member-edit').on('click', function() {
+							generateServiceArray();
 							if ($(".edit-form").valid()) {
 								service.setUserProfileOnly(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", jQuery('#member-pin').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-											setTimeout(function() {
-												router.returnToPrevious();
-											}, 2000);
+											var kidid = [];
+											kidid.push(jQuery('#member-id').val());
+											service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, {
+												success : function(data) {
+													if (data.status !== 'error') {
+														notify.showNotification('OK', jQuery('#member-first-name').val() + ' profile updated!');
+														setTimeout(function() {
+															router.returnToPrevious();
+														}, 2000);
+													} else {
+														notify.showNotification('ERROR', data.message);
+													}
+												}
+											});
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}

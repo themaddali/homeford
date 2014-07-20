@@ -46,7 +46,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function getServices(activedomains) {
 					SERVICESALL = [];
 					jQuery('.servicetemplate').remove();
-					//jQuery('.edit-select').empty();
 					if (ActiveMembers.text) {
 						jQuery('#member-list').val(ActiveMembers.text);
 					} else {
@@ -70,12 +69,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
 										// jQuery(thisservice)
-										jQuery('.service-ol').append(thisservice);
+										jQuery('#services-grid').append(thisservice);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
-										jQuery('.service-ol').append(thisservice);
+										jQuery('#services-grid').append(thisservice);
 									}
 									// if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 									// jQuery('#default-service-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
@@ -100,6 +99,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					return elt.options[elt.selectedIndex].text;
 				}
 
+
+				$.validator.addMethod("validAssignment", function(value, element, param) {
+					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
+						jQuery('#member-list').css('color', 'red');
+						return false;
+					} else {
+						jQuery('#member-list').css('color', 'black');
+						return true;
+					}
+				}, 'Select to whom to assign.');
 
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
@@ -132,14 +141,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
-						$(".formlink").click(function() {
-							var thisservice = template.clone();
-							jQuery(thisservice).show();
-							jQuery(thisservice).find('select').attr('id', 'service-select-' + jQuery('select').length);
-							jQuery(thisservice).addClass('extraservice');
-							jQuery('.service-ol').append(thisservice);
-						});
-
 						jQuery('#invoice-preview').click(function() {
 							var databoject = {
 								'toname' : 'None Assigned',
@@ -166,38 +167,19 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}
 							databoject.services = _services;
 							invoicepreview.setData(databoject);
-							router.go('/invoicepreview');
+							if ($("#invoice-form").valid()) {
+								router.go('/invoicepreview');
+							} else {
+								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+							}
 						});
 
 						jQuery('#member-list').click(function() {
 							router.go('/memberspick');
 						});
 
-						$.validator.addMethod("validAssignment", function(value, element, param) {
-							if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
-								jQuery('#member-list').css('color', 'red');
-								return false;
-							} else {
-								jQuery('#member-list').css('color', 'black');
-								return true;
-							}
-						}, 'Select to whom to assign.');
-
-						jQuery('#invite-send').on('click', function() {
-							var roles = [{
-								"roleName" : "ROLE_TIER2"
-							}];
-							if ($("#invite-form").valid()) {
-								if (jQuery('#invite-message').val() === null || jQuery('#invite-message').val() === "") {
-									jQuery('#invite-message').val("Hi, I am adding you as an admin to this domain. Register and use!!");
-								}
-								if ($('#member-role').is(":checked")) {
-									roles = [{
-										"roleName" : "ROLE_TIER2"
-									}, {
-										"roleName" : "ROLE_TIER3"
-									}];
-								}
+						jQuery('#invoice-send').on('click', function() {
+							if ($("#invoice-form").valid()) {
 								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
 									success : function(response) {
 										if (response.status !== 'error') {
@@ -209,29 +191,23 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								});
 								setTimeout(function() {
 									router.returnToPrevious();
-									//admin.reloadData();
 								}, 2000);
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
-
-							//Need to update to handler
 						});
 
-						validator = jQuery("#invite-form").validate({
+						validator = jQuery("#invoice-form").validate({
 							rules : {
-								invitedomain : {
-									required : true,
-									domainValidation : true
+								assignedto : {
+									validAssignment : true
 								},
-								inviteemail : {
-									required : true,
-									email : true,
-									notRepeated : true
-								},
-								roles : {
+								services : {
 									required : true
 								}
+							},
+							messages : {
+								services : "You must check at least 1 service"
 							}
 						});
 

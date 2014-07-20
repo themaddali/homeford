@@ -36,6 +36,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function populateData() {
 					var grandtotal = 0;
+					jQuery('#inv-to-name').empty();
 					if (DATAOBJECT !== null) {
 						service.getUserProfile({
 							success : function(UserProfile) {
@@ -49,7 +50,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								}
 							}
 						});
-						jQuery('#inv-to-name').text(DATAOBJECT.toname);
+						//jQuery('#inv-to-name').text(DATAOBJECT.toname);
+						for (var k = 0; k < DATAOBJECT.toname.length; k++) {
+							jQuery('#inv-to-name').append('<option>' + DATAOBJECT.toname[k] + '</option>');
+						}
 						jQuery('#inv-to-contact').text(DATAOBJECT.toemail);
 						jQuery('#inv-tbody').empty();
 						for (var j = 0; j < DATAOBJECT.services.length; j++) {

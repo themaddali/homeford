@@ -513,7 +513,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 										updatePanelValues('#attendance-out-value', (studentids.length - _checkin));
 										_checkindata[1] = (studentids.length - _checkin);
 										updatePanelValues('#attendance-noshow-value', _noshow - (studentids.length));
-										
+										updatePanelGraphs('#attendance-donut', _checkindata);
 									}
 								});
 							}

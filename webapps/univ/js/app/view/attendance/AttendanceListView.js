@@ -42,6 +42,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('header-label').type = 'date';
 						document.getElementById('header-label-to').type = 'date';
+						var date = new Date();
+						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+						jQuery("#header-label").val(today);
+						jQuery("#header-label-to").val(today);
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -84,7 +88,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									var row = rowtemplate.clone();
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
-									jQuery('.checkin-date', row).text((stats[i].checkinTime).split('T')[0]);
+									jQuery('.checkin-date', row).text(toDate(stats[i].checkinTime));
 									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
 									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
 									if (stats[i].checkout_parent) {
@@ -131,7 +135,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									var row = rowtemplate.clone();
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
-									jQuery('.checkin-date', row).text((stats[i].checkinTime).split('T')[0]);
+									jQuery('.checkin-date', row).text(toDate(stats[i].checkinTime));
 									jQuery('.checkin-by', row).text(stats[i].parent.firstName);
 									jQuery('.checkout-time', row).text(msToTime(stats[i].checkoutTime));
 									if (stats[i].checkout_parent) {
@@ -191,6 +195,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (!s || s === null) {
 						return '-';
 					} else {
+						s = s + ' UTC';
 						var dateformat = new Date(s);
 						var h = dateformat.getHours();
 						var m = dateformat.getMinutes();
@@ -205,6 +210,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						}
 						//return (((h * 60) + m) + ":" + s);
 					}
+				}
+
+				function toDate(s) {
+					s = s + ' UTC';
+					var dateformat = new Date(s);
+					return dateformat.getFullYear() + '-' + (dateformat.getMonth() + 1) + '-' + dateformat.getDate();
+
 				}
 
 				function clearForm() {
