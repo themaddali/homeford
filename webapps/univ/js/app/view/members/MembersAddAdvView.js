@@ -76,6 +76,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				function clearForm() {
 					jQuery('input[type="text"]').val('');
+					jQuery('input[type="checkbox"]').removeAttr('checked');
 					jQuery('input[type="email"]').val('');
 					//Fall Back
 					jQuery('#member-first-name').val('');
@@ -174,6 +175,22 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
+						});
+						
+						jQuery('#father-name').blur(function(){
+							validator.resetForm();
+						});
+						
+						jQuery('#father-email').blur(function(){
+							validator.resetForm();
+						});
+						
+						jQuery('#mother-name').blur(function(){
+							validator.resetForm();
+						});
+						
+						jQuery('#mother-email').blur(function(){
+							validator.resetForm();
 						});
 
 						jQuery('.formlink').on('click', function() {

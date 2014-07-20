@@ -205,7 +205,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery('#ui-datepicker-div').css('z-index', '200');
 							}, 100);
 						});
-
+						
 						jQuery('#form-reset').click(function() {
 							clearForm();
 						});
