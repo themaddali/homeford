@@ -150,9 +150,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function updateFiltercounter() {
 					var count = jQuery('input[type="checkbox"]:unchecked').length;
-					jQuery('.filter-selection-count').text(count + ' filters');
+					jQuery('.filter-selection-count').text(count);
 					if (count === 0) {
-						jQuery('.filter-selection-count').text('Filter');
+						jQuery('.filter-selection-count').text('');
 					}
 				}
 
@@ -164,7 +164,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				this.resume = function() {
 					populateData();
 					document.title = 'Zingoare | Admin List';
-					jQuery('.filter-selection-count').text('Filter');
+					jQuery('.filter-selection-count').text('');
 				};
 
 				this.init = function(args) {
@@ -181,9 +181,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						});
 
 						jQuery('.filter-selection-icon').click(function() {
-							jQuery('.modal-contents').toggle();
-							jQuery('.filter-selection').toggle();
-							jQuery('.icon-pushpin').toggle();
+							jQuery('.modal-contents').toggle(900);
+							jQuery('.filter-selection').toggle(900);
+							jQuery('.icon-wrench').toggle();
 							jQuery('.icon-check').toggle();
 							jQuery('.modal_close').toggle();
 						});
