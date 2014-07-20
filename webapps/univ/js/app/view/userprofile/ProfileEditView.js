@@ -60,6 +60,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								if (jQuery('#profile-domainThanksMessage').val() == 'null' || jQuery('#profile-domainThanksMessage').val() == null || jQuery('#profile-domainThanksMessage').val().length < 2) {
 									jQuery('#profile-domainThanksMessage').val('Myself and the whole team');
 								}
+								if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
+									jQuery('.modal_close').hide();
+								} else {
+									jQuery('.modal_close').show();
+								}
 							}, 500);
 							ActivateClicks();
 						}
@@ -139,12 +144,20 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					jQuery('.edit-notify').hide();
 					populateData();
 					document.title = 'Zingoare | Profile Edit';
+					if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
+						jQuery('.modal_close').hide();
+					} else {
+						jQuery('.modal_close').show();
+					}
 				};
 
 				this.init = function(args) {
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Profile Edit';
+					// if (!$("#profile-edit-form").valid()) {
+						// jQuery('.modal_close').hide();
+					// }
 
 					if (checkForActiveCookie() === true) {
 						populateData();
@@ -207,6 +220,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+								jQuery('.modal_close').hide();
 							}
 						});
 
@@ -248,7 +262,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									required : true,
 									digits : true,
 									maxlength : 4,
-									minlength : 4
+									minlength : 4,
 								},
 							}
 						});

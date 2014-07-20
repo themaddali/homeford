@@ -44,8 +44,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						document.getElementById('header-label-to').type = 'date';
 						var date = new Date();
 						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-						jQuery("#header-label").val(today);
-						jQuery("#header-label-to").val(today);
+						jQuery("#header-label").text(today);
+						jQuery("#header-label-to").text(today);
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -195,7 +195,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (!s || s === null) {
 						return '-';
 					} else {
-						s = s + ' UTC';
+						var newDate = new Date(s.getTime() + s.getTimezoneOffset() * 60 * 1000);
+						var offset = s.getTimezoneOffset() / 60;
+						var hours = s.getHours();
+						newDate.setHours(hours - offset);
+						//s = s + ' UTC';
 						var dateformat = new Date(s);
 						var h = dateformat.getHours();
 						var m = dateformat.getMinutes();
