@@ -176,20 +176,20 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});
-						
-						jQuery('#father-name').blur(function(){
+
+						jQuery('#father-name').blur(function() {
 							validator.resetForm();
 						});
-						
-						jQuery('#father-email').blur(function(){
+
+						jQuery('#father-email').blur(function() {
 							validator.resetForm();
 						});
-						
-						jQuery('#mother-name').blur(function(){
+
+						jQuery('#mother-name').blur(function() {
 							validator.resetForm();
 						});
-						
-						jQuery('#mother-email').blur(function(){
+
+						jQuery('#mother-email').blur(function() {
 							validator.resetForm();
 						});
 
@@ -265,7 +265,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 												if ((kidobject[0].firstName === data[j].firstName) && (kidobject[0].lastName === data[j].lastName)) {
 													var kidid = [];
 													kidid.push(data[j].id);
-													service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, {
+													var deleteItemServicesIds = [];
+													service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, deleteItemServicesIds, {
 														success : function(data) {
 															if (data.status !== 'error') {
 																notify.showNotification('OK', kidobject[0].firstName + ' and group added!');

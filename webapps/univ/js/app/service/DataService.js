@@ -686,7 +686,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				this.AssignService = function(domainid, kidsids, serviceids, handlers) {
+				this.AssignService = function(domainid, kidsids, serviceids, deleteItemServicesIds, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -697,6 +697,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						data : JSON.stringify({
 							'kidsIds' : kidsids,
 							'itemServicesIds' : serviceids,
+							'deleteItemServicesIds' : deleteItemServicesIds,
 						}),
 						success : function(data) {
 							SERVICESLIST = null;

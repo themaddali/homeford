@@ -12,6 +12,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 			var leadtemplate;
 			var followtemplate;
 			var serviceIDs = [];
+			var deleteItemServicesIds = [];
 
 			function MembersEditView() {
 
@@ -37,9 +38,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-pin').val(ACTIVEMEMBER.kioskpin);
 						jQuery('#new-member-profile-image').attr('data-url', '/zingoare/api/profileupload/' + ACTIVEMEMBER.id);
 						setTimeout(function() {
-							if (ACTIVEMEMBER.services.length === 0) {
-								jQuery('#services-grid').hide();
-							}
+							// if (ACTIVEMEMBER.services.length === 0) {
+							// jQuery('#services-grid').hide();
+							// }
 							for (var j = 0; j < ACTIVEMEMBER.services.length; j++) {
 								$('input[serviceid="' + ACTIVEMEMBER.services[j] + '"]').attr('checked', 'checked');
 								generateServiceArray();
@@ -53,11 +54,15 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				function generateServiceArray() {
 					serviceIDs = [];
+					deleteItemServicesIds = [];
 					$('input[type=checkbox]').each(function() {
 						if (this.checked) {
 							serviceIDs.push(jQuery(this).attr('serviceid'));
+						} else {
+							deleteItemServicesIds.push(jQuery(this).attr('serviceid'));
 						}
 					});
+
 				}
 
 				function getServices(activedomains) {
@@ -179,7 +184,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										if (response.status !== 'error') {
 											var kidid = [];
 											kidid.push(jQuery('#member-id').val());
-											service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, {
+											service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs,deleteItemServicesIds, {
 												success : function(data) {
 													if (data.status !== 'error') {
 														notify.showNotification('OK', jQuery('#member-first-name').val() + ' profile updated!');
@@ -222,7 +227,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									digits : true,
 									maxlength : 4,
 									minlength : 4
+								},
+								services : {
+									required : true
 								}
+							},
+							messages : {
+								services : "You must check at least 1 service"
 							}
 						});
 
