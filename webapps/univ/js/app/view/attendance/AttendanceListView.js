@@ -17,6 +17,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message"></span></p></div>';
 			var ACTIVEDOMAINS = [];
+			var Months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
 			function AdminsListView() {
 
@@ -195,18 +196,20 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (!s || s === null) {
 						return '-';
 					} else {
-						var newDate = new Date(s.getTime() + s.getTimezoneOffset() * 60 * 1000);
-						var offset = s.getTimezoneOffset() / 60;
-						var hours = s.getHours();
-						newDate.setHours(hours - offset);
 						//s = s + ' UTC';
-						var dateformat = new Date(s);
-						var h = dateformat.getHours();
-						var m = dateformat.getMinutes();
+						var datepart = s.split(" ")[0].split('-');
+						var timepart = s.split(" ")[1].split(':');						
+						var dateformat = new Date(datepart[0],(datepart[1]-1),datepart[2],timepart[0],timepart[1],timepart[2]);
+						//var dateformat = new Date(Date.parse(s));
+						var now = new Date();
+						dateformat = dateformat.toString().split(" ");
+						//var h = dateformat[4].split(':')[0];
+						//var m = dateformat[4].split(':')[1];
+						var h = (timepart[0]-7);
+						var m = (timepart[1]);
 						if (m < 10) {
 							m = '0' + m;
 						}
-						var s = dateformat.getSeconds();
 						if (h < 13) {
 							return (h + ':' + m + ' am');
 						} else {
@@ -218,8 +221,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 				function toDate(s) {
 					s = s + ' UTC';
-					var dateformat = new Date(s);
-					return dateformat.getFullYear() + '-' + (dateformat.getMonth() + 1) + '-' + dateformat.getDate();
+					var dateformat = new Date();
+					dateformat = dateformat.toString().split(' ');
+					return dateformat[3] + '-' + (Months.indexOf(dateformat[1])+1) + '-' + dateformat[2];
 
 				}
 

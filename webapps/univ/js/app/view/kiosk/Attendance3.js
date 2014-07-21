@@ -162,7 +162,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 											}, 500);
 											setTimeout(function() {
 												router.go('/attendancekiosk');
-											}, 3000);
+											}, 1500);
 										} else {
 											alert(data.message);
 										}
