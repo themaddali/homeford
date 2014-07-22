@@ -2949,6 +2949,7 @@ html.touch #subnav {
 
 .members-image {
 	width: 45px;
+	height : 22px;
 	border-bottom-right-radius: 5px;
 	border-top-left-radius: 5px;
 }

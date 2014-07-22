@@ -86,7 +86,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}
 
 				function clearForm() {
-					jQuery('.form-item > input').val("");
+					jQuery('input[type="text"]').val("");
 					jQuery('#member-role').prop('checked', false);
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
@@ -120,9 +120,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				};
 
 				this.resume = function() {
-					clearForm();
+					
 					//$("#member-name").autocomplete("destroy");
-					populateData();
+					validator.resetForm();
+					if (ActiveMembers.text) {
+						jQuery('#member-list').val(ActiveMembers.text);
+						jQuery('#member-list').css('color', 'black');
+					} else {
+						clearForm();
+						populateData();
+					}
+
 					document.title = 'Zingoare | Invoice Generate';
 				};
 
@@ -180,18 +188,20 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						jQuery('#invoice-send').on('click', function() {
 							if ($("#invoice-form").valid()) {
-								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
-									success : function(response) {
-										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-								setTimeout(function() {
-									router.returnToPrevious();
-								}, 2000);
+								ActiveMembers = {};
+								router.returnToPrevious();
+								// service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
+								// success : function(response) {
+								// if (response.status !== 'error') {
+								// notify.showNotification('OK', response.message);
+								// } else {
+								// notify.showNotification('ERROR', response.message);
+								// }
+								// }
+								// });
+								// setTimeout(function() {
+								// router.returnToPrevious();
+								// }, 2000);
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
