@@ -1716,7 +1716,7 @@ div.formselction {
 .view-table > thead tr {
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	color: #7f7f7f;
-	border-bottom: 2px dotted #d9d9d9;
+	border-bottom: 2px solid #d9d9d9;
 	height: 35px;
 	font-size: 15px;
 	text-align: left;

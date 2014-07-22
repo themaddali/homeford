@@ -15,7 +15,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
-			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message"></span></p></div>';
+			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span style="padding-left:2px">4</span></i>';
+			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message" style="font-size:12px;"></span></p><p id="note-auto-warning" style="font-size:11px; color: red" >This student is off the assigned scheduled duration by 4 minutes</p></div>';
 			var ACTIVEDOMAINS = [];
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -117,6 +118,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
+									jQuery('.checkin-time', row).append(EXTRAICON);
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
 										//activedomains.splice(0, 1);
@@ -229,11 +231,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (localnow.toString().slice(-1) === ")") {
 						//console.log('Not IE -' + localnow.toString());
 						localnow = localnow.toString().split(" ");
-						return localnow[3] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+						//return localnow[3] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+						//return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+						return localnow[1] + ' ' + localnow[2];
 					} else {
 						//console.log('IE Sucker -' + localnow.toString());
 						localnow = localnow.toString().split(" ");
-						return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+						//return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+						return localnow[1] + ' ' + localnow[2];
 					}
 					// var dateformat = new Date();
 					// dateformat = dateformat.toString().split(' ');

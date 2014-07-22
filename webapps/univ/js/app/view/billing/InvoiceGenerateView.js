@@ -16,9 +16,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var pendingList;
 			var leadtemplate, followtemplate;
 			var validator;
+			var newitemvalidator;
 			var ActiveMembers = 'All Members';
 			var SERVICESALL = [];
-
+			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="number" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -92,6 +93,19 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('.modal_close').show();
 				}
 
+				function addNewItem() {
+					if ($("#new-item-form").valid()) {
+						var thisservice = followtemplate.clone();
+						jQuery('.services-list', thisservice).parent().append(jQuery('#new-item-name').val());
+						jQuery('.services-list', thisservice).attr('sname', jQuery('#new-item-name').val()).attr('cost', jQuery('#new-item-cost').val()).attr('tax', '0').attr('desc', jQuery('#new-item-desc').val()).attr('checked', 'checked');
+						jQuery('#services-grid').append(thisservice);
+						jQuery('#new-item-name').val('');
+						jQuery('#new-item-cost').val('');
+						jQuery('#new-item-desc').val('');
+						$("#item-dialog-form").dialog("close");
+					}
+				}
+
 				function getSelectedText(elementId) {
 					var elt = document.getElementById(elementId);
 					if (elt.selectedIndex == -1)
@@ -110,6 +124,41 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					}
 				}, 'Select to whom to assign.');
 
+				jQuery.validator.addMethod("money", function(value, element) {
+					//value = value.replace('$', '');
+					//value = value.replace('%', '');
+					var isValidMoney = /^\d{0,4}(\.\d{0,2})?$/.test(value);
+					return this.optional(element) || isValidMoney;
+				}, "Enter valid dollar amount ");
+
+				function initDialog() {
+					jQuery('body').append(DIALOG);
+					$("#item-dialog-form").dialog({
+						autoOpen : false,
+						height : 500,
+						width : 600,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						modal : true,
+						buttons : {
+							"Add" : addNewItem,
+							Cancel : function() {
+								$("#item-dialog-form").dialog("close");
+							}
+						},
+						close : function() {
+							$(this).dialog("close");
+						}
+					});
+				}
+
+
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
 					jQuery('#member-list').css('color', 'black');
@@ -120,10 +169,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				};
 
 				this.resume = function() {
-					
+
 					//$("#member-name").autocomplete("destroy");
 					validator.resetForm();
+					newitemvalidator.resetForm();
+					initDialog();
 					if (ActiveMembers.text) {
+						jQuery('.edit-notify').hide();
 						jQuery('#member-list').val(ActiveMembers.text);
 						jQuery('#member-list').css('color', 'black');
 					} else {
@@ -142,11 +194,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					if (checkForActiveCookie() === true) {
 						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
 						followtemplate = jQuery('#service-follow').remove().attr('id', '');
+						initDialog();
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
+						});
+
+						jQuery('.formlink').click(function() {
+							jQuery("#item-dialog-form").dialog("open");
 						});
 
 						jQuery('#invoice-preview').click(function() {
@@ -213,12 +270,30 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									validAssignment : true
 								},
 								services : {
-									required : true
+									required : false
+								},
+								invitemessage : {
+									maxlength : 20
 								}
 							},
 							messages : {
 								services : "You must check at least 1 service"
 							}
+						});
+
+						newitemvalidator = jQuery("#new-item-form").validate({
+							rules : {
+								newitemname : {
+									required : true
+								},
+								newitemdesc : {
+									required : true
+								},
+								newitemcost : {
+									required : true,
+									money : true
+								}
+							},
 						});
 
 					} // Cookie Guider
