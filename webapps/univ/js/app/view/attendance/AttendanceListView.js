@@ -17,7 +17,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message"></span></p></div>';
 			var ACTIVEDOMAINS = [];
-			var Months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 			function AdminsListView() {
 
@@ -40,16 +40,25 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function populateData() {
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
+					var date = new Date();
+					var y = date.getFullYear();
+					var m = date.getMonth() + 1;
+					if (m < 10) {
+						m = '0' + m;
+					}
+					var d = date.getDate();
+					if (d < 10) {
+						d = '0' + d;
+					}
+					var today = y + '-' + m + '-' + d;
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('header-label').type = 'date';
 						document.getElementById('header-label-to').type = 'date';
-						var date = new Date();
-						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-						jQuery("#header-label").text(today);
-						jQuery("#header-label-to").text(today);
+						jQuery("#header-label").val(today);
+						jQuery("#header-label-to").val(today);
 					} else {
-						var date = new Date();
-						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+						// var date = new Date();
+						// var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 						jQuery("#header-label").datepicker({
 							dateFormat : 'yy-mm-dd',
 							minDate : -90,
@@ -196,35 +205,39 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (!s || s === null) {
 						return '-';
 					} else {
-						//s = s + ' UTC';
 						var datepart = s.split(" ")[0].split('-');
-						var timepart = s.split(" ")[1].split(':');						
-						var dateformat = new Date(datepart[0],(datepart[1]-1),datepart[2],timepart[0],timepart[1],timepart[2]);
-						//var dateformat = new Date(Date.parse(s));
-						var now = new Date();
-						dateformat = dateformat.toString().split(" ");
-						//var h = dateformat[4].split(':')[0];
-						//var m = dateformat[4].split(':')[1];
-						var h = (timepart[0]-7);
-						var m = (timepart[1]);
-						if (m < 10) {
-							m = '0' + m;
-						}
+						var locals = datepart[1] + '/' + datepart[2] + '/' + datepart[0] + ' ' + s.split(" ")[1] + ' UTC';
+						var localnow = new Date(locals);
+						var h = localnow.toString().split(":")[0].slice(-2);
+						var m = localnow.toString().split(":")[1];
+						// if (m < 10) {
+						// m = '0' + m;
+						// }
 						if (h < 13) {
 							return (h + ':' + m + ' am');
 						} else {
 							return ((h - 12) + ':' + m + ' pm');
 						}
-						//return (((h * 60) + m) + ":" + s);
 					}
 				}
 
 				function toDate(s) {
-					s = s + ' UTC';
-					var dateformat = new Date();
-					dateformat = dateformat.toString().split(' ');
-					return dateformat[3] + '-' + (Months.indexOf(dateformat[1])+1) + '-' + dateformat[2];
-
+					var datepart = s.split(" ")[0].split('-');
+					var locals = datepart[1] + '/' + datepart[2] + '/' + datepart[0] + ' ' + s.split(" ")[1] + ' UTC';
+					var localnow = new Date(locals);
+					//For IE dumb pattern :(
+					if (localnow.toString().slice(-1) === ")") {
+						//console.log('Not IE -' + localnow.toString());
+						localnow = localnow.toString().split(" ");
+						return localnow[3] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+					} else {
+						//console.log('IE Sucker -' + localnow.toString());
+						localnow = localnow.toString().split(" ");
+						return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
+					}
+					// var dateformat = new Date();
+					// dateformat = dateformat.toString().split(' ');
+					// return dateformat[3] + '-' + (Months.indexOf(dateformat[1]) + 1) + '-' + dateformat[2];
 				}
 
 				function clearForm() {

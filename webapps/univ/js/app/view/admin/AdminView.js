@@ -168,6 +168,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								// populateDomainData();
 								// populateUserData();
 							} else {
+								setTimeout(function(){
+									activateDonutClicks();
+								}, 1500);
 								jQuery('.T1').show();
 								populateUserData();
 								populateInviteData();
@@ -200,9 +203,6 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								populateQuizData(ACTIVEDOMAINIDS);
 								populateServicesData(ACTIVEDOMAINIDS);
 								populateAttendanceKioskData(ACTIVEDOMAINIDS);
-								setTimeout(function(){
-									activateDonutClicks();
-								}, 1000);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
