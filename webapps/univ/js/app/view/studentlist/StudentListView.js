@@ -201,7 +201,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
 							jQuery('#card-canvas').append(newboard);
-							jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' member(s)');
+							jQuery('.metainfo').text(jQuery('.studentboard:visible').length + ' member(s)');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
