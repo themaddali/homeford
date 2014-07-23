@@ -62,16 +62,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
-										jQuery('#services-grid').append(thisservice);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
+									}
+									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
 									}
-									// if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
-									// jQuery('#default-service-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
-									// }
 								}
 							}
 						});

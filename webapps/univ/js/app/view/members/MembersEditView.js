@@ -78,12 +78,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
-										// jQuery(thisservice)
-										jQuery('#services-grid').append(thisservice);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+									}
+									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
 									}
 								}
@@ -184,7 +184,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										if (response.status !== 'error') {
 											var kidid = [];
 											kidid.push(jQuery('#member-id').val());
-											service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs,deleteItemServicesIds, {
+											service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, deleteItemServicesIds, {
 												success : function(data) {
 													if (data.status !== 'error') {
 														notify.showNotification('OK', jQuery('#member-first-name').val() + ' profile updated!');

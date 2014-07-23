@@ -35,12 +35,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
-										// jQuery(thisservice)
-										jQuery('#services-grid').append(thisservice);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+									}
+									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
 									}
 								}
