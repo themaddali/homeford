@@ -61,7 +61,7 @@ define(['modernizr', 'cookie', '../../service/DataService', '../../service/Banne
 						});
 						jQuery('.ui-slider-handle').focus();
 						jQuery('.ui-slider-range').removeClass("beginning middle end").addClass(ACTIVEQUIZ.progress < 31 ? "beginning" : ACTIVEQUIZ.progress < 71 ? "middle" : "end");
-						jQuery('.helper-email').parent().parent().fadeIn();
+						//jQuery('.helper-email').parent().parent().fadeIn();
 						if (ACTIVEQUIZ.url && ACTIVEQUIZ.url.length > 4) {
 							jQuery('.helper-url').attr('href', ACTIVEQUIZ.url);
 							jQuery('.helper-url').parent().parent().fadeIn();
