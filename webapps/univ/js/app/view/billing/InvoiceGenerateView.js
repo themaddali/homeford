@@ -19,7 +19,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var newitemvalidator;
 			var ActiveMembers = 'All Members';
 			var SERVICESALL = [];
-			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="number" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
+			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="number" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li><li class="form-item servicetemplate" id="item-remember"><label>Remember Item</label><span><input class="services-list" type="checkbox" name="services" value="This is a regular service, add to the list of services offered"/></span></li></ol></fieldset></form></div>';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -57,19 +57,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						var thisdomaininstance = activedomains[i];
 						service.ListAllServices(thisdomaininstance, {
 							success : function(data) {
-								// for (var j = 0; j < data.length; j++) {
-								// SERVICESALL.push(data[j]);
-								// jQuery('#service-template select').append('<option cost="' + SERVICESALL[j].unit_price + '" tax="' + SERVICESALL[j].tax + '" desc="' + SERVICESALL[j].description + '">' + SERVICESALL[j].name + '</option>');
-								// if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
-								// jQuery('#default-service-select').append('<option cost="' + data[j].unit_price + '" tax="' + data[j].tax + '" desc="' + data[j].description + '">' + data[j].name + '</option>');
-								// }
-								// }
 								for (var j = 0; j < data.length; j++) {
 									if (j === 0) {
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
-										// jQuery(thisservice)
 										jQuery('#services-grid').append(thisservice);
 									} else {
 										var thisservice = followtemplate.clone();
@@ -222,14 +214,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								databoject.tomessage = 'Happy to help!!!';
 							}
 							var _services = [];
-							for (var i = 0; i < $('input:checked').length; i++) {
-								var _servicesentries = {};
-								_servicesentries.name = $('input:checked')[i].attributes[4].nodeValue;
-								_servicesentries.cost = $('input:checked')[i].attributes[5].nodeValue;
-								_servicesentries.tax = $('input:checked')[i].attributes[6].nodeValue;
-								_servicesentries.desc = $('input:checked')[i].attributes[7].nodeValue;
-								_services.push(_servicesentries);
-							}
+							$('input[type=checkbox]').each(function() {
+								if (this.checked) {
+									var _servicesentries = {};
+									_servicesentries.name = jQuery(this).attr('sname');
+									_servicesentries.cost = jQuery(this).attr('cost');
+									_servicesentries.tax = jQuery(this).attr('tax');
+									_servicesentries.desc = jQuery(this).attr('desc');
+									_services.push(_servicesentries);
+								}
+							});
 							databoject.services = _services;
 							invoicepreview.setData(databoject);
 							if ($("#invoice-form").valid()) {
@@ -245,20 +239,43 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						jQuery('#invoice-send').on('click', function() {
 							if ($("#invoice-form").valid()) {
-								ActiveMembers = {};
-								router.returnToPrevious();
-								// service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery('#invite-domain').val(), roles, {
-								// success : function(response) {
-								// if (response.status !== 'error') {
-								// notify.showNotification('OK', response.message);
-								// } else {
-								// notify.showNotification('ERROR', response.message);
-								// }
-								// }
-								// });
-								// setTimeout(function() {
-								// router.returnToPrevious();
-								// }, 2000);
+								var _services = [];
+								var _grandtotal = 0;
+								$('input[type=checkbox]').each(function() {
+									if (this.checked) {
+										var _servicesentries = {};
+										_servicesentries.item = jQuery(this).attr('sname');
+										_servicesentries.quantity = 1;
+										var _cost = jQuery(this).attr('cost');
+										var _tax = jQuery(this).attr('tax');
+										_servicesentries.amount = parseInt(_cost) + parseInt((_cost * _tax) / 100);
+										_grandtotal = _grandtotal + _servicesentries.amount;
+										_servicesentries.itemDesc = jQuery(this).attr('desc');
+										_servicesentries.transtype = 'FEE';
+										_services.push(_servicesentries);
+									}
+								});
+								var now = new Date();
+								if (now.getMonth() < 11) {
+									var duedate = now.getMonth() + 2 + '/01/' + now.getFullYear();
+								} else {
+									var duedate = '01/01/' + now.getFullyear() + 1;
+								}
+								console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
+								var _ids = ActiveMembers.list[0];
+								service.generateInvoice(service.domainNametoID(jQuery.cookie('subuser')), _ids, duedate, _grandtotal, _services, {
+									success : function(response) {
+										if (response.status !== 'error') {
+											ActiveMembers = {};
+											notify.showNotification('OK', response.message);
+										} else {
+											notify.showNotification('ERROR', response.message);
+										}
+									}
+								});
+								setTimeout(function() {
+									router.returnToPrevious();
+								}, 2000);
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}

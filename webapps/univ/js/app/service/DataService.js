@@ -516,6 +516,36 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.generateInvoice = function(_domainid, _userid, duedate, total, items, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/invoice/user/' + _domainid+'/'+_userid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'dueDate' : duedate,
+							'grandTotal' : total,
+							'invoiceItems' : items,
+						}),
+						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Generating Invoice"
+							};
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(errormsg);
+						}
+					});
+				};
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$('input[type="button"]').addClass('processing');
