@@ -3621,7 +3621,7 @@ dialog-modal::-webkit-scrollbar {
 	z-index: 200;
 	border-radius: 25px;
 	cursor: move;
-	background-color: white;
+	border: 1px solid #007DBA;
 }
 
 .studentboard, .adminboard, .quizactionboard, .classboard, .kioskboard, .faceboard {
