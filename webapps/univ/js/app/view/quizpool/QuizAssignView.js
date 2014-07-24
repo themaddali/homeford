@@ -76,7 +76,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										QUIZLIST.push(data[k].name);
 										QUIZLIST_sorted.push(data[k].name);
 										if (QUIZLIST.length === 0) {
-											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quiz'z and Questions.",'quizadd');
+											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quizzes and Questions.",'quizadd');
 										}
 										if (k === data.length - 1) {
 											QUIZLIST_sorted.sort();
@@ -109,7 +109,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
+					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {

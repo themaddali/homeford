@@ -105,7 +105,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().indexOf("0 of") !== -1) {
+					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {

@@ -32,7 +32,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('.form-content input').val();
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('service-starttime').type = 'time';
-						document.getElementById('task-endtime').type = 'time';
+						document.getElementById('service-endtime').type = 'time';
 					} else {
 						jQuery("#service-starttime").timepicker({
 							timeSeparator : ':',
