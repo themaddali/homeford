@@ -15,7 +15,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
-			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span style="padding-left:2px">4</span></i>';
+			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span class="time-diff" style="padding-left:2px"></span></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message" style="font-size:12px;"></span></p><p id="note-auto-warning" style="font-size:11px; color: red" >This student is off the assigned scheduled duration by 4 minutes</p></div>';
 			var ACTIVEDOMAINS = [];
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -118,12 +118,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
-									jQuery('.checkin-time', row).append(EXTRAICON);
+									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
+										jQuery('.checkin-time', row).append(EXTRAICON);
+										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+									}
+									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
+										jQuery('.checkout-time', row).append(EXTRAICON);
+										jQuery('.time-diff', row).text(stats[i].checkOutTimeDiff);
+									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
-										//activedomains.splice(0, 1);
 										jQuery('.view-table').trigger("update");
-										//loadTable(activedomains);
 										activateTableClicks();
 									}
 								}
@@ -165,6 +170,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										jQuery('.notes', row).attr('note', 'CheckIn:' + stats[i].notes + '<br />CheckOut Note:' + stats[i].checkedout_notes).html(COMMENTICON);
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
+									}
+									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
+										jQuery('.checkin-time', row).append(EXTRAICON);
+										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+									}
+									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
+										jQuery('.checkout-time', row).append(EXTRAICON);
+										jQuery('.time-diff', row).text(stats[i].checkOutTimeDiff);
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
