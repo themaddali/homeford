@@ -59,6 +59,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.service-cost', row).text('$' + data[j].unit_price);
 									jQuery('.service-tax', row).text(data[j].tax + '%');
 									jQuery('.service-freq', row).text(data[j].days + ' days');
+									if (data[j].startTime === null) {
+										data[j].startTime = '-';
+									}
+									if (data[j].endTime === null) {
+										data[j].endTime = '-';
+									}
+									jQuery('.service-stime', row).text(data[j].startTime);
+									jQuery('.service-etime', row).text(data[j].endTime);
 									jQuery('.service-status', row).text(data[j].status);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
@@ -77,6 +85,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						desc : "none",
 						id : 'none',
 						cost : 'none',
+						stime : 'none',
+						etime : 'none',
 						tax : 'none',
 						status : 'none',
 					};
@@ -90,11 +100,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						rowObject.id = jQuery(this).find('.service-id').text();
 						rowObject.cost = jQuery(this).find('.service-cost').text();
 						rowObject.freq = jQuery(this).find('.service-freq').text();
+						rowObject.stime = jQuery(this).find('.service-stime').text();
+						rowObject.etime = jQuery(this).find('.service-etime').text();
 						rowObject.tax = jQuery(this).find('.service-tax').text();
 						servicesedit.setInfo(rowObject);
 						router.go('/servicesedit');
 					});
-					
+
 					jQuery('.view-table thead > tr > th').click(function() {
 						if (jQuery(this).find('i').hasClass('icon-sort-by-attributes')) {
 							jQuery('.tablesortcontrol').removeClass('active');

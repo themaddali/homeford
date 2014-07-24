@@ -98,12 +98,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _sfreq = 0;
 								var _sstarttime = jQuery('#service-starttime').val() + ':00';
 								var _sendtime = jQuery('#service-endtime').val() + ':00';
-								// var _domainids;
-								// service.returnDomainIDList({
-								// success : function(data) {
-								// _domainids = data;
-								// }
-								// });
+								
 								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {

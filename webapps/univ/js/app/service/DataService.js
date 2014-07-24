@@ -168,11 +168,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						//Check after 3 seconds. Cooling time
 					}
 				}
-				
-				this.knowServices = function(memberid, handlers) {
-					
-				};
 
+
+				this.knowServices = function(memberid, handlers) {
+
+				};
 
 				this.addMemberRegular = function(domainid, userid, fname, lname, handlers) {
 					$('input[type="button"]').addClass('processing');
@@ -516,12 +516,12 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.generateInvoice = function(_domainid, _userid, duedate, total, items, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
-						url : '/zingoare/api/invoice/user/' + _domainid+'/'+_userid,
+						url : '/zingoare/api/invoice/user/' + _domainid + '/' + _userid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -688,7 +688,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						});
 					}
 				};
-				this.UpdateServices = function(serviceid, title, desc, cost, tax, freq, status, handlers) {
+				this.UpdateServices = function(serviceid, title, desc, sstart, send, cost, tax, freq, status, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					var _cost = cost.replace('$', '');
@@ -704,9 +704,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'status' : status,
 							'unit_price' : _cost,
 							'minutes' : '0',
-							'days' : freq,
+							'days' : 0,
 							'tax' : _tax,
 							'quantity' : '1',
+							"startTime" : sstart,
+							"endTime" : send,
 						}),
 						success : function(data) {
 							SERVICESLIST = null;

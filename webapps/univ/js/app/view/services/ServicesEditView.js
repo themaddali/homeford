@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','timepicker'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin,timepicker) {"use strict";
 
 	var ServicesEditView = ( function() {
 
@@ -14,10 +14,25 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				function populateData() {
 					if (ACTIVESERVICE) {
+						if (Modernizr.touch && Modernizr.inputtypes.date) {
+							document.getElementById('service-starttime').type = 'time';
+							document.getElementById('service-endtime').type = 'time';
+						} else {
+							jQuery("#service-starttime").timepicker({
+								timeSeparator : ':',
+								showPeriod : false,
+							});
+							jQuery("#service-endtime").timepicker({
+								timeSeparator : ':',
+								showPeriod : false,
+							});
+						}
 						jQuery('#service-name').val(ACTIVESERVICE.name);
 						jQuery('#service-desc').val(ACTIVESERVICE.desc);
 						jQuery('#service-id').val(ACTIVESERVICE.id);
 						jQuery('#service-cost').val(ACTIVESERVICE.cost);
+						jQuery('#service-starttime').val(ACTIVESERVICE.stime);
+						jQuery('#service-endtime').val(ACTIVESERVICE.etime);
 						jQuery('#service-tax').val(ACTIVESERVICE.tax);
 						jQuery('#service-status').val(ACTIVESERVICE.status);
 						jQuery('#service-frequency').val(ACTIVESERVICE.freq);
@@ -78,7 +93,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#service-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
+								var _sstarttime = jQuery('#service-starttime').val() + ':00';
+								var _sendtime = jQuery('#service-endtime').val() + ':00';
+								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime,_sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
@@ -96,18 +113,18 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							}
 						});
 
-						jQuery('#service-cost').blur(function() {
-							if (jQuery('#service-cost').val().charAt(0) !== '$') {
-								jQuery('#service-cost').val('$' + jQuery('#service-cost').val());
-							}
+						//JQ UI Bug of -Index.
+						jQuery('#service-starttime').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-timepicker-div').css('background-color', 'white');
+								jQuery('#ui-timepicker-div').css('z-index', '200');
+							}, 100);
 						});
-						jQuery('#service-tax').blur(function() {
-							if (jQuery('#service-tax').val().charAt(0) === '$') {
-								jQuery('#service-tax').val().replace('$', '');
-							}
-							if (jQuery('#service-tax').val().charAt(jQuery('#service-tax').val().length - 1) !== '%') {
-								jQuery('#service-tax').val(jQuery('#service-tax').val() + '%');
-							}
+						jQuery('#service-endtime').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-timepicker-div').css('background-color', 'white');
+								jQuery('#ui-timepicker-div').css('z-index', '200');
+							}, 100);
 						});
 
 						jQuery.validator.addMethod("money", function(value, element) {
