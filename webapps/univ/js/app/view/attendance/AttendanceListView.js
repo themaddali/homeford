@@ -120,11 +120,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									}
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
 										jQuery('.checkin-time', row).append(EXTRAICON);
+										if (stats[i].checkInTimeDiff < 0) {
+											stats[i].checkInTimeDiff = -1 * stats[i].checkInTimeDiff;
+										}
 										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
 										jQuery('.checkout-time', row).append(EXTRAICON);
-										jQuery('.time-diff', row).text(stats[i].checkOutTimeDiff);
+										if (stats[i].checkOutTimeDiff < 0) {
+											stats[i].checkOutTimeDiff = -1 * stats[i].checkOutTimeDiff;
+										}
+										jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
@@ -173,11 +179,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									}
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
 										jQuery('.checkin-time', row).append(EXTRAICON);
+										if (stats[i].checkInTimeDiff < 0) {
+											stats[i].checkInTimeDiff = -1 * stats[i].checkInTimeDiff;
+										}
 										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
 										jQuery('.checkout-time', row).append(EXTRAICON);
-										jQuery('.time-diff', row).text(stats[i].checkOutTimeDiff);
+										if (stats[i].checkOutTimeDiff < 0) {
+											stats[i].checkOutTimeDiff = -1 * stats[i].checkOutTimeDiff;
+										}
+										jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
@@ -199,7 +211,20 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
 						var note = jQuery(this).find('.notes').attr('note');
+						var _indiff = parseInt(jQuery(this).find('.checkin-time').find('.time-diff').text());
+						var _outdiff = parseInt(jQuery(this).find('.checkout-time').find('.time-diff').text());
+						if (!_indiff) {
+							_indiff = 0;
+						}
+						if (!_outdiff) {
+							_outdiff = 0;
+						}
+						var warnnote = "This student is off the assigned scheduled duration by " + (_indiff + _outdiff) + " minutes";
+						if ((_indiff + _outdiff) === 0) {
+							warnnote = '';
+						}
 						jQuery('#note-message').html(note);
+						jQuery('#note-auto-warning').html(warnnote);
 						jQuery("#note-dialog").dialog("open");
 					});
 					jQuery('.view-table thead > tr > th').click(function() {
@@ -244,18 +269,12 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					if (localnow.toString().slice(-1) === ")") {
 						//console.log('Not IE -' + localnow.toString());
 						localnow = localnow.toString().split(" ");
-						//return localnow[3] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
-						//return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
 						return localnow[1] + ' ' + localnow[2];
 					} else {
 						//console.log('IE Sucker -' + localnow.toString());
 						localnow = localnow.toString().split(" ");
-						//return localnow[5] + '-' + (Months.indexOf(localnow[1]) + 1) + '-' + localnow[2];
 						return localnow[1] + ' ' + localnow[2];
 					}
-					// var dateformat = new Date();
-					// dateformat = dateformat.toString().split(' ');
-					// return dateformat[3] + '-' + (Months.indexOf(dateformat[1]) + 1) + '-' + dateformat[2];
 				}
 
 				function clearForm() {
