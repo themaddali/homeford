@@ -252,7 +252,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function helperMediaQuiries() {
-					if ($('.studentboard').length > 4) {
+					if ($('.studentboard').length > 4 && $('#card-canvas').width() > 480) {
 						var width = $('#card-canvas').width() - 30;
 						var rowholds = Math.floor(width / 254);
 						var fillerspace = width - (rowholds * 254);

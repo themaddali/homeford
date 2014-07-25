@@ -109,13 +109,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if (jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) {
+					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {
 						jQuery('#member-list').css('color', 'black');
 						return true;
 					}
+
 				}, 'Select to whom to assign.');
 
 				$.validator.addMethod("validQuiz", function(value, element, param) {

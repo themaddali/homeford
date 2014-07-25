@@ -662,7 +662,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function helperMediaQuiries() {
-					if ($('.adminboard').length > 3) {
+					if ($('.adminboard').length > 3 && $('#card-canvas').width() > 480) {
 						var width = $('#card-canvas').width() - 30;
 						var rowholds = Math.floor(width / 254);
 						var fillerspace = width - (rowholds * 254);
