@@ -29,9 +29,11 @@
 								<li class="form-item">
 									<label>Assign To</label>
 									<div class="form-content">
-										<input style="color: #0784E3;" class="input-link" readonly name="assignedto" id="member-list" type="text" value="None" />
+										<select class="edit-select" placeholder="Select Kid"  id="kid-name" name="kidname" type="text">
+
+										</select>
 										<div class="form-helper">
-											<label>Select whom to assign</label>
+											<label>Select kid whom to assign</label>
 										</div>
 									</div>
 								</li>
@@ -41,6 +43,15 @@
 										<input placeholder="Happy to help!!!" id="member-message" name="invitemessage" type="text" />
 										<div class="form-helper">
 											<label> Edit to customise (Optional) </label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Due Date</label>
+									<div class="form-content">
+										<input placeholder="Select a date" id="invoice-duedate" name="invoiceduedate" type="text" />
+										<div class="form-helper">
+											<label>Select when this invoice has to be paid by</label>
 										</div>
 									</div>
 								</li>
@@ -59,7 +70,7 @@
 				<div id="invite-modal-close" class="modal_close"></div>
 				<div class="div-template" style="display:none">
 					<li class="form-item servicetemplate" id="service-lead">
-						<label>Select Services</label>
+						<label> Services</label>
 						<span>
 							<input class="services-list" type="checkbox" name="services" value=""/>
 						</span>

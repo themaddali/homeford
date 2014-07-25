@@ -17,9 +17,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var leadtemplate, followtemplate;
 			var validator;
 			var newitemvalidator;
-			var ActiveMembers = 'All Members';
+			var ActiveMembers = {};
 			var SERVICESALL = [];
-			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="number" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li><li class="form-item servicetemplate" id="item-remember"><label>Remember Item</label><span><input class="services-list" type="checkbox" name="services" value="This is a regular service, add to the list of services offered"/></span></li></ol></fieldset></form></div>';
+			var ITEMS = new Object();
+			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -41,18 +42,46 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function populateData() {
 					var domainIDs = [];
 					domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
-					getServices(domainIDs);
+					if (Modernizr.touch && Modernizr.inputtypes.date) {
+						document.getElementById('invoice-duedate').type = 'date';
+					} else {
+						var date = new Date();
+						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+						jQuery("#invoice-duedate").datepicker({
+							minDate : 0,
+							dateFormat : 'yy-mm-dd',
+						});
+					}
+					getMembers(domainIDs);
+					//getServices(domainIDs);
+				}
+
+				function getMembers(activedomains) {
+					jQuery('#kid-name').empty().append('<option>None Selected</option>');
+					ITEMS = new Object();
+					for (var i = 0; i < activedomains.length; i++) {
+						service.getDomainMembers(activedomains[i], {
+							success : function(data) {
+								for (var j = 0; j < data.length; j++) {
+									if (data[j].itemServiceDetails.length > 0) {
+										ITEMS[data[j].id] = data[j].itemServiceDetails;
+										jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');
+									}
+								}
+							}
+						});
+					}
 				}
 
 				function getServices(activedomains) {
 					SERVICESALL = [];
 					jQuery('.servicetemplate').remove();
-					if (ActiveMembers.text) {
-						jQuery('#member-list').val(ActiveMembers.text);
-					} else {
-						jQuery('#member-list').val('None');
-					}
-					jQuery('#member-list').css('color', 'black');
+					// if (ActiveMembers.text) {
+					// jQuery('#member-list').val(ActiveMembers.text);
+					// } else {
+					// jQuery('#member-list').val('None');
+					// }
+					//jQuery('#member-list').css('color', 'black');
 					for (var i = 0; i < activedomains.length; i++) {
 						var thisdomaininstance = activedomains[i];
 						service.ListAllServices(thisdomaininstance, {
@@ -78,6 +107,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function clearForm() {
 					jQuery('input[type="text"]').val("");
+					jQuery('input[type="date"]').val("");
+					jQuery('#kid-name').val("").text('None Selected');
 					jQuery('#member-role').prop('checked', false);
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
@@ -105,15 +136,22 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
+					if ((jQuery('#member-list').val() === 'None' || jQuery('#member-list').val().charAt(0) === 0) && ((jQuery('#member-list').val().indexOf('User: ') !== -1))) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {
 						jQuery('#member-list').css('color', 'black');
 						return true;
 					}
-
 				}, 'Select to whom to assign.');
+
+				$.validator.addMethod("validSelect", function(value, element, param) {
+					if (jQuery('#kid-name').val() === 'None Selected') {
+						return false;
+					} else {
+						return true;
+					}
+				}, 'Select a kid.');
 
 				jQuery.validator.addMethod("money", function(value, element) {
 					//value = value.replace('$', '');
@@ -160,20 +198,23 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				};
 
 				this.resume = function() {
-
-					//$("#member-name").autocomplete("destroy");
 					validator.resetForm();
 					newitemvalidator.resetForm();
+					if (Modernizr.touch && Modernizr.inputtypes.date) {
+						document.getElementById('invoice-duedate').type = 'date';
+					} else {
+						jQuery("#invoice-duedate").datepicker({
+							minDate : 0,
+							dateFormat : 'yy-mm-dd',
+						});
+					}
 					initDialog();
 					if (ActiveMembers.text) {
 						jQuery('.edit-notify').hide();
-						jQuery('#member-list').val(ActiveMembers.text);
-						jQuery('#member-list').css('color', 'black');
 					} else {
 						clearForm();
 						populateData();
 					}
-
 					document.title = 'Zingoare | Invoice Generate';
 				};
 
@@ -193,8 +234,37 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
+						//JQ UI Bug of -Index.
+						jQuery('#invoice-duedate').focus(function() {
+							setTimeout(function() {
+								jQuery('#ui-datepicker-div').css('background-color', 'white');
+								jQuery('#ui-datepicker-div').css('z-index', '200');
+							}, 100);
+						});
+
 						jQuery('.formlink').click(function() {
 							jQuery("#item-dialog-form").dialog("open");
+						});
+
+						jQuery('#kid-name').change(function() {
+							ActiveMembers.text = getSelectedText('kid-name');
+							var studentid = $(this).val();
+							jQuery('.servicetemplate').remove();
+							for (var i = 0; i < ITEMS[studentid].length; i++) {
+								if (i === 0) {
+									var thisservice = leadtemplate.clone();
+									jQuery('.services-list', thisservice).parent().append(ITEMS[studentid][i].itemService.name);
+									//jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked').attr('disabled', 'disabled');
+									jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked');
+								} else {
+									var thisservice = followtemplate.clone();
+									jQuery('.services-list', thisservice).parent().append(ITEMS[studentid][i].itemService.name);
+									jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked');
+								}
+								if (ITEMS[studentid][i].itemService.status === 'Active' || ITEMS[studentid][i].itemService.status === 'ACTIVE') {
+									jQuery('#services-grid').append(thisservice);
+								}
+							}
 						});
 
 						jQuery('#invoice-preview').click(function() {
@@ -206,7 +276,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								'cost' : '$-',
 								'tax' : '-%' ,
 							};
-							databoject.toname = ActiveMembers.list;
+							databoject.toname = getSelectedText('kid-name');
 							databoject.toemail = jQuery('#member-email').val();
 							databoject.tomessage = jQuery('#member-message').val();
 							if (databoject.tomessage == "") {
@@ -254,17 +324,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										_services.push(_servicesentries);
 									}
 								});
-								var now = new Date();
-								if (now.getMonth() < 11) {
-									var duedate = now.getMonth() + 2 + '/01/' + now.getFullYear();
-								} else {
-									var duedate = '01/01/' + now.getFullyear() + 1;
-								}
+								var duedate = jQuery('#invoice-duedate').val();
 								console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
-								var _ids = ActiveMembers.list[0];
+								var _ids = jQuery('#kid-name').val();
 								service.generateInvoice(service.domainNametoID(jQuery.cookie('subuser')), _ids, duedate, _grandtotal, _services, {
 									success : function(response) {
 										if (response.status !== 'error') {
+											clearForm();
 											ActiveMembers = {};
 											notify.showNotification('OK', response.message);
 										} else {
@@ -282,14 +348,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						validator = jQuery("#invoice-form").validate({
 							rules : {
-								assignedto : {
-									validAssignment : true
+								kidname : {
+									validSelect : true
 								},
 								services : {
 									required : false
 								},
 								invitemessage : {
 									maxlength : 20
+								},
+								invoiceduedate : {
+									required : true
 								}
 							},
 							messages : {

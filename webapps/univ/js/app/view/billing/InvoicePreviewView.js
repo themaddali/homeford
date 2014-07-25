@@ -50,11 +50,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								}
 							}
 						});
-						//jQuery('#inv-to-name').text(DATAOBJECT.toname);
-						for (var k = 0; k < DATAOBJECT.toname.length; k++) {
-							jQuery('#inv-to-name').append('<option>' + DATAOBJECT.toname[k] + '</option>');
-						}
-						jQuery('#inv-to-contact').text(DATAOBJECT.toemail);
+						jQuery('#inv-to-addr1').text('Attn: '+ DATAOBJECT.toname);
+						// for (var k = 0; k < DATAOBJECT.toname.length; k++) {
+							// jQuery('#inv-to-name').append('<option>' + DATAOBJECT.toname[k] + '</option>');
+						// }
+						//jQuery('#inv-to-addr1').val(DATAOBJECT.toemail);
 						jQuery('#inv-tbody').empty();
 						for (var j = 0; j < DATAOBJECT.services.length; j++) {
 							var thisrow = template.clone();
