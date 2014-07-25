@@ -268,6 +268,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('invoicelist', '^/invoicelist(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/billing/invoicelist.html', '../app/view/billing/InvoiceListView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('servicesadd', '^/servicesadd(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

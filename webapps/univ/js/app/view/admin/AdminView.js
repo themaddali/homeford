@@ -168,7 +168,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								// populateDomainData();
 								// populateUserData();
 							} else {
-								setTimeout(function(){
+								setTimeout(function() {
 									activateDonutClicks();
 								}, 1500);
 								jQuery('.T1').show();
@@ -203,6 +203,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								populateQuizData(ACTIVEDOMAINIDS);
 								populateServicesData(ACTIVEDOMAINIDS);
 								populateAttendanceKioskData(ACTIVEDOMAINIDS);
+								populateInvoiceData(ACTIVEDOMAINIDS);
 								if (ROLEMAP[UserProfile.domains[0].roleName] === 'Admin' || ROLEMAP[UserProfile.domains[0].roleName] === 'Member') {
 									updatePanelValues('#user-admin-value', 1);
 									_profiledata[1] = 1;
@@ -519,7 +520,30 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							}
 						}
 					});
+				}
 
+				function populateInvoiceData(activedomains) {
+					//defaulting to 0th index
+					service.getAllInvoices(activedomains[0], {
+						success : function(data) {
+							var _invoicestotal = data.length;
+							var _grandtotal = 0;
+							var _invoicesoverdue = 0;
+							var _itemcount = 0;
+							var _invoicedata = [0, 0];
+							var studentids = [];
+							for (var j = 0; j < data.length; j++) {
+								_grandtotal = _grandtotal + data[j].grandTotal;
+								_itemcount = _itemcount + data[j].invoiceItems.length;
+								_invoicedata[0] = _invoicestotal;
+							}
+							updatePanelValues('#invoice-total-value', _invoicestotal);
+							updatePanelValues('#invoice-items-value', _itemcount);
+							updatePanelValues('#invoice-grand-value', '$' + _grandtotal);
+							_invoicedata[1] = _itemcount;
+							updatePanelGraphs('#invoice-donut', _invoicedata);
+						}
+					});
 				}
 
 				function updatePanelValues(name, value) {
@@ -675,9 +699,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						$('.adminboard').css('margin-right', newmargin / 2);
 					}
 				}
-				
+
 				function activateDonutClicks() {
-					jQuery('path').click(function(){
+					jQuery('path').click(function() {
 						var gotopage = $(this).parent().parent().parent().parent().parent().next().find('a').attr('href');
 						router.go(gotopage.split('#')[1]);
 					});
@@ -785,11 +809,11 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							router.go('/studentlist');
 						});
 						// jQuery('.admin-donut').click(function(){
-							// var idname = $(this).attr('name');
-							// var posi = POSITIONMAP.indexOf(idname);
-							// var toolti = '#elycharts_tooltip_'+(posi+1)+'_content';
-							// console.log(jQuery(toolti).text());
-							// //alert(idname + '  ' + (posi+1));
+						// var idname = $(this).attr('name');
+						// var posi = POSITIONMAP.indexOf(idname);
+						// var toolti = '#elycharts_tooltip_'+(posi+1)+'_content';
+						// console.log(jQuery(toolti).text());
+						// //alert(idname + '  ' + (posi+1));
 						// });
 
 					} // Cookie Guider

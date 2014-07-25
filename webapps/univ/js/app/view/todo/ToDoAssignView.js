@@ -8,7 +8,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			 */
 
 			var validator;
-			var ActiveMembers = 'All Members';
+			var ActiveMembers = {};
 
 			function ToDoAssignView() {
 
@@ -59,20 +59,29 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
+					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) === 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {
 						jQuery('#member-list').css('color', 'black');
 						return true;
 					}
-
 				}, 'Select to whom to assign.');
 
 				this.selectedMembers = function(selection) {
 					ActiveMembers = selection;
 					jQuery('#member-list').css('color', 'black');
 				};
+
+				function clearform() {
+					jQuery('input[type="text"]').val('');
+					jQuery('input[type="date"]').val('');
+					jQuery('textarea').val('');
+					ActiveMembers = {};
+					jQuery('#member-list').val('None');
+					jQuery('#member-list').css('color', 'black');
+				}
+
 
 				this.pause = function() {
 
@@ -172,6 +181,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								service.AssignToDo(service.domainNametoID(jQuery.cookie('subuser')), _ids, _tname, _tdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
+											clearform();
 											notify.showNotification('OK', data.message);
 										} else {
 											notify.showNotification('ERROR', data.message);

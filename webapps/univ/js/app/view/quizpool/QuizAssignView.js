@@ -11,7 +11,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			var allQUIZ;
 			var QUIZLIST = [];
 			var QUIZLIST_sorted = [];
-			var ActiveMembers = 'All Members';
+			var ActiveMembers = {};
 
 			function QuizAssignView() {
 
@@ -62,8 +62,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						}
 						jQuery('#member-list').css('color', 'black');
 						//var activedomains = admin.getActiveDomainsIDs();
-					var activedomains = [];
-					activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
+						var activedomains = [];
+						activedomains.push(service.domainNametoID(jQuery.cookie('subuser')));
 						if (activedomains.length === 0) {
 							router.go('/admin');
 						}
@@ -76,7 +76,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										QUIZLIST.push(data[k].name);
 										QUIZLIST_sorted.push(data[k].name);
 										if (QUIZLIST.length === 0) {
-											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quizzes and Questions.",'quizadd');
+											notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quizzes and Questions.", 'quizadd');
 										}
 										if (k === data.length - 1) {
 											QUIZLIST_sorted.sort();
@@ -109,7 +109,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 
 				$.validator.addMethod("validAssignment", function(value, element, param) {
-					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) !== 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
+					if ((jQuery('#member-list').val() == 'None' || jQuery('#member-list').val().charAt(0) === 0) && ((jQuery('#member-list').val().indexOf('User: ') === -1))) {
 						jQuery('#member-list').css('color', 'red');
 						return false;
 					} else {
@@ -120,17 +120,23 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				}, 'Select to whom to assign.');
 
 				$.validator.addMethod("validQuiz", function(value, element, param) {
-					// if (QUIZLIST.indexOf(jQuery('#quiz-name').val()) === -1) {
-					// return false;
-					// } else {
-					// return true;
-					// }
 					if (jQuery('#quiz-name').val() === 'None Selected') {
 						return false;
 					} else {
 						return true;
 					}
 				}, 'Select a valid Quiz');
+
+				function clearform() {
+					jQuery('input[type="text"]').val('');
+					jQuery('input[type="date"]').val('');
+					jQuery('textarea').val('');
+					ActiveMembers = {};
+					jQuery('#quiz-name').empty();
+					jQuery('#member-list').val('None');
+					jQuery('#member-list').css('color', 'black');
+				}
+
 
 				this.pause = function() {
 
@@ -143,6 +149,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				this.resume = function() {
 					validator.resetForm();
+					jQuery("#task-deadline").datepicker({
+						minDate : 0,
+						dateFormat : 'yy-mm-dd',
+					});
+					jQuery("#task-startdate").datepicker({
+						minDate : 0,
+						dateFormat : 'yy-mm-dd',
+					});
 					populateData();
 					jQuery('.edit-notify').hide();
 					//$("#quiz-name").autocomplete("destroy");
@@ -242,16 +256,15 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _ids = ActiveMembers.list;
 								var _domainids;
 								// service.returnDomainIDList({
-									// success : function(data) {
-										// _domainids = data;
-									// }
+								// success : function(data) {
+								// _domainids = data;
+								// }
 								// });
 								service.AssignQuiz(service.domainNametoID(jQuery.cookie('subuser')), _qid, _ids, _qname, _qdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
 											notify.showNotification('OK', data.message);
-											var ActiveMembers = 'All Members';
-											ActiveMembers.text = null;
+											clearform();
 											setTimeout(function() {
 												router.go('/admin');
 											}, 2000);
@@ -270,7 +283,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								quizname : {
 									required : true,
 									validQuiz : true,
-									maxlength: 30,
+									maxlength : 30,
 								},
 								quizdesc : {
 									required : false,

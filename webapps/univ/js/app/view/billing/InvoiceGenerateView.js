@@ -108,10 +108,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function clearForm() {
 					jQuery('input[type="text"]').val("");
 					jQuery('input[type="date"]').val("");
-					jQuery('#kid-name').val("").text('None Selected');
-					jQuery('#member-role').prop('checked', false);
+					jQuery('#kid-name').val($("#kid-name option:first").val());
+					jQuery('#services-grid').empty();
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
+					
 				}
 
 				function addNewItem() {

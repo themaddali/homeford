@@ -546,6 +546,32 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.getAllInvoices = function(_domainid, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/invoice/domain/' + _domainid,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Getting Invoices"
+							};
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(errormsg);
+						}
+					});
+				};
+
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$('input[type="button"]').addClass('processing');
