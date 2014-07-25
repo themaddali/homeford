@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','timepicker'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin,timepicker) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', 'timepicker'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin, timepicker) {"use strict";
 
 	var ServicesEditView = ( function() {
 
@@ -14,19 +14,27 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 				function populateData() {
 					if (ACTIVESERVICE) {
-						if (Modernizr.touch && Modernizr.inputtypes.date) {
-							document.getElementById('service-starttime').type = 'time';
-							document.getElementById('service-endtime').type = 'time';
-						} else {
-							jQuery("#service-starttime").timepicker({
-								timeSeparator : ':',
-								showPeriod : false,
-							});
-							jQuery("#service-endtime").timepicker({
-								timeSeparator : ':',
-								showPeriod : false,
-							});
-						}
+						// if (Modernizr.touch && Modernizr.inputtypes.date) {
+						// document.getElementById('service-starttime').type = 'time';
+						// document.getElementById('service-endtime').type = 'time';
+						// } else {
+						// jQuery("#service-starttime").timepicker({
+						// timeSeparator : ':',
+						// showPeriod : false,
+						// });
+						// jQuery("#service-endtime").timepicker({
+						// timeSeparator : ':',
+						// showPeriod : false,
+						// });
+						// }
+						jQuery("#service-starttime").timepicker({
+							timeSeparator : ':',
+							showPeriod : false,
+						});
+						jQuery("#service-endtime").timepicker({
+							timeSeparator : ':',
+							showPeriod : false,
+						});
 						jQuery('#service-name').val(ACTIVESERVICE.name);
 						jQuery('#service-desc').val(ACTIVESERVICE.desc);
 						jQuery('#service-id').val(ACTIVESERVICE.id);
@@ -95,7 +103,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							if ($(".edit-form").valid()) {
 								var _sstarttime = jQuery('#service-starttime').val() + ':00';
 								var _sendtime = jQuery('#service-endtime').val() + ':00';
-								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime,_sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
+								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime, _sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);

@@ -60,13 +60,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery('.service-tax', row).text(data[j].tax + '%');
 									jQuery('.service-freq', row).text(data[j].days + ' days');
 									if (data[j].startTime === null) {
-										data[j].startTime = '-';
+										data[j].startTime = '-:00';
 									}
 									if (data[j].endTime === null) {
-										data[j].endTime = '-';
+										data[j].endTime = '-:00';
 									}
-									jQuery('.service-stime', row).text(data[j].startTime);
-									jQuery('.service-etime', row).text(data[j].endTime);
+									jQuery('.service-stime', row).text(data[j].startTime.slice(0,-3));
+									jQuery('.service-etime', row).text(data[j].endTime.slice(0,-3));
 									jQuery('.service-status', row).text(data[j].status);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {

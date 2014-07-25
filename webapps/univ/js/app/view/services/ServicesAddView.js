@@ -30,19 +30,27 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 				function populateData() {
 					jQuery('.form-content input').val();
-					if (Modernizr.touch && Modernizr.inputtypes.date) {
-						document.getElementById('service-starttime').type = 'time';
-						document.getElementById('service-endtime').type = 'time';
-					} else {
-						jQuery("#service-starttime").timepicker({
-							timeSeparator : ':',
-							showPeriod : false,
-						});
-						jQuery("#service-endtime").timepicker({
-							timeSeparator : ':',
-							showPeriod : false,
-						});
-					}
+					// if (Modernizr.touch && Modernizr.inputtypes.date) {
+					// document.getElementById('service-starttime').type = 'time';
+					// document.getElementById('service-endtime').type = 'time';
+					// } else {
+					// jQuery("#service-starttime").timepicker({
+					// timeSeparator : ':',
+					// showPeriod : false,
+					// });
+					// jQuery("#service-endtime").timepicker({
+					// timeSeparator : ':',
+					// showPeriod : false,
+					// });
+					// }
+					jQuery("#service-starttime").timepicker({
+						timeSeparator : ':',
+						showPeriod : false,
+					});
+					jQuery("#service-endtime").timepicker({
+						timeSeparator : ':',
+						showPeriod : false,
+					});
 				}
 
 
@@ -98,7 +106,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _sfreq = 0;
 								var _sstarttime = jQuery('#service-starttime').val() + ':00';
 								var _sendtime = jQuery('#service-endtime').val() + ':00';
-								
+
 								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
