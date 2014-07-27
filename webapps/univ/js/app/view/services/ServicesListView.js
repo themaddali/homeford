@@ -98,11 +98,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						rowObject.desc = jQuery(this).find('.service-desc').text();
 						rowObject.status = jQuery(this).find('.service-status').text();
 						rowObject.id = jQuery(this).find('.service-id').text();
-						rowObject.cost = jQuery(this).find('.service-cost').text();
+						rowObject.cost = jQuery(this).find('.service-cost').text().replace('$','');
 						rowObject.freq = jQuery(this).find('.service-freq').text();
 						rowObject.stime = jQuery(this).find('.service-stime').text();
 						rowObject.etime = jQuery(this).find('.service-etime').text();
-						rowObject.tax = jQuery(this).find('.service-tax').text();
+						rowObject.tax = jQuery(this).find('.service-tax').text().replace('%','');
 						servicesedit.setInfo(rowObject);
 						router.go('/servicesedit');
 					});
