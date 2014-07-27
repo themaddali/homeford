@@ -338,7 +338,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									}
 								});
 								var duedate = jQuery('#invoice-duedate').val();
-								console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
+								//console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
 								var _ids = jQuery('#kid-name').val();
 								service.generateInvoice(service.domainNametoID(jQuery.cookie('subuser')), _ids, duedate, _grandtotal, _services, {
 									success : function(response) {
