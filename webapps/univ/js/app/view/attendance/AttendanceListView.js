@@ -16,6 +16,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
 			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span class="time-diff" style="padding-left:2px"></span></i>';
+			var EXTRAICONOK = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: green; cursor: pointer"><span class="time-diff" style="padding-left:2px"></span></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message" style="font-size:12px; color: black"></span></p><p id="note-auto-warning" style="font-size:11px; color: red" ><strong>Attn: </strong>This student is off the assigned scheduled</p></div>';
 			var ACTIVEDOMAINS = [];
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -114,23 +115,28 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										stats[i].checkedout_notes = 'No Message';
 									}
 									if (stats[i].notes !== 'No Message' || stats[i].checkedout_notes !== 'No Message') {
-										jQuery('.notes', row).attr('note', '<p><strong>CheckIn Note: </strong>' + stats[i].notes + '<p /><p><strong>CheckOut Note: </strong>' + stats[i].checkedout_notes+'</p>').html(COMMENTICON);
+										jQuery('.notes', row).attr('note', '<p><strong>CheckIn Note: </strong>' + stats[i].notes + '<p /><p><strong>CheckOut Note: </strong>' + stats[i].checkedout_notes + '</p>').html(COMMENTICON);
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
-										jQuery('.checkin-time', row).append(EXTRAICON);
 										if (stats[i].checkInTimeDiff < 0) {
-											stats[i].checkInTimeDiff = -1 * stats[i].checkInTimeDiff;
+											jQuery('.checkin-time', row).append(EXTRAICON);
+											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+										} else {
+											jQuery('.checkin-time', row).append(EXTRAICONOK);
+											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 										}
-										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
-										jQuery('.checkout-time', row).append(EXTRAICON);
+
 										if (stats[i].checkOutTimeDiff < 0) {
-											stats[i].checkOutTimeDiff = -1 * stats[i].checkOutTimeDiff;
+											jQuery('.checkout-time', row).append(EXTRAICON);
+											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+										} else {
+											jQuery('.checkout-time', row).append(EXTRAICONOK);
+											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 										}
-										jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
@@ -173,23 +179,28 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										stats[i].checkedout_notes = 'No Message';
 									}
 									if (stats[i].notes !== 'No Message' || stats[i].checkedout_notes !== 'No Message') {
-										jQuery('.notes', row).attr('note', '<p><strong>CheckIn Note: </strong>' + stats[i].notes + '<p /><p><strong>CheckOut Note: </strong>' + stats[i].checkedout_notes+'</p>').html(COMMENTICON);
+										jQuery('.notes', row).attr('note', '<p><strong>CheckIn Note: </strong>' + stats[i].notes + '<p /><p><strong>CheckOut Note: </strong>' + stats[i].checkedout_notes + '</p>').html(COMMENTICON);
 									} else {
 										jQuery('.notes', row).attr('note', 'No Note!!').text('--');
 									}
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
-										jQuery('.checkin-time', row).append(EXTRAICON);
 										if (stats[i].checkInTimeDiff < 0) {
-											stats[i].checkInTimeDiff = -1 * stats[i].checkInTimeDiff;
+											jQuery('.checkin-time', row).append(EXTRAICON);
+											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+										} else {
+											jQuery('.checkin-time', row).append(EXTRAICONOK);
+											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 										}
-										jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
-										jQuery('.checkout-time', row).append(EXTRAICON);
+
 										if (stats[i].checkOutTimeDiff < 0) {
-											stats[i].checkOutTimeDiff = -1 * stats[i].checkOutTimeDiff;
+											jQuery('.checkout-time', row).append(EXTRAICON);
+											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+										} else {
+											jQuery('.checkout-time', row).append(EXTRAICONOK);
+											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 										}
-										jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
 									}
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
@@ -213,12 +224,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						var note = jQuery(this).find('.notes').attr('note');
 						var _indiff = parseInt(jQuery(this).find('.checkin-time').find('.time-diff').text());
 						var _outdiff = parseInt(jQuery(this).find('.checkout-time').find('.time-diff').text());
-						if (!_indiff) {
+						if (!_indiff || _indiff > 0) {
 							_indiff = 0;
 						}
-						if (!_outdiff) {
+						if (!_outdiff || _outdiff > 0) {
 							_outdiff = 0;
 						}
+						if (_outdiff < 0) {
+							_outdiff = -1 * _outdiff;
+						}
+						if (_indiff < 0) {
+							_indiff = -1 * _indiff;
+						}
+
 						var warnnote = "This student is off the assigned scheduled duration by " + (_indiff + _outdiff) + " minutes. For this additional service create <a href='#/invoicenew' style='font-size:11px; color: #007DBA; cursor: pointer'>new invoice</a>";
 						if ((_indiff + _outdiff) === 0) {
 							warnnote = '';

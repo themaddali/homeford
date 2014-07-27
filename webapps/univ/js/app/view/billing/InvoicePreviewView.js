@@ -36,7 +36,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function populateData() {
 					var grandtotal = 0;
-					jQuery('#inv-to-name').empty();
+					jQuery('#inv-domain-address').empty();
 					if (DATAOBJECT !== null) {
 						service.getUserProfile({
 							success : function(UserProfile) {
@@ -46,18 +46,22 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										UserProfile.lastName = "Billing Team";
 										UserProfile.firstName = '';
 									}
+									jQuery('#inv-addr1').text('City, State');
+									jQuery('#inv-addr2').text('US, 12354');
+									jQuery('#inv-contact').text(UserProfile.email);
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}
 							}
 						});
-						jQuery('#inv-to-addr1').text('Attn: '+ DATAOBJECT.toname);
+						//jQuery('#inv-to-addr1').text('Attn: ' + DATAOBJECT.toname);
 						// for (var k = 0; k < DATAOBJECT.toname.length; k++) {
-							// jQuery('#inv-to-name').append('<option>' + DATAOBJECT.toname[k] + '</option>');
+						// jQuery('#inv-to-name').append('<option>' + DATAOBJECT.toname[k] + '</option>');
 						// }
 						//jQuery('#inv-to-addr1').val(DATAOBJECT.toemail);
 						jQuery('#inv-tbody').empty();
 						for (var j = 0; j < DATAOBJECT.services.length; j++) {
 							var thisrow = template.clone();
+							jQuery('.snumber', thisrow).text(j + 1);
 							jQuery('.sname', thisrow).text(DATAOBJECT.services[j].name);
 							jQuery('.scost', thisrow).text('$' + DATAOBJECT.services[j].cost);
 							jQuery('.stax', thisrow).text(DATAOBJECT.services[j].tax + '%');
@@ -71,9 +75,24 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						var currentDate = new Date();
 						var day = currentDate.getDate();
 						var month = currentDate.getMonth() + 1;
+						if (month < 10) {
+							month = 0 + month;
+						}
+						if (day < 10) {
+							day = '0' + day;
+						}
 						var year = currentDate.getFullYear();
-						jQuery('#inv-date').text(day + "/" + month + "/" + year);
+						jQuery('#inv-inssuedate').text(year + "-" + month + "-" + day);
+						jQuery('#inv-dueby').text(DATAOBJECT.duedate);
 						jQuery('.thanks').text(DATAOBJECT.tomessage);
+						jQuery('#inv-to1').html(DATAOBJECT.toname);
+						document.title = DATAOBJECT.toname + ' | Invoice';
+						jQuery('#inv-to2').html(DATAOBJECT.parent.split(':')[0]);
+						if (DATAOBJECT.parent.split(':')[1].length > 3) {
+							jQuery('#inv-to3').html(DATAOBJECT.parent.split(':')[1]);
+						} else {
+							jQuery('#inv-to3').html('');
+						}
 					} else {
 						router.go('/invoicenew');
 					}

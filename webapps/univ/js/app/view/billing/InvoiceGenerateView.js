@@ -20,6 +20,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var ActiveMembers = {};
 			var SERVICESALL = [];
 			var ITEMS = new Object();
+			var PARENTS = new Object();
 			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			function InvoiceGenerateView() {
 
@@ -59,12 +60,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function getMembers(activedomains) {
 					jQuery('#kid-name').empty().append('<option>None Selected</option>');
 					ITEMS = new Object();
+					PARENTS = new Object();
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
 									if (data[j].itemServiceDetails.length > 0) {
 										ITEMS[data[j].id] = data[j].itemServiceDetails;
+										PARENTS[data[j].id] = data[j].parents;
 										jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');
 									}
 								}
@@ -76,12 +79,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function getServices(activedomains) {
 					SERVICESALL = [];
 					jQuery('.servicetemplate').remove();
-					// if (ActiveMembers.text) {
-					// jQuery('#member-list').val(ActiveMembers.text);
-					// } else {
-					// jQuery('#member-list').val('None');
-					// }
-					//jQuery('#member-list').css('color', 'black');
 					for (var i = 0; i < activedomains.length; i++) {
 						var thisdomaininstance = activedomains[i];
 						service.ListAllServices(thisdomaininstance, {
@@ -112,7 +109,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('#services-grid').empty();
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
-					
+
 				}
 
 				function addNewItem() {
@@ -295,6 +292,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								}
 							});
 							databoject.services = _services;
+							databoject.duedate = jQuery('#invoice-duedate').val();
+							databoject.parent = '';
+							for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++)
+								if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
+									databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+								}
 							invoicepreview.setData(databoject);
 							if ($("#invoice-form").valid()) {
 								router.go('/invoicepreview');

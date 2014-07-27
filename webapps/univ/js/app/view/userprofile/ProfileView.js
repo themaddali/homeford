@@ -33,6 +33,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							}
 							jQuery('#profile-kiosk-pin').text(UserProfile.kioskPassword);
 							jQuery('#profile-pending-invites').text(UserProfile.pendingInvitees.length);
+							jQuery('.DO-T1').hide();
 							if (!UserProfile.image || UserProfile.image == null) {
 								jQuery('#profile-image').attr('src', 'img/noimg.png');
 							} else {
@@ -48,15 +49,29 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery('.profile-domain-list', activetemplate).attr('name', UserProfile.domains[0].domainName);
 								jQuery('#profile-form').append(activetemplate);
 								DOMAINS.push(UserProfile.domains[0].domainName);
-								jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
-								jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
-								jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
+								if (UserProfile.domains[0].roleName === 'ROLE_TIER1') {
+									jQuery('.DO-T1').show();
+									jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
+									jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
+									jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
+									jQuery('#profile-street', activetemplate).text(UserProfile.domains[0].street);
+									jQuery('#profile-city', activetemplate).text(UserProfile.domains[0].city);
+									jQuery('#profile-state', activetemplate).text(UserProfile.domains[0].state);
+									jQuery('#profile-country', activetemplate).text(UserProfile.domains[0].country);
+									jQuery('#profile-zip', activetemplate).text(UserProfile.domains[0].zip);
+								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
-										jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
-										jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
-										jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
+									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser') && UserProfile.domains[i].roleName === 'ROLE_TIER1') {
+										jQuery('.DO-T1').show();
+										jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[i].domainDesc1);
+										jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[i].domainDesc2);
+										jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[i].domainThanksMessage);
+										jQuery('#profile-street', activetemplate).text(UserProfile.domains[i].street);
+										jQuery('#profile-city', activetemplate).text(UserProfile.domains[i].city);
+										jQuery('#profile-state', activetemplate).text(UserProfile.domains[i].state);
+										jQuery('#profile-country', activetemplate).text(UserProfile.domains[i].country);
+										jQuery('#profile-zip', activetemplate).text(UserProfile.domains[i].zip);
 									}
 									if (DOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
 										DOMAINS.push(UserProfile.domains[i].domainName);

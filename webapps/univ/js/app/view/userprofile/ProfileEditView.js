@@ -40,16 +40,29 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							}
 							var imageUploadURL = '/zingoare/api/profileupload/' + UserProfile.id;
 							jQuery('#profile-picture').attr('data-url', imageUploadURL);
-							if (UserProfile.domains.length === 1) {
+							jQuery('.DO-T1').hide();
+							if (UserProfile.domains.length === 1 && UserProfile.domains[0].roleName === 'ROLE_TIER1') {
+								jQuery('.DO-T1').show();
 								jQuery('#profile-domainDesc1').text(UserProfile.domains[0].domainDesc1);
 								jQuery('#profile-domainDesc2').text(UserProfile.domains[0].domainDesc2);
 								jQuery('#profile-domainThanksMessage').text(UserProfile.domains[0].domainThanksMessage);
+								jQuery('#profile-street').text(UserProfile.domains[0].street);
+								jQuery('#profile-city').text(UserProfile.domains[0].city);
+								jQuery('#profile-state').text(UserProfile.domains[0].state);
+								jQuery('#profile-country').text(UserProfile.domains[0].country);
+								jQuery('#profile-zip').text(UserProfile.domains[0].zip);
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
-										jQuery('#profile-domainDesc1').text(UserProfile.domains[0].domainDesc1);
-										jQuery('#profile-domainDesc2').text(UserProfile.domains[0].domainDesc2);
-										jQuery('#profile-domainThanksMessage').text(UserProfile.domains[0].domainThanksMessage);
+									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser') && UserProfile.domains[i].roleName === 'ROLE_TIER1') {
+										jQuery('.DO-T1').show();
+										jQuery('#profile-domainDesc1').text(UserProfile.domains[i].domainDesc1);
+										jQuery('#profile-domainDesc2').text(UserProfile.domains[i].domainDesc2);
+										jQuery('#profile-domainThanksMessage').text(UserProfile.domains[i].domainThanksMessage);
+										jQuery('#profile-street').text(UserProfile.domains[i].street);
+										jQuery('#profile-city').text(UserProfile.domains[i].city);
+										jQuery('#profile-state').text(UserProfile.domains[i].state);
+										jQuery('#profile-country').text(UserProfile.domains[i].country);
+										jQuery('#profile-zip').text(UserProfile.domains[i].zip);
 									}
 								}
 							}
@@ -159,7 +172,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					//Light weight DOM.
 					document.title = 'Zingoare | Profile Edit';
 					// if (!$("#profile-edit-form").valid()) {
-						// jQuery('.modal_close').hide();
+					// jQuery('.modal_close').hide();
 					// }
 
 					if (checkForActiveCookie() === true) {
@@ -179,6 +192,11 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.domainDesc1 = jQuery('#profile-domainDesc1').val();
 								domainobj.domainDesc2 = jQuery('#profile-domainDesc2').val();
 								domainobj.domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
+								domainobj.street = jQuery('#profile-street').val();
+								domainobj.city = jQuery('#profile-city').val();
+								domainobj.state = jQuery('#profile-state').val();
+								domainobj.country = jQuery('#profile-country').val();
+								domainobj.zip = jQuery('#profile-zip').val();
 								if (jQuery('#profile-password').val().length > 0) {
 									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
 										success : function(response) {

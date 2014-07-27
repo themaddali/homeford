@@ -23,43 +23,86 @@
 					INVOICE
 				</header>
 				<div class="modal-contents">
+					<!-- <div class="inv-header">
+					<div class="address">
+					<p id="inv-to-addr1">
+					Attn:
+					</p>
+					<!-- <p>
+					Attn:	<select id="inv-to-name" style="border: none"></select>
+					</p>
+					<p id="inv-to-name">
+					Kubo Inc
+					</p>
+					<p id="inv-to-addr1">
+					Mountain View, CA
+					</p>
+					<p id="inv-addr-2">
+					94404
+					</p>
+					<p id="inv-to-contact">
+					123 456 7890
+					</p>
+					</div>
+					<div class="inv-logo">
+					<img src="img/iosicon.png" alt="Zingoare Logo"/>
+					<p id="inv-domain">
+					Domain Name
+					</p>
+					</div>
+					</div> -->
 					<div class="inv-header">
-						<div class="address">
-							<p id="inv-to-addr1">
-								Attn:
-							</p>
-							<!-- <p>
-							Attn:	<select id="inv-to-name" style="border: none"></select>
-							</p> -->
-							<!-- <p id="inv-to-name">
-							Kubo Inc
-							</p> -->
-							<!-- <p id="inv-to-addr1">
-							Mountain View, CA
-							</p>
-							<p id="inv-addr-2">
-							94404
-							</p>
-							<p id="inv-to-contact">
-							123 456 7890
-							</p> -->
-						</div>
+
 						<div class="inv-logo">
-							<img src="img/iosicon.png" alt="Zingoare Logo"/>
+							<img src="img/logo-print.jpg" alt="Zingoare Logo"/>
+						</div>
+						<div class="address">
 							<p id="inv-domain">
-								Domain Name
+								Zingoare
+							</p>
+							<!-- <p id="inv-to-addr1">
+							Attn:
+							</p> -->
+							<p id="inv-addr1">
+								Foster City, CA
+							</p>
+							<p id="inv-addr2">
+								94404
+							</p>
+							<p id="inv-contact">
+
 							</p>
 						</div>
+
 					</div>
 					<div class="inv-synopsis">
-						<table>
+						<table style="float: left;margin-left: 40px; text-align: left;">
 							<!-- <tr>
-								<th><span >Invoice #</span></th>
-								<td><span id="inv-id" >101138</span></td>
+							<th><span >Invoice #</span></th>
+							<td><span id="inv-id">K102</span></td>
 							</tr> -->
 							<tr>
-								<th><span >Date</span></th>
-								<td><span id="inv-date" >Today</span></td>
+								<th><span >Issued On</span></th>
+								<td><span id="inv-inssuedate" >12-12-2012</span></td>
+							</tr>
+							<tr>
+								<th><span >Due By</span></th>
+								<td><span id="inv-dueby" >1-12-2012</span></td>
+							</tr>
+
+						</table>
+						<table>
+							<tr>
+								<th><span >Bill To</span></th>
+								<td><span id="inv-to1" style="font-weight: 700" >James Zingoare</span></td>
+							</tr>
+							<tr>
+								<th><span >Guardian</span></th>
+								<td><span id="inv-to2" >parent@zingoare.com</span></td>
+							</tr>
+							<tr>
+								<th><span ></span></th>
+								<td><span id="inv-to3" >parent1@zingoare.com</span></td>
 							</tr>
 						</table>
 					</div>
@@ -67,17 +110,19 @@
 						<table class="inventory">
 							<thead>
 								<tr>
+									<th><span ></span></th>
 									<th><span >Service</span></th>
-									<th><span >Description</span></th>
-									<th><span >Rate</span></th>
-									<th><span >Tax</span></th>
+									<th style="display: none"><span >Description</span></th>
 									<th><span >Price</span></th>
+									<th><span >Tax</span></th>
+									<th><span >Total</span></th>
 								</tr>
 							</thead>
 							<tbody id="inv-tbody">
-								<tr id="inv-tbody-row">
+								<tr id="inv-tbody-row" style="border-bottom: 1px dotted #f3f3f3;">
+									<td class="snumber"></td>
 									<td class="sname"></td>
-									<td class="sdesc"></td>
+									<td class="sdesc" style="display: none"></td>
 									<td class="scost"></td>
 									<td class="stax"></td>
 									<td class="sprice"></td>
@@ -86,10 +131,11 @@
 						</table>
 						<div class="invoice-summary">
 							<table class="summary">
-								<tr>
-									<th>Total</th>
-									<td class="grand-total">January 1, 2012</td>
+								<tr style="font-weight: 800; color: #0784E3; font-size: 15px;">
+									<th>Grand Total</th>
+									<td class="grand-total" style="color: black">$ 1000</td>
 								</tr>
+
 							</table>
 						</div>
 					</div>
@@ -99,7 +145,7 @@
 				</div>
 				<div class="footer">
 					<p class="inv-domain-info">
-						Issued by: Kubo Inc, Mountain View, CA
+						Issued by: Zingoare, Foster City, CA
 					</p>
 					<p>
 						Powered by www.zingoare.com
