@@ -22,6 +22,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var ITEMS = new Object();
 			var PARENTS = new Object();
 			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
+			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -88,10 +89,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
+										jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+										jQuery('.checkbox-span', thisservice).text('Cost: $ ' + data[j].unit_price);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description);
+										jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+										jQuery('.checkbox-span', thisservice).text('Cost: $ ' + data[j].unit_price);
 									}
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
@@ -254,10 +259,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									jQuery('.services-list', thisservice).parent().append(ITEMS[studentid][i].itemService.name);
 									//jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked').attr('disabled', 'disabled');
 									jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked');
+									jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+									jQuery('.checkbox-span', thisservice).text('Cost: $ ' + ITEMS[studentid][i].itemService.unit_price);
 								} else {
 									var thisservice = followtemplate.clone();
 									jQuery('.services-list', thisservice).parent().append(ITEMS[studentid][i].itemService.name);
 									jQuery('.services-list', thisservice).attr('sname', ITEMS[studentid][i].itemService.name).attr('cost', ITEMS[studentid][i].itemService.unit_price).attr('tax', ITEMS[studentid][i].itemService.tax).attr('desc', ITEMS[studentid][i].itemService.description).attr('checked', 'checked');
+									jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+									jQuery('.checkbox-span', thisservice).text('Cost: $ ' + ITEMS[studentid][i].itemService.unit_price);
 								}
 								if (ITEMS[studentid][i].itemService.status === 'Active' || ITEMS[studentid][i].itemService.status === 'ACTIVE') {
 									jQuery('#services-grid').append(thisservice);

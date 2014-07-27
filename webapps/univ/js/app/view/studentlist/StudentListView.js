@@ -29,7 +29,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function populateStudentList() {
 					//Get User Profile
-					jQuery('#card-canvas').empty();
+					jQuery('#card-canvas-students').empty();
 					jQuery('.cardsloading').fadeIn(200);
 					MEMBEROBJECT = [];
 					MEMBERIDS = [];
@@ -175,7 +175,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 				function displayCards(MEMBEROBJECT) {
 					//console.log(service.domainNametoID(jQuery.cookie('subuser')));
-					jQuery('#card-canvas').empty();
+					jQuery('#card-canvas-students').empty();
 					for (var i = 0; i < MEMBEROBJECT.length; i++) {
 						if (MEMBEROBJECT[i].id !== 'FILLER') {
 							var newboard = template.clone();
@@ -200,7 +200,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							//jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
-							jQuery('#card-canvas').append(newboard);
+							jQuery('#card-canvas-students').append(newboard);
 							jQuery('.metainfo').text(jQuery('.studentboard:visible').length + ' member(s)');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
@@ -215,7 +215,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							if (i < MEMBEROBJECT.length - 1) {
 								var partitionboard = partiontemplate.clone();
 								jQuery('.tag', partitionboard).html(MEMBEROBJECT[i].firstName);
-								jQuery('#card-canvas').append(partitionboard);
+								jQuery('#card-canvas-students').append(partitionboard);
 							}
 						}
 					}
@@ -252,8 +252,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function helperMediaQuiries() {
-					if ($('.studentboard').length > 4 && $('#card-canvas').width() > 480) {
-						var width = $('#card-canvas').width() - 30;
+					if ($('.studentboard').length > 4 && $('#card-canvas-students').width() > 480) {
+						var width = $('#card-canvas-students').width() - 30;
 						var rowholds = Math.floor(width / 254);
 						var fillerspace = width - (rowholds * 254);
 						//var eachfiller = 300+fillerspace/rowholds;

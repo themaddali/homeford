@@ -13,6 +13,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 			var followtemplate;
 			var serviceIDs = [];
 			var deleteItemServicesIds = [];
+			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 
 			function MembersEditView() {
 
@@ -78,11 +79,16 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										var thisservice = leadtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+										jQuery('.checkbox-span', thisservice).text('Cost: $ ' + data[j].unit_price);
 									} else {
 										var thisservice = followtemplate.clone();
 										jQuery('.services-list', thisservice).parent().append(data[j].name);
 										jQuery('.services-list', thisservice).attr('sname', data[j].name).attr('cost', data[j].unit_price).attr('tax', data[j].tax).attr('desc', data[j].description).attr('serviceid', data[j].id);
+										jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+										jQuery('.checkbox-span', thisservice).text('Cost: $ ' + data[j].unit_price);
 									}
+
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
 									}

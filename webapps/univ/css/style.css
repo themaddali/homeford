@@ -2357,6 +2357,13 @@ form div.form-content textarea.error {
 	font-size:13px;
 	color:#000;
 }
+.checkbox-span {
+	margin-left: 10px;
+	padding-left: 10px;
+	/*border-left: 2px solid #0784E3;*/
+	float: right;
+	font-style: italic;
+}
 /*INVOICE*/
 .inv-header {
 	border-bottom:2px solid #0784E3;
