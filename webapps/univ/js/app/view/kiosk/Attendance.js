@@ -205,7 +205,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					jQuery('.main-content-header').fadeIn(400);
 					jQuery('.main-content').fadeIn(400);
 					jQuery('#project-nav').fadeIn(400);
-					populateData();
+					//populateData();
+					var thisactivedomains = [service.domainNametoID(jQuery.cookie('subuser'))];
+					getCurrentStats(thisactivedomains);
 					banner.setBrand();
 					document.title = 'Zingoare | Attendance Kiosk';
 				};
