@@ -391,7 +391,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								},
 								newitemcost : {
 									required : true,
-									money : true
+									money : true,
+									minlength : 1
 								}
 							},
 						});
