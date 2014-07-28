@@ -178,7 +178,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				}
 
 				function helperMediaQuiries() {
-					if ($('.classboard').length > 2) {
+					if ($('.classboard').length > 2 && $('.main-content').width() > 480) {
 						var width = $('.main-content').width() - 60;
 						var rowholds = Math.floor(width / 254);
 						var fillerspace = width - (rowholds * 254);
