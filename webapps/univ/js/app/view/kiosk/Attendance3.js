@@ -119,7 +119,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
-
+					if (checkForActiveCookie() !== true) {
+						router.go('/home', '/admin');
+					}// Cookie Guider
 					if (ACTIVEINFO.state === null) {
 						router.go('/attendancekiosk');
 					} else {

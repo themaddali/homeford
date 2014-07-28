@@ -219,6 +219,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
+					if (checkForActiveCookie() !== true) {
+						router.go('/home', '/admin');
+					}// Cookie Guider
 					if (!ACTIVESTUDENT || ACTIVESTUDENT.name === null || !ACTIVESTUDENT.name) {
 						router.go('/attendancekiosk');
 					} else {

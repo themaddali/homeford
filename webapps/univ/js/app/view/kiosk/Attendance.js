@@ -199,6 +199,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				};
 
 				this.resume = function() {
+					if (checkForActiveCookie() !== true) {
+						router.go('/home', '/admin');
+					}// Cookie Guider
 					$(".card-search").autocomplete("destroy");
 					GetClock();
 					jQuery('#nopage-warning').fadeOut(500);
