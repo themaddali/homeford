@@ -122,6 +122,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						var thisservice = followtemplate.clone();
 						jQuery('.services-list', thisservice).parent().append(jQuery('#new-item-name').val());
 						jQuery('.services-list', thisservice).attr('sname', jQuery('#new-item-name').val()).attr('cost', jQuery('#new-item-cost').val()).attr('tax', '0').attr('desc', jQuery('#new-item-desc').val()).attr('checked', 'checked');
+						jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+						jQuery('.checkbox-span', thisservice).text('Cost: $ ' + jQuery('#new-item-cost').val());
 						jQuery('#services-grid').append(thisservice);
 						jQuery('#new-item-name').val('');
 						jQuery('#new-item-cost').val('');
