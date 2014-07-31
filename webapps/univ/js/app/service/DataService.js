@@ -182,7 +182,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.setDomainProfile = function(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainobj, handlers) {
+				this.setDomainProfile = function(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainobj, paymentobj, handlers) {
 					$.ajax({
 						url : '/zingoare/api/updatedomainprofile/' + domainid,
 						type : 'POST',
@@ -193,12 +193,14 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'domainDesc2' : domainDesc2,
 							'domainThanksMessage' : domainThanksMessage,
 							'addresses' : domainobj,
+							'billingInfo' : paymentobj,
 							'id' : parseInt(domainid)
 						}),
 						success : function(data) {
 							handlers.success(data);
 						}
 					});
+
 				};
 
 				this.knowServices = function(memberid, handlers) {

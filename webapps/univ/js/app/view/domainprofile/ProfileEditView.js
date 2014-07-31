@@ -12,7 +12,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			};
-			//var Croppic = new croppic;
+			var ADDRESS1ID;
+			var ADDRESS2ID;
+			var BILLINGID;
 
 			function ProfileEditView() {
 
@@ -27,6 +29,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								jQuery('#profile-state').val(Profile.addresses[0].state);
 								jQuery('#profile-country').val(Profile.addresses[0].country);
 								jQuery('#profile-zip').val(Profile.addresses[0].zip);
+								ADDRESS1ID = Profile.addresses[0].id;
 
 								jQuery('#profile-street-2').val(Profile.addresses[1].street1);
 								jQuery('#profile-street1-2').val(Profile.addresses[1].street2);
@@ -34,8 +37,15 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								jQuery('#profile-state-2').val(Profile.addresses[1].state);
 								jQuery('#profile-country-2').val(Profile.addresses[1].country);
 								jQuery('#profile-zip-2').val(Profile.addresses[1].zip);
+								ADDRESS2ID = Profile.addresses[1].id;
 							}
-							
+
+							if (Profile.billingInfo) {
+								jQuery('#profile-paypal').val(Profile.billingInfo.paypalemail);
+								jQuery('#profile-check').val(Profile.billingInfo.checkpayable);
+								BILLINGID = Profile.billingInfo.id;
+							}
+
 							jQuery('#profile-domainDesc1').text(Profile.domainDesc1);
 							jQuery('#profile-domainDesc2').text(Profile.domainDesc2);
 							jQuery('#profile-domainThanksMessage').text(Profile.domainThanksMessage);
@@ -126,7 +136,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 				this.resume = function() {
 					//jQuery('#password-reenter-item').hide();
 					jQuery('.edit-notify').hide();
-					jQuery('input').val('');
+					jQuery('input[type="text"]').val('');
 					populateData();
 					document.title = 'Zingoare | Domain Profile Edit';
 					if (jQuery('#profile-street').val() == null || jQuery('#profile-street').val() == 'null' || jQuery('#profile-street').val().length < 1) {
@@ -166,6 +176,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.state = jQuery('#profile-state').val();
 								domainobj.country = jQuery('#profile-country').val();
 								domainobj.zip = jQuery('#profile-zip').val();
+								domainobj.id = ADDRESS1ID;
 								domainarray.push(domainobj);
 								var domainobj = {};
 								domainobj.addressName = "BILLING2";
@@ -175,8 +186,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.state = jQuery('#profile-state-2').val();
 								domainobj.country = jQuery('#profile-country-2').val();
 								domainobj.zip = jQuery('#profile-zip-2').val();
+								domainobj.id = ADDRESS2ID;
 								domainarray.push(domainobj);
-								service.setDomainProfile(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainarray, {
+								var billinobj = {};
+								billinobj.paypalemail = jQuery('#profile-paypal').val();
+								billinobj.checkpayable = jQuery('#profile-check').val();
+								billinobj.id = BILLINGID;
+								service.setDomainProfile(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainarray, billinobj, {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
@@ -198,8 +214,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#profile-image').click(function() {
 							$('input[type=file]').click();
 						});
-						
-						jQuery('#address-copy').change(function(){
+
+						jQuery('#address-copy').change(function() {
 							if (this.checked) {
 								jQuery('#profile-street-2').val(jQuery('#profile-street').val());
 								jQuery('#profile-street1-2').val(jQuery('#profile-street1').val());
@@ -207,9 +223,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								jQuery('#profile-state-2').val(jQuery('#profile-state').val());
 								jQuery('#profile-country-2').val(jQuery('#profile-country').val());
 								jQuery('#profile-zip-2').val(jQuery('#profile-zip').val());
-							}
-							else {
-								jQuery('#profile-street-2').val('') 
+							} else {
+								jQuery('#profile-street-2').val('')
 								jQuery('#profile-street1-2').val('')
 								jQuery('#profile-city-2').val('')
 								jQuery('#profile-state-2').val('')

@@ -141,13 +141,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 					service.getUserProfile({
 						success : function(UserProfile) {
-							// for (var i = 0; i < UserProfile.domains.length; i++) {
-							// if (ROLEMAP[UserProfile.domains[i].roleName] === 'Admin') {
-							// ADMINLEVEL = ADMINLEVEL + 1;
-							// } else if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
-							// OWNERLEVEL = OWNERLEVEL + 1;
-							// }
-							// }
+
 							for (var i = 0; i < UserProfile.domains.length; i++) {
 								if (UserProfile.domains[i].domainName === jQuery.cookie('subuser')) {
 									if (ROLEMAP[UserProfile.domains[i].roleName] === 'Owner') {
@@ -172,9 +166,48 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 									activateDonutClicks();
 								}, 1500);
 								jQuery('.T1').show();
+								populateDomainData();
 								populateUserData();
 								populateInviteData();
 							}
+						}
+					});
+				}
+
+				function populateDomainData() {
+					service.getDomainProfile(jQuery.cookie('_did'), {
+						success : function(Profile) {
+							var _addresses = 0;
+							var _payments = 0;
+							var _domaindata = [0, 0];
+							updatePanelValues('#domain-ids-value', '# ' + Profile.id);
+							updatePanelValues('#domain-address-value', Profile.addresses.length);
+							updatePanelValues('#domain-payement-value', 0);
+							if (Profile.addresses[0]) {
+								if (Profile.addresses[0].street1 && Profile.addresses[0].street1 !== null || Profile.addresses[0].street1 !== 'null' && Profile.addresses[0].street1.length > 1) {
+									_addresses = _addresses + 1;
+									updatePanelValues('#domain-address-value', _addresses);
+									_domaindata[0] = _addresses;
+								}
+								if (Profile.addresses[1].street1 && Profile.addresses[1].street1 !== null || Profile.addresses[1].street1 !== 'null' && Profile.addresses[1].street1.length > 1) {
+									_addresses = _addresses + 1;
+									updatePanelValues('#domain-address-value', _addresses);
+									_domaindata[0] = _addresses;
+								}
+							}
+							if (Profile.billingInfo) {
+								if (Profile.billingInfo.paypalemail && Profile.billingInfo.paypalemail !== null || Profile.billingInfo.paypalemail !== 'null' && Profile.billingInfo.paypalemail.length > 1) {
+									_payments = _payments + 1;
+									updatePanelValues('#domain-payment-value', _payments);
+									_domaindata[1] = _payments;
+								}
+								if (Profile.billingInfo.checkpayable && Profile.billingInfo.checkpayable !== null || Profile.billingInfo.checkpayable !== 'null' && Profile.billingInfo.checkpayable.length > 1) {
+									_payments = _payments + 1;
+									updatePanelValues('#domain-payment-value', _payments);
+									_domaindata[1] = _payments;
+								}
+							}
+							updatePanelGraphs('#domain-donut', _domaindata);
 						}
 					});
 				}

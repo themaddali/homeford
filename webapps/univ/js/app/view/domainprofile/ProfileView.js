@@ -40,6 +40,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							} else {
 								jQuery('#profile-image').attr('src', '/zingoare/api/domainupload/picture/' + Profile.image.id);
 							}
+							
+							if (Profile.billingInfo) {
+								jQuery('#profile-paypal').text(Profile.billingInfo.paypalemail);
+								jQuery('#profile-check').text(Profile.billingInfo.checkpayable);
+							}
 
 							jQuery('#profile-domainDesc1').text(Profile.domainDesc1);
 							jQuery('#profile-domainDesc2').text(Profile.domainDesc2);
@@ -55,7 +60,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								if (jQuery('#profile-domainThanksMessage').text() == 'null' || jQuery('#profile-domainThanksMessage').text() == null || jQuery('#profile-domainThanksMessage').text().length < 2) {
 									jQuery('#profile-domainThanksMessage').text('Myself and the whole team');
 								}
-								if (jQuery('#profile-street').val() == null || jQuery('#profile-street').val() == 'null' || jQuery('#profile-street').val().length < 1) {
+								if (jQuery('#profile-street').text() == null || jQuery('#profile-street').text() == 'null' || jQuery('#profile-street').text().length < 1) {
 									jQuery('#profile-street').text('Not On File. Please Update!');
 								}
 							}, 500);
@@ -86,6 +91,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 				};
 
 				this.resume = function() {
+					jQuery('span').text('');
 					populateData();
 					document.title = 'Zingoare | Profile Info';
 					if (jQuery('#profile-street').val() == null || jQuery('#profile-street').val() == 'null' || jQuery('#profile-street').val().length < 1) {
