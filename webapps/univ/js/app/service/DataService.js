@@ -170,6 +170,37 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				}
 
 
+				this.getDomainProfile = function(domainid, handlers) {
+					$.ajax({
+						url : '/zingoare/api/getdomaindetails/' + domainid,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+
+				this.setDomainProfile = function(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainobj, handlers) {
+					$.ajax({
+						url : '/zingoare/api/updatedomainprofile/' + domainid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'domainDesc1' : domainDesc1,
+							'domainDesc2' : domainDesc2,
+							'domainThanksMessage' : domainThanksMessage,
+							'addresses' : domainobj,
+							'id' : parseInt(domainid)
+						}),
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+
 				this.knowServices = function(memberid, handlers) {
 
 				};
@@ -415,7 +446,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, domainobj, handlers) {
+				this.setUserProfile = function(id, firstname, lastname, email, phone, kioskpin, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -429,7 +460,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'phoneNumber' : phone,
 							'email' : email,
 							'kioskPassword' : kioskpin,
-							'domain' : domainobj,
 						}),
 						success : function(data) {
 							USERPROFILE = null;
@@ -449,7 +479,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.setUserProfileWithPassword = function(id, firstname, lastname, email, password, phone, kioskpin, domainobj, handlers) {
+				this.setUserProfileWithPassword = function(id, firstname, lastname, email, password, phone, kioskpin, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -464,7 +494,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'email' : email,
 							'password' : password,
 							'kioskPassword' : kioskpin,
-							'domain' : domainobj,
 						}),
 						success : function(data) {
 							USERPROFILE = null;
@@ -546,7 +575,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.getAllInvoices = function(_domainid, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
@@ -571,7 +600,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-
 
 				this.registerNewUser = function(username, password, domain, handlers) {
 					$('input[type="button"]').addClass('processing');

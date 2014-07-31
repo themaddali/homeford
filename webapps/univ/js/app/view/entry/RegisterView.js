@@ -48,7 +48,9 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						success : function(RegisterData) {
 							if (RegisterData.status === 'success') {
 								notify.showNotification('OK', 'Congratulations!!!', null, '1000');
-								Login(username, password, domain);
+								setTimeout(function() {
+									Login(username, password, domain);
+								},300);
 							} else {
 								notify.showNotification('ERROR', RegisterData.message);
 							}
@@ -82,7 +84,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 									path : '/'
 								});
 							} else {
-								notify.showNotification('ERROR', 'Some thing didnt go right!');
+								router.go('/home', '/register');
 							}
 						}
 					});

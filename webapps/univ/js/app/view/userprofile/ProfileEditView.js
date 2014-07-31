@@ -40,42 +40,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							}
 							var imageUploadURL = '/zingoare/api/profileupload/' + UserProfile.id;
 							jQuery('#profile-picture').attr('data-url', imageUploadURL);
-							jQuery('.DO-T1').hide();
-							if (UserProfile.domains.length === 1 && UserProfile.domains[0].roleName === 'ROLE_TIER1') {
-								jQuery('.DO-T1').show();
-								jQuery('#profile-domainDesc1').text(UserProfile.domains[0].domainDesc1);
-								jQuery('#profile-domainDesc2').text(UserProfile.domains[0].domainDesc2);
-								jQuery('#profile-domainThanksMessage').text(UserProfile.domains[0].domainThanksMessage);
-								jQuery('#profile-street').text(UserProfile.domains[0].street);
-								jQuery('#profile-city').text(UserProfile.domains[0].city);
-								jQuery('#profile-state').text(UserProfile.domains[0].state);
-								jQuery('#profile-country').text(UserProfile.domains[0].country);
-								jQuery('#profile-zip').text(UserProfile.domains[0].zip);
-							} else {
-								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser') && UserProfile.domains[i].roleName === 'ROLE_TIER1') {
-										jQuery('.DO-T1').show();
-										jQuery('#profile-domainDesc1').text(UserProfile.domains[i].domainDesc1);
-										jQuery('#profile-domainDesc2').text(UserProfile.domains[i].domainDesc2);
-										jQuery('#profile-domainThanksMessage').text(UserProfile.domains[i].domainThanksMessage);
-										jQuery('#profile-street').text(UserProfile.domains[i].street);
-										jQuery('#profile-city').text(UserProfile.domains[i].city);
-										jQuery('#profile-state').text(UserProfile.domains[i].state);
-										jQuery('#profile-country').text(UserProfile.domains[i].country);
-										jQuery('#profile-zip').text(UserProfile.domains[i].zip);
-									}
-								}
-							}
 							setTimeout(function() {
-								if (jQuery('#profile-domainDesc1').val() == 'null' || jQuery('#profile-domainDesc1').val() == null || jQuery('#profile-domainDesc1').val().length < 2) {
-									jQuery('#profile-domainDesc1').val('In continuous effort to provide best and quality care to your kid, we here, have decided to empower ourselves with Zingoare platform. I personally invite you to take a moment (less than a minute) to register yourself and add your kid thru the link provided below.');
-								}
-								if (jQuery('#profile-domainDesc2').val() == 'null' || jQuery('#profile-domainDesc2').val() == null || jQuery('#profile-domainDesc2').val().length < 2) {
-									jQuery('#profile-domainDesc2').val('We are happy that you chose us to be a part of your kids exciting journey for a great future. A big thank you!! ');
-								}
-								if (jQuery('#profile-domainThanksMessage').val() == 'null' || jQuery('#profile-domainThanksMessage').val() == null || jQuery('#profile-domainThanksMessage').val().length < 2) {
-									jQuery('#profile-domainThanksMessage').val('Myself and the whole team');
-								}
 								if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
 									jQuery('.modal_close').hide();
 								} else {
@@ -118,15 +83,6 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							});
 						}
 					});
-
-					// var croppicContaineroutputOptions = {
-					// uploadUrl : jQuery('#profile-picture').attr('data-url'),
-					// outputUrlId : 'cropOutput',
-					// modal : false,
-					// formdatainput : formData_input,
-					// loaderHtml : '<div class="loader bubblingG"><span id="bubblingG_1"></span><span id="bubblingG_2"></span><span id="bubblingG_3"></span></div> '
-					// }
-					// var cropContaineroutput = new Croppic('profile-picture-div', croppicContaineroutputOptions);
 				}
 
 				function checkForActiveCookie() {
@@ -171,9 +127,6 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					//Check for Cookoverview-manageie before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Profile Edit';
-					// if (!$("#profile-edit-form").valid()) {
-					// jQuery('.modal_close').hide();
-					// }
 
 					if (checkForActiveCookie() === true) {
 						populateData();
@@ -187,18 +140,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#profile-edit').on('click', function() {
 							if ($("#profile-edit-form").valid()) {
-								var domainobj = {};
-								domainobj.id = jQuery.cookie('_did');
-								domainobj.domainDesc1 = jQuery('#profile-domainDesc1').val();
-								domainobj.domainDesc2 = jQuery('#profile-domainDesc2').val();
-								domainobj.domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
-								domainobj.street = jQuery('#profile-street').val();
-								domainobj.city = jQuery('#profile-city').val();
-								domainobj.state = jQuery('#profile-state').val();
-								domainobj.country = jQuery('#profile-country').val();
-								domainobj.zip = jQuery('#profile-zip').val();
 								if (jQuery('#profile-password').val().length > 0) {
-									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
+									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
 										success : function(response) {
 											if (response.status !== 'error') {
 												jQuery.removeCookie('user', {
@@ -223,7 +166,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										}
 									});
 								} else {
-									service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), domainobj, {
+									service.setUserProfile(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
 										success : function(response) {
 											if (response.status !== 'error') {
 												notify.showNotification('OK', response.message);

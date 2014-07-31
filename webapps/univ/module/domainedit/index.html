@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<link rel="apple-touch-icon" href="img/iosicon.png"/>
+<html class="no-js" lang="en">
+	<body class="page">
+		<noscript>
+			<div id="noscript-warning">
+				This website works best with JavaScript enabled
+			</div>
+		</noscript>
+
+		<header id="fluid-nav">
+			<div id="logo">
+				<a href=""></a>
+			</div>
+		</header>
+
+		<div id="profile-edit-modal" class="modal-body">
+			<div class="modal-container">
+				<header>
+					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
+					Domain Profile Edit
+				</header>
+				<div class="modal-contents">
+					<form id="profile-edit-form" class="edit-form">
+						<fieldset>
+							<ol id="profile-form">
+								<div class="form-partition">
+									<span>Primary Address</span>
+								</div>
+								<li class="form-item  ">
+									<label> Address Line 1</label>
+									<div class="form-content">
+										<input placeholder="Ex:101 Success Drive" id="profile-street" name="profilestreet" type="text" />
+										<div class="form-helper">
+											<label> Street Address Full</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label> Address Line 2</label>
+									<div class="form-content">
+										<input placeholder="Ex:Unit 999" id="profile-street1" name="profilestreet2" type="text" />
+										<div class="form-helper">
+											<label> Street Address (continued)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>City</label>
+									<div class="form-content">
+										<input placeholder="Ex:Foster City" id="profile-city" name="profilecity" type="text" />
+										<div class="form-helper">
+											<label> City Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>State</label>
+									<div class="form-content">
+										<input placeholder="Ex:CA" id="profile-state" name="profilestate" type="text" />
+										<div class="form-helper">
+											<label> State Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>Country</label>
+									<div class="form-content">
+										<input placeholder="Ex:USA" id="profile-country" name="profilecountry" type="text" />
+										<div class="form-helper">
+											<label> Country Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>Zip Code</label>
+									<div class="form-content">
+										<input placeholder="Ex:94404" id="profile-zip" name="profilezip" type="text" />
+										<div class="form-helper">
+											<label>Valid Zip Code</label>
+										</div>
+									</div>
+								</li>
+								
+								<div class="form-partition">
+									<span>Secondary Address</span>
+								</div>
+								<li class="form-item servicetemplate" id="">
+									<label></label>
+									<span>
+										<input id="address-copy" class="address-list" type="checkbox" name="addresses"> Same Address as above
+										<span class="checkbox-span"></span></span>
+								</li>
+								<li class="form-item  ">
+									<label>Address Line 1</label>
+									<div class="form-content">
+										<input placeholder="Ex:101 Success Drive" id="profile-street-2" name="profilestreet2" type="text" />
+										<div class="form-helper">
+											<label> Street Address </label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label> Address Line 2 </label>
+									<div class="form-content">
+										<input placeholder="Ex:Unit 999" id="profile-street1-2" name="profilestreet2" type="text" />
+										<div class="form-helper">
+											<label> Street Address (continued)</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>City</label>
+									<div class="form-content">
+										<input placeholder="Ex:Foster City" id="profile-city-2" name="profilecity2" type="text" />
+										<div class="form-helper">
+											<label> City Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>State</label>
+									<div class="form-content">
+										<input placeholder="Ex:CA" id="profile-state-2" name="profilestate2" type="text" />
+										<div class="form-helper">
+											<label> State Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>Country</label>
+									<div class="form-content">
+										<input placeholder="Ex:USA" id="profile-country-2" name="profilecountry2" type="text" />
+										<div class="form-helper">
+											<label> Country Name</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item  ">
+									<label>Zip Code</label>
+									<div class="form-content">
+										<input placeholder="Ex:94404" id="profile-zip-2" name="profilezip2" type="text" />
+										<div class="form-helper">
+											<label>Valid Zip Code</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition DO-T1">
+									<span>Customize Mailers</span>
+								</div>
+								<li class="form-item DO-T1">
+									<label>Welcome Email (Header)</label>
+									<div class="form-content">
+										<textarea id="profile-domainDesc1" class="edittextarea" placeholder="In continuous effort to provide best and quality care to your kid, we here, have decided to empower ourselves with Zingoare platform. I personally invite you to take a moment (less than a minute) to register yourself and add your kid thru the link provided below."></textarea>
+										<div class="form-helper">
+											<label> Header/Intro for the invite/welcome email</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item DO-T1">
+									<label>Welcome Email (Footer)</label>
+									<div class="form-content">
+										<textarea id="profile-domainDesc2" class="edittextarea" placeholder="We are happy that you chose us to be a part of your kids exciting journey for a great future. A big thank you!! "></textarea>
+										<div class="form-helper">
+											<label> Footer for the invite/welcome email</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item DO-T1">
+									<label>Welcome Email (Thanks Note)</label>
+									<div class="form-content">
+										<textarea id="profile-domainThanksMessage" class="edittextarea" placeholder=" Myself and the whole team "></textarea>
+										<div class="form-helper">
+											<label> Signature for the invite/welcome email</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition">
+									<span><a href="#paymentinfo"></a>Payment Information</span>
+								</div>
+								<li class="form-item">
+									<label>PayPal ID/Email</label>
+									<div class="form-content">
+										<input placeholder="Ex:payments@zingoare.com" id="profile-paypal" name="profilepaypal" type="text" />
+										<div class="form-helper">
+											<label> Provide your payement id of paypal. This is used to inform in your invoicing/billing module. Dont worry you can chose to hide this info if you want want to.</label>
+										</div>
+									</div>
+								</li>
+								<li class="form-item">
+									<label>Check Payable To</label>
+									<div class="form-content">
+										<input placeholder="Ex:Zingoare Inc." id="profile-check" name="profilecheck" type="text" />
+										<div class="form-helper">
+											<label>Check payable information.This is used to inform in your invoicing/billing module. Dont worry you can chose to hide this info if you want want to.</label>
+										</div>
+									</div>
+								</li>
+								<div class="form-partition">
+									<span>Personalize</span>
+								</div>
+								<li class="form-item">
+									<label>Domain Logo</label>
+									<div class="form-content">
+										<input id="profile-picture" name="profilepicture" type="file" style="display: none" />
+										<img alt="profile-image" id="profile-image" />
+										<div class="form-helper">
+											<label>Choose a Display (Profile) Image or Logo. Suggested shape is square .jpg, .png or .gif only.</label>
+										</div>
+									</div>
+								</li>
+							</ol>
+						</fieldset>
+					</form>
+				</div>
+				<!-- <div style="background-color: red;" id="myid"></div> -->
+				<footer>
+					<div class="edit-controls">
+						<input id="profile-edit" type="button" value="Update">
+					</div>
+				</footer>
+				<div id="profile-edit-modal-close" class="modal_close"></div>
+			</div>
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+
+		<div id="preloader"></div>
+		<div id="headshot-upload"></div>
+
+	</body>
+</html>

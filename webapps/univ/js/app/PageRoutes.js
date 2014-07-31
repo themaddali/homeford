@@ -112,6 +112,22 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('domainedit', '^/domainedit(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/domainedit/index.html', '../app/view/domainprofile/ProfileEditView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
+					router.map('domainview', '^/domainview(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/domainedit/view.html', '../app/view/domainprofile/ProfileView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 
 					router.map('admin', '^/admin(/.*|$)', {
 						container : CONTAINER,

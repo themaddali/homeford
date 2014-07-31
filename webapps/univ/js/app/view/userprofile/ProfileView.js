@@ -49,30 +49,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								jQuery('.profile-domain-list', activetemplate).attr('name', UserProfile.domains[0].domainName);
 								jQuery('#profile-form').append(activetemplate);
 								DOMAINS.push(UserProfile.domains[0].domainName);
-								if (UserProfile.domains[0].roleName === 'ROLE_TIER1') {
-									jQuery('.DO-T1').show();
-									jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[0].domainDesc1);
-									jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[0].domainDesc2);
-									jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[0].domainThanksMessage);
-									jQuery('#profile-street', activetemplate).text(UserProfile.domains[0].street);
-									jQuery('#profile-city', activetemplate).text(UserProfile.domains[0].city);
-									jQuery('#profile-state', activetemplate).text(UserProfile.domains[0].state);
-									jQuery('#profile-country', activetemplate).text(UserProfile.domains[0].country);
-									jQuery('#profile-zip', activetemplate).text(UserProfile.domains[0].zip);
-								}
 							} else {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
-									if (UserProfile.domains[i].domainName === jQuery.cookie('subuser') && UserProfile.domains[i].roleName === 'ROLE_TIER1') {
-										jQuery('.DO-T1').show();
-										jQuery('#profile-domainDesc1', activetemplate).text(UserProfile.domains[i].domainDesc1);
-										jQuery('#profile-domainDesc2', activetemplate).text(UserProfile.domains[i].domainDesc2);
-										jQuery('#profile-domainThanksMessage', activetemplate).text(UserProfile.domains[i].domainThanksMessage);
-										jQuery('#profile-street', activetemplate).text(UserProfile.domains[i].street);
-										jQuery('#profile-city', activetemplate).text(UserProfile.domains[i].city);
-										jQuery('#profile-state', activetemplate).text(UserProfile.domains[i].state);
-										jQuery('#profile-country', activetemplate).text(UserProfile.domains[i].country);
-										jQuery('#profile-zip', activetemplate).text(UserProfile.domains[i].zip);
-									}
 									if (DOMAINS.indexOf(UserProfile.domains[i].domainName) === -1) {
 										DOMAINS.push(UserProfile.domains[i].domainName);
 										var activetemplate = template.clone();
@@ -88,15 +66,6 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								}
 							}
 							setTimeout(function() {
-								if (jQuery('#profile-domainDesc1').text() == 'null' || jQuery('#profile-domainDesc1').text() == null || jQuery('#profile-domainDesc1').text().length < 2) {
-									jQuery('#profile-domainDesc1').text('In continuous effort to provide best and quality care to your kid, we here, have decided to empower ourselves with Zingoare platform. I personally invite you to take a moment (less than a minute) to register yourself and add your kid thru the link provided below.');
-								}
-								if (jQuery('#profile-domainDesc2').text() == 'null' || jQuery('#profile-domainDesc2').text() == null || jQuery('#profile-domainDesc2').text().length < 2) {
-									jQuery('#profile-domainDesc2').text('We are happy that you chose us to be a part of your kids exciting journey for a great future. A big thank you!! ');
-								}
-								if (jQuery('#profile-domainThanksMessage').text() == 'null' || jQuery('#profile-domainThanksMessage').text() == null || jQuery('#profile-domainThanksMessage').text().length < 2) {
-									jQuery('#profile-domainThanksMessage').text('Myself and the whole team');
-								}
 								if (jQuery('#profile-first-name').text() == null || jQuery('#profile-first-name').text() == 'null' || jQuery('#profile-first-name').text.length < 1) {
 									jQuery('#profile-first-name').text('Not On File. Please Update!');
 								}
