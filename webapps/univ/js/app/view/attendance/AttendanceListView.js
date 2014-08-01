@@ -122,20 +122,20 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
 										if (stats[i].checkInTimeDiff < 0) {
 											jQuery('.checkin-time', row).append(EXTRAICON);
-											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										} else {
 											jQuery('.checkin-time', row).append(EXTRAICONOK);
-											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										}
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
 
 										if (stats[i].checkOutTimeDiff < 0) {
 											jQuery('.checkout-time', row).append(EXTRAICON);
-											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										} else {
 											jQuery('.checkout-time', row).append(EXTRAICONOK);
-											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										}
 									}
 									jQuery('.view-table  tbody').append(row);
@@ -186,20 +186,20 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if (stats[i].checkInTimeDiff && stats[i].checkInTimeDiff != 0) {
 										if (stats[i].checkInTimeDiff < 0) {
 											jQuery('.checkin-time', row).append(EXTRAICON);
-											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										} else {
 											jQuery('.checkin-time', row).append(EXTRAICONOK);
-											jQuery('.time-diff', row).text(stats[i].checkInTimeDiff);
+											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										}
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
 
 										if (stats[i].checkOutTimeDiff < 0) {
 											jQuery('.checkout-time', row).append(EXTRAICON);
-											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										} else {
 											jQuery('.checkout-time', row).append(EXTRAICONOK);
-											jQuery('.checkout-time', row).find('.time-diff').text(stats[i].checkOutTimeDiff);
+											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										}
 									}
 									jQuery('.view-table  tbody').append(row);
@@ -222,8 +222,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
 						var note = jQuery(this).find('.notes').attr('note');
-						var _indiff = parseInt(jQuery(this).find('.checkin-time').find('.time-diff').text());
-						var _outdiff = parseInt(jQuery(this).find('.checkout-time').find('.time-diff').text());
+						var _indiff = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[0]);
+						var _outdiff = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[0]);
+						_indiff = parseInt(_indiff.split(":")[0] * 60) + parseInt(_indiff.split(":")[1]);
+						_outdiff = parseInt(_outdiff.split(":")[0] * 60) + parseInt(_outdiff.split(":")[1]);
 						if (!_indiff || _indiff > 0) {
 							_indiff = 0;
 						}
@@ -236,8 +238,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						if (_indiff < 0) {
 							_indiff = -1 * _indiff;
 						}
-
-						var warnnote = "This student is off the assigned scheduled duration by " + (_indiff + _outdiff) + " minutes. For this additional service create <a href='#/invoicenew' style='font-size:11px; color: #007DBA; cursor: pointer'>new invoice</a>";
+						var timetotal = parseInt(_indiff + _outdiff);
+						var warnnote = "This student is off the assigned scheduled duration by " + minToTime(timetotal) + ". For this additional service create <a href='#/invoicenew' style='font-size:11px; color: #007DBA; cursor: pointer'>new invoice</a>";
 						if ((_indiff + _outdiff) === 0) {
 							warnnote = '';
 						}
@@ -276,6 +278,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						} else {
 							return ((h - 12) + ':' + m + ' pm');
 						}
+					}
+				}
+
+				function minToTime(s) {
+					if (s < 0) {
+						s = s * -1;
+						var _m = s % 60;
+						var _h = Math.floor(s / 60);
+						return _h + ':' + _m + ' mins';
+					} else {
+						var _m = s % 60;
+						var _h = Math.floor(s / 60);
+						return _h + ':' + _m + ' mins';
 					}
 				}
 
