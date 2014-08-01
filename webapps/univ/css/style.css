@@ -2603,11 +2603,17 @@ form div.form-content textarea.error {
 	margin-top:30px;
 	padding-left:20px;
 }
+.inv-payment {
+	float: right;
+	margin-top: 30px;
+	padding-right: 20px;
+	font-size: 12px;
+}
 #inv-domain {
 	font-weight:700;
 	color:#0784E3;
 }
-.address> p {
+.address> p, .inv-payment> p {
 	margin:0px;
 }
 .inv-logo {
@@ -2622,6 +2628,7 @@ form div.form-content textarea.error {
 }
 .inv-logo> img {
 	height:90px
+	width: 90px;
 }
 .inv-synopsis {
 	position:absolute;

@@ -22,6 +22,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var ITEMS = new Object();
 			var PARENTS = new Object();
 			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
+			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 			function InvoiceGenerateView() {
 
@@ -55,6 +56,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						});
 					}
 					getMembers(domainIDs);
+					//getAddresses(domainIDs);
 					//getServices(domainIDs);
 				}
 
@@ -71,6 +73,41 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										PARENTS[data[j].id] = data[j].parents;
 										jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');
 									}
+								}
+								getPaymentOptions(activedomains);
+							}
+						});
+					}
+				}
+
+				function getPaymentOptions(activedomains) {
+					for (var i = 0; i < activedomains.length; i++) {
+						service.getDomainProfile(activedomains[i], {
+							success : function(data) {
+								if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length <= 1) {
+									jQuery('#payment-paypal-1').parent().text('').append('PAYPAL');
+									jQuery('#payment-paypal-1').val('1');
+									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
+									jQuery('#payment-check').hide();
+								} else if (data.billingInfo.paypalemail.length <= 1 && data.billingInfo.checkpayable.length > 1) {
+									jQuery('#payment-paypal-1').parent().text('').append('CHECK');
+									jQuery('#payment-paypal-1').val('2');
+									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.checkpayable);
+									jQuery('#payment-check').hide();
+								} else if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length > 1) {
+									jQuery('#payment-paypal-1').parent().append('PAYPAL');
+									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
+									jQuery('#payment-check-1').parent().append('CHECK');
+									jQuery('#payment-check-1').parent().append(CHECKBOXSPAN);
+									jQuery('#payment-paypal-1').val('3');
+									jQuery('#payment-check').find('.checkbox-span').text(data.billingInfo.checkpayable);
+								} else {
+									jQuery('#payment-check').hide();
+									jQuery('#payment-paypal').hide();
+									jQuery("#note-dialog").dialog("open");
 								}
 							}
 						});
@@ -110,7 +147,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				function clearForm() {
 					jQuery('input[type="text"]').val("");
 					jQuery('input[type="date"]').val("");
-					jQuery('#kid-name').val($("#kid-name option:first").val());
+					jQuery('#payment-paypal-1').attr('checked', 'checked');
+					jQuery('#payment-paypal-1').parent().find('span').remove();
+					jQuery('#payment-check-1').attr('checked', 'checked');
+					jQuery('#payment-check-1').parent().find('span').remove();
 					jQuery('#services-grid').empty();
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
@@ -188,6 +228,30 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						},
 						close : function() {
 							$(this).dialog("close");
+						}
+					});
+
+					jQuery('body').append(WARNDIALOG);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						modal : true,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						buttons : {
+							"Update Now " : function() {
+								router.go('/domainedit');
+								$(this).dialog("close");
+							},
+							"Cancel" : function() {
+								$(this).dialog("close");
+								router.returnToPrevious();
+							}
 						}
 					});
 				}
@@ -283,7 +347,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								'tomessage' : 'Happy To Help!!!!',
 								'sname' : 'None Assigned',
 								'cost' : '$-',
-								'tax' : '-%' ,
+								'tax' : '-%',
+								'payoptions' : 0
 							};
 							databoject.toname = getSelectedText('kid-name');
 							databoject.toemail = jQuery('#member-email').val();
@@ -292,7 +357,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								databoject.tomessage = 'Happy to help!!!';
 							}
 							var _services = [];
-							$('input[type=checkbox]').each(function() {
+							$('#services-grid input[type=checkbox]').each(function() {
 								if (this.checked) {
 									var _servicesentries = {};
 									_servicesentries.name = jQuery(this).attr('sname');
@@ -302,6 +367,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									_services.push(_servicesentries);
 								}
 							});
+							databoject.payoptions = $('#payment-grid input[type=checkbox]:checked').length;
+							if (databoject.payoptions === 2) {
+								databoject.payoptions === 3;
+							}
+							if (databoject.payoptions === 1) {
+								if ($('#payment-grid input[type=checkbox]:checked').parent().text().indexOf('PAYPAL') == -1) {
+									databoject.payoptions === 2;
+								}
+							}
+
 							databoject.services = _services;
 							databoject.duedate = jQuery('#invoice-duedate').val();
 							databoject.parent = '';
@@ -325,7 +400,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							if ($("#invoice-form").valid()) {
 								var _services = [];
 								var _grandtotal = 0;
-								$('input[type=checkbox]').each(function() {
+								$('#services-grid input[type=checkbox]').each(function() {
 									if (this.checked) {
 										var _servicesentries = {};
 										_servicesentries.item = jQuery(this).attr('sname');
