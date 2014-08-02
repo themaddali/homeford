@@ -266,7 +266,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 											notify.showNotification('OK', data.message);
 											clearform();
 											setTimeout(function() {
-												router.go('/admin');
+												//router.go('/admin');
 											}, 2000);
 										} else {
 											notify.showNotification('ERROR', data.message);

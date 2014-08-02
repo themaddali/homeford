@@ -2627,7 +2627,7 @@ form div.form-content textarea.error {
 	color:#0784E3
 }
 .inv-logo> img {
-	height:90px
+	height:90px;
 	width: 90px;
 }
 .inv-synopsis {
@@ -5837,6 +5837,16 @@ footer a:hover {
 	.modal-body.print, .modal-container.print-landscape {
 		width: 8.5in;
 		height: 11in;
+	}
+	
+	::-webkit-scrollbar {
+		width: 0px;
+		height: 0px;
+	}
+	
+	.modal-body .modal-container .modal-contents {
+		height: auto;
+		background-color: white;
 	}
 
 	.certify {

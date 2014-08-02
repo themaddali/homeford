@@ -46,8 +46,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										UserProfile.lastName = "Billing Team";
 										UserProfile.firstName = '';
 									}
-									jQuery('#inv-addr1').text('City, State');
-									jQuery('#inv-addr2').text('US, 12354');
+									jQuery('#inv-addr1').text('');
+									jQuery('#inv-addr2').text('');
 									jQuery('#inv-contact').text(UserProfile.email);
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}
@@ -59,19 +59,23 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ,' + Profile.addresses[0].state + ' ,' + Profile.addresses[0].country + '  - ' + Profile.addresses[0].zip);
 								jQuery('#inv-logo-img').attr('src', '/zingoare/api/domainupload/picture/' + Profile.image.id);
 								if (DATAOBJECT.payoptions === 1) {
-									jQuery('#payment-1').text(Profile.billingInfo.paypalemail);
+									jQuery('#payment-1').text('PAYPAL: ' + Profile.billingInfo.paypalemail);
 								}
 								if (DATAOBJECT.payoptions === 2) {
-									jQuery('#payment-1').text(Profile.billingInfo.checkpayable);
+									jQuery('#payment-1').text('CHECK: ' + Profile.billingInfo.checkpayable);
 								}
 								if (DATAOBJECT.payoptions === 3) {
-									jQuery('#payment-1').text(Profile.billingInfo.paypalemail);
-									jQuery('#payment-2').text(Profile.billingInfo.checkpayable);
+									jQuery('#payment-1').text('PAYPAL: ' + Profile.billingInfo.paypalemail);
+									jQuery('#payment-2').text('CHECK: ' + Profile.billingInfo.checkpayable);
 								}
 								if (DATAOBJECT.payoptions === 0) {
 									jQuery('#payment-1').text('');
 									jQuery('#payment-2').text('');
 								}
+								setTimeout(function() {
+									jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ,' + Profile.addresses[0].street2);
+									jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ,' + Profile.addresses[0].state + ' ,' + Profile.addresses[0].country + '  - ' + Profile.addresses[0].zip);
+								}, 200);
 							}
 						});
 						jQuery('#inv-tbody').empty();

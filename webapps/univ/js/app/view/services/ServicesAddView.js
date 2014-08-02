@@ -53,6 +53,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					});
 				}
 
+				function clearForm() {
+					jQuery('input[type="text"]').val('');
+					jQuery('input[type="date"]').val('');
+					jQuery('textarea').val('');
+				}
+
 
 				this.pause = function() {
 
@@ -110,9 +116,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {
 									success : function(data) {
 										if (data.status !== 'error') {
+											clearForm();
 											notify.showNotification('OK', data.message);
 											setTimeout(function() {
-												router.returnToPrevious();
+												//router.returnToPrevious();
 												//admin.reloadData();
 											}, 2000);
 										} else {

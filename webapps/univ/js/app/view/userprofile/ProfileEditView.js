@@ -172,7 +172,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 												notify.showNotification('OK', response.message);
 												studentlist.reload();
 												setTimeout(function() {
-													router.returnToPrevious();
+													//router.returnToPrevious();
 													//admin.reloadData();
 												}, 2000);
 											} else {

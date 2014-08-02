@@ -187,7 +187,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 											notify.showNotification('ERROR', data.message);
 										}
 										setTimeout(function() {
-											router.returnToPrevious();
+											//router.returnToPrevious();
 											//admin.reloadData();
 										}, 2000);
 									}

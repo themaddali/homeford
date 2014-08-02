@@ -126,6 +126,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								service.sendInvite(jQuery('#invite-email').val(), jQuery('#invite-message').val(), jQuery.cookie('subuser'), roles, {
 									success : function(response) {
 										if (response !== 'error') {
+											clearForm();
 											notify.showNotification('OK', response.message);
 										} else {
 											notify.showNotification('ERROR', response.message);
@@ -133,7 +134,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									}
 								});
 								setTimeout(function() {
-									router.returnToPrevious();
+									//router.returnToPrevious();
 									//admin.reloadData();
 								}, 2000);
 							} else {

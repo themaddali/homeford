@@ -274,10 +274,11 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 													service.AssignService(service.domainNametoID(jQuery.cookie('subuser')), kidid, serviceIDs, deleteItemServicesIds, {
 														success : function(data) {
 															if (data.status !== 'error') {
+																clearForm();
 																notify.showNotification('OK', kidobject[0].firstName + ' and group added!');
 																setTimeout(function() {
 																	studentlist.reload();
-																	router.returnToPrevious();
+																	//router.returnToPrevious();
 																}, 2000);
 															} else {
 																notify.showNotification('ERROR', data.message);

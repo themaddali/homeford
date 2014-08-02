@@ -22,7 +22,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var ITEMS = new Object();
 			var PARENTS = new Object();
 			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
-			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
+			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 			function InvoiceGenerateView() {
 
@@ -85,19 +85,19 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						service.getDomainProfile(activedomains[i], {
 							success : function(data) {
 								if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length <= 1) {
-									jQuery('#payment-paypal-1').parent().text('').append('PAYPAL');
+									jQuery('#payment-paypal').find('.checkbox-name').text('PAYPAL');
 									jQuery('#payment-paypal-1').val('1');
 									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
 									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
 									jQuery('#payment-check').hide();
 								} else if (data.billingInfo.paypalemail.length <= 1 && data.billingInfo.checkpayable.length > 1) {
-									jQuery('#payment-paypal-1').parent().text('').append('CHECK');
+									jQuery('#payment-paypal-1').find('.checkbox-name').text('CHECK');
 									jQuery('#payment-paypal-1').val('2');
 									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
 									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.checkpayable);
 									jQuery('#payment-check').hide();
 								} else if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length > 1) {
-									jQuery('#payment-paypal-1').parent().append('PAYPAL');
+									jQuery('#payment-paypal-1').find('.checkbox-name').text('PAYPAL');
 									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
 									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
 									jQuery('#payment-check-1').parent().append('CHECK');
@@ -148,9 +148,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('input[type="text"]').val("");
 					jQuery('input[type="date"]').val("");
 					jQuery('#payment-paypal-1').attr('checked', 'checked');
-					jQuery('#payment-paypal-1').parent().find('span').remove();
+					jQuery('#kid-name').val('None Selected');
+					//jQuery('#payment-paypal-1').parent().find('.checkbox-span').remove();
 					jQuery('#payment-check-1').attr('checked', 'checked');
-					jQuery('#payment-check-1').parent().find('span').remove();
+					//jQuery('#payment-check-1').parent().find('.checkbox-span').remove();
 					jQuery('#services-grid').empty();
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
@@ -282,6 +283,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						jQuery('.edit-notify').hide();
 					} else {
 						clearForm();
+						jQuery('.checkbox-span').remove();
 						populateData();
 					}
 					document.title = 'Zingoare | Invoice Generate';
@@ -367,12 +369,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									_services.push(_servicesentries);
 								}
 							});
-							databoject.payoptions = $('#payment-grid input[type=checkbox]:checked').length;
+							databoject.payoptions = $('#payment-grid input[type=checkbox]:checked:visible').length;
 							if (databoject.payoptions === 2) {
 								databoject.payoptions === 3;
 							}
 							if (databoject.payoptions === 1) {
-								if ($('#payment-grid input[type=checkbox]:checked').parent().text().indexOf('PAYPAL') == -1) {
+								if ($('#payment-grid input[type=checkbox]:checked:visible').next().text().indexOf('PAYPAL') == -1) {
 									databoject.payoptions === 2;
 								}
 							}
@@ -429,7 +431,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									}
 								});
 								setTimeout(function() {
-									router.returnToPrevious();
+									//router.returnToPrevious();
 								}, 2000);
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');

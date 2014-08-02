@@ -197,7 +197,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);
 											setTimeout(function() {
-												router.returnToPrevious();
+												//router.returnToPrevious();
 											}, 2000);
 										} else {
 											notify.showNotification('ERROR', response.message);
@@ -224,12 +224,12 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								jQuery('#profile-country-2').val(jQuery('#profile-country').val());
 								jQuery('#profile-zip-2').val(jQuery('#profile-zip').val());
 							} else {
-								jQuery('#profile-street-2').val('')
-								jQuery('#profile-street1-2').val('')
-								jQuery('#profile-city-2').val('')
-								jQuery('#profile-state-2').val('')
-								jQuery('#profile-country-2').val('')
-								jQuery('#profile-zip-2').val('')
+								jQuery('#profile-street-2').val('');
+								jQuery('#profile-street1-2').val('');
+								jQuery('#profile-city-2').val('');
+								jQuery('#profile-state-2').val('');
+								jQuery('#profile-country-2').val('');
+								jQuery('#profile-zip-2').val('');
 							}
 						});
 
