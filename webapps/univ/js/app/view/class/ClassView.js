@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, ellipsis, service, banner, router, notify, todogroundview, quizgroundview, todoassign) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/ground/BillGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, ellipsis, service, banner, router, notify, todogroundview, quizgroundview, billgroundview, todoassign) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -29,12 +29,6 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						router.go('/studentlist');
 					} else {
 						jQuery('.subtitleinfo').text(ACTIVESTUDENTNAME);
-						// var list;
-						// service.returnDomainIDList({
-						// success : function(data) {
-						// list = data;
-						// }
-						// });
 						if (service.domainNametoID(jQuery.cookie('subuser'))) {
 							CardsData();
 						} else {
@@ -56,6 +50,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						success : function(StudentData) {
 							var _taskcount = 0;
 							var _quizcount = 0;
+							var _billcount = 0;
 							var PanelTemplate = jQuery('#class-template').remove().attr('id', '');
 							//BackingUp
 							jQuery('.div-template').append(PanelTemplate.attr('id', 'class-template'));
@@ -80,13 +75,21 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									jQuery(newboard).addClass('quiz');
 									newboard.attr('type', 'QUIZ');
 									_quizcount = _quizcount + 1;
-									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
+									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s) / ' + _billcount + ' Bills(s)');
 									StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
 									jQuery('.class-header img', newboard).attr('src', 'img/quiztag.png');
+								}
+								if (StudentData[i].title.indexOf('@BILL') !== -1) {
+									jQuery(newboard).addClass('bill');
+									newboard.attr('type', 'BILL');
+									_billcount = _billcount + 1;
+									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s) / ' + _billcount + ' Bills(s)');
+									StudentData[i].title = (StudentData[i].title).split('@BILL')[1];
+									jQuery('.class-header img', newboard).attr('src', 'img/billtag.png');
 								} else {
 									newboard.attr('type', 'TODO');
 									_taskcount = _taskcount + 1;
-									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s)');
+									jQuery('.metainfo').text(_taskcount + ' ToDo(s) / ' + _quizcount + ' Quiz(s) / ' + _billcount + ' Bills(s)');
 								}
 								if (StudentData[i].title.length > 30) {
 									var elipsisname = StudentData[i].title.substring(0, 30);
@@ -156,6 +159,9 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						} else if ($(this).attr('type') === 'QUIZ') {
 							quizgroundview.activeTask(selectedQuiz);
 							router.go('/quizground', '/class');
+						} else if ($(this).attr('type') === 'BILL') {
+							billgroundview.activeTask(selectedQuiz);
+							//router.go('/billground', '/class');
 						}
 					});
 

@@ -263,7 +263,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								service.AssignQuiz(service.domainNametoID(jQuery.cookie('subuser')), _qid, _ids, _qname, _qdesc, _priority, _tfrom, _tdue, _tbenefit, _thelpurl, _thelpyoutube, {
 									success : function(data) {
 										if (data.status !== 'error') {
-											notify.showNotification('OK', data.message);
+											notify.showNotification('OK', data.message.replace('@QUIZ', ''));
 											clearform();
 											setTimeout(function() {
 												//router.go('/admin');

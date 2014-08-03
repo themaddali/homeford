@@ -382,10 +382,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							databoject.services = _services;
 							databoject.duedate = jQuery('#invoice-duedate').val();
 							databoject.parent = '';
-							for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++)
+							for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
 								if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
 									databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
 								}
+							}
 							invoicepreview.setData(databoject);
 							if ($("#invoice-form").valid()) {
 								router.go('/invoicepreview');
@@ -417,6 +418,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									}
 								});
 								var duedate = jQuery('#invoice-duedate').val();
+								var _pids = [];
+								for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
+									if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
+										_pids.push(PARENTS[jQuery('#kid-name').val()][k].id);
+									}
+								}
 								//console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
 								var _ids = jQuery('#kid-name').val();
 								service.generateInvoice(service.domainNametoID(jQuery.cookie('subuser')), _ids, duedate, _grandtotal, _services, {
@@ -424,7 +431,36 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 										if (response.status !== 'error') {
 											clearForm();
 											ActiveMembers = {};
-											notify.showNotification('OK', response.message);
+											//notify.showNotification('OK', response.message);
+											notify.showNotification('OK', 'Invoice generated and assigned');
+											var currentDate = new Date();
+											var day = currentDate.getDate();
+											var month = currentDate.getMonth() + 1;
+											if (month < 10) {
+												month = '0' + month;
+											}
+											if (day < 10) {
+												day = '0' + day;
+											}
+											var year = currentDate.getFullYear();
+											var now = year + "-" + month + "-" + day;
+											//var _invoicedesc= JSON.stringify(_services).toString();
+											var _invoicedesc= 'For ' + _services.length + ' services, you owe $' + _grandtotal;
+											service.AssignInvoice(service.domainNametoID(jQuery.cookie('subuser')), _pids, 'Invoice '+day+month+year,_invoicedesc , 'High', now, duedate, '', '', '', {
+												success : function(data) {
+													if (data.status !== 'error') {
+														//clearform();
+														//notify.showNotification('OK', data.message);
+													} else {
+														//notify.showNotification('ERROR', data.message);
+													}
+													setTimeout(function() {
+														//router.returnToPrevious();
+														//admin.reloadData();
+													}, 2000);
+												}
+											});
+
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}

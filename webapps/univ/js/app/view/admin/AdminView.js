@@ -370,6 +370,9 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								for (var j = 0; j < data.length; j++) {
 									if ((data[j].groupName).indexOf('@QUIZ') !== -1) {
 										quizdata.push(data[j]);
+									}
+									if ((data[j].groupName).indexOf('@BILL') !== -1) {
+										//quizdata.push(data[j]);
 									} else {
 										tododata.push(data[j]);
 									}

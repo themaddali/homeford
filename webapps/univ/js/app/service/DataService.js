@@ -666,6 +666,37 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.AssignInvoice = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/todo/domain/' + domainid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'title' : '@BILL' + title,
+							'desc' : desc,
+							'priority' : priority,
+							'percentage' : 0,
+							'todoStartDate' : startdate,
+							'todoEndDate' : enddate,
+							'userIds' : ids,
+							'benefit' : benefit,
+							'helperUrl' : url,
+							'helperYoutube' : youtube
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							TODOLIST = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						}
+					});
+				};
+
 
 				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$('input[type="button"]').addClass('processing');

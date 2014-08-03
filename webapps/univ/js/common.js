@@ -20,6 +20,7 @@ require({
 		fileupload : 'fileupload',
 		canvastoblob : 'canvastoblob',
 		getusermedia : 'getUserMedia',
+		paypal : 'paypal',
 		Pages : '../../module',
 	},
 	map : {

@@ -94,6 +94,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('billground', '^/billground(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/ground/bill.html', '../app/view/ground/BillGroundView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 
 					router.map('profileview', '^/profileview(/.*|$)', {
 						container : CONTAINER,

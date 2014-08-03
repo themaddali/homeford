@@ -50,7 +50,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						service.DomainToDoList(thisdomaininstance, {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									if ((data[j].groupName).indexOf('@QUIZ') === -1) {
+									if ((data[j].groupName).indexOf('@QUIZ') === -1 && (data[j].groupName).indexOf('@BILL') === -1) {
 										jQuery('.noinfo').hide();
 										jQuery('.view-table').show();
 										var row = rowtemplate.clone();
