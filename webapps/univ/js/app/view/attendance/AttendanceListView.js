@@ -96,6 +96,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								var COUNT = stats.length;
+								updateSummary(stats);
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
@@ -162,6 +163,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								jQuery('.cardsloading').hide();
 								var COUNT = stats.length;
+								updateSummary(stats);
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
@@ -216,6 +218,22 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								}
 							}
 						});
+					}
+				}
+
+				function updateSummary(data) {
+					var studentids = [];
+					var _checkin = 0;
+					var _checkout = 0;
+					jQuery('#attendance-total').text(data.length);
+					for (var j = 0; j < data.length; j++) {
+						if (data[j].type === 'CHECKIN') {
+							_checkin = _checkin + 1;
+							$('#attendance-in').text(_checkin);
+						} else {
+							_checkout = _checkout + 1;
+							$('#attendance-out').text(_checkout);
+						}
 					}
 				}
 
@@ -356,7 +374,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					populateData();
 					positionModal();
 					jQuery('.filter-selection-count').text('0');
-					jQuery('input[type="checkbox"]').prop('checked',true);
+					jQuery('input[type="checkbox"]').prop('checked', true);
 					jQuery('#admin-template').show();
 					document.title = 'Zingoare | Attendance Summary';
 				};
