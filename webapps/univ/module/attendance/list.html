@@ -20,10 +20,11 @@
 			<div class="modal-container print showheader">
 				<header>
 					<i style="padding-right:10px" class="icon-edit icon-1x "></i>
-					<span style="padding-right: 25px">Attendance Summary  </span>
+					<span style="padding-right: 25px">Attendance Summary </span>
 					<input class="header-input" placeholder="Select a date" id="header-label" name="reportdate" type="text" />
 					<span style="padding-left: 10px; padding-right: 10px"> - </span>
 					<input class="header-input" placeholder="Select a date" id="header-label-to" name="reportdateto" type="text" />
+					<a style="color: white" class="filter-selection-icon"> <i class="icon-wrench  icon-1x "><span class="filter-selection-count">0</span></i><i class="icon-check  icon-1x " style="display: none"><span >Apply</span></i></a>
 				</header>
 				<div class="modal-contents">
 					<table id="adminslist-table" class="view-table">
@@ -40,6 +41,12 @@
 								<th style="background: none"></th>
 							</tr>
 						</thead>
+						<div class="cardsloading">
+							<img width="70px" height="70px" src="img/loading-cofee.gif" />
+							<p>
+								Getting attendance summary!!
+							</p>
+						</div>
 						<tbody>
 
 						</tbody>
@@ -47,6 +54,53 @@
 							No Results Available
 						</div>
 					</table>
+				</div>
+				<div class="filter-selection" style="display: none">
+					<div class="filter-selection-header">
+						Select Filters
+					</div>
+					<form id="invite-edit-form" class="edit-form">
+						<fieldset>
+							<ol id="invite-form">
+								<li class="form-item">
+									<label>Check In Status</label>
+									<span>
+										<input type="checkbox" name="status" value="in" checked="checked"/>
+										Checked In </span>
+								</li>
+								<li class="form-item filler" style="margin-top: 0px">
+									<label></label>
+									<span>
+										<input type="checkbox" name="status" value="out" checked="checked"/>
+										Checked Out</span>
+								</li>
+								<li class="form-item">
+									<label>Note</label>
+									<span>
+										<input type="checkbox" name="status" value="noteyes" checked="checked"/>
+										Available </span>
+								</li>
+								<li class="form-item filler" style="margin-top: 0px">
+									<label></label>
+									<span>
+										<input type="checkbox" name="status" value="noteno" checked="checked"/>
+										Not Available</span>
+								</li>
+								<!-- <li class="form-item">
+								<label>Extra Time</label>
+								<span>
+								<input type="checkbox" name="status" value="extrayes" checked="checked"/>
+								Yes </span>
+								</li>
+								<li class="form-item filler" style="margin-top: 0px">
+								<label></label>
+								<span>
+								<input type="checkbox" name="status" value="extrano" checked="checked"/>
+								No</span>
+								</li> -->
+							</ol>
+						</fieldset>
+					</form>
 				</div>
 				<div id="closethis" class="modal_close"></div>
 				<div id="printbutton" class="modal_close print" onclick="window.print();"></div>

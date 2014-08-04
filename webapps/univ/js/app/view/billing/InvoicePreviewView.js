@@ -57,7 +57,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							success : function(Profile) {
 								jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ,' + Profile.addresses[0].street2);
 								jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ,' + Profile.addresses[0].state + ' ,' + Profile.addresses[0].country + '  - ' + Profile.addresses[0].zip);
-								jQuery('#inv-logo-img').attr('src', '/zingoare/api/domainupload/picture/' + Profile.image.id);
+								if (!Profile.image || Profile.image == null) {
+									jQuery('#profile-image').attr('src', 'img/logo-print.jpg');
+								} else {
+									jQuery('#inv-logo-img').attr('src', '/zingoare/api/domainupload/picture/' + Profile.image.id);
+								}
 								if (DATAOBJECT.payoptions === 1) {
 									jQuery('#payment-1').text('PAYPAL: ' + Profile.billingInfo.paypalemail);
 								}

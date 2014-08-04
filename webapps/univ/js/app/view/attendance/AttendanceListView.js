@@ -15,8 +15,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var ACCEPTEDICON = '<i class="icon-check icon-1x" style="padding-right:10px"></i>';
 			var PENDINGICON = '<i class="icon-spinner icon-1x" style="padding-right:10px"></i>';
 			var COMMENTICON = '<i class="icon-comment icon-1x" style="padding-right:10px; color: #0784E3; cursor: pointer"></i>';
-			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span class="time-diff" style="padding-left:2px"></span></i>';
-			var EXTRAICONOK = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: green; cursor: pointer"><span class="time-diff" style="padding-left:2px"></span></i>';
+			var EXTRAICON = '<i class="icon-circle-arrow-up icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: red; cursor: pointer"><span class="time-diff billyes" style="padding-left:2px"></span></i>';
+			var EXTRAICONOK = '<i class="icon-circle-arrow-down icon-1x" style="padding-right:3px;padding-left:10px; font-size:11px; color: green; cursor: pointer"><span class="time-diff billno" style="padding-left:2px"></span></i>';
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message" style="font-size:12px; color: black"></span></p><p id="note-auto-warning" style="font-size:11px; color: red" ><strong>Attn: </strong>This student is off the assigned scheduled</p></div>';
 			var ACTIVEDOMAINS = [];
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -40,6 +40,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function populateData() {
+					jQuery('.cardsloading').show();
 					jQuery('.view-table  tbody').empty();
 					jQuery('.view-table').tablesorter();
 					var date = new Date();
@@ -91,6 +92,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						service.checkInStats(activedomains[0], {
 							success : function(stats) {
 								var rowtemplate = jQuery('#admin-template').attr('id', '');
+								jQuery('.cardsloading').hide();
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								var COUNT = stats.length;
@@ -150,6 +152,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function reLoadTable(activedomains) {
+					jQuery('.cardsloading').show();
 					jQuery('.view-table  tbody').empty();
 					if (activedomains[0]) {
 						service.checkInStatsbyDate(activedomains[0], jQuery('#header-label').val(), jQuery('#header-label-to').val(), {
@@ -157,6 +160,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								var rowtemplate = jQuery('#admin-template').attr('id', '');
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
+								jQuery('.cardsloading').hide();
 								var COUNT = stats.length;
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
@@ -222,21 +226,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery(this).addClass('rowactive');
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
 						var note = jQuery(this).find('.notes').attr('note');
-						var _indiff = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[0]);
-						var _outdiff = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[0]);
-						_indiff = parseInt(_indiff.split(":")[0] * 60) + parseInt(_indiff.split(":")[1]);
-						_outdiff = parseInt(_outdiff.split(":")[0] * 60) + parseInt(_outdiff.split(":")[1]);
-						if (!_indiff || _indiff > 0) {
-							_indiff = 0;
+						if ((jQuery(this).find('.checkin-time').find('.time-diff')).parent().hasClass('icon-circle-arrow-up')) {
+							var _indiff = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[0]);
+							_indiff = parseInt(_indiff.split(":")[0] * 60) + parseInt(_indiff.split(":")[1]);
+						} else {
+							var _indiff = 0;
 						}
-						if (!_outdiff || _outdiff > 0) {
-							_outdiff = 0;
-						}
-						if (_outdiff < 0) {
-							_outdiff = -1 * _outdiff;
-						}
-						if (_indiff < 0) {
-							_indiff = -1 * _indiff;
+						if ((jQuery(this).find('.checkout-time').find('.time-diff')).parent().hasClass('icon-circle-arrow-up')) {
+							var _outdiff = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[0]);
+							_outdiff = parseInt(_outdiff.split(":")[0] * 60) + parseInt(_outdiff.split(":")[1]);
+						} else {
+							var _outdiff = 0;
 						}
 						var timetotal = parseInt(_indiff + _outdiff);
 						var warnnote = "This student is off the assigned scheduled duration by " + minToTime(timetotal) + ". For this additional service create <a href='#/invoicenew' style='font-size:11px; color: #007DBA; cursor: pointer'>new invoice</a>";
@@ -337,6 +337,14 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					// }
 				}
 
+				function updateFiltercounter() {
+					var count = jQuery('input[type="checkbox"]:unchecked').length;
+					jQuery('.filter-selection-count').text(count);
+					// if (count === 0) {
+					// jQuery('.filter-selection-count').text('');
+					// }
+				}
+
 
 				this.pause = function() {
 
@@ -347,7 +355,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					initDialog();
 					populateData();
 					positionModal();
-					//jQuery('.modal-container').removeClass('print');
+					jQuery('.filter-selection-count').text('0');
+					jQuery('input[type="checkbox"]').prop('checked',true);
+					jQuery('#admin-template').show();
 					document.title = 'Zingoare | Attendance Summary';
 				};
 
@@ -365,6 +375,62 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						// When the browser changes size
 						$(window).resize(positionModal);
 						populateData();
+
+						jQuery('.filter-selection-icon').click(function() {
+							jQuery('.modal-contents').toggle(0);
+							jQuery('.filter-selection').toggle(0);
+							jQuery('.icon-wrench').toggle();
+							jQuery('.icon-check').toggle();
+							jQuery('.modal_close').toggle();
+						});
+
+						jQuery('input[type="checkbox"]').change(function() {
+							updateFiltercounter();
+							var mode = $(this).val();
+							if (mode === 'out') {
+								if (! $(this).is(":checked")) {
+									$('td.checkout-by:not(:contains("-"))').parents('tr').hide(0);
+								} else {
+									$('td.checkout-by:not(:contains("-"))').parents('tr').show(0);
+								}
+							}
+							if (mode === 'in') {
+								if (! $(this).is(":checked")) {
+									$('td.checkout-by:contains("-")').parents('tr').hide(0);
+								} else {
+									$('td.checkout-by:contains("-")').parents('tr').show(0);
+								}
+							}
+							if (mode === 'noteno') {
+								if (! $(this).is(":checked")) {
+									$('td.notes:contains("--")').parents('tr').hide(0);
+								} else {
+									$('td.notes:contains("--")').parents('tr').show(0);
+								}
+							}
+							if (mode === 'noteyes') {
+								if (! $(this).is(":checked")) {
+									$('td.notes:not(:contains("--"))').parents('tr').hide(0);
+								} else {
+									$('td.notes:not(:contains("--"))').parents('tr').show(0);
+								}
+							}
+							if (mode === 'extrayes') {
+								if (! $(this).is(":checked")) {
+									$('.billyes:visible').parent().parent().parent().hide();
+								} else {
+									$('.billyes').parent().parent().parent().show();
+								}
+							}
+							if (mode === 'extrano') {
+								if (! $(this).is(":checked")) {
+									$('td.notes:not(:contains("--"))').parents('tr').hide(0);
+								} else {
+									$('td.notes:not(:contains("--"))').parents('tr').show(0);
+								}
+							}
+
+						});
 
 						//jQuery UI Bug - Hot Fix
 						jQuery('#header-label').focus(function() {
