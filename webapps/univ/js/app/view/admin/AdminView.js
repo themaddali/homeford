@@ -328,6 +328,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 											updatePanelGraphs('#invite-donut', _invitedata);
 										}
 									}
+									updatePanelGraphs('#invite-donut', _invitedata);
 								}
 							});
 						}
@@ -355,6 +356,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 										updatePanelGraphs('#members-donut', _membersdata);
 									}
 								}
+								updatePanelGraphs('#members-donut', _membersdata);
 							}
 						});
 					}
@@ -367,6 +369,10 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 					for (var i = 0; i < activedomains.length; i++) {
 						service.DomainToDoList(activedomains[i], {
 							success : function(data) {
+								if (data.length === 0) {
+									updatePanelGraphs('#todo-donut', [0,0]);
+									updatePanelGraphs('#activequiz-donut', [0,0]);
+								}
 								for (var j = 0; j < data.length; j++) {
 									if ((data[j].groupName).indexOf('@QUIZ') !== -1) {
 										quizdata.push(data[j]);
@@ -409,7 +415,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							updatePanelValues('#todo-progress-value', percentage + ' %');
 						}
 					}
-
+					updatePanelGraphs('#todo-donut', _tododata);
 				}
 
 				function activequiz(data) {
@@ -435,6 +441,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							updatePanelValues('#activequiz-average-value', percentage + ' %');
 						}
 					}
+					updatePanelGraphs('#activequiz-donut', _quizdata);
 				}
 
 				function populateQuizData(activedomains) {
@@ -588,29 +595,29 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				function updatePanelGraphs(name, data) {
 					if (data[0] == 0 && data[1] == 0) {
-						// data[0]=100;
-						// $(name).chart({
-						// template : "novalue_chart",
-						// values : {
-						// serie1 : data
-						// },
-						// labels : [],
-						// tooltips : {
-						// serie1 : data
-						// },
-						// defaultSeries : {
-						// r : -0.5,
-						// values : [{
-						// plotProps : {
-						// fill : "#7f7f7f"
-						// }
-						// }, {
-						// plotProps : {
-						// fill : "#7f7f7f"
-						// }
-						// }]
-						// }
-						// });
+						data[0] = 100;
+						$(name).chart({
+							template : "novalue_chart",
+							values : {
+								serie1 : data
+							},
+							labels : [],
+							tooltips : {
+								serie1 : data
+							},
+							defaultSeries : {
+								r : -0.5,
+								values : [{
+									plotProps : {
+										fill : "#e6e6e6"
+									}
+								}, {
+									plotProps : {
+										fill : "#e6e6e6"
+									}
+								}]
+							}
+						});
 					} else {
 						$(name).chart({
 							template : "pie_basic_2",
@@ -668,7 +675,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							label : {
 								active : true,
 								props : {
-									fill : "#0784E3"
+									fill : "#f3f3f3"
 								}
 							},
 							startAnimation : {
@@ -685,7 +692,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						},
 						defaultSeries : {
 							plotProps : {
-								stroke : "#f3f3f3",
+								stroke : "#e6e6e6",
 								"stroke-width" : 3, //upto 3
 								opacity : 1
 							},
@@ -705,7 +712,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							label : {
 								active : false,
 								props : {
-									fill : "#0784E3"
+									fill : "#7f7f7f"
 								}
 							},
 							startAnimation : {

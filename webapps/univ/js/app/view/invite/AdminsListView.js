@@ -181,8 +181,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						});
 
 						jQuery('.filter-selection-icon').click(function() {
-							jQuery('.modal-contents').toggle(000);
-							jQuery('.filter-selection').toggle(000);
+							jQuery('.modal-contents').toggle(0);
+							jQuery('.filter-selection').toggle(0);
 							jQuery('.icon-wrench').toggle();
 							jQuery('.icon-check').toggle();
 							jQuery('.modal_close').toggle();
