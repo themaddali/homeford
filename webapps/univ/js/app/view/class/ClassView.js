@@ -121,6 +121,12 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								}
 								//jQuery('.class-anouncement', newboard).text(StudentData[i].desc);
 								newboard.attr('name', StudentData[i].id);
+								if (StudentData[i].comments[0]){
+									newboard.attr('comments', StudentData[i].comments[0].text);
+								}
+								else {
+									newboard.attr('comments', '');
+								}
 								//jQuery('.class-header',newboard).css('background-color','#'+(Math.random()*0xFFFFFF<<0).toString(16));
 								jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i + 1]);
 								if (i > 8) {
@@ -148,6 +154,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							selectedQuiz.priority = 'Normal';
 						}
 						selectedQuiz.id = $(this).attr('name');
+						selectedQuiz.comments = $(this).attr('comments');
 						selectedQuiz.dueby = $(this).find('.due-date').text();
 						selectedQuiz.memberid = ACTIVESTUDENTID;
 						selectedQuiz.membername = $('.subtitleinfo').text();
@@ -161,7 +168,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							router.go('/quizground', '/class');
 						} else if ($(this).attr('type') === 'BILL') {
 							billgroundview.activeTask(selectedQuiz);
-							//router.go('/billground', '/class');
+							router.go('/billground', '/class');
 						}
 					});
 

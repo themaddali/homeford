@@ -21,6 +21,7 @@ require({
 		canvastoblob : 'canvastoblob',
 		getusermedia : 'getUserMedia',
 		paypal : 'paypal',
+		stripe : 'stripe',
 		Pages : '../../module',
 	},
 	map : {
