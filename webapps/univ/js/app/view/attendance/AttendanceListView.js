@@ -292,9 +292,17 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						// m = '0' + m;
 						// }
 						if (h < 13) {
-							return (h + ':' + m + ' am');
+							if (h < 10) {
+								return ('0' + h + ':' + m + ' am');
+							} else {
+								return (h + ':' + m + ' am');
+							}
 						} else {
-							return ((h - 12) + ':' + m + ' pm');
+							var h = h - 12;
+							if (h < 10) {
+								h = '0' + h;
+							}
+							return (h + ':' + m + ' pm');
 						}
 					}
 				}
