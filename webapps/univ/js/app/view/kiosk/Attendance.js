@@ -156,10 +156,10 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				function updatePanelIcons(memberid, type, kioskactionid) {
 					jQuery('.kioskboard[name=' + memberid + ']').attr('kioskactionid', kioskactionid);
 					if (type === 'CHECKIN') {
-						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').addClass('icon-ok-sign').css('color', 'green');
+						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-ok-sign').css('color', 'green');
 						jQuery('.kioskboard[name=' + memberid + ']').find('.kiosk-flag-text').text('Checked In');
 					} else {
-						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').removeClass('icon-ok-sign').addClass('icon-smile').css('color', '#0784E3');
+						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-smile').css('color', '#0784E3');
 						jQuery('.kioskboard[name=' + memberid + ']').find('.kiosk-flag-text').text('Checked Out');
 					}
 

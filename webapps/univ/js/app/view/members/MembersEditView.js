@@ -182,6 +182,34 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							router.returnToPrevious();
 						});
 
+						jQuery('.negative').click(function() {
+							if ($('.negative').val() == 'Make Inactive') {
+								service.disableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
+									success : function(response) {
+										if (response.status !== 'error') {
+											notify.showNotification('OK', response.message);
+											$('.negative').val('Make Active');
+											$('.negative').css('background-color','green');
+										} else {
+											notify.showNotification('ERROR', response.message);
+										}
+									}
+								});
+							} else {
+								service.enableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
+									success : function(response) {
+										if (response.status !== 'error') {
+											notify.showNotification('OK', response.message);
+											$('.negative').val('Make Inactive');
+											$('.negative').css('background-color','red');
+										} else {
+											notify.showNotification('ERROR', response.message);
+										}
+									}
+								});
+							}
+						});
+
 						jQuery('#member-edit').on('click', function() {
 							generateServiceArray();
 							if ($(".edit-form").valid()) {

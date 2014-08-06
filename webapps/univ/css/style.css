@@ -2074,7 +2074,8 @@ div.formselction {
 }
 .edit-form li.form-item div.form-content img {
 	padding: 10px;
-	width: 60%;
+	width: 250px;
+	height: 125px;
 	border-bottom-right-radius: 10px;
 	border-top-left-radius: 10px;
 	border: 1px solid rgba(114, 114, 114, 0.71);
@@ -2367,6 +2368,52 @@ div.value-desc {
 	margin-top: -10px;
 	margin-bottom: 20px;
 }
+
+/*DAY SUMMARY*/
+.big-table-summary {
+	width: 100%;
+	text-align: center;
+	color : #0784E3;
+}
+
+.table-day-summary {
+	/*float: left;*/
+	display: inline-block;
+	margin: 5px;
+	width: 120px;
+	height: 80px;
+	border : 1px solid #0784E3;	
+}
+
+.day-header > p {
+	margin: 0px;
+	font-size: 19px;
+	text-align: center;
+	padding: 10px;
+	padding-top: 5px;
+}
+
+.day-content {
+	height: 20px;
+	text-align: left;
+	font-size: 12px;
+	margin-top : -3px;
+}
+
+.day-content > div,.day-helpers > div {
+	text-align : center;
+	width: 100%;
+}
+
+.day-content div.right {
+	color: red;
+}
+
+.day-helpers {
+	font-size: 10px;
+	height: 20px;
+}
+
 .adminboard .dash-info-2key {
 	text-align: center;
 	font-size: 4em;

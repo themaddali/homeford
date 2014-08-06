@@ -115,6 +115,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					//jQuery('#password-reenter-item').hide();
 					jQuery('.edit-notify').hide();
 					populateData();
+					jQuery('#profile-password').val('');
+					jQuery('#profile-password-repeat').val('');
 					document.title = 'Zingoare | Profile Edit';
 					if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
 						jQuery('.modal_close').hide();

@@ -21,7 +21,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var SERVICESALL = [];
 			var ITEMS = new Object();
 			var PARENTS = new Object();
-			var DIALOG = '<div id="item-dialog-form" title="Add new item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="Ex: 10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
+			var DIALOG = '<div id="item-dialog-form" title="Add New Item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Ex: Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="Ex: 10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 			function InvoiceGenerateView() {
@@ -50,10 +50,15 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+						var duedate = date.getFullYear() + '-' + (date.getMonth() + 2) + '-01';
+						if ((date.getMonth() + 2) > 12) {
+							var duedate = date.getFullYear() + 1 + '-01-01';
+						}
 						jQuery("#invoice-duedate").datepicker({
 							minDate : 0,
 							dateFormat : 'yy-mm-dd',
 						});
+						jQuery('#invoice-duedate').val(duedate);
 					}
 					getMembers(domainIDs);
 					//getAddresses(domainIDs);
@@ -84,26 +89,32 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getDomainProfile(activedomains[i], {
 							success : function(data) {
-								if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length <= 1) {
-									jQuery('#payment-paypal').find('.checkbox-name').text('PAYPAL');
-									jQuery('#payment-paypal-1').val('1');
-									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
-									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
-									jQuery('#payment-check').hide();
-								} else if (data.billingInfo.paypalemail.length <= 1 && data.billingInfo.checkpayable.length > 1) {
-									jQuery('#payment-paypal').find('.checkbox-name').text('CHECK');
-									jQuery('#payment-paypal-1').val('2');
-									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
-									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.checkpayable);
-									jQuery('#payment-check').hide();
-								} else if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length > 1) {
-									jQuery('#payment-paypal').find('.checkbox-name').text('PAYPAL');
-									jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
-									jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
-									jQuery('#payment-check').find('.checkbox-name').append('CHECK');
-									jQuery('#payment-check-1').parent().append(CHECKBOXSPAN);
-									jQuery('#payment-paypal-1').val('3');
-									jQuery('#payment-check').find('.checkbox-span').text(data.billingInfo.checkpayable);
+								if (data.billingInfo) {
+									if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length <= 1) {
+										jQuery('#payment-paypal').find('.checkbox-name').text('PAYPAL');
+										jQuery('#payment-paypal-1').val('1');
+										jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+										jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
+										jQuery('#payment-check').hide();
+									} else if (data.billingInfo.paypalemail.length <= 1 && data.billingInfo.checkpayable.length > 1) {
+										jQuery('#payment-paypal').find('.checkbox-name').text('CHECK');
+										jQuery('#payment-paypal-1').val('2');
+										jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+										jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.checkpayable);
+										jQuery('#payment-check').hide();
+									} else if (data.billingInfo.paypalemail.length > 1 && data.billingInfo.checkpayable.length > 1) {
+										jQuery('#payment-paypal').find('.checkbox-name').text('PAYPAL');
+										jQuery('#payment-paypal-1').parent().append(CHECKBOXSPAN);
+										jQuery('#payment-paypal').find('.checkbox-span').text(data.billingInfo.paypalemail);
+										jQuery('#payment-check').find('.checkbox-name').append('CHECK');
+										jQuery('#payment-check-1').parent().append(CHECKBOXSPAN);
+										jQuery('#payment-paypal-1').val('3');
+										jQuery('#payment-check').find('.checkbox-span').text(data.billingInfo.checkpayable);
+									} else {
+										jQuery('#payment-check').hide();
+										jQuery('#payment-paypal').hide();
+										jQuery("#note-dialog").dialog("open");
+									}
 								} else {
 									jQuery('#payment-check').hide();
 									jQuery('#payment-paypal').hide();
@@ -222,10 +233,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						},
 						modal : true,
 						buttons : {
-							"Add" : addNewItem,
-							Cancel : function() {
-								$("#item-dialog-form").dialog("close");
-							}
+							// Cancel : function() {
+							// $("#item-dialog-form").dialog("close");
+							// },
+							"Add" : addNewItem
 						},
 						close : function() {
 							$(this).dialog("close");
@@ -245,14 +256,17 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							duration : 300
 						},
 						buttons : {
-							"Update Now " : function() {
+							"Update" : function() {
 								router.go('/domainedit');
-								$(this).dialog("close");
+								//$(this).dialog("close");
 							},
-							"Cancel" : function() {
-								$(this).dialog("close");
-								router.returnToPrevious();
-							}
+							// "Cancel" : function() {
+							// $(this).dialog("close");
+							// router.returnToPrevious();
+							// }
+						},
+						close : function() {
+							router.returnToPrevious();
 						}
 					});
 				}
@@ -382,9 +396,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							databoject.services = _services;
 							databoject.duedate = jQuery('#invoice-duedate').val();
 							databoject.parent = '';
-							for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
-								if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
-									databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+							if (jQuery('#kid-name').val() != 'None Selected') {
+								for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
+									if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
+										databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+									}
 								}
 							}
 							invoicepreview.setData(databoject);
@@ -419,9 +435,11 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								});
 								var duedate = jQuery('#invoice-duedate').val();
 								var _pids = [];
-								for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
-									if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
-										_pids.push(PARENTS[jQuery('#kid-name').val()][k].id);
+								if (jQuery('#kid-name').val() != 'None Selected') {
+									for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
+										if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
+											databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+										}
 									}
 								}
 								//console.log('For ' + _services.length + ' services, you owe $' + _grandtotal);
@@ -445,17 +463,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 											var year = currentDate.getFullYear();
 											var now = year + "-" + month + "-" + day;
 											//var _invoicedesc= JSON.stringify(_services).toString();
-											var _invoicedesc= 'For ' + _services.length + ' services, you owe $' + _grandtotal;
+											var _invoicedesc = 'For ' + _services.length + ' services, you owe $' + _grandtotal;
 											var _paypalurl = 'payments@zingoare.com';
 											var _paycheck = 'Zingoare, Inc.';
 											if (jQuery('#payment-paypal-1').val() === '1' || jQuery('#payment-paypal-1').val() === '3') {
 												_paypalurl = jQuery('#payment-paypal').find('.checkbox-span').text();
 												_paycheck = jQuery('#payment-check').find('.checkbox-span').text();
-											}
-											else {
+											} else {
 												_paycheck = jQuery('#payment-paypal').find('.checkbox-span').val();
 											}
-											service.AssignInvoice(service.domainNametoID(jQuery.cookie('subuser')), _pids, 'Invoice '+day+month+year,_invoicedesc , 'High', now, duedate, '', _paypalurl, _paycheck, {
+											service.AssignInvoice(service.domainNametoID(jQuery.cookie('subuser')), _pids, 'Invoice ' + day + month + year, _invoicedesc, 'High', now, duedate, '', _paypalurl, _paycheck, {
 												success : function(data) {
 													if (data.status !== 'error') {
 														//clearform();

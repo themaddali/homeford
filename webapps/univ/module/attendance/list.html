@@ -27,15 +27,7 @@
 					<a style="color: white" class="filter-selection-icon"> <i class="icon-wrench  icon-1x "><span class="filter-selection-count">0</span></i><i class="icon-check  icon-1x " style="display: none"><span >Apply</span></i></a>
 				</header>
 				<div class="modal-contents">
-					<div class="dash-info-reg">
-						<div class="dash-info-3key">
-							<div id="attendance-total" class="value">
-								0
-							</div>
-							<div class="value-desc">
-								total entries
-							</div>
-						</div>
+					<div class="dash-info-reg" style="display: none">
 						<div class="dash-info-3key">
 							<div id="attendance-in" class="value">
 								0
@@ -52,11 +44,23 @@
 								signed out
 							</div>
 						</div>
+						<div class="dash-info-3key">
+							<div id="attendance-total" class="value">
+								0
+							</div>
+							<div class="value-desc">
+								extra time
+							</div>
+						</div>
+					</div>
+					<div class="big-table-summary">
+
 					</div>
 					<table id="adminslist-table" class="view-table">
 						<thead>
 							<tr>
 								<!-- <th style="background: none"></th> -->
+								<th style="padding-right: 10px"> # </th>
 								<th>Student<i class="icon-sort-by-attributes  icon-1x tablesortcontrol"></i></th>
 								<th>Date<i class="icon-sort-by-attributes  icon-1x tablesortcontrol"></i></th>
 								<th>In Time<i class="icon-sort-by-attributes  icon-1x tablesortcontrol"></i></th>
@@ -141,6 +145,7 @@
 		<table id="div-template" style="display:none">
 			<tr id="admin-template">
 				<!-- <td class="admin-icon"></td> -->
+				<td style="padding-right: 10px" class="s-id"></td>
 				<td class="s-name"></td>
 				<td class="checkin-date"></td>
 				<td class="checkin-time"></td>
@@ -151,6 +156,25 @@
 				<!-- <td class="admin-action" style="color:white"><i class="icon-cog  icon-1x "></i></td> -->
 			</tr>
 		</table>
+		<div style="display: none">
+			<div class="table-day-summary" id="day-template">
+				<div class="day-header">
+					<p>
+						
+					</p>
+				</div>
+				<div class="day-content">
+					<div class="left">
+						
+					</div>
+				</div>
+				<div class="day-content">
+					<div class="right">
+						
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</body>
 </html>

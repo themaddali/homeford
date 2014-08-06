@@ -20,6 +20,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var DIALOGBODY = '<div id="note-dialog" title="Note"><p><span id="note-message" style="font-size:12px; color: black"></span></p><p id="note-auto-warning" style="font-size:11px; color: red" ><strong>Attn: </strong>This student is off the assigned scheduled</p></div>';
 			var ACTIVEDOMAINS = [];
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			var BILLABLEEXTRA = 0;
+			var template;
 
 			function AdminsListView() {
 
@@ -96,11 +98,15 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								var COUNT = stats.length;
+								BILLABLEEXTRA = 0;
+								var dailysummary = new Object();
 								updateSummary(stats);
+								dailysummary[toDate(stats[0].checkinTime)] = [COUNT, 0];
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
+									jQuery('.s-id', row).text(i + 1);
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
 									jQuery('.checkin-date', row).text(toDate(stats[i].checkinTime));
@@ -126,6 +132,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										if (stats[i].checkInTimeDiff < 0) {
 											jQuery('.checkin-time', row).append(EXTRAICON);
 											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
+											BILLABLEEXTRA = BILLABLEEXTRA + stats[i].checkInTimeDiff;
+											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
+											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkInTimeDiff;
 										} else {
 											jQuery('.checkin-time', row).append(EXTRAICONOK);
 											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
@@ -136,6 +145,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										if (stats[i].checkOutTimeDiff < 0) {
 											jQuery('.checkout-time', row).append(EXTRAICON);
 											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
+											BILLABLEEXTRA = BILLABLEEXTRA + stats[i].checkOutTimeDiff;
+											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
+											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkOutTimeDiff;
 										} else {
 											jQuery('.checkout-time', row).append(EXTRAICONOK);
 											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
@@ -145,6 +157,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if (i === COUNT - 1 && activedomains.length > 0) {
 										jQuery('.view-table').trigger("update");
 										activateTableClicks();
+										jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
+										createSummaryBlock(dailysummary);
 									}
 								}
 							}
@@ -155,6 +169,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				function reLoadTable(activedomains) {
 					jQuery('.cardsloading').show();
 					jQuery('.view-table  tbody').empty();
+					jQuery('.big-table-summary').empty();
+					var dailysummary = new Object();
 					if (activedomains[0]) {
 						service.checkInStatsbyDate(activedomains[0], jQuery('#header-label').val(), jQuery('#header-label-to').val(), {
 							success : function(stats) {
@@ -163,11 +179,18 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								jQuery('.cardsloading').hide();
 								var COUNT = stats.length;
+								BILLABLEEXTRA = 0;
 								updateSummary(stats);
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
 									var row = rowtemplate.clone();
+									if (!dailysummary[toDate(stats[i].checkinTime)]) {
+										dailysummary[toDate(stats[i].checkinTime)] = [1, 0];
+									} else {
+										dailysummary[toDate(stats[i].checkinTime)][0] = dailysummary[toDate(stats[i].checkinTime)][0] + 1;
+									}
+									jQuery('.s-id', row).text(i + 1);
 									jQuery('.s-name', row).text(stats[i].kid.firstName);
 									jQuery('.checkin-time', row).text(msToTime(stats[i].checkinTime));
 									jQuery('.checkin-date', row).text(toDate(stats[i].checkinTime));
@@ -193,26 +216,43 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										if (stats[i].checkInTimeDiff < 0) {
 											jQuery('.checkin-time', row).append(EXTRAICON);
 											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
+											BILLABLEEXTRA = BILLABLEEXTRA + stats[i].checkInTimeDiff;
+											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkInTimeDiff;
+											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 										} else {
 											jQuery('.checkin-time', row).append(EXTRAICONOK);
 											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										}
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
-
 										if (stats[i].checkOutTimeDiff < 0) {
 											jQuery('.checkout-time', row).append(EXTRAICON);
 											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
+											BILLABLEEXTRA = BILLABLEEXTRA + stats[i].checkOutTimeDiff;
+											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
+											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkOutTimeDiff;
 										} else {
 											jQuery('.checkout-time', row).append(EXTRAICONOK);
 											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										}
 									}
+
+									// if (dateunique.indexOf(toDate(stats[i].checkinTime)) === -1) {
+									// var thisitem = template.clone();
+									// dateunique.push(toDate(stats[i].checkinTime));
+									// jQuery('.day-header p', thisitem).text(toDate(stats[i].checkinTime));
+									// jQuery('.right', thisitem).text(minToTime(BILLABLEEXTRA));
+									// jQuery('.left', thisitem).text(_daycount);
+									// jQuery('.big-table-summary').append(thisitem);
+									// _extratime = 0;
+									// _daycount = 0;
+									// }
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
 										//activedomains.splice(0, 1);
 										jQuery('.view-table').trigger("update");
-										//loadTable(activedomains);
+										jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
+										createSummaryBlock(dailysummary);
 										activateTableClicks();
 									}
 								}
@@ -221,11 +261,20 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					}
 				}
 
+				function createSummaryBlock(dailysummary) {
+					for (var i in dailysummary) {
+						var thisitem = template.clone();
+						jQuery('.day-header p', thisitem).text(i);
+						jQuery('.left', thisitem).text(dailysummary[i][0] + ' entries');
+						jQuery('.right', thisitem).text(minToTime(dailysummary[i][1]) + ' extra');
+						jQuery('.big-table-summary').append(thisitem);
+					}
+				}
+
 				function updateSummary(data) {
 					var studentids = [];
 					var _checkin = 0;
 					var _checkout = 0;
-					jQuery('#attendance-total').text(data.length);
 					for (var j = 0; j < data.length; j++) {
 						if (data[j].type === 'CHECKIN') {
 							_checkin = _checkin + 1;
@@ -308,6 +357,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function minToTime(s) {
+					if (s===0) {
+						return '';
+					}
 					if (s < 0) {
 						s = s * -1;
 						var _m = s % 60;
@@ -398,6 +450,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							location.reload();
 						}
 						positionModal();
+						template = jQuery('#day-template').remove().attr('id', '');
 						// When the browser changes size
 						$(window).resize(positionModal);
 						populateData();

@@ -264,6 +264,57 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
+				//Active and inactive kids
+				this.disableUser = function(domainid, memberid, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/disableUser/' + domainid+'/'+memberid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Memner Status"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
+				
+				this.enableUser = function(domainid, memberid, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/enableUser/' + domainid+'/'+memberid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Memner Status"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
+
 				this.checkIn = function(domainid, parentid, kidid, notes, handlers) {
 					//$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
@@ -666,7 +717,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.AssignInvoice = function(domainid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
@@ -696,7 +747,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-
 
 				this.AssignQuiz = function(domainid, quizid, ids, title, desc, priority, startdate, enddate, benefit, url, youtube, handlers) {
 					$('input[type="button"]').addClass('processing');

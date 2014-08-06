@@ -12,6 +12,8 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				'ROLE_TIER3' : 'Member'
 			};
 
+			var validator;
+
 			function EntryView() {
 
 				function activateSuggestionSearch() {
@@ -117,6 +119,9 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					positionModal();
 					document.title = 'Zingoare | Signin/Signup';
 					jQuery('#user-name').focus();
+					jQuery('#user-name').val('');
+					jQuery('#user-password').val('');
+
 				};
 
 				this.init = function() {
@@ -192,7 +197,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 						router.returnToPrevious();
 					});
 
-					jQuery("#login-form").validate({
+					validator = jQuery("#login-form").validate({
 						rules : {
 							username : {
 								required : true,
