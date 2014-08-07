@@ -101,7 +101,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								BILLABLEEXTRA = 0;
 								var dailysummary = new Object();
 								updateSummary(stats);
-								dailysummary[toDate(stats[0].checkinTime)] = [COUNT, 0];
+								if (stats[0]) {
+									dailysummary[toDate(stats[0].checkinTime)] = [COUNT, 0];
+								}
 								for (var i = 0; i < COUNT; i++) {
 									jQuery('.noinfo').hide();
 									jQuery('.view-table').show();
@@ -266,7 +268,12 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						var thisitem = template.clone();
 						jQuery('.day-header p', thisitem).text(i);
 						jQuery('.left', thisitem).text(dailysummary[i][0] + ' entries');
-						jQuery('.right', thisitem).text(minToTime(dailysummary[i][1]) + ' extra');
+						var _more = minToTime(dailysummary[i][1]);
+						if (_more !== '') {
+							jQuery('.right', thisitem).text(_more + ' extra');
+						} else {
+							jQuery('.right', thisitem).text(_more);
+						}
 						jQuery('.big-table-summary').append(thisitem);
 					}
 				}
@@ -357,7 +364,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function minToTime(s) {
-					if (s===0) {
+					if (s === 0) {
 						return '';
 					}
 					if (s < 0) {
