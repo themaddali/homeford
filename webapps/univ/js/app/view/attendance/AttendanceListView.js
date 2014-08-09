@@ -291,14 +291,16 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						jQuery('.rowactive').find('.admin-action').css('color', '#007DBA');
 						var note = jQuery(this).find('.notes').attr('note');
 						if ((jQuery(this).find('.checkin-time').find('.time-diff')).parent().hasClass('icon-circle-arrow-up')) {
-							var _indiff = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[0]);
-							_indiff = parseInt(_indiff.split(":")[0] * 60) + parseInt(_indiff.split(":")[1]);
+							var hh = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[0]).split('h')[0];
+							var mm = (jQuery(this).find('.checkin-time').find('.time-diff').text().split(" ")[1]).split('m')[0];
+							var _indiff = parseInt(hh * 60) + parseInt(mm);
 						} else {
 							var _indiff = 0;
 						}
 						if ((jQuery(this).find('.checkout-time').find('.time-diff')).parent().hasClass('icon-circle-arrow-up')) {
-							var _outdiff = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[0]);
-							_outdiff = parseInt(_outdiff.split(":")[0] * 60) + parseInt(_outdiff.split(":")[1]);
+							var hh = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[0]).split('h')[0];
+							var mm = (jQuery(this).find('.checkout-time').find('.time-diff').text().split(" ")[1]).split('m')[0];
+							var _outdiff = parseInt(hh * 60) + parseInt(mm);
 						} else {
 							var _outdiff = 0;
 						}
@@ -361,7 +363,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						s = s * -1;
 						var _m = s % 60;
 						var _h = Math.floor(s / 60);
-						return _h + 'h ' + _m + ' m';
+						return _h + 'h ' + _m + 'm';
 					} else {
 						var _m = s % 60;
 						var _h = Math.floor(s / 60);
