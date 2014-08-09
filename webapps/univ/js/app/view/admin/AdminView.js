@@ -213,7 +213,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				}
 
 				function populateUserData() {
-					//5 minutes
+					//1 minutes
 					setInterval(function() {
 						timelyReloadAttendance();
 					}, 60000);

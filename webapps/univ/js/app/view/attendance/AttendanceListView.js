@@ -98,6 +98,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								//Backing the template
 								jQuery('.div-template').append(rowtemplate.attr('id', 'admin-template'));
 								var COUNT = stats.length;
+								jQuery('.big-table-summary').empty();
 								BILLABLEEXTRA = 0;
 								var dailysummary = new Object();
 								updateSummary(stats);
@@ -138,8 +139,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkInTimeDiff;
 										} else {
-											jQuery('.checkin-time', row).append(EXTRAICONOK);
-											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
+											//jQuery('.checkin-time', row).append(EXTRAICONOK);
+											//jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										}
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
@@ -222,8 +223,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkInTimeDiff;
 											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 										} else {
-											jQuery('.checkin-time', row).append(EXTRAICONOK);
-											jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
+											//jQuery('.checkin-time', row).append(EXTRAICONOK);
+											//jQuery('.time-diff', row).text(minToTime(stats[i].checkInTimeDiff));
 										}
 									}
 									if (stats[i].checkOutTimeDiff && stats[i].checkOutTimeDiff != 0) {
@@ -234,24 +235,12 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkOutTimeDiff;
 										} else {
-											jQuery('.checkout-time', row).append(EXTRAICONOK);
-											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
+											//jQuery('.checkout-time', row).append(EXTRAICONOK);
+											//jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										}
 									}
-
-									// if (dateunique.indexOf(toDate(stats[i].checkinTime)) === -1) {
-									// var thisitem = template.clone();
-									// dateunique.push(toDate(stats[i].checkinTime));
-									// jQuery('.day-header p', thisitem).text(toDate(stats[i].checkinTime));
-									// jQuery('.right', thisitem).text(minToTime(BILLABLEEXTRA));
-									// jQuery('.left', thisitem).text(_daycount);
-									// jQuery('.big-table-summary').append(thisitem);
-									// _extratime = 0;
-									// _daycount = 0;
-									// }
 									jQuery('.view-table  tbody').append(row);
 									if (i === COUNT - 1 && activedomains.length > 0) {
-										//activedomains.splice(0, 1);
 										jQuery('.view-table').trigger("update");
 										jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 										createSummaryBlock(dailysummary);
@@ -264,6 +253,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 				function createSummaryBlock(dailysummary) {
+					document.title = 'Attendance | ' + $('#header-label').val() + '-' + $('#header-label-to').val();
 					for (var i in dailysummary) {
 						var thisitem = template.clone();
 						jQuery('.day-header p', thisitem).text(i);
@@ -272,7 +262,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						if (_more !== '') {
 							jQuery('.right', thisitem).text(_more + ' extra');
 						} else {
-							jQuery('.right', thisitem).text(_more);
+							jQuery('.right', thisitem).text("-");
 						}
 						jQuery('.big-table-summary').append(thisitem);
 					}
@@ -349,7 +339,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						// }
 						if (h < 13) {
 							if (h < 10) {
-								return ('0' + h + ':' + m + ' am');
+								return (h + ':' + m + ' am');
 							} else {
 								return (h + ':' + m + ' am');
 							}
@@ -371,11 +361,11 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						s = s * -1;
 						var _m = s % 60;
 						var _h = Math.floor(s / 60);
-						return _h + ':' + _m + ' mins';
+						return _h + 'h ' + _m + ' m';
 					} else {
 						var _m = s % 60;
 						var _h = Math.floor(s / 60);
-						return _h + ':' + _m + ' mins';
+						return _h + 'h ' + _m + 'm';
 					}
 				}
 
