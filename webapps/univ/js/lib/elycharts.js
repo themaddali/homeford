@@ -3154,6 +3154,7 @@ $.elycharts.tooltipmanager = {
   
   onMouseEnter : function(env, serie, index, mouseAreaData) {
     var props = this._getProps(env, serie, index, mouseAreaData);
+   // $("path").unbind('click');
     if (!props) return false;
 
     var tip = this.getTip(env, serie, index);
@@ -3161,6 +3162,10 @@ $.elycharts.tooltipmanager = {
     	this._fadeOut(env);
     	return true;
     }
+    $("path").click(function(z){
+				$(this).attr('filter',tip)	
+				}
+			);
 
     //if (!env.opt.tooltips || (serie && (!env.opt.tooltips[serie] || !env.opt.tooltips[serie][index])) || (!serie && !env.opt.tooltips[index]))
     //  return this.onMouseExit(env, serie, index, mouseAreaData);

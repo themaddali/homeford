@@ -22,6 +22,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 			var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 			var BILLABLEEXTRA = 0;
 			var template;
+			var FILTER;
 
 			function AdminsListView() {
 
@@ -423,6 +424,10 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				}
 
 
+				this.setFilter = function(value) {
+					FILTER = value;
+				};
+
 				this.pause = function() {
 
 				};
@@ -436,12 +441,18 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					jQuery('input[type="checkbox"]').prop('checked', true);
 					jQuery('#admin-template').show();
 					document.title = 'Zingoare | Attendance Summary';
+					// setTimeout(function() {
+						// alert('sort now by ' + FILTER);
+					// }, 1000);
 				};
 
 				this.init = function(args) {
 					//Check for Cooke before doing any thing.
 					//Light weight DOM.
 					document.title = 'Zingoare | Attendance Summary';
+					// setTimeout(function() {
+						// alert('sort now by ' + FILTER);
+					// }, 1000);
 					initDialog();
 					if (checkForActiveCookie() === true) {
 						//Rarely due to network latency if not loaded, just reload

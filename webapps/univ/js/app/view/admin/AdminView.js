@@ -1,4 +1,4 @@
-define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, notify) {"use strict";
+define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/attendance/AttendanceListView','../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, attendacelist, notify) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -163,6 +163,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 								// populateUserData();
 							} else {
 								setTimeout(function() {
+									//console.log('donuts click active');
 									activateDonutClicks();
 								}, 1500);
 								jQuery('.T1').show();
@@ -370,8 +371,8 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						service.DomainToDoList(activedomains[i], {
 							success : function(data) {
 								if (data.length === 0) {
-									updatePanelGraphs('#todo-donut', [0,0]);
-									updatePanelGraphs('#activequiz-donut', [0,0]);
+									updatePanelGraphs('#todo-donut', [0, 0]);
+									updatePanelGraphs('#activequiz-donut', [0, 0]);
 								}
 								for (var j = 0; j < data.length; j++) {
 									if ((data[j].groupName).indexOf('@QUIZ') !== -1) {
@@ -746,6 +747,11 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				function activateDonutClicks() {
 					jQuery('path').click(function() {
 						var gotopage = $(this).parent().parent().parent().parent().parent().next().find('a').attr('href');
+						var filter = $(this).attr('filter');
+						//console.log('filter by  ' + filter);
+						if (gotopage == '#/attendancesummary') {
+							attendacelist.setFilter(filter);
+						}
 						router.go(gotopage.split('#')[1]);
 					});
 				}
