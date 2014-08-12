@@ -45,11 +45,13 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					// }
 					jQuery("#service-starttime").timepicker({
 						timeSeparator : ':',
-						showPeriod : false,
+						showPeriod : true,
+						timeFormat : 'h:i A'
 					});
 					jQuery("#service-endtime").timepicker({
 						timeSeparator : ':',
-						showPeriod : false,
+						showPeriod : true,
+						timeFormat : 'h:i A'
 					});
 				}
 
@@ -110,8 +112,18 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _stax = jQuery('#service-tax').val();
 								//var _sfreq = jQuery('#service-frequency').val();
 								var _sfreq = 0;
-								var _sstarttime = jQuery('#service-starttime').val() + ':00';
-								var _sendtime = jQuery('#service-endtime').val() + ':00';
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM') {
+									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) + 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM') {
+									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {
+									var _sstarttime = (jQuery('#service-starttime').val().split(":")[0]) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'AM') {
+									var _sendtime = (jQuery('#service-endtime').val().split(":")[0]) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
 
 								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {
 									success : function(data) {

@@ -183,6 +183,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				this.setDomainProfile = function(domainid, domainDesc1, domainDesc2, domainThanksMessage, domainobj, paymentobj, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
 						url : '/zingoare/api/updatedomainprofile/' + domainid,
 						type : 'POST',
@@ -197,6 +199,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'id' : parseInt(domainid)
 						}),
 						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
 							handlers.success(data);
 						}
 					});
@@ -283,7 +287,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
-								"message" : e.statusText + " - Error Updating Memner Status"
+								"message" : e.statusText + " - Error Updating Member Status"
 							};
 							handlers.success(errormsg);
 						}
@@ -308,7 +312,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							$('input[type="button"]').removeClass('processing');
 							var errormsg = {
 								"status" : "error",
-								"message" : e.statusText + " - Error Updating Memner Status"
+								"message" : e.statusText + " - Error Updating Member Status"
 							};
 							handlers.success(errormsg);
 						}

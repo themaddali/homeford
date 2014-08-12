@@ -2692,6 +2692,7 @@ div.value-desc {
 }
 .address> p, .inv-payment> p {
 	margin:0px;
+	line-height: 20px;
 }
 .inv-logo {
 	margin-top:35px;
@@ -2706,6 +2707,7 @@ div.value-desc {
 .inv-logo> img {
 	height:90px;
 	width: 90px;
+	margin-top: 5px;
 }
 .inv-synopsis {
 	position:absolute;
@@ -4304,7 +4306,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 }
 
 .ui-dialog .ui-dialog-buttonpane {
-	padding: 2px;
+	padding: 0px;
 }
 
 .tablesortcontrol {

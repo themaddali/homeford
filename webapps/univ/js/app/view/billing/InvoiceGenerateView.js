@@ -21,7 +21,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var SERVICESALL = [];
 			var ITEMS = new Object();
 			var PARENTS = new Object();
-			var DIALOG = '<div id="item-dialog-form" title="Add New Item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Ex: Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="Ex: 10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Add On Fee</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
+			var DIALOG = '<div id="item-dialog-form" title="Add New Item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Ex: Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="Ex: 10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Coupon</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
 			function InvoiceGenerateView() {
@@ -211,7 +211,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				}, 'Select a kid.');
 
 				jQuery.validator.addMethod("money", function(value, element) {
-					//value = value.replace('$', '');
+					value = value.replace('-', '');
 					//value = value.replace('%', '');
 					var isValidMoney = /^\d{0,4}(\.\d{0,2})?$/.test(value);
 					return this.optional(element) || isValidMoney;
@@ -267,6 +267,30 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						},
 						close : function() {
 							router.returnToPrevious();
+						}
+					});
+
+					newitemvalidator = jQuery("#new-item-form").validate({
+						rules : {
+							newitemname : {
+								required : true
+							},
+							newitemdesc : {
+								required : true
+							},
+							newitemcost : {
+								required : true,
+								money : true,
+								minlength : 1
+							}
+						},
+					});
+
+					jQuery('#new-item-type').change(function() {
+						if (jQuery('#new-item-type').val() === 'Discount' || jQuery('#new-item-type').val() === 'Coupon') {
+							jQuery('#new-item-cost').val('-' + jQuery('#new-item-cost').val());
+						} else {
+							jQuery('#new-item-cost').val(jQuery('#new-item-cost').val().replace('-', ''));
 						}
 					});
 				}
@@ -518,22 +542,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							messages : {
 								services : "You must check at least 1 service"
 							}
-						});
-
-						newitemvalidator = jQuery("#new-item-form").validate({
-							rules : {
-								newitemname : {
-									required : true
-								},
-								newitemdesc : {
-									required : true
-								},
-								newitemcost : {
-									required : true,
-									money : true,
-									minlength : 1
-								}
-							},
 						});
 
 					} // Cookie Guider

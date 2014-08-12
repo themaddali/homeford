@@ -29,11 +29,13 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						// }
 						jQuery("#service-starttime").timepicker({
 							timeSeparator : ':',
-							showPeriod : false,
+							showPeriod : true,
+							timeFormat : 'h:i A'
 						});
 						jQuery("#service-endtime").timepicker({
 							timeSeparator : ':',
-							showPeriod : false,
+							showPeriod : true,
+							timeFormat : 'h:i A'
 						});
 						jQuery('#service-name').val(ACTIVESERVICE.name);
 						jQuery('#service-desc').val(ACTIVESERVICE.desc);
@@ -101,8 +103,20 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#service-edit').on('click', function() {
 							if ($(".edit-form").valid()) {
-								var _sstarttime = jQuery('#service-starttime').val() + ':00';
-								var _sendtime = jQuery('#service-endtime').val() + ':00';
+								// var _sstarttime = jQuery('#service-starttime').val() + ':00';
+								// var _sendtime = jQuery('#service-endtime').val() + ':00';
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM') {
+									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) + 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM') {
+									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {
+									var _sstarttime = (jQuery('#service-starttime').val().split(":")[0]) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'AM') {
+									var _sendtime = (jQuery('#service-endtime').val().split(":")[0]) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
 								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime, _sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {

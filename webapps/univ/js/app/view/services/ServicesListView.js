@@ -65,8 +65,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if (data[j].endTime === null) {
 										data[j].endTime = '-:00';
 									}
-									jQuery('.service-stime', row).text(data[j].startTime.slice(0,-3));
-									jQuery('.service-etime', row).text(data[j].endTime.slice(0,-3));
+									jQuery('.service-stime', row).text(toAMPM(data[j].startTime));
+									jQuery('.service-etime', row).text(toAMPM(data[j].endTime));
 									jQuery('.service-status', row).text(data[j].status);
 									jQuery('.view-table  tbody').append(row);
 									if (j === data.length - 1) {
@@ -76,6 +76,21 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								}
 							}
 						});
+					}
+				}
+				
+				function toAMPM(s){
+					s = s.slice(0,-3);
+					if (parseInt(s.split(":")[0]) < 13) {
+						return s + ' AM';
+					}
+					else {
+						var newhour = (parseInt(s.split(":")[0])-12);
+						if (newhour < 10 ){
+							newhour = '0'+newhour;
+						}
+						var news = newhour +':'+ s.split(":")[1] + ' PM';
+						return news;
 					}
 				}
 

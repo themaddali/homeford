@@ -14,6 +14,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 			var serviceIDs = [];
 			var deleteItemServicesIds = [];
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
+			var DIALOGBODY = '<div id="note-dialog" title="Confirm!"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure?</p></div>';
 
 			function MembersEditView() {
 
@@ -63,7 +64,57 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							deleteItemServicesIds.push(jQuery(this).attr('serviceid'));
 						}
 					});
+				}
 
+				function initDialog() {
+					jQuery('body').append(DIALOGBODY);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						modal : false,
+						buttons : {
+							"Yes " : toggleMemberStatus,
+						},
+						close : function() {
+							$(this).dialog("close");
+						}
+					});
+				}
+
+				function toggleMemberStatus() {
+					$(this).dialog("close");
+					if ($('.negative').val() == 'Make Inactive') {
+						service.disableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
+							success : function(response) {
+								if (response.status !== 'error') {
+									notify.showNotification('OK', response.message);
+									$('.negative').val('Make Active');
+									$('.negative').css('background-color', 'green');
+								} else {
+									notify.showNotification('ERROR', response.message);
+								}
+							}
+						});
+					} else {
+						service.enableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
+							success : function(response) {
+								if (response.status !== 'error') {
+									notify.showNotification('OK', response.message);
+									$('.negative').val('Make Inactive');
+									$('.negative').css('background-color', 'red');
+								} else {
+									notify.showNotification('ERROR', response.message);
+								}
+							}
+						});
+					}
 				}
 
 				function getServices(activedomains) {
@@ -164,6 +215,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					populateData();
 					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Members Edit';
+					initDialog();
 					//$('#new-member-profile-image').fileupload('destroy');
 				};
 
@@ -176,6 +228,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
 						followtemplate = jQuery('#service-follow').remove().attr('id', '');
 						populateData();
+						initDialog();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
@@ -183,31 +236,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						});
 
 						jQuery('.negative').click(function() {
-							if ($('.negative').val() == 'Make Inactive') {
-								service.disableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
-									success : function(response) {
-										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-											$('.negative').val('Make Active');
-											$('.negative').css('background-color','green');
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-							} else {
-								service.enableUser(jQuery.cookie('_did'), jQuery('#member-id').val(), {
-									success : function(response) {
-										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-											$('.negative').val('Make Inactive');
-											$('.negative').css('background-color','red');
-										} else {
-											notify.showNotification('ERROR', response.message);
-										}
-									}
-								});
-							}
+							jQuery("#note-dialog").dialog("open");
 						});
 
 						jQuery('#member-edit').on('click', function() {

@@ -38,6 +38,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					var grandtotal = 0;
 					jQuery('#inv-domain-address').empty();
 					if (DATAOBJECT !== null) {
+						document.title = DATAOBJECT.toname + ' | Invoice';
 						service.getUserProfile({
 							success : function(UserProfile) {
 								for (var i = 0; i < UserProfile.domains.length; i++) {
@@ -48,15 +49,18 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									}
 									jQuery('#inv-addr1').text('');
 									jQuery('#inv-addr2').text('');
+									jQuery('#inv-addr3').text('');
 									jQuery('#inv-contact').text(UserProfile.email);
+									jQuery('#inv-contact-phone').text(UserProfile.phoneNumber);
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}
 							}
 						});
 						service.getDomainProfile(jQuery.cookie('_did'), {
 							success : function(Profile) {
-								jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ,' + Profile.addresses[0].street2);
-								jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ,' + Profile.addresses[0].state + ' ,' + Profile.addresses[0].country + '  - ' + Profile.addresses[0].zip);
+								jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ' + Profile.addresses[0].street2);
+								jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ' + Profile.addresses[0].state + ' ' + Profile.addresses[0].zip);
+								jQuery('#inv-addr3').text((Profile.addresses[0].country).toUpperCase());
 								if (!Profile.image || Profile.image == null) {
 									jQuery('#profile-image').attr('src', 'img/logo-print.jpg');
 								} else {
@@ -77,8 +81,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									jQuery('#payment-2').text('');
 								}
 								setTimeout(function() {
-									jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ,' + Profile.addresses[0].street2);
-									jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ,' + Profile.addresses[0].state + ' ,' + Profile.addresses[0].country + '  - ' + Profile.addresses[0].zip);
+									jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ' + Profile.addresses[0].street2);
+									jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ' + Profile.addresses[0].state + ' ' + Profile.addresses[0].zip);
+									jQuery('#inv-addr3').text((Profile.addresses[0].country).toUpperCase());
 								}, 200);
 							}
 						});

@@ -463,7 +463,7 @@ input.ui-button::-moz-focus-inner, button.ui-button::-moz-focus-inner {
 	cursor: pointer;
 	background-color: #0784E3;
 	color: white;
-	height: 38px;
+	height: 33px;
 	background-image: none;
 }
 .ui-dialog .ui-resizable-se {
