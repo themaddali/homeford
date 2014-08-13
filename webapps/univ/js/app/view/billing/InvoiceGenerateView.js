@@ -73,7 +73,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									if (data[j].itemServiceDetails.length > 0) {
+									if (data[j].itemServiceDetails.length >= 0) {
 										ITEMS[data[j].id] = data[j].itemServiceDetails;
 										PARENTS[data[j].id] = data[j].parents;
 										jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');

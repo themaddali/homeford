@@ -13,6 +13,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 			var followtemplate;
 			var serviceIDs = [];
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
+			var WARNDIALOG = '<div id="note-dialog" title="Service Plans Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please create few service plans before adding members.</p></div>';
 
 			function MembersAddAdvView() {
 
@@ -31,6 +32,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						var thisdomaininstance = activedomains[i];
 						service.ListAllServices(thisdomaininstance, {
 							success : function(data) {
+								if (data.length === 0) {
+									jQuery("#note-dialog").dialog("open");
+								}
 								for (var j = 0; j < data.length; j++) {
 									if (j === 0) {
 										var thisservice = leadtemplate.clone();
@@ -153,12 +157,37 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						return false;
 					}
 				}, "Atleast one parent info is mandatory");
+				
+				function initDialog() {
+					jQuery('body').append(WARNDIALOG);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						modal : true,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						buttons : {
+							"Create" : function() {
+								router.go('/servicesadd');
+							},
+						},
+						close : function() {
+							router.returnToPrevious();
+						}
+					});
+				}
 
 				this.pause = function() {
 
 				};
 
 				this.resume = function() {
+					initDialog();
 					populateData();
 					clearForm();
 					document.title = 'Zingoare | Member / Student Add';
@@ -171,6 +200,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('.g2').hide();
 					jQuery('.g3').hide();
 					jQuery('.formlink').show();
+					initDialog();
 
 					if (checkForActiveCookie() === true) {
 						leadtemplate = jQuery('#service-lead').remove().attr('id', '');

@@ -112,6 +112,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						}
 						var year = currentDate.getFullYear();
 						jQuery('#inv-inssuedate').text(year + "-" + month + "-" + day);
+						if (parseInt(DATAOBJECT.duedate.split("-")[1]) < 10) {
+							DATAOBJECT.duedate = DATAOBJECT.duedate.split("-")[0] + '-0' + DATAOBJECT.duedate.split("-")[1] +'-'+ DATAOBJECT.duedate.split("-")[2];
+						}
 						jQuery('#inv-dueby').text(DATAOBJECT.duedate);
 						jQuery('.thanks').text(DATAOBJECT.tomessage);
 						jQuery('#inv-to1').html(DATAOBJECT.toname);
