@@ -287,6 +287,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					});
 
 					jQuery('#new-item-type').change(function() {
+						jQuery('#new-item-cost').val(jQuery('#new-item-cost').val().replace('-', ''));
 						if (jQuery('#new-item-type').val() === 'Discount' || jQuery('#new-item-type').val() === 'Coupon') {
 							jQuery('#new-item-cost').val('-' + jQuery('#new-item-cost').val());
 						} else {
@@ -352,6 +353,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						});
 
 						jQuery('.formlink').click(function() {
+							//newitemvalidator.resetForm();
 							jQuery("#item-dialog-form").dialog("open");
 						});
 

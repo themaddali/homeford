@@ -3868,6 +3868,8 @@ dialog-modal::-webkit-scrollbar {
 	margin-top: 0px;
 	border: 3px solid;
 	border-color: #f3f3f3;
+	border-radius: 10px;
+	background: url("../img/search.png") no-repeat right;
 }
 
 .canvas-header input:active {
@@ -3967,8 +3969,10 @@ dialog-modal::-webkit-scrollbar {
 #currenttime {
 	color: #0784E3;
 	vertical-align: middle;
-	padding: 10px;
+	padding: 20px;
 	font-weight: 600;
+	font-size: 12px;
+	float: right;
 }
 
 .kioskaction > input[type=button]:hover, .kioskaction > input[type=button]:active {
