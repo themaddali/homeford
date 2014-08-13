@@ -132,6 +132,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							contentType : "application/json",
 							success : function(data) {
 								listenPendingInvites(data.pendingInvitees);
+								listenNotifications(data.notifications);
 								if (!jQuery.cookie('_did')) {
 									jQuery.cookie('_did', data.domains[0].id, {
 										expires : 100,
@@ -164,6 +165,16 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					if (invitesarray.length > 0) {
 						setTimeout(function() {
 							notify.showMessage('INFO', 'Pending Invitation', invitesarray, 'Accept', 'notifications');
+						}, 3000);
+						//Check after 3 seconds. Cooling time
+					}
+				}
+
+				//Listen Notifications
+				function listenNotifications(notificationssarray) {
+					if (notificationssarray.length > 0) {
+						setTimeout(function() {
+							notify.showNotification('INFO', 'Message here:', notificationssarray.length);
 						}, 3000);
 						//Check after 3 seconds. Cooling time
 					}
@@ -273,7 +284,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
-						url : '/zingoare/api/disableUser/' + domainid+'/'+memberid,
+						url : '/zingoare/api/disableUser/' + domainid + '/' + memberid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -293,12 +304,12 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.enableUser = function(domainid, memberid, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
-						url : '/zingoare/api/enableUser/' + domainid+'/'+memberid,
+						url : '/zingoare/api/enableUser/' + domainid + '/' + memberid,
 						type : 'POST',
 						async : 'async',
 						contentType : "application/json",
@@ -1134,6 +1145,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							contentType : "application/json",
 							success : function(data) {
 								listenPendingInvites(data.pendingInvitees);
+								listenNotifications(data.notifications);
 								USERPROFILE = data;
 								USERID = data.id;
 								for (var i = 0; i < data.domains.length; i++) {

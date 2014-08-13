@@ -39,7 +39,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 									jQuery('.brandnames').empty();
 									for (var i = 0; i < UserProfile.domains.length; i++) {
 										jQuery('.brandname').removeClass('show');
-										if (UserProfile.domains[i].roleName !== "ROLE_TIER3"){
+										if (UserProfile.domains[i].roleName !== "ROLE_TIER3" && UserProfile.domains[i].roleStatus == 'ACTIVE') {
 											jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
 										}
 									}
