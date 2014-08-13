@@ -22,6 +22,7 @@ require({
 		getusermedia : 'getUserMedia',
 		paypal : 'paypal',
 		stripe : 'stripe',
+		filter : 'filter',
 		Pages : '../../module',
 	},
 	map : {

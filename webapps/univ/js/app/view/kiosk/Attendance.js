@@ -140,7 +140,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 									}
 								} else {
 									if (data[j].type === 'CHECKIN') {
-										jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.icon-3x').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-question-sign').css('color', 'grey');
+										jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.icon-2x').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-question-sign').css('color', 'grey');
 										jQuery('.kioskboard[name=' + data[j].kid.id + ']').find('.kiosk-flag-text').text('No Show Yet');
 										updatePanelIcons(data[j].kid.id, 'CHECKIN', data[j].id);
 									}
@@ -156,16 +156,31 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				function updatePanelIcons(memberid, type, kioskactionid) {
 					jQuery('.kioskboard[name=' + memberid + ']').attr('kioskactionid', kioskactionid);
 					if (type === 'CHECKIN') {
-						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-ok-sign').css('color', 'green');
+						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-2x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-ok-sign').css('color', 'green');
 						jQuery('.kioskboard[name=' + memberid + ']').find('.kiosk-flag-text').text('Checked In');
 					} else {
-						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-3x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-smile').css('color', '#0784E3');
+						jQuery('.kioskboard[name=' + memberid + ']').find('.icon-2x').removeClass('icon-question-sign').removeClass('icon-ok-sign').removeClass('icon-smile').addClass('icon-smile').css('color', '#0784E3');
 						jQuery('.kioskboard[name=' + memberid + ']').find('.kiosk-flag-text').text('Checked Out');
 					}
 
 				}
 
 				function activateEvents() {
+					jQuery("#card-searchbox").val('').focus();
+
+					jQuery("#card-searchbox").keyup(function() {
+						var searchword = jQuery('#card-searchbox').val().toUpperCase();
+						var cardlist = jQuery('.contentfull .student-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
+
 					jQuery('.kioskboard').on('click', function() {
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();
@@ -181,8 +196,8 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 				function helperMediaQuiries() {
 					if ($('.kioskboard').length > 2) {
 						var width = $('#action-canvas').width() - 30;
-						var rowholds = Math.floor(width / 254);
-						var fillerspace = width - (rowholds * 254);
+						var rowholds = Math.floor(width / 154);
+						var fillerspace = width - (rowholds * 154);
 						//var eachfiller = 300+fillerspace/rowholds;
 						var newmargin = fillerspace / rowholds;
 						if (newmargin < 20) {
@@ -202,7 +217,9 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 					if (checkForActiveCookie() !== true) {
 						router.go('/home', '/admin');
 					}// Cookie Guider
-					$(".card-search").autocomplete("destroy");
+					//$(".card-search").autocomplete("destroy");
+					jQuery("#card-searchbox").val('').focus();
+					jQuery('.kioskboard').show();
 					GetClock();
 					jQuery('#nopage-warning').fadeOut(500);
 					jQuery('.main-content-header').fadeIn(400);
@@ -228,6 +245,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 						//Preactivate Dependency
 						//todoassign.init();
 						GetClock();
+						jQuery("#card-searchbox").val('').focus();
 						//populateData();
 
 						$(window).resize(helperMediaQuiries);
