@@ -36,6 +36,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				function populateData() {
 					var grandtotal = 0;
+					jQuery('.grand-total').text('$ 0');
 					jQuery('#inv-domain-address').empty();
 					if (DATAOBJECT !== null) {
 						document.title = DATAOBJECT.toname + ' | Invoice';

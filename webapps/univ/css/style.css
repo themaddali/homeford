@@ -2750,11 +2750,15 @@ div.value-desc {
 	padding-left:20px;
 	padding-bottom:5px;
 }
+.sprice,.scost {
+	text-align: right;
+}
+
 .inv-body> .invoice-summary {
 	margin-top:40px;
 	float:right;
 	border-top:1px solid #f3f3f3;
-	margin-right:40px;
+	margin-right:10px;
 }
 
 .formlink {
@@ -2840,13 +2844,20 @@ table.summary > tbody tr th, table.summary > tbody tr td {
 	width: 85%;
 }
 
-.thanks {
+/*.thanks {
 	text-align: center;
 	font-size: 25px;
 	font-style: italic;
 	color: black;
 	padding-bottom: 20px;
 	font-family: 'scriptin' 'trebuchet MS', 'Tahoma';
+}*/
+
+.thanks {
+	text-align: center;
+	font-size: 15px;
+	color: #0784E3;
+	padding-bottom: 20px;
 }
 .writing {
 	text-align: center;

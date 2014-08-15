@@ -5,6 +5,7 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 
 			var ACTIVEDOMAIN;
 			var DOMAINLIST;
+			var DIALOGBODY = '<div id="note-dialog" title="Notification!"> <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><span id="note-message"></span></p></div>';
 
 			/**
 			 * @constructor
@@ -32,9 +33,16 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 						service.getUserProfile({
 							success : function(UserProfile) {
 								if (UserProfile.domains.length === 1) {
-									jQuery('.brandnames').removeClass('show');
-									jQuery('.brandname').text(UserProfile.domains[0].domainName).addClass('show');
-									jQuery('.brandnamesicon').hide();
+									if (UserProfile.domains[0].roleStatus == 'ACTIVE') {
+										jQuery('.brandnames').removeClass('show');
+										jQuery('.brandname').text(UserProfile.domains[0].domainName).addClass('show');
+										jQuery('.brandnamesicon').hide();
+									} else {
+										initDialog();
+										jQuery('.brandnamesicon').hide();
+										jQuery('#note-message').text('You are no longer active in this domain. Please contact admin');
+										jQuery("#note-dialog").dialog("open");
+									}
 								} else {
 									jQuery('.brandnames').empty();
 									for (var i = 0; i < UserProfile.domains.length; i++) {
@@ -96,6 +104,62 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 					});
 				};
 
+				function initDialog() {
+					jQuery('body').append(DIALOGBODY);
+					$("#note-dialog").dialog({
+						autoOpen : false,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						modal : true,
+						buttons : {
+							"OK " : function() {
+								service.Logout({
+									success : function() {
+										jQuery.removeCookie('user', {
+											path : '/'
+										});
+										jQuery.removeCookie('subuser', {
+											path : '/'
+										});
+										jQuery.removeCookie('_did', {
+											path : '/'
+										});
+										router.go('/home');
+										window.setTimeout('location.reload()', 500);
+										// refresh after 1/2 sec
+									},
+								});
+								$(this).dialog("close");
+							},
+						},
+						close : function (){
+							service.Logout({
+							success : function() {
+							jQuery.removeCookie('user', {
+								path : '/'
+							});
+							jQuery.removeCookie('subuser', {
+								path : '/'
+							});
+							jQuery.removeCookie('_did', {
+								path : '/'
+							});
+							router.go('/home');
+							window.setTimeout('location.reload()', 500);
+							// refresh after 1/2 sec
+						},
+					});
+						}
+					});
+				}
+
+
 				this.newNotify = function(status, message, link, details) {
 
 				};
@@ -105,11 +169,11 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 				};
 
 				this.resume = function() {
-					// No implementation needed for this here.
+					initDialog();
 				};
 
 				this.init = function() {
-
+					initDialog();
 				};
 			}
 

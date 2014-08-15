@@ -534,9 +534,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								services : {
 									required : false
 								},
-								invitemessage : {
-									maxlength : 20
-								},
 								invoiceduedate : {
 									required : true
 								}
