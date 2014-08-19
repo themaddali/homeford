@@ -222,8 +222,8 @@ button, input {
 
 button, input[type="button"], input[type="reset"], input[type="submit"] {
 	cursor: pointer;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	/*-webkit-appearance: button;*/
 	*overflow: visible;
 	outline: none;
@@ -734,11 +734,11 @@ a.goback {
 }
 .login-input {
 	padding: 10px 18px;
-	-webkit-border-radius: 3px;
+	/*-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
-	border-radius: 3px;
+	border-radius: 3px;*/
 	width: 88%;
 	border: 2px solid rgb(245, 239, 239);
 	text-align: center;
@@ -756,11 +756,11 @@ a.goback {
 	color: white;
 	width: 100%;
 	-webkit-font-smoothing: antialiased;
-	-webkit-border-radius: 3px;
+	/*-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
 	-o-border-radius: 3px;
-	border-radius: 3px;
+	border-radius: 3px;*/
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
 	-o-transition: all 0.1s linear;
@@ -905,8 +905,8 @@ a.goback {
 }
 
 .toggle-dark .toggle-slide {
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border: 1px solid #737373;
 }
 .toggle-dark .toggle-slide .toggle-on, .toggle-dark .toggle-slide .toggle-off, .toggle-dark .toggle-slide .toggle-blob {
@@ -917,8 +917,8 @@ a.goback {
 }
 
 .toggle-dark .toggle-slide .toggle-blob {
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	box-shadow: inset 0 0 0 1px #888, inset 0 0 0 2px rgba(14, 1, 1, 0.35);
 }
 .toggle-dark .toggle-slide .toggle-blob:hover {
@@ -1051,8 +1051,8 @@ a.goback {
 	padding: 15px;
 	text-align: center;
 	border: 2px solid #0784E3;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 #nopage-warning i {
 	padding-right: 20px;
@@ -1074,8 +1074,8 @@ a.goback {
 	border-radius: 0;
 	margin-bottom: 5px;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 	font-size: 1em;
 	outline: none;
@@ -1089,7 +1089,7 @@ a.goback {
 	background-color: #0784E3;
 	color: white;
 	border: 2px solid #ffffff;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	width: 40px;
 }
 
@@ -1288,8 +1288,8 @@ a.goback {
 	z-index: 20;
 	border: solid 2px #0784E3;
 	background-color: white;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 
 .modal-container.login {
@@ -1301,8 +1301,8 @@ a.goback {
 	z-index: 20;
 	border: solid 2px #0784E3;
 	background-color: white;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 
 .form-inline-control {
@@ -1319,8 +1319,8 @@ a.goback {
 	border: none;
 	cursor: pointer;
 	border: 2px solid #e6e6e6;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	width: 150px;
 	margin-left: 120px;
 }
@@ -1368,7 +1368,7 @@ a.goback {
 	padding: 20px;
 	padding-left: 15px;
 	border: 1px solid #d9d9d9;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 	/*background: url("../img/header-stripe.png");*/
 }
 .modal-body .modal-container.print header, .modal-body .modal-container.print-landscape header {
@@ -1390,13 +1390,13 @@ a.goback {
 	right: 0px;
 	height: 60px;
 	border-top: 1px solid #d9d9d9;
-	border-bottom-right-radius: 10px;
+	/*border-bottom-right-radius: 10px;*/
 }
 .edit-notify.OK {
 	display: none;
 	background-color: #f3f3f3;
 	border-bottom: 4px solid #07e366;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 	font-size: 1.2em;
 	position: absolute;
 	width: 100%;
@@ -1410,7 +1410,7 @@ a.goback {
 	display: none;
 	height: 29px;
 	border-bottom: 3px solid #0784E3;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 	font-size: 1em;
 	position: absolute;
 	width: 100%;
@@ -1428,7 +1428,7 @@ a.goback {
 }
 .edit-notify.ERROR {
 	border-bottom: 4px solid #e30716;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 	display: none;
 	background-color: #f3f3f3;
 	font-size: 1.2em;
@@ -1445,7 +1445,7 @@ a.goback {
 }
 .edit-notify.WARN {
 	border-bottom: 4px solid #f8720c;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 	display: none;
 	background-color: #f3f3f3;
 	font-size: 1.2em;
@@ -1476,8 +1476,8 @@ a.goback {
 	text-align: right;
 	width: 100%;
 	height: 60px;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	outline: none;
 	-webkit-appearance: none;
 }
@@ -1487,8 +1487,8 @@ a.goback {
 	text-align: right;
 	width: 97%;
 	height: 60px;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	outline: none;
 	-webkit-appearance: none;
 }
@@ -1503,8 +1503,8 @@ a.goback {
 	float: right;
 	margin-right: 20px;
 	border: 2px solid #e6e6e6;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 }
 
 .modal-body .modal-container header input.header-input {
@@ -1677,8 +1677,8 @@ div.formselction {
 	border: 2px solid white;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 }
 
 .view-form-control input.big {
@@ -1807,7 +1807,7 @@ div.formselction {
 .edit-form div.form-partition span {
 	color: #0784E3;
 	background-color: #FFFFFF;
-	border-radius: 15px;
+	/*border-radius: 15px;*/
 	padding: 7px;
 	border: 1px solid #0784E3;
 }
@@ -1864,8 +1864,8 @@ div.formselction {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 }
 
@@ -1877,8 +1877,8 @@ div.formselction {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 }
 
@@ -1890,8 +1890,8 @@ div.formselction {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: #0784E3;
 	background-color: white;
 }
@@ -1916,7 +1916,7 @@ div.formselction {
 	vertical-align: top;
 	border-width: 1px;
 	width: 40px;
-	border-radius: 20px;
+	/*border-radius: 20px;*/
 	margin-left: 10px;
 }
 .edit-form div.form-datainput li div.form-content button.correct {
@@ -1941,8 +1941,8 @@ div.formselction {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 }
 
@@ -1958,8 +1958,8 @@ div.formselction {
 	font-size: 14px;
 	border: none;
 	border: 0px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 	vertical-align: top;
 }
@@ -2022,8 +2022,8 @@ div.formselction {
 	margin-bottom: 5px;
 	border-radius: 0;
 	background-color: #FFFFFF;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 	background: transparent url("../img/select-down.png") no-repeat right;
 	margin-bottom: 5px;
@@ -2076,8 +2076,8 @@ div.formselction {
 	padding: 10px;
 	width: 250px;
 	height: 125px;
-	border-bottom-right-radius: 10px;
-	border-top-left-radius: 10px;
+	/*border-bottom-right-radius: 10px;
+	border-top-left-radius: 10px;*/
 	border: 1px solid rgba(114, 114, 114, 0.71);
 	cursor: pointer;
 }
@@ -2485,7 +2485,7 @@ div.value-desc {
 	position: relative;
 	padding-top: 0px;
 	border-top: 1px dotted #d9d9d9;
-	border-bottom-right-radius: 10px;
+	/*border-bottom-right-radius: 10px;*/
 	cursor: pointer;
 	z-index: 21;
 }
@@ -2525,7 +2525,7 @@ div.value-desc {
 	color: #0784E3;
 	position: relative;
 	border-top: 1px dotted #d9d9d9;
-	border-bottom-right-radius: 10px;
+	/*border-bottom-right-radius: 10px;*/
 }
 .adminboard footer:hover .more-info {
 	color: #0784E3;
@@ -2968,8 +2968,8 @@ html.no-touch #subnav ul li a:hover {
 }
 html.no-touch #subnav ul li.selected {
 	background-color: #848C92;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
+	/*-webkit-border-radius: 2px;
+	border-radius: 2px;*/
 }
 html.no-touch #subnav ul li.selected a {
 	color: #fff;
@@ -3070,8 +3070,8 @@ html.touch #subnav {
 .members-image {
 	width: 45px;
 	height : 22px;
-	border-bottom-right-radius: 5px;
-	border-top-left-radius: 5px;
+	/*border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;*/
 }
 
 /*INFO*/
@@ -3079,8 +3079,8 @@ html.touch #subnav {
 	border: 2px solid rgba(114, 114, 114, 0);
 	padding: 10px 10px;
 	background-color: rgba(121, 195, 251, 0.59);
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	width: 60%;
 }
 
@@ -3090,8 +3090,8 @@ html.touch #subnav {
 	height: 100px;
 	position: relative;
 	border: 1px solid rgba(114, 114, 114, 0.71);
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	padding: 10px;
 }
 
@@ -3311,8 +3311,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 300px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 8px;
-	border-bottom-right-radius: 8px;
+	/*border-top-left-radius: 8px;
+	border-bottom-right-radius: 8px;*/
 	overflow: none;
 }
 
@@ -3322,8 +3322,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 190px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 8px;
-	border-bottom-right-radius: 8px;
+	/*border-top-left-radius: 8px;
+	border-bottom-right-radius: 8px;*/
 	overflow: none;
 }
 
@@ -3339,8 +3339,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 167px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 }
 
@@ -3355,8 +3355,8 @@ dialog-modal::-webkit-scrollbar {
 	height: auto;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 	margin-top: 15px;
 	margin-left: 15px;
@@ -3367,8 +3367,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 150px;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 	margin: 15px;
 }
@@ -3376,7 +3376,7 @@ dialog-modal::-webkit-scrollbar {
 	width: 100%;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 	background-color: #0784E3;
 	color: white;
 	text-align: center;
@@ -3387,7 +3387,7 @@ dialog-modal::-webkit-scrollbar {
 	width: 100%;
 	padding-top: 15px;
 	padding-bottom: 15px;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 	background-color: #0784E3;
 	color: white;
 	font-size: 0.8em;
@@ -3427,8 +3427,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: none;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	margin-bottom: 10px;
 	font-size: 14px;
 }
@@ -3438,7 +3438,7 @@ dialog-modal::-webkit-scrollbar {
 	color: white;
 	background: url("../img/stripe.png");
 	font-size: 14px;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 }
 .float-left .infocard div.details {
 	padding: 10px;
@@ -3458,8 +3458,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: none;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	margin-bottom: 10px;
 }
 .float-left .notifycard.min {
@@ -3468,8 +3468,8 @@ dialog-modal::-webkit-scrollbar {
 	height: auto;
 	text-align: left;
 	border: 2px solid #d9d9d9;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	margin-bottom: 10px;
 }
 .float-left .notifycard div.head {
@@ -3477,15 +3477,15 @@ dialog-modal::-webkit-scrollbar {
 	height: 35px;
 	background-color: #f3f3f3;
 	border-bottom: 1px solid #d9d9d9;
-	border-top-left-radius: 10px;
+	/*border-top-left-radius: 10px;*/
 }
 .float-left .notifycard.min div.head {
 	padding: 10px;
 	height: 30px;
 	background-color: white;
 	border-bottom: 0px;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 .float-left .notifycard div.head div.title {
 	color: black;
@@ -3544,8 +3544,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 }
 
 .float-left .quizactionboard {
@@ -3556,8 +3556,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	margin-bottom: 20px;
 }
 .float-left .quizactionboard.cardactive {
@@ -3591,8 +3591,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	margin-bottom: 10px;
 }
 
@@ -3612,8 +3612,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 
 .float-left div.primaryboard .helpboard {
@@ -3625,8 +3625,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 
 .float-left .secondaryboard {
@@ -3638,8 +3638,8 @@ dialog-modal::-webkit-scrollbar {
 	text-align: left;
 	border: 2px solid #d9d9d9;
 	overflow: hidden;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 
 .edit-card-canvas {
@@ -3652,8 +3652,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 85px;
 	text-align: left;
 	border: 1px solid #d9d9d9;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 	margin: 5px;
 	padding: 5px;
@@ -3666,8 +3666,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 175px;
 	text-align: left;
 	border: 1px solid #d9d9d9;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 	margin: 5px;
 	overflow: hidden;
@@ -3679,8 +3679,8 @@ dialog-modal::-webkit-scrollbar {
 	height: 100%;
 	text-align: center;
 	border: 1px solid #0784E3;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 	overflow: none;
 	margin: 5px;
 	overflow: hidden;
@@ -3777,8 +3777,8 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 	width: 60%;
 	text-align: center;
@@ -3879,8 +3879,8 @@ dialog-modal::-webkit-scrollbar {
 	font-size: 1em;
 	border: none;
 	border: 1px solid;
-	border-top-left-radius: 5px;
-	border-bottom-right-radius: 5px;
+	/*border-top-left-radius: 5px;
+	border-bottom-right-radius: 5px;*/
 	border-color: rgba(114, 114, 114, 0.71);
 	/*background: url("../img/search.png") no-repeat right;*/
 	background-position-x: 99%;
@@ -3891,7 +3891,7 @@ dialog-modal::-webkit-scrollbar {
 	margin-top: 0px;
 	border: 3px solid;
 	border-color: #f3f3f3;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	background: url("../img/search.png") no-repeat right;
 }
 
@@ -4174,7 +4174,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	background-repeat: no-repeat;
 	position: relative;
 	overflow: hidden;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 }
 
 .kioskboard img {
@@ -4186,7 +4186,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	background-repeat: no-repeat;
 	position: relative;
 	overflow: hidden;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 }
 
 .faceboard img {
@@ -4198,7 +4198,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	background-repeat: no-repeat;
 	position: relative;
 	overflow: hidden;
-	border-top-left-radius: 8px;
+	/*border-top-left-radius: 8px;*/
 }
 
 .studentboard div.student-name {
@@ -4230,7 +4230,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	text-align: center;
 	color: white;
 	background: url("../img/stripe.png");
-	border-bottom-right-radius: 8px;
+	/*border-bottom-right-radius: 8px;*/
 }
 
 .studentboard span.taskcount {
@@ -4264,8 +4264,8 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	top: -310px;
 	right: -270px;
 	z-index: 1000;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+	/*border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
 }
 .studentboard div.student-info > div.you > i {
 	color: #0784E3;
@@ -4289,7 +4289,7 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 
 .classboard div.class-header {
 	height: 125px;
-	border-top-left-radius: 9px;
+	/*border-top-left-radius: 9px;*/
 }
 .classboard div.class-header > img {
 	margin: 40px;
@@ -4443,8 +4443,8 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 	color: #444;
 	background: #ffe39c;
 	padding: 5px 20px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	/*-webkit-border-radius: 3px;
+	border-radius: 3px;*/
 }
 #blog-content .post h2.search-header span {
 	font-weight: 600;
@@ -4497,8 +4497,8 @@ input#s {
 	width: 185px;
 	border: 1px solid #bbb;
 	padding: 5px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	/*-webkit-border-radius: 3px;
+	border-radius: 3px;*/
 	margin-bottom: 10px;
 }
 
@@ -4515,8 +4515,8 @@ input#searchsubmit {
 	border: 0;
 	padding: 5px 10px;
 	font-size: 0.9em;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	/*-webkit-border-radius: 3px;
+	border-radius: 3px;*/
 	font-family: 'lucida sans', 'trebuchet MS', 'Tahoma';
 	font-style: normal;
 	color: #fff;
@@ -4623,8 +4623,8 @@ input#searchsubmit:hover {
 #blog-nav a {
 	padding: 8px;
 	background-color: #000;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	/*-webkit-border-radius: 3px;
+	border-radius: 3px;*/
 	color: #fff;
 	font-size: 0.7em;
 	-webkit-transition: all 0.3s ease-in-out;
@@ -5341,8 +5341,8 @@ footer a:hover {
 	}
 
 	.studentboard div.student-name {
-		border-top-left-radius: 8px;
-		border-bottom-right-radius: 8px;
+		/*border-top-left-radius: 8px;
+		border-bottom-right-radius: 8px;*/
 		/*background-color: white;*/
 		color: white;
 		text-overflow: ellipsis;
@@ -5375,7 +5375,7 @@ footer a:hover {
 	}
 	.classboard div.class-name {
 		margin-top: 0px;
-		border-top-left-radius: 8px;
+		/*border-top-left-radius: 8px;*/
 	}
 
 	.classboard div.class-header, .classboard div.class-info div.label, .classboard div.class-info div.start-date, .classboard div.class-anouncement {
@@ -5693,11 +5693,11 @@ footer a:hover {
 		color: white;
 		width: 100%;
 		-webkit-font-smoothing: antialiased;
-		-webkit-border-radius: 3px;
+		/*-webkit-border-radius: 3px;
 		-moz-border-radius: 3px;
 		-ms-border-radius: 3px;
-		-o-border-radius: 3px;
-		border-radius: 3px;
+		-o-border-radius: 3px;*/
+		/*border-radius: 3px;*/
 		-webkit-transition: all 0.1s linear;
 		-moz-transition: all 0.1s linear;
 		-o-transition: all 0.1s linear;
