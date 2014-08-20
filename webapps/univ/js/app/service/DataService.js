@@ -1056,7 +1056,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.Login = function(username, password, handlers) {
+				this.LoginOld = function(username, password, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -1076,9 +1076,46 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				this.Logout = function(handlers) {
+
+				this.Login = function(username, password, handlers) {
+					var remember = true;
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/app/authentication',
+						type : 'POST',
+						async : 'async',
+						data : 'j_username=' + username + '&j_password=' + password + '&_spring_security_remember_me=' + remember + '&submit=Login',
+						success : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
+							handlers.success(data);
+						},
+						error : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
+							handlers.success('error');
+						}
+					});
+				};
+
+				this.LogoutOut = function(handlers) {
 					$.ajax({
 						url : '/zingoare/j_spring_security_logout',
+						type : 'POST',
+						async : 'async',
+						success : function(data) {
+							handlers.success(data);
+						},
+						error : function(data) {
+							handlers.success('error');
+						}
+					});
+				};
+				
+				this.Logout = function(handlers) {
+					$.ajax({
+						url : '/zingoare/app/logout',
 						type : 'POST',
 						async : 'async',
 						success : function(data) {
