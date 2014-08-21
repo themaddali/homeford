@@ -72,6 +72,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							service.DomainQuizList(thisdomaininstance, {
 								success : function(data) {
 									allQUIZ = data;
+									if (data.length === 0) {
+										notify.showNotification('WARN', "There are no quiz's availble in Quiz pool. First add few Quizzes and Questions.", 'quizadd');
+									}
 									for (var k = 0; k < data.length; k++) {
 										QUIZLIST.push(data[k].name);
 										QUIZLIST_sorted.push(data[k].name);

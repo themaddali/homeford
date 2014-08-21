@@ -34,10 +34,10 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					}
 				}
 
-				function Authenticate(username, password, domain) {
+				function Authenticate(username, password, remember, domain) {
 					var OWNERLEVEL = false;
 					var ADMINLEVEL = false;
-					service.Login(username, password, {
+					service.Login(username, password,remember, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
 								if (username.length > 18) {
@@ -147,7 +147,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 							jQuery('#login-error').hide();
 							var inputuname = jQuery('#user-name').val();
 							var inputpass = jQuery('#user-password').val();
-							Authenticate(inputuname, inputpass);
+							Authenticate(inputuname, inputpass, $('#remember-me').is(":checked"));
 						} else {
 							notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 						}

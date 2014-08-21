@@ -647,7 +647,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				function setCanvas() {
 					if (!jQuery.elycharts.templates || jQuery.elycharts.templates == undefined) {
-						location.reload(false);
+						//location.reload(false);
 					}
 					jQuery.elycharts.templates['pie_basic_2'] = {
 						type : "pie",
@@ -732,8 +732,8 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 				function helperMediaQuiries() {
 					if ($('.adminboard').length > 3 && $('#card-canvas').width() > 480) {
 						var width = $('#card-canvas').width() - 30;
-						var rowholds = Math.floor(width / 254);
-						var fillerspace = width - (rowholds * 254);
+						var rowholds = Math.floor(width / 264);
+						var fillerspace = width - (rowholds * 264);
 						//var eachfiller = 300+fillerspace/rowholds;
 						var newmargin = fillerspace / rowholds;
 						if (newmargin < 20) {

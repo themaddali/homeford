@@ -68,7 +68,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				}
 
 				function Login(username, password, domain) {
-					service.Login(username, password, {
+					service.Login(username, password, false, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
 								notify.showNotification('OK', 'Congratulations!!!', 'profileedit', '1000');

@@ -1077,8 +1077,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.Login = function(username, password, handlers) {
-					var remember = true;
+				this.Login = function(username, password, remember, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
