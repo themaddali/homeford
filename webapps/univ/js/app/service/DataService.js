@@ -1098,7 +1098,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
-				this.LogoutOut = function(handlers) {
+				this.LogoutOld = function(handlers) {
 					$.ajax({
 						url : '/zingoare/j_spring_security_logout',
 						type : 'POST',
@@ -1111,7 +1111,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.Logout = function(handlers) {
 					$.ajax({
 						url : '/zingoare/app/logout',
@@ -1121,6 +1121,27 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							handlers.success(data);
 						},
 						error : function(data) {
+							handlers.success('error');
+						}
+					});
+				};
+
+				this.passwordReset = function(email, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/app/resetpassword',
+						type : 'POST',
+						async : 'async',
+						data : email,
+						success : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
+							handlers.success(data);
+						},
+						error : function(data) {
+							$('input[type="button"]').removeClass('processing');
+							$('input[type="button"]').removeAttr('disabled');
 							handlers.success('error');
 						}
 					});

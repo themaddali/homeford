@@ -647,7 +647,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 
 				function setCanvas() {
 					if (!jQuery.elycharts.templates || jQuery.elycharts.templates == undefined) {
-						//location.reload(false);
+						location.reload(false);
 					}
 					jQuery.elycharts.templates['pie_basic_2'] = {
 						type : "pie",

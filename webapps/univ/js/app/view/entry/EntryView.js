@@ -37,7 +37,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				function Authenticate(username, password, remember, domain) {
 					var OWNERLEVEL = false;
 					var ADMINLEVEL = false;
-					service.Login(username, password,remember, {
+					service.Login(username, password, remember, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
 								if (username.length > 18) {
@@ -121,7 +121,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					jQuery('#user-name').focus();
 					jQuery('#user-name').val('');
 					jQuery('#user-password').val('');
-
+					$('#remember-me').prop("checked", true);
 				};
 
 				this.init = function() {

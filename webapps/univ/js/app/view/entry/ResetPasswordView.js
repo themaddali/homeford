@@ -47,7 +47,18 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						jQuery('#reset-send').click(function() {
 							if ($("#invite-form").valid()) {
 								var email = jQuery('#invite-email').val();
-								alert('Apologies!!- This functionality currently unavailable. Please contact support@zingoare.com');
+								service.passwordReset(email, {
+									success : function(response) {
+										if (response !=='error' && response.status !== 'error') {
+											notify.showNotification('OK', response.message);
+											setTimeout(function() {
+												//router.returnToPrevious();
+											}, 2000);
+										} else {
+											notify.showNotification('ERROR', 'Error in password reset. Contact support');
+										}
+									}
+								});
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
