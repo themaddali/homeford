@@ -61,7 +61,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 											}
 										}
 										if (UserProfile.passwordReset === true || UserProfile.passwordReset === 'true') {
-											newpassword.resetinfo(username);
+											newpassword.resetinfo(username, UserProfile.id);
 											router.go('/newpassword');
 										} else {
 											if (ADMINLEVEL == true) {

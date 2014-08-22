@@ -44,18 +44,40 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							router.returnToPrevious();
 						});
 
+						jQuery('#invite-email').bind('keypress', function(e) {
+							if (e.keyCode === 13) {
+								if ($("#invite-form").valid()) {
+									var email = jQuery('#invite-email').val();
+									service.passwordReset(email, {
+										success : function(response) {
+											if (response !== 'error' && response.status !== 'error') {
+												notify.showNotification('OK', response.message);
+												setTimeout(function() {
+													//router.returnToPrevious();
+												}, 2000);
+											} else {
+												notify.showNotification('ERROR', response.message);
+											}
+										}
+									});
+								} else {
+									notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+								}
+							}
+						});
+
 						jQuery('#reset-send').click(function() {
 							if ($("#invite-form").valid()) {
 								var email = jQuery('#invite-email').val();
 								service.passwordReset(email, {
 									success : function(response) {
-										if (response !=='error' && response.status !== 'error') {
+										if (response !== 'error' && response.status !== 'error') {
 											notify.showNotification('OK', response.message);
 											setTimeout(function() {
 												//router.returnToPrevious();
 											}, 2000);
 										} else {
-											notify.showNotification('ERROR', 'Error in password reset. Contact support');
+											notify.showNotification('ERROR', response.message);
 										}
 									}
 								});

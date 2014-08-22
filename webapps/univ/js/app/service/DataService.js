@@ -1130,10 +1130,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
-						url : '/zingoare/app/resetpassword',
+						url : '/zingoare/api/resetpassword',
 						type : 'POST',
 						async : 'async',
 						data : email,
+						contentType : "application/json",
 						success : function(data) {
 							$('input[type="button"]').removeClass('processing');
 							$('input[type="button"]').removeAttr('disabled');
@@ -1143,6 +1144,35 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							$('input[type="button"]').removeClass('processing');
 							$('input[type="button"]').removeAttr('disabled');
 							handlers.success('error');
+						}
+					});
+				};
+				
+				this.updatePassword = function(id, newpassword,handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/userprofile/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'password' : newpassword,
+						}),
+						success : function(data) {
+							USERPROFILE = null;
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Updating Password"
+							};
+							handlers.success(errormsg);
 						}
 					});
 				};

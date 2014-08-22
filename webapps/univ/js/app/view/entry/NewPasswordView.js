@@ -9,6 +9,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 			var validator;
 			var info;
+			var memberid;
 
 			function ResetPasswordView() {
 
@@ -28,9 +29,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					return (value.length == 0 || ValidPwd);
 				}, 'Invalid Password Choice');
 
-				this.resetinfo = function(email) {
+				this.resetinfo = function(email, id) {
 					clearForm();
 					info = email;
+					memberid = id;
 					jQuery('#new-user-name').val(email);
 				};
 
@@ -79,7 +81,18 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							if ($("#invite-form").valid()) {
 								var email = jQuery('#new-user-name').val();
 								var password = jQuery('#new-user-password').val();
-								alert(email + ' action');
+								service.updatePassword(memberid, email, {
+									success : function(response) {
+										if (response.status !== 'error') {
+											notify.showNotification('OK', response.message, 'home', 10000);
+											setTimeout(function() {
+												router.go('/home');
+											}, 2000);
+										} else {
+											notify.showNotification('ERROR', response.message);
+										}
+									}
+								});
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
