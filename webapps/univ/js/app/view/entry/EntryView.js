@@ -127,6 +127,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 				this.init = function() {
 					document.title = 'Zingoare | Signin/Signup';
 					positionModal();
+					checkForActiveCookie();
 
 					// When the browser changes size
 					$(window).resize(positionModal);

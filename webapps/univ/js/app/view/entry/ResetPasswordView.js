@@ -12,11 +12,16 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			function ResetPasswordView() {
 
 				function checkForActiveCookie() {
-					return true;
+					if (jQuery.cookie('user')) {
+						router.go('/studentlist', '/entry');
+						return true;
+					} else {
+						return false;
+					}
 				}
 
 				function clearForm() {
-					jQuery('#invite-email').val('').focus();
+					jQuery('#reset-email').val('').focus();
 				}
 
 
@@ -26,6 +31,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.resume = function() {
 					clearForm();
+					checkForActiveCookie();
 					validator.resetForm();
 					document.title = 'Zingoare | Password Reset';
 				};
@@ -35,26 +41,24 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					//Light weight DOM.
 					document.title = 'Zingoare | Password Reset';
 
-					if (checkForActiveCookie() === true) {
-
+					if (checkForActiveCookie() === false) {
 						//populateData();
-
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});
 
-						jQuery('#invite-email').bind('keypress', function(e) {
+						jQuery('#reset-email').bind('keypress', function(e) {
 							if (e.keyCode === 13) {
-								if ($("#invite-form").valid()) {
-									var email = jQuery('#invite-email').val();
+								e.preventDefault();
+								if ($("#reset-form").valid()) {
+									var email = jQuery('#reset-email').val();
 									service.passwordReset(email, {
 										success : function(response) {
 											if (response !== 'error' && response.status !== 'error') {
-												notify.showNotification('OK', response.message);
-												setTimeout(function() {
-													//router.returnToPrevious();
-												}, 2000);
+												notify.showNotification('OK', 'Email Sent - ' + response.message, 'home', 5000);
+												clearForm();
+												validator.resetForm();
 											} else {
 												notify.showNotification('ERROR', response.message);
 											}
@@ -67,15 +71,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						});
 
 						jQuery('#reset-send').click(function() {
-							if ($("#invite-form").valid()) {
-								var email = jQuery('#invite-email').val();
+							if ($("#reset-form").valid()) {
+								var email = jQuery('#reset-email').val();
 								service.passwordReset(email, {
 									success : function(response) {
 										if (response !== 'error' && response.status !== 'error') {
-											notify.showNotification('OK', response.message);
-											setTimeout(function() {
-												//router.returnToPrevious();
-											}, 2000);
+											notify.showNotification('OK', 'Email Sent - ' + response.message, 'home', 5000);
+											clearForm();
+											validator.resetForm();
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}
@@ -86,9 +89,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}
 						});
 
-						validator = jQuery("#invite-form").validate({
+						validator = jQuery("#reset-form").validate({
 							rules : {
-								inviteemail : {
+								resetemail : {
 									required : true,
 									email : true
 								},

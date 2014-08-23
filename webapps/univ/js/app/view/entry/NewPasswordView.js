@@ -14,7 +14,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			function ResetPasswordView() {
 
 				function checkForActiveCookie() {
-					return true;
+					if (jQuery.cookie('user')) {
+						router.go('/studentlist', '/entry');
+						return true;
+					} else {
+						return false;
+					}
 				}
 
 				function clearForm() {
@@ -42,6 +47,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 				this.resume = function() {
 					clearForm();
+					checkForActiveCookie();
 					validator.resetForm();
 					document.title = 'Zingoare | New Password';
 				};

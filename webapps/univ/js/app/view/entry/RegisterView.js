@@ -140,6 +140,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 
 				this.init = function() {
 					document.title = 'Zingoare | Register';
+					checkForActiveCookie();
 					if (!jQuery.cookie('entity')) {
 						jQuery('#user-domain').removeAttr('readonly');
 						jQuery('#user-domain').removeClass('onlyone');

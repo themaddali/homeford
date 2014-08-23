@@ -1143,7 +1143,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						error : function(data) {
 							$('input[type="button"]').removeClass('processing');
 							$('input[type="button"]').removeAttr('disabled');
-							handlers.success('error');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Reseting Password"
+							};
+							handlers.success(errormsg);
 						}
 					});
 				};
