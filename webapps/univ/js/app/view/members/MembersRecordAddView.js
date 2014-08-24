@@ -29,15 +29,15 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						});
 						jQuery("#member-dob").val(today);
 					}
-					// service.getMemberRecord(ID, {
-						// success : function(data) {
-							// if (data.status !== 'error') {
-								// notify.showNotification('OK', data.message);
-							// } else {
-								// notify.showNotification('ERROR', data.message);
-							// }
-						// }
-					// });
+					service.getMemberRecord(ID, {
+						success : function(data) {
+							if (data.status !== 'error') {
+								notify.showNotification('OK', data.message);
+							} else {
+								notify.showNotification('ERROR', data.message);
+							}
+						}
+					});
 				}
 
 				function checkForActiveCookie() {

@@ -414,11 +414,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				//Last month late stats
-				this.getLateInfo = function(id,month,handlers) {
+				this.getLateInfo = function(id, month, handlers) {
 					$.ajax({
-						url : '/zingoare/api/getlatekiosks/'+id+'?invoiceDate='+ month,
+						url : '/zingoare/api/getlatekiosks/' + id + '?invoiceDate=' + month,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -427,11 +427,18 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				this.getMemberRecord = function(id, handlers) {
-					
+					$.ajax({
+						url : '/zingoare/api/getUserDetails/' + id,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
 				};
-				
 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {
