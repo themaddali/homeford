@@ -427,6 +427,11 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				this.getMemberRecord = function(id, handlers) {
+					
+				};
+				
 
 				//Get T1, T2 and T3 privilage
 				this.getMembers = function(domain, handlers) {

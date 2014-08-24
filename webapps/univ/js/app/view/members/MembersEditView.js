@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/members/MembersRecordAddView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin, memberrecord) {"use strict";
 
 	var MembersEditView = ( function() {
 
@@ -32,6 +32,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
 						jQuery('#member-id').val(ACTIVEMEMBER.id);
+						memberrecord.setuser(ACTIVEMEMBER.id, ACTIVEMEMBER.firstname + ' '+ACTIVEMEMBER.lastname);
 						jQuery('#member-rel').val(ACTIVEMEMBER.relation);
 						jQuery('#member-email').val(ACTIVEMEMBER.email);
 						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
@@ -267,6 +268,10 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							} else {
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
+						});
+						
+						jQuery('#member-record').on('click',function(){
+							router.go('/membersrecordadd');
 						});
 
 						jQuery('#member-profile-image').click(function() {
