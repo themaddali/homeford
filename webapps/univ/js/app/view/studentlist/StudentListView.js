@@ -191,12 +191,12 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.student-id', newboard).text(MEMBEROBJECT[i].taskcount + ' task(s) todo');
 							jQuery('.taskcount', newboard).text(MEMBEROBJECT[i].taskcount);
 							jQuery('.member-from', newboard).text(MEMBEROBJECT[i].taskprogress + ' % completed');
-							if (MEMBEROBJECT[i].email) {
-								if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
-									jQuery('.student-info', newboard).append(YOU);
-									jQuery(newboard).css('display', 'none');
-								}
-							}
+							// if (MEMBEROBJECT[i].email) {
+								// if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
+									// jQuery('.student-info', newboard).append(YOU);
+									// jQuery(newboard).css('display', 'none');
+								// }
+							// }
 							//jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();

@@ -89,6 +89,23 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});
+						
+						jQuery('#member-record-add').click(function(){
+							var _memberdob = jQuery('#member-dob').val();
+							var _memberpob = jQuery('#member-pob').val();
+							var _emergencyname = jQuery('#emergency-contact-name').val();
+							var _emergencynum = jQuery('#emergency-phone').val();
+							var _familyhome = jQuery('#family-home').val();
+							var _fathermobile = jQuery('#father-mobile').val();
+							var _fatherwork = jQuery('#father-work').val();
+							var _mothermobile = jQuery('#mother-mobile').val();
+							var _motherwork = jQuery('#mother-work').val();
+							var _memberallergies = jQuery('#member-allergies').val();
+							var _pcptname = jQuery('#pcp-contact-name').val();
+							var _pcpphone = jQuery('#pcp-phone').val();
+							var _membernote = jQuery('#member-note').val();
+							alert('action here');
+						});
 
 						jQuery('#member-dob').focus(function() {
 							setTimeout(function() {

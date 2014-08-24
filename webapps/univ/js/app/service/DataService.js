@@ -75,28 +75,26 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 
 				this.getFlickList = function(keyword, handlers) {
 					handlers.error();
-					// // Location based images - Disabled for now.
+					// Location based images - Disabled for now.
 					// $.getJSON('https://freegeoip.net/json/', function(location) {
-					// keyword = FLICKRMAP[location.region_name];
-					// if (!keyword) {
-					// keyword = location.country_name;
-					// }
-					// var imagelist = [];
-					// var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
-					// $.getJSON(flickrurl, function(data) {
-					// $.each(data.items, function(i, item) {
-					//
-					// //$("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
-					// for (var i = 0; i < 3; i++) {
-					// var imageurl = data.items[i].media.m;
-					// imageurl = imageurl.replace('_m.jpg', '_b.jpg');
-					// imagelist.push(imageurl);
-					// }
-					// handlers.success(imagelist);
+						// keyword = FLICKRMAP[location.region_name];
+						// if (!keyword) {
+							// keyword = location.country_name;
+						// }
+						// var imagelist = [];
+						// var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
+						// $.getJSON(flickrurl, function(data) {
+							// $.each(data.items, function(i, item) {
+								// $("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
+								// for (var i = 0; i < 3; i++) {
+									// var imageurl = data.items[i].media.m;
+									// imageurl = imageurl.replace('_m.jpg', '_b.jpg');
+									// imagelist.push(imageurl);
+								// }
+								// handlers.success(imagelist);
+							// });
+						// });
 					// });
-					// });
-					// });
-
 				};
 
 				this.getUserProfile = function(handlers) {
@@ -428,12 +426,27 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					});
 				};
 
+				//Member Record - GET
 				this.getMemberRecord = function(id, handlers) {
 					$.ajax({
 						url : '/zingoare/api/getUserDetails/' + id,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+
+				//Member REcord Update - POST
+				this.setMemberRecord = function(id, dataobj, handlers) {
+					$.ajax({
+						url : '/zingoare/api/getUserDetails/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify(dataobj),
 						success : function(data) {
 							handlers.success(data);
 						}

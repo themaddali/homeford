@@ -3709,7 +3709,7 @@ dialog-modal::-webkit-scrollbar {
 }
 
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 7px;
 	height: 5px;
 }
 
@@ -5189,6 +5189,11 @@ footer a:hover {
 	}
 	.edit-notify.ERROR {
 		font-size: 1em;
+	}
+	
+	::-webkit-scrollbar {
+		width: 0px;
+		height: 5px;
 	}
 
 	.page-template-about-php #backstretch, .page-template-about-php #backstretch {

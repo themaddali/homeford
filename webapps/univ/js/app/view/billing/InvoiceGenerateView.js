@@ -596,7 +596,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								if (jQuery('#kid-name').val() != 'None Selected') {
 									for (var k = 0; k < PARENTS[jQuery('#kid-name').val()].length; k++) {
 										if (PARENTS[jQuery('#kid-name').val()][k].userType == 'FATHER' || PARENTS[jQuery('#kid-name').val()][k].userType == 'MOTHER') {
-											databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+											//databoject.parent = databoject.parent + PARENTS[jQuery('#kid-name').val()][k].email + ':';
+											_pids.push(PARENTS[jQuery('#kid-name').val()][k].id);
 										}
 									}
 								}
@@ -623,6 +624,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 											//var _invoicedesc= JSON.stringify(_services).toString();
 											var _invoicedesc = 'For ' + _services.length + ' services, you owe $' + _grandtotal;
 											var _paycheck = 'Zingoare, Inc.';
+											var _paypalurl = 'payment@zingoare.com';
 											if (jQuery('#payment-paypal-1').val() === '1' || jQuery('#payment-paypal-1').val() === '3') {
 												_paypalurl = jQuery('#payment-paypal').find('.checkbox-span').text();
 												_paycheck = jQuery('#payment-check').find('.checkbox-span').text();
