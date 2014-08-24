@@ -1,4 +1,4 @@
-define(['cookie','timeago', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, timeago, service, banner, notify, router) {"use strict";
+define(['cookie', 'timeago', '../../service/DataService', '../../service/BannerService', '../../Notify', '../../Router'], function(cookie, timeago, service, banner, notify, router) {"use strict";
 
 	var InviteView = ( function() {
 
@@ -39,8 +39,10 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 					NOTIFICATION = notify.getNotifications();
 					var template = jQuery('#notify-template').attr('id', '');
 					var mintemplate = jQuery('#notify-min-template').attr('id', '');
+					var ackntemplate = jQuery('#ackn-notify-template').attr('id', '');
 					//Backing the template
 					jQuery('.div-template').append(template.attr('id', 'notify-template'));
+					jQuery('.div-template').append(ackntemplate.attr('id', 'ackn-notify-template'));
 					jQuery('.div-template').append(mintemplate.attr('id', 'notify-min-template'));
 					jQuery('.metainfo').text(NOTIFICATION.length + ' Notification(s)');
 					if (NOTIFICATION.length === 0) {
@@ -48,11 +50,11 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 						jQuery('.cardsloading').fadeOut(200);
 					}
 					jQuery('.cardsloading').fadeOut(200);
-					for (var i = NOTIFICATION.length-1; i >=0 ; i--) {
+					for (var i = NOTIFICATION.length - 1; i >= 0; i--) {
 						var thistemplate = template.clone();
 						jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
-						jQuery('.timeago', thistemplate).attr('title',NOTIFICATION[i].timestamp);
-						if (NOTIFICATION[i].keyword && NOTIFICATION[i].keyword.length > 1) {
+						jQuery('.timeago', thistemplate).attr('title', NOTIFICATION[i].timestamp);
+						if (NOTIFICATION[i].keyword && NOTIFICATION[i].keyword.length > 1 && NOTIFICATION[i].keyword !== 'ACKN') {
 							if (NOTIFICATION[i].status == 'OK') {
 								jQuery('.title', thistemplate).parent().prepend(OK);
 							} else if (NOTIFICATION[i].status == 'INFO') {
@@ -68,16 +70,35 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 							thistemplate.attr('name', i);
 							jQuery("abbr.timeago").timeago();
 							jQuery('#card-canvas').append(thistemplate);
-						} else {
-							var thistemplate = mintemplate.clone();
+						} else if (NOTIFICATION[i].keyword === 'ACKN') {
+							var thistemplate = ackntemplate.clone();
+							jQuery('.inviteid', thistemplate).text(NOTIFICATION[i].title.split(':::')[2]);
+							jQuery('.message', thistemplate).text(NOTIFICATION[i].title.split(':::')[0]);
+							jQuery('.urgency', thistemplate).text(NOTIFICATION[i].title.split(':::')[1]);
+							jQuery('.title', thistemplate).text('Access Update');
 							if (NOTIFICATION[i].status == 'OK') {
 								jQuery('.title', thistemplate).parent().prepend(OK);
+							} else if (NOTIFICATION[i].status == 'INFO') {
+								jQuery('.title', thistemplate).parent().prepend(INFO);
 							} else {
 								jQuery('.title', thistemplate).parent().prepend(ERROR);
 							}
+							jQuery('.timeago', thistemplate).attr('title', NOTIFICATION[i].timestamp);
+							jQuery('.action', thistemplate).text('Acknowledge');
+							thistemplate.attr('name', i);
+							jQuery("abbr.timeago").timeago();
+							jQuery('#card-canvas').append(thistemplate);
+						} else {
+							var thistemplate = mintemplate.clone();
 							jQuery('.title', thistemplate).text(NOTIFICATION[i].title);
-							//jQuery('.timestamp', thistemplate).text(NOTIFICATION[i].timestamp);
-							jQuery('.timeago', thistemplate).attr('title',NOTIFICATION[i].timestamp);
+							if (NOTIFICATION[i].status == 'OK') {
+								jQuery('.title', thistemplate).parent().prepend(OK);
+							} else if (NOTIFICATION[i].status == 'INFO') {
+								jQuery('.title', thistemplate).parent().prepend(INFO);
+							} else {
+								jQuery('.title', thistemplate).parent().prepend(ERROR);
+							}
+							jQuery('.timeago', thistemplate).attr('title', NOTIFICATION[i].timestamp);
 							jQuery("abbr.timeago").timeago();
 							jQuery('#card-canvas').append(thistemplate);
 						}
@@ -85,14 +106,26 @@ define(['cookie','timeago', '../../service/DataService', '../../service/BannerSe
 						if (i === 0) {
 							jQuery("abbr.timeago").timeago();
 							jQuery('.action').click(function() {
-								var id = $(this).parent().parent().find('.inviteid').text();
-								var indexof = $(this).parent().parent().attr('name');
-								service.acceptInvite(id, {
-									success : function(data) {
-										notify.removeNotifications(indexof);
-										populateData();
-									}
-								});
+								if (jQuery(this).text() !== 'Acknowledge') {
+									var id = $(this).parent().parent().find('.inviteid').text();
+									var indexof = $(this).parent().parent().attr('name');
+									service.acceptInvite(id, {
+										success : function(data) {
+											notify.removeNotifications(indexof);
+											populateData();
+										}
+									});
+								}
+								else {
+									var id = $(this).parent().parent().find('.inviteid').text();
+									var indexof = $(this).parent().parent().attr('name');
+									service.acknNotification(id, {
+										success : function(data) {
+											notify.removeNotifications(indexof);
+											populateData();
+										}
+									});
+								}
 							});
 						}
 					}

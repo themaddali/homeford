@@ -48,7 +48,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				this.resume = function() {
 					clearForm();
 					checkForActiveCookie();
-					validator.resetForm();
+					//validator.resetForm();
 					document.title = 'Zingoare | New Password';
 				};
 
@@ -57,7 +57,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					//Light weight DOM.
 					document.title = 'Zingoare | New Password';
 
-					if (checkForActiveCookie() === true) {
+					if (checkForActiveCookie() === false) {
 						clearForm();
 						jQuery('#new-user-name').val(info);
 
@@ -83,17 +83,36 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}
 						});
 
+						jQuery('#new-user-password-repeat').bind('keypress', function(e) {
+							if (e.keyCode === 13) {
+								e.preventDefault();
+								if ($("#invite-form").valid()) {
+									var email = jQuery('#new-user-name').val();
+									var password = jQuery('#new-user-password').val();
+									service.updatePassword(memberid, password, {
+										success : function(response) {
+											if (response.status !== 'error') {
+												notify.showNotification('OK', 'New Password Set. Please login now', 'entry', 4000);
+											} else {
+												
+												notify.showNotification('ERROR', response.message);
+											}
+										}
+									});
+								} else {
+									notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
+								}
+							}
+						});
+
 						jQuery('#update-password').click(function() {
 							if ($("#invite-form").valid()) {
 								var email = jQuery('#new-user-name').val();
 								var password = jQuery('#new-user-password').val();
-								service.updatePassword(memberid, email, {
+								service.updatePassword(memberid, password, {
 									success : function(response) {
 										if (response.status !== 'error') {
-											notify.showNotification('OK', response.message, 'home', 10000);
-											setTimeout(function() {
-												router.go('/home');
-											}, 2000);
+											notify.showNotification('OK', 'New Password Set. Please login now', 'entry', 4000);
 										} else {
 											notify.showNotification('ERROR', response.message);
 										}

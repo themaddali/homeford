@@ -53,6 +53,11 @@ define(['jquery', 'cookie', '../service/DataService', '../Router'], function(jQu
 									}
 									jQuery('.brandnames').val(jQuery.cookie('subuser'));
 								}
+								if (jQuery('.brandnames option').length === 1) {
+									jQuery('.brandname').text(jQuery('.brandnames').val()).addClass('show');
+									jQuery('.brandnames').removeClass('show');
+									jQuery('.brandnamesicon').hide();
+								}
 							}
 						});
 					}

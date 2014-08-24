@@ -168,18 +168,35 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}, 3000);
 						//Check after 3 seconds. Cooling time
 					}
-				}
+				};
 
 				//Listen Notifications
 				function listenNotifications(notificationssarray) {
 					if (notificationssarray.length > 0) {
 						setTimeout(function() {
-							notify.showNotification('INFO', 'Message here:', notificationssarray.length);
+							for (var i = 0; i < notificationssarray.length; i++) {
+								if (notificationssarray[i].notificationStatus !== 'ACCEPTED') {
+									notify.showNotification('INFO', notificationssarray[i].message + ':::' + notificationssarray[i].notificationType + ':::' + notificationssarray[i].id, '', 10, notificationssarray[i].notificationSentTime);
+									jQuery('#alert-value').text(notify.getNewNotificationsCount());
+								}
+							}
 						}, 3000);
 						//Check after 3 seconds. Cooling time
 					}
-				}
+				};
 
+				//Read Notification
+				this.acknNotification = function(id, handlers) {
+					$.ajax({
+						url : '/zingoare/api/notification/statusupdate/' + id,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
 
 				this.getDomainProfile = function(domainid, handlers) {
 					$.ajax({
@@ -389,6 +406,19 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				this.checkInStatsbyDate = function(domainid, fromdate, todate, handlers) {
 					$.ajax({
 						url : '/zingoare/api/getkioskbydate/' + domainid + '?fromDate=' + fromdate + '&toDate=' + todate,
+						type : 'GET',
+						async : 'async',
+						contentType : "application/json",
+						success : function(data) {
+							handlers.success(data);
+						}
+					});
+				};
+				
+				//Last month late stats
+				this.getLateInfo = function(id,month,handlers) {
+					$.ajax({
+						url : '/zingoare/api/getlatekiosks/'+id+'?invoiceDate='+ month,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
@@ -1151,8 +1181,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
-				this.updatePassword = function(id, newpassword,handlers) {
+
+				this.updatePassword = function(id, newpassword, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({

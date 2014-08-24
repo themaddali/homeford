@@ -17,14 +17,35 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 
 			function Notify() {
 
-				function showNotification(status, message, toroute, duration) {
+				function showNotification(status, message, toroute, duration, timestamp) {
 					var _notification = {};
 					_notification.title = message;
 					_notification.status = status;
-					_notification.timestamp = new Date().toISOString();
 					_notification.keyword = '';
-					NOTIFICATION_new = NOTIFICATION_new + 1;
-					NOTIFICATIONS.push(_notification);
+					if (!timestamp) {
+						_notification.timestamp = new Date().toISOString();
+						NOTIFICATION_new = NOTIFICATION_new + 1;
+						NOTIFICATIONS.push(_notification);
+					} else {
+						_notification.timestamp = timestamp;
+						_notification.keyword = 'ACKN';
+						jQuery('div.edit-notify').remove();
+						jQuery('.page').append('<audio id="notifyAudio"><source src="media/notify.ogg" type="audio/ogg"><source src="media/notify.mp3" type="audio/mpeg"><source src="media/notify.wav" type="audio/wav"></audio>');
+						if (NOTIFICATIONS.length === 0) {
+							NOTIFICATION_new = NOTIFICATION_new + 1;
+							NOTIFICATIONS.push(_notification);
+							$('#notifyAudio')[0].play();
+						} else {
+							for (var s = 0; s < NOTIFICATIONS.length; s++) {
+								if (NOTIFICATIONS[s].keyword === 'ACKN' && NOTIFICATIONS[s].timestamp !== timestamp) {
+									NOTIFICATION_new = NOTIFICATION_new + 1;
+									NOTIFICATIONS.push(_notification);
+									$('#notifyAudio')[0].play();
+								}
+							}
+						}
+					}
+
 					jQuery('div.edit-notify').remove();
 					if (!duration) {
 						duration = 1000;
@@ -88,7 +109,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 								_notification.keyword = keyword;
 								_notification.inviteid = fullmessage[i].id;
 								NOTIFICATIONS.push(_notification);
-								NOTIFICATION_new = NOTIFICATION_new +1;
+								NOTIFICATION_new = NOTIFICATION_new + 1;
 								jQuery('#alert-value').text(NOTIFICATION_new);
 								$('#notifyAudio')[0].play();
 							}
@@ -104,7 +125,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 										_notification.timestamp = new Date().toISOString();
 										;
 										_notification.keyword = keyword;
-										NOTIFICATION_new = NOTIFICATION_new +1;
+										NOTIFICATION_new = NOTIFICATION_new + 1;
 										NOTIFICATIONS.push(_notification);
 										jQuery('#alert-value').text(NOTIFICATION_new);
 										$('#notifyAudio')[0].play();
@@ -122,7 +143,7 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 											;
 											_notification.keyword = keyword;
 											_notification.inviteid = fullmessage[i].id;
-											NOTIFICATION_new = NOTIFICATION_new +1;
+											NOTIFICATION_new = NOTIFICATION_new + 1;
 											NOTIFICATIONS.push(_notification);
 											jQuery('#alert-value').text(NOTIFICATION_new);
 											$('#notifyAudio')[0].play();
@@ -169,8 +190,8 @@ define(['../app/Router', 'cookie', 'timeago', '../app/service/DataService', 'jqu
 
 				};
 
-				this.showNotification = function(status, message, toroute, duration) {
-					showNotification(status, message, toroute, duration);
+				this.showNotification = function(status, message, toroute, duration, timestamp) {
+					showNotification(status, message, toroute, duration, timestamp);
 				};
 
 				this.showMessage = function(status, message, fullmessage, keyword, toroute, duration) {

@@ -14,16 +14,19 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			};
 			var activeDomains = [];
 			var pendingList;
-			var leadtemplate, followtemplate;
+			var leadtemplate, followtemplate, latetemplate;
 			var validator;
 			var newitemvalidator;
+			var latefeevalidator;
 			var ActiveMembers = {};
 			var SERVICESALL = [];
 			var ITEMS = new Object();
 			var PARENTS = new Object();
 			var DIALOG = '<div id="item-dialog-form" title="Add New Item"><form id="new-item-form" class="edit-form"><fieldset><ol class="service-ol"><li class="form-item"><label>Item Name</label><div class="form-content"><input placeholder="Ex: Late Fee" id="new-item-name" name="newitemname" type="text" /></div></li><li class="form-item"><label>Item Description</label><div class="form-content"><textarea class="edittextarea" placeholder="Ex: Late pick up fee" id="new-item-desc" name="newitemdesc"></textarea></div></li><li class="form-item"><label>Item Cost</label><div class="form-content"><input placeholder="Ex: 10" id="new-item-cost" name="newitemcost" type="text" /></div></li><li class="form-item"><label>Category</label><div class="form-content"><select class="edit-select" id="new-item-type" type="text"><option>One Time Fee</option><option>Recuring Fee</option><option>Coupon</option><option>Discount</option></select></div></li></ol></fieldset></form></div>';
 			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
+			var LATEDIALOG = '<div id="late-dialog-form" title="Late Entries"><form id="late-item-form" class="edit-form"><fieldset><ol class="late-ol"><div id="late-checklist"></div></ol></fieldset></form></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
+			var CHECKBOXINPUT = '<input style="margin-right:15px; float: right" placeholder="Ex: 30"  name="latefees" class="checkbox-input" type="text" />';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -149,10 +152,89 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									if (data[j].status === 'Active' || data[j].status === 'ACTIVE') {
 										jQuery('#services-grid').append(thisservice);
 									}
+									if (j === data.length - 1) {
+										getLateLog();
+									}
 								}
 							}
 						});
 					}
+				}
+
+				function toDate(s) {
+					var datepart = s.split(" ")[0].split('-');
+					var locals = datepart[1] + '/' + datepart[2] + '/' + datepart[0] + ' ' + s.split(" ")[1] + ' UTC';
+					var localnow = new Date(locals);
+					//For IE dumb pattern :(
+					if (localnow.toString().slice(-1) === ")") {
+						//console.log('Not IE -' + localnow.toString());
+						localnow = localnow.toString().split(" ");
+						return localnow[1] + ' ' + localnow[2];
+					} else {
+						//console.log('IE Sucker -' + localnow.toString());
+						localnow = localnow.toString().split(" ");
+						return localnow[1] + ' ' + localnow[2];
+					}
+				}
+
+				function minToTime(s) {
+					if (s === 0) {
+						return '';
+					}
+					if (s < 0) {
+						s = s * -1;
+						var _m = s % 60;
+						var _h = Math.floor(s / 60);
+						return _h + 'h ' + _m + 'm';
+					} else {
+						var _m = s % 60;
+						var _h = Math.floor(s / 60);
+						return _h + 'h ' + _m + 'm';
+					}
+				}
+
+				function getLateLog() {
+					jQuery('#late-checklist').empty();
+					var date = new Date();
+					var today = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+					service.getLateInfo(jQuery('#kid-name').val(), today, {
+						success : function(data) {
+							jQuery("#latelog").text(data.length + " late entries");
+							if (data.length === 0) {
+								jQuery("#latelog").hide();
+							}
+							for (var j = 0; j < data.length; j++) {
+								if (j === 0) {
+									var thisservice = latetemplate.clone();
+									var delay = 0;
+									if (data[j].checkInTimeDiff < 0) {
+										delay = delay + data[j].checkInTimeDiff;
+									}
+									if (data[j].checkOutTimeDiff < 0) {
+										delay = delay + data[j].checkOutTimeDiff;
+									}
+									jQuery('.services-list', thisservice).parent().append(toDate(data[j].checkinTime) + '  Late by: ' + minToTime(delay));
+									jQuery('.services-list', thisservice).attr('sname', toDate(data[j].checkinTime)).attr('cost', '200').attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
+									jQuery('.services-list', thisservice).parent().append(CHECKBOXINPUT);
+									jQuery('.checkbox-input', thisservice).val();
+								} else {
+									var thisservice = latetemplate.clone();
+									var delay = 0;
+									if (data[j].checkInTimeDiff < 0) {
+										delay = delay + data[j].checkInTimeDiff;
+									}
+									if (data[j].checkOutTimeDiff < 0) {
+										delay = delay + data[j].checkOutTimeDiff;
+									}
+									jQuery('.services-list', thisservice).parent().append(toDate(data[j].checkinTime) + '  Late by: ' + minToTime(delay));
+									jQuery('.services-list', thisservice).attr('sname', toDate(data[j].checkinTime)).attr('cost', '200').attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
+									jQuery('.services-list', thisservice).parent().append(CHECKBOXINPUT);
+									jQuery('.checkbox-input', thisservice).val();
+								}
+								jQuery('#late-checklist').append(thisservice);
+							}
+						}
+					});
 				}
 
 				function clearForm() {
@@ -182,6 +264,26 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						jQuery('#new-item-desc').val('');
 						$("#item-dialog-form").dialog("close");
 					}
+				}
+
+				function addLateItem() {
+					jQuery('.latefee').remove();
+					$('#late-checklist input[type=checkbox]').each(function() {
+						if (this.checked) {
+							var thisservice = followtemplate.clone();
+							var cost = jQuery(this).next().val();
+							if (!cost || cost === '') {
+								cost = '0';
+							}
+							jQuery('.services-list', thisservice).parent().append(jQuery(this).parent().text());
+							jQuery('.services-list', thisservice).attr('sname', jQuery(this).parent().text()).attr('cost',cost ).attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
+							jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
+							jQuery('.checkbox-span', thisservice).text('Cost: $ ' + cost);
+							jQuery(thisservice).addClass('latefee');
+							jQuery('#services-grid').append(thisservice);
+						}
+					});
+					$("#late-dialog-form").dialog("close");
 				}
 
 				function getSelectedText(elementId) {
@@ -243,6 +345,28 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						}
 					});
 
+					jQuery('body').append(LATEDIALOG);
+					$("#late-dialog-form").dialog({
+						autoOpen : false,
+						height : 500,
+						width : 600,
+						show : {
+							effect : "blind",
+							duration : 300
+						},
+						hide : {
+							effect : "explode",
+							duration : 300
+						},
+						modal : true,
+						buttons : {
+							"Add" : addLateItem
+						},
+						close : function() {
+							$(this).dialog("close");
+						}
+					});
+
 					jQuery('body').append(WARNDIALOG);
 					$("#note-dialog").dialog({
 						autoOpen : false,
@@ -257,13 +381,10 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						},
 						buttons : {
 							"Update" : function() {
+								ActiveMembers = {};
 								router.go('/domainedit');
 								//$(this).dialog("close");
 							},
-							// "Cancel" : function() {
-							// $(this).dialog("close");
-							// router.returnToPrevious();
-							// }
 						},
 						close : function() {
 							router.returnToPrevious();
@@ -309,6 +430,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 				this.resume = function() {
 					validator.resetForm();
 					newitemvalidator.resetForm();
+					//latefeevalidator.resetForm();
 					if (Modernizr.touch && Modernizr.inputtypes.date) {
 						document.getElementById('invoice-duedate').type = 'date';
 					} else {
@@ -336,6 +458,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					if (checkForActiveCookie() === true) {
 						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
 						followtemplate = jQuery('#service-follow').remove().attr('id', '');
+						latetemplate = jQuery('#service-lead-late').remove().attr('id', '');
 						initDialog();
 						populateData();
 
@@ -352,9 +475,15 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							}, 100);
 						});
 
-						jQuery('.formlink').click(function() {
+						jQuery('#addlog').click(function() {
 							//newitemvalidator.resetForm();
 							jQuery("#item-dialog-form").dialog("open");
+						});
+
+						jQuery('#latelog').click(function() {
+							//newitemvalidator.resetForm();
+							getLateLog() ;
+							jQuery("#late-dialog-form").dialog("open");
 						});
 
 						jQuery('#kid-name').change(function() {
@@ -378,6 +507,9 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								}
 								if (ITEMS[studentid][i].itemService.status === 'Active' || ITEMS[studentid][i].itemService.status === 'ACTIVE') {
 									jQuery('#services-grid').append(thisservice);
+								}
+								if (i === ITEMS[studentid].length - 1) {
+									//getLateLog();
 								}
 							}
 						});
@@ -490,7 +622,6 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 											var now = year + "-" + month + "-" + day;
 											//var _invoicedesc= JSON.stringify(_services).toString();
 											var _invoicedesc = 'For ' + _services.length + ' services, you owe $' + _grandtotal;
-											var _paypalurl = 'payments@zingoare.com';
 											var _paycheck = 'Zingoare, Inc.';
 											if (jQuery('#payment-paypal-1').val() === '1' || jQuery('#payment-paypal-1').val() === '3') {
 												_paypalurl = jQuery('#payment-paypal').find('.checkbox-span').text();

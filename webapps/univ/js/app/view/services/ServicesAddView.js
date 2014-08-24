@@ -112,10 +112,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								var _stax = jQuery('#service-tax').val();
 								//var _sfreq = jQuery('#service-frequency').val();
 								var _sfreq = 0;
-								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM') {
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM' && jQuery('#service-starttime').val().split(":")[0] !== '12') {
 									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) + 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
-								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM') {
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-starttime').val().split(":")[0] !== '12') {
 									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
 								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {

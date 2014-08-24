@@ -51,15 +51,13 @@
 										<label>Payment Options</label>
 										<span>
 											<input id="payment-paypal-1" class="payment-list" type="checkbox" value="" checked="checked"/>
-											<span class="checkbox-name"></span>
-										</span>
+											<span class="checkbox-name"></span> </span>
 									</li>
 									<li class="form-item" style="margin-top: 0px" id="payment-check">
 										<label></label>
 										<span>
 											<input id="payment-check-1" class="services-list" type="checkbox"  value="" checked="checked"/>
-											<span class="checkbox-name"></span>
-										</span>
+											<span class="checkbox-name"></span> </span>
 									</li>
 								</div>
 								<li class="form-item">
@@ -73,7 +71,8 @@
 								</li>
 								<div id="services-grid" class="form-checkboxs"></div>
 							</ol>
-							<a class="formlink">Add new entry</a>
+							<a id="addlog" class="formlink">Add new entry</a>
+							<a id="latelog" class="formlink">Late entries</a>
 						</fieldset>
 					</form>
 				</div>
@@ -88,6 +87,11 @@
 					<li class="form-item servicetemplate" id="service-lead">
 						<label> Services</label>
 						<span>
+							<input class="services-list" type="checkbox" name="services" value=""/>
+						</span>
+					</li>
+					<li class="form-item servicetemplate" id="service-lead-late">
+						<span style="width: 100%">
 							<input class="services-list" type="checkbox" name="services" value=""/>
 						</span>
 					</li>
