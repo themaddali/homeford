@@ -23,21 +23,26 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						success : function(Profile) {
 							//OverView Panel Load
 							if (Profile.addresses[0]) {
-								jQuery('#profile-street').val(Profile.addresses[0].street1);
-								jQuery('#profile-street1').val(Profile.addresses[0].street2);
-								jQuery('#profile-city').val(Profile.addresses[0].city);
-								jQuery('#profile-state').val(Profile.addresses[0].state);
-								jQuery('#profile-country').val(Profile.addresses[0].country);
-								jQuery('#profile-zip').val(Profile.addresses[0].zip);
-								ADDRESS1ID = Profile.addresses[0].id;
-
-								jQuery('#profile-street-2').val(Profile.addresses[1].street1);
-								jQuery('#profile-street1-2').val(Profile.addresses[1].street2);
-								jQuery('#profile-city-2').val(Profile.addresses[1].city);
-								jQuery('#profile-state-2').val(Profile.addresses[1].state);
-								jQuery('#profile-country-2').val(Profile.addresses[1].country);
-								jQuery('#profile-zip-2').val(Profile.addresses[1].zip);
-								ADDRESS2ID = Profile.addresses[1].id;
+								for (var i = 0; i < Profile.addresses.length; i++) {
+									if (Profile.addresses[i].addressName === 'PRIMARY') {
+										jQuery('#profile-street').val(Profile.addresses[i].street1);
+										jQuery('#profile-street1').val(Profile.addresses[i].street2);
+										jQuery('#profile-city').val(Profile.addresses[i].city);
+										jQuery('#profile-state').val(Profile.addresses[i].state);
+										jQuery('#profile-country').val(Profile.addresses[i].country);
+										jQuery('#profile-zip').val(Profile.addresses[i].zip);
+										ADDRESS1ID = Profile.addresses[i].id;
+									}
+									if (Profile.addresses[i].addressName === 'SECONDARY') {
+										jQuery('#profile-street-2').val(Profile.addresses[i].street1);
+										jQuery('#profile-street1-2').val(Profile.addresses[i].street2);
+										jQuery('#profile-city-2').val(Profile.addresses[i].city);
+										jQuery('#profile-state-2').val(Profile.addresses[i].state);
+										jQuery('#profile-country-2').val(Profile.addresses[i].country);
+										jQuery('#profile-zip-2').val(Profile.addresses[i].zip);
+										ADDRESS2ID = Profile.addresses[i].id;
+									}
+								}
 							}
 
 							if (Profile.billingInfo) {
@@ -169,7 +174,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								var domainThanksMessage = jQuery('#profile-domainThanksMessage').val();
 								var domainarray = [];
 								var domainobj = {};
-								domainobj.addressName = "BILLING";
+								domainobj.addressName = "PRIMARY";
 								domainobj.street1 = jQuery('#profile-street').val();
 								domainobj.street2 = jQuery('#profile-street1').val();
 								domainobj.city = jQuery('#profile-city').val();
@@ -179,7 +184,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								domainobj.id = ADDRESS1ID;
 								domainarray.push(domainobj);
 								var domainobj = {};
-								domainobj.addressName = "BILLING2";
+								domainobj.addressName = "SECONDARY";
 								domainobj.street1 = jQuery('#profile-street-2').val();
 								domainobj.street2 = jQuery('#profile-street1-2').val();
 								domainobj.city = jQuery('#profile-city-2').val();

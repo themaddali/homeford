@@ -52,16 +52,24 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									jQuery('#inv-addr2').text('');
 									jQuery('#inv-addr3').text('');
 									jQuery('#inv-contact').text(UserProfile.email);
-									jQuery('#inv-contact-phone').text(UserProfile.phoneNumber);
+									var phnum = UserProfile.phoneNumber;
+									if (!phnum || phnum == null || phnum === 'null') {
+										phnum = '';
+									}
+									jQuery('#inv-contact-phone').text(phnum);
 									jQuery('.inv-domain-info').text('Issued by ' + UserProfile.firstName + ' ' + UserProfile.lastName + ' for ' + UserProfile.domains[i].domainName);
 								}
 							}
 						});
 						service.getDomainProfile(jQuery.cookie('_did'), {
 							success : function(Profile) {
-								jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ' + Profile.addresses[0].street2);
-								jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ' + Profile.addresses[0].state + ' ' + Profile.addresses[0].zip);
-								jQuery('#inv-addr3').text((Profile.addresses[0].country).toUpperCase());
+								for (var i = 0; i < Profile.addresses.length; i++) {
+									if (Profile.addresses[i].addressName === 'PRIMARY' || Profile.addresses[i].addressName === 'BILLING') {
+										jQuery('#inv-addr1').text(Profile.addresses[i].street1 + ' ' + Profile.addresses[i].street2);
+										jQuery('#inv-addr2').text(Profile.addresses[i].city + ' ' + Profile.addresses[i].state + ' ' + Profile.addresses[i].zip);
+										jQuery('#inv-addr3').text((Profile.addresses[i].country).toUpperCase());
+									}
+								}
 								if (!Profile.image || Profile.image == null) {
 									jQuery('#profile-image').attr('src', 'img/logo-print.jpg');
 								} else {
@@ -82,9 +90,13 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									jQuery('#payment-2').text('');
 								}
 								setTimeout(function() {
-									jQuery('#inv-addr1').text(Profile.addresses[0].street1 + ' ' + Profile.addresses[0].street2);
-									jQuery('#inv-addr2').text(Profile.addresses[0].city + ' ' + Profile.addresses[0].state + ' ' + Profile.addresses[0].zip);
-									jQuery('#inv-addr3').text((Profile.addresses[0].country).toUpperCase());
+									for (var i = 0; i < Profile.addresses.length; i++) {
+										if (Profile.addresses[i].addressName === 'PRIMARY' || Profile.addresses[i].addressName === 'BILLING') {
+											jQuery('#inv-addr1').text(Profile.addresses[i].street1 + ' ' + Profile.addresses[i].street2);
+											jQuery('#inv-addr2').text(Profile.addresses[i].city + ' ' + Profile.addresses[i].state + ' ' + Profile.addresses[i].zip);
+											jQuery('#inv-addr3').text((Profile.addresses[i].country).toUpperCase());
+										}
+									}
 								}, 200);
 							}
 						});
@@ -114,7 +126,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						var year = currentDate.getFullYear();
 						jQuery('#inv-inssuedate').text(year + "-" + month + "-" + day);
 						if (parseInt(DATAOBJECT.duedate.split("-")[1]) < 10) {
-							DATAOBJECT.duedate = DATAOBJECT.duedate.split("-")[0] + '-0' + DATAOBJECT.duedate.split("-")[1] +'-'+ DATAOBJECT.duedate.split("-")[2];
+							DATAOBJECT.duedate = DATAOBJECT.duedate.split("-")[0] + '-0' + DATAOBJECT.duedate.split("-")[1] + '-' + DATAOBJECT.duedate.split("-")[2];
 						}
 						jQuery('#inv-dueby').text(DATAOBJECT.duedate);
 						jQuery('.thanks').text(DATAOBJECT.tomessage);
