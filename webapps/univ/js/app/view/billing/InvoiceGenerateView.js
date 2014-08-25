@@ -26,7 +26,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 			var WARNDIALOG = '<div id="note-dialog" title="More Info Needed"> <p style="color: black "><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please update domain information like address and payment details.</p></div>';
 			var LATEDIALOG = '<div id="late-dialog-form" title="Late Entries"><form id="late-item-form" class="edit-form"><fieldset><ol class="late-ol"><div id="late-checklist"></div></ol></fieldset></form></div>';
 			var CHECKBOXSPAN = '<span class="checkbox-span"></span>';
-			var CHECKBOXINPUT = '<input style="margin-right:15px; float: right" placeholder="Ex: 30"  name="latefees" class="checkbox-input" type="text" />';
+			var CHECKBOXINPUT = '<span style="float:right">Fee: <input style="margin-right:15px;margin-top: -5px;margin-left: 5px;" placeholder="Ex: 30"  name="latefees" class="checkbox-input" type="text" /></span>';
 			function InvoiceGenerateView() {
 
 				function checkForActiveCookie() {
@@ -202,6 +202,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							jQuery("#latelog").text(data.length + " late entries");
 							if (data.length === 0) {
 								jQuery("#latelog").hide();
+							}else {
+								jQuery("#latelog").show();
 							}
 							for (var j = 0; j < data.length; j++) {
 								if (j === 0) {
