@@ -83,11 +83,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						if (!$.ui) {
 							location.reload();
 						}
+						//location.reload();
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
+							router.go('#/admin');
 						});
 
 						//JQ UI Bug of -Index.

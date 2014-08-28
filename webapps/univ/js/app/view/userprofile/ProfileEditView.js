@@ -115,8 +115,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					//jQuery('#password-reenter-item').hide();
 					jQuery('.edit-notify').hide();
 					populateData();
-					jQuery('#profile-password').val('');
-					jQuery('#profile-password-repeat').val('');
+					jQuery('#profile-password-1').val('');
+					jQuery('#profile-password-repeat-1').val('');
 					document.title = 'Zingoare | Profile Edit';
 					if (jQuery('#profile-first-name').val() == null || jQuery('#profile-first-name').val() == 'null' || jQuery('#profile-first-name').val().length < 1) {
 						jQuery('.modal_close').hide();
@@ -142,8 +142,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						jQuery('#profile-edit').on('click', function() {
 							if ($("#profile-edit-form").valid()) {
-								if (jQuery('#profile-password').val().length > 0) {
-									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
+								if (jQuery('#profile-password-1').val().length > 0) {
+									service.setUserProfileWithPassword(jQuery('#profile-id').val(), jQuery('#profile-first-name').val(), jQuery('#profile-last-name').val(), jQuery('#profile-email').val(), jQuery('#profile-password-1').val(), jQuery('#profile-phone').val(), jQuery('#profile-kiosk-pin').val(), {
 										success : function(response) {
 											if (response.status !== 'error') {
 												jQuery.removeCookie('user', {
@@ -209,7 +209,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								profilepassword : {
 									required : false,
 									minlength : 4,
-									passwordvalid : '#profile-password'
+									passwordvalid : '#profile-password-1'
 								},
 								profilefirstname : {
 									required : true,
@@ -218,7 +218,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									required : true,
 								},
 								profilepasswordrepeat : {
-									equalTo : "#profile-password"
+									equalTo : "#profile-password-1"
 								},
 								profileemail : {
 									required : true,

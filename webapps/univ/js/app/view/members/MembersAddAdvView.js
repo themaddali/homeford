@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/studentlist/StudentListView'], function(modernizr, cookie, service, validate, router, notify, admin, studentlist) {"use strict";
+define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/studentlist/StudentListView','../../view/services/ServicesAddView'], function(modernizr, cookie, service, validate, router, notify, admin, studentlist, serviceadd) {"use strict";
 
 	var MembersAddAdvView = ( function() {
 
