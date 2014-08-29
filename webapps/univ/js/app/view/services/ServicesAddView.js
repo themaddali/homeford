@@ -9,6 +9,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 
 			var validator;
 			var ActiveMembers = 'All Members';
+			var REFRESH = 0;
 
 			function ServicesAddView() {
 
@@ -61,6 +62,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('textarea').val('');
 				}
 
+				this.refreshForBug  = function(){
+					REFRESH = 1;
+				};
 
 				this.pause = function() {
 
@@ -83,12 +87,16 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						if (!$.ui) {
 							location.reload();
 						}
-						//location.reload();
+						if (REFRESH === 1) {
+							console.log('There is a jQuery UI library bug... so refresing...');
+							location.reload();
+						}
+						
 						populateData();
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.go('#/admin');
+							router.go('/admin');
 						});
 
 						//JQ UI Bug of -Index.
@@ -116,7 +124,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM' && jQuery('#service-starttime').val().split(":")[0] !== '12') {
 									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) + 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
-								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-starttime').val().split(":")[0] !== '12') {
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-endtime').val().split(":")[0] !== '12') {
 									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
 								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {

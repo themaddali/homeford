@@ -20,19 +20,24 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					service.getDomainProfile(jQuery.cookie('_did'), {
 						success : function(Profile) {
 							if (Profile.addresses[0]) {
-								jQuery('#profile-street').text(Profile.addresses[0].street1);
-								jQuery('#profile-street1').text(Profile.addresses[0].street2);
-								jQuery('#profile-city').text(Profile.addresses[0].city);
-								jQuery('#profile-state').text(Profile.addresses[0].state);
-								jQuery('#profile-country').text(Profile.addresses[0].country);
-								jQuery('#profile-zip').text(Profile.addresses[0].zip);
-
-								jQuery('#profile-street-2').text(Profile.addresses[1].street1);
-								jQuery('#profile-street1-2').text(Profile.addresses[1].street2);
-								jQuery('#profile-city-2').text(Profile.addresses[1].city);
-								jQuery('#profile-state-2').text(Profile.addresses[1].state);
-								jQuery('#profile-country-2').text(Profile.addresses[1].country);
-								jQuery('#profile-zip-2').text(Profile.addresses[1].zip);
+								for (var i = 0; i < Profile.addresses.length; i++) {
+									if (Profile.addresses[i].addressName === 'PRIMARY') {
+										jQuery('#profile-street').text(Profile.addresses[i].street1);
+										jQuery('#profile-street1').text(Profile.addresses[i].street2);
+										jQuery('#profile-city').text(Profile.addresses[i].city);
+										jQuery('#profile-state').text(Profile.addresses[i].state);
+										jQuery('#profile-country').text(Profile.addresses[i].country);
+										jQuery('#profile-zip').text(Profile.addresses[i].zip);
+									}
+									if (Profile.addresses[i].addressName === 'SECONDARY') {
+										jQuery('#profile-street-2').text(Profile.addresses[i].street1);
+										jQuery('#profile-street1-2').text(Profile.addresses[i].street2);
+										jQuery('#profile-city-2').text(Profile.addresses[i].city);
+										jQuery('#profile-state-2').text(Profile.addresses[i].state);
+										jQuery('#profile-country-2').text(Profile.addresses[i].country);
+										jQuery('#profile-zip-2').text(Profile.addresses[i1].zip);
+									}
+								}
 							}
 
 							if (!Profile.image || Profile.image == null) {
@@ -40,7 +45,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							} else {
 								jQuery('#profile-image').attr('src', '/zingoare/api/domainupload/picture/' + Profile.image.id);
 							}
-							
+
 							if (Profile.billingInfo) {
 								jQuery('#profile-paypal').text(Profile.billingInfo.paypalemail);
 								jQuery('#profile-check').text(Profile.billingInfo.checkpayable);

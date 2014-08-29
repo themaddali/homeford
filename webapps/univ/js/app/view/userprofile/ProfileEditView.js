@@ -135,7 +135,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 
 						//HTML Event - Actions
 						jQuery('#profile-edit-modal-close').on('click', function() {
-							router.returnToPrevious();
+							//router.returnToPrevious();
 						});
 
 						jQuery('#profile-picture-div').css('height', jQuery('#profile-picture-div').width() / 2);
@@ -177,6 +177,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 													//router.returnToPrevious();
 													//admin.reloadData();
 												}, 2000);
+												router.go('/admin');
 											} else {
 												notify.showNotification('ERROR', response.message);
 											}

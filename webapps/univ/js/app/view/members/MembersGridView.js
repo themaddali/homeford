@@ -84,7 +84,13 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									}
 									var grpname = 'grp' + j;
 									jQuery(thisitem).addClass(grpname).attr('group', grpname);
-									jQuery('.edit-card-canvas').append(thisitem);
+									for (var z = 0; z < data[j].domains.length; z++) {
+										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+											//jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
+											jQuery('.edit-card-canvas').append(thisitem);
+										}
+									}
+									
 									for (var k = 0; k < data[j].parents.length; k++) {
 										var thisitemparent = template.clone();
 										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {

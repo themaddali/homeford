@@ -66,7 +66,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									}
 								}
 								//Commenting Self
-								//MEMBEROBJECT.push(_memberobjectself);
+								MEMBEROBJECT.push(_memberobjectself);
 								for (var j = 0; j < data.members.length; j++) {
 									var _memberobject = {};
 									if (!data.members[j].image || data.members[j].image === null) {
@@ -122,11 +122,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 
 					for (var i = 0; i < activedomains.length; i++) {
 						var _domain = activedomains[i];
-						service.getMembersOnly(activedomains[i], {
+						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								if (data.length == 0) {
 									displayCards(MEMBEROBJECT);
-									jQuery('.metainfo').text(jQuery('.studentboard').length-1 + ' member(s)');
+									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' member(s)');
 									if (jQuery('.studentboard').length === 1) {
 										var selectedUserName = $('.student-name').text();
 										var selectedUserId = $('.student-name').parent().attr('name');
@@ -160,9 +160,37 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 											_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
 										}
 									}
+									for (var k = 0; k < data[j].parents.length; k++) {
+										var _memberobjectparent = {};
+										if (!data[j].parents[k].firstName || data[j].parents[k].firstName.length === 0) {
+											data[j].parents[k].firstName = '';
+										}
+										if (!data[j].parents[k].lastName || data[j].parents[k].lastName.length === 0) {
+											data[j].parents[k].lastName = '';
+										}
+										_memberobjectparent.firstName = data[j].parents[k].firstName;
+										_memberobjectparent.lastName = data[j].parents[k].lastName;
+										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
+											_memberobjectparent.image = '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id;
+										} else {
+											_memberobjectparent.image = 'img/noimg.png';
+										}
+										_memberobjectparent.email = data[j].parents[k].email;
+										_memberobjectparent.id = data[j].parents[k].id;
+										_memberobjectparent.taskcount = data[j].parents[k].tasks.length;
+										_memberobjectparent.taskprogress = 0;
+										for (var p = 0; p < data[j].parents[k].tasks.length; p++) {
+										_memberobjectparent.taskprogress = _memberobjectparent.taskprogress + data[j].parents[k].tasks[p].percentage;
+										if (p === data[j].parents[k].tasks.length - 1) {
+											_memberobjectparent.taskprogress = Math.ceil(_memberobjectparent.taskprogress / data[j].parents[k].tasks.length);
+										}
+									}
+									}
 									if (MEMBERIDS.indexOf(data[j].id) == -1) {
 										MEMBERIDS.push(_memberobject.id);
+										MEMBERIDS.push(_memberobjectparent.id);
 										MEMBEROBJECT.push(_memberobject);
+										MEMBEROBJECT.push(_memberobjectparent);
 									}
 									if (j == data.length - 1) {
 										displayCards(MEMBEROBJECT);
@@ -192,10 +220,10 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.taskcount', newboard).text(MEMBEROBJECT[i].taskcount);
 							jQuery('.member-from', newboard).text(MEMBEROBJECT[i].taskprogress + ' % completed');
 							// if (MEMBEROBJECT[i].email) {
-								// if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
-									// jQuery('.student-info', newboard).append(YOU);
-									// jQuery(newboard).css('display', 'none');
-								// }
+							// if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
+							// jQuery('.student-info', newboard).append(YOU);
+							// jQuery(newboard).css('display', 'none');
+							// }
 							// }
 							//jQuery('.member-from', newboard).text('Member From: Dec 16 2014');
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
@@ -226,7 +254,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					if (jQuery('.studentboard:visible').length === 0) {
 						jQuery('#noinfo').fadeIn(500);
 					}
-					
+
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
 						var selectedUserName = $(this).find('.student-name').text();

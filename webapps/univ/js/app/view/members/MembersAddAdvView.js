@@ -33,6 +33,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						service.ListAllServices(thisdomaininstance, {
 							success : function(data) {
 								if (data.length === 0) {
+									serviceadd.refreshForBug();
 									jQuery("#note-dialog").dialog("open");
 								}
 								for (var j = 0; j < data.length; j++) {
