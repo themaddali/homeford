@@ -31,11 +31,14 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					}
 					service.getMemberRecord(ID, {
 						success : function(data) {
-							if (data.status !== 'error') {
-								notify.showNotification('OK', data.message);
-							} else {
-								notify.showNotification('ERROR', data.message);
-							}
+							jQuery('#member-dob').val(data.dateOfBirth);
+							jQuery('#member-pob').val(data.race);
+							jQuery('#member-hair').val(data.hairColor);
+							jQuery('#member-eye').val(data.eyeColor);
+							jQuery('#member-allergies').val(data.allergies);
+							jQuery('#pcp-contact-name').val(data.doctorName);
+							jQuery('#pcp-phone').val(data.doctorContact);
+							jQuery('#pcp-medication').val(data.currentMedications);
 						}
 					});
 				}
@@ -89,10 +92,12 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 						jQuery('.modal_close').on('click', function() {
 							router.returnToPrevious();
 						});
-						
-						jQuery('#member-record-add').click(function(){
+
+						jQuery('#member-record-add').click(function() {
 							var _memberdob = jQuery('#member-dob').val();
 							var _memberpob = jQuery('#member-pob').val();
+							var _memberhair = jQuery('#member-hair').val();
+							var _membereye = jQuery('#member-eye').val();
 							var _emergencyname = jQuery('#emergency-contact-name').val();
 							var _emergencynum = jQuery('#emergency-phone').val();
 							var _familyhome = jQuery('#family-home').val();
@@ -103,8 +108,20 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							var _memberallergies = jQuery('#member-allergies').val();
 							var _pcptname = jQuery('#pcp-contact-name').val();
 							var _pcpphone = jQuery('#pcp-phone').val();
+							var _pcpmedication = jQuery('#pcp-medication').val();
 							var _membernote = jQuery('#member-note').val();
-							alert('action here');
+							service.memberRecord(ID, _memberhair, _membereye, _memberdob, _memberpob, _memberallergies, _pcptname, _pcpphone, _pcpmedication, {
+								success : function(response) {
+									if (response.status !== 'error') {
+										notify.showNotification('OK', 'Updated Member Record');
+									} else {
+										notify.showNotification('ERROR', response.message);
+									}
+								},
+								error : function(response) {
+									notify.showNotification('ERROR', response.message);
+								}
+							});
 						});
 
 						jQuery('#member-dob').focus(function() {

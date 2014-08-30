@@ -293,6 +293,43 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				//More details for kids.
+				this.memberRecord = function(userid, hair, eye, dob, pob, allergies, pcpname,pcpphone, medications, handlers) {
+					$('input[type="button"]').addClass('processing');
+					$('input[type="button"]').attr('disabled', 'disabled');
+					$.ajax({
+						url : '/zingoare/api/updateUserDetails/' + userid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : JSON.stringify({
+							'hairColor' : hair,
+							'eyeColor' : eye,
+							'race' : pob,
+							'allergies' : allergies,
+							'currentMedications' : medications,
+							'doctorName' : pcpname,
+							'doctorContact' : pcpphone,
+							'dateOfBirth' : dob,
+						}),
+						success : function(data) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							USERPROFILE = null;
+							handlers.success(data);
+						},
+						error : function(e) {
+							$('input[type="button"]').removeAttr('disabled');
+							$('input[type="button"]').removeClass('processing');
+							var errormsg = {
+								"status" : "error",
+								"message" : e.statusText + " - Error Adding Records"
+							};
+							handlers.success(errormsg);
+						}
+					});
+				};
 
 				//Active and inactive kids
 				this.disableUser = function(domainid, memberid, handlers) {
@@ -946,6 +983,8 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
+				
+				
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$('input[type="button"]').addClass('processing');

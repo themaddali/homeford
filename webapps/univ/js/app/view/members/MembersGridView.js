@@ -90,7 +90,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('.edit-card-canvas').append(thisitem);
 										}
 									}
-									
+
 									for (var k = 0; k < data[j].parents.length; k++) {
 										var thisitemparent = template.clone();
 										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
@@ -109,7 +109,15 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 										jQuery('.membercard-rel', thisitemparent).text('');
 										var grpname = 'grp' + j;
 										jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
-										jQuery('.edit-card-canvas').append(thisitemparent);
+										for (var z = 0; z < data[j].parents[k].domains.length; z++) {
+											if (data[j].parents[k].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].parents[k].domains[z].roleStatus == 'ACTIVE') {
+												//jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
+												jQuery('.edit-card-canvas').append(thisitemparent);
+											}
+											else {
+												alert('Sonething inactive + do for studentlist');
+											}
+										}
 									}
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
@@ -283,7 +291,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
+							//router.returnToPrevious();
+							router.go('/admin');
 						});
 
 					} // Cookie Guider

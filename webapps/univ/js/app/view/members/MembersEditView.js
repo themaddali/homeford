@@ -26,8 +26,10 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							var domainIDs = [];
 							domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
 							getServices(domainIDs);
+							jQuery('#member-record').show();
 						} else {
 							jQuery('.form-checkboxs').hide();
+							jQuery('#member-record').hide();
 						}
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
