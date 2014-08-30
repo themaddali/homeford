@@ -17,6 +17,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				'ROLE_TIER2' : 'Admin',
 				'ROLE_TIER3' : 'Member'
 			};
+			var COLORBLOCKS = ['#4c8bff', '#ffcb05', '#5ca028', '#d2047d', '#c88562', '#09b1c1', '#b609c1', '#092fc1', '#abd838', '#49dd54'];
 
 			/**
 			 * Constructor
@@ -59,6 +60,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.id = data.id;
 								_memberobjectself.taskcount = data.tasks.length;
 								_memberobjectself.taskprogress = 0;
+								_memberobjectself.groupcolor = '#0784E3';
+								_memberobjectself.oneliner = 'You';
 								for (var p = 0; p < data.tasks.length; p++) {
 									_memberobjectself.taskprogress = _memberobjectself.taskprogress + data.tasks[p].percentage;
 									if (p === data.tasks.length - 1) {
@@ -80,6 +83,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									_memberobject.id = data.members[j].id;
 									_memberobject.taskcount = data.members[j].tasks.length;
 									_memberobject.taskprogress = 0;
+									_memberobject.groupcolor = '#0784E3';
+									_memberobject.oneliner = data.itemServiceDetails.length + ' plans(s) active';
 									for (var p = 0; p < data.members[j].tasks.length; p++) {
 										_memberobject.taskprogress = _memberobject.taskprogress + data.members[j].tasks[p].percentage;
 										if (p === data.members[j].tasks.length - 1) {
@@ -154,11 +159,20 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									_memberobject.id = data[j].id;
 									_memberobject.taskcount = data[j].tasks.length;
 									_memberobject.taskprogress = 0;
+									_memberobject.groupcolor = COLORBLOCKS[j + 1];
+									if (j > 8) {
+										_memberobject.groupcolor = COLORBLOCKS[j % 8];
+									}
+									_memberobject.oneliner = data[j].itemServiceDetails.length + ' plans(s) active';
 									for (var p = 0; p < data[j].tasks.length; p++) {
 										_memberobject.taskprogress = _memberobject.taskprogress + data[j].tasks[p].percentage;
 										if (p === data[j].tasks.length - 1) {
 											_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
 										}
+									}
+									if (MEMBERIDS.indexOf(data[j].id) == -1) {
+										MEMBERIDS.push(_memberobject.id);
+										MEMBEROBJECT.push(_memberobject);
 									}
 									for (var k = 0; k < data[j].parents.length; k++) {
 										var _memberobjectparent = {};
@@ -179,19 +193,18 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 										_memberobjectparent.id = data[j].parents[k].id;
 										_memberobjectparent.taskcount = data[j].parents[k].tasks.length;
 										_memberobjectparent.taskprogress = 0;
+										_memberobjectparent.oneliner = data[j].parents[k].userType;
+										_memberobjectparent.groupcolor = MEMBEROBJECT[MEMBEROBJECT.length - 1].groupcolor;
 										for (var p = 0; p < data[j].parents[k].tasks.length; p++) {
-										_memberobjectparent.taskprogress = _memberobjectparent.taskprogress + data[j].parents[k].tasks[p].percentage;
-										if (p === data[j].parents[k].tasks.length - 1) {
-											_memberobjectparent.taskprogress = Math.ceil(_memberobjectparent.taskprogress / data[j].parents[k].tasks.length);
+											_memberobjectparent.taskprogress = _memberobjectparent.taskprogress + data[j].parents[k].tasks[p].percentage;
+											if (p === data[j].parents[k].tasks.length - 1) {
+												_memberobjectparent.taskprogress = Math.ceil(_memberobjectparent.taskprogress / data[j].parents[k].tasks.length);
+											}
 										}
-									}
-									}
-									if (MEMBERIDS.indexOf(data[j].id) == -1) {
-										MEMBERIDS.push(_memberobject.id);
 										MEMBERIDS.push(_memberobjectparent.id);
-										MEMBEROBJECT.push(_memberobject);
 										MEMBEROBJECT.push(_memberobjectparent);
 									}
+
 									if (j == data.length - 1) {
 										displayCards(MEMBEROBJECT);
 									}
@@ -219,6 +232,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.student-id', newboard).text(MEMBEROBJECT[i].taskcount + ' task(s) todo');
 							jQuery('.taskcount', newboard).text(MEMBEROBJECT[i].taskcount);
 							jQuery('.member-from', newboard).text(MEMBEROBJECT[i].taskprogress + ' % completed');
+							jQuery('.member-oneliner', newboard).text(MEMBEROBJECT[i].oneliner);
+							jQuery('.grouping-flag', newboard).css('border-right-color', MEMBEROBJECT[i].groupcolor);
 							// if (MEMBEROBJECT[i].email) {
 							// if (MEMBEROBJECT[i].email.indexOf(jQuery.cookie('user')) !== -1) {
 							// jQuery('.student-info', newboard).append(YOU);
@@ -235,6 +250,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								jQuery('.student-name').ellipsis({
 									onlyFullWords : true
 								});
+								jQuery("#card-searchbox").val('').focus();
 								helperMediaQuiries();
 								ActivatePanelEvents();
 								//populateTasks(MEMBEROBJECT_instance);
@@ -254,6 +270,20 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					if (jQuery('.studentboard:visible').length === 0) {
 						jQuery('#noinfo').fadeIn(500);
 					}
+					helperMediaQuiries();
+					
+					jQuery("#card-searchbox").keyup(function() {
+						var searchword = jQuery('#card-searchbox').val().toUpperCase();
+						var cardlist = jQuery('.contentfull .student-name');
+						for (var i = 0; i < cardlist.length; i++) {
+							var thiscard = cardlist[i];
+							thiscard.parentElement.style.display = '';
+							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+							} else {
+								thiscard.parentElement.style.display = 'none';
+							}
+						}
+					});
 
 					jQuery('.studentboard').on('click', function() {
 						// successful selection of user for context, and create cookie
@@ -310,6 +340,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 					jQuery('.edit-notify').hide();
 					banner.HideAlert();
 					banner.HideUser();
+					jQuery("#card-searchbox").val('').focus();
+					$('.studentboard').show();
 					if ((!service.knowClenUserProfile() && service.knowClenUserProfile() == null) || RELOAD == true) {
 						RELOAD = false;
 						//router.reload();

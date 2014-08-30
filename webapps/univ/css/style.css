@@ -4250,13 +4250,25 @@ div.quizactionboard.cardactive div.question-number > span.timeelapsed {
 .studentboard div.student-info {
 	display: inline-block;
 	background-color: white;
-	padding-top: 30px;
+	padding-top: 15px;
 	text-align: left;
 	margin-left: 10px;
 	color: white;
 	font-size: 0.9em;
 	font-weight: 400;
 }
+
+.grouping-flag {
+	width: 210px;
+	height: 0;
+	position: absolute;
+	float: right;
+	border-top: 40px solid transparent;
+	border-bottom: 0px solid transparent;
+	border-right: 40px solid green;
+	margin-top: -20px;
+}
+
 .studentboard div.student-info > div.you {
 	width: 30px;
 	height: 30px;
@@ -5301,6 +5313,9 @@ footer a:hover {
 		padding: 0 0 0 5px;
 	}
 	.studentboard img {
+		display: none;
+	}
+	.grouping-flag {
 		display: none;
 	}
 	.float-left .studentboard {

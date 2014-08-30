@@ -153,8 +153,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											jQuery('#attendance-total').text(minToTime(BILLABLEEXTRA));
 											dailysummary[toDate(stats[i].checkinTime)][1] = dailysummary[toDate(stats[i].checkinTime)][1] + stats[i].checkOutTimeDiff;
 										} else {
-											jQuery('.checkout-time', row).append(EXTRAICONOK);
-											jQuery('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
+											//jQuery('.checkout-time', row).append(EXTRAICONOK);
+											//Query('.checkout-time', row).find('.time-diff').text(minToTime(stats[i].checkOutTimeDiff));
 										}
 									}
 									jQuery('.view-table  tbody').append(row);

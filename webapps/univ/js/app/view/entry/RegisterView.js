@@ -47,7 +47,7 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					service.registerNewUser(username, password, domain, {
 						success : function(RegisterData) {
 							if (RegisterData.status === 'success') {
-								notify.showNotification('OK', 'Congratulations!!!', null, '1000');
+								//notify.showNotification('OK', 'Congratulations!!!', null, '1000');
 								setTimeout(function() {
 									Login(username, password, domain);
 								},300);
