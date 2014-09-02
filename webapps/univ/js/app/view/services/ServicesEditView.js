@@ -117,7 +117,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								if (jQuery('#service-endtime').val().split(" ")[1] == 'AM') {
 									var _sendtime = (jQuery('#service-endtime').val().split(":")[0]) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' AM', '') + ':00';
 								}
-								service.UpdateServices(jQuery('#service-id').val(), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime, _sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
+								service.UpdateServices(parseInt(ACTIVESERVICE.id), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime, _sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											notify.showNotification('OK', response.message);

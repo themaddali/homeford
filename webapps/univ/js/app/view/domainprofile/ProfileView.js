@@ -35,7 +35,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 										jQuery('#profile-city-2').text(Profile.addresses[i].city);
 										jQuery('#profile-state-2').text(Profile.addresses[i].state);
 										jQuery('#profile-country-2').text(Profile.addresses[i].country);
-										jQuery('#profile-zip-2').text(Profile.addresses[i1].zip);
+										jQuery('#profile-zip-2').text(Profile.addresses[i].zip);
 									}
 								}
 							}
