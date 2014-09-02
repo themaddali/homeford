@@ -77,23 +77,23 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 					handlers.error();
 					// Location based images - Disabled for now.
 					// $.getJSON('https://freegeoip.net/json/', function(location) {
-						// keyword = FLICKRMAP[location.region_name];
-						// if (!keyword) {
-							// keyword = location.country_name;
-						// }
-						// var imagelist = [];
-						// var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
-						// $.getJSON(flickrurl, function(data) {
-							// $.each(data.items, function(i, item) {
-								// $("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
-								// for (var i = 0; i < 3; i++) {
-									// var imageurl = data.items[i].media.m;
-									// imageurl = imageurl.replace('_m.jpg', '_b.jpg');
-									// imagelist.push(imageurl);
-								// }
-								// handlers.success(imagelist);
-							// });
-						// });
+					// keyword = FLICKRMAP[location.region_name];
+					// if (!keyword) {
+					// keyword = location.country_name;
+					// }
+					// var imagelist = [];
+					// var flickrurl = "https://api.flickr.com/services/feeds/photos_public.gne?tags=" + keyword + "&lang=en-us&format=json&jsoncallback=?";
+					// $.getJSON(flickrurl, function(data) {
+					// $.each(data.items, function(i, item) {
+					// $("<img/>").attr("src", item.media.m).appendTo("#FlickrImages ul").wrap("<li><a href='" + item.link + "' target='_blank' title='Flickr'></a></li>");
+					// for (var i = 0; i < 3; i++) {
+					// var imageurl = data.items[i].media.m;
+					// imageurl = imageurl.replace('_m.jpg', '_b.jpg');
+					// imagelist.push(imageurl);
+					// }
+					// handlers.success(imagelist);
+					// });
+					// });
 					// });
 				};
 
@@ -293,9 +293,9 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
+
 				//More details for kids.
-				this.memberRecord = function(userid, hair, eye, dob, pob, allergies, pcpname,pcpphone, medications, handlers) {
+				this.memberRecord = function(userid, hair, eye, dob, pob, allergies, pcpname, pcpphone, medications, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -932,6 +932,20 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						});
 					}
 				};
+
+				this.updateTimeZone = function(userid, timezone) {
+					$.ajax({
+						url : '/zingoare/api/updateUserTimeZone/' + userid,
+						type : 'POST',
+						async : 'async',
+						contentType : "application/json",
+						data : timezone,
+						success : function(data) {
+
+						}
+					});
+				};
+
 				this.UpdateServices = function(serviceid, title, desc, sstart, send, cost, tax, freq, status, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
@@ -983,8 +997,6 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						}
 					});
 				};
-				
-				
 
 				this.AddQuiz = function(domainid, title, desc, handlers) {
 					$('input[type="button"]').addClass('processing');

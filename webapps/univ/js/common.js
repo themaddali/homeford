@@ -23,6 +23,7 @@ require({
 		paypal : 'paypal',
 		stripe : 'stripe',
 		filter : 'filter',
+		moment : 'moment',
 		Pages : '../../module',
 	},
 	map : {

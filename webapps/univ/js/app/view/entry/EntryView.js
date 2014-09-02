@@ -1,4 +1,4 @@
-define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', '../../view/entry/NewPasswordView'], function(cookie, router, validate, service, notify, newpassword) {"use strict";
+define(['cookie', '../../Router', 'validate', '../../service/DataService', '../../Notify', '../../view/entry/NewPasswordView', 'moment'], function(cookie, router, validate, service, notify, newpassword, moment) {"use strict";
 
 	var EntryView = ( function() {
 
@@ -34,12 +34,24 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 					}
 				}
 
+				//IE version detect.
+				function msieversion() {
+
+					var ua = window.navigator.userAgent;
+					var msie = ua.indexOf("MSIE ");
+					if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))// If Internet Explorer, return version number
+						return true;
+					else// If another browser, return 0
+						return false;
+				}
+
 				function Authenticate(username, password, remember, domain) {
 					var OWNERLEVEL = false;
 					var ADMINLEVEL = false;
 					service.Login(username, password, remember, {
 						success : function(LoginData) {
 							if (LoginData !== 'error') {
+								var fullusername = username;
 								if (username.length > 18) {
 									username = username.split('@')[0];
 								}
@@ -61,9 +73,11 @@ define(['cookie', '../../Router', 'validate', '../../service/DataService', '../.
 											}
 										}
 										if (UserProfile.passwordReset === true || UserProfile.passwordReset === 'true') {
-											newpassword.resetinfo(username, UserProfile.id);
+											newpassword.resetinfo(fullusername, UserProfile.id);
 											router.go('/newpassword');
 										} else {
+											var moment1 = new moment();
+											service.updateTimeZone(UserProfile.id, moment1.format('Z'));
 											if (ADMINLEVEL == true) {
 												//User is not owner. Filter stuff.a and take to studentlist
 												notify.showNotification('OK', 'Login Success', 'studentlist', '0');
