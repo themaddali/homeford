@@ -1608,7 +1608,7 @@ a.goback {
 	font-size: 1em;
 	line-height: 1.6em;
 	color: #444;
-	overflow: scroll;
+	/*overflow: scroll;*/
 	height: 80%;
 }
 .modal-body .modal-container .modal-contents.cards {

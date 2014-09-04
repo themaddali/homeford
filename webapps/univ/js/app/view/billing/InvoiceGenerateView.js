@@ -250,6 +250,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					jQuery('#services-grid').empty();
 					jQuery('.edit-notify').hide();
 					jQuery('.modal_close').show();
+					jQuery("#latelog").hide();
 
 				}
 
@@ -273,12 +274,12 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 					$('#late-checklist input[type=checkbox]').each(function() {
 						if (this.checked) {
 							var thisservice = followtemplate.clone();
-							var cost = jQuery(this).next().val();
+							var cost = jQuery(this).next().find('input').val();
 							if (!cost || cost === '') {
 								cost = '0';
 							}
-							jQuery('.services-list', thisservice).parent().append(jQuery(this).parent().text());
-							jQuery('.services-list', thisservice).attr('sname', jQuery(this).parent().text()).attr('cost',cost ).attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
+							jQuery('.services-list', thisservice).parent().append(jQuery(this).parent().text().replace('Fee:',''));
+							jQuery('.services-list', thisservice).attr('sname', jQuery(this).parent().text().replace('Fee:','')).attr('cost',cost ).attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
 							jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
 							jQuery('.checkbox-span', thisservice).text('Cost: $ ' + cost);
 							jQuery(thisservice).addClass('latefee');
@@ -448,6 +449,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						clearForm();
 						jQuery('.checkbox-span').remove();
 						populateData();
+						jQuery("#latelog").text('late entries');
 					}
 					document.title = 'Zingoare | Invoice Generate';
 				};
@@ -461,6 +463,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						leadtemplate = jQuery('#service-lead').remove().attr('id', '');
 						followtemplate = jQuery('#service-follow').remove().attr('id', '');
 						latetemplate = jQuery('#service-lead-late').remove().attr('id', '');
+						jQuery("#latelog").hide();
 						initDialog();
 						populateData();
 
@@ -510,6 +513,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 								if (ITEMS[studentid][i].itemService.status === 'Active' || ITEMS[studentid][i].itemService.status === 'ACTIVE') {
 									jQuery('#services-grid').append(thisservice);
 								}
+								jQuery("#latelog").show();
 								if (i === ITEMS[studentid].length - 1) {
 									//getLateLog();
 								}
