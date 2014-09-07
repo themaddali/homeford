@@ -115,7 +115,8 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 												jQuery('.edit-card-canvas').append(thisitemparent);
 											}
 											else {
-												alert('Sonething inactive + do for studentlist');
+												//jQuery('.edit-card-canvas').append(thisitemparent);
+												//alert('Sonething inactive + do for studentlist');
 											}
 										}
 									}

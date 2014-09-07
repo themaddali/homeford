@@ -243,9 +243,9 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								profilestreet : {
 									required : true,
 								},
-								profilestreet2 : {
-									required : true,
-								},
+								// profilestreet2 : {
+									// required : true,
+								// },
 								profilecity : {
 									required : true,
 								},
