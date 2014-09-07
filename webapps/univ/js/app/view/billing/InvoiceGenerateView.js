@@ -473,7 +473,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						//HTML Event - Actions
 						jQuery('.modal_close').on('click', function() {
-							router.returnToPrevious();
+							//router.returnToPrevious();
+							router.go('/admin');
 						});
 
 						//JQ UI Bug of -Index.
@@ -522,6 +523,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 									//getLateLog();
 								}
 							}
+						});
+
+						jQuery('#invoice-reset').click(function() {
+							ActiveMembers = {};
+							clearForm();
+							jQuery('.checkbox-span').remove();
+							populateData();
+							jQuery("#latelog").text('late entries');
 						});
 
 						jQuery('#invoice-preview').click(function() {
