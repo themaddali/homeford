@@ -39,6 +39,10 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							jQuery('#pcp-contact-name').val(data.doctorName);
 							jQuery('#pcp-phone').val(data.doctorContact);
 							jQuery('#pcp-medication').val(data.currentMedications);
+							jQuery('#emergency-contact-name').val(data.emergencyContact1);
+							jQuery('#emergency-phone').val(data.emergencyNumber1);
+							jQuery('#emergency-contact-name2').val(data.emergencyContact2);
+							jQuery('#emergency-phone2').val(data.emergencyNumber2);
 						}
 					});
 				}
@@ -100,6 +104,8 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							var _membereye = jQuery('#member-eye').val();
 							var _emergencyname = jQuery('#emergency-contact-name').val();
 							var _emergencynum = jQuery('#emergency-phone').val();
+							var _emergencyname2 = jQuery('#emergency-contact-name2').val();
+							var _emergencynum2 = jQuery('#emergency-phone2').val();
 							var _familyhome = jQuery('#family-home').val();
 							var _fathermobile = jQuery('#father-mobile').val();
 							var _fatherwork = jQuery('#father-work').val();
@@ -110,7 +116,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 							var _pcpphone = jQuery('#pcp-phone').val();
 							var _pcpmedication = jQuery('#pcp-medication').val();
 							var _membernote = jQuery('#member-note').val();
-							service.memberRecord(ID, _memberhair, _membereye, _memberdob, _memberpob, _memberallergies, _pcptname, _pcpphone, _pcpmedication, {
+							service.memberRecord(ID, _memberhair, _membereye, _memberdob, _memberpob, _memberallergies, _pcptname, _pcpphone, _pcpmedication,_emergencyname,_emergencynum,_emergencyname2,_emergencynum2, {
 								success : function(response) {
 									if (response.status !== 'error') {
 										notify.showNotification('OK', 'Updated Member Record');

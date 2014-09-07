@@ -49,25 +49,23 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 								var thisitem = template.clone();
 								for (var j = 0; j < data.length; j++) {
 									var roles = JSON.stringify(data[j].roles);
-									if (roles.indexOf('ROLE_TIER3') !== -1) {
-										memberscount = memberscount + 1;
-										jQuery('.metadata').text(memberscount + ' of ' + memberscount + ' selected');
-										var thisitem = template.clone();
-										if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
-											jQuery('.membercard-name', thisitem).text(data[j].email);
-										} else {
-											jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
-										}
-										if (data[j].image && data[j].image.name != null) {
-											jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
-										} else {
-											jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
-										}
-										jQuery('.membercard-checkbox', thisitem).attr('checked', 'checked');
-										membernames.push(jQuery('.membercard-name', thisitem).text());
-										jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
-										jQuery('.edit-card-canvas').append(thisitem);
+									memberscount = memberscount + 1;
+									jQuery('.metadata').text(memberscount + ' of ' + memberscount + ' selected');
+									var thisitem = template.clone();
+									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
+										jQuery('.membercard-name', thisitem).text(data[j].email);
+									} else {
+										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
 									}
+									if (data[j].image && data[j].image.name != null) {
+										jQuery('.members-image', thisitem).attr('src', '/zingoare/api/profileupload/picture/' + data[j].image.id);
+									} else {
+										jQuery('.members-image', thisitem).attr('src', 'img/noimg.png');
+									}
+									jQuery('.membercard-checkbox', thisitem).attr('checked', 'checked');
+									membernames.push(jQuery('.membercard-name', thisitem).text());
+									jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
+									jQuery('.edit-card-canvas').append(thisitem);
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
 											source : function(request, response) {

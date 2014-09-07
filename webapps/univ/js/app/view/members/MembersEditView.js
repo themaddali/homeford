@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView','../../view/members/MembersRecordAddView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin, memberrecord) {"use strict";
+define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../../service/DataService', 'validate', '../../Router', '../../Notify', '../../view/admin/AdminView', '../../view/members/MembersRecordAddView','../../view/studentlist/StudentListView'], function(modernizr, cookie, jquerywidget, transport, fileupload, service, validate, router, notify, admin, memberrecord,studentlist) {"use strict";
 
 	var MembersEditView = ( function() {
 
@@ -23,18 +23,22 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						$('input[type="checkbox"]').removeAttr('checked');
 						if (ACTIVEMEMBER.relation === 'Student') {
 							jQuery('.form-checkboxs').show();
+							jQuery('.negative').show();
 							var domainIDs = [];
 							domainIDs.push(service.domainNametoID(jQuery.cookie('subuser')));
 							getServices(domainIDs);
 							jQuery('#member-record').show();
+							jQuery('#member-email').removeAttr('readonly');
 						} else {
 							jQuery('.form-checkboxs').hide();
 							jQuery('#member-record').hide();
+							jQuery('.negative').hide();
+							jQuery('#member-email').attr('readonly',"readonly");
 						}
 						jQuery('#member-first-name').val(ACTIVEMEMBER.firstname);
 						jQuery('#member-last-name').val(ACTIVEMEMBER.lastname);
 						jQuery('#member-id').val(ACTIVEMEMBER.id);
-						memberrecord.setuser(ACTIVEMEMBER.id, ACTIVEMEMBER.firstname + ' '+ACTIVEMEMBER.lastname);
+						memberrecord.setuser(ACTIVEMEMBER.id, ACTIVEMEMBER.firstname + ' ' + ACTIVEMEMBER.lastname);
 						jQuery('#member-rel').val(ACTIVEMEMBER.relation);
 						jQuery('#member-email').val(ACTIVEMEMBER.email);
 						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
@@ -100,6 +104,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									notify.showNotification('OK', response.message);
 									$('.negative').val('Make Active');
 									$('.negative').css('background-color', 'green');
+									studentlist.reload();
 								} else {
 									notify.showNotification('ERROR', response.message);
 								}
@@ -112,6 +117,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 									notify.showNotification('OK', response.message);
 									$('.negative').val('Make Inactive');
 									$('.negative').css('background-color', 'red');
+									studentlist.reload();
 								} else {
 									notify.showNotification('ERROR', response.message);
 								}
@@ -219,6 +225,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 					jQuery('.edit-notify').hide();
 					document.title = 'Zingoare | Members Edit';
 					initDialog();
+					$('.negative').val('Make Inactive');
+					$('.negative').css('background-color', '#e30716');
 					//$('#new-member-profile-image').fileupload('destroy');
 				};
 
@@ -271,8 +279,8 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 								notify.showNotification('ERROR', 'One or more fields in the form are not entered properly');
 							}
 						});
-						
-						jQuery('#member-record').on('click',function(){
+
+						jQuery('#member-record').on('click', function() {
 							router.go('/membersrecordadd');
 						});
 

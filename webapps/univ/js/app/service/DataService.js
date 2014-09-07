@@ -295,7 +295,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				};
 
 				//More details for kids.
-				this.memberRecord = function(userid, hair, eye, dob, pob, allergies, pcpname, pcpphone, medications, handlers) {
+				this.memberRecord = function(userid, hair, eye, dob, pob, allergies, pcpname, pcpphone, medications, emername, emernum, emername2, emernum2, handlers) {
 					$('input[type="button"]').addClass('processing');
 					$('input[type="button"]').attr('disabled', 'disabled');
 					$.ajax({
@@ -312,6 +312,10 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 							'doctorName' : pcpname,
 							'doctorContact' : pcpphone,
 							'dateOfBirth' : dob,
+							'emergencyContact1' : emername,
+							'emergencyNumber1' : emernum,
+							'emergencyContact2' : emername2,
+							'emergencyNumber2' : emernum2
 						}),
 						success : function(data) {
 							$('input[type="button"]').removeAttr('disabled');
@@ -343,6 +347,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						success : function(data) {
 							$('input[type="button"]').removeAttr('disabled');
 							$('input[type="button"]').removeClass('processing');
+							USERPROFILE = null;
 							handlers.success(data);
 						},
 						error : function(e) {
@@ -352,6 +357,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								"status" : "error",
 								"message" : e.statusText + " - Error Updating Member Status"
 							};
+							USERPROFILE = null;
 							handlers.success(errormsg);
 						}
 					});
@@ -368,6 +374,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 						success : function(data) {
 							$('input[type="button"]').removeAttr('disabled');
 							$('input[type="button"]').removeClass('processing');
+							USERPROFILE = null;
 							handlers.success(data);
 						},
 						error : function(e) {
@@ -377,6 +384,7 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 								"status" : "error",
 								"message" : e.statusText + " - Error Updating Member Status"
 							};
+							USERPROFILE = null;
 							handlers.success(errormsg);
 						}
 					});
@@ -519,13 +527,27 @@ define(['jquery', '../Notify', 'cookie', '../Router'], function(jquery, notify, 
 				//Get T3 privilage
 				this.getMembersOnly = function(domain, handlers) {
 					$.ajax({
-						url : '/zingoare/api/getdomainsusers/' + domain,
+						url : '/zingoare/api/getdomainmembers/' + domain,
 						type : 'GET',
 						async : 'async',
 						contentType : "application/json",
 						success : function(data) {
-							//handlers.success(getmembersonly(data));
-							handlers.success(data);
+							var activelist = [];
+							for (var j = 0; j < data.length; j++) {
+								for (var z = 0; z < data[j].domains.length; z++) {
+									if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+										activelist.push(data[j]);
+										for (var k = 0; k < data[j].parents.length; k++) {
+											activelist.push(data[j].parents[k]);
+										}
+									}
+								}
+								if (j === data.length - 1) {
+									//handlers.success(getmembersonly(data));
+									handlers.success(activelist);
+								}
+							}
+
 						}
 					});
 				};

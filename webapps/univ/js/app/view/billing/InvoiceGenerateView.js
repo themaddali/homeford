@@ -76,10 +76,14 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									if (data[j].itemServiceDetails.length >= 0) {
-										ITEMS[data[j].id] = data[j].itemServiceDetails;
-										PARENTS[data[j].id] = data[j].parents;
-										jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');
+									for (var z = 0; z < data[j].domains.length; z++) {
+										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+											if (data[j].itemServiceDetails.length >= 0) {
+												ITEMS[data[j].id] = data[j].itemServiceDetails;
+												PARENTS[data[j].id] = data[j].parents;
+												jQuery('#kid-name').append('<option value="' + data[j].id + '">' + data[j].firstName + ' ' + data[j].lastName + '</option>');
+											}
+										}
 									}
 								}
 								getPaymentOptions(activedomains);
@@ -202,7 +206,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							jQuery("#latelog").text(data.length + " late entries");
 							if (data.length === 0) {
 								jQuery("#latelog").hide();
-							}else {
+							} else {
 								jQuery("#latelog").show();
 							}
 							for (var j = 0; j < data.length; j++) {
@@ -278,8 +282,8 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 							if (!cost || cost === '') {
 								cost = '0';
 							}
-							jQuery('.services-list', thisservice).parent().append(jQuery(this).parent().text().replace('Fee:',''));
-							jQuery('.services-list', thisservice).attr('sname', jQuery(this).parent().text().replace('Fee:','')).attr('cost',cost ).attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
+							jQuery('.services-list', thisservice).parent().append(jQuery(this).parent().text().replace('Fee:', ''));
+							jQuery('.services-list', thisservice).attr('sname', jQuery(this).parent().text().replace('Fee:', '')).attr('cost', cost).attr('tax', '0').attr('desc', 'Late Fee').attr('checked', 'checked');
 							jQuery('.services-list', thisservice).parent().append(CHECKBOXSPAN);
 							jQuery('.checkbox-span', thisservice).text('Cost: $ ' + cost);
 							jQuery(thisservice).addClass('latefee');
@@ -487,7 +491,7 @@ define(['cookie', '../../service/DataService', 'validate', '../../Router', '../.
 
 						jQuery('#latelog').click(function() {
 							//newitemvalidator.resetForm();
-							getLateLog() ;
+							getLateLog();
 							jQuery("#late-dialog-form").dialog("open");
 						});
 

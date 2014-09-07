@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/ground/BillGroundView', '../../view/todo/ToDoAssignView'], function(modernizr, cookie, ellipsis, service, banner, router, notify, todogroundview, quizgroundview, billgroundview, todoassign) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../Router', '../../Notify', '../../view/ground/ToDoGroundView', '../../view/ground/QuizGroundView', '../../view/ground/BillGroundView', '../../view/todo/ToDoAssignView','timeago'], function(modernizr, cookie, ellipsis, service, banner, router, notify, todogroundview, quizgroundview, billgroundview, todoassign, timeago) {"use strict";
 
 	var ClassView = ( function() {
 
@@ -132,9 +132,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								if (i > 8) {
 									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i % 8]);
 								}
-								jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
+								//jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
+								jQuery('.timeago', newboard).attr('title', StudentData[i].lastUpdated);
 								jQuery('#class-canvas').append(newboard);
 								if (i === COUNT - 1) {
+									jQuery("abbr.timeago").timeago();
 									helperMediaQuiries();
 									ActivatePanelEvents();
 								}

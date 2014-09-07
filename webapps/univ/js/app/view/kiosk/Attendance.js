@@ -92,31 +92,35 @@ define(['jquery', 'cookie', '../../service/DataService', '../../service/BannerSe
 								var thisitem = template.clone();
 								jQuery('.cardsloading').fadeOut(200);
 								for (var j = 0; j < data.length; j++) {
-									jQuery('.metainfo').text(data.length + ' members');
-									var thisitem = template.clone();
-									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
-										jQuery('.student-name', thisitem).text(data[j].email);
-										jQuery('.student-select', thisitem).attr('name', data[j].email);
-									} else {
-										jQuery('.student-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
-										jQuery('.student-select', thisitem).attr('name', data[j].email);
-									}
-									membernames.push(jQuery('.kioskcard-name', thisitem).text());
-									if (!data[j].image || data[j].image === null) {
-										var _image = "img/noimg.png";
-										jQuery('.kiosk-headshot', thisitem).attr('src', _image);
-									} else {
-										_image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
-										jQuery('.kiosk-headshot', thisitem).attr('src', _image);
-									}
-									jQuery(thisitem).attr('name', data[j].id);
-									jQuery('.contentfull').append(thisitem);
-									if (j === data.length - 1) {
-										jQuery('.student-name').ellipsis({
-											onlyFullWords : true
-										});
-										getCurrentStats(activedomains);
-										activateEvents();
+									for (var z = 0; z < data[j].domains.length; z++) {
+										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+											jQuery('.metainfo').text(data.length + ' members');
+											var thisitem = template.clone();
+											if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
+												jQuery('.student-name', thisitem).text(data[j].email);
+												jQuery('.student-select', thisitem).attr('name', data[j].email);
+											} else {
+												jQuery('.student-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName);
+												jQuery('.student-select', thisitem).attr('name', data[j].email);
+											}
+											membernames.push(jQuery('.kioskcard-name', thisitem).text());
+											if (!data[j].image || data[j].image === null) {
+												var _image = "img/noimg.png";
+												jQuery('.kiosk-headshot', thisitem).attr('src', _image);
+											} else {
+												_image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
+												jQuery('.kiosk-headshot', thisitem).attr('src', _image);
+											}
+											jQuery(thisitem).attr('name', data[j].id);
+											jQuery('.contentfull').append(thisitem);
+											if (j === data.length - 1) {
+												jQuery('.student-name').ellipsis({
+													onlyFullWords : true
+												});
+												getCurrentStats(activedomains);
+												activateEvents();
+											}
+										}
 									}
 								}
 							}

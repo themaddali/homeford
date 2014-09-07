@@ -212,6 +212,14 @@ define(['../app/Router', 'cookie', '../app/UrlFragment'], function(router, cooki
 							});
 						}
 					});
+					router.map('membersinactive', '^/membersinactive(/.*|$)', {
+						container : CONTAINER,
+						enter : function(location, result) {
+							require(['text!Pages/members/inactive.html', '../app/view/members/MembersInactiveView'], function(page, view) {
+								result.load(page, view);
+							});
+						}
+					});
 					router.map('todoassign', '^/todoassign(/.*|$)', {
 						container : CONTAINER,
 						enter : function(location, result) {

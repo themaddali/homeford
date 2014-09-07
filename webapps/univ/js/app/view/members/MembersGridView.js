@@ -52,6 +52,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					jQuery('.edit-card-canvas').empty();
 					membernames = [];
 					var memberscount = 0;
+					var inactive = 0;
 					for (var i = 0; i < activedomains.length; i++) {
 						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
@@ -59,8 +60,6 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 								for (var j = 0; j < data.length; j++) {
 									var thisitem = template.clone();
 									var thispartition = gridbreaktemplate.clone();
-									jQuery('.tag', thispartition).text('Family-' + (j + 1));
-									jQuery('.edit-card-canvas').append(thispartition);
 									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
 										jQuery('.membercard-name', thisitem).text((data[j].email));
 									} else {
@@ -86,40 +85,42 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									jQuery(thisitem).addClass(grpname).attr('group', grpname);
 									for (var z = 0; z < data[j].domains.length; z++) {
 										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
-											//jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
+											jQuery('.edit-card-canvas').append(thispartition);
+											jQuery('.tag', thispartition).text('Member ' + ($('.icon-sitemap').length) + ' Info');
 											jQuery('.edit-card-canvas').append(thisitem);
+											for (var k = 0; k < data[j].parents.length; k++) {
+												var thisitemparent = template.clone();
+												if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
+													jQuery('.membercard-name', thisitemparent).text((data[j].parents[k].email).split('@')[0]).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
+												} else {
+													jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
+												}
+												membernames.push(jQuery('.membercard-name', thisitemparent).text());
+												if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
+													jQuery('.members-image', thisitemparent).attr('src', '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id);
+												} else {
+													jQuery('.members-image', thisitemparent).attr('src', 'img/noimg.png');
+												}
+												//jQuery('.membercard-category', thisitemparent).text(kidsalutation + "'s "+toTitleCase(data[j].parents[k].userType));
+												jQuery('.membercard-category', thisitemparent).html(toTitleCase(data[j].parents[k].userType) + ' ' + KEYICON + ' ' + data[j].parents[k].kioskPassword);
+												jQuery('.membercard-rel', thisitemparent).text('');
+												var grpname = 'grp' + j;
+												jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
+												jQuery('.edit-card-canvas').append(thisitemparent);
+												// for (var z = 0; z < data[j].parents[k].domains.length; z++) {
+												// if (data[j].parents[k].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].parents[k].domains[z].roleStatus == 'ACTIVE') {
+												// jQuery('.edit-card-canvas').append(thisitemparent);
+												// }
+												// }
+											}
+										}
+										else {
+											inactive = inactive + 1;
+											jQuery('.filter-selection-icon').show();
+											jQuery('.filter-selection-count').text(inactive + ' Member(s) Inactive');
 										}
 									}
 
-									for (var k = 0; k < data[j].parents.length; k++) {
-										var thisitemparent = template.clone();
-										if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
-											jQuery('.membercard-name', thisitemparent).text((data[j].parents[k].email).split('@')[0]).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
-										} else {
-											jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
-										}
-										membernames.push(jQuery('.membercard-name', thisitemparent).text());
-										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
-											jQuery('.members-image', thisitemparent).attr('src', '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id);
-										} else {
-											jQuery('.members-image', thisitemparent).attr('src', 'img/noimg.png');
-										}
-										//jQuery('.membercard-category', thisitemparent).text(kidsalutation + "'s "+toTitleCase(data[j].parents[k].userType));
-										jQuery('.membercard-category', thisitemparent).html(toTitleCase(data[j].parents[k].userType) + ' ' + KEYICON + ' ' + data[j].parents[k].kioskPassword);
-										jQuery('.membercard-rel', thisitemparent).text('');
-										var grpname = 'grp' + j;
-										jQuery(thisitemparent).addClass(grpname).attr('group', grpname);
-										for (var z = 0; z < data[j].parents[k].domains.length; z++) {
-											if (data[j].parents[k].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].parents[k].domains[z].roleStatus == 'ACTIVE') {
-												//jQuery('.brandnames').append('<option>' + UserProfile.domains[i].domainName + '</option').addClass('show');
-												jQuery('.edit-card-canvas').append(thisitemparent);
-											}
-											else {
-												//jQuery('.edit-card-canvas').append(thisitemparent);
-												//alert('Sonething inactive + do for studentlist');
-											}
-										}
-									}
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
 											source : function(request, response) {
@@ -277,6 +278,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 				this.resume = function() {
 					populateData();
 					jQuery('.card-search').val('');
+					jQuery('.filter-selection-icon').hide();
 					document.title = 'Zingoare | Members Grid';
 				};
 

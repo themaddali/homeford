@@ -131,7 +131,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							success : function(data) {
 								if (data.length == 0) {
 									displayCards(MEMBEROBJECT);
-									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' member(s)');
+									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' total member(s)');
 									if (jQuery('.studentboard').length === 1) {
 										var selectedUserName = $('.student-name').text();
 										var selectedUserId = $('.student-name').parent().attr('name');
@@ -147,67 +147,72 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								}
 
 								for (var j = 0; j < data.length; j++) {
-									var _memberobject = {};
-									if (!data[j].image || data[j].image === null) {
-										_memberobject.image = "img/noimg.png";
-									} else {
-										_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
-									}
-									_memberobject.firstName = data[j].firstName;
-									_memberobject.lastName = data[j].lastName;
-									_memberobject.email = data[j].email;
-									_memberobject.id = data[j].id;
-									_memberobject.taskcount = data[j].tasks.length;
-									_memberobject.taskprogress = 0;
-									_memberobject.groupcolor = COLORBLOCKS[j + 1];
-									if (j > 8) {
-										_memberobject.groupcolor = COLORBLOCKS[j % 8];
-									}
-									_memberobject.oneliner = data[j].itemServiceDetails.length + ' plans(s) active';
-									for (var p = 0; p < data[j].tasks.length; p++) {
-										_memberobject.taskprogress = _memberobject.taskprogress + data[j].tasks[p].percentage;
-										if (p === data[j].tasks.length - 1) {
-											_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
-										}
-									}
-									if (MEMBERIDS.indexOf(data[j].id) == -1) {
-										MEMBERIDS.push(_memberobject.id);
-										MEMBEROBJECT.push(_memberobject);
-									}
-									for (var k = 0; k < data[j].parents.length; k++) {
-										var _memberobjectparent = {};
-										if (!data[j].parents[k].firstName || data[j].parents[k].firstName.length === 0) {
-											data[j].parents[k].firstName = '';
-										}
-										if (!data[j].parents[k].lastName || data[j].parents[k].lastName.length === 0) {
-											data[j].parents[k].lastName = '';
-										}
-										_memberobjectparent.firstName = data[j].parents[k].firstName;
-										_memberobjectparent.lastName = data[j].parents[k].lastName;
-										if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
-											_memberobjectparent.image = '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id;
-										} else {
-											_memberobjectparent.image = 'img/noimg.png';
-										}
-										_memberobjectparent.email = data[j].parents[k].email;
-										_memberobjectparent.id = data[j].parents[k].id;
-										_memberobjectparent.taskcount = data[j].parents[k].tasks.length;
-										_memberobjectparent.taskprogress = 0;
-										_memberobjectparent.oneliner = data[j].parents[k].userType;
-										_memberobjectparent.groupcolor = MEMBEROBJECT[MEMBEROBJECT.length - 1].groupcolor;
-										for (var p = 0; p < data[j].parents[k].tasks.length; p++) {
-											_memberobjectparent.taskprogress = _memberobjectparent.taskprogress + data[j].parents[k].tasks[p].percentage;
-											if (p === data[j].parents[k].tasks.length - 1) {
-												_memberobjectparent.taskprogress = Math.ceil(_memberobjectparent.taskprogress / data[j].parents[k].tasks.length);
+									for (var z = 0; z < data[j].domains.length; z++) {
+										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+											var _memberobject = {};
+											if (!data[j].image || data[j].image === null) {
+												_memberobject.image = "img/noimg.png";
+											} else {
+												_memberobject.image = '/zingoare/api/profileupload/picture/' + data[j].image.id;
+											}
+											_memberobject.firstName = data[j].firstName;
+											_memberobject.lastName = data[j].lastName;
+											_memberobject.email = data[j].email;
+											_memberobject.id = data[j].id;
+											_memberobject.taskcount = data[j].tasks.length;
+											_memberobject.taskprogress = 0;
+											_memberobject.groupcolor = COLORBLOCKS[j + 1];
+											if (j > 8) {
+												_memberobject.groupcolor = COLORBLOCKS[j % 8];
+											}
+											_memberobject.oneliner = data[j].itemServiceDetails.length + ' plans(s) active';
+											for (var p = 0; p < data[j].tasks.length; p++) {
+												_memberobject.taskprogress = _memberobject.taskprogress + data[j].tasks[p].percentage;
+												if (p === data[j].tasks.length - 1) {
+													_memberobject.taskprogress = Math.ceil(_memberobject.taskprogress / data[j].tasks.length);
+												}
+											}
+											if (MEMBERIDS.indexOf(data[j].id) == -1) {
+												MEMBERIDS.push(_memberobject.id);
+												MEMBEROBJECT.push(_memberobject);
+											}
+											for (var k = 0; k < data[j].parents.length; k++) {
+												var _memberobjectparent = {};
+												if (!data[j].parents[k].firstName || data[j].parents[k].firstName.length === 0) {
+													data[j].parents[k].firstName = '';
+												}
+												if (!data[j].parents[k].lastName || data[j].parents[k].lastName.length === 0) {
+													data[j].parents[k].lastName = '';
+												}
+												_memberobjectparent.firstName = data[j].parents[k].firstName;
+												_memberobjectparent.lastName = data[j].parents[k].lastName;
+												if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
+													_memberobjectparent.image = '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id;
+												} else {
+													_memberobjectparent.image = 'img/noimg.png';
+												}
+												_memberobjectparent.email = data[j].parents[k].email;
+												_memberobjectparent.id = data[j].parents[k].id;
+												_memberobjectparent.taskcount = data[j].parents[k].tasks.length;
+												_memberobjectparent.taskprogress = 0;
+												_memberobjectparent.oneliner = data[j].parents[k].userType;
+												_memberobjectparent.groupcolor = MEMBEROBJECT[MEMBEROBJECT.length - 1].groupcolor;
+												for (var p = 0; p < data[j].parents[k].tasks.length; p++) {
+													_memberobjectparent.taskprogress = _memberobjectparent.taskprogress + data[j].parents[k].tasks[p].percentage;
+													if (p === data[j].parents[k].tasks.length - 1) {
+														_memberobjectparent.taskprogress = Math.ceil(_memberobjectparent.taskprogress / data[j].parents[k].tasks.length);
+													}
+												}
+												MEMBERIDS.push(_memberobjectparent.id);
+												MEMBEROBJECT.push(_memberobjectparent);
+											}
+
+											if (j == data.length - 1) {
+												displayCards(MEMBEROBJECT);
 											}
 										}
-										MEMBERIDS.push(_memberobjectparent.id);
-										MEMBEROBJECT.push(_memberobjectparent);
 									}
 
-									if (j == data.length - 1) {
-										displayCards(MEMBEROBJECT);
-									}
 								}
 							}
 						});
@@ -244,7 +249,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery(newboard).attr('name', MEMBEROBJECT[i].id);
 							jQuery('#noinfo').hide();
 							jQuery('#card-canvas-students').append(newboard);
-							jQuery('.metainfo').text(jQuery('.studentboard:visible').length + ' member(s)');
+							jQuery('.metainfo').text(jQuery('.studentboard:visible').length + ' total member(s)');
 							if (i == MEMBEROBJECT.length - 1 || i == MEMBEROBJECT.length - 2) {
 								var MEMBEROBJECT_instance = MEMBEROBJECT;
 								jQuery('.student-name').ellipsis({
@@ -271,7 +276,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 						jQuery('#noinfo').fadeIn(500);
 					}
 					helperMediaQuiries();
-					
+
 					jQuery("#card-searchbox").keyup(function() {
 						var searchword = jQuery('#card-searchbox').val().toUpperCase();
 						var cardlist = jQuery('.contentfull .student-name');

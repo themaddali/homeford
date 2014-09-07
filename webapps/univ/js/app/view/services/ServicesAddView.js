@@ -127,11 +127,17 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-endtime').val().split(":")[0] !== '12') {
 									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-endtime').val().split(":")[0] === '12') {
+									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0])) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
 								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {
 									var _sstarttime = (jQuery('#service-starttime').val().split(":")[0]) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
 								}
 								if (jQuery('#service-endtime').val().split(" ")[1] == 'AM') {
 									var _sendtime = (jQuery('#service-endtime').val().split(":")[0]) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM' && jQuery('#service-starttime').val().split(":")[0] === '12') {
+									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) - 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
 								}
 
 								service.AddServices(service.domainNametoID(jQuery.cookie('subuser')), _sname, _sdesc, _scost, _stax, _sfreq, _sstarttime, _sendtime, jQuery('#service-status').val(), {

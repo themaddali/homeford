@@ -1,4 +1,4 @@
-define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/attendance/AttendanceListView','../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, attendacelist, notify) {"use strict";
+define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/attendance/AttendanceListView', '../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, attendacelist, notify) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -345,16 +345,20 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 						service.getDomainMembers(activedomains[i], {
 							success : function(data) {
 								for (var j = 0; j < data.length; j++) {
-									_memberst3 = _memberst3 + 1;
-									_memberst2 = _memberst2 + data[j].parents.length;
-									_memberstotal = _memberst2 + _memberst3;
-									updatePanelValues('#members-t3-value', _memberst3);
-									updatePanelValues('#members-t2-value', _memberst2);
-									updatePanelValues('#members-total-value', _memberstotal);
-									_membersdata[0] = _memberst2;
-									_membersdata[1] = _memberst3;
-									if (j === data.length - 1) {
-										updatePanelGraphs('#members-donut', _membersdata);
+									for (var z = 0; z < data[j].domains.length; z++) {
+										if (data[j].domains[z].id === parseInt(jQuery.cookie('_did')) && data[j].domains[z].roleStatus == 'ACTIVE') {
+											_memberst3 = _memberst3 + 1;
+											_memberst2 = _memberst2 + data[j].parents.length;
+											_memberstotal = _memberst2 + _memberst3;
+											updatePanelValues('#members-t3-value', _memberst3);
+											updatePanelValues('#members-t2-value', _memberst2);
+											updatePanelValues('#members-total-value', _memberstotal);
+											_membersdata[0] = _memberst2;
+											_membersdata[1] = _memberst3;
+											if (j === data.length - 1) {
+												updatePanelGraphs('#members-donut', _membersdata);
+											}
+										}
 									}
 								}
 								updatePanelGraphs('#members-donut', _membersdata);
