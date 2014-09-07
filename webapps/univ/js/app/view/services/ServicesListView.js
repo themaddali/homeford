@@ -79,17 +79,19 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 					}
 				}
 				
-				function toAMPM(s){
-					s = s.slice(0,-3);
-					if (parseInt(s.split(":")[0]) < 13) {
+				function toAMPM(s) {
+					s = s.slice(0, -3);
+					if (parseInt(s.split(":")[0]) < 12) {
 						return s + ' AM';
-					}
-					else {
-						var newhour = (parseInt(s.split(":")[0])-12);
-						if (newhour < 10 ){
-							newhour = '0'+newhour;
+					} else {
+						var newhour = (parseInt(s.split(":")[0]) - 12);
+						if (newhour === 0) {
+							newhour = 12;
 						}
-						var news = newhour +':'+ s.split(":")[1] + ' PM';
+						if (newhour < 10) {
+							newhour = '0' + newhour;
+						}
+						var news = newhour + ':' + s.split(":")[1] + ' PM';
 						return news;
 					}
 				}
