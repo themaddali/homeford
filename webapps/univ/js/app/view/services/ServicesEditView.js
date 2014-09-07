@@ -105,17 +105,23 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 							if ($(".edit-form").valid()) {
 								// var _sstarttime = jQuery('#service-starttime').val() + ':00';
 								// var _sendtime = jQuery('#service-endtime').val() + ':00';
-								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM') {
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'PM' && jQuery('#service-starttime').val().split(":")[0] !== '12') {
 									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) + 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
-								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM') {
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-endtime').val().split(":")[0] !== '12') {
 									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0]) + 12) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
+								}
+								if (jQuery('#service-endtime').val().split(" ")[1] == 'PM' && jQuery('#service-endtime').val().split(":")[0] === '12') {
+									var _sendtime = (parseInt(jQuery('#service-endtime').val().split(":")[0])) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' PM', '') + ':00';
 								}
 								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM') {
 									var _sstarttime = (jQuery('#service-starttime').val().split(":")[0]) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
 								}
 								if (jQuery('#service-endtime').val().split(" ")[1] == 'AM') {
 									var _sendtime = (jQuery('#service-endtime').val().split(":")[0]) + ':' + jQuery('#service-endtime').val().split(":")[1].replace(' AM', '') + ':00';
+								}
+								if (jQuery('#service-starttime').val().split(" ")[1] == 'AM' && jQuery('#service-starttime').val().split(":")[0] === '12') {
+									var _sstarttime = (parseInt(jQuery('#service-starttime').val().split(":")[0]) - 12) + ':' + jQuery('#service-starttime').val().split(":")[1].replace(' AM', '') + ':00';
 								}
 								service.UpdateServices(parseInt(ACTIVESERVICE.id), jQuery('#service-name').val(), jQuery('#service-desc').val(), _sstarttime, _sendtime, jQuery('#service-cost').val(), jQuery('#service-tax').val(), jQuery('#service-frequency').val().split(' ')[0], jQuery('#service-status').val(), {
 									success : function(response) {
