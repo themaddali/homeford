@@ -41,6 +41,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						memberrecord.setuser(ACTIVEMEMBER.id, ACTIVEMEMBER.firstname + ' ' + ACTIVEMEMBER.lastname);
 						jQuery('#member-rel').val(ACTIVEMEMBER.relation);
 						jQuery('#member-email').val(ACTIVEMEMBER.email);
+						jQuery('#member-phone').val(ACTIVEMEMBER.phone);
 						jQuery('#member-domains').val(ACTIVEMEMBER.domain);
 						jQuery('#member-roles').val(ACTIVEMEMBER.roles);
 						jQuery('#member-profile-image').attr('src', ACTIVEMEMBER.image);
@@ -253,7 +254,7 @@ define(['modernizr', 'cookie', 'jquerywidget', 'transport', 'fileupload', '../..
 						jQuery('#member-edit').on('click', function() {
 							generateServiceArray();
 							if ($(".edit-form").valid()) {
-								service.setUserProfileOnly(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), "", jQuery('#member-pin').val(), {
+								service.setUserProfileOnly(jQuery('#member-id').val(), jQuery('#member-first-name').val(), jQuery('#member-last-name').val(), jQuery('#member-email').val(), jQuery('#member-phone').val(), jQuery('#member-pin').val(), {
 									success : function(response) {
 										if (response.status !== 'error') {
 											var kidid = [];

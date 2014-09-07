@@ -63,7 +63,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 									if ((data[j].firstName === 'null' || data[j].firstName == null || data[j].firstName === "" ) && (data[j].lastName === 'null' || data[j].lastName == null || data[j].lastName === "")) {
 										jQuery('.membercard-name', thisitem).text((data[j].email));
 									} else {
-										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email).attr('kioskpin', data[j].kioskPassword);
+										jQuery('.membercard-name', thisitem).text(data[j].firstName + ' ' + data[j].lastName).attr('fn', data[j].firstName).attr('ph', data[j].phoneNumber).attr('ln', data[j].lastName).attr('memberid', data[j].id).attr('email', data[j].email).attr('kioskpin', data[j].kioskPassword);
 									}
 									var kidsalutation = data[j].firstName;
 									membernames.push(jQuery('.membercard-name', thisitem).text());
@@ -91,9 +91,9 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 											for (var k = 0; k < data[j].parents.length; k++) {
 												var thisitemparent = template.clone();
 												if ((data[j].parents[k].firstName === 'null' || data[j].parents[k].firstName == null || data[j].parents[k].firstName === "" ) && (data[j].parents[k].lastName === 'null' || data[j].parents[k].lastName == null || data[j].parents[k].lastName === "")) {
-													jQuery('.membercard-name', thisitemparent).text((data[j].parents[k].email).split('@')[0]).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
+													jQuery('.membercard-name', thisitemparent).text((data[j].parents[k].email).split('@')[0]).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('ph', data[j].parents[k].phoneNumber).attr('kioskpin', data[j].parents[k].kioskPassword);
 												} else {
-													jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
+													jQuery('.membercard-name', thisitemparent).text(data[j].parents[k].firstName + ' ' + data[j].parents[k].lastName).attr('fn', data[j].parents[k].firstName).attr('ph', data[j].parents[k].phoneNumber).attr('ln', data[j].parents[k].lastName).attr('memberid', data[j].parents[k].id).attr('email', data[j].parents[k].email).attr('kioskpin', data[j].parents[k].kioskPassword);
 												}
 												membernames.push(jQuery('.membercard-name', thisitemparent).text());
 												if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
@@ -158,6 +158,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 						courses : 'none',
 						services : [],
 						email : '',
+						phone: '',
 						id : 'none',
 						kioskpin : 'No Pin Available - Go to profile and set one.',
 						image : 'img/noimg.png',
@@ -178,6 +179,7 @@ define(['cookie', '../../service/DataService', 'validate', 'tablesorter', '../..
 							rowObject.relation = jQuery(this).find('.membercard-category').text().split(' ')[0];
 							rowObject.kioskpin = jQuery(this).find('.membercard-name').attr('kioskpin');
 							rowObject.id = jQuery(this).find('.membercard-name').attr('memberid');
+							rowObject.phone = jQuery(this).find('.membercard-name').attr('ph');
 							if (serviceMAP[rowObject.id] && serviceMAP[rowObject.id] !== null) {
 								rowObject.services = serviceMAP[rowObject.id].split(":");
 							}
