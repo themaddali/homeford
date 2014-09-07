@@ -94,7 +94,9 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 					jQuery('#mother-name').val('');
 					jQuery('#father-name').val('');
 					jQuery('#father-email').val('');
+					jQuery('#father-phone').val('');
 					jQuery('#mother-email').val('');
+					jQuery('#mother-phone').val('');
 					jQuery('#g1-name').val('');
 					jQuery('#g1-email').val('');
 					jQuery('#g2-name').val('');
@@ -256,6 +258,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									var person = {};
 									person.firstName = getFirstName(jQuery('#father-name').val());
 									person.lastName = getLastName(jQuery('#father-name').val());
+									person.phoneNumber = jQuery('#father-phone').val();
 									person.email = jQuery('#father-email').val();
 									person.userType = 'FATHER';
 									kidobject.push(person);
@@ -265,6 +268,7 @@ define(['modernizr', 'cookie', '../../service/DataService', 'validate', '../../R
 									person.firstName = getFirstName(jQuery('#mother-name').val());
 									person.lastName = getLastName(jQuery('#mother-name').val());
 									person.email = jQuery('#mother-email').val();
+									person.phoneNumber = jQuery('#mother-phone').val();
 									person.userType = 'MOTHER';
 									kidobject.push(person);
 								}
