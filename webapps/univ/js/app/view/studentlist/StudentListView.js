@@ -1,4 +1,4 @@
-define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael'], function(modernizr, cookie, ellipsis, service, banner, classview, router, notify, raphael) {"use strict";
+define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../service/BannerService', '../../view/class/ClassView', '../../Router', '../../Notify', 'raphael', 'timeago'], function(modernizr, cookie, ellipsis, service, banner, classview, router, notify, raphael, timeago) {"use strict";
 
 	var StudentListView = ( function() {
 
@@ -58,6 +58,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								_memberobjectself.lastName = data.lastName;
 								_memberobjectself.email = data.email;
 								_memberobjectself.id = data.id;
+								_memberobjectself.created = new Date(data.createdDate);
 								_memberobjectself.taskcount = data.tasks.length;
 								_memberobjectself.taskprogress = 0;
 								_memberobjectself.groupcolor = '#0784E3';
@@ -81,10 +82,11 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									_memberobject.lastName = data.members[j].lastName;
 									_memberobject.email = data.members[j].email;
 									_memberobject.id = data.members[j].id;
+									_memberobject.created = new Date(data.members[j].createdDate);
 									_memberobject.taskcount = data.members[j].tasks.length;
 									_memberobject.taskprogress = 0;
 									_memberobject.groupcolor = '#0784E3';
-									_memberobject.oneliner = data.itemServiceDetails.length + ' plans(s) active';
+									_memberobject.oneliner = data.itemServiceDetails.length + ' plan(s) active';
 									for (var p = 0; p < data.members[j].tasks.length; p++) {
 										_memberobject.taskprogress = _memberobject.taskprogress + data.members[j].tasks[p].percentage;
 										if (p === data.members[j].tasks.length - 1) {
@@ -159,13 +161,14 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 											_memberobject.lastName = data[j].lastName;
 											_memberobject.email = data[j].email;
 											_memberobject.id = data[j].id;
+											_memberobject.created= new Date (data[j].createdDate);
 											_memberobject.taskcount = data[j].tasks.length;
 											_memberobject.taskprogress = 0;
 											_memberobject.groupcolor = COLORBLOCKS[j + 1];
 											if (j > 8) {
 												_memberobject.groupcolor = COLORBLOCKS[j % 8];
 											}
-											_memberobject.oneliner = data[j].itemServiceDetails.length + ' plans(s) active';
+											_memberobject.oneliner = data[j].itemServiceDetails.length + ' plan(s) active';
 											for (var p = 0; p < data[j].tasks.length; p++) {
 												_memberobject.taskprogress = _memberobject.taskprogress + data[j].tasks[p].percentage;
 												if (p === data[j].tasks.length - 1) {
@@ -185,6 +188,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 													data[j].parents[k].lastName = '';
 												}
 												_memberobjectparent.firstName = data[j].parents[k].firstName;
+												_memberobjectparent.created = new Date (data[j].parents[k].createdDate);
 												_memberobjectparent.lastName = data[j].parents[k].lastName;
 												if (data[j].parents[k].image && data[j].parents[k].image.name != null) {
 													_memberobjectparent.image = '/zingoare/api/profileupload/picture/' + data[j].parents[k].image.id;
@@ -237,6 +241,8 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 							jQuery('.student-id', newboard).text(MEMBEROBJECT[i].taskcount + ' task(s) todo');
 							jQuery('.taskcount', newboard).text(MEMBEROBJECT[i].taskcount);
 							jQuery('.member-from', newboard).text(MEMBEROBJECT[i].taskprogress + ' % completed');
+							//jQuery('.timeago', newboard).attr('title', MEMBEROBJECT[i].created);
+							//jQuery("abbr.timeago").timeago();
 							jQuery('.member-oneliner', newboard).text(MEMBEROBJECT[i].oneliner);
 							jQuery('.grouping-flag', newboard).css('border-right-color', MEMBEROBJECT[i].groupcolor);
 							// if (MEMBEROBJECT[i].email) {
@@ -257,6 +263,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								});
 								jQuery("#card-searchbox").val('').focus();
 								helperMediaQuiries();
+								//jQuery("abbr.timeago").timeago();
 								ActivatePanelEvents();
 								//populateTasks(MEMBEROBJECT_instance);
 							}

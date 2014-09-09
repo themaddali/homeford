@@ -1,4 +1,4 @@
-define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/attendance/AttendanceListView', '../../Notify'], function(raphael, cookie, elychart, service, banner, router, invite, attendacelist, notify) {"use strict";
+define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../service/BannerService', '../../Router', '../../view/invite/InviteView', '../../view/attendance/AttendanceListView', '../../Notify', 'timeago'], function(raphael, cookie, elychart, service, banner, router, invite, attendacelist, notify, timeago) {"use strict";
 
 	var AdminView = ( function() {
 
@@ -181,7 +181,17 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							var _addresses = 0;
 							var _payments = 0;
 							var _domaindata = [0, 0];
-							updatePanelValues('#domain-ids-value', '# ' + Profile.id);
+							//updatePanelValues('#domain-ids-value', '# ' + Profile.createdDate);
+							jQuery('.timeago').attr('title', new Date(Profile.createdDate).toISOString());
+							jQuery("abbr.timeago").timeago();
+							var agoindex = jQuery('.timeago').text().indexOf(' ');
+							var agonum = jQuery('.timeago').text().substring(0, agoindex);
+							if (agonum === 'about') {
+								agonum = '0';
+							}
+							var agotext = jQuery('.timeago').text().substring(agoindex+1);
+							jQuery('.timeago').text(agonum);
+							jQuery('#domain-from').text('active from ' + agotext);
 							updatePanelValues('#domain-address-value', Profile.addresses.length);
 							updatePanelValues('#domain-payement-value', 0);
 							if (Profile.addresses[0]) {
