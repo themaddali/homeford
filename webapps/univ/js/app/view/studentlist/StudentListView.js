@@ -134,6 +134,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 								if (data.length == 0) {
 									displayCards(MEMBEROBJECT);
 									jQuery('.metainfo').text(jQuery('.studentboard').length - 1 + ' total member(s)');
+									jQuery('.metainfo').text(jQuery('.metainfo').text().replace('-1','0'));
 									if (jQuery('.studentboard').length === 1) {
 										var selectedUserName = $('.student-name').text();
 										var selectedUserId = $('.student-name').parent().attr('name');
@@ -281,6 +282,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 				function ActivatePanelEvents() {
 					if (jQuery('.studentboard:visible').length === 0) {
 						jQuery('#noinfo').fadeIn(500);
+						jQuery('.metainfo').text(jQuery('.metainfo').text().replace('-1','0'));
 					}
 					helperMediaQuiries();
 
