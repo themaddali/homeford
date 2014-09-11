@@ -184,6 +184,7 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							//updatePanelValues('#domain-ids-value', '# ' + Profile.createdDate);
 							jQuery('.timeago').attr('title', new Date(Profile.createdDate).toISOString());
 							jQuery("abbr.timeago").timeago();
+							jQuery('.timeago').text(jQuery('.timeago').text().replace('about ',''));
 							var agoindex = jQuery('.timeago').text().indexOf(' ');
 							var agonum = jQuery('.timeago').text().substring(0, agoindex);
 							if (agonum === 'about') {
