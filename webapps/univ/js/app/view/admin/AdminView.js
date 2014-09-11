@@ -184,15 +184,25 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 							//updatePanelValues('#domain-ids-value', '# ' + Profile.createdDate);
 							jQuery('.timeago').attr('title', new Date(Profile.createdDate).toISOString());
 							jQuery("abbr.timeago").timeago();
-							jQuery('.timeago').text(jQuery('.timeago').text().replace('about ',''));
-							var agoindex = jQuery('.timeago').text().indexOf(' ');
-							var agonum = jQuery('.timeago').text().substring(0, agoindex);
-							if (agonum === 'about') {
-								agonum = '0';
-							}
-							var agotext = jQuery('.timeago').text().substring(agoindex+1);
-							jQuery('.timeago').text(agonum);
-							jQuery('#domain-from').text('active from ' + agotext);
+							setInterval(function() {
+								if (jQuery('.timeago').text().indexOf(' ') !== -1){
+									jQuery('.timeago').text(jQuery('.timeago').text().replace('about ', ''));
+									var agoindex = jQuery('.timeago').text().indexOf(' ');
+									var agonum = jQuery('.timeago').text().substring(0, agoindex);
+									if (agonum === 'about') {
+										agonum = '0';
+									}
+									if (agonum === 'less') {
+										agonum = '0';
+									}
+									if (agonum === 'a') {
+										agonum = '1';
+									}
+									var agotext = jQuery('.timeago').text().substring(agoindex + 1);
+									jQuery('.timeago').text(agonum);
+									jQuery('#domain-from').text('active from ' + agotext);
+								}
+							}, 500);
 							updatePanelValues('#domain-address-value', Profile.addresses.length);
 							updatePanelValues('#domain-payement-value', 0);
 							if (Profile.addresses[0]) {
