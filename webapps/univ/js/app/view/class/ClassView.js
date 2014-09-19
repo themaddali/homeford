@@ -79,7 +79,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									StudentData[i].title = (StudentData[i].title).split('@QUIZ')[1];
 									jQuery('.class-header img', newboard).attr('src', 'img/quiztag.png');
 								}
-								if (StudentData[i].title.indexOf('@BILL') !== -1) {
+								else if (StudentData[i].title.indexOf('@BILL') !== -1) {
 									jQuery(newboard).addClass('bill');
 									newboard.attr('type', 'BILL');
 									_billcount = _billcount + 1;

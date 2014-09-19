@@ -195,14 +195,14 @@ define(['raphael', 'cookie', 'elychart', '../../service/DataService', '../../ser
 									if (agonum === 'less') {
 										agonum = '0';
 									}
-									if (agonum === 'a') {
+									if (agonum === 'a' || agonum === 'an') {
 										agonum = '1';
 									}
 									var agotext = jQuery('.timeago').text().substring(agoindex + 1);
 									jQuery('.timeago').text(agonum);
 									jQuery('#domain-from').text('active from ' + agotext);
 								}
-							}, 500);
+							}, 10);
 							updatePanelValues('#domain-address-value', Profile.addresses.length);
 							updatePanelValues('#domain-payement-value', 0);
 							if (Profile.addresses[0]) {
