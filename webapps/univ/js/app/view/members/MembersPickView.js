@@ -65,6 +65,7 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 									jQuery('.membercard-checkbox', thisitem).attr('checked', 'checked');
 									membernames.push(jQuery('.membercard-name', thisitem).text());
 									jQuery('.membercard-id', thisitem).text('Id# ' + data[j].id);
+									thisitem.attr('usertype', data[j].userType);
 									jQuery('.edit-card-canvas').append(thisitem);
 									if (j === data.length - 1) {
 										$(".card-search").autocomplete({
@@ -119,14 +120,33 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 
 					jQuery('.card-search').change(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						var cardlist = jQuery('.edit-card-canvas .membercard-name');
-						for (var i = 0; i < cardlist.length; i++) {
-							var thiscard = cardlist[i];
-							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
-								//thiscard.parentElement.stlye.display = '';
-							} else {
-								thiscard.parentElement.style.display = 'none';
+						var searchword = jQuery('.card-search').val().toUpperCase();
+						if ((searchword.indexOf('KID') !== -1) || searchword === 'MOTHER' || searchword === 'FATHER' || searchword.indexOf('PARENT') !== -1) {
+							if (searchword === 'FATHER' || searchword === 'MOTHER' || searchword.indexOf('PARENT') !== -1) {
+								searchword = 'FATHERMOTHER';
+							}
+							var cardlist = jQuery('.membercard');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.style.display = '';
+								if (searchword.indexOf(thiscard.attributes[2].value) !== -1) {
+									//thiscard.parentElement.stlye.display = '';
+									thiscard.style.display = '';
+									//console.log('show');
+								} else {
+									thiscard.style.display = 'none';
+								}
+							}
+						} else {
+							var cardlist = jQuery('.edit-card-canvas .membercard-name');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.parentElement.style.display = '';
+								if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+									//thiscard.parentElement.stlye.display = '';
+								} else {
+									thiscard.parentElement.style.display = 'none';
+								}
 							}
 						}
 					});
@@ -145,28 +165,65 @@ define(['jquery', 'cookie', '../../service/DataService', '../../Router', 'ellips
 					});
 					jQuery('.search-button').click(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						var cardlist = jQuery('.edit-card-canvas .membercard-name');
-						for (var i = 0; i < cardlist.length; i++) {
-							var thiscard = cardlist[i];
-							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
-								//thiscard.parentElement.stlye.display = '';
-							} else {
-								thiscard.parentElement.style.display = 'none';
+						var searchword = jQuery('.card-search').val().toUpperCase();
+						if ((searchword.indexOf('KID') !== -1) || searchword === 'MOTHER' || searchword === 'FATHER' || searchword.indexOf('PARENT') !== -1) {
+							if (searchword === 'FATHER' || searchword === 'MOTHER' || searchword.indexOf('PARENT') !== -1) {
+								searchword = 'FATHERMOTHER';
+							}
+							var cardlist = jQuery('.membercard');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.style.display = '';
+								if (searchword.indexOf(thiscard.attributes[2].value) !== -1) {
+									//thiscard.parentElement.stlye.display = '';
+									thiscard.style.display = '';
+									console.log('show');
+								} else {
+									thiscard.style.display = 'none';
+								}
+							}
+						} else {
+							var cardlist = jQuery('.edit-card-canvas .membercard-name');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.parentElement.style.display = '';
+								if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+									//thiscard.parentElement.stlye.display = '';
+								} else {
+									thiscard.parentElement.style.display = 'none';
+								}
 							}
 						}
 					});
 					jQuery('.card-search').keyup(function(event) {
 						var searchword = jQuery('.card-search').val().toUpperCase();
-						;
-						var cardlist = jQuery('.edit-card-canvas .membercard-name');
-						for (var i = 0; i < cardlist.length; i++) {
-							var thiscard = cardlist[i];
-							thiscard.parentElement.style.display = '';
-							if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
-								//thiscard.parentElement.stlye.display = '';
-							} else {
-								thiscard.parentElement.style.display = 'none';
+						var searchword = jQuery('.card-search').val().toUpperCase();
+						if ((searchword.indexOf('KID') !== -1) || searchword === 'MOTHER' || searchword === 'FATHER' || searchword.indexOf('PARENT') !== -1) {
+							if (searchword === 'FATHER' || searchword === 'MOTHER' || searchword === 'PARENT') {
+								searchword = 'FATHERMOTHER';
+							}
+							var cardlist = jQuery('.membercard');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.style.display = '';
+								if (searchword.indexOf(thiscard.attributes[2].value) !== -1) {
+									//thiscard.parentElement.stlye.display = '';
+									thiscard.style.display = '';
+									console.log('show');
+								} else {
+									thiscard.style.display = 'none';
+								}
+							}
+						} else {
+							var cardlist = jQuery('.edit-card-canvas .membercard-name');
+							for (var i = 0; i < cardlist.length; i++) {
+								var thiscard = cardlist[i];
+								thiscard.parentElement.style.display = '';
+								if (thiscard.textContent.toUpperCase().indexOf(searchword) != -1) {
+									//thiscard.parentElement.stlye.display = '';
+								} else {
+									thiscard.parentElement.style.display = 'none';
+								}
 							}
 						}
 					});

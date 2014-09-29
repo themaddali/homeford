@@ -133,7 +133,7 @@ define(['modernizr', 'cookie', 'ellipsis', '../../service/DataService', '../../s
 									jQuery('.class-header', newboard).css('background-color', COLORBLOCKS[i % 8]);
 								}
 								//jQuery('.footer', newboard).text('last worked on: ' + StudentData[i].lastUpdated);
-								jQuery('.timeago', newboard).attr('title', StudentData[i].lastUpdated);
+								jQuery('.timeago', newboard).attr('title', new Date(StudentData[i].lastUpdated).toISOString());
 								jQuery('#class-canvas').append(newboard);
 								if (i === COUNT - 1) {
 									jQuery("abbr.timeago").timeago();
